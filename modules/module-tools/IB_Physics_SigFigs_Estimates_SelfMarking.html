@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Significant Figures &amp; Estimates — IB Physics Practice</title>
+<style>
+  :root{
+    --navy:#0b3d61;
+    --navy-light:#0e4d7a;
+    --bg:#f7f8fb;
+    --card:#ffffff;
+    --border:#dbe2ea;
+    --text:#1a1a2e;
+    --muted:#5b6b7a;
+    --green:#1a8a4a;
+    --green-bg:#f1fbf4;
+    --red:#c23b3b;
+    --red-bg:#fdf2f2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    line-height:1.55;
+    color:var(--text);
+    background:var(--bg);
+    margin:0;
+    padding:0;
+  }
+  header.page-header{
+    background:var(--navy);
+    color:#fff;
+    padding:20px 24px;
+  }
+  header.page-header h1{
+    margin:0;
+    font-size:1.5rem;
+  }
+  .container{
+    max-width:900px;
+    margin:0 auto;
+    padding:24px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:20px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  }
+  h2{
+    color:var(--navy);
+    margin-top:0;
+    border-bottom:2px solid var(--border);
+    padding-bottom:8px;
+  }
+  h3{
+    color:var(--navy);
+    margin-top:0;
+  }
+  p.intro{
+    color:var(--text);
+  }
+  p.note{
+    color:var(--muted);
+    font-size:0.9rem;
+    background:#eef4f9;
+    border-left:3px solid var(--navy);
+    padding:8px 12px;
+    border-radius:4px;
+  }
+  .outline-box{
+    background:#eef4f9;
+    border-left:3px solid var(--navy);
+    padding:12px 14px;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .choice-buttons{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:18px;
+    justify-content:center;
+  }
+  .choice-btn{
+    padding:14px 26px;
+    border-radius:10px;
+    border:2px solid var(--navy);
+    background:var(--navy);
+    color:#fff;
+    font-size:1rem;
+    cursor:pointer;
+  }
+  .choice-btn:hover{
+    background:var(--navy-light);
+  }
+  .task-nav{
+    max-width:900px;
+    margin:0 auto;
+    padding:14px 24px 0 24px;
+    font-size:0.9rem;
+  }
+  .task-nav a{
+    color:var(--navy);
+    text-decoration:none;
+    margin-right:18px;
+    font-weight:600;
+  }
+  .task-nav a:hover{
+    text-decoration:underline;
+  }
+  .progress-bar{
+    position:sticky;
+    top:0;
+    background:var(--navy);
+    color:#fff;
+    padding:8px 24px;
+    font-size:0.9rem;
+    z-index:10;
+    margin-top:10px;
+    text-align:center;
+  }
+  .item{
+    padding:12px 0;
+    border-bottom:1px solid #edf0f4;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px 10px;
+  }
+  .item:last-child{
+    border-bottom:none;
+  }
+  .item-full{
+    flex:1 1 100%;
+  }
+  .q-label{
+    font-weight:700;
+    min-width:22px;
+    color:var(--navy);
+  }
+  .q-prompt{
+    margin-right:6px;
+  }
+  .answer-group{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-left:auto;
+  }
+  .coeff-input{
+    width:78px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .exp-input{
+    width:66px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .times10{
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .plain-dp-input{
+    width:120px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .count-input{
+    width:56px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+    text-align:center;
+  }
+  .count-suffix{
+    color:var(--muted);
+    font-size:0.88rem;
+    white-space:nowrap;
+  }
+  .feedback{
+    font-weight:800;
+    font-size:1.15rem;
+    min-width:22px;
+    text-align:center;
+  }
+  .feedback.correct{color:var(--green);}
+  .feedback.incorrect{color:var(--red);}
+  .item.correct{background:var(--green-bg);}
+  .item.incorrect{background:var(--red-bg);}
+  .mcq-item{
+    display:block;
+  }
+  .mcq-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 18px;
+    margin:10px 0 6px 0;
+  }
+  .mcq-option{
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+  }
+  .mcq-item .feedback{
+    display:inline-block;
+    margin-top:4px;
+  }
+  .section-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:14px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .btn{
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:0.95rem;
+  }
+  .btn:hover{
+    background:var(--navy-light);
+  }
+  .btn.print-btn{
+    background:var(--green);
+  }
+  .btn.print-btn:hover{
+    background:#166e3c;
+  }
+  .score-badge{
+    font-weight:700;
+    color:var(--navy);
+    font-size:0.95rem;
+  }
+  footer.site-footer{
+    max-width:900px;
+    margin:0 auto;
+    padding:10px 24px 40px 24px;
+    color:var(--muted);
+    font-size:0.82rem;
+  }
+  @media (max-width:600px){
+    .answer-group{margin-left:0;}
+    .mcq-options{grid-template-columns:1fr;}
+  }
+  @media print{
+    .no-print{display:none !important;}
+    #landing{display:none !important;}
+    #task1, #task2{display:block !important;}
+    body{background:#fff;}
+    .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;}
+    .progress-bar{position:static;background:#fff;color:#000;border:1px solid #ccc;}
+    header.page-header{background:#fff;color:#000;border-bottom:2px solid #000;}
+    .choice-buttons{display:none;}
+    input{border:1px solid #999;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Significant Figures &amp; Estimates</h1>
+</header>
+
+<!-- LANDING PAGE -->
+<div id="landing">
+  <div class="container">
+    <div class="card">
+      <p class="intro">This resource covers two related skills you need throughout IB Physics: writing measurements to the correct number of <strong>significant figures</strong>, and making sensible <strong>order-of-magnitude estimates</strong> for everyday quantities.</p>
+      <p class="intro">Work through Section A first, then move on to Section B. Type your answers into the boxes, then click "Check answers" to mark each part — the correct answers are never shown, so use your working and the Hodder IB Physics Course Book to improve any you get wrong.</p>
+      <div class="choice-buttons">
+        <button class="choice-btn" onclick="goToTask1()">Start Section A: Significant Figures</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION A: SIGNIFICANT FIGURES -->
+<div class="task-nav no-print" id="task1-nav" style="display:none;">
+  <a href="#" onclick="backToStart();return false;">← Back to start</a>
+</div>
+<div class="progress-bar no-print" id="task1-progress" style="display:none;">Progress: 0 / 15 attempted</div>
+<div id="task1" style="display:none;">
+  <div class="container">
+    <h2>Section A: Significant Figures</h2>
+
+    <div class="card">
+      <h3>How to identify the correct number of significant figures</h3>
+      <p class="outline-box">All non-zero digits are always significant. Zeros <em>between</em> two non-zero digits are always significant. Leading zeros (before the first non-zero digit) are never significant — they only show the size of the number. Trailing zeros (after the last non-zero digit) are only significant if the number contains a decimal point. Writing a number in scientific notation removes this ambiguity completely, because every digit in the coefficient is significant — which is why physicists often prefer standard form.</p>
+    </div>
+
+    <div class="card" id="t1q1">
+      <h3>1. How many significant figures?</h3>
+      <p class="intro">State how many significant figures are in each number below.</p>
+      <div id="t1q1-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q1')">Check answers</button>
+        <span class="score-badge" id="t1q1-score"></span>
+      </div>
+    </div>
+
+    <div class="card" id="t1q2">
+      <h3>2. Round to 2 significant figures</h3>
+      <p class="note">Give each answer in scientific notation (standard form), so your significant figures are clear: enter the coefficient (e.g. 2.6) then the power of 10 (e.g. 2).</p>
+      <div id="t1q2-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q2')">Check answers</button>
+        <span class="score-badge" id="t1q2-score"></span>
+      </div>
+    </div>
+
+    <div class="card" id="t1q3">
+      <h3>3. Operations with significant figures</h3>
+      <p class="note">For multiplying/dividing, give your answer in scientific notation, rounded to the same number of significant figures as the least precise value used. For adding/subtracting, give your answer as a decimal, rounded to the same number of decimal places as the least precise value used.</p>
+      <div id="t1q3-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q3')">Check answers</button>
+        <span class="score-badge" id="t1q3-score"></span>
+      </div>
+    </div>
+
+    <div class="card no-print" style="text-align:center;">
+      <button class="btn" onclick="goToTask2()">Continue to Section B: Estimates and Orders of Magnitude →</button>
+    </div>
+
+    <div class="card no-print" style="text-align:center;">
+      <button class="btn print-btn" onclick="printPage()">🖨 Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION B: ESTIMATES AND ORDERS OF MAGNITUDE -->
+<div class="task-nav no-print" id="task2-nav" style="display:none;">
+  <a href="#" onclick="backToStart();return false;">← Back to start</a>
+  <a href="#" onclick="goToTask1();return false;">Go to Section A: Significant Figures</a>
+</div>
+<div class="progress-bar no-print" id="task2-progress" style="display:none;">Progress: 0 / 12 attempted</div>
+<div id="task2" style="display:none;">
+  <div class="container">
+    <h2>Section B: Estimates and Orders of Magnitude</h2>
+
+    <div class="card">
+      <h3>How to estimate the dimensions of an object</h3>
+      <p class="outline-box">Start from something you already know well — your own height (about 1.7&nbsp;m), a metre ruler, a bag of sugar (1&nbsp;kg), or a can of drink — and compare the unknown object to it. Round your comparison to the <strong>nearest power of ten</strong> rather than aiming for a precise value: the goal of an order-of-magnitude estimate is to get within a factor of ten of the real answer, not to be exact. Useful everyday reference points include a hand span (~0.1&nbsp;m), a door height (~2&nbsp;m), a paperclip's mass (~1&nbsp;g), and a small car's mass (~1000&nbsp;kg). This estimation approach is described in your Hodder IB Physics Course Book and the IB Physics Subject Guide, where it is an assessed skill.</p>
+    </div>
+
+    <div class="card" id="t2q1">
+      <h3>Multiple-choice questions</h3>
+      <p class="intro">Choose the best estimate for each quantity below.</p>
+      <div id="t2q1-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t2q1')">Check answers</button>
+        <span class="score-badge" id="t2q1-score"></span>
+      </div>
+    </div>
+
+    <div class="card no-print" style="text-align:center;">
+      <button class="btn print-btn" onclick="printPage()">🖨 Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer no-print">
+  Created for IB Physics students. Reference materials: Hodder Education, <em>IB Physics Course Book</em> (3rd edition); IB Physics Subject Guide.
+</footer>
+
+<script>
+/* ---------- Data ---------- */
+
+var countItems = [
+  { l:'a', p:'400.02', ans:5 },
+  { l:'b', p:'0.00000513', ans:3 },
+  { l:'c', p:'200.', ans:3 },
+  { l:'d', p:'2.10 × 10⁵', ans:3 },
+  { l:'e', p:'10.600', ans:5 }
+];
+
+var roundItems = [
+  { l:'a', p:'256', c:2.6, e:2, sf:2 },
+  { l:'b', p:'0.00203', c:2.0, e:-3, sf:2 },
+  { l:'c', p:'9,999', c:1.0, e:4, sf:2 },
+  { l:'d', p:'402', c:4.0, e:2, sf:2 },
+  { l:'e', p:'0.0012199', c:1.2, e:-3, sf:2 }
+];
+
+var opsSci = [
+  { l:'a', p:'6.175 × 45.1', c:2.78, e:2, sf:3 },
+  { l:'b', p:'25.17 ÷ 2.1', c:1.2, e:1, sf:2 },
+  { l:'c', p:'(9.09 × 10⁻³) ÷ (3.0 × 10⁵)', c:3.0, e:-8, sf:2 }
+];
+
+var opsPlain = [
+  { l:'d', p:'158.6 + 3.432 + 26.111 + 18.98', ans:207.1, dp:1 },
+  { l:'e', p:'295.381 − 95.381', ans:200.000, dp:3 }
+];
+
+var estimateItems = [
+  { num:1, p:'What is the approximate thickness of a piece of paper?', opts:['10¹ m','10⁰ m','10⁻² m','10⁻⁴ m'], ans:'D' },
+  { num:2, p:'Which is the most likely mass of a high school student?', opts:['1 kg','5 kg','60 kg','250 kg'], ans:'C' },
+  { num:3, p:'The weight of an apple is closest to…', opts:['10⁻² N','10⁰ N','10² N','10⁴ N'], ans:'B' },
+  { num:4, p:'The length of a high school physics classroom is probably closest to…', opts:['10⁻² m','10⁻¹ m','10¹ m','10⁴ m'], ans:'C' },
+  { num:5, p:'The mass of a physics textbook is closest to…', opts:['10³ kg','10¹ kg','10⁰ kg','10⁻² kg'], ans:'C' },
+  { num:6, p:'Which object has a weight closest to 1 Newton?', opts:['a Euro coin','a paper clip','a physics student','a golf ball'], ans:'D' },
+  { num:7, p:'The maximum time you should need to complete a worksheet like this one is approximately…', opts:['10² s','10³ s','10⁴ s','10⁵ s'], ans:'D' },
+  { num:8, p:'Which measurement of an average classroom door is closest to 1 metre?', opts:['thickness','width','height','surface area'], ans:'B' },
+  { num:9, p:'What is the approximate mass of a pencil?', opts:['5.0 × 10⁻³ kg','5.0 × 10⁻¹ kg','5.0 × 10⁰ kg','5.0 × 10¹ kg'], ans:'A' },
+  { num:10, p:"What is the approximate width of a person's little finger?", opts:['1 m','0.1 m','0.01 m','0.001 m'], ans:'C' },
+  { num:11, p:'A physics student is sitting in a seat reading this question. The magnitude of the force with which the seat pushes up on the student is closest to…', opts:['0 N','60 N','600 N','6,000 N'], ans:'C' },
+  { num:12, p:'The mass of a paper clip is approximately…', opts:['1 × 10⁶ kg','1 × 10³ kg','1 × 10⁻³ kg','1 × 10⁻⁶ kg'], ans:'C' }
+];
+
+/* ---------- Rendering ---------- */
+
+function renderCountItem(item){
+  return '<div class="item" data-type="count" data-ans="'+item.ans+'">'
+    + '<span class="q-label">'+item.l+'.</span>'
+    + '<span class="q-prompt">'+item.p+'</span>'
+    + '<span class="answer-group">'
+    + '<input type="text" inputmode="numeric" class="count-input" placeholder="?" aria-label="Number of significant figures for '+item.l+'">'
+    + '<span class="count-suffix">sig figs</span>'
+    + '</span>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function renderSciItem(item){
+  return '<div class="item" data-type="sci" data-c="'+item.c+'" data-e="'+item.e+'" data-sf="'+item.sf+'">'
+    + '<span class="q-label">'+item.l+'.</span>'
+    + '<span class="q-prompt">'+item.p+'</span>'
+    + '<span class="answer-group">'
+    + '<input type="text" inputmode="decimal" class="coeff-input" placeholder="e.g. 2.6" aria-label="Coefficient for '+item.l+'">'
+    + '<span class="times10">&times; 10</span>'
+    + '<input type="text" inputmode="numeric" class="exp-input" placeholder="e.g. 2" aria-label="Power of ten for '+item.l+'">'
+    + '</span>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function renderPlainDpItem(item){
+  return '<div class="item" data-type="plaindp" data-ans="'+item.ans+'" data-dp="'+item.dp+'">'
+    + '<span class="q-label">'+item.l+'.</span>'
+    + '<span class="q-prompt">'+item.p+'</span>'
+    + '<span class="answer-group">'
+    + '<input type="text" inputmode="decimal" class="plain-dp-input" placeholder="e.g. 207.1" aria-label="Answer for '+item.l+'">'
+    + '</span>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function renderMCQItem(item){
+  var name = 'mcq-' + item.num;
+  var optsHtml = item.opts.map(function(o, i){
+    var letter = String.fromCharCode(65 + i);
+    return '<label class="mcq-option"><input type="radio" name="' + name + '" value="' + letter + '"> ' + letter + '. ' + o + '</label>';
+  }).join('');
+  return '<div class="item mcq-item" data-type="mcq" data-ans="' + item.ans + '">'
+    + '<div class="item-full"><span class="q-label">' + item.num + '.</span> <span class="q-prompt">' + item.p + '</span></div>'
+    + '<div class="mcq-options">' + optsHtml + '</div>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function buildPage(){
+  document.getElementById('t1q1-items').innerHTML = countItems.map(renderCountItem).join('');
+  document.getElementById('t1q2-items').innerHTML = roundItems.map(renderSciItem).join('');
+  document.getElementById('t1q3-items').innerHTML = opsSci.map(renderSciItem).join('') + opsPlain.map(renderPlainDpItem).join('');
+  document.getElementById('t2q1-items').innerHTML = estimateItems.map(renderMCQItem).join('');
+}
+
+/* ---------- Marking ---------- */
+
+function checkSection(sectionId){
+  var section = document.getElementById(sectionId);
+  var items = section.querySelectorAll('.item');
+  var correctCount = 0;
+
+  items.forEach(function(it){
+    var type = it.dataset.type;
+    var ok = false;
+
+    if (type === 'count'){
+      var input = it.querySelector('.count-input');
+      var userVal = parseInt(input.value.trim(), 10);
+      ok = !isNaN(userVal) && userVal === parseInt(it.dataset.ans, 10);
+    } else if (type === 'sci'){
+      var cInput = it.querySelector('.coeff-input');
+      var eInput = it.querySelector('.exp-input');
+      var sf = parseInt(it.dataset.sf, 10);
+      var expC = parseFloat(it.dataset.c);
+      var expE = parseInt(it.dataset.e, 10);
+      var userCStr = cInput.value.trim();
+      var userE = parseInt(eInput.value.trim(), 10);
+      var expectedCStr = expC.toFixed(sf - 1);
+      ok = (userCStr === expectedCStr) && !isNaN(userE) && (userE === expE);
+    } else if (type === 'plaindp'){
+      var pInput = it.querySelector('.plain-dp-input');
+      var dp = parseInt(it.dataset.dp, 10);
+      var expVal = parseFloat(it.dataset.ans);
+      var userStr = pInput.value.trim();
+      var expectedStr = expVal.toFixed(dp);
+      ok = userStr === expectedStr;
+    } else if (type === 'mcq'){
+      var checked = it.querySelector('input[type="radio"]:checked');
+      ok = !!checked && checked.value === it.dataset.ans;
+    }
+
+    it.dataset.checked = '1';
+    it.dataset.correct = ok ? '1' : '0';
+    it.classList.remove('correct', 'incorrect');
+    it.classList.add(ok ? 'correct' : 'incorrect');
+
+    var fb = it.querySelector('.feedback');
+    fb.textContent = ok ? '✓' : '✗';
+    fb.className = 'feedback ' + (ok ? 'correct' : 'incorrect');
+
+    if (ok) correctCount++;
+  });
+
+  var scoreEl = document.getElementById(sectionId + '-score');
+  if (scoreEl) scoreEl.textContent = correctCount + ' / ' + items.length + ' correct';
+
+  var taskId = sectionId.indexOf('t1') === 0 ? 'task1' : 'task2';
+  updateProgress(taskId);
+}
+
+function updateProgress(taskId){
+  var items = document.querySelectorAll('#' + taskId + ' .item');
+  var total = items.length, checked = 0, correct = 0;
+  items.forEach(function(it){
+    if (it.dataset.checked === '1'){
+      checked++;
+      if (it.dataset.correct === '1') correct++;
+    }
+  });
+  var bar = document.getElementById(taskId + '-progress');
+  if (bar) bar.textContent = 'Progress: ' + checked + ' / ' + total + ' attempted · ' + correct + ' correct so far';
+}
+
+/* ---------- Navigation ---------- */
+
+function goToTask1(){
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('task1').style.display = 'block';
+  document.getElementById('task1-nav').style.display = 'block';
+  document.getElementById('task1-progress').style.display = 'block';
+  document.getElementById('task2').style.display = 'none';
+  document.getElementById('task2-nav').style.display = 'none';
+  document.getElementById('task2-progress').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function goToTask2(){
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('task2').style.display = 'block';
+  document.getElementById('task2-nav').style.display = 'block';
+  document.getElementById('task2-progress').style.display = 'block';
+  document.getElementById('task1').style.display = 'none';
+  document.getElementById('task1-nav').style.display = 'none';
+  document.getElementById('task1-progress').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function backToStart(){
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('task1').style.display = 'none';
+  document.getElementById('task1-nav').style.display = 'none';
+  document.getElementById('task1-progress').style.display = 'none';
+  document.getElementById('task2').style.display = 'none';
+  document.getElementById('task2-nav').style.display = 'none';
+  document.getElementById('task2-progress').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function printPage(){
+  window.print();
+}
+
+document.addEventListener('DOMContentLoaded', buildPage);
+</script>
+
+</body>
+</html>

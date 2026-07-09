@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Notation (Standard Form) — IB Physics Practice</title>
+<style>
+  :root{
+    --navy:#0b3d61;
+    --navy-light:#0e4d7a;
+    --bg:#f7f8fb;
+    --card:#ffffff;
+    --border:#dbe2ea;
+    --text:#1a1a2e;
+    --muted:#5b6b7a;
+    --green:#1a8a4a;
+    --green-bg:#f1fbf4;
+    --red:#c23b3b;
+    --red-bg:#fdf2f2;
+    --amber:#8a5a00;
+    --amber-border:#e6ab2e;
+    --amber-bg:#fff9e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    line-height:1.55;
+    color:var(--text);
+    background:var(--bg);
+    margin:0;
+    padding:0;
+  }
+  header.page-header{
+    background:var(--navy);
+    color:#fff;
+    padding:20px 24px;
+  }
+  header.page-header h1{
+    margin:0;
+    font-size:1.5rem;
+  }
+  .container{
+    max-width:900px;
+    margin:0 auto;
+    padding:24px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:20px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  }
+  h2{
+    color:var(--navy);
+    margin-top:0;
+    border-bottom:2px solid var(--border);
+    padding-bottom:8px;
+  }
+  h3{
+    color:var(--navy);
+    margin-top:0;
+  }
+  p.intro{
+    color:var(--text);
+  }
+  p.note{
+    color:var(--muted);
+    font-size:0.9rem;
+    background:#eef4f9;
+    border-left:3px solid var(--navy);
+    padding:8px 12px;
+    border-radius:4px;
+  }
+  p.stem{
+    background:#eef4f9;
+    padding:10px 12px;
+    border-radius:6px;
+    font-weight:500;
+  }
+  .choice-buttons{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+  .choice-btn{
+    flex:1;
+    min-width:230px;
+    padding:18px;
+    border-radius:10px;
+    border:2px solid var(--navy);
+    background:#fff;
+    color:var(--text);
+    font-size:0.95rem;
+    cursor:pointer;
+    text-align:left;
+    transition:background 0.15s;
+  }
+  .choice-btn:hover{
+    background:#eaf3fb;
+  }
+  .choice-btn strong{
+    display:block;
+    font-size:1.05rem;
+    margin-bottom:6px;
+    color:var(--navy);
+  }
+  .task-nav{
+    max-width:900px;
+    margin:0 auto;
+    padding:14px 24px 0 24px;
+    font-size:0.9rem;
+  }
+  .task-nav a{
+    color:var(--navy);
+    text-decoration:none;
+    margin-right:18px;
+    font-weight:600;
+  }
+  .task-nav a:hover{
+    text-decoration:underline;
+  }
+  .progress-bar{
+    position:sticky;
+    top:0;
+    background:var(--navy);
+    color:#fff;
+    padding:8px 24px;
+    font-size:0.9rem;
+    z-index:10;
+    margin-top:10px;
+    text-align:center;
+  }
+  .item{
+    padding:12px 0;
+    border-bottom:1px solid #edf0f4;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px 10px;
+  }
+  .item:last-child{
+    border-bottom:none;
+  }
+  .q-label{
+    font-weight:700;
+    min-width:26px;
+    color:var(--navy);
+  }
+  .q-prompt{
+    margin-right:6px;
+  }
+  .answer-group{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-left:auto;
+  }
+  .coeff-input{
+    width:84px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .exp-input{
+    width:58px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .plain-input{
+    width:150px;
+    padding:7px 8px;
+    border:1px solid #b7c2cf;
+    border-radius:6px;
+    font-size:0.95rem;
+  }
+  .times10{
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .unit{
+    color:var(--muted);
+    font-size:0.88rem;
+    margin-left:2px;
+    white-space:nowrap;
+  }
+  .feedback{
+    font-weight:800;
+    font-size:1.15rem;
+    min-width:22px;
+    text-align:center;
+  }
+  .feedback.correct{color:var(--green);}
+  .feedback.incorrect{color:var(--red);}
+  .item.correct{background:var(--green-bg);}
+  .item.incorrect{background:var(--red-bg);}
+  .item-full{
+    flex:1 1 100%;
+  }
+  .hint-btn{
+    background:#fff;
+    color:var(--amber);
+    border:1.5px solid var(--amber-border);
+    padding:5px 12px;
+    border-radius:6px;
+    font-size:0.82rem;
+    cursor:pointer;
+    margin-left:10px;
+  }
+  .hint-btn:hover{
+    background:var(--amber-bg);
+  }
+  .hint-box{
+    background:var(--amber-bg);
+    border:1px solid var(--amber-border);
+    padding:10px 12px;
+    border-radius:6px;
+    margin-top:8px;
+    font-size:0.9rem;
+    display:none;
+    color:#5a3d00;
+  }
+  .hint-box.visible{
+    display:block;
+  }
+  .section-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:14px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .btn{
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:0.95rem;
+  }
+  .btn:hover{
+    background:var(--navy-light);
+  }
+  .btn.print-btn{
+    background:var(--green);
+  }
+  .btn.print-btn:hover{
+    background:#166e3c;
+  }
+  .score-badge{
+    font-weight:700;
+    color:var(--navy);
+    font-size:0.95rem;
+  }
+  footer.site-footer{
+    max-width:900px;
+    margin:0 auto;
+    padding:10px 24px 40px 24px;
+    color:var(--muted);
+    font-size:0.82rem;
+  }
+  @media (max-width:600px){
+    .answer-group{margin-left:0;}
+    .item{flex-direction:row;}
+  }
+  @media print{
+    .no-print{display:none !important;}
+    #landing{display:none !important;}
+    #task1, #task2{display:block !important;}
+    body{background:#fff;}
+    .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;}
+    .progress-bar{position:static;background:#fff;color:#000;border:1px solid #ccc;}
+    header.page-header{background:#fff;color:#000;border-bottom:2px solid #000;}
+    .choice-buttons{display:none;}
+    input{border:1px solid #999;}
+    .hint-box{display:block !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Scientific Notation (Standard Form)</h1>
+</header>
+
+<!-- LANDING PAGE -->
+<div id="landing">
+  <div class="container">
+    <div class="card">
+      <p>Scientific notation (standard form) is used throughout IB Physics to write very large and very small numbers clearly, and to keep track of significant figures correctly. This resource lets you practise the skill and check your own answers as you go.</p>
+      <p><strong>Please choose a level to begin.</strong> If you are not so sure about scientific notation, start at the beginning and complete Task 1. If you are already confident, you can skip straight to Task 2.</p>
+      <div class="choice-buttons">
+        <button class="choice-btn" onclick="goToTask1()">
+          <strong>Not sure yet? Start with Task 1</strong>
+          Work through the basics — writing numbers in standard form, converting back to ordinary numbers, and calculating with standard form.
+        </button>
+        <button class="choice-btn" onclick="goToTask2()">
+          <strong>Feeling confident? Skip to Task 2</strong>
+          Go straight to the extension task, which applies standard form to real IB Physics problems, with hints available if you need them.
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TASK 1 -->
+<div class="task-nav no-print" id="task1-nav" style="display:none;">
+  <a href="#" onclick="backToStart();return false;">← Back to start</a>
+</div>
+<div class="progress-bar no-print" id="task1-progress" style="display:none;">Progress: 0 / 50 attempted</div>
+<div id="task1" style="display:none;">
+  <div class="container">
+    <h2>Task 1: Basics</h2>
+    <p class="intro">Work through each section below. Type your answer into the boxes, then click "Check answers" to mark that section. You can change your answers and check again as many times as you like — the correct answers are never shown, so use your working, your notes and the Hodder IB Physics Course Book to improve any answers you get wrong.</p>
+    <p class="note">Remember: in scientific notation, the coefficient (the first number) should always be between 1 and 9. This is an essential skill when it comes to determining the number of significant figures in future tasks.</p>
+
+    <div class="card" id="t1q1">
+      <h3>1. Write in scientific notation</h3>
+      <div id="t1q1-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q1')">Check answers</button>
+        <span class="score-badge" id="t1q1-score"></span>
+      </div>
+    </div>
+
+    <div class="card" id="t1q2">
+      <h3>2. Write as an ordinary (normal) number</h3>
+      <div id="t1q2-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q2')">Check answers</button>
+        <span class="score-badge" id="t1q2-score"></span>
+      </div>
+    </div>
+
+    <div class="card" id="t1q3">
+      <h3>3. Multiply and divide in scientific notation</h3>
+      <p class="note">Give each answer in scientific notation, rounded to 3 significant figures.</p>
+      <div id="t1q3-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q3')">Check answers</button>
+        <span class="score-badge" id="t1q3-score"></span>
+      </div>
+    </div>
+
+    <div class="card" id="t1q4">
+      <h3>4. Evaluate using A, B and C</h3>
+      <p class="note">A = 4.25 × 10³, B = 8.4 × 10⁹ and C = 1.05 × 10⁻⁶. Give each answer in scientific notation, rounded to 3 significant figures.</p>
+      <div id="t1q4-items"></div>
+      <div class="section-footer">
+        <button class="btn no-print" onclick="checkSection('t1q4')">Check answers</button>
+        <span class="score-badge" id="t1q4-score"></span>
+      </div>
+    </div>
+
+    <div class="card no-print" style="text-align:center;">
+      <button class="btn" onclick="goToTask2()">Continue to Task 2: Extension →</button>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <button class="btn print-btn no-print" onclick="printPage()">🖨 Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- TASK 2 -->
+<div class="task-nav no-print" id="task2-nav" style="display:none;">
+  <a href="#" onclick="backToStart();return false;">← Back to start</a>
+  <a href="#" onclick="goToTask1();return false;">Go to Task 1: Basics</a>
+</div>
+<div class="progress-bar no-print" id="task2-progress" style="display:none;">Progress: 0 / 10 attempted</div>
+<div id="task2" style="display:none;">
+  <div class="container">
+    <h2>Task 2: Extension — Applying standard form in Physics</h2>
+    <p class="intro">These questions use scientific notation in physics contexts, similar to calculations you will meet across the IB Physics course (see the Hodder Education IB Physics Course Book, 3rd edition, and the IB Physics Subject Guide, Topic 1: Measurements and uncertainties). Click "Show hint" if you get stuck. Give every answer in scientific notation, rounded to 3 significant figures.</p>
+
+    <div id="task2-questions"></div>
+
+    <div class="card" style="text-align:center;">
+      <button class="btn print-btn no-print" onclick="printPage()">🖨 Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer no-print">
+  Created for IB Physics students (Grade 11), Topic 1: Measurements and uncertainties. Reference materials: Hodder Education, <em>IB Physics Course Book</em> (3rd edition); IB Physics Subject Guide.
+</footer>
+
+<script>
+/* ---------- Data ---------- */
+
+var t1q1 = [
+  {l:'a', p:'12 800', c:1.28, e:4},
+  {l:'b', p:'340 000 000', c:3.4, e:8},
+  {l:'c', p:'53 000', c:5.3, e:4},
+  {l:'d', p:'418 200', c:4.182, e:5},
+  {l:'e', p:'340 million', c:3.4, e:8},
+  {l:'f', p:'670 000 000 000', c:6.7, e:11},
+  {l:'g', p:'12.8 million', c:1.28, e:7},
+  {l:'h', p:'710 300 000', c:7.103, e:8},
+  {l:'i', p:'0.004 68', c:4.68, e:-3},
+  {l:'j', p:'0.000 063', c:6.3, e:-5},
+  {l:'k', p:'0.000 000 000 5', c:5, e:-10},
+  {l:'l', p:'0.000 528', c:5.28, e:-4},
+  {l:'m', p:'0.000 007 91', c:7.91, e:-6},
+  {l:'n', p:'0.352', c:3.52, e:-1},
+  {l:'o', p:'0.000 063', c:6.3, e:-5},
+  {l:'p', p:'0.000 000 302', c:3.02, e:-7},
+  {l:'q', p:'700 × 10³', c:7, e:5},
+  {l:'r', p:'400 × 10⁻⁸', c:4, e:-6},
+  {l:'s', p:'61.7 × 10¹²', c:6.17, e:13},
+  {l:'t', p:'15 × 10⁻³', c:1.5, e:-2},
+  {l:'u', p:'0.7 × 10⁵', c:7, e:4},
+  {l:'v', p:'0.003 × 10⁻⁴', c:3, e:-7},
+  {l:'w', p:'0.126 × 10⁹', c:1.26, e:8},
+  {l:'x', p:'0.075 × 10⁻⁷', c:7.5, e:-9}
+];
+
+var t1q2 = [
+  {l:'a', p:'7 × 10⁵', ans:700000},
+  {l:'b', p:'3 × 10⁴', ans:30000},
+  {l:'c', p:'4.3 × 10⁵', ans:430000},
+  {l:'d', p:'5.2 × 10¹', ans:52},
+  {l:'e', p:'3.45 × 10³', ans:3450},
+  {l:'f', p:'5.24 × 10⁷', ans:52400000},
+  {l:'g', p:'9.32 × 10²', ans:932},
+  {l:'h', p:'6.125 × 10⁵', ans:612500}
+];
+
+var t1q3 = [
+  {l:'a', p:'(3.12 × 10¹²) × (4.65 × 10⁶)', c:1.45, e:19},
+  {l:'b', p:'(4.7 × 10⁷) × (2.16 × 10¹⁵)', c:1.02, e:23},
+  {l:'c', p:'(5.6 × 10⁸) × (3.17 × 10⁻⁴)', c:1.78, e:5},
+  {l:'d', p:'(6.3 × 10⁻¹⁴) × (5.25 × 10⁹)', c:3.31, e:-4},
+  {l:'e', p:'(2.86 × 10⁻⁵) × (3.4 × 10⁻⁹)', c:9.72, e:-14},
+  {l:'f', p:'(8.72 × 10⁻¹⁵) × (1.265 × 10⁻⁶)', c:1.10, e:-20}
+];
+
+var t1q4 = [
+  {l:'a', p:'AB', c:3.57, e:13},
+  {l:'b', p:'BC', c:8.82, e:3},
+  {l:'c', p:'A²', c:1.81, e:7},
+  {l:'d', p:'C²', c:1.10, e:-12},
+  {l:'e', p:'B²C', c:7.41, e:13},
+  {l:'f', p:'(BC)²', c:7.78, e:7},
+  {l:'g', p:'B / C', c:8.00, e:15},
+  {l:'h', p:'C / A', c:2.47, e:-10},
+  {l:'i', p:'A² / B', c:2.56, e:-13},
+  {l:'j', p:'B / (AC)', c:1.88, e:12},
+  {l:'k', p:'A / C + B', c:1.24, e:10},
+  {l:'l', p:'A / B + C', c:1.56, e:-6}
+];
+
+var task2Questions = [
+  {
+    num:1,
+    stem:'One milligram of hydrogen gas contains 2.987 × 10²⁰ molecules.',
+    parts:[
+      {l:'a', p:'Calculate the number of molecules in 1.2 grams of hydrogen gas.', c:3.58, e:23, unit:'molecules',
+       hint:'First work out how many milligrams there are in 1.2 grams. Then multiply this by the number of molecules in one milligram.'},
+      {l:'b', p:'Calculate the mass, in milligrams, of one molecule of hydrogen.', c:3.35, e:-21, unit:'milligrams',
+       hint:'Divide the mass of one milligram by the number of molecules it contains.'}
+    ]
+  },
+  {
+    num:2,
+    stem:'The density of hydrogen at 0°C is 8.987 × 10⁻⁵ grams per cubic centimetre.',
+    parts:[
+      {l:'a', p:'Calculate the mass of 3 litres of hydrogen.', c:2.70, e:-1, unit:'grams',
+       hint:'Convert 3 litres into cubic centimetres (1 litre = 1000 cm³), then use mass = density × volume.'},
+      {l:'b', p:'Calculate the volume, in cubic centimetres, of 6 grams of hydrogen.', c:6.68, e:4, unit:'cm³',
+       hint:'Rearrange density = mass ÷ volume to make volume the subject.'}
+    ]
+  },
+  {
+    num:3,
+    stem:'There are 6.022 × 10²³ atoms in 22.4 litres of helium gas. This amount of gas has a mass of 4.003 grams.',
+    parts:[
+      {l:'a', p:'Calculate the number of atoms in 1 millilitre of helium gas.', c:2.69, e:19, unit:'atoms',
+       hint:'Convert 22.4 litres into millilitres (1 litre = 1000 mL), then divide the total number of atoms by this volume.'},
+      {l:'b', p:'Calculate the mass, in grams, of one atom of helium.', c:6.65, e:-24, unit:'grams',
+       hint:'Divide the total mass by the total number of atoms.'}
+    ]
+  },
+  {
+    num:4,
+    stem:'The second is defined as the duration of 9 192 631 770 periods of radiation of the caesium atom, so there are 9.192631770 × 10⁹ periods in 1 second.',
+    parts:[
+      {l:'a', p:'Calculate the number of periods in 2 minutes.', c:1.10, e:12, unit:'periods',
+       hint:'Convert 2 minutes into seconds, then multiply by the number of periods in one second.'},
+      {l:'b', p:'Calculate the time in seconds for 1 period.', c:1.09, e:-10, unit:'seconds',
+       hint:'The time for one period is the reciprocal of the number of periods per second (1 ÷ periods per second).'}
+    ]
+  },
+  {
+    num:5,
+    stem:'The Sun is spherical, with a radius of 6.960 × 10⁵ kilometres and an average density of 1.409 × 10⁹ tonnes per cubic kilometre.',
+    parts:[
+      {l:'a', p:'Calculate the volume of the Sun in cubic kilometres.', c:1.41, e:18, unit:'km³',
+       hint:'Use the formula for the volume of a sphere: V = (4/3)πr³.'},
+      {l:'b', p:'Calculate the mass of the Sun in tonnes.', c:1.99, e:27, unit:'tonnes',
+       hint:'Use mass = density × volume, substituting your answer to part (a) for the volume.'}
+    ]
+  }
+];
+
+/* ---------- Rendering ---------- */
+
+function renderSci(item){
+  return '<div class="item" data-type="sci" data-c="'+item.c+'" data-e="'+item.e+'">'
+    + '<span class="q-label">('+item.l+')</span>'
+    + '<span class="q-prompt">'+item.p+'</span>'
+    + '<span class="answer-group">'
+    + '<input type="text" inputmode="decimal" class="coeff-input" placeholder="e.g. 1.01" aria-label="Coefficient for part '+item.l+'">'
+    + '<span class="times10">&times; 10</span>'
+    + '<input type="text" inputmode="numeric" class="exp-input" placeholder="power" aria-label="Power of ten for part '+item.l+'">'
+    + (item.unit ? '<span class="unit">'+item.unit+'</span>' : '')
+    + '</span>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function renderPlain(item){
+  return '<div class="item" data-type="plain" data-ans="'+item.ans+'">'
+    + '<span class="q-label">('+item.l+')</span>'
+    + '<span class="q-prompt">'+item.p+'</span>'
+    + '<span class="answer-group">'
+    + '<input type="text" inputmode="decimal" class="plain-input" placeholder="e.g. 12500" aria-label="Answer for part '+item.l+'">'
+    + '</span>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function renderExtPart(qnum, item){
+  var hintId = 'hint-'+qnum+item.l;
+  return '<div class="item" data-type="sci" data-c="'+item.c+'" data-e="'+item.e+'">'
+    + '<div class="item-full">'
+    + '<span class="q-label">('+item.l+')</span> <span class="q-prompt">'+item.p+'</span>'
+    + '<button type="button" class="hint-btn no-print" onclick="toggleHint(\''+hintId+'\', this)">Show hint</button>'
+    + '<div class="hint-box" id="'+hintId+'">'+item.hint+'</div>'
+    + '</div>'
+    + '<span class="answer-group">'
+    + '<input type="text" inputmode="decimal" class="coeff-input" placeholder="e.g. 1.01" aria-label="Coefficient">'
+    + '<span class="times10">&times; 10</span>'
+    + '<input type="text" inputmode="numeric" class="exp-input" placeholder="power" aria-label="Power of ten">'
+    + '<span class="unit">'+item.unit+'</span>'
+    + '</span>'
+    + '<span class="feedback" aria-live="polite"></span>'
+    + '</div>';
+}
+
+function buildPage(){
+  document.getElementById('t1q1-items').innerHTML = t1q1.map(renderSci).join('');
+  document.getElementById('t1q2-items').innerHTML = t1q2.map(renderPlain).join('');
+  document.getElementById('t1q3-items').innerHTML = t1q3.map(renderSci).join('');
+  document.getElementById('t1q4-items').innerHTML = t1q4.map(renderSci).join('');
+
+  var t2html = '';
+  task2Questions.forEach(function(q){
+    t2html += '<div class="card" id="t2q'+q.num+'">'
+      + '<h3>'+q.num+'.</h3>'
+      + '<p class="stem">'+q.stem+'</p>'
+      + '<div>' + q.parts.map(function(part){ return renderExtPart(q.num, part); }).join('') + '</div>'
+      + '<div class="section-footer">'
+      + '<button class="btn no-print" onclick="checkSection(\'t2q'+q.num+'\')">Check answers</button>'
+      + '<span class="score-badge" id="t2q'+q.num+'-score"></span>'
+      + '</div>'
+      + '</div>';
+  });
+  document.getElementById('task2-questions').innerHTML = t2html;
+}
+
+/* ---------- Hints ---------- */
+
+function toggleHint(id, btn){
+  var el = document.getElementById(id);
+  el.classList.toggle('visible');
+  btn.textContent = el.classList.contains('visible') ? 'Hide hint' : 'Show hint';
+}
+
+/* ---------- Marking ---------- */
+
+function coeffMatches(user, correct){
+  if (isNaN(user)) return false;
+  var tol = Math.max(0.015, Math.abs(correct) * 0.012);
+  return Math.abs(user - correct) <= tol;
+}
+
+function expMatches(user, correct){
+  return !isNaN(user) && Math.round(user) === correct;
+}
+
+function plainMatches(userRaw, correct){
+  var cleaned = String(userRaw).replace(/[,\s]/g, '');
+  var user = parseFloat(cleaned);
+  if (isNaN(user)) return false;
+  var tol = Math.max(0.5, Math.abs(correct) * 0.005);
+  return Math.abs(user - correct) <= tol;
+}
+
+function checkSection(sectionId){
+  var section = document.getElementById(sectionId);
+  var items = section.querySelectorAll('.item');
+  var correctCount = 0;
+
+  items.forEach(function(it){
+    var type = it.dataset.type;
+    var ok = false;
+
+    if (type === 'sci'){
+      var cInput = it.querySelector('.coeff-input');
+      var eInput = it.querySelector('.exp-input');
+      var userC = parseFloat(cInput.value);
+      var userE = parseFloat(eInput.value);
+      ok = coeffMatches(userC, parseFloat(it.dataset.c)) && expMatches(userE, parseInt(it.dataset.e, 10));
+    } else {
+      var pInput = it.querySelector('.plain-input');
+      ok = plainMatches(pInput.value, parseFloat(it.dataset.ans));
+    }
+
+    it.dataset.checked = '1';
+    it.dataset.correct = ok ? '1' : '0';
+    it.classList.remove('correct', 'incorrect');
+    it.classList.add(ok ? 'correct' : 'incorrect');
+
+    var fb = it.querySelector('.feedback');
+    fb.textContent = ok ? '✓' : '✗';
+    fb.className = 'feedback ' + (ok ? 'correct' : 'incorrect');
+
+    if (ok) correctCount++;
+  });
+
+  var scoreEl = document.getElementById(sectionId + '-score');
+  if (scoreEl) scoreEl.textContent = correctCount + ' / ' + items.length + ' correct';
+
+  var taskId = sectionId.indexOf('t1') === 0 ? 'task1' : 'task2';
+  updateProgress(taskId);
+}
+
+function updateProgress(taskId){
+  var items = document.querySelectorAll('#' + taskId + ' .item');
+  var total = items.length, checked = 0, correct = 0;
+  items.forEach(function(it){
+    if (it.dataset.checked === '1'){
+      checked++;
+      if (it.dataset.correct === '1') correct++;
+    }
+  });
+  var bar = document.getElementById(taskId + '-progress');
+  if (bar) bar.textContent = 'Progress: ' + checked + ' / ' + total + ' attempted · ' + correct + ' correct so far';
+}
+
+/* ---------- Navigation ---------- */
+
+function goToTask1(){
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('task1').style.display = 'block';
+  document.getElementById('task1-nav').style.display = 'block';
+  document.getElementById('task1-progress').style.display = 'block';
+  document.getElementById('task2').style.display = 'none';
+  document.getElementById('task2-nav').style.display = 'none';
+  document.getElementById('task2-progress').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function goToTask2(){
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('task2').style.display = 'block';
+  document.getElementById('task2-nav').style.display = 'block';
+  document.getElementById('task2-progress').style.display = 'block';
+  document.getElementById('task1').style.display = 'none';
+  document.getElementById('task1-nav').style.display = 'none';
+  document.getElementById('task1-progress').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function backToStart(){
+  document.getElementById('landing').style.display = 'block';
+  document.getElementById('task1').style.display = 'none';
+  document.getElementById('task1-nav').style.display = 'none';
+  document.getElementById('task1-progress').style.display = 'none';
+  document.getElementById('task2').style.display = 'none';
+  document.getElementById('task2-nav').style.display = 'none';
+  document.getElementById('task2-progress').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function printPage(){
+  window.print();
+}
+
+document.addEventListener('DOMContentLoaded', buildPage);
+</script>
+
+</body>
+</html>
