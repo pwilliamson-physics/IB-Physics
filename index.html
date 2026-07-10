@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IB DP Physics</title>
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --border: #e2e6ea;
+    --accent: #1e5b8f;
+    --accent-light: #e8f1fb;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --placeholder-bg: #fafbfc;
+    --placeholder-border: #d7dce2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #1e5b8f, #2d7dc0);
+    color: white;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2.25rem;
+    letter-spacing: 0.02em;
+  }
+  header p {
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+    font-size: 1.05rem;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .topic {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .topic.placeholder {
+    background: var(--placeholder-bg);
+    border: 1px dashed var(--placeholder-border);
+  }
+  .topic-header {
+    padding: 1.1rem 1.5rem;
+    background: var(--accent-light);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topic.placeholder .topic-header {
+    background: transparent;
+    border-bottom: 1px dashed var(--placeholder-border);
+  }
+  .topic-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--accent);
+  }
+  .topic.placeholder .topic-header h2 {
+    color: var(--muted);
+  }
+  .status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+  }
+  .status.ready {
+    background: #d7f0e0;
+    color: #1c7a44;
+  }
+  .status.pending {
+    background: #eef0f2;
+    color: var(--muted);
+  }
+  .resource-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+  .resource-list li {
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .resource-list li:last-child {
+    border-bottom: none;
+  }
+  .resource-list a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  .resource-list a:hover {
+    text-decoration: underline;
+  }
+  .resource-list p {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .empty-note {
+    padding: 1rem 1.5rem;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.92rem;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding-bottom: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IB DP Physics</h1>
+  <p>A growing library of workbooks and resources, organised by topic</p>
+</header>
+
+<main>
+
+  <!-- Astrophysics -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Astrophysics</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Collaborative Project -->
+  <section class="topic">
+    <div class="topic-header">
+      <h2>Collaborative Project</h2>
+      <span class="status ready">1 resource</span>
+    </div>
+    <ul class="resource-list">
+      <li>
+        <a href="modules/collaborative-project/Energy_Balance_and_Greenhouse_Effect.html">Energy Balance &amp; the Greenhouse Effect — Student Workbook</a>
+        <p>A two-lesson workbook on radiation, emissivity, the solar constant and albedo, followed by Earth's energy balance and the greenhouse effect. Includes a synthesis task on real planetary energy budgets, an interactive inverse-square-law simulation, and the brief for the 10-hour Collaborative Sciences Project investigating albedo or foliage energy shielding, with an understanding checklist and self-marking answer key.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Currents and Circuits -->
+  <section class="topic">
+    <div class="topic-header">
+      <h2>Currents and Circuits</h2>
+      <span class="status ready">10 resources</span>
+    </div>
+    <ul class="resource-list">
+      <li>
+        <a href="modules/current-and-circuits/00_modelling_electrical_circuits.html">Modelling Electrical Circuits — Self-Marking Workbook</a>
+        <p>Builds intuition for circuit behaviour using everyday analogies (a coal truck, a supermarket, and a hamster wheel) before mapping each model onto real electric circuit quantities. Self-marking format for independent study.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/01_potential_difference_and_Kirchhoffs_laws.html">Potential Difference and Kirchhoff's Laws — Interactive Notes</a>
+        <p>Introduces potential difference via the gravitational analogy, then develops Kirchhoff's voltage law and current law, with interactive checks and a results summary.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/02_basic_circuits_workbook.html">Basic Circuits — IB Physics Workbook</a>
+        <p>Practical workbook covering the definition of current, the charge equation I = ΔQ/Δt, and hands-on measurement of current and potential difference in series and parallel circuits, finishing with a summary of Kirchhoff's laws.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/02_DC_circuit_builder.html">DC Circuit Builder</a>
+        <p>Interactive tool for constructing DC circuits from a palette of components, with the ability to save and load circuit designs — useful for experimenting with circuit layouts before building them physically.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/03_charge_and_current.html">Charge, Current and Time — Practice Workbook</a>
+        <p>Practice problems on the relationship between charge, current and time, covering unit conversions, multi-step problems, and electron counting, with an extension section for further challenge.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/03b_basic_circuits_concept_check.html">Basic Circuits Concept Check</a>
+        <p>Ten circuit diagrams testing conceptual understanding of series and parallel circuit behaviour — a quick diagnostic to check readiness before moving on to resistance.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/04_resistance.html">Resistance</a>
+        <p>Notes on what resistance is and how it depends on temperature via the Drude model, followed by a practical on measuring resistance across six different circuits.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/06_adding_resistors.html">Adding Resistors — Self-Marking Workbook</a>
+        <p>Covers combining resistors in series and parallel using rope-bridge and water-pump analogies, then a workbook, a predicted-vs-measured practical, and a concept check on resistor circuits.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/08_potentiometer_simulation.html">Potentiometer Simulation</a>
+        <p>Interactive simulation exploring variable resistor and potentiometer control, letting students see how sliding a wiper changes potential difference and current in a circuit.</p>
+      </li>
+      <li>
+        <a href="modules/current-and-circuits/09_emf_and_internal_resistance.html">EMF and Internal Resistance — Self-Marking Workbook</a>
+        <p>Notes on emf, terminal potential difference, "lost volts", and internal resistance, including finding emf and r from a graph, an interactive simulation, worked examples, and a review workbook.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Electromagnetism -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Electromagnetism</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Mechanics -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Mechanics</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Nuclear Physics -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Nuclear Physics</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Rotational Dynamics -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Rotational Dynamics</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Special Relativity -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Special Relativity</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Thermal Physics -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Thermal Physics</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+  <!-- Tools -->
+  <section class="topic">
+    <div class="topic-header">
+      <h2>Tools</h2>
+      <span class="status ready">3 resources</span>
+    </div>
+    <ul class="resource-list">
+      <li>
+        <a href="modules/tools/Accuracy_and_Precision.html">Accuracy and Precision — IB Physics Practice</a>
+        <p>Self-marking practice distinguishing accuracy (closeness to the true value, affected by systematic error) from precision (repeatability, affected by random error and instrument resolution), using the classic dartboard illustration.</p>
+      </li>
+      <li>
+        <a href="modules/tools/Scientific_Notation.html">Scientific Notation (Standard Form) — IB Physics Practice</a>
+        <p>Self-marking practice writing numbers in and out of scientific notation, calculating with standard form, and applying it to real IB Physics problems from Topic 1: Measurements and uncertainties. Includes a foundational task and an extension task with hints.</p>
+      </li>
+      <li>
+        <a href="modules/tools/SigFigs_and_Estimates.html">Significant Figures &amp; Estimates — IB Physics Practice</a>
+        <p>Self-marking practice on identifying and rounding to significant figures and carrying them through calculations, followed by a section on order-of-magnitude estimation for everyday quantities.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Waves -->
+  <section class="topic placeholder">
+    <div class="topic-header">
+      <h2>Waves</h2>
+      <span class="status pending">Coming soon</span>
+    </div>
+    <p class="empty-note">No resources yet — check back soon.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>IB DP Physics resource index</p>
+</footer>
+
+</body>
+</html>
