@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://hookean1-dotcom.github.io/apps/uncertainties-toolkit%20new.html -->
+<html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A-level Uncertainties &amp; Graphing Toolkit</title>
+</head>
+<body style="margin:0">
+<!-- A-Level Uncertainties & Graphing Toolkit — Dr Jones Physics
+     Embed-safe single file: scoped #ugt-root, canvas rendering (no inline SVG),
+     ResizeObserver sizing, no viewport units, no position:fixed. -->
+<div id="ugt-root">
+  <div class="ugt-shell">
+
+    <header class="ugt-bezel">
+      <div class="ugt-bezel-mark">±</div>
+      <div class="ugt-bezel-text">
+        <h1 class="ugt-title">Uncertainties &amp; Graphing Toolkit</h1>
+        <p class="ugt-sub">A-level practical skills</p>
+      </div>
+      <div class="ugt-board" role="group" aria-label="Exam board">
+        <span class="ugt-board-lab">Exam board</span>
+        <div class="ugt-board-seg">
+          <button class="ugt-board-btn ugt-active" data-board="wjec" aria-pressed="true">WJEC</button>
+          <button class="ugt-board-btn" data-board="aqa" aria-pressed="false">AQA</button>
+          <button class="ugt-board-btn" data-board="ocr" aria-pressed="false">OCR</button>
+          <button class="ugt-board-btn" data-board="edx" aria-pressed="false">Edexcel</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="ugt-tabs" role="tablist" aria-label="Toolkit sections">
+      <button class="ugt-tab ugt-active" data-panel="concepts" role="tab" aria-selected="true">Errors &amp; precision</button>
+      <button class="ugt-tab" data-panel="readings" role="tab" aria-selected="false">Readings</button>
+      <button class="ugt-tab" data-panel="combine" role="tab" aria-selected="false">Combining</button>
+      <button class="ugt-tab" data-panel="graph" role="tab" aria-selected="false">Graph &amp; gradient</button>
+      <button class="ugt-tab" data-panel="report" role="tab" aria-selected="false">Reporting</button>
+      <button class="ugt-tab" data-panel="logs" role="tab" aria-selected="false">Logarithms</button>
+    </nav>
+
+    <main class="ugt-stage">
+
+      <!-- ============ PANEL: CONCEPTS ============ -->
+      <section class="ugt-panel ugt-active" data-panel="concepts" role="tabpanel">
+        <div class="ugt-grid2">
+          <div class="ugt-card">
+            <h2 class="ugt-h">The target test</h2>
+            <p class="ugt-p">Drag the sliders to see how <strong>random</strong> and <strong>systematic</strong> errors look on a target. Each shot is one repeated measurement; the bullseye is the true value.</p>
+            <div class="ugt-target-wrap">
+              <canvas id="ugt-target" class="ugt-canvas" width="636" height="636"></canvas>
+            </div>
+            <div class="ugt-control">
+              <label class="ugt-lab" for="ugt-spread">Random error (spread / precision)</label>
+              <input id="ugt-spread" class="ugt-range" type="range" min="2" max="80" value="20">
+            </div>
+            <div class="ugt-control">
+              <label class="ugt-lab" for="ugt-offset">Systematic error (offset / accuracy)</label>
+              <input id="ugt-offset" class="ugt-range" type="range" min="0" max="80" value="6">
+            </div>
+            <button id="ugt-resample" class="ugt-btn ugt-btn-ghost">New sample</button>
+            <div id="ugt-verdict" class="ugt-verdict">Precise and accurate — small spread, on target.</div>
+          </div>
+
+          <div class="ugt-card">
+            <h2 class="ugt-h">What the words mean</h2>
+            <dl class="ugt-defs">
+              <dt>Random error</dt>
+              <dd>Scatters readings either side of the true value (e.g. reaction time, judging a fast event). Reduced by repeating and averaging. Shows as <em>spread</em>.</dd>
+              <dt>Systematic error</dt>
+              <dd>Shifts every reading the same way (e.g. a zero error, a miscalibrated meter, consistent parallax). Repeating does not help. Shows as <em>offset</em> from the bullseye.</dd>
+              <dt>Precision</dt>
+              <dd>How tightly repeated readings agree — a small spread. Says nothing about being correct.</dd>
+              <dt>Accuracy</dt>
+              <dd>How close a reading is to the true value — a small offset.</dd>
+              <dt>Resolution</dt>
+              <dd>The smallest change an instrument can show (its finest division or last digit). It sets the floor on uncertainty for a single reading.</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PANEL: READINGS ============ -->
+      <section class="ugt-panel" data-panel="readings" role="tabpanel">
+        <div class="ugt-grid2">
+          <div class="ugt-card">
+            <h2 class="ugt-h">Single reading</h2>
+            <p class="ugt-p">A single reading is limited by the instrument's resolution.</p>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-sr-val">Reading</label><input id="ugt-sr-val" class="ugt-in" type="number" value="24.0" step="any"></div>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-sr-res">Resolution (smallest division / last digit)</label><input id="ugt-sr-res" class="ugt-in" type="number" value="0.1" step="any"></div>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-sr-rule">Type of measurement</label>
+              <select id="ugt-sr-rule" class="ugt-in"><option value="wjec_res">Single reading on any instrument</option></select>
+            </div>
+            <div id="ugt-sr-note" class="ugt-note">WJEC: for a single reading, take the uncertainty as the <b>instrument resolution</b> (the smallest measurable division), unless there is reason to believe it is greater.</div>
+            <div id="ugt-sr-out" class="ugt-readout"><span class="ugt-result"><span class="ugt-rv">24.0</span><span class="ugt-rpm">± 0.1</span></span><div class="ugt-step">Percentage uncertainty = <b>0.417%</b></div></div>
+          </div>
+
+          <div class="ugt-card">
+            <h2 class="ugt-h">Repeated readings</h2>
+            <p class="ugt-p">Enter your repeats (any separator). The uncertainty is half the range, the standard A-level estimate used by both WJEC and AQA.</p>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-rr-data">Measurements</label>
+              <textarea id="ugt-rr-data" class="ugt-in ugt-area" rows="3">1.62, 1.58, 1.65, 1.60, 1.59</textarea>
+            </div>
+            <button id="ugt-rr-go" class="ugt-btn">Calculate</button>
+            <div id="ugt-rr-out" class="ugt-readout"><div class="ugt-step">n = <b>5</b> · max 1.65 · min 1.58 · range 0.07</div><div class="ugt-step">mean = <b>1.608</b> · uncertainty = range ÷ 2 = 0.07 ÷ 2</div><span class="ugt-result"><span class="ugt-rv">1.608</span><span class="ugt-rpm">± 0.035</span></span><div class="ugt-step">Percentage uncertainty = <b>2.18%</b></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PANEL: COMBINE ============ -->
+      <section class="ugt-panel ugt-workhidden" data-panel="combine" role="tabpanel">
+        <div class="ugt-workbar">
+          <button id="ugt-toggle-work" class="ugt-btn ugt-btn-ghost">Reveal calculations</button>
+          <span class="ugt-hint">Working is hidden by default — try the propagation yourself, then reveal to check.</span>
+        </div>
+        <div class="ugt-card">
+          <h2 class="ugt-h">Products, quotients &amp; powers</h2>
+          <p class="ugt-p">For any quantity of the form <span class="ugt-mono">Z = k · A<sup>a</sup> · B<sup>b</sup> · …</span> the percentage uncertainties add, each multiplied by the size of its power: <span class="ugt-mono">%Z = |a|·%A + |b|·%B + …</span> Use a negative power to divide, <span class="ugt-mono">0.5</span> for a square root, and so on.</p>
+          <div class="ugt-field"><label class="ugt-lab" for="ugt-c-preset">Relationship</label>
+            <select id="ugt-c-preset" class="ugt-in"><option value="custom">Custom — build your own</option><option value="0">Density · ρ = m / V</option><option value="1">Speed · v = s / t</option><option value="2">Acceleration · a = v / t</option><option value="3">Momentum · p = m v</option><option value="4">Kinetic energy · Eₖ = ½ m v²</option><option value="5">Newton's 2nd law · F = m a</option><option value="6">Weight · W = m g</option><option value="7">Work done · W = F s</option><option value="8">Power · P = W / t</option><option value="9">Moment · M = F d</option><option value="10">Pressure · p = F / A</option><option value="11">Hydrostatic pressure · p = ρ g h</option><option value="12">GPE change · ΔEₚ = m g Δh</option><option value="13">Pendulum (g) · g = 4π²L / T²</option><option value="14">Centripetal force · F = m v² / r</option><option value="15">Stress · σ = F / A</option><option value="16">Young modulus · E = F L / (A x)</option><option value="17">Resistance · R = V / I</option><option value="18">Power · P = V I</option><option value="19">Power · P = I² R</option><option value="20">Power · P = V² / R</option><option value="21">Resistivity · ρ = R A / L</option><option value="22">Charge · Q = I t</option><option value="23">Electrical energy · E = V I t</option><option value="24">Capacitance · C = Q / V</option><option value="25">Capacitor energy · E = ½ C V²</option><option value="26">Wave speed · v = f λ</option><option value="27">Fringe spacing · w = λ D / s</option><option value="28">Refractive index · n = real / apparent</option><option value="29">Photon energy · E = h f</option><option value="30">Photon energy · E = h c / λ</option><option value="31">de Broglie (electron) · λ = h / (mₑ v)</option><option value="32">Gravitational field · g = G M / r²</option><option value="33">Coulomb force · F = Q₁Q₂ / 4πε₀r²</option><option value="34">Uniform E-field · E = V / d</option><option value="35">Force on a conductor · F = B I L</option><option value="36">Radius in B-field (electron) · r = mₑv / (B q)</option><option value="37">Specific heat · c = Q / (m ΔT)</option><option value="38">Ideal gas (moles) · n = p V / R T</option><option value="39">Activity · A = λ N</option></select>
+          </div>
+          <div id="ugt-c-formula" class="ugt-formula" style="display: block;">g = 4π²·L / T²  (4π² = 39.478)<span class="ugt-rule">uncertainty rule: %g = %L + 2·%T</span></div>
+          <div class="ugt-field ugt-inline"><label class="ugt-lab" for="ugt-c-k">Constant&nbsp;k</label><input id="ugt-c-k" class="ugt-in ugt-in-sm" type="number" value="39.478" step="any"><span class="ugt-hint">(no uncertainty — e.g. 4π² ≈ 39.478)</span></div>
+          <div class="ugt-table-wrap">
+            <table class="ugt-table" id="ugt-c-tab">
+              <thead><tr><th>Name</th><th>Value</th><th>± abs unc</th><th>Power</th><th></th></tr></thead>
+              <tbody id="ugt-c-body"><tr><td><input class="ugt-in" type="text" value="L" data-k="name"></td><td><input class="ugt-in" type="number" step="any" value="0.85" data-k="val"></td><td><input class="ugt-in" type="number" step="any" value="0.005" data-k="unc"></td><td><input class="ugt-in" type="number" step="any" value="1" data-k="pow"></td><td><button class="ugt-x" title="Remove">×</button></td></tr><tr><td><input class="ugt-in" type="text" value="T" data-k="name"></td><td><input class="ugt-in" type="number" step="any" value="1.85" data-k="val"></td><td><input class="ugt-in" type="number" step="any" value="0.02" data-k="unc"></td><td><input class="ugt-in" type="number" step="any" value="-2" data-k="pow"></td><td><button class="ugt-x" title="Remove">×</button></td></tr></tbody>
+            </table>
+          </div>
+          <button id="ugt-c-add" class="ugt-btn ugt-btn-ghost">Add variable</button>
+          <div id="ugt-c-out" class="ugt-readout"><div class="ugt-step">%L = 0.005 ÷ 0.85 × 100 = <b>0.588%</b> → ×|1| = 0.588%</div><div class="ugt-step">%T = 0.02 ÷ 1.85 × 100 = <b>1.08%</b> → ×|-2| = 2.16%</div><div class="ugt-step">%Z = sum of contributions = <b>2.75%</b></div><span class="ugt-result"><span class="ugt-rv">9.80</span><span class="ugt-rpm">± 0.27</span></span><div class="ugt-step">i.e. Z = 9.805 with 2.75% uncertainty</div></div>
+        </div>
+
+        <div class="ugt-card">
+          <h2 class="ugt-h">Sums &amp; differences</h2>
+          <p class="ugt-p">When quantities are added or subtracted, their <strong>absolute</strong> uncertainties add: <span class="ugt-mono">ΔZ = ΔA + ΔB + …</span></p>
+          <div class="ugt-table-wrap">
+            <table class="ugt-table" id="ugt-s-tab">
+              <thead><tr><th>Name</th><th>Sign</th><th>Value</th><th>± abs unc</th><th></th></tr></thead>
+              <tbody id="ugt-s-body"><tr><td><input class="ugt-in" type="text" value="d₂" data-k="name"></td><td><select class="ugt-in" data-k="sign"><option value="1" selected="">+</option><option value="-1">−</option></select></td><td><input class="ugt-in" type="number" step="any" value="48.5" data-k="val"></td><td><input class="ugt-in" type="number" step="any" value="0.5" data-k="unc"></td><td><button class="ugt-x" title="Remove">×</button></td></tr><tr><td><input class="ugt-in" type="text" value="d₁" data-k="name"></td><td><select class="ugt-in" data-k="sign"><option value="1">+</option><option value="-1" selected="">−</option></select></td><td><input class="ugt-in" type="number" step="any" value="12.3" data-k="val"></td><td><input class="ugt-in" type="number" step="any" value="0.5" data-k="unc"></td><td><button class="ugt-x" title="Remove">×</button></td></tr></tbody>
+            </table>
+          </div>
+          <button id="ugt-s-add" class="ugt-btn ugt-btn-ghost">Add term</button>
+          <div id="ugt-s-out" class="ugt-readout"><div class="ugt-step">Z = +48.5 −12.3 = <b>36.2</b></div><div class="ugt-step">ΔZ = 0.5 + 0.5 = <b>1</b></div><span class="ugt-result"><span class="ugt-rv">36</span><span class="ugt-rpm">± 1</span></span><div class="ugt-step">Percentage uncertainty = <b>2.76%</b></div></div>
+        </div>
+      </section>
+
+      <!-- ============ PANEL: GRAPH ============ -->
+      <section class="ugt-panel" data-panel="graph" role="tabpanel">
+        <div class="ugt-card">
+          <h2 class="ugt-h">Plot, line of best fit &amp; gradient uncertainty</h2>
+          <p class="ugt-p" id="ugt-g-method">WJEC method: a line of <b>maximum</b> and a line of <b>minimum</b> gradient, both through the centroid (x̄, ȳ) — each the steepest/shallowest that still passes through <b>every</b> error bar, so the limiting points emerge automatically. gradient = (m_max + m_min)/2 ± (m_max − m_min)/2. Drag to adjust (pivots on the centroid).</p>
+
+          <div class="ugt-graph-layout">
+            <div class="ugt-plot-wrap"><canvas id="ugt-plot" class="ugt-canvas"></canvas></div>
+            <div class="ugt-plot-tools">
+              <button id="ugt-fit-best" class="ugt-btn" style="display: none;">Snap best fit (least squares)</button>
+              <button id="ugt-fit-worst" class="ugt-btn ugt-btn-ghost">Suggest max &amp; min lines</button>
+              <label class="ugt-check"><input id="ugt-show-worst" type="checkbox" checked=""> <span id="ugt-show-worst-lab">Show max &amp; min lines</span></label>
+            </div>
+
+            <div class="ugt-data-row">
+              <div class="ugt-axis-fields">
+                <div class="ugt-field"><label class="ugt-lab">x-axis label</label><input id="ugt-xlab" class="ugt-in" type="text" value="Current I"></div>
+                <div class="ugt-field ugt-unitf"><label class="ugt-lab">x unit</label><input id="ugt-xunit" class="ugt-in" type="text" value="A"></div>
+                <div class="ugt-field"><label class="ugt-lab">y-axis label</label><input id="ugt-ylab" class="ugt-in" type="text" value="Potential difference V"></div>
+                <div class="ugt-field ugt-unitf"><label class="ugt-lab">y unit</label><input id="ugt-yunit" class="ugt-in" type="text" value="V"></div>
+              </div>
+              <div class="ugt-data-block">
+                <div class="ugt-table-wrap ugt-data-scroll">
+                  <table class="ugt-table ugt-data-table" id="ugt-d-tab">
+                    <thead><tr><th>x</th><th>y</th><th>±x</th><th>±y</th><th></th></tr></thead>
+                    <tbody id="ugt-d-body"><tr><td><input class="ugt-in" type="number" step="any" value="0.1" data-k="x"></td><td><input class="ugt-in" type="number" step="any" value="0.52" data-k="y"></td><td><input class="ugt-in" type="number" step="any" value="0.005" data-k="ex"></td><td><input class="ugt-in" type="number" step="any" value="0.05" data-k="ey"></td><td><button class="ugt-x" title="Remove">×</button></td></tr><tr><td><input class="ugt-in" type="number" step="any" value="0.2" data-k="x"></td><td><input class="ugt-in" type="number" step="any" value="1.05" data-k="y"></td><td><input class="ugt-in" type="number" step="any" value="0.005" data-k="ex"></td><td><input class="ugt-in" type="number" step="any" value="0.05" data-k="ey"></td><td><button class="ugt-x" title="Remove">×</button></td></tr><tr><td><input class="ugt-in" type="number" step="any" value="0.3" data-k="x"></td><td><input class="ugt-in" type="number" step="any" value="1.49" data-k="y"></td><td><input class="ugt-in" type="number" step="any" value="0.005" data-k="ex"></td><td><input class="ugt-in" type="number" step="any" value="0.05" data-k="ey"></td><td><button class="ugt-x" title="Remove">×</button></td></tr><tr><td><input class="ugt-in" type="number" step="any" value="0.4" data-k="x"></td><td><input class="ugt-in" type="number" step="any" value="2.04" data-k="y"></td><td><input class="ugt-in" type="number" step="any" value="0.005" data-k="ex"></td><td><input class="ugt-in" type="number" step="any" value="0.05" data-k="ey"></td><td><button class="ugt-x" title="Remove">×</button></td></tr><tr><td><input class="ugt-in" type="number" step="any" value="0.5" data-k="x"></td><td><input class="ugt-in" type="number" step="any" value="2.51" data-k="y"></td><td><input class="ugt-in" type="number" step="any" value="0.005" data-k="ex"></td><td><input class="ugt-in" type="number" step="any" value="0.05" data-k="ey"></td><td><button class="ugt-x" title="Remove">×</button></td></tr></tbody>
+                  </table>
+                </div>
+                <button id="ugt-d-add" class="ugt-btn ugt-btn-ghost">Add point</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="ugt-g-out" class="ugt-readout"><div class="ugt-step">centroid (x̄, ȳ) = (0.3, 1.52) — both lines pass through it</div><div class="ugt-step">m(max) = 5.19 · m(min) = 4.76</div><div class="ugt-step">gradient = (m_max + m_min)/2 &nbsp;±&nbsp; (m_max − m_min)/2</div><span class="ugt-result"><span class="ugt-rv">m = 4.98 V A⁻¹</span><span class="ugt-rpm">± 0.22 V A⁻¹</span></span> &nbsp; <span class="ugt-result"><span class="ugt-rv">c = 0.030 V</span><span class="ugt-rpm">± 0.065 V</span></span><div class="ugt-step">% uncertainty in gradient = <b>4.42%</b> · in intercept = <b>220%</b></div></div>
+        </div>
+      </section>
+
+      <!-- ============ PANEL: REPORT ============ -->
+      <section class="ugt-panel" data-panel="report" role="tabpanel">
+        <div class="ugt-grid2">
+          <div class="ugt-card">
+            <h2 class="ugt-h">Express a result correctly</h2>
+            <p class="ugt-p">Quote the uncertainty to the appropriate number of significant figures, then give the value to the <strong>same decimal place</strong>.</p>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-rp-val">Value</label><input id="ugt-rp-val" class="ugt-in" type="number" value="9.806" step="any"></div>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-rp-unc">Absolute uncertainty</label><input id="ugt-rp-unc" class="ugt-in" type="number" value="0.27" step="any"></div>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-rp-unit">Unit</label><input id="ugt-rp-unit" class="ugt-in" type="text" value="m s⁻²"></div>
+            <div id="ugt-rp-note" class="ugt-note">WJEC: quote the uncertainty to a maximum of <b>2 significant figures</b>, and give the absolute uncertainty to the <b>same number of decimal places as the mean</b>.</div>
+            <div id="ugt-rp-out" class="ugt-readout"><div class="ugt-step">Uncertainty to ≤2 s.f. = <b>0.27</b> → value quoted to 2 d.p.</div><span class="ugt-result"><span class="ugt-rv">9.81 m s⁻²</span><span class="ugt-rpm">± 0.27 m s⁻²</span></span><div class="ugt-step">Percentage uncertainty = <b>2.75%</b></div></div>
+          </div>
+
+          <div class="ugt-card">
+            <h2 class="ugt-h">Compare with the accepted value</h2>
+            <p class="ugt-p">Percentage difference tests accuracy. If it is no larger than your experimental uncertainty, your result is consistent with the accepted value.</p>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-pd-meas">Your measured value</label><input id="ugt-pd-meas" class="ugt-in" type="number" value="9.806" step="any"></div>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-pd-acc">Accepted value</label><input id="ugt-pd-acc" class="ugt-in" type="number" value="9.81" step="any"></div>
+            <div class="ugt-field"><label class="ugt-lab" for="ugt-pd-unc">Your % uncertainty (optional)</label><input id="ugt-pd-unc" class="ugt-in" type="number" value="2.8" step="any"></div>
+            <div id="ugt-pd-out" class="ugt-readout"><div class="ugt-step">% difference = |9.806 − 9.81| ÷ |9.81| × 100</div><span class="ugt-result"><span class="ugt-rv">0.0408%</span></span><div class="ugt-tag ugt-tag-good">Consistent with the accepted value within your 2.8% uncertainty.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PANEL: LOGS ============ -->
+      <section class="ugt-panel" data-panel="logs" role="tabpanel">
+        <div class="ugt-card">
+          <h2 class="ugt-h">Linearising with logarithms</h2>
+          <p class="ugt-p">When a relationship is a power law or an exponential, taking logs turns it into a straight line of the form <span class="ugt-mono">y = mx + c</span>, so the gradient and intercept reveal the unknown constants.</p>
+          <div class="ugt-table-wrap">
+            <table class="ugt-table ugt-log-ref">
+              <thead><tr><th>Relationship</th><th>Take logs to get…</th><th>Plot</th><th>Gradient</th><th>Intercept</th></tr></thead>
+              <tbody>
+                <tr><td>Power law &nbsp;<span class="ugt-mono">y = A x<sup>n</sup></span></td><td><span class="ugt-mono">log y = n log x + log A</span></td><td>log y against log x <em>(log–log)</em></td><td><b>n</b></td><td>log A</td></tr>
+                <tr><td>Exponential &nbsp;<span class="ugt-mono">y = A e<sup>kx</sup></span></td><td><span class="ugt-mono">ln y = k x + ln A</span></td><td>ln y against x <em>(log–linear)</em></td><td><b>k</b></td><td>ln A</td></tr>
+                <tr><td>Exponential (base 10) &nbsp;<span class="ugt-mono">y = A·10<sup>bx</sup></span></td><td><span class="ugt-mono">log y = b x + log A</span></td><td>log y against x <em>(log–linear)</em></td><td><b>b</b></td><td>log A</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ugt-field ugt-inline" style="margin-top:10px">
+            <label class="ugt-lab" for="ugt-log-in">Quick log &amp; ln of a value</label>
+            <input id="ugt-log-in" class="ugt-in ugt-in-sm" type="number" value="250" step="any">
+          </div>
+          <div id="ugt-log-out" class="ugt-readout"><div class="ugt-step">log₁₀(250) = <b>2.398</b> &nbsp;·&nbsp; ln(250) = <b>5.521</b></div></div>
+
+          <div id="ugt-lu-card" style="display:none">
+          <h3 class="ugt-h3" style="margin-top:16px">Uncertainty in a log or ln value <span class="ugt-board-flag">OCR method</span></h3>
+          <p class="ugt-p">When you tabulate <span class="ugt-mono">ln y</span> or <span class="ugt-mono">log y</span> to plot, each point needs an uncertainty. Because a log scale is not symmetric, OCR averages the upper and lower differences: Δ = ½ ( |f(x+Δx) − f(x)| + |f(x) − f(x−Δx)| ).</p>
+          <div class="ugt-q-answer">
+            <span class="ugt-lab">value x</span>
+            <input id="ugt-lu-val" class="ugt-in ugt-in-sm" type="number" value="3.0" step="any">
+            <span class="ugt-lab">± Δx</span>
+            <input id="ugt-lu-unc" class="ugt-in ugt-in-sm" type="number" value="0.2" step="any">
+            <select id="ugt-lu-base" class="ugt-in ugt-in-sm">
+              <option value="ln">ln (base e)</option>
+              <option value="log">log₁₀</option>
+            </select>
+          </div>
+          <div id="ugt-lu-out" class="ugt-readout"><div class="ugt-step">ln(3) = <b>1.1</b></div><div class="ugt-step">upper: ln(3.2) − ln(3) = +0.0645 &nbsp;·&nbsp; lower: ln(3) − ln(2.8) = −0.069</div><div class="ugt-step">uncertainty = ( 0.0645 + 0.069 ) ÷ 2</div><span class="ugt-result"><span class="ugt-rv">1.099</span><span class="ugt-rpm">± 0.067</span></span></div>
+          </div>
+        </div>
+
+        <div class="ugt-card">
+          <h2 class="ugt-h">Read off the graph</h2>
+          <p class="ugt-p">A bank of 20 graphs spanning <strong>log–log</strong>, <strong>log–linear</strong> (ln and log₁₀) and true <strong>logarithmic-scale axes</strong>. Read the value the question asks for, type your answer, then check.</p>
+          <div class="ugt-q-head">
+            <span id="ugt-q-counter" class="ugt-q-counter">Graph 1 of 20</span>
+            <span id="ugt-q-score" class="ugt-q-score">Score 0 / 20</span>
+          </div>
+          <div id="ugt-q-tag" class="ugt-note"><b>Log–linear graph (natural log)</b> — underlying relationship y = A·e^(kx).</div>
+          <div class="ugt-plot-wrap ugt-log-wrap"><canvas id="ugt-logcanvas" class="ugt-canvas" width="1440" height="900"></canvas></div>
+          <div id="ugt-q-prompt" class="ugt-q-prompt">Use a large triangle to estimate the <b>gradient</b> of the line.</div>
+          <div class="ugt-q-answer">
+            <input id="ugt-q-input" class="ugt-in ugt-in-sm" type="number" step="any" placeholder="your answer">
+            <span id="ugt-q-unit" class="ugt-hint">(the gradient)</span>
+            <button id="ugt-q-check" class="ugt-btn">Check</button>
+            <button id="ugt-q-reveal" class="ugt-btn ugt-btn-ghost">Show answer</button>
+            <button id="ugt-q-next" class="ugt-btn ugt-btn-ghost">Next graph</button>
+          </div>
+          <div id="ugt-q-feedback" class="ugt-readout"></div>
+        </div>
+      </section>
+
+<style>
+  #ugt-root{
+    --ink:#16222c; --ink-soft:#42505c; --line:#ccd6dd;
+    --paper:#e9eef2; --card:#fbfcfd; --card-edge:#dde5ea;
+    --bezel:#15303a; --bezel-2:#0e242c; --bezel-ink:#cfe6e6;
+    --teal:#0e8c86; --teal-d:#0a615d; --teal-soft:#d6ecea;
+    --rose:#d6336c; --amber:#c87f12; --violet:#5b5fb0;
+    --good:#0e8c86; --warn:#c0392b;
+    --mono:ui-monospace,"SF Mono","Cascadia Code","Roboto Mono",Consolas,monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+    box-sizing:border-box; min-height:620px;
+    font-family:var(--sans); color:var(--ink); line-height:1.5;
+    background:var(--paper);
+    -webkit-text-size-adjust:100%;
+  }
+  #ugt-root *{ box-sizing:border-box; }
+  #ugt-root .ugt-shell{
+    max-width:980px; margin:0 auto; padding:14px;
+    min-height:620px;
+  }
+
+  /* ---- bezel header ---- */
+  #ugt-root .ugt-bezel{
+    display:flex; align-items:center; gap:14px;
+    background:linear-gradient(150deg,var(--bezel),var(--bezel-2));
+    color:#fff; padding:16px 18px; border-radius:12px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 6px 18px rgba(12,30,36,.18);
+  }
+  #ugt-root .ugt-bezel-mark{
+    font-family:var(--mono); font-size:34px; font-weight:700; line-height:1;
+    width:54px; height:54px; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+    color:var(--bezel-ink); border:2px solid rgba(207,230,230,.4); border-radius:10px;
+    background:rgba(255,255,255,.04);
+  }
+  #ugt-root .ugt-bezel-text{ flex:1 1 auto; min-width:0; }
+  #ugt-root .ugt-title{ margin:0; font-size:21px; font-weight:700; letter-spacing:-.01em; color:#fff; }
+  #ugt-root .ugt-sub{ margin:2px 0 0; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--bezel-ink); opacity:.85; }
+  #ugt-root .ugt-bezel-lamp{
+    width:11px; height:11px; border-radius:50%; flex:0 0 auto;
+    background:radial-gradient(circle at 35% 35%, #7ff0c9, var(--teal));
+    box-shadow:0 0 8px rgba(14,140,134,.8);
+  }
+
+  /* ---- tabs ---- */
+  #ugt-root .ugt-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin:14px 0; }
+  #ugt-root .ugt-tab{
+    font-family:var(--sans); font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    background:var(--card); border:1px solid var(--card-edge); border-radius:9px;
+    padding:9px 13px; cursor:pointer; transition:all .12s ease;
+  }
+  #ugt-root .ugt-tab:hover{ color:var(--ink); border-color:var(--teal); }
+  #ugt-root .ugt-tab.ugt-active{
+    color:#fff; background:var(--teal); border-color:var(--teal-d);
+    box-shadow:0 2px 8px rgba(14,140,134,.28);
+  }
+  #ugt-root .ugt-tab:focus-visible{ outline:3px solid var(--amber); outline-offset:2px; }
+
+  /* ---- panels ---- */
+  #ugt-root .ugt-panel{ display:none; }
+  #ugt-root .ugt-panel.ugt-active{ display:block; }
+  #ugt-root .ugt-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  #ugt-root .ugt-card{
+    background:var(--card); border:1px solid var(--card-edge); border-radius:12px;
+    padding:16px 16px 18px; margin-bottom:14px;
+    box-shadow:0 2px 6px rgba(20,40,50,.05);
+  }
+  #ugt-root .ugt-h{ margin:0 0 6px; font-size:16px; font-weight:700; letter-spacing:-.01em; }
+  #ugt-root .ugt-h::before{
+    content:""; display:inline-block; width:8px; height:8px; border-radius:2px;
+    background:var(--teal); margin-right:8px; vertical-align:middle;
+  }
+  #ugt-root .ugt-p{ margin:0 0 12px; font-size:13.5px; color:var(--ink-soft); }
+  #ugt-root .ugt-mono{ font-family:var(--mono); font-size:.94em; background:var(--teal-soft); padding:1px 5px; border-radius:4px; color:var(--teal-d); white-space:nowrap; }
+
+  /* ---- form controls ---- */
+  #ugt-root .ugt-field{ margin-bottom:11px; }
+  #ugt-root .ugt-inline{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  #ugt-root .ugt-lab{ display:block; font-size:12px; font-weight:600; color:var(--ink-soft); margin-bottom:4px; letter-spacing:.01em; }
+  #ugt-root .ugt-in{
+    width:100%; font-family:var(--sans); font-size:14px; color:var(--ink);
+    padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:#fff;
+  }
+  #ugt-root .ugt-in-sm{ width:120px; }
+  #ugt-root .ugt-area{ resize:vertical; font-family:var(--mono); font-size:13px; }
+  #ugt-root .ugt-in:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft); }
+  #ugt-root .ugt-hint{ font-size:11.5px; color:var(--ink-soft); }
+
+  #ugt-root .ugt-btn{
+    font-family:var(--sans); font-size:13.5px; font-weight:600; color:#fff;
+    background:var(--teal); border:1px solid var(--teal-d); border-radius:8px;
+    padding:9px 14px; cursor:pointer; transition:filter .12s ease; margin:2px 6px 2px 0;
+  }
+  #ugt-root .ugt-btn:hover{ filter:brightness(1.06); }
+  #ugt-root .ugt-btn:focus-visible{ outline:3px solid var(--amber); outline-offset:2px; }
+  #ugt-root .ugt-btn-ghost{ color:var(--teal-d); background:#fff; border-color:var(--teal); }
+  #ugt-root .ugt-btn-ghost:hover{ background:var(--teal-soft); }
+  #ugt-root .ugt-check{ display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-soft); cursor:pointer; }
+
+  /* ---- range sliders ---- */
+  #ugt-root .ugt-control{ margin:10px 0; }
+  #ugt-root .ugt-range{ width:100%; accent-color:var(--teal); }
+
+  /* ---- readout / ± band signature ---- */
+  #ugt-root .ugt-readout{ margin-top:12px; font-size:13.5px; }
+  #ugt-root .ugt-result{
+    display:inline-flex; align-items:stretch; font-family:var(--mono); font-size:15px; font-weight:600;
+    border-radius:8px; overflow:hidden; border:1px solid var(--card-edge); margin:4px 0; background:#fff;
+  }
+  #ugt-root .ugt-result .ugt-rv{ padding:7px 11px; color:var(--ink); }
+  #ugt-root .ugt-result .ugt-rpm{
+    padding:7px 11px; background:repeating-linear-gradient(135deg,var(--teal-soft),var(--teal-soft) 6px,#e8f4f2 6px,#e8f4f2 12px);
+    color:var(--teal-d); border-left:1px dashed var(--teal);
+  }
+  #ugt-root .ugt-step{ font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); margin:3px 0; }
+  #ugt-root .ugt-step b{ color:var(--ink); }
+  #ugt-root .ugt-tag{ display:inline-block; font-size:12px; font-weight:700; padding:3px 9px; border-radius:20px; margin-top:6px; }
+  #ugt-root .ugt-tag-good{ background:var(--teal-soft); color:var(--teal-d); }
+  #ugt-root .ugt-tag-warn{ background:#f8dcd6; color:var(--warn); }
+
+  /* ---- definitions ---- */
+  #ugt-root .ugt-defs{ margin:0; }
+  #ugt-root .ugt-defs dt{ font-weight:700; font-size:13.5px; margin-top:9px; }
+  #ugt-root .ugt-defs dd{ margin:1px 0 0; font-size:13px; color:var(--ink-soft); }
+
+  /* ---- tables ---- */
+  #ugt-root .ugt-table-wrap{ overflow-x:auto; margin:6px 0 4px; }
+  #ugt-root .ugt-table{ width:100%; border-collapse:collapse; font-size:13px; }
+  #ugt-root .ugt-table th{ text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); padding:4px 6px; border-bottom:1px solid var(--line); }
+  #ugt-root .ugt-table td{ padding:4px 6px; }
+  #ugt-root .ugt-table .ugt-in{ padding:6px 8px; font-size:13px; min-width:62px; }
+  #ugt-root .ugt-x{ background:none; border:none; color:var(--rose); font-size:18px; line-height:1; cursor:pointer; padding:2px 6px; }
+  #ugt-root .ugt-x:hover{ color:#a51d50; }
+
+  /* ---- target canvas ---- */
+  #ugt-root .ugt-target-wrap{ width:100%; max-width:320px; margin:0 auto 6px; }
+  #ugt-root .ugt-canvas{ display:block; width:100%; background:#fff; border:1px solid var(--card-edge); border-radius:10px; touch-action:none; }
+  #ugt-root .ugt-target-wrap .ugt-canvas{ aspect-ratio:1/1; }
+  #ugt-root .ugt-verdict{ font-size:13.5px; font-weight:600; text-align:center; margin-top:8px; color:var(--teal-d); min-height:20px; }
+
+  /* ---- graph layout (large full-width plot) ---- */
+  #ugt-root .ugt-graph-layout{ display:block; }
+  #ugt-root .ugt-plot-wrap{ width:100%; min-height:430px; }
+  #ugt-root .ugt-plot-wrap .ugt-canvas{ aspect-ratio:16/10; min-height:430px; max-height:600px; }
+  #ugt-root .ugt-plot-tools{ margin:10px 0 4px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  #ugt-root .ugt-data-row{ display:grid; grid-template-columns:1fr 1.2fr; gap:16px; align-items:start; margin-top:8px; }
+  #ugt-root .ugt-axis-fields{ display:grid; grid-template-columns:1fr 70px; gap:6px 8px; }
+  #ugt-root .ugt-data-scroll{ max-height:230px; overflow-y:auto; }
+  #ugt-root .ugt-data-table .ugt-in{ min-width:52px; }
+
+  /* ---- board switch ---- */
+  #ugt-root .ugt-board{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex:0 0 auto; }
+  #ugt-root .ugt-board-lab{ font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--bezel-ink); opacity:.85; }
+  #ugt-root .ugt-board-seg{ display:flex; background:rgba(255,255,255,.07); border:1px solid rgba(207,230,230,.3); border-radius:9px; padding:3px; gap:3px; }
+  #ugt-root .ugt-board-btn{ font-family:var(--sans); font-size:13px; font-weight:700; letter-spacing:.02em; color:var(--bezel-ink); background:transparent; border:0; border-radius:6px; padding:6px 14px; cursor:pointer; }
+  #ugt-root .ugt-board-btn.ugt-active{ background:var(--teal); color:#fff; }
+  #ugt-root .ugt-board-btn:focus-visible{ outline:3px solid var(--amber); outline-offset:2px; }
+
+  /* ---- notes ---- */
+  #ugt-root .ugt-note{ font-size:12.5px; color:var(--ink-soft); background:#eef3f5; border-left:3px solid var(--teal); border-radius:0 6px 6px 0; padding:7px 10px; margin:2px 0 8px; line-height:1.5; }
+  #ugt-root .ugt-note b{ color:var(--ink); }
+
+  /* ---- combine: preset + working toggle ---- */
+  #ugt-root .ugt-workbar{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+  #ugt-root .ugt-formula{ font-family:var(--mono); font-size:14px; color:var(--teal-d); background:var(--teal-soft); border-radius:8px; padding:9px 12px; margin:0 0 12px; line-height:1.55; }
+  #ugt-root .ugt-formula .ugt-rule{ display:block; color:var(--ink-soft); font-size:12.5px; margin-top:4px; }
+  #ugt-root .ugt-workhidden .ugt-readout{ display:none; }
+
+  /* ---- logarithms tab ---- */
+  #ugt-root .ugt-log-ref td em{ color:var(--ink-soft); font-style:italic; }
+  #ugt-root .ugt-log-wrap{ width:100%; min-height:360px; }
+  #ugt-root .ugt-log-wrap .ugt-canvas{ aspect-ratio:16/10; min-height:360px; max-height:520px; }
+  #ugt-root .ugt-q-head{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:6px; }
+  #ugt-root .ugt-q-counter{ font-size:13px; font-weight:700; color:var(--ink-soft); }
+  #ugt-root .ugt-q-score{ font-family:var(--mono); font-size:12.5px; color:var(--teal-d); background:var(--teal-soft); padding:3px 9px; border-radius:20px; }
+  #ugt-root .ugt-q-prompt{ font-size:14.5px; font-weight:600; margin:10px 0 8px; }
+  #ugt-root .ugt-q-answer{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  #ugt-root .ugt-h3{ font-family:var(--sans); font-size:14.5px; font-weight:700; color:var(--ink); margin:0 0 4px; }
+  #ugt-root .ugt-board-flag{ font-family:var(--sans); font-size:10.5px; font-weight:700; letter-spacing:.06em; color:#fff; background:var(--teal); border-radius:5px; padding:2px 7px; vertical-align:middle; margin-left:6px; }
+
+  /* ---- responsive ---- */
+  @media (max-width:720px){
+    #ugt-root .ugt-grid2{ grid-template-columns:1fr; }
+    #ugt-root .ugt-data-row{ grid-template-columns:1fr; }
+    #ugt-root .ugt-plot-wrap, #ugt-root .ugt-plot-wrap .ugt-canvas{ min-height:340px; }
+    #ugt-root .ugt-plot-wrap .ugt-canvas{ aspect-ratio:4/3; }
+    #ugt-root .ugt-title{ font-size:18px; }
+    #ugt-root .ugt-bezel{ flex-wrap:wrap; }
+    #ugt-root .ugt-board{ align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    #ugt-root .ugt-tab, #ugt-root .ugt-btn{ transition:none; }
+  }
+</style>
+
+<script>
+(function(){
+  var root = document.getElementById('ugt-root');
+  if(!root) return;
+  var $ = function(id){ return document.getElementById(id); };
+  var DPR = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  var boardMode = 'wjec';
+
+  /* ---------- number helpers ---------- */
+  function num(v){ var n = parseFloat(v); return isFinite(n) ? n : 0; }
+  function fmt(x, sig){
+    sig = sig || 4;
+    if(!isFinite(x)) return '—';
+    if(x === 0) return '0';
+    var a = Math.abs(x);
+    if(a >= 1e5 || a < 1e-3) return x.toExponential(sig-1).replace('e','×10^');
+    return parseFloat(x.toPrecision(sig)).toString();
+  }
+  function resultPill(val, unc, unit){
+    unit = unit ? (' '+unit) : '';
+    var pm = (unc===''||unc==null) ? '' : '<span class="ugt-rpm">± '+unc+unit+'</span>';
+    return '<span class="ugt-result"><span class="ugt-rv">'+val+unit+'</span>'+pm+'</span>';
+  }
+  // --- value ± uncertainty to matching decimal places (board-aware) ---
+  // AQA: uncertainty to 1 s.f.  WJEC: up to 2 s.f.  Value always matched to the same dp.
+  function uSig(){ return boardMode==='wjec' ? 2 : 1; }
+  function supNum(n){
+    var map={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+    return String(n).split('').map(function(c){ return map[c]||c; }).join('');
+  }
+  function roundSig(x, sf){
+    if(!isFinite(x) || x===0) return 0;
+    var c=parseFloat(x.toPrecision(12));            // strip floating-point noise (e.g. 0.0349999→0.035)
+    var o=Math.floor(Math.log10(Math.abs(c)));
+    var f=Math.pow(10,(sf-1)-o);
+    return Math.round(c*f + (c<0?-1:1)*1e-9)/f;      // half-away-from-zero, FP-safe
+  }
+  function fixDP(x, dp){                              // round to dp decimal places, FP-safe, padded
+    if(!isFinite(x)) return '—';
+    var c=parseFloat(x.toPrecision(12));
+    var f=Math.pow(10,dp);
+    var r=Math.round(c*f + (c<0?-1:1)*1e-9)/f;
+    return r.toFixed(dp);
+  }
+  function decimalsOf(uR, sf){ // dp needed to display uR (already rounded to sf s.f.)
+    if(!(uR>0)) return 0;
+    var o=Math.floor(Math.log10(uR)+1e-9);
+    return Math.max(0,(sf-1)-o);
+  }
+  function uncRoundDP(U){ // {uR, dp} for positive U; board s.f., dropping a trailing zero for WJEC
+    var sf=uSig();
+    var uR=roundSig(U, sf);
+    if(sf>1){
+      var u1=roundSig(U, 1);
+      if(Math.abs(uR-u1) <= Math.abs(uR)*1e-9){ return {uR:u1, dp:decimalsOf(u1,1)}; }
+    }
+    return {uR:uR, dp:decimalsOf(uR, sf)};
+  }
+  function fmtPair(value, unc){
+    if(!isFinite(value)) return {v:'—', u:'—'};
+    var U=Math.abs(unc);
+    if(!(U>0)) return {v:fmt(value), u:fmt(U)};
+    var a=Math.abs(value), ref=a>0?a:U;
+    if(ref>=1e5 || ref<1e-3){
+      var exp=Math.floor(Math.log10(ref));
+      var sc=Math.pow(10,exp);
+      var r=uncRoundDP(U/sc), vm=value/sc;
+      return {v:fixDP(vm,r.dp)+'×10'+supNum(exp), u:fixDP(r.uR,r.dp)+'×10'+supNum(exp)};
+    }
+    var r2=uncRoundDP(U);
+    return {v:fixDP(value,r2.dp), u:fixDP(r2.uR,r2.dp)};
+  }
+  function pairPill(value, unc, unit, label){
+    var p=fmtPair(value, unc);
+    return resultPill((label? label+' ':'')+p.v, p.u, unit);
+  }
+  // % uncertainty computed from the *quoted* (rounded) uncertainty, so it always agrees with the value ± uncertainty pill shown alongside it
+  function pctUnc(value, unc){
+    var U=Math.abs(unc);
+    if(value===0 || !(U>0)) return 0;
+    return Math.abs(uncRoundDP(U).uR / value * 100);
+  }
+
+  /* ---------- tab switching ---------- */
+  var tabs = root.querySelectorAll('.ugt-tab');
+  var panels = root.querySelectorAll('.ugt-panel');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var name = t.getAttribute('data-panel');
+      tabs.forEach(function(x){ var on = x===t; x.classList.toggle('ugt-active', on); x.setAttribute('aria-selected', on?'true':'false'); });
+      panels.forEach(function(p){ p.classList.toggle('ugt-active', p.getAttribute('data-panel')===name); });
+      if(name === 'graph'){ sizePlot(); drawPlot(); }
+      if(name === 'logs'){ sizeLog(); drawLog(); }
+    });
+  });
+
+  /* ===================================================================
+     PANEL 1 — Errors & precision : target scatter
+  =================================================================== */
+  var tcan = $('ugt-target'), tctx = tcan.getContext('2d');
+  var tW = 300, tH = 300, baseSamples = [];
+  function makeSamples(){
+    baseSamples = [];
+    for(var i=0;i<14;i++){
+      // Box–Muller for unit normal pairs
+      var u1 = Math.random()||1e-6, u2 = Math.random();
+      var r = Math.sqrt(-2*Math.log(u1));
+      baseSamples.push([r*Math.cos(2*Math.PI*u2), r*Math.sin(2*Math.PI*u2)]);
+    }
+  }
+  function sizeTarget(){
+    var w = tcan.clientWidth || 300;
+    tW = w; tH = w;
+    tcan.width = Math.round(w*DPR); tcan.height = Math.round(w*DPR);
+    tctx.setTransform(DPR,0,0,DPR,0,0);
+    drawTarget();
+  }
+  function drawTarget(){
+    var cx = tW/2, cy = tH/2, R = tW*0.46;
+    tctx.clearRect(0,0,tW,tH);
+    // rings
+    var rings = [1,0.78,0.56,0.34];
+    for(var i=0;i<rings.length;i++){
+      tctx.beginPath();
+      tctx.arc(cx,cy,R*rings[i],0,2*Math.PI);
+      tctx.fillStyle = (i%2===0)? '#eef4f5':'#ffffff';
+      tctx.fill();
+      tctx.strokeStyle = '#c7d4d8'; tctx.lineWidth = 1; tctx.stroke();
+    }
+    tctx.beginPath(); tctx.arc(cx,cy,R*0.12,0,2*Math.PI); tctx.fillStyle='#0e8c86'; tctx.fill();
+    // crosshair
+    tctx.strokeStyle='rgba(20,40,50,.25)'; tctx.lineWidth=1;
+    tctx.beginPath(); tctx.moveTo(cx-R,cy); tctx.lineTo(cx+R,cy); tctx.moveTo(cx,cy-R); tctx.lineTo(cx,cy+R); tctx.stroke();
+
+    var spread = num($('ugt-spread').value)/100 * R;
+    var offset = num($('ugt-offset').value)/100 * R;
+    var ang = -0.7; // fixed systematic direction
+    var ox = Math.cos(ang)*offset, oy = Math.sin(ang)*offset;
+    for(var s=0;s<baseSamples.length;s++){
+      var px = cx + ox + baseSamples[s][0]*spread;
+      var py = cy + oy + baseSamples[s][1]*spread;
+      tctx.beginPath(); tctx.arc(px,py,4.5,0,2*Math.PI);
+      tctx.fillStyle='rgba(214,51,108,.85)'; tctx.fill();
+      tctx.strokeStyle='#fff'; tctx.lineWidth=1.3; tctx.stroke();
+    }
+    // verdict
+    var sp = num($('ugt-spread').value), of = num($('ugt-offset').value);
+    var precise = sp < 30, accurate = of < 22;
+    var msg;
+    if(precise && accurate) msg = 'Precise and accurate — small spread, on target.';
+    else if(precise && !accurate) msg = 'Precise but not accurate — tight cluster, systematic error.';
+    else if(!precise && accurate) msg = 'Accurate on average but imprecise — large random error.';
+    else msg = 'Imprecise and inaccurate — random and systematic errors.';
+    $('ugt-verdict').textContent = msg;
+  }
+  $('ugt-spread').addEventListener('input', drawTarget);
+  $('ugt-offset').addEventListener('input', drawTarget);
+  $('ugt-resample').addEventListener('click', function(){ makeSamples(); drawTarget(); });
+
+  /* ===================================================================
+     PANEL 2 — Readings
+  =================================================================== */
+  function renderSingleOptions(){
+    var sel=$('ugt-sr-rule'); var prev=sel.value; sel.innerHTML='';
+    var opts = (boardMode==='aqa')
+      ? [['aqa_read_an','Reading – analogue scale, one judgement (e.g. thermometer)'],
+         ['aqa_read_dig','Reading – digital, one judgement (e.g. digital meter)'],
+         ['aqa_meas','Measurement – two judgements (e.g. ruler, micrometer)']]
+      : (boardMode==='ocr')
+      ? [['ocr_an','Reading – analogue graduated scale (½ smallest division)'],
+         ['ocr_dig','Reading – digital instrument (resolution)'],
+         ['ocr_meas','Measurement needing two readings, e.g. a length (±1 division)']]
+      : (boardMode==='edx')
+      ? [['edx_res','Single reading – ± ½ the resolution (analogue or digital)']]
+      : [['wjec_res','Single reading on any instrument']];
+    opts.forEach(function(o){ var e=document.createElement('option'); e.value=o[0]; e.textContent=o[1]; sel.appendChild(e); });
+    if(prev && Array.prototype.some.call(sel.options,function(o){return o.value===prev;})) sel.value=prev;
+  }
+  function singleUnc(res){
+    var r=$('ugt-sr-rule').value;
+    if(r==='aqa_read_an' || r==='ocr_an' || r==='edx_res') return res/2;   // ±½ smallest division / resolution
+    return res;                                           // digital / measurement / WJEC: ±1 division
+  }
+  function singleNote(){
+    var r=$('ugt-sr-rule').value;
+    if(r==='aqa_read_an') return 'AQA: a reading taken from a single judgement on an analogue scale has an uncertainty of at least <b>±½ of the smallest division</b>.';
+    if(r==='aqa_read_dig') return 'AQA: a digital reading is quoted as <b>±1 in the last digit</b> when stating value and uncertainty together.';
+    if(r==='aqa_meas') return 'AQA: a measurement needing <b>two judgements</b> (both ends, e.g. a ruler) has an uncertainty of at least <b>±1 whole division</b>.';
+    if(r==='ocr_an') return 'OCR: for an analogue graduated scale, take <b>± half the smallest graduation</b> (e.g. mm ruler → ±0.5 mm; meter marked every 0.2 V → ±0.1 V).';
+    if(r==='ocr_dig') return 'OCR: for a digital instrument, take <b>± the resolution</b> (the smallest displayed increment). This depends on the range — e.g. ±0.1 V on a 0–20 V range but ±1 V on 0–100 V.';
+    if(r==='ocr_meas') return 'OCR: a measurement read at <b>two</b> points (e.g. a length) counts the ½-division twice, giving <b>±1 whole division</b> overall.';
+    if(r==='edx_res') return 'Edexcel: take the uncertainty in a single reading as <b>± half the resolution</b> — for analogue and digital alike. E.g. a mm ruler → ±0.5 mm; an ammeter reading to 0.1 A → ±0.05 A (a displayed 0.4 A lies between 0.35 and 0.45 A).';
+    return 'WJEC: for a single reading, take the uncertainty as the <b>instrument resolution</b> (the smallest measurable division), unless there is reason to believe it is greater.';
+  }
+  function calcSingle(){
+    var val = num($('ugt-sr-val').value), res = num($('ugt-sr-res').value);
+    var unc = singleUnc(res);
+    var pc = pctUnc(val, unc);
+    $('ugt-sr-note').innerHTML = singleNote();
+    $('ugt-sr-out').innerHTML =
+      pairPill(val, unc) +
+      '<div class="ugt-step">Percentage uncertainty = <b>'+fmt(pc,3)+'%</b></div>';
+  }
+
+  function calcRepeat(){
+    var raw = $('ugt-rr-data').value.split(/[^0-9eE.+\-]+/).filter(function(s){return s.length;});
+    var vals = raw.map(parseFloat).filter(function(n){return isFinite(n);});
+    if(vals.length < 2){ $('ugt-rr-out').innerHTML = '<div class="ugt-step">Enter at least two values.</div>'; return; }
+    var mean = vals.reduce(function(a,b){return a+b;},0)/vals.length;
+    var mx = Math.max.apply(null,vals), mn = Math.min.apply(null,vals);
+    var range = mx-mn, unc = range/2;
+    var pc = pctUnc(mean, unc);
+    $('ugt-rr-out').innerHTML =
+      '<div class="ugt-step">n = <b>'+vals.length+'</b> · max '+fmt(mx)+' · min '+fmt(mn)+' · range '+fmt(range)+'</div>'+
+      '<div class="ugt-step">mean = <b>'+fmt(mean)+'</b> · uncertainty = range ÷ 2 = '+fmt(range)+' ÷ 2</div>'+
+      pairPill(mean, unc) +
+      '<div class="ugt-step">Percentage uncertainty = <b>'+fmt(pc,3)+'%</b></div>';
+  }
+  $('ugt-rr-go').addEventListener('click', calcRepeat);
+
+  /* ===================================================================
+     PANEL 3 — Combining
+  =================================================================== */
+  // 40 A-level relationships of the multiplicative form Z = k·A^a·B^b·…
+  var PRESETS = [
+    {name:'Density · ρ = m / V', sym:'ρ', formula:'ρ = m / V', k:1, vars:[{name:'m',val:0.485,unc:0.001,pow:1},{name:'V',val:62.0,unc:0.5,pow:-1}]},
+    {name:'Speed · v = s / t', sym:'v', formula:'v = s / t', k:1, vars:[{name:'s',val:24.0,unc:0.1,pow:1},{name:'t',val:3.62,unc:0.02,pow:-1}]},
+    {name:'Acceleration · a = v / t', sym:'a', formula:'a = v / t', k:1, vars:[{name:'v',val:18.5,unc:0.5,pow:1},{name:'t',val:4.20,unc:0.10,pow:-1}]},
+    {name:'Momentum · p = m v', sym:'p', formula:'p = m·v', k:1, vars:[{name:'m',val:0.058,unc:0.001,pow:1},{name:'v',val:42.0,unc:1.0,pow:1}]},
+    {name:'Kinetic energy · Eₖ = ½ m v²', sym:'Eₖ', formula:'Eₖ = ½·m·v²', k:0.5, vars:[{name:'m',val:0.145,unc:0.001,pow:1},{name:'v',val:38.0,unc:1.0,pow:2}]},
+    {name:"Newton's 2nd law · F = m a", sym:'F', formula:'F = m·a', k:1, vars:[{name:'m',val:1250,unc:10,pow:1},{name:'a',val:2.40,unc:0.05,pow:1}]},
+    {name:'Weight · W = m g', sym:'W', formula:'W = m·g  (g = 9.81)', k:9.81, vars:[{name:'m',val:72.5,unc:0.1,pow:1}]},
+    {name:'Work done · W = F s', sym:'W', formula:'W = F·s', k:1, vars:[{name:'F',val:85.0,unc:2.0,pow:1},{name:'s',val:12.0,unc:0.1,pow:1}]},
+    {name:'Power · P = W / t', sym:'P', formula:'P = W / t', k:1, vars:[{name:'W',val:2400,unc:50,pow:1},{name:'t',val:18.0,unc:0.5,pow:-1}]},
+    {name:'Moment · M = F d', sym:'M', formula:'M = F·d', k:1, vars:[{name:'F',val:45.0,unc:1.0,pow:1},{name:'d',val:0.320,unc:0.005,pow:1}]},
+    {name:'Pressure · p = F / A', sym:'p', formula:'p = F / A', k:1, vars:[{name:'F',val:240,unc:5,pow:1},{name:'A',val:0.0150,unc:0.0002,pow:-1}]},
+    {name:'Hydrostatic pressure · p = ρ g h', sym:'p', formula:'p = ρ·g·h  (g = 9.81)', k:9.81, vars:[{name:'ρ',val:1000,unc:10,pow:1},{name:'h',val:2.40,unc:0.02,pow:1}]},
+    {name:'GPE change · ΔEₚ = m g Δh', sym:'ΔEₚ', formula:'ΔEₚ = m·g·Δh  (g = 9.81)', k:9.81, vars:[{name:'m',val:2.50,unc:0.01,pow:1},{name:'Δh',val:1.80,unc:0.02,pow:1}]},
+    {name:'Pendulum (g) · g = 4π²L / T²', sym:'g', formula:'g = 4π²·L / T²  (4π² = 39.478)', k:39.478, vars:[{name:'L',val:0.850,unc:0.005,pow:1},{name:'T',val:1.850,unc:0.020,pow:-2}]},
+    {name:'Centripetal force · F = m v² / r', sym:'F', formula:'F = m·v² / r', k:1, vars:[{name:'m',val:0.500,unc:0.005,pow:1},{name:'v',val:6.00,unc:0.10,pow:2},{name:'r',val:1.20,unc:0.02,pow:-1}]},
+    {name:'Stress · σ = F / A', sym:'σ', formula:'σ = F / A', k:1, vars:[{name:'F',val:120,unc:2,pow:1},{name:'A',val:2.0e-6,unc:0.1e-6,pow:-1}]},
+    {name:'Young modulus · E = F L / (A x)', sym:'E', formula:'E = F·L / (A·x)', k:1, vars:[{name:'F',val:50.0,unc:1.0,pow:1},{name:'L',val:2.00,unc:0.01,pow:1},{name:'A',val:2.0e-6,unc:0.1e-6,pow:-1},{name:'x',val:1.5e-3,unc:0.1e-3,pow:-1}]},
+    {name:'Resistance · R = V / I', sym:'R', formula:'R = V / I', k:1, vars:[{name:'V',val:6.00,unc:0.05,pow:1},{name:'I',val:0.150,unc:0.005,pow:-1}]},
+    {name:'Power · P = V I', sym:'P', formula:'P = V·I', k:1, vars:[{name:'V',val:12.0,unc:0.1,pow:1},{name:'I',val:2.50,unc:0.05,pow:1}]},
+    {name:'Power · P = I² R', sym:'P', formula:'P = I²·R', k:1, vars:[{name:'I',val:3.00,unc:0.05,pow:2},{name:'R',val:15.0,unc:0.5,pow:1}]},
+    {name:'Power · P = V² / R', sym:'P', formula:'P = V² / R', k:1, vars:[{name:'V',val:230,unc:5,pow:2},{name:'R',val:48.0,unc:1.0,pow:-1}]},
+    {name:'Resistivity · ρ = R A / L', sym:'ρ', formula:'ρ = R·A / L', k:1, vars:[{name:'R',val:4.20,unc:0.10,pow:1},{name:'A',val:2.0e-7,unc:0.1e-7,pow:1},{name:'L',val:1.50,unc:0.01,pow:-1}]},
+    {name:'Charge · Q = I t', sym:'Q', formula:'Q = I·t', k:1, vars:[{name:'I',val:0.450,unc:0.010,pow:1},{name:'t',val:120,unc:2,pow:1}]},
+    {name:'Electrical energy · E = V I t', sym:'E', formula:'E = V·I·t', k:1, vars:[{name:'V',val:9.00,unc:0.10,pow:1},{name:'I',val:0.80,unc:0.02,pow:1},{name:'t',val:300,unc:5,pow:1}]},
+    {name:'Capacitance · C = Q / V', sym:'C', formula:'C = Q / V', k:1, vars:[{name:'Q',val:2.2e-3,unc:0.1e-3,pow:1},{name:'V',val:6.0,unc:0.1,pow:-1}]},
+    {name:'Capacitor energy · E = ½ C V²', sym:'E', formula:'E = ½·C·V²', k:0.5, vars:[{name:'C',val:4.7e-4,unc:0.1e-4,pow:1},{name:'V',val:12.0,unc:0.2,pow:2}]},
+    {name:'Wave speed · v = f λ', sym:'v', formula:'v = f·λ', k:1, vars:[{name:'f',val:256,unc:2,pow:1},{name:'λ',val:1.32,unc:0.02,pow:1}]},
+    {name:'Fringe spacing · w = λ D / s', sym:'w', formula:'w = λ·D / s', k:1, vars:[{name:'λ',val:6.5e-7,unc:0.1e-7,pow:1},{name:'D',val:2.00,unc:0.01,pow:1},{name:'s',val:4.0e-4,unc:0.1e-4,pow:-1}]},
+    {name:'Refractive index · n = real / apparent', sym:'n', formula:'n = d(real) / d(apparent)', k:1, vars:[{name:'d_real',val:80.0,unc:0.5,pow:1},{name:'d_app',val:53.0,unc:0.5,pow:-1}]},
+    {name:'Photon energy · E = h f', sym:'E', formula:'E = h·f  (h = 6.63×10⁻³⁴)', k:6.63e-34, vars:[{name:'f',val:5.0e14,unc:0.1e14,pow:1}]},
+    {name:'Photon energy · E = h c / λ', sym:'E', formula:'E = hc / λ  (hc = 1.99×10⁻²⁵)', k:1.99e-25, vars:[{name:'λ',val:5.0e-7,unc:0.1e-7,pow:-1}]},
+    {name:'de Broglie (electron) · λ = h / (mₑ v)', sym:'λ', formula:'λ = h / (mₑ·v)  (h/mₑ = 7.28×10⁻⁴)', k:7.28e-4, vars:[{name:'v',val:2.5e6,unc:0.1e6,pow:-1}]},
+    {name:'Gravitational field · g = G M / r²', sym:'g', formula:'g = G·M / r²  (G = 6.67×10⁻¹¹)', k:6.67e-11, vars:[{name:'M',val:5.97e24,unc:0.05e24,pow:1},{name:'r',val:6.40e6,unc:0.02e6,pow:-2}]},
+    {name:'Coulomb force · F = Q₁Q₂ / 4πε₀r²', sym:'F', formula:'F = Q₁·Q₂ / (4πε₀·r²)  (1/4πε₀ = 8.99×10⁹)', k:8.99e9, vars:[{name:'Q₁',val:2.0e-6,unc:0.1e-6,pow:1},{name:'Q₂',val:3.0e-6,unc:0.1e-6,pow:1},{name:'r',val:0.150,unc:0.002,pow:-2}]},
+    {name:'Uniform E-field · E = V / d', sym:'E', formula:'E = V / d', k:1, vars:[{name:'V',val:5000,unc:100,pow:1},{name:'d',val:0.020,unc:0.0005,pow:-1}]},
+    {name:'Force on a conductor · F = B I L', sym:'F', formula:'F = B·I·L', k:1, vars:[{name:'B',val:0.250,unc:0.005,pow:1},{name:'I',val:4.00,unc:0.10,pow:1},{name:'L',val:0.120,unc:0.002,pow:1}]},
+    {name:'Radius in B-field (electron) · r = mₑv / (B q)', sym:'r', formula:'r = mₑ·v / (B·q)  (mₑ/q = 5.69×10⁻¹²)', k:5.69e-12, vars:[{name:'v',val:3.0e7,unc:0.1e7,pow:1},{name:'B',val:1.5e-3,unc:0.05e-3,pow:-1}]},
+    {name:'Specific heat · c = Q / (m ΔT)', sym:'c', formula:'c = Q / (m·ΔT)', k:1, vars:[{name:'Q',val:24000,unc:500,pow:1},{name:'m',val:0.500,unc:0.001,pow:-1},{name:'ΔT',val:18.0,unc:0.5,pow:-1}]},
+    {name:'Ideal gas (moles) · n = p V / R T', sym:'n', formula:'n = p·V / (R·T)  (1/R = 0.12034)', k:0.12034, vars:[{name:'p',val:1.01e5,unc:0.02e5,pow:1},{name:'V',val:2.40e-3,unc:0.05e-3,pow:1},{name:'T',val:295,unc:2,pow:-1}]},
+    {name:'Activity · A = λ N', sym:'A', formula:'A = λ·N', k:1, vars:[{name:'λ',val:1.2e-9,unc:0.05e-9,pow:1},{name:'N',val:5.0e20,unc:0.1e20,pow:1}]}
+  ];
+
+  var combData = [];
+
+  function buildPresetMenu(){
+    var sel = $('ugt-c-preset');
+    var c = document.createElement('option'); c.value='custom'; c.textContent='Custom — build your own'; sel.appendChild(c);
+    PRESETS.forEach(function(p,i){ var o=document.createElement('option'); o.value=String(i); o.textContent=p.name; sel.appendChild(o); });
+    sel.addEventListener('change', function(){
+      if(sel.value==='custom'){ showFormula(null); return; }
+      loadPreset(PRESETS[+sel.value]);
+    });
+  }
+  function loadPreset(p){
+    $('ugt-c-k').value = p.k;
+    combData = p.vars.map(function(v){ return {name:v.name, val:v.val, unc:v.unc, pow:v.pow}; });
+    showFormula(p);
+    renderComb(); calcComb();
+  }
+  function showFormula(p){
+    var el = $('ugt-c-formula');
+    if(!p){ el.style.display='none'; el.innerHTML=''; return; }
+    var rule = '%' + (p.sym||'Z') + ' = ' + p.vars.map(function(v){ var c=Math.abs(v.pow); return (c===1?'':c+'·')+'%'+v.name; }).join(' + ');
+    el.style.display='block';
+    el.innerHTML = p.formula + '<span class="ugt-rule">uncertainty rule: ' + rule + '</span>';
+  }
+  function markCustom(){ $('ugt-c-preset').value='custom'; showFormula(null); }
+
+  function renderComb(){
+    var b = $('ugt-c-body'); b.innerHTML='';
+    combData.forEach(function(r,i){
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><input class="ugt-in" type="text" value="'+r.name+'" data-k="name"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.val+'" data-k="val"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.unc+'" data-k="unc"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.pow+'" data-k="pow"></td>'+
+        '<td><button class="ugt-x" title="Remove">×</button></td>';
+      tr.querySelectorAll('input').forEach(function(inp){
+        inp.addEventListener('input', function(){
+          var k = inp.getAttribute('data-k');
+          combData[i][k] = k==='name' ? inp.value : num(inp.value);
+          if(k==='pow' || k==='name') markCustom();
+          calcComb();
+        });
+      });
+      tr.querySelector('.ugt-x').addEventListener('click', function(){ combData.splice(i,1); markCustom(); renderComb(); calcComb(); });
+      b.appendChild(tr);
+    });
+  }
+  function calcComb(){
+    var k = num($('ugt-c-k').value);
+    var Z = k, pcZ = 0, steps = [];
+    combData.forEach(function(r){
+      var pc = r.val!==0 ? Math.abs(r.unc/r.val*100) : 0;
+      var contrib = Math.abs(r.pow)*pc;
+      pcZ += contrib;
+      Z *= Math.pow(r.val, r.pow);
+      steps.push('<div class="ugt-step">%'+r.name+' = '+fmt(r.unc)+' ÷ '+fmt(r.val)+' × 100 = <b>'+fmt(pc,3)+'%</b> → ×|'+r.pow+'| = '+fmt(contrib,3)+'%</div>');
+    });
+    var absZ = Math.abs(Z)*pcZ/100;
+    $('ugt-c-out').innerHTML =
+      steps.join('') +
+      '<div class="ugt-step">%Z = sum of contributions = <b>'+fmt(pcZ,3)+'%</b></div>'+
+      pairPill(Z, absZ) +
+      '<div class="ugt-step">i.e. Z = '+fmt(Z)+' with '+fmt(pcZ,3)+'% uncertainty</div>';
+  }
+  $('ugt-c-add').addEventListener('click', function(){ combData.push({name:'X',val:1,unc:0.1,pow:1}); markCustom(); renderComb(); calcComb(); });
+  $('ugt-c-k').addEventListener('input', calcComb);
+
+  var sumData = [
+    {name:'d₂', sign:1, val:48.5, unc:0.5},
+    {name:'d₁', sign:-1, val:12.3, unc:0.5}
+  ];
+  function renderSum(){
+    var b = $('ugt-s-body'); b.innerHTML='';
+    sumData.forEach(function(r,i){
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><input class="ugt-in" type="text" value="'+r.name+'" data-k="name"></td>'+
+        '<td><select class="ugt-in" data-k="sign"><option value="1"'+(r.sign>0?' selected':'')+'>+</option><option value="-1"'+(r.sign<0?' selected':'')+'>−</option></select></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.val+'" data-k="val"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.unc+'" data-k="unc"></td>'+
+        '<td><button class="ugt-x" title="Remove">×</button></td>';
+      tr.querySelectorAll('input,select').forEach(function(inp){
+        inp.addEventListener('input', function(){
+          var key = inp.getAttribute('data-k');
+          sumData[i][key] = (key==='name') ? inp.value : num(inp.value);
+          calcSum();
+        });
+      });
+      tr.querySelector('.ugt-x').addEventListener('click', function(){ sumData.splice(i,1); renderSum(); calcSum(); });
+      b.appendChild(tr);
+    });
+  }
+  function calcSum(){
+    var Z=0, absZ=0;
+    sumData.forEach(function(r){ Z += r.sign*r.val; absZ += Math.abs(r.unc); });
+    var pc = pctUnc(Z, absZ);
+    $('ugt-s-out').innerHTML =
+      '<div class="ugt-step">Z = '+sumData.map(function(r){return (r.sign>0?'+':'−')+fmt(r.val);}).join(' ')+' = <b>'+fmt(Z)+'</b></div>'+
+      '<div class="ugt-step">ΔZ = '+sumData.map(function(r){return fmt(r.unc);}).join(' + ')+' = <b>'+fmt(absZ)+'</b></div>'+
+      pairPill(Z, absZ) +
+      '<div class="ugt-step">Percentage uncertainty = <b>'+fmt(pc,3)+'%</b></div>';
+  }
+  $('ugt-s-add').addEventListener('click', function(){ sumData.push({name:'X',sign:1,val:1,unc:0.1}); renderSum(); calcSum(); });
+
+  /* ===================================================================
+     PANEL 4 — Graph & gradient
+  =================================================================== */
+  var pcan = $('ugt-plot'), pctx = pcan.getContext('2d');
+  var pW=520, pH=390;
+  var data = [
+    {x:0.10,y:0.52,ex:0.005,ey:0.05},
+    {x:0.20,y:1.05,ex:0.005,ey:0.05},
+    {x:0.30,y:1.49,ex:0.005,ey:0.05},
+    {x:0.40,y:2.04,ex:0.005,ey:0.05},
+    {x:0.50,y:2.51,ex:0.005,ey:0.05}
+  ];
+  var lines = { best:null, worst:null, max:null, min:null };
+  var showWorst = true;
+  var plot = null; // transform info
+  var drag = null;
+
+  function renderDataTable(){
+    var b = $('ugt-d-body'); b.innerHTML='';
+    data.forEach(function(r,i){
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.x+'" data-k="x"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.y+'" data-k="y"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.ex+'" data-k="ex"></td>'+
+        '<td><input class="ugt-in" type="number" step="any" value="'+r.ey+'" data-k="ey"></td>'+
+        '<td><button class="ugt-x" title="Remove">×</button></td>';
+      tr.querySelectorAll('input').forEach(function(inp){
+        inp.addEventListener('input', function(){ data[i][inp.getAttribute('data-k')] = num(inp.value); drawPlot(); updateGraphReadout(); });
+      });
+      tr.querySelector('.ugt-x').addEventListener('click', function(){ if(data.length>2){ data.splice(i,1); renderDataTable(); resetLines(); drawPlot(); updateGraphReadout(); } });
+      b.appendChild(tr);
+    });
+  }
+  $('ugt-d-add').addEventListener('click', function(){
+    var last = data[data.length-1] || {x:0,y:0,ex:0,ey:0};
+    data.push({x:num(last.x)+0.1, y:num(last.y), ex:last.ex, ey:last.ey});
+    renderDataTable(); drawPlot(); updateGraphReadout();
+  });
+
+  function leastSquares(){
+    var n=data.length, sx=0,sy=0,sxy=0,sxx=0;
+    data.forEach(function(d){ sx+=d.x; sy+=d.y; sxy+=d.x*d.y; sxx+=d.x*d.x; });
+    var denom = n*sxx - sx*sx;
+    var m = denom!==0 ? (n*sxy - sx*sy)/denom : 0;
+    var c = (sy - m*sx)/n;
+    return {m:m,c:c};
+  }
+  function xExtent(){
+    var xs = data.map(function(d){return d.x;});
+    return {min:Math.min.apply(null,xs), max:Math.max.apply(null,xs)};
+  }
+  function lineFromMC(m,c){
+    var e = xExtent(); var span = (e.max-e.min)||1;
+    var x1 = e.min + span*0.18, x2 = e.min + span*0.82;
+    return {x1:x1, y1:m*x1+c, x2:x2, y2:m*x2+c};
+  }
+  function mcFromLine(L){
+    var dx = (L.x2-L.x1); if(Math.abs(dx)<1e-9) dx = 1e-9;
+    var m = (L.y2-L.y1)/dx; var c = L.y1 - m*L.x1;
+    return {m:m,c:c};
+  }
+  function centroid(){
+    var sx=0,sy=0; data.forEach(function(d){ sx+=d.x; sy+=d.y; });
+    var n=data.length||1; return {x:sx/n, y:sy/n};
+  }
+  function lineThruCentroid(g){
+    var c=centroid(); var e=xExtent(); var span=(e.max-e.min)||1;
+    var x2=e.min+span*0.85;
+    return {x1:c.x, y1:c.y, x2:x2, y2:c.y+g*(x2-c.x)};
+  }
+  function anchorWJEC(){
+    if(boardMode!=='wjec') return;
+    var c=centroid();
+    if(lines.max){ lines.max.x1=c.x; lines.max.y1=c.y; }
+    if(lines.min){ lines.min.x1=c.x; lines.min.y1=c.y; }
+  }
+  // Returns {best:{m,c}, a:{m,c}, b:{m,c}} — a & b are the two extreme/worst lines
+  function gradientLines(){
+    if(boardMode!=='wjec'){
+      var be=mcFromLine(lines.best), wo=lines.worst?mcFromLine(lines.worst):be;
+      return {best:be, a:be, b:wo};
+    }
+    anchorWJEC();
+    var mx=lines.max?mcFromLine(lines.max):{m:0,c:0};
+    var mn=lines.min?mcFromLine(lines.min):{m:0,c:0};
+    return {best:{m:(mx.m+mn.m)/2, c:(mx.c+mn.c)/2}, a:mx, b:mn};
+  }
+  function resetLines(){
+    var bf = leastSquares();
+    lines.best = lineFromMC(bf.m, bf.c);
+    lines.worst=null; lines.max=null; lines.min=null;
+    suggestWorst();
+  }
+  // Steepest & shallowest straight lines that pass through EVERY vertical error bar.
+  // Returns {steep:{m,c}, shallow:{m,c}} or null if no single line can thread them all.
+  function threadAll(){
+    var p=data; if(p.length<2) return null;
+    var ys=p.map(function(d){return d.y;});
+    var tol=1e-6*((Math.max.apply(null,ys)-Math.min.apply(null,ys))||1)+1e-9;
+    function ok(m,c){ for(var k=0;k<p.length;k++){ var v=m*p[k].x+c; if(v<p[k].y-p[k].ey-tol||v>p[k].y+p[k].ey+tol) return false; } return true; }
+    var steep=null, shallow=null, i, j;
+    for(i=0;i<p.length;i++) for(j=0;j<p.length;j++){
+      if(i===j || Math.abs(p[j].x-p[i].x)<1e-9) continue;
+      var m1=((p[j].y+p[j].ey)-(p[i].y-p[i].ey))/(p[j].x-p[i].x), c1=(p[i].y-p[i].ey)-m1*p[i].x; // bottom of i, top of j
+      if(ok(m1,c1) && (steep===null || m1>steep.m)) steep={m:m1,c:c1};
+      var m2=((p[j].y-p[j].ey)-(p[i].y+p[i].ey))/(p[j].x-p[i].x), c2=(p[i].y+p[i].ey)-m2*p[i].x; // top of i, bottom of j
+      if(ok(m2,c2) && (shallow===null || m2<shallow.m)) shallow={m:m2,c:c2};
+    }
+    return (steep&&shallow)?{steep:steep, shallow:shallow}:null;
+  }
+  // Fallback when the bars are too scattered to thread: use the first & last bar corners.
+  function endExtremes(){
+    var s=data.slice().sort(function(a,b){return a.x-b.x;}), L=s[0], R=s[s.length-1];
+    var dx=(R.x-L.x)||1;
+    var sm=((R.y+R.ey)-(L.y-L.ey))/dx, hm=((R.y-R.ey)-(L.y+L.ey))/dx;
+    return { steep:{m:sm, c:(L.y-L.ey)-sm*L.x}, shallow:{m:hm, c:(L.y+L.ey)-hm*L.x} };
+  }
+  var worstThreaded = true; // whether the last suggestion threaded all bars
+  function suggestWorst(){
+    var ext = threadAll();
+    worstThreaded = !!ext;
+    if(!ext) ext = endExtremes();
+    if(boardMode!=='wjec'){
+      var bf=leastSquares();
+      var w=(Math.abs(ext.steep.m-bf.m) >= Math.abs(ext.shallow.m-bf.m)) ? ext.steep : ext.shallow; // the more deviant
+      lines.worst=lineFromMC(w.m, w.c);
+    } else {
+      var c=centroid(), mmax=Infinity, mmin=-Infinity, any=false;
+      data.forEach(function(d){
+        var dd=d.x-c.x; if(Math.abs(dd)<1e-6) return; any=true;
+        var hi, lo;
+        if(dd>0){ hi=(d.y+d.ey-c.y)/dd; lo=(d.y-d.ey-c.y)/dd; }
+        else    { hi=(d.y-d.ey-c.y)/dd; lo=(d.y+d.ey-c.y)/dd; }
+        if(hi<mmax) mmax=hi; if(lo>mmin) mmin=lo;
+      });
+      if(!any || !(isFinite(mmax)&&isFinite(mmin)) || mmax<mmin){ // can't thread through centroid
+        worstThreaded=false;
+        mmax=Math.max(ext.steep.m, ext.shallow.m); mmin=Math.min(ext.steep.m, ext.shallow.m);
+      }
+      lines.max=lineThruCentroid(mmax);
+      lines.min=lineThruCentroid(mmin);
+    }
+    drawPlot(); updateGraphReadout();
+  }
+  $('ugt-fit-best').addEventListener('click', function(){ if(boardMode!=='wjec'){ var bf=leastSquares(); lines.best=lineFromMC(bf.m,bf.c); } drawPlot(); updateGraphReadout(); });
+  $('ugt-fit-worst').addEventListener('click', suggestWorst);
+  $('ugt-show-worst').addEventListener('change', function(){ showWorst=this.checked; drawPlot(); });
+
+  function niceAxis(lo, hi){
+    if(lo===hi){ lo-=1; hi+=1; }
+    var range = hi-lo;
+    var step = Math.pow(10, Math.floor(Math.log10(range/5)));
+    var err = (range/5)/step;
+    if(err>=7.5) step*=10; else if(err>=3.5) step*=5; else if(err>=1.5) step*=2;
+    var nlo = Math.floor(lo/step)*step, nhi = Math.ceil(hi/step)*step;
+    return {lo:nlo, hi:nhi, step:step};
+  }
+  function bounds(){
+    var xlo=Infinity,xhi=-Infinity,ylo=Infinity,yhi=-Infinity;
+    data.forEach(function(d){
+      xlo=Math.min(xlo,d.x-d.ex); xhi=Math.max(xhi,d.x+d.ex);
+      ylo=Math.min(ylo,d.y-d.ey); yhi=Math.max(yhi,d.y+d.ey);
+    });
+    // include intercept region a touch
+    ylo=Math.min(ylo,0> ylo?ylo:Math.min(ylo,0)*0+ylo);
+    return {xlo:xlo,xhi:xhi,ylo:ylo,yhi:yhi};
+  }
+
+  function sizePlot(){
+    var w = pcan.clientWidth || 760;
+    var h = pcan.clientHeight || Math.round(w*0.625);
+    h = Math.max(360, h);
+    pW=w; pH=h;
+    pcan.width=Math.round(w*DPR); pcan.height=Math.round(h*DPR);
+    pctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+
+  function drawPlot(){
+    if(!lines.best && !lines.max) resetLines();
+    var padL=58, padR=16, padT=14, padB=46;
+    var b = bounds();
+    var ax = niceAxis(b.xlo, b.xhi), ay = niceAxis(b.ylo, b.yhi);
+    var x0=ax.lo, x1=ax.hi, y0=ay.lo, y1=ay.hi;
+    var plotW = pW-padL-padR, plotH = pH-padT-padB;
+    function sx(x){ return padL + (x-x0)/(x1-x0)*plotW; }
+    function sy(y){ return padT + (1-(y-y0)/(y1-y0))*plotH; }
+    function dxFromPx(px){ return x0 + (px-padL)/plotW*(x1-x0); }
+    function dyFromPx(py){ return y0 + (1-(py-padT)/plotH)*(y1-y0); }
+    plot = {sx:sx,sy:sy,dx:dxFromPx,dy:dyFromPx,x0:x0,x1:x1,y0:y0,y1:y1,padL:padL,padT:padT,plotW:plotW,plotH:plotH};
+
+    pctx.clearRect(0,0,pW,pH);
+    pctx.fillStyle='#ffffff'; pctx.fillRect(0,0,pW,pH);
+
+    // grid (graph paper)
+    pctx.lineWidth=1;
+    var gx, gy;
+    pctx.strokeStyle='#e6eef0';
+    for(gx=x0; gx<=x1+1e-9; gx+=ax.step/5){ var X=sx(gx); pctx.beginPath(); pctx.moveTo(X,padT); pctx.lineTo(X,padT+plotH); pctx.stroke(); }
+    for(gy=y0; gy<=y1+1e-9; gy+=ay.step/5){ var Y=sy(gy); pctx.beginPath(); pctx.moveTo(padL,Y); pctx.lineTo(padL+plotW,Y); pctx.stroke(); }
+    pctx.strokeStyle='#cdd9dd';
+    for(gx=x0; gx<=x1+1e-9; gx+=ax.step){ var X2=sx(gx); pctx.beginPath(); pctx.moveTo(X2,padT); pctx.lineTo(X2,padT+plotH); pctx.stroke(); }
+    for(gy=y0; gy<=y1+1e-9; gy+=ay.step){ var Y2=sy(gy); pctx.beginPath(); pctx.moveTo(padL,Y2); pctx.lineTo(padL+plotW,Y2); pctx.stroke(); }
+
+    // axes
+    pctx.strokeStyle='#16222c'; pctx.lineWidth=1.5;
+    pctx.beginPath(); pctx.moveTo(padL,padT); pctx.lineTo(padL,padT+plotH); pctx.lineTo(padL+plotW,padT+plotH); pctx.stroke();
+
+    // tick labels
+    pctx.fillStyle='#42505c'; pctx.font='11px ui-monospace,monospace';
+    pctx.textAlign='center'; pctx.textBaseline='top';
+    for(gx=x0; gx<=x1+1e-9; gx+=ax.step){ pctx.fillText(fmt(gx,3), sx(gx), padT+plotH+6); }
+    pctx.textAlign='right'; pctx.textBaseline='middle';
+    for(gy=y0; gy<=y1+1e-9; gy+=ay.step){ pctx.fillText(fmt(gy,3), padL-6, sy(gy)); }
+
+    // axis titles
+    var xl=$('ugt-xlab').value, xu=$('ugt-xunit').value, yl=$('ugt-ylab').value, yu=$('ugt-yunit').value;
+    pctx.fillStyle='#16222c'; pctx.font='600 12px Segoe UI,system-ui,sans-serif';
+    pctx.textAlign='center'; pctx.textBaseline='bottom';
+    pctx.fillText(xl + (xu?(' / '+xu):''), padL+plotW/2, pH-4);
+    pctx.save();
+    pctx.translate(13, padT+plotH/2); pctx.rotate(-Math.PI/2);
+    pctx.textBaseline='top';
+    pctx.fillText(yl + (yu?(' / '+yu):''), 0, 0);
+    pctx.restore();
+
+    // --- gradient lines & uncertainty wedge ---
+    if(lines.best || lines.max){
+      var GL = gradientLines();
+      pctx.save(); pctx.beginPath(); pctx.rect(padL,padT,plotW,plotH); pctx.clip();
+      if(showWorst){
+        // shaded wedge between the two extreme lines
+        pctx.beginPath();
+        pctx.moveTo(sx(x0), sy(GL.a.m*x0+GL.a.c));
+        pctx.lineTo(sx(x1), sy(GL.a.m*x1+GL.a.c));
+        pctx.lineTo(sx(x1), sy(GL.b.m*x1+GL.b.c));
+        pctx.lineTo(sx(x0), sy(GL.b.m*x0+GL.b.c));
+        pctx.closePath();
+        pctx.fillStyle='rgba(200,127,18,.12)'; pctx.fill();
+      }
+      drawMC(GL.best.m, GL.best.c, '#0e8c86', false, sx, sy, x0, x1);
+      if(showWorst){
+        if(boardMode!=='wjec'){ drawMC(GL.b.m, GL.b.c, '#c87f12', true, sx, sy, x0, x1); }
+        else { drawMC(GL.a.m, GL.a.c, '#c87f12', true, sx, sy, x0, x1); drawMC(GL.b.m, GL.b.c, '#5b5fb0', true, sx, sy, x0, x1); }
+      }
+      pctx.restore();
+    }
+
+    // centroid marker (WJEC)
+    if(boardMode==='wjec'){
+      var ce=centroid(); var cX=sx(ce.x), cY=sy(ce.y);
+      pctx.beginPath(); pctx.arc(cX,cY,6,0,2*Math.PI); pctx.fillStyle='#0e8c86'; pctx.fill();
+      pctx.strokeStyle='#fff'; pctx.lineWidth=2; pctx.stroke();
+      pctx.fillStyle='#0a615d'; pctx.font='600 11px Segoe UI,system-ui,sans-serif';
+      pctx.textAlign='left'; pctx.textBaseline='bottom'; pctx.fillText('centroid', cX+9, cY-4);
+    }
+
+    // error bars + points
+    data.forEach(function(d){
+      var X=sx(d.x), Y=sy(d.y);
+      pctx.strokeStyle='rgba(22,34,44,.55)'; pctx.lineWidth=1.2;
+      if(d.ey){ var yA=sy(d.y+d.ey), yB=sy(d.y-d.ey);
+        pctx.beginPath(); pctx.moveTo(X,yA); pctx.lineTo(X,yB);
+        pctx.moveTo(X-4,yA); pctx.lineTo(X+4,yA); pctx.moveTo(X-4,yB); pctx.lineTo(X+4,yB); pctx.stroke(); }
+      if(d.ex){ var xA=sx(d.x+d.ex), xB=sx(d.x-d.ex);
+        pctx.beginPath(); pctx.moveTo(xA,Y); pctx.lineTo(xB,Y);
+        pctx.moveTo(xA,Y-4); pctx.lineTo(xA,Y+4); pctx.moveTo(xB,Y-4); pctx.lineTo(xB,Y+4); pctx.stroke(); }
+      pctx.beginPath(); pctx.arc(X,Y,3.6,0,2*Math.PI); pctx.fillStyle='#d6336c'; pctx.fill();
+      pctx.strokeStyle='#fff'; pctx.lineWidth=1.2; pctx.stroke();
+    });
+
+    // draggable handles
+    if(boardMode!=='wjec'){
+      drawHandles(lines.best,'#0e8c86',sx,sy);
+      if(showWorst) drawHandles(lines.worst,'#c87f12',sx,sy);
+    } else if(showWorst){
+      drawHandle(lines.max,'2','#c87f12',sx,sy);
+      drawHandle(lines.min,'2','#5b5fb0',sx,sy);
+    }
+  }
+
+  function drawMC(m,c,color,dash,sx,sy,x0,x1){
+    pctx.strokeStyle=color; pctx.lineWidth=dash?1.8:2.6;
+    pctx.setLineDash(dash?[7,5]:[]);
+    pctx.beginPath(); pctx.moveTo(sx(x0),sy(m*x0+c)); pctx.lineTo(sx(x1),sy(m*x1+c)); pctx.stroke();
+    pctx.setLineDash([]);
+  }
+  function drawHandle(L,which,color,sx,sy){
+    if(!L) return; var x=which==='1'?L.x1:L.x2, y=which==='1'?L.y1:L.y2;
+    pctx.beginPath(); pctx.arc(sx(x),sy(y),6,0,2*Math.PI);
+    pctx.fillStyle='#fff'; pctx.fill(); pctx.strokeStyle=color; pctx.lineWidth=2.4; pctx.stroke();
+  }
+
+  function drawHandles(L,color,sx,sy){
+    if(!L) return;
+    [[L.x1,L.y1],[L.x2,L.y2]].forEach(function(p){
+      pctx.beginPath(); pctx.arc(sx(p[0]),sy(p[1]),6,0,2*Math.PI);
+      pctx.fillStyle='#fff'; pctx.fill();
+      pctx.strokeStyle=color; pctx.lineWidth=2.4; pctx.stroke();
+    });
+  }
+
+  function updateGraphReadout(){
+    if(!lines.best && !lines.max){ return; }
+    var yu=$('ugt-yunit').value, xu=$('ugt-xunit').value;
+    var gunit = (yu||xu) ? ((yu||'1')+(xu?(' '+xu+'⁻¹'):'')) : '';
+    var GL=gradientLines();
+    var html='';
+    if(boardMode!=='wjec'){
+      var be=GL.best, wo=GL.b;
+      var dm=Math.abs(be.m-wo.m), pcm=pctUnc(be.m, dm);
+      var dc=Math.abs(be.c-wo.c), pcc=pctUnc(be.c, dc);
+      html += '<div class="ugt-step">best-fit gradient = <b>'+fmt(be.m,4)+(gunit?(' '+gunit):'')+'</b> · intercept = <b>'+fmt(be.c,4)+(yu?(' '+yu):'')+'</b></div>';
+      if(showWorst){
+        html += '<div class="ugt-step">worst-line gradient = '+fmt(wo.m,4)+' · intercept = '+fmt(wo.c,4)+'</div>';
+        html += '<div class="ugt-step">% uncertainty = |best − worst| ÷ best × 100</div>';
+        html += pairPill(be.m, dm, gunit, 'm =') + ' &nbsp; ' + pairPill(be.c, dc, yu, 'c =');
+        html += '<div class="ugt-step">% uncertainty in gradient = <b>'+fmt(pcm,3)+'%</b> · in intercept = <b>'+fmt(pcc,3)+'%</b></div>';
+      }
+    } else {
+      var mx=GL.a, mn=GL.b, best=GL.best, ce=centroid();
+      var dm2=Math.abs(mx.m-mn.m)/2, pcm2=pctUnc(best.m, dm2);
+      var dc2=Math.abs(mx.c-mn.c)/2, pcc2=pctUnc(best.c, dc2);
+      html += '<div class="ugt-step">centroid (x̄, ȳ) = ('+fmt(ce.x,3)+', '+fmt(ce.y,3)+') — both lines pass through it</div>';
+      if(showWorst){
+        html += '<div class="ugt-step">m(max) = '+fmt(mx.m,4)+' · m(min) = '+fmt(mn.m,4)+'</div>';
+        html += '<div class="ugt-step">gradient = (m_max + m_min)/2 &nbsp;±&nbsp; (m_max − m_min)/2</div>';
+        html += pairPill(best.m, dm2, gunit, 'm =') + ' &nbsp; ' + pairPill(best.c, dc2, yu, 'c =');
+        html += '<div class="ugt-step">% uncertainty in gradient = <b>'+fmt(pcm2,3)+'%</b> · in intercept = <b>'+fmt(pcc2,3)+'%</b></div>';
+      } else {
+        html += '<div class="ugt-step">gradient = <b>'+fmt(best.m,4)+(gunit?(' '+gunit):'')+'</b></div>';
+      }
+    }
+    if(showWorst && !worstThreaded){
+      html += '<div class="ugt-step" style="color:#c0392b">No straight line passes through every error bar (the scatter exceeds the quoted uncertainties), so the first and last points were used. Check the error bars are realistic, or drag the lines to adjust.</div>';
+    }
+    $('ugt-g-out').innerHTML = html;
+  }
+
+  // ---- pointer drag on plot ----
+  function canvasXY(ev){
+    var r = pcan.getBoundingClientRect();
+    return {x: ev.clientX - r.left, y: ev.clientY - r.top};
+  }
+  function hitTest(px,py){
+    if(!plot) return null;
+    var cands=[];
+    if(boardMode!=='wjec'){ cands.push(['best',lines.best,['1','2']]); if(showWorst) cands.push(['worst',lines.worst,['1','2']]); }
+    else if(showWorst){ cands.push(['max',lines.max,['2']]); cands.push(['min',lines.min,['2']]); }
+    for(var i=0;i<cands.length;i++){
+      var key=cands[i][0], L=cands[i][1], hs=cands[i][2]; if(!L) continue;
+      for(var j=0;j<hs.length;j++){
+        var h=hs[j]; var hx=plot.sx(h==='1'?L.x1:L.x2), hy=plot.sy(h==='1'?L.y1:L.y2);
+        if((px-hx)*(px-hx)+(py-hy)*(py-hy) < 196){ return {key:key, h:h}; }
+      }
+    }
+    return null;
+  }
+  pcan.addEventListener('pointerdown', function(ev){
+    var p=canvasXY(ev); var hit=hitTest(p.x,p.y);
+    if(hit){ drag=hit; pcan.setPointerCapture(ev.pointerId); ev.preventDefault(); }
+  });
+  pcan.addEventListener('pointermove', function(ev){
+    if(!drag||!plot) return;
+    var p=canvasXY(ev);
+    var nx=plot.dx(p.x), ny=plot.dy(p.y);
+    var L=lines[drag.key];
+    if(!L) return;
+    if(drag.h==='1'){ L.x1=nx; L.y1=ny; } else { L.x2=nx; L.y2=ny; }
+    if(boardMode==='wjec'){ var c=centroid(); L.x1=c.x; L.y1=c.y; } // keep pivot on centroid
+    drawPlot(); updateGraphReadout();
+  });
+  function endDrag(){ drag=null; }
+  pcan.addEventListener('pointerup', endDrag);
+  pcan.addEventListener('pointercancel', endDrag);
+
+  /* ===================================================================
+     PANEL 5 — Reporting
+  =================================================================== */
+  function round1sf(u){
+    if(u<=0) return {val:0, dp:0};
+    var order=Math.floor(Math.log10(u));
+    var r=Math.round(u/Math.pow(10,order))*Math.pow(10,order);
+    var order2=Math.floor(Math.log10(r));
+    var dp=Math.max(0,-order2);
+    return {val:r, dp:dp};
+  }
+  function calcReport(){
+    var v=num($('ugt-rp-val').value), u=Math.abs(num($('ugt-rp-unc').value)), unit=$('ugt-rp-unit').value;
+    if(u<=0){ $('ugt-rp-out').innerHTML='<div class="ugt-step">Enter a non-zero uncertainty.</div>'; return; }
+    var sf=uSig();
+    var r=uncRoundDP(u);
+    var pc=pctUnc(v,u);
+    $('ugt-rp-out').innerHTML =
+      '<div class="ugt-step">Uncertainty to '+(sf===2?'≤2':'1')+' s.f. = <b>'+fixDP(r.uR,r.dp)+'</b> → value quoted to '+r.dp+' d.p.</div>'+
+      pairPill(v, u, unit) +
+      '<div class="ugt-step">Percentage uncertainty = <b>'+fmt(pc,3)+'%</b></div>';
+  }
+  ['ugt-rp-val','ugt-rp-unc','ugt-rp-unit'].forEach(function(id){ $(id).addEventListener('input', calcReport); });
+
+  function calcPctDiff(){
+    var m=num($('ugt-pd-meas').value), a=num($('ugt-pd-acc').value), u=num($('ugt-pd-unc').value);
+    if(a===0){ $('ugt-pd-out').innerHTML='<div class="ugt-step">Accepted value cannot be zero.</div>'; return; }
+    var pd=Math.abs(m-a)/Math.abs(a)*100;
+    var html='<div class="ugt-step">% difference = |'+fmt(m)+' − '+fmt(a)+'| ÷ |'+fmt(a)+'| × 100</div>'+
+      resultPill(fmt(pd,3)+'%','');
+    if(u>0){
+      if(pd<=u) html+='<div class="ugt-tag ugt-tag-good">Consistent with the accepted value within your '+fmt(u,3)+'% uncertainty.</div>';
+      else html+='<div class="ugt-tag ugt-tag-warn">Discrepancy ('+fmt(pd,3)+'%) exceeds your '+fmt(u,3)+'% uncertainty — suggests a systematic error.</div>';
+    }
+    $('ugt-pd-out').innerHTML=html;
+  }
+  ['ugt-pd-meas','ugt-pd-acc','ugt-pd-unc'].forEach(function(id){ $(id).addEventListener('input', calcPctDiff); });
+
+  /* ---- working show/hide (combine panel) ---- */
+  var showWork = false;
+  function applyWork(){
+    var panel = root.querySelector('.ugt-panel[data-panel="combine"]');
+    panel.classList.toggle('ugt-workhidden', !showWork);
+    $('ugt-toggle-work').textContent = showWork ? 'Hide calculations' : 'Reveal calculations';
+  }
+  $('ugt-toggle-work').addEventListener('click', function(){ showWork = !showWork; applyWork(); });
+
+  /* ===================================================================
+     PANEL 6 — Logarithms
+  =================================================================== */
+  var lcan=$('ugt-logcanvas'), lctx=lcan.getContext('2d');
+  var lW=720, lH=450;
+
+  function calcLogQuick(){
+    var v=num($('ugt-log-in').value);
+    if(v>0){
+      $('ugt-log-out').innerHTML='<div class="ugt-step">log₁₀('+fmt(v)+') = <b>'+fmt(Math.log10(v),4)+'</b> &nbsp;·&nbsp; ln('+fmt(v)+') = <b>'+fmt(Math.log(v),4)+'</b></div>';
+    } else {
+      $('ugt-log-out').innerHTML='<div class="ugt-step">Logarithms are only defined for values greater than zero.</div>';
+    }
+  }
+  $('ugt-log-in').addEventListener('input', calcLogQuick);
+
+  function calcLogUnc(){
+    var x=num($('ugt-lu-val').value), dx=Math.abs(num($('ugt-lu-unc').value));
+    var base=$('ugt-lu-base').value;
+    var f=(base==='ln')?Math.log:Math.log10, name=(base==='ln')?'ln':'log₁₀';
+    var out=$('ugt-lu-out');
+    if(!(x>0) || !(x-dx>0)){ out.innerHTML='<div class="ugt-step">Need x &gt; 0 and x − Δx &gt; 0 for the log to be defined.</div>'; return; }
+    var val=f(x), up=Math.abs(f(x+dx)-val), lo=Math.abs(val-f(x-dx));
+    var unc=(up+lo)/2;
+    out.innerHTML=
+      '<div class="ugt-step">'+name+'('+fmt(x)+') = <b>'+fmt(val,3)+'</b></div>'+
+      '<div class="ugt-step">upper: '+name+'('+fmt(x+dx)+') − '+name+'('+fmt(x)+') = +'+fmt(up,3)+' &nbsp;·&nbsp; lower: '+name+'('+fmt(x)+') − '+name+'('+fmt(x-dx)+') = −'+fmt(lo,3)+'</div>'+
+      '<div class="ugt-step">uncertainty = (&#8201;'+fmt(up,3)+' + '+fmt(lo,3)+'&#8201;) ÷ 2</div>'+
+      pairPill(val, unc);
+  }
+  ['ugt-lu-val','ugt-lu-unc','ugt-lu-base'].forEach(function(id){ $(id).addEventListener('input', calcLogUnc); });
+
+  var QBANK=[
+    {type:'loglog', kind:'read', A:2, n:1.5, xmin:0, xmax:3, x0:2},
+    {type:'loglog', kind:'gradient', A:5, n:2, xmin:0, xmax:2.5},
+    {type:'loglog', kind:'intercept_A', A:3, n:0.5, xmin:0, xmax:3},
+    {type:'loglog', kind:'read', A:10, n:-1, xmin:0, xmax:3, x0:1.5},
+    {type:'loglog', kind:'gradient', A:1, n:3, xmin:0, xmax:2},
+    {type:'lnlin', kind:'read', A:20, k:-0.3, xmin:0, xmax:8, x0:4, xunit:'s'},
+    {type:'lnlin', kind:'gradient', A:2, k:0.5, xmin:0, xmax:6, xunit:'s'},
+    {type:'lnlin', kind:'intercept_A', A:8, k:-0.2, xmin:0, xmax:10, xunit:'s'},
+    {type:'lnlin', kind:'read', A:100, k:-0.5, xmin:0, xmax:6, x0:3, xunit:'s'},
+    {type:'lnlin', kind:'gradient', A:5, k:-0.4, xmin:0, xmax:8, xunit:'s'},
+    {type:'log10lin', kind:'read', A:4, b:0.25, xmin:0, xmax:8, x0:4, xunit:'s'},
+    {type:'log10lin', kind:'gradient', A:2, b:-0.2, xmin:0, xmax:10, xunit:'s'},
+    {type:'log10lin', kind:'intercept_A', A:50, b:0.1, xmin:0, xmax:10, xunit:'s'},
+    {type:'log10lin', kind:'read', A:1, b:0.3, xmin:0, xmax:6, x0:5, xunit:'s'},
+    {type:'logyaxis', kind:'readY', A:2, b:0.2, xmin:0, xmax:10, x0:5, xunit:'s', yunit:'V'},
+    {type:'logyaxis', kind:'readY', A:5, b:-0.15, xmin:0, xmax:12, x0:8, xunit:'s', yunit:'A'},
+    {type:'logyaxis', kind:'readY', A:100, b:0.1, xmin:0, xmax:20, x0:10, xunit:'s', yunit:'Bq'},
+    {type:'loglogaxis', kind:'readY', A:3, n:2, xmin:1, xmax:100, x0:10, xunit:'m', yunit:'N'},
+    {type:'loglogaxis', kind:'readY', A:50, n:-1, xmin:1, xmax:100, x0:20, xunit:'cm', yunit:'Ω'},
+    {type:'loglogaxis', kind:'readY', A:1, n:0.5, xmin:1, xmax:1000, x0:100, xunit:'Hz', yunit:'V'}
+  ];
+  var qOrder=[], qPos=0, qScore=0, qAnswered=false;
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+  function curQ(){ return QBANK[qOrder[qPos]]; }
+  function qSlope(q){ return q.type==='loglog'?q.n : (q.type==='lnlin'?q.k : q.b); }
+  function qIntercept(q){ return q.type==='lnlin'?Math.log(q.A):Math.log10(q.A); }
+  function qAnswer(q){
+    if(q.kind==='gradient') return qSlope(q);
+    if(q.kind==='intercept_A') return q.A;
+    if(q.kind==='read') return qSlope(q)*q.x0 + qIntercept(q);
+    if(q.kind==='readY') return q.type==='loglogaxis' ? q.A*Math.pow(q.x0,q.n) : q.A*Math.pow(10,q.b*q.x0);
+    return 0;
+  }
+  function qTol(q){
+    var ans=qAnswer(q);
+    if(q.kind==='read') return 0.1;
+    if(q.kind==='gradient') return Math.max(0.05, Math.abs(ans)*0.08);
+    if(q.kind==='intercept_A') return Math.abs(ans)*0.15;
+    return Math.abs(ans)*0.10;
+  }
+  function qLogLabel(q){
+    if(q.type==='loglog') return 'Log–log graph';
+    if(q.type==='lnlin') return 'Log–linear graph (natural log)';
+    if(q.type==='log10lin') return 'Log–linear graph (log₁₀)';
+    if(q.type==='logyaxis') return 'Logarithmic y-axis (semi-log paper)';
+    return 'Log–log axes (log-log paper)';
+  }
+  function qRelation(q){
+    if(q.type==='loglog'||q.type==='loglogaxis') return 'y = A·xⁿ';
+    if(q.type==='lnlin') return 'y = A·e^(kx)';
+    return 'y = A·10^(bx)';
+  }
+  function qPromptText(q){
+    if(q.kind==='read'){
+      if(q.type==='loglog') return 'Read off <b>log₁₀ y</b> when log₁₀ x = '+q.x0+'.';
+      if(q.type==='lnlin') return 'Read off <b>ln y</b> when x = '+q.x0+(q.xunit?' '+q.xunit:'')+'.';
+      return 'Read off <b>log₁₀ y</b> when x = '+q.x0+(q.xunit?' '+q.xunit:'')+'.';
+    }
+    if(q.kind==='gradient') return 'Use a large triangle to estimate the <b>gradient</b> of the line.';
+    if(q.kind==='intercept_A'){
+      var t=q.type==='lnlin'?'ln A':'log₁₀ A';
+      return 'The y-intercept (at x = 0) is <b>'+t+'</b>. Use it to determine <b>A</b>.';
+    }
+    return 'Read off the value of <b>y</b> when x = '+q.x0+(q.xunit?' '+q.xunit:'')+'.';
+  }
+  function qUnitHint(q){
+    if(q.kind==='intercept_A') return '(the value of A)';
+    if(q.kind==='readY') return q.yunit?('(in '+q.yunit+')'):'';
+    if(q.kind==='gradient') return '(the gradient)';
+    return '(a logarithm — no unit)';
+  }
+  function qExplain(q){
+    var ans=qAnswer(q), s=qSlope(q), ic=qIntercept(q);
+    if(q.kind==='read'){
+      var xl=q.type==='loglog'?'log₁₀ x':'x', yl=q.type==='lnlin'?'ln y':'log₁₀ y';
+      return yl+' = '+fmt(s,3)+' × '+q.x0+' + '+fmt(ic,3)+' = <b>'+fmt(ans,3)+'</b>  (using '+xl+' = '+q.x0+').';
+    }
+    if(q.kind==='gradient'){
+      var nm=q.type==='loglog'?'the power n':(q.type==='lnlin'?'the constant k':'the constant b');
+      return 'The gradient = <b>'+fmt(ans,3)+'</b>, which is '+nm+'.';
+    }
+    if(q.kind==='intercept_A'){
+      if(q.type==='lnlin') return 'Intercept = ln A = '+fmt(ic,3)+', so A = e^'+fmt(ic,3)+' = <b>'+fmt(q.A,3)+'</b>.';
+      return 'Intercept = log₁₀ A = '+fmt(ic,3)+', so A = 10^'+fmt(ic,3)+' = <b>'+fmt(q.A,3)+'</b>.';
+    }
+    if(q.type==='loglogaxis') return 'y = A·xⁿ = '+q.A+' × '+q.x0+'^'+q.n+' = <b>'+fmt(ans,3)+'</b>'+(q.yunit?' '+q.yunit:'')+'.';
+    return 'y = A·10^(bx) = '+q.A+' × 10^('+q.b+'×'+q.x0+') = <b>'+fmt(ans,3)+'</b>'+(q.yunit?' '+q.yunit:'')+'.';
+  }
+
+  function sizeLog(){
+    var w=lcan.clientWidth||720;
+    var h=lcan.clientHeight||Math.round(w*0.625);
+    h=Math.max(320,h);
+    lW=w; lH=h;
+    lcan.width=Math.round(w*DPR); lcan.height=Math.round(h*DPR);
+    lctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  function drawAxisTitlesL(xt,yt,padL,padT,plotW,plotH){
+    lctx.fillStyle='#16222c'; lctx.font='600 12px Segoe UI,system-ui,sans-serif';
+    lctx.textAlign='center'; lctx.textBaseline='bottom'; lctx.fillText(xt, padL+plotW/2, lH-4);
+    lctx.save(); lctx.translate(14, padT+plotH/2); lctx.rotate(-Math.PI/2);
+    lctx.textBaseline='top'; lctx.fillText(yt, 0, 0); lctx.restore();
+  }
+  function decadeLabel(e){
+    if(e>=0 && e<=4) return String(Math.round(Math.pow(10,e)));
+    if(e<0 && e>=-3) return (Math.pow(10,e)).toString();
+    return '10'+supNum(e);
+  }
+  function drawLinearLog(q){
+    var padL=64, padR=18, padT=16, padB=52;
+    var s=qSlope(q), ic=qIntercept(q);
+    var yA=s*q.xmin+ic, yB=s*q.xmax+ic;
+    var ylo=Math.min(yA,yB), yhi=Math.max(yA,yB);
+    var pad=(yhi-ylo)*0.12||1; ylo-=pad; yhi+=pad;
+    if(q.kind==='intercept_A'){ ylo=Math.min(ylo, ic-Math.abs(ic)*0.2-0.2); }
+    var ax=niceAxis(q.xmin,q.xmax), ay=niceAxis(ylo,yhi);
+    var X0=ax.lo,X1=ax.hi,Y0=ay.lo,Y1=ay.hi;
+    var plotW=lW-padL-padR, plotH=lH-padT-padB;
+    function sx(x){ return padL+(x-X0)/(X1-X0)*plotW; }
+    function sy(y){ return padT+(1-(y-Y0)/(Y1-Y0))*plotH; }
+    lctx.clearRect(0,0,lW,lH); lctx.fillStyle='#fff'; lctx.fillRect(0,0,lW,lH);
+    var gx,gy;
+    lctx.lineWidth=1; lctx.strokeStyle='#e6eef0';
+    for(gx=X0; gx<=X1+1e-9; gx+=ax.step/5){ lctx.beginPath(); lctx.moveTo(sx(gx),padT); lctx.lineTo(sx(gx),padT+plotH); lctx.stroke(); }
+    for(gy=Y0; gy<=Y1+1e-9; gy+=ay.step/5){ lctx.beginPath(); lctx.moveTo(padL,sy(gy)); lctx.lineTo(padL+plotW,sy(gy)); lctx.stroke(); }
+    lctx.strokeStyle='#cdd9dd';
+    for(gx=X0; gx<=X1+1e-9; gx+=ax.step){ lctx.beginPath(); lctx.moveTo(sx(gx),padT); lctx.lineTo(sx(gx),padT+plotH); lctx.stroke(); }
+    for(gy=Y0; gy<=Y1+1e-9; gy+=ay.step){ lctx.beginPath(); lctx.moveTo(padL,sy(gy)); lctx.lineTo(padL+plotW,sy(gy)); lctx.stroke(); }
+    lctx.strokeStyle='#16222c'; lctx.lineWidth=1.5;
+    lctx.beginPath(); lctx.moveTo(padL,padT); lctx.lineTo(padL,padT+plotH); lctx.lineTo(padL+plotW,padT+plotH); lctx.stroke();
+    lctx.fillStyle='#42505c'; lctx.font='11px ui-monospace,monospace';
+    lctx.textAlign='center'; lctx.textBaseline='top';
+    for(gx=X0; gx<=X1+1e-9; gx+=ax.step){ lctx.fillText(fmt(gx,3), sx(gx), padT+plotH+6); }
+    lctx.textAlign='right'; lctx.textBaseline='middle';
+    for(gy=Y0; gy<=Y1+1e-9; gy+=ay.step){ lctx.fillText(fmt(gy,3), padL-6, sy(gy)); }
+    var xt=q.type==='loglog'?'log₁₀ ( x )':('x'+(q.xunit?(' / '+q.xunit):''));
+    var yt=q.type==='lnlin'?'ln ( y )':'log₁₀ ( y )';
+    drawAxisTitlesL(xt,yt,padL,padT,plotW,plotH);
+    lctx.save(); lctx.beginPath(); lctx.rect(padL,padT,plotW,plotH); lctx.clip();
+    lctx.strokeStyle='#0e8c86'; lctx.lineWidth=2.6;
+    lctx.beginPath(); lctx.moveTo(sx(X0),sy(s*X0+ic)); lctx.lineTo(sx(X1),sy(s*X1+ic)); lctx.stroke();
+    if(q.kind==='read'){
+      var yv=s*q.x0+ic;
+      lctx.setLineDash([6,4]); lctx.strokeStyle='#d6336c'; lctx.lineWidth=1.4;
+      lctx.beginPath(); lctx.moveTo(sx(q.x0),sy(Y0)); lctx.lineTo(sx(q.x0),sy(yv)); lctx.lineTo(sx(X0),sy(yv)); lctx.stroke();
+      lctx.setLineDash([]);
+      lctx.beginPath(); lctx.arc(sx(q.x0),sy(yv),4,0,2*Math.PI); lctx.fillStyle='#d6336c'; lctx.fill();
+    }
+    lctx.restore();
+  }
+  function drawLogScale(q){
+    var padL=70, padR=18, padT=16, padB=52;
+    var plotW=lW-padL-padR, plotH=lH-padT-padB;
+    var xlog=(q.type==='loglogaxis');
+    var yAt=function(x){ return xlog ? q.A*Math.pow(x,q.n) : q.A*Math.pow(10,q.b*x); };
+    var y1=yAt(q.xmin), y2=yAt(q.xmax);
+    var ymin=Math.min(y1,y2), ymax=Math.max(y1,y2);
+    var eLo=Math.floor(Math.log10(ymin)-1e-9), eHi=Math.ceil(Math.log10(ymax)+1e-9);
+    if(eHi-eLo<1) eHi=eLo+1;
+    var xeLo,xeHi,axX=null;
+    if(xlog){ xeLo=Math.floor(Math.log10(q.xmin)-1e-9); xeHi=Math.ceil(Math.log10(q.xmax)+1e-9); if(xeHi-xeLo<1)xeHi=xeLo+1; }
+    else { axX=niceAxis(q.xmin,q.xmax); }
+    function sy(y){ return padT+(1-(Math.log10(y)-eLo)/(eHi-eLo))*plotH; }
+    function sx(x){ return xlog ? padL+(Math.log10(x)-xeLo)/(xeHi-xeLo)*plotW : padL+(x-axX.lo)/(axX.hi-axX.lo)*plotW; }
+    lctx.clearRect(0,0,lW,lH); lctx.fillStyle='#fff'; lctx.fillRect(0,0,lW,lH);
+    var e,f;
+    lctx.lineWidth=1;
+    for(e=eLo;e<eHi;e++){ for(f=2;f<=9;f++){ var Y=sy(f*Math.pow(10,e)); lctx.strokeStyle='#eef3f4'; lctx.beginPath(); lctx.moveTo(padL,Y); lctx.lineTo(padL+plotW,Y); lctx.stroke(); } }
+    for(e=eLo;e<=eHi;e++){ var Ym=sy(Math.pow(10,e)); lctx.strokeStyle='#cdd9dd'; lctx.beginPath(); lctx.moveTo(padL,Ym); lctx.lineTo(padL+plotW,Ym); lctx.stroke();
+      lctx.fillStyle='#42505c'; lctx.font='11px ui-monospace,monospace'; lctx.textAlign='right'; lctx.textBaseline='middle'; lctx.fillText(decadeLabel(e), padL-6, Ym); }
+    if(xlog){
+      for(e=xeLo;e<xeHi;e++){ for(f=2;f<=9;f++){ var Xx=sx(f*Math.pow(10,e)); lctx.strokeStyle='#eef3f4'; lctx.beginPath(); lctx.moveTo(Xx,padT); lctx.lineTo(Xx,padT+plotH); lctx.stroke(); } }
+      for(e=xeLo;e<=xeHi;e++){ var Xm=sx(Math.pow(10,e)); lctx.strokeStyle='#cdd9dd'; lctx.beginPath(); lctx.moveTo(Xm,padT); lctx.lineTo(Xm,padT+plotH); lctx.stroke();
+        lctx.fillStyle='#42505c'; lctx.font='11px ui-monospace,monospace'; lctx.textAlign='center'; lctx.textBaseline='top'; lctx.fillText(decadeLabel(e), Xm, padT+plotH+6); }
+    } else {
+      var gx;
+      lctx.strokeStyle='#e6eef0';
+      for(gx=axX.lo; gx<=axX.hi+1e-9; gx+=axX.step/5){ lctx.beginPath(); lctx.moveTo(sx(gx),padT); lctx.lineTo(sx(gx),padT+plotH); lctx.stroke(); }
+      lctx.strokeStyle='#cdd9dd';
+      for(gx=axX.lo; gx<=axX.hi+1e-9; gx+=axX.step){ lctx.beginPath(); lctx.moveTo(sx(gx),padT); lctx.lineTo(sx(gx),padT+plotH); lctx.stroke();
+        lctx.fillStyle='#42505c'; lctx.font='11px ui-monospace,monospace'; lctx.textAlign='center'; lctx.textBaseline='top'; lctx.fillText(fmt(gx,3), sx(gx), padT+plotH+6); }
+    }
+    lctx.strokeStyle='#16222c'; lctx.lineWidth=1.5;
+    lctx.beginPath(); lctx.moveTo(padL,padT); lctx.lineTo(padL,padT+plotH); lctx.lineTo(padL+plotW,padT+plotH); lctx.stroke();
+    var xt=(xlog?('x'+(q.xunit?(' / '+q.xunit):'')+'  (log scale)'):('x'+(q.xunit?(' / '+q.xunit):'')));
+    var yt='y'+(q.yunit?(' / '+q.yunit):'')+'  (log scale)';
+    drawAxisTitlesL(xt,yt,padL,padT,plotW,plotH);
+    lctx.save(); lctx.beginPath(); lctx.rect(padL,padT,plotW,plotH); lctx.clip();
+    lctx.strokeStyle='#0e8c86'; lctx.lineWidth=2.6; lctx.beginPath();
+    var N=80,i;
+    for(i=0;i<=N;i++){ var xx=q.xmin+(q.xmax-q.xmin)*i/N; if(xx<=0)xx=1e-9; var py=sy(yAt(xx)), px=sx(xx); if(i===0)lctx.moveTo(px,py); else lctx.lineTo(px,py); }
+    lctx.stroke();
+    if(q.kind==='readY'){ var yv=yAt(q.x0);
+      lctx.setLineDash([6,4]); lctx.strokeStyle='#d6336c'; lctx.lineWidth=1.4;
+      lctx.beginPath(); lctx.moveTo(sx(q.x0),padT+plotH); lctx.lineTo(sx(q.x0),sy(yv)); lctx.lineTo(padL,sy(yv)); lctx.stroke(); lctx.setLineDash([]);
+      lctx.beginPath(); lctx.arc(sx(q.x0),sy(yv),4,0,2*Math.PI); lctx.fillStyle='#d6336c'; lctx.fill();
+    }
+    lctx.restore();
+  }
+  function drawLog(){
+    var q=curQ(); if(!q) return;
+    if(q.type==='logyaxis'||q.type==='loglogaxis') drawLogScale(q); else drawLinearLog(q);
+  }
+  function showQuestion(){
+    var q=curQ(); qAnswered=false;
+    $('ugt-q-counter').textContent='Graph '+(qPos+1)+' of '+QBANK.length;
+    $('ugt-q-score').textContent='Score '+qScore+' / '+QBANK.length;
+    $('ugt-q-tag').innerHTML='<b>'+qLogLabel(q)+'</b> — underlying relationship '+qRelation(q)+'.';
+    $('ugt-q-prompt').innerHTML=qPromptText(q);
+    $('ugt-q-unit').textContent=qUnitHint(q);
+    $('ugt-q-input').value='';
+    $('ugt-q-feedback').innerHTML='';
+    sizeLog(); drawLog();
+  }
+  function checkQuestion(){
+    if(qAnswered) return;
+    var q=curQ(), ans=qAnswer(q), tol=qTol(q);
+    var raw=$('ugt-q-input').value;
+    if(raw===''){ $('ugt-q-feedback').innerHTML='<div class="ugt-step">Type your read-off value first.</div>'; return; }
+    var ok=Math.abs(num(raw)-ans)<=tol;
+    qAnswered=true;
+    if(ok){ qScore++; $('ugt-q-score').textContent='Score '+qScore+' / '+QBANK.length;
+      $('ugt-q-feedback').innerHTML='<span class="ugt-tag ugt-tag-good">Correct — within tolerance.</span><div class="ugt-step">'+qExplain(q)+'</div>';
+    } else {
+      $('ugt-q-feedback').innerHTML='<span class="ugt-tag ugt-tag-warn">Not quite — accepted answer ≈ '+fmt(ans,3)+'.</span><div class="ugt-step">'+qExplain(q)+'</div>';
+    }
+  }
+  function revealQuestion(){ var q=curQ(); qAnswered=true; $('ugt-q-feedback').innerHTML='<div class="ugt-step">Answer ≈ <b>'+fmt(qAnswer(q),3)+'</b>. '+qExplain(q)+'</div>'; }
+  function nextQuestion(){ qPos=(qPos+1)%QBANK.length; showQuestion(); }
+  $('ugt-q-check').addEventListener('click', checkQuestion);
+  $('ugt-q-reveal').addEventListener('click', revealQuestion);
+  $('ugt-q-next').addEventListener('click', nextQuestion);
+  function initLogs(){ qOrder=shuffle(QBANK.map(function(_,i){return i;})); qPos=0; qScore=0; calcLogQuick(); calcLogUnc(); showQuestion(); }
+
+  /* ---- board switching ---- */
+  function applyBoard(b){
+    boardMode = b;
+    root.querySelectorAll('.ugt-board-btn').forEach(function(x){
+      var on=x.getAttribute('data-board')===b;
+      x.classList.toggle('ugt-active',on); x.setAttribute('aria-pressed',on?'true':'false');
+    });
+    renderSingleOptions(); calcSingle();
+    $('ugt-rp-note').innerHTML = (b==='wjec')
+      ? 'WJEC: quote the uncertainty to a maximum of <b>2 significant figures</b>, and give the absolute uncertainty to the <b>same number of decimal places as the mean</b>.'
+      : (b==='ocr')
+      ? 'OCR: quote the absolute uncertainty to <b>1 significant figure</b> (percentage uncertainties to 1 s.f. or the nearest whole number), and write the value to the <b>same number of decimal places</b> as its uncertainty.'
+      : (b==='edx')
+      ? 'Edexcel: quote the uncertainty to <b>1 or 2 significant figures</b> with the value to the same decimal place. Accuracy is judged by the percentage difference from the accepted value below — <b>under 5%</b> indicates an accurate result.'
+      : 'AQA: quote the uncertainty to <b>1 significant figure</b>, and give the value to the same number of decimal places.';
+    calcComb(); calcSum(); calcReport(); calcRepeat();
+    var luCard=$('ugt-lu-card'); if(luCard){ luCard.style.display = (b==='ocr') ? '' : 'none'; }
+    $('ugt-g-method').innerHTML = (b==='wjec')
+      ? 'WJEC method: a line of <b>maximum</b> and a line of <b>minimum</b> gradient, both through the centroid (x̄, ȳ) — each the steepest/shallowest that still passes through <b>every</b> error bar, so the limiting points emerge automatically. gradient = (m_max + m_min)/2 ± (m_max − m_min)/2. Drag to adjust (pivots on the centroid).'
+      : (b==='ocr'?'OCR':b==='edx'?'Edexcel':'AQA')+' method: the <b>best-fit</b> line plus one <b>worst</b> line — the steepest or shallowest that still threads <b>every</b> error bar (whichever deviates more). % uncertainty = |best − worst| ÷ best × 100%. Drag either line by its handles.'+(b==='edx'?' (Edexcel does not formally require error bars and also judges accuracy by percentage difference — see Reporting.)':'');
+    $('ugt-show-worst-lab').textContent = (b==='wjec') ? 'Show max & min lines' : 'Show best & worst lines';
+    $('ugt-fit-best').style.display = (b==='wjec') ? 'none' : '';
+    $('ugt-fit-worst').textContent = (b==='wjec') ? 'Suggest max & min lines' : 'Suggest worst line';
+    resetLines();
+    if(root.querySelector('.ugt-panel[data-panel="graph"]').classList.contains('ugt-active')){ sizePlot(); }
+    drawPlot(); updateGraphReadout();
+  }
+
+  /* ---------- init ---------- */
+  makeSamples();
+  calcRepeat();
+  buildPresetMenu();
+  var defIdx = 13; // Pendulum (g)
+  $('ugt-c-preset').value = String(defIdx);
+  loadPreset(PRESETS[defIdx]);
+  applyWork();
+  renderSum(); calcSum();
+  renderDataTable();
+  ['ugt-xlab','ugt-xunit','ugt-ylab','ugt-yunit'].forEach(function(id){ $(id).addEventListener('input', function(){ drawPlot(); updateGraphReadout(); }); });
+  ['ugt-sr-val','ugt-sr-res'].forEach(function(id){ $(id).addEventListener('input', calcSingle); });
+  $('ugt-sr-rule').addEventListener('change', calcSingle);
+  root.querySelectorAll('.ugt-board-btn').forEach(function(b){ b.addEventListener('click', function(){ applyBoard(b.getAttribute('data-board')); }); });
+  applyBoard('wjec');
+  calcReport(); calcPctDiff();
+  initLogs();
+
+  // ResizeObserver for canvases
+  var ro = new ResizeObserver(function(){
+    sizeTarget();
+    if(root.querySelector('.ugt-panel[data-panel="graph"]').classList.contains('ugt-active')){ sizePlot(); drawPlot(); }
+    if(root.querySelector('.ugt-panel[data-panel="logs"]').classList.contains('ugt-active')){ sizeLog(); drawLog(); }
+  });
+  ro.observe(root);
+  // initial sizing (deferred so layout settles)
+  setTimeout(function(){ sizeTarget(); }, 30);
+})();
+</script>
+
+
+</main></div></div></body></html>
