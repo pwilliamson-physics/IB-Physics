@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motion in Electromagnetic Fields — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e;
+    --teal:#0e7c86;
+    --teal-dark:#0a5b62;
+    --amber:#d98324;
+    --soft-blue:#eaf3fb;
+    --soft-amber:#fdf1e2;
+    --soft-green:#eaf7ee;
+    --soft-grey:#f4f6f8;
+    --line:#b9c6d3;
+    --ink:#1f2933;
+    --border:#d7e0e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:#f7f9fb;
+    line-height:1.55;
+    font-size:16.5px;
+  }
+  .layout{display:flex; min-height:100vh;}
+  nav.sidebar{
+    width:250px; flex-shrink:0; background:var(--navy); color:#fff;
+    padding:1.25rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{
+    display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem;
+    padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;
+  }
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{
+    display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem;
+    padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;
+  }
+  main{flex:1; max-width:900px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{
+    background:linear-gradient(135deg,var(--navy),var(--teal-dark));
+    color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;
+  }
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+
+  section.topic{
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    padding:1.8rem 2rem; margin-bottom:1.6rem;
+  }
+  section.topic h2{
+    color:var(--navy); font-size:1.4rem; margin-top:0;
+    border-bottom:3px solid var(--amber); padding-bottom:0.4rem;
+  }
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+  .goals{
+    background:var(--soft-blue); border-left:4px solid var(--teal); border-radius:6px;
+    padding:0.9rem 1.1rem; font-size:0.92rem;
+  }
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  .keybox{
+    background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px;
+    padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;
+  }
+  .keybox strong{color:var(--navy);}
+  .eqn{
+    background:#fff; border:1px solid #c7ddef; border-radius:6px;
+    padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center;
+    font-family:"Cambria Math",Cambria,Georgia,serif;
+  }
+  .keyword{
+    background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px;
+    padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;
+  }
+  .keyword b{color:var(--amber);}
+
+  .example{
+    background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px;
+    padding:0.9rem 1.1rem; margin:1rem 0;
+  }
+  .example .tag{
+    display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem;
+    font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px;
+    margin-bottom:0.5rem; text-transform:uppercase;
+  }
+
+  .question{
+    background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
+    padding:1rem 1.2rem; margin:1.1rem 0;
+  }
+  .question .qnum{
+    display:inline-block; background:var(--navy); color:#fff; font-weight:700;
+    font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center;
+    border-radius:50%; margin-right:0.5rem;
+  }
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+
+  .reveal-btn{
+    background:var(--teal); color:#fff; border:none; border-radius:6px;
+    padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;
+  }
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{
+    display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px;
+    padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;
+  }
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:520px;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  /* ---------- predict-the-path quiz widget ---------- */
+  .pathquiz{
+    background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
+    padding:1rem 1.2rem; margin:1.3rem 0;
+  }
+  .pathquiz .qnum{
+    display:inline-block; background:var(--navy); color:#fff; font-weight:700;
+    font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center;
+    border-radius:50%; margin-bottom:0.5rem;
+  }
+  .pathquiz-figure{max-width:320px; margin:0.3rem auto 0.9rem auto;}
+  .pathquiz-prompt{margin:0 0 0.7rem 0; font-size:0.96rem;}
+  .pathquiz-options{display:flex; gap:1.3rem; flex-wrap:wrap; justify-content:center; margin:0.6rem 0;}
+  .pathquiz-options label{display:flex; align-items:center; gap:0.35rem; font-weight:600; cursor:pointer; font-size:0.95rem;}
+  .pathquiz-options input{width:16px; height:16px;}
+  .pathquiz-feedback{text-align:center; font-weight:600; margin-top:0.6rem; min-height:1.3em; font-size:0.92rem;}
+  .pathquiz-feedback.correct{color:#237a41;}
+  .pathquiz-feedback.incorrect{color:#a4222a;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  .sim-embed{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0;
+  }
+  .sim-embed p.instructions{margin:0 0 0.6rem 0;}
+  .sim-print-note{display:none;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .fab{
+    position:fixed; right:1.6rem; bottom:1.6rem; background:var(--amber); color:#fff;
+    border:none; border-radius:50px; padding:0.85rem 1.4rem; font-size:0.98rem;
+    font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.25); cursor:pointer; z-index:100;
+  }
+  .fab:hover{background:#c0721c;}
+  .toolbar{
+    position:fixed; right:1.6rem; bottom:5.3rem; z-index:100; display:flex; flex-direction:column; gap:0.5rem;
+  }
+  .toolbar button{
+    background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px;
+    padding:0.55rem 1.1rem; font-size:0.82rem; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.12);
+  }
+  .toolbar button:hover{background:var(--soft-blue);}
+
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  @media print{
+    nav.sidebar, .fab, .toolbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .pathquiz{page-break-inside:avoid;}
+    .pathquiz-feedback{display:none !important;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Motion in Electromagnetic Fields</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Conventional current vs electron flow</a>
+    <a href="#s2">2. Motion in a uniform electric field</a>
+    <a href="#s3">3. Motion in a uniform magnetic field</a>
+    <a href="#s4">4. Predict the path — quiz</a>
+    <a href="#s5">5. Crossed E and B fields</a>
+    <a href="#s6">6. Force on a current-carrying conductor</a>
+    <a href="#s7">7. Force between parallel wires</a>
+    <a href="#s8">8. Equation summary</a>
+    <a href="#s9">9. Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Motion in Electromagnetic Fields</h1>
+      <p class="sub">Student Workbook — Unit D.3</p>
+      <div class="goals" style="margin-top:1.3rem; background:rgba(255,255,255,0.12); border-left-color:#fff; color:#fff;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Explain the difference between conventional current and the actual flow of electrons.</li>
+          <li>Describe and calculate the parabolic motion of a charged particle in a uniform electric field.</li>
+          <li>Describe and calculate the circular (or helical) motion of a charged particle in a uniform magnetic field, using F = qvB sinθ and r = mv/qB.</li>
+          <li>Predict the direction of the magnetic force on a moving charge using Fleming's left-hand rule.</li>
+          <li>Describe the motion of a charged particle in perpendicular (crossed) electric and magnetic fields, including the velocity selector condition.</li>
+          <li>Calculate the force on a current-carrying conductor in a magnetic field, F = BIL sinθ.</li>
+          <li>Calculate the force per unit length between two parallel current-carrying wires.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label>
+        <input class="fill" placeholder="Type your name…">
+      </div>
+      <p class="meta">This workbook builds directly on <em>Electric &amp; Magnetic Fields</em> (Workbook 1) and <em>Millikan's Oil-Drop Experiment</em> (Workbook 2). It covers IB DP Physics Topic D.3: Motion in electromagnetic fields.</p>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Conventional current vs. the flow of electrons</h2>
+      <p>Before you can predict the direction of any magnetic force in this workbook, you need to be completely secure on one distinction: <b>conventional current</b> and the <b>actual flow of electrons</b> point in <em>opposite</em> directions in an ordinary metal wire.</p>
+
+      <div class="keybox">
+        <strong>Conventional current</strong> is defined as the direction that <em>positive</em> charge flows, or would flow — from the positive terminal of a supply, through the external circuit, to the negative terminal. This convention was fixed in the 18th century (by Benjamin Franklin, among others), long before anyone knew what was actually moving inside a wire.
+      </div>
+      <div class="keybox">
+        <strong>Electron flow</strong> is what is actually happening physically in a metal: free (delocalised) electrons drift from the negative terminal, through the wire, to the positive terminal — the exact opposite direction to conventional current.
+      </div>
+
+      <div class="keyword">
+        <b>Why does this matter here?</b> Every force rule you will use in this workbook — Fleming's left-hand rule, F = BIL sinθ, the force between parallel wires — is defined in terms of <em>conventional current</em>, not electron flow. If you forget to flip the direction when the charge carriers are electrons (as they are in a wire, or in an electron beam such as the deflection tube later in this workbook), you will predict the force in exactly the wrong direction.
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;">
+          <rect x="10" y="45" width="320" height="14" rx="7" fill="#d7e0e8"/>
+          <text x="170" y="20" font-size="13" text-anchor="middle" fill="#173a5e" font-weight="700">Conventional current, I</text>
+          <line x1="60" y1="35" x2="280" y2="35" stroke="#c0392b" stroke-width="2.4" marker-end="url(#pfArrow)"/>
+          <text x="170" y="98" font-size="13" text-anchor="middle" fill="#0e7c86" font-weight="700">Electron flow</text>
+          <line x1="280" y1="80" x2="60" y2="80" stroke="#0e7c86" stroke-width="2.4" marker-end="url(#pfArrowB)"/>
+          <circle cx="20" cy="52" r="14" fill="none" stroke="#173a5e" stroke-width="2"/>
+          <text x="20" y="57" font-size="14" text-anchor="middle" font-weight="700" fill="#173a5e">+</text>
+          <circle cx="320" cy="52" r="14" fill="none" stroke="#173a5e" stroke-width="2"/>
+          <text x="320" y="57" font-size="14" text-anchor="middle" font-weight="700" fill="#173a5e">−</text>
+          <defs>
+            <marker id="pfArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#c0392b"/></marker>
+            <marker id="pfArrowB" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0e7c86"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Conventional current flows from + to −; the electrons that actually carry the charge in a metal wire drift from − to +, the opposite way.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>A wire carries a conventional current of 2.0 A from left to right. State the direction of drift of the free electrons in the wire.</p>
+        <p><strong>Answer:</strong> Electrons drift <strong>right to left</strong> — the exact opposite direction to the stated conventional current, because the electrons are negatively charged.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>An electron beam inside a cathode-ray tube travels from the cathode (left) to the screen (right).</strong> State the direction of the equivalent conventional current, and explain your reasoning.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a1')">Show answer</button>
+        <div class="answer-panel" id="a1">The conventional current points from the screen back to the cathode (right to left) — opposite to the electrons' actual motion — because conventional current is defined as the direction of flow of positive charge, and the electrons are negative.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>Explain why the direction used in Fleming's left-hand rule ("current") is not always the direction the charge carriers are actually moving.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a2')">Show answer</button>
+        <div class="answer-panel" id="a2">Fleming's left-hand rule is defined using conventional current — the direction positive charge flows. When the actual charge carriers are electrons (as in a metal wire or an electron beam), the physical particles move in the opposite direction to the "current" arrow used in the rule. You must use the conventional-current direction in the rule itself, even though it is not the direction the electrons are really travelling.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Motion in a uniform electric field</h2>
+      <p>A charged particle sitting <em>still</em> in a uniform electric field simply accelerates in a straight line, along (or against) the field direction, exactly like a mass falling under gravity. Things get more interesting — and much more useful — when the particle enters the field already moving <em>across</em> it.</p>
+
+      <div class="keybox">
+        A charged particle that enters a uniform electric field moving <strong>perpendicular</strong> to the field experiences a constant sideways force (F = qE) the whole time it is in the field, while its forward velocity stays constant (there is no field component in that direction). The result is <strong>parabolic motion</strong> — mathematically identical to horizontal projectile motion under gravity, with the electric force playing the role of weight.
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;">
+          <rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.8"/>
+          <text x="8" y="27" font-size="13" fill="#c0392b">+</text>
+          <rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.8"/>
+          <text x="8" y="184" font-size="13" fill="#2f6fa8">−</text>
+          <line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#pfV)"/>
+          <line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#pfV)"/>
+          <line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#pfV)"/>
+          <line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#pfV)"/>
+          <line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#pfV)"/>
+          <path d="M 24 100 L 60 100 Q 160 100 284 45" stroke="#173a5e" stroke-width="2.6" fill="none" marker-end="url(#pfEnd)"/>
+          <circle cx="24" cy="100" r="7" fill="#173a5e"/>
+          <text x="24" y="92" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text>
+          <defs>
+            <marker id="pfV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+            <marker id="pfEnd" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D3.1 — An electron entering a uniform field between charged plates follows a parabolic path, curving towards the positive plate.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1 (Hodder D3.1/D3.2)</span>
+        <p>An electron travelling at 3.0 × 10⁶ m s⁻¹ enters, moving parallel to the plates, a uniform electric field of strength 4.0 × 10⁴ N C⁻¹ between two parallel plates 6.0 cm long. Calculate (a) the force on the electron, (b) its acceleration, (c) the time spent between the plates, (d) its vertical deflection by the time it leaves the field. (e = 1.60 × 10⁻¹⁹ C, m<sub>e</sub> = 9.11 × 10⁻³¹ kg)</p>
+        <p><strong>Answer:</strong> (a) F = Eq = (4.0×10⁴)(1.60×10⁻¹⁹) = 6.4×10⁻¹⁵ N. (b) a = F/m = (6.4×10⁻¹⁵)/(9.11×10⁻³¹) = 7.0×10¹⁵ m s⁻². (c) t = d/v = (0.060)/(3.0×10⁶) = 2.0×10⁻⁸ s. (d) y = ½at² = ½(7.0×10¹⁵)(2.0×10⁻⁸)² = <strong>1.4×10⁻³ m (1.4 mm)</strong>.</p>
+      </div>
+
+      <h3>Particle beams and the electron deflection tube</h3>
+      <p>This is exactly the physics used inside an <strong>electron deflection tube</strong> (Fig. D3.4 in Hodder): electrons are released from a heated cathode (thermionic emission), accelerated towards a positively-charged anode, and then pass between a pair of deflecting plates before striking a fluorescent screen. A voltage across the plates creates the uniform field that deflects the beam — exactly the parabolic motion above. You will meet a live, interactive version of this apparatus later in this workbook (Section 5).</p>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>A proton enters the same field as Worked Example 2.1 (magnitude 4.0 × 10⁴ N C⁻¹, same plate length), also at 3.0 × 10⁶ m s⁻¹, with the top plate positive.</strong> State, with a reason, whether the proton deflects towards the same plate as the electron did, or the opposite one.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a3')">Show answer</button>
+        <div class="answer-panel" id="a3">The opposite plate. The force on a charge in a field is F = qE, acting along the field direction for a positive charge and against it for a negative charge. The electron (negative) was pushed towards the positive plate; the proton (positive) is pushed towards the negative plate — the two charges always deflect towards opposite plates in the same field.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>An electron enters a uniform electric field of strength 2.5 × 10⁴ N C⁻¹ moving at 5.0 × 10⁶ m s⁻¹, parallel to plates 4.0 cm long.</strong> Calculate its vertical deflection as it leaves the field.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a4')">Show hint</button>
+        <div class="answer-panel" id="a4">Hint: follow the same four steps as Worked Example 2.1 — force (F = Eq), acceleration (a = F/m), time in the field (t = d/v), then vertical deflection (y = ½at²). You should get a deflection of about 1.4 mm.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>Explain why the horizontal velocity of the charged particle stays constant throughout its passage through the field, even though it deflects vertically.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a5')">Show answer</button>
+        <div class="answer-panel" id="a5">The electric field, and therefore the electric force, points only vertically (perpendicular to the plates). There is no component of force along the original direction of travel, so — just as in projectile motion — the horizontal velocity is completely unaffected and remains constant, while only the vertical velocity changes.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Motion in a uniform magnetic field</h2>
+      <p>A charged particle moving through a magnetic field experiences a force whose size depends on the particle's charge, speed, the field strength, and the angle between its velocity and the field.</p>
+
+      <div class="eqn">F = qvB sinθ</div>
+      <div class="keybox">
+        <strong>F</strong> = magnetic force (N) · <strong>q</strong> = charge (C) · <strong>v</strong> = speed (m s⁻¹) · <strong>B</strong> = magnetic field strength (T) · <strong>θ</strong> = angle between the velocity and the field.
+      </div>
+
+      <h3>Direction: Fleming's left-hand rule</h3>
+      <p>The direction of the force is always <strong>perpendicular to both the velocity and the field</strong> — found using Fleming's left-hand rule.</p>
+      <figure>
+        <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;">
+          <line x1="230" y1="255" x2="230" y2="75" stroke="#173a5e" stroke-width="3" marker-end="url(#flF)"/>
+          <text x="230" y="40" font-size="13" font-weight="700" fill="#173a5e" text-anchor="middle">F — force leading to</text>
+          <text x="230" y="56" font-size="13" font-weight="700" fill="#173a5e" text-anchor="middle">motion (thuMb)</text>
+          <line x1="230" y1="255" x2="370" y2="165" stroke="#0e7c86" stroke-width="3" marker-end="url(#flI)"/>
+          <text x="370" y="132" font-size="13" font-weight="700" fill="#0e7c86" text-anchor="middle">Magnetic field</text>
+          <text x="370" y="148" font-size="13" font-weight="700" fill="#0e7c86" text-anchor="middle">(First finger)</text>
+          <line x1="230" y1="255" x2="90" y2="120" stroke="#b8860b" stroke-width="3" marker-end="url(#flB)"/>
+          <text x="90" y="88" font-size="13" font-weight="700" fill="#b8860b" text-anchor="middle">Current</text>
+          <text x="90" y="104" font-size="13" font-weight="700" fill="#b8860b" text-anchor="middle">(seCond finger)</text>
+          <circle cx="230" cy="255" r="5" fill="#1f2933"/>
+          <defs>
+            <marker id="flF" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/></marker>
+            <marker id="flI" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0e7c86"/></marker>
+            <marker id="flB" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#b8860b"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D3.6 — Fleming's left-hand rule</figcaption>
+      </figure>
+
+      <div class="keyword">
+        <b>Remember Section 1:</b> the "current" finger in Fleming's rule always points along <em>conventional</em> current. For a beam of electrons, that means pointing your second finger <em>opposite</em> to the electrons' actual direction of travel before applying the rule.
+      </div>
+
+      <h3>Why the path is circular</h3>
+      <p>Because the magnetic force is always perpendicular to the velocity, it never does any work on the particle — the particle's <strong>speed stays constant</strong>, and the force simply acts as a centripetal force, continuously changing direction. This produces uniform <strong>circular motion</strong>, with radius:</p>
+
+      <figure>
+        <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;">
+          <g font-size="15" fill="#5b6b78">
+            <text x="60" y="55">×</text><text x="110" y="55">×</text><text x="160" y="55">×</text><text x="210" y="55">×</text><text x="260" y="55">×</text>
+            <text x="60" y="105">×</text><text x="110" y="105">×</text><text x="160" y="105">×</text><text x="210" y="105">×</text><text x="260" y="105">×</text>
+            <text x="60" y="155">×</text><text x="110" y="155">×</text><text x="160" y="155">×</text><text x="210" y="155">×</text><text x="260" y="155">×</text>
+            <text x="60" y="205">×</text><text x="110" y="205">×</text><text x="160" y="205">×</text><text x="210" y="205">×</text><text x="260" y="205">×</text>
+            <text x="60" y="250">×</text><text x="110" y="250">×</text><text x="160" y="250">×</text><text x="210" y="250">×</text><text x="260" y="250">×</text>
+          </g>
+          <circle cx="160" cy="150" r="90" fill="none" stroke="#b9c6d3" stroke-width="2" stroke-dasharray="6 4"/>
+          <circle cx="160" cy="150" r="3" fill="#1f2933"/>
+          <!-- entry point: bottom, moving right -->
+          <circle cx="160" cy="240" r="6" fill="#173a5e"/>
+          <text x="160" y="264" font-size="13" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text>
+          <line x1="160" y1="240" x2="195" y2="240" stroke="#173a5e" stroke-width="2.4" marker-end="url(#cmV)"/>
+          <line x1="160" y1="240" x2="160" y2="210" stroke="#c0392b" stroke-width="2.4" marker-end="url(#cmF)"/>
+          <text x="200" y="236" font-size="13" font-weight="700" fill="#173a5e">v</text>
+          <text x="167" y="222" font-size="13" font-weight="700" fill="#c0392b">F</text>
+          <!-- point 2: upper left -->
+          <circle cx="82.1" cy="105" r="6" fill="#173a5e"/>
+          <line x1="82.1" y1="105" x2="64.6" y2="135.3" stroke="#173a5e" stroke-width="2.4" marker-end="url(#cmV)"/>
+          <line x1="82.1" y1="105" x2="108.0" y2="120" stroke="#c0392b" stroke-width="2.4" marker-end="url(#cmF)"/>
+          <!-- point 3: upper right -->
+          <circle cx="237.9" cy="105" r="6" fill="#173a5e"/>
+          <line x1="237.9" y1="105" x2="220.4" y2="74.7" stroke="#173a5e" stroke-width="2.4" marker-end="url(#cmV)"/>
+          <line x1="237.9" y1="105" x2="212.0" y2="120" stroke="#c0392b" stroke-width="2.4" marker-end="url(#cmF)"/>
+          <defs>
+            <marker id="cmV" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+            <marker id="cmF" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D3.7 — An electron travelling through a uniform magnetic field directed into the page (×). At every point on the path, the magnetic force <span style="color:#c0392b;font-weight:700;">F</span> points towards the centre (it is centripetal), always perpendicular to the velocity <span style="color:#173a5e;font-weight:700;">v</span>, which is always tangential. Because F only ever changes the particle's direction and never its speed, the path traced out is a perfect circle.</figcaption>
+      </figure>
+
+      <div class="eqn">r = mv / (qB)</div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1 (Hodder D3.4)</span>
+        <p>An electron travelling at 2.0 × 10⁶ m s⁻¹ enters a uniform magnetic field of 0.030 T, perpendicular to the field. Calculate the radius of its circular path. (m<sub>e</sub> = 9.11×10⁻³¹ kg, e = 1.60×10⁻¹⁹ C)</p>
+        <p><strong>Answer:</strong> r = mv/(qB) = (9.11×10⁻³¹ × 2.0×10⁶)/(1.60×10⁻¹⁹ × 0.030) = <strong>3.8×10⁻⁴ m</strong>.</p>
+      </div>
+
+      <p>If the particle's velocity is <em>not</em> exactly perpendicular to the field, only the perpendicular component of velocity produces circular motion; the parallel component is unaffected (there is no force along the field direction, since sinθ = 0 for that component). The combination produces a <strong>helical</strong> (corkscrew) path that spirals along the field direction.</p>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>A proton moving at 1.5 × 10⁶ m s⁻¹ enters a uniform magnetic field of 0.50 T, travelling perpendicular to the field.</strong> Calculate the radius of its circular path. (m<sub>p</sub> = 1.67×10⁻²⁷ kg)
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a6')">Show hint</button>
+        <div class="answer-panel" id="a6">Hint: substitute directly into r = mv/(qB), using q = 1.60×10⁻¹⁹ C. You should get roughly 3.1×10⁻² m.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>A charged particle moves through a magnetic field at an angle of 30° to the field lines (rather than perpendicular to them).</strong> Describe the shape of its path, and explain why it is not a simple circle.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a7')">Show answer</button>
+        <div class="answer-panel" id="a7">The path is a helix (a 3-D spiral). The component of velocity perpendicular to B produces circular motion in the plane perpendicular to the field, while the component of velocity parallel to B experiences no force (sinθ = 0 for that component) and continues at constant velocity along the field direction. The combination of steady circular motion and steady straight-line motion traces out a helix.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>A physicist measures the radius of a charged particle's circular path in a known magnetic field, and also measures its speed independently.</strong> Show how these measurements could be combined to find the particle's charge-to-mass ratio, q/m.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a8')">Show answer</button>
+        <div class="answer-panel" id="a8">Rearranging r = mv/(qB) gives q/m = v/(Br). This is essentially the method J. J. Thomson used to measure the charge-to-mass ratio of the electron in 1897, using a tube very similar to the deflection tube you will use in Section 5.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>Derive the equation r = mv/(qB) from first principles, starting from F = qvB sinθ.</strong> (Hint: think about what provides the centripetal force for the circular motion, and remember that for circular motion at perpendicular incidence, θ = 90°.)
+        <textarea class="answer-lines long" rows="6" placeholder="Type your derivation here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a9')">Show answer</button>
+        <div class="answer-panel" id="a9">For circular motion, the magnetic force provides the centripetal force, so we can set the two expressions for force equal to each other: qvB sinθ = mv²/r. Since the particle moves perpendicular to the field, θ = 90° and sinθ = 1, giving qvB = mv²/r. Dividing both sides by v gives qB = mv/r. Rearranging to make r the subject: r = mv/(qB).</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Predict the path — quiz</h2>
+      <p>For each diagram below, a charged particle enters a field region moving to the right. Three possible paths are drawn — <span style="color:#c0392b;font-weight:700;">A (red)</span>, <span style="color:#0e7c86;font-weight:700;">B (teal)</span> and <span style="color:#b8860b;font-weight:700;">C (gold, straight)</span>. Select the path you think the particle actually follows, then check your answer. Work through Fleming's left-hand rule (Section 3) and F = qvB sinθ each time — don't just guess from the shape of the curve!</p>
+      <div class="keyword"><b>Reminder:</b> × means the field points <em>into</em> the page; • means the field points <em>out of</em> the page. Arrows in a row (→→→) show a field lying <em>in</em> the page, parallel to the direction shown.</div>
+
+      <div class="pathquiz">
+        <span class="qnum">10</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 29.1 99.9 L 34.2 99.4 L 39.2 98.7 L 44.2 97.7 L 49.2 96.4 L 54.0 94.8 L 58.8 93.0 L 63.5 90.9 L 68.0 88.5 L 72.4 85.9 L 76.6 83.0 L 80.6 79.9 L 84.5 76.6 L 88.2 73.1 L 91.7 69.3 L 94.9 65.4 L 97.9 61.3 L 100.7 57.0 L 103.3 52.6 L 105.6 48.0 L 107.6 43.4 L 109.3 38.6 L 110.8 33.7 L 112.0 28.7" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="126.0332840660425" cy="28.71205217359835" r="10" fill="#c0392b"/><text x="126.0332840660425" y="32.71205217359835" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 29.1 100.1 L 34.2 100.6 L 39.2 101.3 L 44.2 102.3 L 49.2 103.6 L 54.0 105.2 L 58.8 107.0 L 63.5 109.1 L 68.0 111.5 L 72.4 114.1 L 76.6 117.0 L 80.6 120.1 L 84.5 123.4 L 88.2 126.9 L 91.7 130.7 L 94.9 134.6 L 97.9 138.7 L 100.7 143.0 L 103.3 147.4 L 105.6 152.0 L 107.6 156.6 L 109.3 161.4 L 110.8 166.3 L 112.0 171.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="126.0332840660425" cy="171.28794782640165" r="10" fill="#0e7c86"/><text x="126.0332840660425" y="175.28794782640165" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">An electron enters a region of uniform magnetic field (into the page, shown by ×), moving right. Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p1" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p1" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p1" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p1')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p1-feedback"></div>
+        <div class="answer-panel" id="a10">Conventional current is opposite the electron’s motion, so the equivalent current points left. Applying Fleming’s left-hand rule (First finger = Field into the page, seCond finger = Current to the left) gives thuMb = force upward. The electron follows the circular arc A at constant speed, since the magnetic force is always perpendicular to the velocity.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">11</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">p⁺</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 29.1 99.9 L 34.2 99.4 L 39.2 98.7 L 44.2 97.7 L 49.2 96.4 L 54.0 94.8 L 58.8 93.0 L 63.5 90.9 L 68.0 88.5 L 72.4 85.9 L 76.6 83.0 L 80.6 79.9 L 84.5 76.6 L 88.2 73.1 L 91.7 69.3 L 94.9 65.4 L 97.9 61.3 L 100.7 57.0 L 103.3 52.6 L 105.6 48.0 L 107.6 43.4 L 109.3 38.6 L 110.8 33.7 L 112.0 28.7" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="126.0332840660425" cy="28.71205217359835" r="10" fill="#c0392b"/><text x="126.0332840660425" y="32.71205217359835" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 29.1 100.1 L 34.2 100.6 L 39.2 101.3 L 44.2 102.3 L 49.2 103.6 L 54.0 105.2 L 58.8 107.0 L 63.5 109.1 L 68.0 111.5 L 72.4 114.1 L 76.6 117.0 L 80.6 120.1 L 84.5 123.4 L 88.2 126.9 L 91.7 130.7 L 94.9 134.6 L 97.9 138.7 L 100.7 143.0 L 103.3 147.4 L 105.6 152.0 L 107.6 156.6 L 109.3 161.4 L 110.8 166.3 L 112.0 171.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="126.0332840660425" cy="171.28794782640165" r="10" fill="#0e7c86"/><text x="126.0332840660425" y="175.28794782640165" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">A proton enters the same field (into the page), moving right. Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p2" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p2" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p2" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p2')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p2-feedback"></div>
+        <div class="answer-panel" id="a11">A proton’s charge is positive, so conventional current points the same way as its velocity — to the right. Fleming’s left-hand rule (Field into the page, Current to the right) gives a downward force, so the proton curves along path B: the mirror image of the electron’s path in Q10, because the charge sign is reversed.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">12</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><circle cx="40" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="40" r="1.4" fill="#5b6b78"/><circle cx="40" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="80" r="1.4" fill="#5b6b78"/><circle cx="40" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="120" r="1.4" fill="#5b6b78"/><circle cx="40" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="160" r="1.4" fill="#5b6b78"/><circle cx="80" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="40" r="1.4" fill="#5b6b78"/><circle cx="80" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="80" r="1.4" fill="#5b6b78"/><circle cx="80" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="120" r="1.4" fill="#5b6b78"/><circle cx="80" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="160" r="1.4" fill="#5b6b78"/><circle cx="120" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="40" r="1.4" fill="#5b6b78"/><circle cx="120" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="80" r="1.4" fill="#5b6b78"/><circle cx="120" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="120" r="1.4" fill="#5b6b78"/><circle cx="120" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="160" r="1.4" fill="#5b6b78"/><circle cx="160" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="40" r="1.4" fill="#5b6b78"/><circle cx="160" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="80" r="1.4" fill="#5b6b78"/><circle cx="160" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="120" r="1.4" fill="#5b6b78"/><circle cx="160" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="160" r="1.4" fill="#5b6b78"/><circle cx="200" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="40" r="1.4" fill="#5b6b78"/><circle cx="200" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="80" r="1.4" fill="#5b6b78"/><circle cx="200" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="120" r="1.4" fill="#5b6b78"/><circle cx="200" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="160" r="1.4" fill="#5b6b78"/><circle cx="240" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="40" r="1.4" fill="#5b6b78"/><circle cx="240" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="80" r="1.4" fill="#5b6b78"/><circle cx="240" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="120" r="1.4" fill="#5b6b78"/><circle cx="240" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="160" r="1.4" fill="#5b6b78"/><circle cx="280" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="40" r="1.4" fill="#5b6b78"/><circle cx="280" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="80" r="1.4" fill="#5b6b78"/><circle cx="280" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="120" r="1.4" fill="#5b6b78"/><circle cx="280" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="160" r="1.4" fill="#5b6b78"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 29.1 99.9 L 34.2 99.4 L 39.2 98.7 L 44.2 97.7 L 49.2 96.4 L 54.0 94.8 L 58.8 93.0 L 63.5 90.9 L 68.0 88.5 L 72.4 85.9 L 76.6 83.0 L 80.6 79.9 L 84.5 76.6 L 88.2 73.1 L 91.7 69.3 L 94.9 65.4 L 97.9 61.3 L 100.7 57.0 L 103.3 52.6 L 105.6 48.0 L 107.6 43.4 L 109.3 38.6 L 110.8 33.7 L 112.0 28.7" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="126.0332840660425" cy="28.71205217359835" r="10" fill="#c0392b"/><text x="126.0332840660425" y="32.71205217359835" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 29.1 100.1 L 34.2 100.6 L 39.2 101.3 L 44.2 102.3 L 49.2 103.6 L 54.0 105.2 L 58.8 107.0 L 63.5 109.1 L 68.0 111.5 L 72.4 114.1 L 76.6 117.0 L 80.6 120.1 L 84.5 123.4 L 88.2 126.9 L 91.7 130.7 L 94.9 134.6 L 97.9 138.7 L 100.7 143.0 L 103.3 147.4 L 105.6 152.0 L 107.6 156.6 L 109.3 161.4 L 110.8 166.3 L 112.0 171.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="126.0332840660425" cy="171.28794782640165" r="10" fill="#0e7c86"/><text x="126.0332840660425" y="175.28794782640165" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">An electron enters a region of uniform magnetic field pointing out of the page (shown by •), moving right. Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p3" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p3" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p3" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p3')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p3-feedback"></div>
+        <div class="answer-panel" id="a12">Reversing the field direction reverses the force direction. Compared with Q10 (electron, field into the page → curved up), the field is now out of the page, so the curve flips to path B, downward.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">13</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">α</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 28.7 100.1 L 33.4 100.3 L 38.1 100.6 L 42.8 101.0 L 47.4 101.6 L 52.1 102.3 L 56.7 103.2 L 61.3 104.1 L 65.8 105.2 L 70.4 106.4 L 74.9 107.8 L 79.3 109.3 L 83.8 110.9 L 88.1 112.6 L 92.5 114.4 L 96.7 116.3 L 101.0 118.4 L 105.1 120.6 L 109.2 122.9 L 113.2 125.3 L 117.2 127.8 L 121.1 130.5 L 124.9 133.2 L 128.7 136.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="142.6624508053619" cy="136.03817188685727" r="10" fill="#c0392b"/><text x="142.6624508053619" y="140.03817188685727" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 27.6 100.2 L 31.2 100.6 L 34.7 101.4 L 38.1 102.5 L 41.5 103.8 L 44.7 105.4 L 47.7 107.4 L 50.6 109.5 L 53.3 111.9 L 55.8 114.5 L 58.0 117.4 L 60.0 120.4 L 61.7 123.5 L 63.2 126.8 L 64.3 130.2 L 65.2 133.7 L 65.7 137.3 L 66.0 140.9 L 65.9 144.5 L 65.6 148.1 L 64.9 151.6 L 63.9 155.1 L 62.6 158.5 L 61.1 161.7" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="75.08379890007492" cy="161.71780563700742" r="10" fill="#0e7c86"/><text x="75.08379890007492" y="165.71780563700742" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">An alpha particle (charge +2e, mass ≈ 4u) and a proton (charge +e, mass 1u) enter the same magnetic field, into the page, with the same speed. Which path shows the alpha particle?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p4" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p4" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p4" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p4')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p4-feedback"></div>
+        <div class="answer-panel" id="a13">The radius of circular motion is r = mv/(qB). The alpha particle has 4× the proton’s mass but only 2× its charge, so its mass-to-charge ratio (and hence its radius) is 2× the proton’s. Both curve the same way (both positive, same field), but the alpha particle’s path (A) sweeps a gentler, larger-radius arc than the proton’s would (B).</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">14</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻ (fast)</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 28.7 99.9 L 33.4 99.7 L 38.1 99.4 L 42.8 99.0 L 47.4 98.4 L 52.1 97.7 L 56.7 96.8 L 61.3 95.9 L 65.8 94.8 L 70.4 93.6 L 74.9 92.2 L 79.3 90.7 L 83.8 89.1 L 88.1 87.4 L 92.5 85.6 L 96.7 83.7 L 101.0 81.6 L 105.1 79.4 L 109.2 77.1 L 113.2 74.7 L 117.2 72.2 L 121.1 69.5 L 124.9 66.8 L 128.7 64.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="142.6624508053619" cy="63.96182811314273" r="10" fill="#c0392b"/><text x="142.6624508053619" y="67.96182811314273" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 27.6 99.8 L 31.2 99.4 L 34.7 98.6 L 38.1 97.5 L 41.5 96.2 L 44.7 94.6 L 47.7 92.6 L 50.6 90.5 L 53.3 88.1 L 55.8 85.5 L 58.0 82.6 L 60.0 79.6 L 61.7 76.5 L 63.2 73.2 L 64.3 69.8 L 65.2 66.3 L 65.7 62.7 L 66.0 59.1 L 65.9 55.5 L 65.6 51.9 L 64.9 48.4 L 63.9 44.9 L 62.6 41.5 L 61.1 38.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="75.08379890007492" cy="38.282194362992584" r="10" fill="#0e7c86"/><text x="75.08379890007492" y="42.282194362992584" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">Two identical electrons enter the same magnetic field (into the page); electron X moves twice as fast as electron Y. Which path is followed by the faster electron, X?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p5" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p5" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p5" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p5')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p5-feedback"></div>
+        <div class="answer-panel" id="a14">Since r = mv/(qB), radius is directly proportional to speed when mass, charge and field are fixed. The faster electron therefore sweeps a larger-radius, gentler arc — path A — while the slower electron would follow the tighter arc, B.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">15</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><line x1="30" y1="50" x2="66" y2="50" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="90" y1="50" x2="126" y2="50" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="150" y1="50" x2="186" y2="50" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="210" y1="50" x2="246" y2="50" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="270" y1="50" x2="306" y2="50" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="30" y1="100" x2="66" y2="100" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="90" y1="100" x2="126" y2="100" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="150" y1="100" x2="186" y2="100" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="210" y1="100" x2="246" y2="100" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="270" y1="100" x2="306" y2="100" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="30" y1="150" x2="66" y2="150" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="90" y1="150" x2="126" y2="150" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="150" y1="150" x2="186" y2="150" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="210" y1="150" x2="246" y2="150" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><line x1="270" y1="150" x2="306" y2="150" stroke="#5b6b78" stroke-width="1.6" marker-end="url(#fieldArrow)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 29.1 99.9 L 34.2 99.4 L 39.2 98.7 L 44.2 97.7 L 49.2 96.4 L 54.0 94.8 L 58.8 93.0 L 63.5 90.9 L 68.0 88.5 L 72.4 85.9 L 76.6 83.0 L 80.6 79.9 L 84.5 76.6 L 88.2 73.1 L 91.7 69.3 L 94.9 65.4 L 97.9 61.3 L 100.7 57.0 L 103.3 52.6 L 105.6 48.0 L 107.6 43.4 L 109.3 38.6 L 110.8 33.7 L 112.0 28.7" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="126.0332840660425" cy="28.71205217359835" r="10" fill="#c0392b"/><text x="126.0332840660425" y="32.71205217359835" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 29.1 100.1 L 34.2 100.6 L 39.2 101.3 L 44.2 102.3 L 49.2 103.6 L 54.0 105.2 L 58.8 107.0 L 63.5 109.1 L 68.0 111.5 L 72.4 114.1 L 76.6 117.0 L 80.6 120.1 L 84.5 123.4 L 88.2 126.9 L 91.7 130.7 L 94.9 134.6 L 97.9 138.7 L 100.7 143.0 L 103.3 147.4 L 105.6 152.0 L 107.6 156.6 L 109.3 161.4 L 110.8 166.3 L 112.0 171.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="126.0332840660425" cy="171.28794782640165" r="10" fill="#0e7c86"/><text x="126.0332840660425" y="175.28794782640165" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">An electron moves parallel to a uniform magnetic field (field lines shown running left-to-right, the same direction as the electron’s velocity). Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p6" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p6" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p6" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p6')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p6-feedback"></div>
+        <div class="answer-panel" id="a15">F = qvB sinθ. Here the angle θ between the velocity and the field is 0°, so sinθ = 0 and the magnetic force is zero regardless of speed or charge. The electron travels in a straight line, path C.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">16</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#57606b"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#57606b">n⁰</text><line x1="24" y1="100" x2="40" y2="100" stroke="#57606b" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 29.1 99.9 L 34.2 99.4 L 39.2 98.7 L 44.2 97.7 L 49.2 96.4 L 54.0 94.8 L 58.8 93.0 L 63.5 90.9 L 68.0 88.5 L 72.4 85.9 L 76.6 83.0 L 80.6 79.9 L 84.5 76.6 L 88.2 73.1 L 91.7 69.3 L 94.9 65.4 L 97.9 61.3 L 100.7 57.0 L 103.3 52.6 L 105.6 48.0 L 107.6 43.4 L 109.3 38.6 L 110.8 33.7 L 112.0 28.7" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="126.0332840660425" cy="28.71205217359835" r="10" fill="#c0392b"/><text x="126.0332840660425" y="32.71205217359835" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 29.1 100.1 L 34.2 100.6 L 39.2 101.3 L 44.2 102.3 L 49.2 103.6 L 54.0 105.2 L 58.8 107.0 L 63.5 109.1 L 68.0 111.5 L 72.4 114.1 L 76.6 117.0 L 80.6 120.1 L 84.5 123.4 L 88.2 126.9 L 91.7 130.7 L 94.9 134.6 L 97.9 138.7 L 100.7 143.0 L 103.3 147.4 L 105.6 152.0 L 107.6 156.6 L 109.3 161.4 L 110.8 166.3 L 112.0 171.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="126.0332840660425" cy="171.28794782640165" r="10" fill="#0e7c86"/><text x="126.0332840660425" y="175.28794782640165" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">A neutral particle (e.g. a neutron) enters the same magnetic field (into the page), moving right. Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p7" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p7" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p7" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p7')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p7-feedback"></div>
+        <div class="answer-panel" id="a16">F = qvB sinθ, and here q = 0. A neutral particle experiences no magnetic force at all, no matter its speed or direction, so it continues in a straight line, path C.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">17</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 34.8 98.7 L 45.7 94.8 L 56.5 88.4 L 67.3 79.3 L 78.2 67.7 L 89.0 53.5 L 99.8 36.7 L 110.7 17.4 L 121.5 -4.6 L 132.3 -29.1 L 143.2 -56.2 L 154.0 -85.9 L 164.8 -118.2 L 175.7 -153.0 L 186.5 -190.5 L 197.3 -230.5 L 208.2 -273.1 L 219.0 -318.3 L 229.8 -366.0 L 240.7 -416.4 L 251.5 -469.3 L 262.3 -524.8 L 273.2 -582.9 L 284.0 -643.6" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="288" cy="12" r="10" fill="#c0392b"/><text x="288" y="16" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 34.8 101.3 L 45.7 105.2 L 56.5 111.6 L 67.3 120.7 L 78.2 132.3 L 89.0 146.5 L 99.8 163.3 L 110.7 182.6 L 121.5 204.6 L 132.3 229.1 L 143.2 256.2 L 154.0 285.9 L 164.8 318.2 L 175.7 353.0 L 186.5 390.5 L 197.3 430.5 L 208.2 473.1 L 219.0 518.3 L 229.8 566.0 L 240.7 616.4 L 251.5 669.3 L 262.3 724.8 L 273.2 782.9 L 284.0 843.6" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="288" cy="188" r="10" fill="#0e7c86"/><text x="288" y="192" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">An electron travels horizontally into a uniform electric field between two charged plates (top plate positive). Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p8" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p8" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p8" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p8')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p8-feedback"></div>
+        <div class="answer-panel" id="a17">The field points from the positive (top) plate to the negative (bottom) plate. The force on a charge is F = qE, but the electron’s charge is negative, so the force on it is opposite to E — upward, toward the positive plate. With a constant sideways force and constant forward velocity, the electron follows a parabolic path, curving up towards the positive plate (A) — directly analogous to projectile motion.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">18</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">p⁺</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 34.8 98.7 L 45.7 94.8 L 56.5 88.4 L 67.3 79.3 L 78.2 67.7 L 89.0 53.5 L 99.8 36.7 L 110.7 17.4 L 121.5 -4.6 L 132.3 -29.1 L 143.2 -56.2 L 154.0 -85.9 L 164.8 -118.2 L 175.7 -153.0 L 186.5 -190.5 L 197.3 -230.5 L 208.2 -273.1 L 219.0 -318.3 L 229.8 -366.0 L 240.7 -416.4 L 251.5 -469.3 L 262.3 -524.8 L 273.2 -582.9 L 284.0 -643.6" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="288" cy="12" r="10" fill="#c0392b"/><text x="288" y="16" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 34.8 101.3 L 45.7 105.2 L 56.5 111.6 L 67.3 120.7 L 78.2 132.3 L 89.0 146.5 L 99.8 163.3 L 110.7 182.6 L 121.5 204.6 L 132.3 229.1 L 143.2 256.2 L 154.0 285.9 L 164.8 318.2 L 175.7 353.0 L 186.5 390.5 L 197.3 430.5 L 208.2 473.1 L 219.0 518.3 L 229.8 566.0 L 240.7 616.4 L 251.5 669.3 L 262.3 724.8 L 273.2 782.9 L 284.0 843.6" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="288" cy="188" r="10" fill="#0e7c86"/><text x="288" y="192" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">A proton travels horizontally into the same field (top plate positive). Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p9" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p9" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p9" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p9')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p9-feedback"></div>
+        <div class="answer-panel" id="a18">The proton’s charge is positive, so the force F = qE acts in the same direction as E — downward, toward the negative plate. The proton follows a parabolic path curving down (B), the mirror image of the electron’s path in Q17.</div>
+      </div>
+      <div class="pathquiz">
+        <span class="qnum">19</span>
+        <div class="pathquiz-figure"><svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="background:#fff; border:1px solid #d7e0e8; border-radius:8px; width:100%; height:auto; display:block;"><defs>
+  <marker id="vArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+  <marker id="fieldArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="fieldArrowV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+  <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+  <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
+  <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
+</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="40" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="40" r="1.4" fill="#5b6b78"/><circle cx="40" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="80" r="1.4" fill="#5b6b78"/><circle cx="40" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="120" r="1.4" fill="#5b6b78"/><circle cx="40" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="40" cy="160" r="1.4" fill="#5b6b78"/><circle cx="80" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="40" r="1.4" fill="#5b6b78"/><circle cx="80" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="80" r="1.4" fill="#5b6b78"/><circle cx="80" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="120" r="1.4" fill="#5b6b78"/><circle cx="80" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="80" cy="160" r="1.4" fill="#5b6b78"/><circle cx="120" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="40" r="1.4" fill="#5b6b78"/><circle cx="120" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="80" r="1.4" fill="#5b6b78"/><circle cx="120" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="120" r="1.4" fill="#5b6b78"/><circle cx="120" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="120" cy="160" r="1.4" fill="#5b6b78"/><circle cx="160" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="40" r="1.4" fill="#5b6b78"/><circle cx="160" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="80" r="1.4" fill="#5b6b78"/><circle cx="160" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="120" r="1.4" fill="#5b6b78"/><circle cx="160" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="160" cy="160" r="1.4" fill="#5b6b78"/><circle cx="200" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="40" r="1.4" fill="#5b6b78"/><circle cx="200" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="80" r="1.4" fill="#5b6b78"/><circle cx="200" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="120" r="1.4" fill="#5b6b78"/><circle cx="200" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="200" cy="160" r="1.4" fill="#5b6b78"/><circle cx="240" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="40" r="1.4" fill="#5b6b78"/><circle cx="240" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="80" r="1.4" fill="#5b6b78"/><circle cx="240" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="120" r="1.4" fill="#5b6b78"/><circle cx="240" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="240" cy="160" r="1.4" fill="#5b6b78"/><circle cx="280" cy="40" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="40" r="1.4" fill="#5b6b78"/><circle cx="280" cy="80" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="80" r="1.4" fill="#5b6b78"/><circle cx="280" cy="120" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="120" r="1.4" fill="#5b6b78"/><circle cx="280" cy="160" r="4.5" fill="none" stroke="#5b6b78" stroke-width="1.4"/><circle cx="280" cy="160" r="1.4" fill="#5b6b78"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 29.2 99.9 L 34.4 99.6 L 39.6 99.1 L 44.7 98.3 L 49.8 97.4 L 54.9 96.3 L 59.9 94.9 L 64.9 93.4 L 69.8 91.7 L 74.6 89.7 L 79.4 87.6 L 84.0 85.3 L 88.6 82.8 L 93.0 80.1 L 97.4 77.3 L 101.6 74.3 L 105.7 71.1 L 109.7 67.7 L 113.6 64.2 L 117.3 60.6 L 120.8 56.8 L 124.2 52.8 L 127.4 48.8 L 130.5 44.6" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="144.48976575756893" cy="44.56493672563599" r="10" fill="#c0392b"/><text x="144.48976575756893" y="48.56493672563599" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 29.2 100.1 L 34.4 100.4 L 39.6 100.9 L 44.7 101.7 L 49.8 102.6 L 54.9 103.7 L 59.9 105.1 L 64.9 106.6 L 69.8 108.3 L 74.6 110.3 L 79.4 112.4 L 84.0 114.7 L 88.6 117.2 L 93.0 119.9 L 97.4 122.7 L 101.6 125.7 L 105.7 128.9 L 109.7 132.3 L 113.6 135.8 L 117.3 139.4 L 120.8 143.2 L 124.2 147.2 L 127.4 151.2 L 130.5 155.4" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="144.48976575756893" cy="155.435063274364" r="10" fill="#0e7c86"/><text x="144.48976575756893" y="159.435063274364" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+        <p class="pathquiz-prompt">An electron travels between the charged plates from Q17/Q18, but now a magnetic field (out of the page, •) has also been switched on. Its strength is adjusted until the electron travels straight through undeflected. Which path does it follow?</p>
+        <div class="pathquiz-options">
+          <label><input type="radio" name="pq-p10" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
+          <label><input type="radio" name="pq-p10" value="B"> Path <span style="color:#0e7c86;font-weight:800;">B</span></label>
+          <label><input type="radio" name="pq-p10" value="C"> Path <span style="color:#b8860b;font-weight:800;">C</span></label>
+        </div>
+        <button class="reveal-btn no-print" onclick="checkPathQuiz('p10')">Check answer</button>
+        <div class="pathquiz-feedback" id="pq-p10-feedback"></div>
+        <div class="answer-panel" id="a19">This is a velocity selector. The electric force (on the electron, upward toward the + plate) and the magnetic force can be made equal and opposite. When Eq = Bqv, the two forces balance exactly and the net force is zero, so the electron passes straight through at v = E/B (path C) — exactly the ‘beam aligned’ condition you can reproduce in the deflection-tube simulation.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Motion in perpendicular (crossed) electric and magnetic fields</h2>
+      <p>What happens if a charged particle enters a region where a uniform electric field <strong>and</strong> a uniform magnetic field act together, at right angles to each other and to the particle's velocity? Now there are two forces to consider: the electric force (F = qE) and the magnetic force (F = qvB).</p>
+
+      <div class="keybox">
+        If the electric and magnetic forces on the particle are equal in size but opposite in direction, they cancel exactly, and the particle travels in a <strong>straight line</strong> at constant velocity — as though no field were present at all. This is called a <strong>velocity selector</strong>, because it only lets particles of one particular speed through undeflected.
+      </div>
+
+      <div class="eqn">Eq = Bqv<br>v = E/B</div>
+      <p>Notice that the charge q cancels out completely — the "balanced" speed v = E/B depends only on the field strengths, not on the size or sign of the charge. Any particle moving at exactly this speed passes straight through, regardless of its charge or mass; particles at any other speed get deflected one way or the other, because the two forces no longer balance.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1 (Hodder D3.6)</span>
+        <p>A velocity selector uses an electric field of 3.0 × 10⁴ N C⁻¹ and a magnetic field of 0.015 T, arranged perpendicular to each other and to the beam. Calculate the speed of particles that pass straight through undeflected.</p>
+        <p><strong>Answer:</strong> v = E/B = (3.0×10⁴)/(0.015) = <strong>2.0×10⁶ m s⁻¹</strong>.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">20</span><strong>In the velocity selector of Worked Example 5.1, a second beam of particles travels through at 2.5×10⁶ m s⁻¹ — faster than the balanced speed.</strong> State, with a reason, which force now dominates, and which way these particles will deflect (you may describe the deflection in terms of "the same direction as the magnetic force" or "the same direction as the electric force").
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a20')">Show hint</button>
+        <div class="answer-panel" id="a20">Hint: the electric force (qE) does not depend on speed, but the magnetic force (qvB) grows with speed. At the balanced speed the two are equal; above it, the magnetic force becomes larger than the electric force, so the particle deflects in the direction of the (now dominant) magnetic force.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">21</span><strong>Explain why the balanced speed v = E/B does not depend on the mass or charge of the particle passing through the selector.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a21')">Show answer</button>
+        <div class="answer-panel" id="a21">Setting the two forces equal gives Eq = Bqv. The charge q appears on both sides of the equation and cancels out completely, leaving v = E/B — an expression with no q or m in it at all. Mass never even entered the force balance, since neither the electric force qE nor the magnetic force qvB depends on mass.</div>
+      </div>
+
+      <h3>See it live: the electron deflection tube simulation</h3>
+      <p>Dr Dan Jones' interactive deflection tube lets you control the accelerating voltage, the deflecting-plate voltage (electric field) and an external magnetic field independently, and watch the electron beam respond in real time — including finding the "beam aligned" velocity-selector condition for yourself.</p>
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Deflection tube (e/m) — interactive simulation</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Switch on the deflecting plates, then bring in the magnetic field and adjust it until the beam runs straight again — that's the velocity selector condition, v = E/B, from this section.</p>
+        <a class="launch-btn" href="https://sites.google.com/view/hookean-physics/electron-beams/deflection-tube-em" target="_blank" rel="noopener">Launch the simulation ↗</a>
+        <p class="credit">Interactive simulation by Dr Dan Jones (Hookean Physics) — sites.google.com/view/hookean-physics. Opens in a new tab; used by permission of the original site.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">22</span><strong>Using the simulation:</strong> set an accelerating voltage and a deflecting-plate voltage so the beam is clearly deflected, then switch on the magnetic field and adjust its strength until the beam is straight again ("beam aligned"). Record the electric field, magnetic field and beam speed the simulation reports, and check that they satisfy v = E/B.
+        <textarea class="answer-lines long" rows="6" placeholder="Record your simulation readings and check here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a22')">Show hint</button>
+        <div class="answer-panel" id="a22">Hint: read off E and B from the simulation's own display, divide E by B, and compare that to the speed value the simulation reports for the beam. They should match (allowing for rounding) — this is a direct experimental check of v = E/B.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Force on a current-carrying conductor</h2>
+      <p>A current-carrying wire in a magnetic field experiences a force, for exactly the same reason a single moving charge does: the current is simply a huge number of moving charges, each one feeling F = qvB sinθ.</p>
+
+      <div class="eqn">F = BIL sinθ</div>
+      <div class="keybox">
+        <strong>F</strong> = force on the wire (N) · <strong>B</strong> = magnetic field strength (T) · <strong>I</strong> = current (A) · <strong>L</strong> = length of wire in the field (m) · <strong>θ</strong> = angle between the wire (current direction) and the field.
+      </div>
+      <p>This can be derived directly from F = qvB sinθ: for charge carriers drifting at speed v, a current I = q/t means the total charge passing a point in time t is q = It; that charge occupies a length of wire L = vt. Substituting q = It and v = L/t into F = qvBsinθ gives F = B(IL)sinθ — the same equation, just written in terms of the whole wire rather than a single charge.</p>
+
+      <figure>
+        <svg viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" style="max-width:260px;">
+          <text x="60" y="18" font-size="12" text-anchor="middle" fill="#173a5e" font-weight="700">I</text>
+          <g font-size="15" fill="#5b6b78">
+            <text x="110" y="98">×</text><text x="150" y="98">×</text><text x="190" y="98">×</text><text x="230" y="98">×</text>
+            <text x="110" y="123">×</text><text x="150" y="123">×</text><text x="190" y="123">×</text><text x="230" y="123">×</text>
+            <text x="110" y="148">×</text><text x="150" y="148">×</text><text x="190" y="148">×</text><text x="230" y="148">×</text>
+          </g>
+          <!-- full wire, before and after the field -->
+          <line x1="60" y1="215" x2="60" y2="30" stroke="#173a5e" stroke-width="4" marker-end="url(#wA)"/>
+          <!-- highlighted segment of wire actually inside the field, length L -->
+          <line x1="60" y1="165" x2="60" y2="75" stroke="#0e7c86" stroke-width="5"/>
+          <!-- L dimension bracket -->
+          <line x1="35" y1="75" x2="45" y2="75" stroke="#0e7c86" stroke-width="2"/>
+          <line x1="35" y1="165" x2="45" y2="165" stroke="#0e7c86" stroke-width="2"/>
+          <line x1="40" y1="75" x2="40" y2="165" stroke="#0e7c86" stroke-width="2"/>
+          <text x="24" y="124" font-size="13" font-weight="700" fill="#0e7c86" text-anchor="middle">L</text>
+          <line x1="60" y1="120" x2="150" y2="120" stroke="#c0392b" stroke-width="3" marker-end="url(#wF)"/>
+          <text x="160" y="124" font-size="13" font-weight="700" fill="#c0392b">F</text>
+          <defs>
+            <marker id="wA" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/></marker>
+            <marker id="wF" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D3.16 — A vertical wire carrying current I, in a field directed into the page, experiences a horizontal force F = BILsinθ (here θ = 90°, so F = BIL). Only the length <strong>L</strong> of wire actually inside the field (highlighted in teal) experiences the force — the wire continues before and after the field with no force acting on those sections.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1 (Hodder D3.7)</span>
+        <p>A 12 cm length of wire carrying a current of 4.5 A is placed perpendicular to a uniform magnetic field of 0.20 T. Calculate the force on the wire.</p>
+        <p><strong>Answer:</strong> F = BILsinθ = (0.20)(4.5)(0.12)sin90° = <strong>0.108 N</strong>.</p>
+      </div>
+
+      <h3>See it live: the current-balance simulation</h3>
+      <p>Dr Dan Jones' current-balance simulation puts a stiff, fixed length of wire between the poles of a magnet, resting on a sensitive digital balance. As you increase the current, the magnetic force F = BIL pushes down on (or lifts) the wire, and that force shows up as a tiny change in the mass reading on the balance below it — exactly the kind of apparatus used to measure B in a real lab.</p>
+      <div class="sim-embed">
+        <p class="instructions">Use the current slider to set several different values of I, pressing <strong>Record Data</strong> at each one (tare the balance first so it reads zero at I = 0). Then click <strong>Show Graph Analysis</strong> to plot force against current — the simulation fits a straight line through the origin and reads off the gradient and the magnetic flux density B for you.</p>
+        <iframe class="sim-frame" srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot;>
+<head>
+<meta charset=&quot;UTF-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+<title>Force on a Conductor (F = BIL)</title>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body, html {
+        width: 100%;
+        height: 100%;
+        background-color: #f4f7f6;
+        color: #333;
+    }
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    header { text-align: center; margin-bottom: 20px; }
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0056b3;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s;
+    }
+    button:hover { background-color: #004494; }
+    button:disabled { background-color: #cccccc; cursor: not-allowed; }
+    .btn-success { background-color: #28a745; }
+    .btn-success:hover { background-color: #218838; }
+    .btn-warning { background-color: #ffc107; color: #333; }
+    .btn-warning:hover { background-color: #e0a800; }
+    .main-content { display: flex; flex-direction: row; gap: 20px; flex: 1; }
+    @media (max-width: 768px) { .main-content { flex-direction: column; } }
+    .experiment-panel, .data-panel {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    .apparatus-stage {
+        position: relative;
+        width: 100%;
+        height: 320px;
+        background: #e9ecef;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+    }
+    .stiff-wire {
+        position: absolute;
+        top: 140px;
+        width: 85%;
+        height: 4px;
+        background: #d9822b;
+        box-shadow: 0 0 2px rgba(0,0,0,0.3);
+        z-index: 2;
+    }
+    .wire-label {
+        position: absolute;
+        top: 115px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #d9822b;
+        z-index: 4;
+    }
+    .top-pan-balance {
+        width: 180px;
+        height: 90px;
+        background: #adb5bd;
+        border: 2px solid #6c757d;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        z-index: 1;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    }
+    .balance-plate {
+        width: 160px;
+        height: 8px;
+        background: #e0e0e0;
+        border-bottom: 2px solid #999;
+        margin-top: -12px;
+        border-radius: 2px;
+    }
+    .magnet-yoke {
+        width: 120px;
+        height: 80px;
+        background-color: #495057;
+        border: 2px solid #343a40;
+        border-radius: 4px;
+        position: relative;
+        z-index: 3;
+        margin-bottom: 0px;
+    }
+    .lcd-display {
+        width: 130px;
+        background: #212529;
+        color: #00ff00;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-align: right;
+        padding: 4px 8px;
+        border-radius: 4px;
+        letter-spacing: 1px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+    }
+    .meters-panel { display: flex; gap: 20px; margin-top: 15px; width: 100%; justify-content: center; }
+    .ammeter {
+        background: #f8f9fa;
+        border: 2px solid #495057;
+        border-radius: 4px;
+        padding: 5px 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .ammeter-readout { font-family: monospace; font-size: 1.2rem; color: #dc3545; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #dee2e6; padding: 8px; text-align: center; }
+    th { background-color: #f8f9fa; }
+    canvas {
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+        background: #fff;
+        border: 1px solid #ccc;
+        display: none;
+    }
+    .results-box {
+        display: none;
+        width: 100%;
+        background: #e2e3e5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class=&quot;app-container&quot;>
+    <header>
+        <h2>Force on a Conductor (F = BIL)</h2>
+        <p>Vary the current flowing through the stiff copper wire, measure the mass change, and deduce the magnetic flux density (B).</p>
+    </header>
+
+    <div class=&quot;controls&quot; id=&quot;control-bar&quot;>
+        <div>
+            <label for=&quot;current-slider&quot;><strong>Current, I (Amperes): </strong></label>
+            <input type=&quot;range&quot; id=&quot;current-slider&quot; min=&quot;0.0&quot; max=&quot;5.0&quot; step=&quot;0.5&quot; value=&quot;0.0&quot;>
+            <span id=&quot;current-display&quot;>0.0 A</span>
+        </div>
+        <button id=&quot;btn-tare&quot; class=&quot;btn-warning&quot;>Tare Balance</button>
+        <button id=&quot;btn-record&quot; class=&quot;btn-success&quot;>Record Data</button>
+        <button id=&quot;btn-graph&quot; class=&quot;btn-warning&quot;>Show Graph Analysis</button>
+        <button id=&quot;btn-clear&quot;>Clear Data</button>
+    </div>
+
+    <div class=&quot;main-content&quot;>
+        <div class=&quot;experiment-panel&quot; id=&quot;view-experiment&quot;>
+            <h3>Experimental Setup</h3>
+            <div style=&quot;margin-top: 5px; font-size: 0.9rem; color: #555;&quot;>Fixed Wire Length (L) = 0.050 metres</div>
+
+            <div class=&quot;apparatus-stage&quot;>
+                <span class=&quot;wire-label&quot;>Stiff Copper Wire (Fixed)</span>
+                <div class=&quot;stiff-wire&quot;></div>
+
+                <div class=&quot;magnet-yoke&quot;></div>
+                <div class=&quot;balance-plate&quot;></div>
+                <div class=&quot;top-pan-balance&quot;>
+                    <div class=&quot;lcd-display&quot; id=&quot;balance-lcd&quot;>0.00 g</div>
+                    <div style=&quot;font-size: 0.7rem; font-weight: bold; color: #495057;&quot;>DIGITAL BALANCE</div>
+                </div>
+            </div>
+
+            <div class=&quot;meters-panel&quot;>
+                <div class=&quot;ammeter&quot;>
+                    D.C. Ammeter: <span class=&quot;ammeter-readout&quot; id=&quot;ammeter-val&quot;>0.00 A</span>
+                </div>
+            </div>
+        </div>
+
+        <div class=&quot;experiment-panel hidden&quot; id=&quot;view-graph&quot;>
+            <h3>Graph: Force vs Current</h3>
+            <canvas id=&quot;graphCanvas&quot; width=&quot;400&quot; height=&quot;300&quot;></canvas>
+            <div class=&quot;results-box&quot; id=&quot;results&quot;>
+                <p><strong>Gradient (m):</strong> <span id=&quot;grad-val&quot;>-</span> N/A</p>
+                <p><strong>Wire Length (L):</strong> 0.050 metres</p>
+                <p><strong>Calculated B (Gradient / L):</strong> <span id=&quot;b-val&quot;>-</span> Tesla</p>
+            </div>
+            <button id=&quot;btn-back&quot; style=&quot;margin-top: 15px;&quot;>Back to Experiment</button>
+        </div>
+
+        <div class=&quot;data-panel&quot;>
+            <h3>Results Table</h3>
+            <table id=&quot;data-table&quot;>
+                <thead>
+                    <tr>
+                        <th>Current, I (A)</th>
+                        <th>Mass Change, &Delta;m (g)</th>
+                        <th>Force, F (N)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type=&quot;text/javascript&quot;>
+    // Constants
+    const TRUE_B = 0.042; // True magnetic field strength (0.042 Tesla)
+    const WIRE_L = 0.050; // 5 cm length inside the field
+    const G_ACCEL = 9.81;
+    const BASE_MAGNET_MASS = 124.50; // Initial weight of magnet holder assembly
+
+    // State Variables
+    let currentI = 0.0;
+    let tareOffset = 0.0;
+    let currentMassReading = BASE_MAGNET_MASS;
+    let dataPoints = [];
+
+    // DOM Elements
+    const slider = document.getElementById('current-slider');
+    const currentDisplay = document.getElementById('current-display');
+    const ammeterVal = document.getElementById('ammeter-val');
+    const balanceLcd = document.getElementById('balance-lcd');
+
+    const btnTare = document.getElementById('btn-tare');
+    const btnRecord = document.getElementById('btn-record');
+    const btnGraph = document.getElementById('btn-graph');
+    const btnClear = document.getElementById('btn-clear');
+    const btnBack = document.getElementById('btn-back');
+    const tableBody = document.querySelector('#data-table tbody');
+
+    const viewExperiment = document.getElementById('view-experiment');
+    const viewGraph = document.getElementById('view-graph');
+    const graphCanvas = document.getElementById('graphCanvas');
+    const ctx = graphCanvas.getContext('2d');
+    const resultsBox = document.getElementById('results');
+    const resultsBoxDefaultHTML = resultsBox.innerHTML;
+
+    slider.addEventListener('input', (e) => {
+        currentI = parseFloat(e.target.value);
+        currentDisplay.textContent = currentI.toFixed(1) + ' A';
+        ammeterVal.textContent = currentI.toFixed(2) + ' A';
+        updateBalance();
+    });
+
+    function updateBalance() {
+        const idealForce = TRUE_B * currentI * WIRE_L;
+        const deltaMass = (idealForce / G_ACCEL) * 1000;
+        const noise = (Math.random() * 0.02) - 0.01;
+        const totalAbsoluteMass = BASE_MAGNET_MASS + deltaMass + noise;
+        currentMassReading = totalAbsoluteMass - tareOffset;
+        balanceLcd.textContent = currentMassReading.toFixed(2) + ' g';
+    }
+
+    btnTare.addEventListener('click', () => {
+        const idealForce = TRUE_B * currentI * WIRE_L;
+        const deltaMass = (idealForce / G_ACCEL) * 1000;
+        tareOffset = BASE_MAGNET_MASS + deltaMass;
+        updateBalance();
+    });
+
+    btnRecord.addEventListener('click', () => {
+        const idealForce = TRUE_B * currentI * WIRE_L;
+        const calculatedDeltaMass = (idealForce / G_ACCEL) * 1000;
+        const structuralVariation = (Math.random() * 0.03) - 0.015;
+        const loggedDeltaMass = calculatedDeltaMass + structuralVariation;
+        const loggedForce = (loggedDeltaMass / 1000) * G_ACCEL;
+
+        dataPoints.push({ current: currentI, deltaMass: loggedDeltaMass, force: loggedForce });
+
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${currentI.toFixed(1)}</td><td>${loggedDeltaMass.toFixed(2)}</td><td>${loggedForce.toFixed(5)}</td>`;
+        tableBody.appendChild(row);
+    });
+
+    btnClear.addEventListener('click', () => {
+        dataPoints = [];
+        tableBody.innerHTML = '';
+        tareOffset = 0.0;
+        slider.value = 0.0;
+        currentI = 0.0;
+        currentDisplay.textContent = '0.0 A';
+        ammeterVal.textContent = '0.00 A';
+        updateBalance();
+    });
+
+    btnGraph.addEventListener('click', () => {
+        viewExperiment.classList.add('hidden');
+        viewGraph.classList.remove('hidden');
+        if (dataPoints.length === 0) {
+            graphCanvas.style.display = 'none';
+            resultsBox.innerHTML = '<p style=&quot;color:#dc3545;&quot;>Record at least one measurement first, then view the graph.</p>';
+            resultsBox.style.display = 'block';
+            return;
+        }
+        resultsBox.innerHTML = resultsBoxDefaultHTML;
+        graphCanvas.style.display = 'block';
+        drawGraph();
+    });
+
+    btnBack.addEventListener('click', () => {
+        viewGraph.classList.add('hidden');
+        viewExperiment.classList.remove('hidden');
+        graphCanvas.style.display = 'none';
+        resultsBox.style.display = 'none';
+    });
+
+    function drawGraph() {
+        ctx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+
+        const paddingLeft = 60;
+        const paddingBottom = 40;
+        const paddingTop = 20;
+        const paddingRight = 20;
+        const width = graphCanvas.width - paddingLeft - paddingRight;
+        const height = graphCanvas.height - paddingBottom - paddingTop;
+
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft, paddingTop);
+        ctx.lineTo(paddingLeft, graphCanvas.height - paddingBottom);
+        ctx.lineTo(graphCanvas.width - paddingRight, graphCanvas.height - paddingBottom);
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#333';
+        ctx.font = '13px sans-serif';
+        ctx.fillText(&quot;Current, I (A)&quot;, graphCanvas.width / 2, graphCanvas.height - 5);
+
+        ctx.save();
+        ctx.translate(15, graphCanvas.height / 2 + 30);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillText(&quot;Force, F (N)&quot;, 0, 0);
+        ctx.restore();
+
+        const maxI = 5.0;
+        const maxF = Math.max(...dataPoints.map(d => d.force), 0.005);
+
+        ctx.fillStyle = '#dc3545';
+        let sumI2 = 0, sumIF = 0;
+
+        dataPoints.forEach(p => {
+            const x = paddingLeft + (p.current / maxI) * width;
+            const y = (graphCanvas.height - paddingBottom) - (p.force / maxF) * height;
+
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            sumIF += p.current * p.force;
+            sumI2 += p.current * p.current;
+        });
+
+        if (sumI2 > 0) {
+            const m = sumIF / sumI2;
+            const x2 = maxI;
+            const y2 = m * maxI;
+
+            const px1 = paddingLeft;
+            const py1 = graphCanvas.height - paddingBottom;
+            const px2 = paddingLeft + width;
+            const py2 = (graphCanvas.height - paddingBottom) - (y2 / maxF) * height;
+
+            ctx.beginPath();
+            ctx.moveTo(px1, py1);
+            ctx.lineTo(px2, py2);
+            ctx.strokeStyle = '#0056b3';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 4]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            const calculatedB = m / WIRE_L;
+
+            document.getElementById('grad-val').textContent = m.toFixed(5);
+            document.getElementById('b-val').textContent = calculatedB.toFixed(3);
+            resultsBox.style.display = 'block';
+        }
+    }
+
+    updateBalance();
+    setInterval(updateBalance, 800);
+</script>
+</body>
+</html>
+" title="Force on a current-carrying conductor simulation" style="width:100%; height:900px; border:1px solid var(--border); border-radius:12px; display:block;" loading="lazy"></iframe>
+        <p class="sim-embed-credit" style="text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;">Interactive simulation by Dr Dan Jones Physics — <a href="https://www.drjonesphysics.com/f-bil" target="_blank" rel="noopener">drjonesphysics.com/f-bil</a>. Used with permission.</p>
+        <p class="sim-print-note">Interactive current-balance (F = BIL) simulation — available in the online version of this workbook. See drjonesphysics.com/f-bil.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">23</span><strong>Using the simulation:</strong> tare the balance at I = 0, then record the mass change (and hence the force, using F = mg) for at least four different current values. Plot (or use the simulation's own graph tool for) force against current, and use the gradient of your line, together with the fixed wire length L = 0.050 m, to calculate the magnetic flux density B between the poles. Compare your value with the value the simulation reports.
+        <textarea class="answer-lines long" rows="6" placeholder="Record your simulation readings and calculation here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a23')">Show hint</button>
+        <div class="answer-panel" id="a23">Hint: for each current, convert the mass change Δm (in g) to a force using F = (Δm/1000) × g, with g = 9.81 m s⁻². The gradient of your force–current graph is F/I = BL, so B = gradient / L. The simulation's own analysis panel does this same calculation for you (Gradient ÷ L) — your value should match it closely.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Force between parallel current-carrying wires</h2>
+      <p>Since a current-carrying wire creates its own magnetic field (B = μ₀I/2πr, from Workbook 1), a second current-carrying wire placed nearby sits inside that field — and so feels a force, F = BIL sinθ, from it. Two parallel wires therefore always exert a magnetic force on each other.</p>
+
+      <div class="eqn">F/L = μ₀ I₁ I₂ / (2πr)</div>
+      <div class="keybox">
+        <strong>F/L</strong> = force per unit length (N m⁻¹) · <strong>μ₀</strong> = permeability of free space (4π×10⁻⁷ T m A⁻¹) · <strong>I₁, I₂</strong> = the currents in the two wires (A) · <strong>r</strong> = separation between the wires (m).
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" style="max-width:240px;">
+          <line x1="70" y1="20" x2="70" y2="120" stroke="#173a5e" stroke-width="4"/>
+          <line x1="150" y1="20" x2="150" y2="120" stroke="#173a5e" stroke-width="4"/>
+          <text x="70" y="14" font-size="12" text-anchor="middle" fill="#173a5e" font-weight="700">I₁</text>
+          <text x="150" y="14" font-size="12" text-anchor="middle" fill="#173a5e" font-weight="700">I₂</text>
+          <line x1="70" y1="110" x2="70" y2="40" stroke="#173a5e" stroke-width="4" marker-end="url(#pwA)"/>
+          <line x1="150" y1="110" x2="150" y2="40" stroke="#173a5e" stroke-width="4" marker-end="url(#pwA)"/>
+          <line x1="85" y1="70" x2="135" y2="70" stroke="#3f9a5c" stroke-width="2.5" marker-end="url(#pwF)"/>
+          <line x1="135" y1="90" x2="85" y2="90" stroke="#3f9a5c" stroke-width="2.5" marker-end="url(#pwF)"/>
+          <text x="110" y="63" font-size="11" fill="#3f9a5c" text-anchor="middle" font-weight="700">attract</text>
+          <defs>
+            <marker id="pwA" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/></marker>
+            <marker id="pwF" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#3f9a5c"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D3.20/21 — Two wires carrying current in the same direction attract; if the currents run in opposite directions, the force is reversed and the wires repel.</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Rule of thumb:</b> currents in the <em>same</em> direction → wires <strong>attract</strong>. Currents in <em>opposite</em> directions → wires <strong>repel</strong>. (You can always confirm this by applying Fleming's left-hand rule to one wire, using the field produced by the other.)</div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1 (Hodder D3.8)</span>
+        <p>Two long parallel wires, 5.0 cm apart, carry currents of 3.0 A and 6.0 A in the same direction. Calculate the force per unit length between them, and state whether they attract or repel.</p>
+        <p><strong>Answer:</strong> F/L = μ₀I₁I₂/(2πr) = (4π×10⁻⁷ × 3.0 × 6.0)/(2π × 0.050) = <strong>7.2×10⁻⁵ N m⁻¹</strong>, attractive (currents are in the same direction).</p>
+      </div>
+
+      <div class="keyword"><b>Historical note:</b> this arrangement was once used to <em>define</em> the ampere — one ampere was defined as the current that, flowing in each of two infinitely long parallel wires 1 m apart in a vacuum, produces a force of exactly 2×10⁻⁷ N per metre of length between them. (Since 2019 the ampere has instead been defined via the elementary charge, e, but the parallel-wire force is still exactly how you can, in principle, measure current from first principles.)</div>
+
+      <div class="question">
+        <span class="qnum">24</span><strong>Two parallel wires carry currents of 2.0 A and 4.0 A, separated by 8.0 cm, in opposite directions.</strong> Calculate the force per unit length between them, and state whether they attract or repel.
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a24')">Show hint</button>
+        <div class="answer-panel" id="a24">Hint: substitute directly into F/L = μ₀I₁I₂/(2πr), then use "opposite directions → repel" to state the direction. You should get roughly 2.0×10⁻⁵ N m⁻¹, repulsive.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">25</span><strong>Two parallel wires, each carrying 5.0 A in the same direction, experience a force per unit length of 5.0×10⁻⁵ N m⁻¹.</strong> Calculate their separation, r.
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a25')">Show hint</button>
+        <div class="answer-panel" id="a25">Hint: rearrange F/L = μ₀I₁I₂/(2πr) to make r the subject: r = μ₀I₁I₂/(2π(F/L)). You should get roughly 5.0×10⁻² m.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Equation summary</h2>
+      <table class="eqtable">
+        <tr><th>Quantity / situation</th><th>Equation</th></tr>
+        <tr><td>Force on a charge in an electric field</td><td>F = Eq</td></tr>
+        <tr><td>Magnetic force on a moving charge</td><td>F = qvB sinθ</td></tr>
+        <tr><td>Radius of circular motion in a magnetic field</td><td>r = mv / (qB)</td></tr>
+        <tr><td>Charge-to-mass ratio</td><td>q/m = v / (Br)</td></tr>
+        <tr><td>Velocity selector (crossed fields) condition</td><td>v = E/B</td></tr>
+        <tr><td>Force on a current-carrying conductor</td><td>F = BIL sinθ</td></tr>
+        <tr><td>Force per unit length between parallel wires</td><td>F/L = μ₀I₁I₂ / (2πr)</td></tr>
+      </table>
+    </section>
+
+    <!-- ================= SECTION 9 ================= -->
+    <section class="topic" id="s9">
+      <h2>9. Glossary</h2>
+      <dl class="glossary">
+        <dt>Conventional current</dt><dd>The direction that positive charge flows (or would flow); by convention, from + to − around a circuit. Fleming's left-hand rule and F = BILsinθ are always defined using this direction.</dd>
+        <dt>Electron flow</dt><dd>The actual physical direction free electrons drift in a conductor — opposite to conventional current.</dd>
+        <dt>Fleming's left-hand rule</dt><dd>A hand rule for finding the direction of the force on a current in a magnetic field: First finger = Field, seCond finger = Current, thuMb = force/Motion.</dd>
+        <dt>Helical motion</dt><dd>A corkscrew-shaped path followed by a charged particle whose velocity has components both parallel and perpendicular to a magnetic field.</dd>
+        <dt>Parabolic motion</dt><dd>The curved path followed by a charged particle entering a uniform electric field perpendicular to the field, caused by a constant sideways force combined with constant forward velocity.</dd>
+        <dt>Radius of circular motion, r</dt><dd>r = mv/(qB) — the radius of the circular path of a charged particle moving perpendicular to a uniform magnetic field.</dd>
+        <dt>Velocity selector</dt><dd>A region of crossed (perpendicular) electric and magnetic fields, arranged so that only particles travelling at v = E/B pass through undeflected.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Motion in Electromagnetic Fields Workbook · Companion resources: <em>Electric &amp; Magnetic Fields</em> (Workbook 1) and <em>Millikan's Oil-Drop Experiment</em> (Workbook 2). Deflection tube simulation by Dr Dan Jones, Hookean Physics.</footer>
+  </main>
+</div>
+
+<div class="toolbar no-print">
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <div id="saveStatus" style="font-size:0.72rem; color:#5b6b78; text-align:center; background:#fff; border:1px solid var(--border); border-radius:50px; padding:0.35rem 0.8rem;">Answers save automatically in this browser</div>
+</div>
+<button class="fab no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<script>
+var PATHQUIZ_CORRECT = {'p1':'A', 'p2':'B', 'p3':'B', 'p4':'A', 'p5':'A', 'p6':'C', 'p7':'C', 'p8':'A', 'p9':'B', 'p10':'C'};
+
+function checkPathQuiz(id){
+  var correct = PATHQUIZ_CORRECT[id];
+  var selected = document.querySelector('input[name="pq-' + id + '"]:checked');
+  var feedback = document.getElementById('pq-' + id + '-feedback');
+  if(!selected){
+    feedback.textContent = 'Select a path first.';
+    feedback.className = 'pathquiz-feedback incorrect';
+    return;
+  }
+  if(selected.value === correct){
+    feedback.textContent = 'Correct! See the explanation below.';
+    feedback.className = 'pathquiz-feedback correct';
+  } else {
+    feedback.textContent = 'Not quite \u2014 the correct answer is path ' + correct + '. See the explanation below.';
+    feedback.className = 'pathquiz-feedback incorrect';
+  }
+  var panel = pathQuizExplanationPanel(id);
+  if(panel) panel.classList.add('shown');
+}
+
+function pathQuizExplanationPanel(id){
+  var input = document.querySelector('input[name="pq-' + id + '"]');
+  if(!input) return null;
+  var container = input.closest('.pathquiz');
+  return container ? container.querySelector('.answer-panel') : null;
+}
+
+function toggleAnswer(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('shown');
+}
+
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize + autosave ---------- */
+var STORAGE_PREFIX = 'ib-d3-workbook3-emfields-v1-';
+var fillableEls = [];
+
+function storageAvailable(){
+  try{
+    var k = '__test__' + STORAGE_PREFIX;
+    localStorage.setItem(k, '1');
+    localStorage.removeItem(k);
+    return true;
+  } catch(e){ return false; }
+}
+var canStore = storageAvailable();
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el, i){
+    var key = STORAGE_PREFIX + i;
+    el.dataset.storeKey = key;
+    if(canStore){
+      var saved = localStorage.getItem(key);
+      if(saved !== null){ el.value = saved; }
+    }
+    autosize(el);
+    el.addEventListener('input', function(){
+      autosize(el);
+      if(canStore){
+        try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){}
+      }
+    });
+  });
+  if(!canStore){
+    var status = document.getElementById('saveStatus');
+    if(status) status.textContent = 'Autosave unavailable here \u2014 print/export before closing this tab';
+  }
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+    if(canStore){ try{ localStorage.removeItem(el.dataset.storeKey); } catch(e){} }
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+</script>
+</body>
+</html>

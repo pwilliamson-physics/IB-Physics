@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electromagnetic Induction — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e;
+    --teal:#0e7c86;
+    --teal-dark:#0a5b62;
+    --amber:#d98324;
+    --soft-blue:#eaf3fb;
+    --soft-amber:#fdf1e2;
+    --soft-green:#eaf7ee;
+    --soft-grey:#f4f6f8;
+    --line:#b9c6d3;
+    --ink:#1f2933;
+    --border:#d7e0e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:#f7f9fb;
+    line-height:1.55;
+    font-size:16.5px;
+  }
+  .layout{display:flex; min-height:100vh;}
+  nav.sidebar{
+    width:250px; flex-shrink:0; background:var(--navy); color:#fff;
+    padding:1.25rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{
+    display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem;
+    padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;
+  }
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  main{flex:1; max-width:900px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{
+    background:linear-gradient(135deg,var(--navy),var(--teal-dark));
+    color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;
+  }
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+
+  section.topic{
+    background:#fff; border:1px solid var(--border); border-radius:12px;
+    padding:1.8rem 2rem; margin-bottom:1.6rem;
+  }
+  section.topic h2{
+    color:var(--navy); font-size:1.4rem; margin-top:0;
+    border-bottom:3px solid var(--amber); padding-bottom:0.4rem;
+  }
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+  .goals{
+    background:var(--soft-blue); border-left:4px solid var(--teal); border-radius:6px;
+    padding:0.9rem 1.1rem; font-size:0.92rem;
+  }
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  .keybox{
+    background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px;
+    padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;
+  }
+  .keybox strong{color:var(--navy);}
+  .eqn{
+    background:#fff; border:1px solid #c7ddef; border-radius:6px;
+    padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center;
+    font-family:"Cambria Math",Cambria,Georgia,serif;
+  }
+  .keyword{
+    background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px;
+    padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;
+  }
+  .keyword b{color:var(--amber);}
+
+  .example{
+    background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px;
+    padding:0.9rem 1.1rem; margin:1rem 0;
+  }
+  .example .tag{
+    display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem;
+    font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px;
+    margin-bottom:0.5rem; text-transform:uppercase;
+  }
+
+  .question{
+    background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
+    padding:1rem 1.2rem; margin:1.1rem 0;
+  }
+  .question .qnum{
+    display:inline-block; background:var(--navy); color:#fff; font-weight:700;
+    font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center;
+    border-radius:50%; margin-right:0.5rem;
+  }
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+
+  .reveal-btn{
+    background:var(--teal); color:#fff; border:none; border-radius:6px;
+    padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;
+  }
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{
+    display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px;
+    padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;
+  }
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:520px;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  /* ---------- frequency explorer widget ---------- */
+  .freqwidget{
+    background:var(--soft-grey); border:1px solid var(--border); border-radius:10px;
+    padding:1.1rem 1.3rem; margin:1.1rem 0;
+  }
+  .freqwidget .control-row{display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem; flex-wrap:wrap;}
+  .freqwidget label{font-weight:600; font-size:0.92rem; min-width:11rem;}
+  .freqwidget input[type="range"]{flex:1; min-width:160px;}
+  .freqwidget .readout{display:flex; gap:1.4rem; flex-wrap:wrap; justify-content:center; margin:0.7rem 0; font-size:0.92rem;}
+  .freqwidget .readout .val{font-weight:700; color:var(--teal-dark);}
+  .freqwidget svg{display:block; margin:0 auto; max-width:420px; width:100%; background:#fff; border:1px solid var(--border); border-radius:8px;}
+  .freqwidget .legend{display:flex; gap:1.4rem; justify-content:center; font-size:0.82rem; color:#5b6b78; margin-top:0.4rem;}
+  .freqwidget .legend span.swatch{display:inline-block; width:16px; height:3px; margin-right:0.3rem; vertical-align:middle;}
+
+  /* ---------- transformer simulation embed ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:0.6rem; margin:1rem 0;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .fab{
+    position:fixed; right:1.6rem; bottom:1.6rem; background:var(--amber); color:#fff;
+    border:none; border-radius:50px; padding:0.85rem 1.4rem; font-size:0.98rem;
+    font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.25); cursor:pointer; z-index:100;
+  }
+  .fab:hover{background:#c0721c;}
+  .toolbar{
+    position:fixed; right:1.6rem; bottom:5.3rem; z-index:100; display:flex; flex-direction:column; gap:0.5rem;
+  }
+  .toolbar button{
+    background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px;
+    padding:0.55rem 1.1rem; font-size:0.82rem; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.12);
+  }
+  .toolbar button:hover{background:var(--soft-blue);}
+
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  @media print{
+    nav.sidebar, .fab, .toolbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .freqwidget input[type="range"]{display:none;}
+    .sim-frame, .sim-embed-credit{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Electromagnetic Induction</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Motional emf: ε = BvL</a>
+    <a href="#s2">2. Magnetic flux &amp; flux linkage</a>
+    <a href="#s3">3. Faraday's law of induction</a>
+    <a href="#s4">4. Lenz's law &amp; energy conservation</a>
+    <a href="#s5">5. AC generators &amp; frequency</a>
+    <a href="#s6">6. Application: the transformer</a>
+    <a href="#s7">7. Equation summary</a>
+    <a href="#s8">8. Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Electromagnetic Induction</h1>
+      <p class="sub">Student Workbook — Unit D.4</p>
+      <div class="goals" style="margin-top:1.3rem; background:rgba(255,255,255,0.12); border-left-color:#fff; color:#fff;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Calculate magnetic flux using Φ = BA cos θ.</li>
+          <li>Apply Faraday's law of induction, ε = −N ΔΦ/Δt, to find an induced emf.</li>
+          <li>Calculate the emf induced in a straight conductor moving perpendicularly through a uniform magnetic field, ε = BvL.</li>
+          <li>Use Lenz's law and energy conservation to determine the direction of an induced emf.</li>
+          <li>Describe how a uniform magnetic field induces a sinusoidal emf in a rotating coil, and explain the effect of changing the rotation frequency.</li>
+          <li>Explain how a transformer works, as a practical application of electromagnetic induction.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label>
+        <input class="fill" placeholder="Type your name…">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Motional emf: ε = BvL</h2>
+      <p>Whenever a conductor moves across a magnetic field, or a magnetic field moves across a conductor, an emf is induced. This is called <b>electromagnetic induction</b>. We start with the simplest case: a straight conductor moving perpendicularly through a uniform magnetic field.</p>
+
+      <div class="keybox">
+        <strong>Electromagnetic induction</strong> is the process in which an emf is produced across a conductor that is experiencing a changing magnetic field. Reminder from Topic B.5: the <strong>electromotive force (emf)</strong> of any source is the energy transferred per unit charge passing through it.
+      </div>
+
+      <h3>Why a moving conductor develops an emf</h3>
+      <p>A conductor moving across a field carries free electrons along with it. Each free electron is a moving charge in a magnetic field, so it experiences a magnetic force F = qvB sinθ (Topic D.3). This force pushes electrons towards one end of the conductor, leaving the other end short of electrons — one end becomes negatively charged, the other positively charged. This charge separation is exactly what an emf is: a potential difference between the two ends of the conductor.</p>
+
+      <figure>
+        <svg viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;">
+          <g font-size="15" fill="#3f9a5c">
+            <text x="40" y="30">×</text><text x="90" y="30">×</text><text x="140" y="30">×</text><text x="190" y="30">×</text><text x="240" y="30">×</text><text x="290" y="30">×</text>
+            <text x="40" y="65">×</text><text x="90" y="65">×</text><text x="140" y="65">×</text><text x="190" y="65">×</text><text x="240" y="65">×</text><text x="290" y="65">×</text>
+            <text x="40" y="100">×</text><text x="90" y="100">×</text><text x="140" y="100">×</text><text x="190" y="100">×</text><text x="240" y="100">×</text><text x="290" y="100">×</text>
+            <text x="40" y="135">×</text><text x="90" y="135">×</text><text x="140" y="135">×</text><text x="190" y="135">×</text><text x="240" y="135">×</text><text x="290" y="135">×</text>
+          </g>
+          <line x1="140" y1="20" x2="140" y2="145" stroke="#b8860b" stroke-width="5"/>
+          <circle cx="140" cy="35" r="3.5" fill="#a4222a"/>
+          <text x="120" y="30" font-size="12" font-weight="700" fill="#a4222a">−</text>
+          <circle cx="140" cy="128" r="3.5" fill="#2f6fa8"/>
+          <text x="120" y="140" font-size="12" font-weight="700" fill="#2f6fa8">+</text>
+          <line x1="150" y1="118" x2="187" y2="118" stroke="#173a5e" stroke-width="2.4" marker-end="url(#mvArrow)"/>
+          <text x="192" y="122" font-size="13" font-weight="700" fill="#173a5e">v</text>
+          <text x="150" y="70" font-size="13" fill="#1f2933">L</text>
+          <defs>
+            <marker id="mvArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D4.2/D4.4 — A conductor of length L moves at speed v perpendicular to a uniform field (into the page). Free electrons are pushed towards one end, so that end becomes negative and the other becomes positive: an emf is induced across the ends.</figcaption>
+      </figure>
+
+      <h3>Deriving ε = BvL</h3>
+      <p>The maximum induced potential difference occurs when the magnetic force on each free electron, F<sub>B</sub> = qvB, is balanced by the electric force from the charge separation itself, F<sub>E</sub> = Eq = (ε/L)q. Setting these equal:</p>
+      <div class="eqn">εq/L = qvB<br>ε = BvL</div>
+
+      <div class="keybox">
+        The emf induced when a straight conductor moves perpendicularly across a uniform magnetic field:
+        <div class="eqn" style="margin-top:0.4rem;">ε = BvL</div>
+        where B is the field strength, v is the conductor's speed, and L is the length of the conductor inside the field.
+      </div>
+
+      <div class="keyword">
+        <b>Direction matters:</b> if the motion or the field is reversed, the emf reverses too. If both are reversed together, the emf is unchanged. For an emf to be induced, there must be <em>relative</em> motion between the conductor and the field — if both move together at the same velocity, no emf is induced.
+      </div>
+
+      <p>If the conductor is wound into a coil of N turns (with one side of the coil inside the field), each turn adds an emf of the same value in series — exactly like adding more cells to a battery:</p>
+      <div class="eqn">ε = NBvL</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1 (Hodder D4.1)</span>
+        <p>Calculate the induced emf produced across a 23.0 cm long conductor moving at 98.0 cm s⁻¹ perpendicularly across a magnetic field of strength 120 μT.</p>
+        <p><strong>Answer:</strong> ε = BvL = (120×10⁻⁶) × 0.98 × 0.23 = <strong>2.7×10⁻⁵ V</strong>.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>A straight conductor of length 1.4 m moves perpendicularly across a uniform magnetic field of strength 5.0×10⁻⁴ T at a speed of 3.2 m s⁻¹.</strong> Calculate the induced emf.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a1')">Show hint</button>
+        <div class="answer-panel" id="a1">Hint: substitute directly into ε = BvL. You should get roughly 2.2×10⁻³ V.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>A conductor is moved across a uniform magnetic field, but no emf is induced.</strong> Suggest two different reasons why this might be the case.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a2')">Show answer</button>
+        <div class="answer-panel" id="a2">Either the conductor is moving parallel to the field lines (rather than across them), so it is not "cutting" any field lines; or the conductor and the field are moving together at the same velocity, so there is no relative motion between them (electromagnetic induction requires relative motion).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>A coil of 40 turns, each of length 18 cm, moves perpendicularly across a uniform field of 2.6×10⁻³ T at 0.75 m s⁻¹.</strong> Calculate the induced emf.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a3')">Show hint</button>
+        <div class="answer-panel" id="a3">Hint: use ε = NBvL rather than ε = BvL, since there are 40 turns in series. You should get roughly 0.014 V.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>An aircraft flies horizontally at 250 m s⁻¹ where the vertical component of the Earth's magnetic field is 15 μT. Its wingspan is 42 m.</strong> Calculate the emf induced across its wing tips.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a4')">Show hint</button>
+        <div class="answer-panel" id="a4">Hint: the wings act as a single moving conductor of length L = 42 m, moving at v = 250 m s⁻¹ perpendicular to the vertical field component B = 15 μT. Use ε = BvL. You should get roughly 0.16 V.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Magnetic flux and flux linkage</h2>
+      <p>To describe electromagnetic induction in general — not just a conductor sliding across a field — physicists use the idea of <b>magnetic flux</b>. It combines field strength, area, and orientation into a single quantity.</p>
+
+      <div class="eqn">Φ = BA cos θ</div>
+      <div class="keybox">
+        <strong>Φ</strong> = magnetic flux (Wb) · <strong>B</strong> = magnetic field strength (T) · <strong>A</strong> = area of the loop or coil (m²) · <strong>θ</strong> = angle between the field direction and the <em>normal</em> to the area (not the angle to the surface itself!).
+      </div>
+
+      <div class="keyword"><b>Common mistake:</b> θ is measured from the normal (perpendicular) to the surface, not from the surface itself. If the field is perpendicular to the loop, θ = 0°, cos θ = 1, and the equation simplifies to Φ = BA (its maximum possible value for that B and A).</div>
+
+      <figure>
+        <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;">
+          <polygon points="60,120 220,120 260,80 100,80" fill="#eaf3fb" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="160" y1="100" x2="160" y2="30" stroke="#5b6b78" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#normArrow)"/>
+          <text x="168" y="35" font-size="12" fill="#5b6b78">normal</text>
+          <line x1="160" y1="100" x2="230" y2="55" stroke="#3f9a5c" stroke-width="2.2" marker-end="url(#bArrow)"/>
+          <text x="236" y="52" font-size="13" font-weight="700" fill="#3f9a5c">B</text>
+          <path d="M 160 90 A 14 14 0 0 0 172 76" fill="none" stroke="#a4222a" stroke-width="1.4"/>
+          <text x="176" y="82" font-size="12" fill="#a4222a">θ</text>
+          <text x="150" y="140" font-size="12" fill="#173a5e">area, A</text>
+          <defs>
+            <marker id="normArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+            <marker id="bArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#3f9a5c"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D4.18 — Magnetic flux depends on the field strength, the area of the loop, and the angle θ between the field and the normal to the loop.</figcaption>
+      </figure>
+
+      <p>The SI unit of magnetic flux is the <b>weber, Wb</b> (1 Wb = 1 T m²). Rearranging the equation for B perpendicular to A shows why field strength is also called <b>magnetic flux density</b>: B = Φ/A, i.e. flux per unit area.</p>
+
+      <h3>Magnetic flux linkage</h3>
+      <p>So far we have considered a single loop of wire. If the wire is wound into a coil of N turns, each turn contributes the same flux, so the overall induced emf ends up multiplied by N. This is captured by the idea of <b>magnetic flux linkage</b>:</p>
+      <div class="eqn">magnetic flux linkage = NΦ</div>
+      <p>The units of flux linkage are the same as flux (Wb), though "Wb-turns" is sometimes used to be explicit about the N.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1 (Hodder D4.3)</span>
+        <p>(a) Calculate the magnetic flux in a square loop of wire of side 6.2 cm when placed at 45° to a magnetic flux density of 4.3×10⁻⁴ T. (b) Calculate how many turns would be needed on a coil of the same dimensions to create a flux linkage of 8.4×10⁻⁴ Wb.</p>
+        <p><strong>Answer:</strong> (a) Φ = BA cos θ = (4.3×10⁻⁴) × (6.2×10⁻²)² × cos45° = <strong>1.2×10⁻⁶ Wb</strong>. (b) N = NΦ/Φ = (8.4×10⁻⁴)/(1.2×10⁻⁶) = <strong>7.2×10² turns</strong>.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>A flat coil of area 52 cm² is placed in a field of magnetic flux density 6.0×10⁻³ T, at an angle of 35° to the plane of the coil.</strong> Calculate the magnetic flux through the coil.
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a5')">Show hint</button>
+        <div class="answer-panel" id="a5">Hint: the angle given (35°) is between the field and the <em>plane</em> of the coil — you need the angle between the field and the <em>normal</em> to the coil for Φ = BAcosθ, which is 90° − 35° = 55°. You should get roughly 1.8×10⁻⁵ Wb.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>A magnetic field of strength 4.0×10⁻² T passes perpendicularly through a flat coil of 350 turns and area 3.6×10⁻⁵ m².</strong> Determine the flux linkage.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a6')">Show hint</button>
+        <div class="answer-panel" id="a6">Hint: first find Φ = BA (θ = 0° since the field is perpendicular), then multiply by N to get the flux linkage NΦ. You should get roughly 5.0×10⁻⁴ Wb.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>A flat coil of 500 turns and area 7.5 cm² is placed where the magnetic flux density is 8.4×10⁻³ T. The axis of the coil is originally parallel to the field, but the coil is then rotated by 20°.</strong> Calculate the <em>change</em> of flux linkage through the coil.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a7')">Show hint</button>
+        <div class="answer-panel" id="a7">Hint: the coil's <em>axis</em> is the normal direction. If the axis starts parallel to the field, θ (measured from the normal) starts at 0°, so the initial flux linkage is at its maximum, NBA. After rotating by 20°, θ becomes 20°, so the new flux linkage is NBAcos20°. Subtract to find the change — you should get a decrease of roughly 1.9×10⁻⁴ Wb.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Faraday's law of electromagnetic induction</h2>
+      <p>Magnetic flux lets us write one general equation that predicts the induced emf in <em>any</em> situation — whatever is actually moving or changing.</p>
+
+      <div class="eqn">ε = N ΔΦ/Δt</div>
+      <div class="keybox">
+        <strong>Faraday's law:</strong> if a coil of N turns experiences a change in magnetic flux ΔΦ in a time Δt, the induced emf is ε = NΔΦ/Δt. In words: <b>the induced emf equals the rate of change of magnetic flux linkage.</b> (Section 4 adds a direction to this equation, via Lenz's law.)
+      </div>
+
+      <p>Faraday's law applies to every method of induction — a conductor moving through a field, a field moving past a conductor, or a changing current inducing an emf in a nearby circuit. Let's see how it reduces to familiar equations in each case.</p>
+
+      <h3>Case 1 — a conductor moving across a uniform field</h3>
+      <p>Picture a rod of length L sliding at speed v along two parallel rails, in a uniform field B. The field is constant, but the <em>area</em> enclosed by the circuit changes as the rod moves. Since there is only one loop, Faraday's law becomes:</p>
+      <div class="eqn">ε = ΔΦ/Δt = Δ(BA)/Δt = B(ΔA/Δt)</div>
+      <p>In time Δt the rod sweeps out an area ΔA = LvΔt (the "area swept out"), so ΔA/Δt = vL, and:</p>
+      <div class="eqn">ε = B(ΔA/Δt) = BvL</div>
+      <p>— exactly the equation from Section 1, now derived from Faraday's law rather than from balancing forces on individual electrons.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1 (Hodder D4.4)</span>
+        <p>Two parallel horizontal conducting rails, 44 cm apart, sit in a uniform field of 8.7×10⁻⁴ T acting vertically downwards. A rod moves along the rails at 48 cm s⁻¹. (a) Determine the emf induced across the loop. (b) Determine how much extra magnetic flux passes through the circuit when the rod moves 25 cm.</p>
+        <p><strong>Answer:</strong> (a) ε = BvL = (8.7×10⁻⁴)(0.48)(0.44) = <strong>1.8×10⁻⁴ V</strong>. (b) Increase in area = 0.25 × 0.44 = 0.11 m²; increase in flux = area × B = 0.11 × (8.7×10⁻⁴) = <strong>9.6×10⁻⁵ Wb</strong>.</p>
+      </div>
+
+      <h3>Case 2 — a coil moving into or out of a field (or a changing field through a stationary coil)</h3>
+      <p>Here the coil's area A is constant, but the field passing through it changes. Faraday's law becomes:</p>
+      <div class="eqn">ε = N(ΔΦ/Δt) = NA(ΔB/Δt)</div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.2 (Hodder D4.5)</span>
+        <p>A coil of 40 turns and area 5.0 cm² is moved from completely outside to completely inside a uniform magnetic field of strength 0.34 T in 0.56 s. Determine the average magnitude of the induced emf.</p>
+        <p><strong>Answer:</strong> ε = NA(ΔB/Δt) = 40 × (5.0×10⁻⁴) × (0.34/0.56) = <strong>1.2×10⁻² V</strong>.</p>
+      </div>
+
+      <h3>Case 3 — mutual induction between two separate circuits</h3>
+      <p>A changing current in one circuit (A) creates a changing magnetic field, which passes through a second, completely separate circuit (B) and induces an emf in it. This is called <b>mutual induction</b>. For a fixed arrangement of the two circuits, ΔΦ/Δt (and therefore the induced emf, ε) in circuit B is proportional to the rate of change of current, ΔI/Δt, in circuit A. You will not be expected to answer detailed quantitative questions on mutual induction — but it is the basic principle behind the transformer, which you will meet in Section 6.</p>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>A coil of 220 turns moves from outside a strong uniform field of 0.095 T to a position fully inside it, in a time of 0.90 s. The coil has dimensions 4.5 cm × 7.0 cm.</strong> (a) Calculate the change of magnetic flux in the coil. (b) State any assumption made in part (a). (c) Determine the change of magnetic flux linkage. (d) Calculate the average induced emf.
+        <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a8')">Show hint</button>
+        <div class="answer-panel" id="a8">Hint: (a) Φ = BA, using the coil's area in m². (b) assume the field is perpendicular to the coil throughout (θ = 0°) and that the coil moves at a constant rate. (c) multiply by N. (d) divide the change in flux linkage by the time taken.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>The magnetic flux through a coil of 850 turns increases from zero to 3.6×10⁻⁵ Wb in 3.4 ms.</strong> Calculate the magnitude of the average induced emf.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a9')">Show hint</button>
+        <div class="answer-panel" id="a9">Hint: use ε = NΔΦ/Δt directly, converting the time to seconds first. You should get roughly 9.0 V.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>A train travels at 42 m s⁻¹ through a region where the Earth's magnetic field is 46 μT, acting at 60° to the horizontal. An axle on the train has a length of 1.5 m.</strong> (a) Calculate the area swept out by the axle every second. (b) Determine the component of the field acting perpendicular to the axle's motion. (c) Calculate the magnitude of the induced emf across the axle.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a10')">Show hint</button>
+        <div class="answer-panel" id="a10">Hint: (a) area swept per second = speed × length = vL. (b) only the vertical component of the Earth's field induces an emf in a horizontal axle moving horizontally — use B sin60° (the vertical component) if 60° is measured from the horizontal. (c) then use ε = BvL with that perpendicular component.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Lenz's law and energy conservation</h2>
+      <p>Faraday's law tells us the <em>size</em> of an induced emf. The negative sign in ε = −NΔΦ/Δt tells us about its <em>direction</em> — and that direction is not arbitrary. It is a direct consequence of the conservation of energy.</p>
+
+      <div class="keybox">
+        <strong>Lenz's law:</strong> the direction of an induced emf (and current) is always such that it opposes the change that produced it. It was the physicist Heinrich Lenz who added this direction to Faraday's law, giving the complete, signed equation:
+        <div class="eqn" style="margin-top:0.4rem;">ε = −N ΔΦ/Δt</div>
+      </div>
+
+      <h3>Why energy conservation demands this</h3>
+      <p>If a current is generated by electromagnetic induction, energy must be transferred to that current from somewhere — energy cannot be created from nothing. That energy usually comes from the kinetic energy of whatever is moving (the conductor, or the magnet). For that energy to be transferred, the moving object must do work against an opposing force — so the induced current's magnetic effect must <em>oppose</em> the motion that created it, requiring a force (and therefore work) to keep the motion going.</p>
+
+      <div class="keyword">
+        <b>If Lenz's law were reversed</b> (i.e. if the induced current assisted the motion instead), the moving object would speed up, generating an even larger current, which would speed it up further — energy would be created from nothing. This would violate the conservation of energy, so it cannot happen.
+      </div>
+
+      <p>Consider a magnet approaching a coil (Topic D.4, Fig. D4.9): the induced current turns the coil into an electromagnet. By Lenz's law, the coil's near end must become the <em>same</em> pole as the approaching magnet, so that the two repel — opposing the magnet's approach. Work must be done to push the magnet closer, and that work is transferred to the induced current. If the magnet is instead pulled away, the induced current reverses, creating an attractive force that opposes the magnet leaving.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A bar magnet is dropped, north pole down, through a horizontal conducting loop. Describe, using Lenz's law, the direction of the force the loop exerts on the magnet as it approaches and as it leaves.</p>
+        <p><strong>Answer:</strong> As the magnet approaches, the loop's induced current makes its upper face a north pole, repelling the approaching north pole and opposing its fall. As the magnet moves away (below the loop), the induced current reverses, making the loop's lower face a south pole, which attracts the departing magnet — again opposing its motion. In both cases, the magnetic force does negative work on the falling magnet, so it falls more slowly than it would in free fall.</p>
+      </div>
+
+      <h3>Eddy currents</h3>
+      <p>Lenz's law also applies inside solid conductors, not just wire loops. When a solid piece of metal experiences a changing magnetic flux, circulating currents called <b>eddy currents</b> are induced within it. By Lenz's law, these currents oppose the change that caused them — which is why, for example, a magnet falling through a copper or aluminium tube falls surprisingly slowly: the eddy currents induced in the tube wall create a magnetic field that opposes the magnet's motion. The electrical energy in eddy currents is transferred to internal (thermal) energy via resistive heating (P = I²R), which is exactly how an induction cooker heats a metal pan.</p>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>A bar magnet, north pole facing down, is moved away from a solenoid that is part of a complete circuit.</strong> State the polarity induced at the top of the solenoid (nearest the departing magnet), and explain your reasoning using Lenz's law.
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a11')">Show hint</button>
+        <div class="answer-panel" id="a11">Hint: Lenz's law says the induced effect must oppose the change — here, the magnet is <em>leaving</em>, so the induced current must try to attract it back. An attractive force between a departing north pole and the solenoid's top requires the solenoid's top to become a south pole.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>Explain why a magnet falls more slowly through a copper tube than through an identical plastic tube, even though copper is not magnetic.</strong>
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a12')">Show answer</button>
+        <div class="answer-panel" id="a12">As the magnet falls, the changing magnetic flux through the copper (a conductor) induces eddy currents in it, even though copper itself is not magnetic. By Lenz's law, these eddy currents create their own magnetic field that opposes the magnet's motion, producing a retarding force. In a plastic tube (an insulator), no eddy currents can flow, so there is no such opposing force and the magnet falls freely.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>Explain, in terms of energy transfers, why a conductor being pushed across a magnetic field to generate a current requires a continuous external force to keep it moving at constant speed.</strong>
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a13')">Show answer</button>
+        <div class="answer-panel" id="a13">By Lenz's law, the induced current creates a magnetic force on the conductor that opposes its motion. To keep the conductor moving at constant speed against this opposing force, an external force must do work on it. That work is the source of the electrical energy delivered to the circuit — energy is not created from nothing, it is converted from the work done by whatever is pushing the conductor.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. AC generators and the effect of frequency</h2>
+      <p>Electromagnetic induction generates most of the world's electrical energy, using coils that rotate inside a magnetic field.</p>
+
+      <div class="keybox">
+        A uniform magnetic field induces a <strong>sinusoidally varying emf</strong> in a coil that rotates within it, at constant angular speed.
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;">
+          <text x="30" y="30" font-size="13" font-weight="700" fill="#c0392b">N</text>
+          <rect x="15" y="35" width="35" height="110" fill="#f4c7c7" stroke="#c0392b" stroke-width="1.4"/>
+          <text x="285" y="30" font-size="13" font-weight="700" fill="#2f6fa8" text-anchor="end">S</text>
+          <rect x="270" y="35" width="35" height="110" fill="#cfe0f2" stroke="#2f6fa8" stroke-width="1.4"/>
+          <line x1="55" y1="70" x2="265" y2="70" stroke="#3f9a5c" stroke-width="1.4" marker-end="url(#genArrow)"/>
+          <line x1="55" y1="95" x2="265" y2="95" stroke="#3f9a5c" stroke-width="1.4" marker-end="url(#genArrow)"/>
+          <line x1="55" y1="120" x2="265" y2="120" stroke="#3f9a5c" stroke-width="1.4" marker-end="url(#genArrow)"/>
+          <ellipse cx="160" cy="95" rx="58" ry="42" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="4 3"/>
+          <g opacity="0.45">
+            <rect x="130" y="55" width="60" height="80" fill="none" stroke="#5b6b78" stroke-width="2" stroke-dasharray="5 4" transform="rotate(-70 160 95)"/>
+          </g>
+          <g>
+            <rect x="130" y="55" width="60" height="80" fill="none" stroke="#173a5e" stroke-width="3" transform="rotate(25 160 95)"/>
+            <circle cx="160" cy="95" r="4" fill="#173a5e"/>
+          </g>
+          <path d="M 209,72 A 58,42 0 0 1 197,124" fill="none" stroke="#a4222a" stroke-width="2" marker-end="url(#rotArrow)"/>
+          <path d="M 111,118 A 58,42 0 0 1 123,66" fill="none" stroke="#a4222a" stroke-width="2" marker-end="url(#rotArrow)"/>
+          <text x="160" y="178" font-size="12" text-anchor="middle" fill="#173a5e">coil rotates about central axis</text>
+          <text x="160" y="194" font-size="11" text-anchor="middle" fill="#5b6b78">(faded outline shows an earlier position)</text>
+          <defs>
+            <marker id="genArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3f9a5c"/></marker>
+            <marker id="rotArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#a4222a"/></marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. D4.30/31 — A coil rotating about a fixed central axis between the poles of a fixed magnet (the faded rectangle shows an earlier position in the rotation, with the red arrows showing the direction of rotation). The induced emf is greatest when the coil's plane is parallel to the field (cutting field lines fastest), and zero when its plane is perpendicular to the field (momentarily moving parallel to the field lines).</figcaption>
+      </figure>
+
+      <p>Carbon "brushes" press against rotating "slip rings" to connect the spinning coil to the external circuit without the wires twisting. As the coil turns at constant angular speed in a uniform field, the emf induced varies smoothly between a maximum in one direction and the same maximum in the other — a sine wave.</p>
+
+      <h3>The effect of changing the rotation frequency</h3>
+      <p>If the coil rotates faster (a higher frequency, f), the magnetic flux through it changes more rapidly, so — by Faraday's law — a <em>larger</em> peak emf is induced, and the whole cycle repeats in a <em>shorter</em> time (period T = 1/f). Halving the frequency halves the rate of change of flux linkage and therefore halves the peak induced emf — while doubling the time period.</p>
+
+      <div class="keyword"><b>Key relationship:</b> peak emf ∝ frequency of rotation, while the time period T = 1/f. Faster rotation means a bigger, faster-oscillating signal; slower rotation means a smaller, slower one.</div>
+
+      <div class="freqwidget">
+        <p style="margin:0 0 0.6rem 0; font-weight:700; color:var(--navy);">Explore it yourself: drag the slider to change the coil's rotation frequency.</p>
+        <div class="control-row">
+          <label for="freqSlider">Rotation frequency</label>
+          <input type="range" id="freqSlider" min="10" max="40" step="1" value="20" oninput="updateFreqWidget()">
+        </div>
+        <div class="readout">
+          <span>Frequency: <span class="val" id="freqVal">20 Hz</span></span>
+          <span>Peak emf: <span class="val" id="peakVal">6.0 V</span></span>
+          <span>Period: <span class="val" id="periodVal">50.0 ms</span></span>
+        </div>
+        <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="100" x2="400" y2="100" stroke="#b9c6d3" stroke-width="1.2"/>
+          <line x1="40" y1="20" x2="40" y2="180" stroke="#b9c6d3" stroke-width="1.2"/>
+          <text x="405" y="104" font-size="11" fill="#5b6b78">t</text>
+          <text x="30" y="24" font-size="11" fill="#5b6b78" text-anchor="end">ε</text>
+          <path id="refWave" d="" fill="none" stroke="#b9c6d3" stroke-width="2" stroke-dasharray="5 4"/>
+          <path id="freqWave" d="" fill="none" stroke="#0e7c86" stroke-width="2.6"/>
+        </svg>
+        <div class="legend">
+          <span><span class="swatch" style="background:#b9c6d3;"></span>reference (20 Hz)</span>
+          <span><span class="swatch" style="background:#0e7c86;"></span>current frequency</span>
+        </div>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A generator produces a peak emf of 340 V when its coil rotates at 50 Hz. Calculate the peak emf if the frequency were reduced to 20 Hz, assuming everything else stays the same.</p>
+        <p><strong>Answer:</strong> Peak emf is proportional to frequency, so ε<sub>peak,new</sub> = 340 × (20/50) = <strong>136 V</strong>. The period would also increase, from 1/50 = 0.020 s to 1/20 = 0.050 s.</p>
+      </div>
+
+      <p>Real generators use turbines to provide the rotation — driven by high-pressure steam, falling water, or wind — and many-turned coils wound on high-permeability cores to maximise the induced emf. Mains electricity in most of the world is generated and delivered as alternating current (ac) rated at 230 V, 50 Hz (120 V, 60 Hz in North America). The quoted "230 V" is the <em>RMS voltage</em> — the steady dc voltage that would deliver the same power — not the peak voltage, which actually reaches about ±325 V. The difference between peak and RMS voltage is not part of our course, but interesting to look at if you are considering studying physics or engineering.</p>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>A generator's coil rotates at 60 Hz and produces a peak emf of 170 V.</strong> (a) Calculate the period of the output. (b) Predict the new peak emf and period if the frequency is increased to 90 Hz.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a14')">Show hint</button>
+        <div class="answer-panel" id="a14">Hint: (a) T = 1/f. (b) peak emf scales in direct proportion to frequency, while the period scales inversely with frequency. You should find the period roughly halves-to-thirds and the peak emf increases to roughly 255 V.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>Using the interactive widget above:</strong> set the frequency to 40 Hz, then to 10 Hz. Record the peak emf and period the widget displays at each setting, and confirm that quadrupling the frequency quadruples the peak emf and reduces the period to a quarter of its previous value.
+        <textarea class="answer-lines long" rows="5" placeholder="Record your readings here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a15')">Show hint</button>
+        <div class="answer-panel" id="a15">Hint: at 10 Hz you should see a small, slow wave (long period); at 40 Hz a large, fast wave (short period) — exactly four times the peak emf and a quarter of the period of the 10 Hz case, since both quantities scale linearly (directly or inversely) with frequency.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>Explain, in terms of Faraday's law, why increasing the rotation frequency of a generator's coil increases the peak induced emf.</strong>
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a16')">Show answer</button>
+        <div class="answer-panel" id="a16">Faraday's law states that the induced emf equals the rate of change of magnetic flux linkage, ε = NΔΦ/Δt. A faster rotation means the coil sweeps through the same change in orientation (and flux) in less time, so ΔΦ/Δt is larger at every point in the cycle — including at the peak. A larger rate of change of flux linkage means a larger induced emf.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Application: the transformer</h2>
+      <p>A transformer uses electromagnetic induction to step an alternating voltage up or down. Two separate coils — the <strong>primary</strong> (connected to the input supply) and the <strong>secondary</strong> (connected to the output) — are wound around a shared iron core, but are <em>not</em> electrically connected to each other at all. This is exactly the mutual induction described in Section 3, Case 3: the alternating current in the primary coil creates a constantly changing magnetic flux, the iron core channels that flux efficiently through the secondary coil, and the changing flux linkage induces an alternating emf in the secondary — with no wires touching.</p>
+
+      <figure>
+        <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;">
+          <rect x="95" y="30" width="18" height="130" fill="#8a97a1"/>
+          <rect x="227" y="30" width="18" height="130" fill="#8a97a1"/>
+          <rect x="95" y="30" width="150" height="14" fill="#8a97a1"/>
+          <rect x="95" y="146" width="150" height="14" fill="#8a97a1"/>
+          <g stroke="#173a5e" stroke-width="2.2" fill="none">
+            <ellipse cx="104" cy="50" rx="20" ry="6"/>
+            <ellipse cx="104" cy="65" rx="20" ry="6"/>
+            <ellipse cx="104" cy="80" rx="20" ry="6"/>
+            <ellipse cx="104" cy="95" rx="20" ry="6"/>
+            <ellipse cx="104" cy="110" rx="20" ry="6"/>
+            <ellipse cx="104" cy="125" rx="20" ry="6"/>
+            <ellipse cx="104" cy="140" rx="20" ry="6"/>
+          </g>
+          <g stroke="#c0392b" stroke-width="2.2" fill="none">
+            <ellipse cx="236" cy="50" rx="20" ry="6"/>
+            <ellipse cx="236" cy="65" rx="20" ry="6"/>
+            <ellipse cx="236" cy="80" rx="20" ry="6"/>
+            <ellipse cx="236" cy="95" rx="20" ry="6"/>
+            <ellipse cx="236" cy="110" rx="20" ry="6"/>
+            <ellipse cx="236" cy="125" rx="20" ry="6"/>
+            <ellipse cx="236" cy="140" rx="20" ry="6"/>
+          </g>
+          <path d="M84,50 L65,35" stroke="#173a5e" stroke-width="1.6" fill="none"/>
+          <circle cx="65" cy="35" r="3" fill="#173a5e"/>
+          <path d="M84,140 L65,155" stroke="#173a5e" stroke-width="1.6" fill="none"/>
+          <circle cx="65" cy="155" r="3" fill="#173a5e"/>
+          <path d="M256,50 L275,35" stroke="#c0392b" stroke-width="1.6" fill="none"/>
+          <circle cx="275" cy="35" r="3" fill="#c0392b"/>
+          <path d="M256,140 L275,155" stroke="#c0392b" stroke-width="1.6" fill="none"/>
+          <circle cx="275" cy="155" r="3" fill="#c0392b"/>
+          <text x="42" y="98" font-size="13" font-weight="700" fill="#173a5e" text-anchor="middle">V&#8346;</text>
+          <text x="298" y="98" font-size="13" font-weight="700" fill="#c0392b" text-anchor="middle">V&#8347;</text>
+          <text x="104" y="179" font-size="12" font-weight="700" fill="#173a5e" text-anchor="middle">N&#8346;</text>
+          <text x="236" y="179" font-size="12" font-weight="700" fill="#c0392b" text-anchor="middle">N&#8347;</text>
+          <text x="170" y="195" font-size="11" fill="#5b6b78" text-anchor="middle">shared iron core</text>
+        </svg>
+        <figcaption>Fig. D4.16/17 &mdash; A transformer: primary coil (N&#8346; turns, blue) and secondary coil (N&#8347; turns, red) wound directly around a common iron core, each connected to its own circuit by a pair of leads. The alternating flux produced by the primary links the secondary, inducing an alternating emf in it.</figcaption>
+      </figure>
+
+      <h3>Deriving the transformer equation from Faraday's law</h3>
+      <p>Both coils are wound on the same iron core, so the same changing flux, and therefore the same rate of change of flux, ΔΦ/Δt, passes through every turn of <em>both</em> coils at once. Applying Faraday's law (Section 3) to each coil separately:</p>
+      <div class="eqn">ε&#8346; = N&#8346;(ΔΦ/Δt)<br>ε&#8347; = N&#8347;(ΔΦ/Δt)</div>
+      <p>Dividing each equation by its own number of turns isolates the shared quantity, ΔΦ/Δt, which must therefore be the same for both:</p>
+      <div class="eqn">ε&#8346;/N&#8346; = ΔΦ/Δt<br>ε&#8347;/N&#8347; = ΔΦ/Δt<br>so&nbsp; ε&#8346;/N&#8346; = ε&#8347;/N&#8347;</div>
+      <p>The primary and secondary coils are each just one part of a complete circuit, so it makes more sense to talk about the potential difference, V, across each coil rather than an "emf" belonging to neither circuit. Replacing ε with V:</p>
+      <div class="eqn">V&#8346;/N&#8346; = V&#8347;/N&#8347;</div>
+      <p>which rearranges to the usual form of the transformer equation:</p>
+      <div class="eqn">V&#8347; / V&#8346; = N&#8347; / N&#8346;</div>
+      <div class="keybox">
+        <strong>V&#8346;, V&#8347;</strong> = primary and secondary (r.m.s.) voltages (V) &middot; <strong>N&#8346;, N&#8347;</strong> = number of turns on the primary and secondary coils. The same changing flux links every turn of both coils, so the induced emf per turn is identical &mdash; the total emf on each side simply scales with how many turns that side has.</div>
+
+      <p>If N&#8347; &gt; N&#8346;, the secondary voltage is larger than the primary &mdash; a <strong>step-up</strong> transformer. If N&#8347; &lt; N&#8346;, the secondary voltage is smaller &mdash; a <strong>step-down</strong> transformer. A real transformer is not perfectly efficient: some energy is lost as heat, mostly through <strong>eddy currents</strong> induced in the iron core itself (see Section 4) and through electrical resistance in the windings. Laminating the core &mdash; building it from thin, electrically-insulated sheets rather than one solid block &mdash; breaks up the paths available to eddy currents and greatly reduces this loss, which is why real transformer cores are always laminated rather than solid.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>A transformer has 500 turns on its primary coil and is connected to a 230 V a.c. supply. How many turns are needed on the secondary coil to produce an output of 12 V?</p>
+        <p><strong>Answer:</strong> Rearranging V&#8347;/V&#8346; = N&#8347;/N&#8346; gives N&#8347; = N&#8346; &times; (V&#8347;/V&#8346;) = 500 &times; (12/230) = <strong>26 turns</strong> (to the nearest whole turn). Since N&#8347; &lt; N&#8346;, this is a step-down transformer.</p>
+      </div>
+
+      <h3>Try it yourself: the interactive transformer simulation</h3>
+      <p>The simulation below lets you build your own transformer: set the number of turns on each coil, the primary voltage, and the efficiency, then read the secondary voltage straight off the output meter. Try predicting V&#8347; from V&#8346; &times; (N&#8347;/N&#8346;) before you change the sliders, then check your prediction against the simulation.</p>
+      <div class="sim-embed">
+        <p class="instructions">Drag your mouse across the 3D transformer to rotate the view. Use the sliders to set N&#8346;, V&#8346; and N&#8347;, and watch V&#8347;&#8347; update in real time. Try switching to <strong>DC Mode</strong> and note what happens to the output &mdash; then switch off <strong>Laminated Core</strong> and watch the core glow red as eddy-current heating increases.</p>
+        <iframe class="sim-frame" srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot;>
+<head>
+<meta charset=&quot;UTF-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+<title>3D Transformer Thermal Simulation</title>
+<style>
+    :root {
+        --iron: #7f8c8d;
+        --iron-dark: #646f70;
+        --iron-light: #95a5a6;
+        --bg: #ffffff;
+        --accent: #2c3e50;
+    }
+    html, body {
+        margin: 0; padding: 0; width: 100%; height: auto;
+        background: var(--bg); font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    #app-wrapper {
+        width: 100%; max-width: 1200px; margin: 0 auto;
+        display: flex; flex-direction: column; gap: 10px; padding: 10px; box-sizing: border-box;
+    }
+    .dashboard {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 10px; background: #f8f9fa; padding: 15px; border: 1px solid #ddd; border-radius: 8px;
+    }
+    .panel h3 { margin: 0 0 10px 0; font-size: 14px; color: #333; border-bottom: 2px solid #111; }
+    .control-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+    input[type=&quot;range&quot;] { flex-grow: 1; margin: 0 15px; }
+    .switch-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .switch-label { font-size: 12px; font-weight: bold; color: #444; }
+    .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+        position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+        background-color: #ccc; transition: .3s; border-radius: 20px;
+    }
+    .slider:before {
+        position: absolute; content: &quot;&quot;; height: 14px; width: 14px; left: 3px; bottom: 3px;
+        background-color: white; transition: .3s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #2e7d32; }
+    input:checked + .slider:before { transform: translateX(20px); }
+    .visibility-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        margin-top: 5px; padding-top: 10px; border-top: 1px dashed #ccc;
+    }
+    .stage {
+        width: 100%; height: 600px;
+        background: radial-gradient(circle, #ffffff 0%, #e2e6e9 100%);
+        border-radius: 8px; position: relative; perspective: 2000px;
+        border: 1px solid #ccc; overflow: hidden;
+    }
+    .scene {
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -45%) rotateX(-20deg) rotateY(-35deg);
+        transform-style: preserve-3d; width: 400px; height: 300px;
+    }
+    .pillar { position: absolute; transform-style: preserve-3d; }
+    .side { position: absolute; background: var(--iron); border: 1px solid rgba(0,0,0,0.2); transition: background 0.5s; }
+    .hot .side { background-color: #b33939 !important; box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.5); }
+    .front { transform: translateZ(30px); background: var(--iron-light); }
+    .back  { transform: translateZ(-30px) rotateY(180deg); }
+    .left  { transform: rotateY(-90deg) translateZ(30px); }
+    .right { transform: rotateY(90deg) translateZ(30px); }
+    .top   { transform: rotateX(90deg) translateZ(30px); }
+    .bottom{ transform: rotateX(-90deg) translateZ(30px); }
+    .is-laminated .side { background-image: repeating-linear-gradient(90deg, var(--iron-dark), var(--iron-dark) 2px, var(--iron-light) 3px); }
+    .turn { position: absolute; width: 60px; height: 8px; transform-style: preserve-3d; }
+    .wire { position: absolute; border-radius: 4px; height: 8px; background-color: inherit; }
+    .w-f { width: 72px; left: -6px; transform: translateZ(33px); }
+    .w-b { width: 72px; left: -6px; transform: translateZ(-33px); filter: brightness(0.6); }
+    .w-l { width: 66px; left: -33px; transform: rotateY(-90deg) translateZ(3px) skewY(-8deg); filter: brightness(0.8); }
+    .w-r { width: 66px; right: -33px; transform: rotateY(90deg) translateZ(3px) skewY(8deg); filter: brightness(0.9); }
+    .meter {
+        position: absolute; background: rgba(0,0,0,0.9); color: #0f0;
+        padding: 10px; border-radius: 4px; font-family: monospace; font-size: 16px;
+        border: 1px solid #444; z-index: 5;
+    }
+    button { padding: 8px; cursor: pointer; font-weight: bold; background: #222; color: #fff; border: none; border-radius: 4px; }
+    .active-btn { background: #d32f2f; }
+    .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id=&quot;app-wrapper&quot;>
+    <div class=&quot;dashboard&quot;>
+        <div class=&quot;panel&quot;>
+            <h3>Primary (Input)</h3>
+            <div class=&quot;control-row&quot;>
+                <label>Turns (Np)</label>
+                <input type=&quot;range&quot; id=&quot;np&quot; min=&quot;5&quot; max=&quot;30&quot; value=&quot;10&quot; oninput=&quot;update()&quot;>
+                <span id=&quot;npDisp&quot;>10</span>
+            </div>
+            <div class=&quot;control-row&quot;>
+                <label>Voltage (Vp)</label>
+                <input type=&quot;range&quot; id=&quot;vp&quot; min=&quot;0&quot; max=&quot;24&quot; value=&quot;12&quot; oninput=&quot;update()&quot;>
+                <span id=&quot;vpVal&quot;>12</span>
+            </div>
+            <div class=&quot;switch-container&quot;>
+                <span class=&quot;switch-label&quot;>Operation Mode</span>
+                <button id=&quot;dcBtn&quot; onclick=&quot;toggleAC()&quot; class=&quot;active-btn&quot;>AC Mode</button>
+            </div>
+        </div>
+
+        <div class=&quot;panel&quot;>
+            <h3>Secondary &amp; Efficiency</h3>
+            <div class=&quot;control-row&quot;>
+                <label>Turns (Ns)</label>
+                <input type=&quot;range&quot; id=&quot;ns&quot; min=&quot;5&quot; max=&quot;30&quot; value=&quot;20&quot; oninput=&quot;update()&quot;>
+                <span id=&quot;nsDisp&quot;>20</span>
+            </div>
+            <div class=&quot;control-row&quot;>
+                <label>Efficiency</label>
+                <input type=&quot;range&quot; id=&quot;eff&quot; min=&quot;10&quot; max=&quot;100&quot; value=&quot;98&quot; oninput=&quot;update()&quot;>
+                <span id=&quot;effDisp&quot;>98%</span>
+            </div>
+            <div class=&quot;switch-container&quot;>
+                <span class=&quot;switch-label&quot;>Laminated Core</span>
+                <label class=&quot;switch&quot;>
+                    <input type=&quot;checkbox&quot; id=&quot;lamToggle&quot; checked onchange=&quot;update()&quot;>
+                    <span class=&quot;slider&quot;></span>
+                </label>
+            </div>
+        </div>
+
+        <div class=&quot;panel&quot;>
+            <h3>Display Visibility</h3>
+            <div class=&quot;visibility-grid&quot;>
+                <div class=&quot;switch-container&quot;>
+                    <span class=&quot;switch-label&quot;>Hide Np</span>
+                    <label class=&quot;switch&quot;><input type=&quot;checkbox&quot; id=&quot;hideNp&quot; onchange=&quot;update()&quot;><span class=&quot;slider&quot;></span></label>
+                </div>
+                <div class=&quot;switch-container&quot;>
+                    <span class=&quot;switch-label&quot;>Hide Ns</span>
+                    <label class=&quot;switch&quot;><input type=&quot;checkbox&quot; id=&quot;hideNs&quot; onchange=&quot;update()&quot;><span class=&quot;slider&quot;></span></label>
+                </div>
+                <div class=&quot;switch-container&quot;>
+                    <span class=&quot;switch-label&quot;>Hide Vin</span>
+                    <label class=&quot;switch&quot;><input type=&quot;checkbox&quot; id=&quot;hideVp&quot; onchange=&quot;update()&quot;><span class=&quot;slider&quot;></span></label>
+                </div>
+                <div class=&quot;switch-container&quot;>
+                    <span class=&quot;switch-label&quot;>Hide Vout</span>
+                    <label class=&quot;switch&quot;><input type=&quot;checkbox&quot; id=&quot;hideVs&quot; onchange=&quot;update()&quot;><span class=&quot;slider&quot;></span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=&quot;stage&quot; id=&quot;stage&quot;>
+        <div class=&quot;meter&quot; id=&quot;m1&quot; style=&quot;left: 20px; top: 20px;&quot;>V<sub>in</sub>: <span id=&quot;v1&quot;>12.00V</span></div>
+        <div class=&quot;meter&quot; id=&quot;m2&quot; style=&quot;right: 20px; top: 20px;&quot;>V<sub>out</sub>: <span id=&quot;v2&quot;>10.58V</span></div>
+
+        <div class=&quot;scene&quot; id=&quot;mainScene&quot;>
+            <div id=&quot;p-pill&quot; class=&quot;pillar is-laminated&quot; style=&quot;left: 0; width: 60px; height: 300px;&quot;>
+                <div class=&quot;side front&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div class=&quot;side back&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div class=&quot;side left&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div class=&quot;side right&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div id=&quot;p-coils&quot; style=&quot;transform-style: preserve-3d;&quot;></div>
+            </div>
+            <div id=&quot;s-pill&quot; class=&quot;pillar is-laminated&quot; style=&quot;right: 0; width: 60px; height: 300px;&quot;>
+                <div class=&quot;side front&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div class=&quot;side back&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div class=&quot;side left&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div class=&quot;side right&quot; style=&quot;width: 60px; height: 300px;&quot;></div>
+                <div id=&quot;s-coils&quot; style=&quot;transform-style: preserve-3d;&quot;></div>
+            </div>
+            <div class=&quot;pillar horiz is-laminated&quot; style=&quot;width: 280px; height: 60px; left: 60px; top: 0;&quot;>
+                <div class=&quot;side front&quot; style=&quot;width: 280px; height: 60px;&quot;></div>
+                <div class=&quot;side back&quot; style=&quot;width: 280px; height: 60px;&quot;></div>
+                <div class=&quot;side top&quot; style=&quot;width: 280px; height: 60px;&quot;></div>
+            </div>
+            <div class=&quot;pillar horiz is-laminated&quot; style=&quot;width: 280px; height: 60px; left: 60px; bottom: 0;&quot;>
+                <div class=&quot;side front&quot; style=&quot;width: 280px; height: 60px;&quot;></div>
+                <div class=&quot;side back&quot; style=&quot;width: 280px; height: 60px;&quot;></div>
+                <div class=&quot;side bottom&quot; style=&quot;width: 280px; height: 60px;&quot;></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type=&quot;text/javascript&quot;>
+    let isAC = true;
+
+    function toggleAC() {
+        isAC = !isAC;
+        const btn = document.getElementById('dcBtn');
+        btn.innerText = isAC ? &quot;AC Mode&quot; : &quot;DC Mode&quot;;
+        btn.className = isAC ? &quot;active-btn&quot; : &quot;&quot;;
+        update();
+    }
+
+    function renderCoils(id, count, color) {
+        const container = document.getElementById(id);
+        container.innerHTML = '';
+        const spacing = 220 / count;
+        for(let i=0; i<count; i++) {
+            const turn = document.createElement('div');
+            turn.className = 'turn';
+            turn.style.top = (40 + i * spacing) + 'px';
+            turn.style.backgroundColor = color;
+            ['f', 'b', 'l', 'r'].forEach(s => {
+                const w = document.createElement('div');
+                w.className = `wire w-${s}`;
+                turn.appendChild(w);
+            });
+            container.appendChild(turn);
+        }
+    }
+
+    function update() {
+        const np = parseInt(document.getElementById('np').value);
+        const ns = parseInt(document.getElementById('ns').value);
+        const vp = parseFloat(document.getElementById('vp').value);
+        const userEff = parseInt(document.getElementById('eff').value) / 100;
+        const lam = document.getElementById('lamToggle').checked;
+
+        let finalEff = lam ? userEff : 0.35;
+        let vs = isAC ? (vp * (ns / np) * finalEff) : 0;
+
+        document.getElementById('npDisp').innerText = np;
+        document.getElementById('nsDisp').innerText = ns;
+        document.getElementById('vpVal').innerText = vp;
+        document.getElementById('effDisp').innerText = Math.round(finalEff * 100) + &quot;%&quot;;
+        document.getElementById('v1').innerText = vp.toFixed(2) + &quot;V&quot;;
+        document.getElementById('v2').innerText = vs.toFixed(2) + &quot;V&quot;;
+
+        const pillars = document.querySelectorAll('.pillar');
+        pillars.forEach(p => {
+            if (lam) p.classList.add('is-laminated'); else p.classList.remove('is-laminated');
+            if (!lam && isAC && vp > 5) p.classList.add('hot'); else p.classList.remove('hot');
+        });
+
+        document.getElementById('m1').className = document.getElementById('hideVp').checked ? 'meter hidden' : 'meter';
+        document.getElementById('m2').className = document.getElementById('hideVs').checked ? 'meter hidden' : 'meter';
+        document.getElementById('npDisp').className = document.getElementById('hideNp').checked ? 'hidden' : '';
+        document.getElementById('nsDisp').className = document.getElementById('hideNs').checked ? 'hidden' : '';
+
+        renderCoils('p-coils', np, '#e67e22');
+        renderCoils('s-coils', ns, '#d35400');
+    }
+
+    document.getElementById('stage').addEventListener('mousemove', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 40;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * -40;
+        document.getElementById('mainScene').style.transform = `translate(-50%, -45%) rotateX(${y-20}deg) rotateY(${x-35}deg)`;
+    });
+
+    update();
+</script>
+</body>
+</html>
+" title="Interactive 3D transformer simulation" style="width:100%; height:780px; border:1px solid var(--border); border-radius:12px; display:block;" loading="lazy"></iframe>
+        <p class="sim-embed-credit">Interactive simulation by Dr Jones Physics &mdash; <a href="https://www.drjonesphysics.com/transformer" target="_blank" rel="noopener">drjonesphysics.com/transformer</a>. Used with permission.</p>
+        <p class="sim-print-note">Interactive 3D transformer simulation &mdash; available in the online version of this workbook. See drjonesphysics.com/transformer.</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>Using the simulation, set N&#8346; = 10, N&#8347; = 25 and V&#8346; = 12 V, with efficiency at 100% and the laminated core switched on.</strong> (a) Predict V&#8347; using V&#8347; = V&#8346; &times; (N&#8347;/N&#8346;). (b) Read off the simulation's actual output voltage. Explain any small difference between your prediction and the simulation's reading.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a17')">Show hint</button>
+        <div class="answer-panel" id="a17">Hint: your prediction should be V&#8347; = 12 &times; (25/10) = 30 V. Even at "100% efficiency" in the simulation, the reading may be a little different because the simulation still applies the efficiency slider value as a multiplying factor on top of the ideal turns-ratio calculation &mdash; check that the efficiency slider really is set fully across before comparing.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>With the same turns (N&#8346; = 10, N&#8347; = 25) and V&#8346; = 12 V, reduce the efficiency slider to around 50%, then switch the laminated core toggle off.</strong> (a) State what happens to the output voltage as efficiency decreases. (b) Explain, using ideas from Section 4, why switching off the laminated core makes the core visibly heat up in the simulation.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a18')">Show answer</button>
+        <div class="answer-panel" id="a18">(a) The output voltage falls, since a lower efficiency means a smaller fraction of the ideal turns-ratio voltage is actually delivered to the secondary. (b) A solid (non-laminated) iron core provides a continuous conducting path for eddy currents to circulate within the core itself. By Lenz's law these eddy currents oppose the changing flux that induces them, and the electrical resistance of the iron dissipates their energy as heat (P = I&#178;R) &mdash; exactly the same eddy-current heating effect discussed for induction cookers in Section 4. Laminating the core breaks up these circulation paths, choking off the eddy currents and keeping the core cool.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">19</span><strong>A step-down transformer is needed to convert a 24 V a.c. supply to 8.0 V.</strong> If the primary coil has 30 turns, calculate the number of turns needed on the secondary. Then set the simulation as close as possible to these values (within its slider limits) and check that the output voltage is close to 8.0 V.
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('a19')">Show hint</button>
+        <div class="answer-panel" id="a19">Hint: rearrange V&#8347;/V&#8346; = N&#8347;/N&#8346; to make N&#8347; the subject: N&#8347; = N&#8346; &times; (V&#8347;/V&#8346;) = 30 &times; (8.0/24) = 10 turns. Set N&#8346; = 30, N&#8347; = 10 and V&#8346; = 24 V in the simulation (all within the slider ranges) and confirm the output reads close to 8.0 V at full efficiency.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Equation summary</h2>
+      <table class="eqtable">
+        <tr><th>Quantity / situation</th><th>Equation</th></tr>
+        <tr><td>Magnetic flux</td><td>&#934; = BA cos&#952;</td></tr>
+        <tr><td>Magnetic flux density (from flux)</td><td>B = &#934;/A</td></tr>
+        <tr><td>Magnetic flux linkage (N-turn coil)</td><td>N&#934;</td></tr>
+        <tr><td>Motional emf (straight conductor)</td><td>&#949; = BvL</td></tr>
+        <tr><td>Faraday&#8217;s law of induction, with Lenz&#8217;s addition</td><td>&#949; = &#8722;N&#916;&#934;/&#916;t</td></tr>
+        <tr><td>Force on a current-carrying conductor</td><td>F = BIL sin&#952;</td></tr>
+      </table>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Glossary</h2>
+      <dl class="glossary">
+        <dt>Electromagnetic induction</dt><dd>The generation of an emf (and, in a closed circuit, a current) as a result of a changing magnetic flux linking a conductor or coil.</dd>
+        <dt>Magnetic flux, &#934;</dt><dd>A measure of the total magnetic field passing through a given area, &#934; = BA cos&#952;, where &#952; is measured from the normal to the area. Measured in webers (Wb).</dd>
+        <dt>Magnetic flux linkage</dt><dd>The total flux linking all N turns of a coil, N&#934;; this is the quantity that actually determines the induced emf for a multi-turn coil.</dd>
+        <dt>Faraday&#8217;s law of induction</dt><dd>The magnitude of the induced emf equals the rate of change of magnetic flux linkage: &#949; = &#8722;N&#916;&#934;/&#916;t. This single law explains motional emf, a coil moving in or out of a field, and mutual induction.</dd>
+        <dt>Lenz&#8217;s law</dt><dd>The direction of an induced emf (and any resulting current) always opposes the change that produced it. This is a direct consequence of the conservation of energy &#8212; if the induced effect instead reinforced the change, energy could be created from nothing.</dd>
+        <dt>Eddy currents</dt><dd>Induced currents that circulate within the bulk of a solid conductor (rather than around a single defined loop), always in a direction that opposes the change causing them (Lenz&#8217;s law). They dissipate energy as heat, which is useful in induction cookers but wasteful in transformer cores, where lamination is used to suppress them.</dd>
+        <dt>Mutual induction</dt><dd>The induction of an emf in one circuit as a result of a changing current (and hence changing flux) in a separate, nearby circuit.</dd>
+        <dt>Alternator / a.c. generator</dt><dd>A device that induces a sinusoidally varying emf by rotating a coil at constant angular speed within a uniform magnetic field; slip rings and brushes maintain electrical contact with the rotating coil.</dd>
+        <dt>Transformer</dt><dd>A device that uses mutual induction between two coils wound on a shared iron core to step an alternating voltage up or down, according to V&#8347;/V&#8346; = N&#8347;/N&#8346;.</dd>
+        <dt>Step-up / step-down transformer</dt><dd>A transformer with more turns on the secondary than the primary (step-up, increases voltage) or fewer turns on the secondary (step-down, decreases voltage).</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Electromagnetic Induction Workbook &middot; Companion resources: <em>Electric &amp; Magnetic Fields</em> (Workbook 1), <em>Millikan's Oil-Drop Experiment</em> (Workbook 2) and <em>Motion in Electromagnetic Fields</em> (Workbook 3). Transformer simulation by Dr Jones Physics.</footer>
+  </main>
+</div>
+
+<div class="toolbar no-print">
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <div id="saveStatus" style="font-size:0.72rem; color:#5b6b78; text-align:center; background:#fff; border:1px solid var(--border); border-radius:50px; padding:0.35rem 0.8rem;">Answers save automatically in this browser</div>
+</div>
+<button class="fab no-print" onclick="window.print()">&#128424;&#65039; Print / Save as PDF</button>
+
+<script>
+function toggleAnswer(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('shown');
+}
+
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- frequency explorer widget (Section 5) ---------- */
+var BASE_F = 20;      // reference frequency, Hz
+var BASE_PEAK = 6;    // reference peak emf, V (arbitrary demo units)
+var TIME_WINDOW = 0.15; // seconds shown across the plot
+var PLOT_X0 = 40, PLOT_X1 = 380, PLOT_Y0 = 100, PLOT_SCALE = 6.25; // px per volt
+
+function freqWavePath(f, peak){
+  var pts = [];
+  var n = 140;
+  for(var i = 0; i <= n; i++){
+    var t = TIME_WINDOW * i / n;
+    var v = peak * Math.sin(2 * Math.PI * f * t);
+    var x = PLOT_X0 + (PLOT_X1 - PLOT_X0) * (t / TIME_WINDOW);
+    var y = PLOT_Y0 - v * PLOT_SCALE;
+    pts.push((i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1));
+  }
+  return pts.join(' ');
+}
+
+function updateFreqWidget(){
+  var slider = document.getElementById('freqSlider');
+  if(!slider) return;
+  var f = parseFloat(slider.value);
+  var peak = BASE_PEAK * (f / BASE_F);
+  var period = 1 / f;
+  document.getElementById('freqVal').textContent = f.toFixed(0) + ' Hz';
+  document.getElementById('peakVal').textContent = peak.toFixed(1) + ' V';
+  document.getElementById('periodVal').textContent = (period * 1000).toFixed(1) + ' ms';
+  document.getElementById('freqWave').setAttribute('d', freqWavePath(f, peak));
+}
+
+function initFreqWidget(){
+  var refWave = document.getElementById('refWave');
+  if(!refWave) return;
+  refWave.setAttribute('d', freqWavePath(BASE_F, BASE_PEAK));
+  updateFreqWidget();
+}
+
+/* ---------- fill in online: autosize + autosave ---------- */
+var STORAGE_PREFIX = 'ib-d4-workbook4-induction-v1-';
+var fillableEls = [];
+
+function storageAvailable(){
+  try{
+    var k = '__test__' + STORAGE_PREFIX;
+    localStorage.setItem(k, '1');
+    localStorage.removeItem(k);
+    return true;
+  } catch(e){ return false; }
+}
+var canStore = storageAvailable();
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el, i){
+    var key = STORAGE_PREFIX + i;
+    el.dataset.storeKey = key;
+    if(canStore){
+      var saved = localStorage.getItem(key);
+      if(saved !== null){ el.value = saved; }
+    }
+    autosize(el);
+    el.addEventListener('input', function(){
+      autosize(el);
+      if(canStore){
+        try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){}
+      }
+    });
+  });
+  if(!canStore){
+    var status = document.getElementById('saveStatus');
+    if(status) status.textContent = 'Autosave unavailable here — print/export before closing this tab';
+  }
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+    if(canStore){ try{ localStorage.removeItem(el.dataset.storeKey); } catch(e){} }
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  initFillables();
+  initFreqWidget();
+});
+</script>
+</body>
+</html>
