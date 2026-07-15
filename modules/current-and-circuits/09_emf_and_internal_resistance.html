@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EMF and Internal Resistance — Self-Marking Workbook</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --navy-dark:#12203a;
+    --blue:#2563eb;
+    --red:#e8533a;
+    --red-bg:#fff3f1;
+    --blue-bg:#e8f1ff;
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --border:#dbe2ef;
+    --good:#1a8a4a;
+    --bad:#c0392b;
+    --text:#1b2333;
+    --muted:#5a6478;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0 0 60px 0;
+    line-height:1.55;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px;}
+  header.top{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);
+    color:#fff;
+    padding:36px 20px 30px 20px;
+    margin-bottom:28px;
+  }
+  header.top .inner{max-width:920px;margin:0 auto;}
+  header.top h1{margin:0 0 6px 0;font-size:2rem;}
+  header.top p.tag{margin:0;color:#c9d4ea;font-size:1.05rem;}
+  .namebox{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:24px;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .namebox label{font-weight:600;margin-right:8px;color:var(--muted);}
+  .namebox input{
+    border:none;border-bottom:2px solid var(--border);
+    padding:4px 2px;font-size:1rem;background:transparent;min-width:220px;
+  }
+  .namebox input:focus{outline:none;border-bottom-color:var(--blue);}
+  h2.section-title{
+    color:var(--navy);
+    border-bottom:3px solid var(--blue);
+    padding-bottom:8px;
+    margin:40px 0 18px 0;
+    font-size:1.5rem;
+  }
+  h3.sub-title{color:var(--navy);margin:28px 0 10px 0;font-size:1.15rem;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:18px;
+  }
+  .note{
+    background:#fbfcfe;
+    border-left:4px solid var(--blue);
+    padding:14px 18px;
+    margin:14px 0;
+    border-radius:0 6px 6px 0;
+  }
+  .note.formula{font-size:1.1rem;}
+  .formula-box{
+    border:2px solid var(--blue);
+    border-radius:8px;
+    padding:14px 20px;
+    background:#f7faff;
+    display:inline-block;
+    margin:10px 0;
+    font-size:1.05rem;
+  }
+  .diagram-row{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin:14px 0;}
+  .diagram-cap{font-size:0.85rem;color:var(--muted);text-align:center;margin-top:4px;max-width:280px;}
+  figure{margin:0;text-align:center;}
+  .q{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:16px 20px;
+    margin:16px 0;
+    background:#fbfcfe;
+  }
+  .q .qtitle{font-weight:600;color:var(--navy);margin-bottom:8px;}
+  .q .qsub{margin:10px 0;}
+  .q .qsub label{margin-right:6px;}
+  select.mcq-select, input.mcq-input{
+    font-size:1rem;padding:6px 10px;border:1px solid var(--border);border-radius:6px;margin-left:6px;
+  }
+  .qinput{width:110px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:0.95rem;}
+  .reveal-btn{
+    background:var(--navy);color:#fff;border:none;border-radius:6px;
+    padding:8px 16px;font-size:0.9rem;cursor:pointer;margin-top:8px;
+  }
+  .reveal-btn:hover{background:var(--navy-dark);}
+  .solution{
+    display:none;
+    background:#f1f5fb;
+    border:1px dashed #9fb3d1;
+    border-radius:6px;
+    padding:12px 16px;
+    margin-top:10px;
+    font-size:0.95rem;
+  }
+  .solution.show{display:block;}
+  .check-btn{
+    background:var(--blue);color:#fff;border:none;border-radius:6px;
+    padding:7px 16px;font-size:0.9rem;cursor:pointer;margin-right:8px;
+  }
+  .check-btn:hover{background:#1d4fc4;}
+  .feedback{margin-left:10px;font-weight:600;font-size:0.9rem;}
+  .feedback.correct{color:var(--good);}
+  .feedback.incorrect{color:var(--bad);}
+  .circuit-block{
+    border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:20px 0;background:#fff;
+  }
+  .circuit-flex{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;}
+  .answer-box{
+    border:2px solid var(--blue);border-radius:8px;padding:14px 18px;min-width:230px;background:#f7faff;
+  }
+  .answer-box table{border-collapse:collapse;}
+  .answer-box td{padding:5px 6px;}
+  .answer-box input{width:95px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;}
+  .credit{font-size:0.75rem;color:var(--muted);margin-top:4px;}
+  .summary-card{
+    background:var(--navy);color:#fff;border-radius:10px;padding:24px;margin-top:36px;
+  }
+  .summary-card h2{color:#fff;border-bottom:2px solid #5a7ac0;}
+  #scoreLine{font-size:1.3rem;font-weight:700;margin:10px 0;}
+  #summaryText{
+    width:100%;min-height:140px;background:#0f1a30;color:#d8e2f5;border:1px solid #3a4d75;
+    border-radius:6px;padding:10px;font-family:monospace;font-size:0.85rem;
+  }
+  .copy-btn{
+    background:#fff;color:var(--navy);border:none;border-radius:6px;padding:10px 20px;
+    font-weight:700;cursor:pointer;margin-top:10px;
+  }
+  .flag{color:var(--red);font-size:0.85rem;}
+  ol.notes-list li{margin-bottom:8px;}
+  /* --- Simulation embed --- */
+  .sim-card{
+    border:2px solid var(--blue);border-radius:10px;padding:20px 24px;margin:18px 0;background:#f7faff;
+  }
+  .sim-frame-wrap{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;}
+  .sim-frame-wrap iframe{width:100%;height:620px;border:none;display:block;}
+  .sim-credit{
+    font-size:0.85rem;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);
+  }
+  .sim-credit a{color:var(--blue);text-decoration:none;font-weight:600;}
+  .sim-credit a:hover{text-decoration:underline;}
+  /* --- Exam-style question section (Part C) --- */
+  .examq-section{margin-top:40px;}
+  .examq-section h2.section-title{border-bottom-color:#0d9488;}
+  .examq-card{
+    background:#ecfdf9;
+    border:2px solid #0d9488;
+    border-radius:10px;
+    padding:20px 24px;
+    margin:16px 0;
+  }
+  .examq-badge{
+    display:inline-block;
+    background:#0d9488;
+    color:#fff;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 12px;
+    border-radius:20px;
+    margin-bottom:12px;
+  }
+  .examq-note{font-size:0.85rem;color:#0f6d63;margin:0 0 14px 0;}
+  .examq-card .check-btn{background:#0d9488;}
+  .examq-card .check-btn:hover{background:#0b7d73;}
+  .examq-card .reveal-btn{background:#115e59;}
+  .examq-card .reveal-btn:hover{background:#0c433f;}
+  .print-only-note{display:none;}
+  .print-btn-row{text-align:center;margin:30px 0 8px;}
+  .print-btn{background:var(--navy);color:#fff;border:none;padding:12px 30px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;}
+  .print-btn:hover{opacity:0.9;}
+  @media print{
+    .print-btn-row{display:none !important;}
+    .check-btn,.reveal-btn,.hint-btn,.copy-btn{display:none !important;}
+    .hint,.solution,.hint-box{display:block !important;}
+    .sim-frame-wrap{display:none !important;}
+    .print-only-note{display:block !important;font-style:italic;color:#555;margin:8px 0 16px;}
+    body{background:#fff;padding:6px;}
+    .q,.circuit-block,.examq-card{page-break-inside:avoid;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="inner">
+  <h1>EMF and Internal Resistance</h1>
+</div></header>
+
+<div class="wrap">
+
+<div class="namebox">
+  <div><label>Name</label><input type="text" id="studentName" placeholder="Enter your name"></div>
+</div>
+
+<h2 class="section-title">Part A — Notes: emf and internal resistance</h2>
+
+<div class="card">
+  <h3 class="sub-title" style="margin-top:0">emf and potential difference</h3>
+  <p>In a circuit there are components that put energy <strong>into</strong> the circuit, and components that take energy <strong>out</strong> of it.</p>
+  <p>A device putting energy into a circuit is providing an <strong>electromotive force (emf)</strong>. A device taking energy out of the circuit has a <strong>potential difference (p.d.)</strong> across it. Both emf and p.d. are measured in volts, V.</p>
+  <ul>
+    <li><strong>Emf, ε</strong> — the total energy transferred (theoretical maximum) per coulomb of charge that passes through the source.</li>
+    <li><strong>Potential difference</strong> — the energy transferred <em>out of</em> the circuit per coulomb of charge.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3 class="sub-title" style="margin-top:0">Terminal p.d. and "lost volts"</h3>
+  <p>When a cell is supplying no current, the potential difference across the cell (its <strong>terminal p.d.</strong>) is equal to its emf. Once the cell starts supplying current, some of the emf is "lost" — dissipated through heating the cell.</p>
+  <div class="diagram-row">
+    <figure>
+      <svg width="230" height="170" viewBox="0 0 230 170">
+        <line x1="20" y1="30" x2="90" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="90" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+        <rect x="96.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+        <rect x="110" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+        <rect x="116.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+        <text x="105" y="14" text-anchor="middle" font-size="12">ε</text>
+        <line x1="120" y1="30" x2="210" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="210" y1="30" x2="210" y2="68" stroke="#1b2a4a" stroke-width="2"/>
+        <circle cx="210" cy="85" r="17" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+        <text x="210" y="90" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A</text>
+        <line x1="210" y1="102" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="20" y1="30" x2="20" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="20" y1="60" x2="98" y2="60" stroke="#3a7bd5" stroke-width="2"/>
+        <circle cx="115" cy="60" r="17" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+        <text x="115" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#3a7bd5">V</text>
+        <line x1="132" y1="60" x2="210" y2="60" stroke="#3a7bd5" stroke-width="2"/>
+        <line x1="20" y1="140" x2="60" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="60" y="131" width="50" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="52" y1="152" x2="118" y2="120" stroke="#1b2a4a" stroke-width="2"/>
+        <polygon points="118.0,120.0 111.9,128.0 107.9,119.9" fill="#1b2a4a"/>
+        <line x1="110" y1="140" x2="148" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <circle cx="150" cy="140" r="3" fill="#1b2a4a"/>
+        <circle cx="184" cy="140" r="3" fill="#1b2a4a"/>
+        <line x1="150" y1="140" x2="181" y2="120" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="184" y1="140" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      </svg>
+      <div class="diagram-cap"><strong>Switch open, I = 0 A:</strong> V = 1.5 V = emf (no current, no p.d. lost internally)</div>
+    </figure>
+    <figure>
+      <svg width="230" height="170" viewBox="0 0 230 170">
+        <line x1="20" y1="30" x2="90" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="90" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+        <rect x="96.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+        <rect x="110" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+        <rect x="116.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+        <text x="105" y="14" text-anchor="middle" font-size="12">ε</text>
+        <line x1="120" y1="30" x2="210" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="210" y1="30" x2="210" y2="68" stroke="#1b2a4a" stroke-width="2"/>
+        <circle cx="210" cy="85" r="17" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+        <text x="210" y="90" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A</text>
+        <line x1="210" y1="102" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="20" y1="30" x2="20" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="20" y1="60" x2="98" y2="60" stroke="#3a7bd5" stroke-width="2"/>
+        <circle cx="115" cy="60" r="17" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+        <text x="115" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#3a7bd5">V</text>
+        <line x1="132" y1="60" x2="210" y2="60" stroke="#3a7bd5" stroke-width="2"/>
+        <line x1="20" y1="140" x2="60" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="60" y="131" width="50" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="52" y1="152" x2="118" y2="120" stroke="#1b2a4a" stroke-width="2"/>
+        <polygon points="118.0,120.0 111.9,128.0 107.9,119.9" fill="#1b2a4a"/>
+        <line x1="110" y1="140" x2="148" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <circle cx="150" cy="140" r="3" fill="#1b2a4a"/>
+        <circle cx="184" cy="140" r="3" fill="#1b2a4a"/>
+        <line x1="150" y1="140" x2="184" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="184" y1="140" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      </svg>
+      <div class="diagram-cap"><strong>Switch closed, I = 0.2 A:</strong> V = 1.4 V. p.d. lost = 1.5 − 1.4 = 0.1 V</div>
+    </figure>
+  </div>
+  <p>As the current increases further (I = 0.4 A), the terminal p.d. drops again (V = 1.3 V, so p.d. lost = 0.2 V). The larger the current, the more potential difference is "lost" inside the cell.</p>
+</div>
+
+<div class="card">
+  <h3 class="sub-title" style="margin-top:0">Internal resistance</h3>
+  <p>An electrical cell is made from metals and chemicals which themselves have some resistance. This is called the <strong>internal resistance</strong> of the cell, r.</p>
+  <div class="note">This resistance is small, so it is given the symbol "little r."</div>
+  <p>Inside the cell, energy is put into the circuit by the emf (ε), but some of this energy is taken back out by the internal resistance before it ever reaches the rest of the circuit. So the p.d. available to the rest of the circuit is:</p>
+  <div class="formula-box">available p.d. = emf − p.d. lost internally</div>
+  <div class="diagram-row">
+    <figure>
+      <svg width="320" height="170" viewBox="0 0 320 170">
+        <line x1="20" y1="30" x2="90" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="120" y1="30" x2="170" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="90" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+        <rect x="96.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+        <rect x="110" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+        <rect x="116.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+        <text x="115" y="14" text-anchor="middle" font-size="12">ε</text>
+        <rect x="170" y="21" width="36" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <text x="188" y="16" text-anchor="middle" font-size="11">r</text>
+        <line x1="206" y1="30" x2="290" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="20" y1="30" x2="20" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="290" y1="30" x2="290" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="82" y="1" width="130" height="44" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <line x1="20" y1="80" x2="107" y2="80" stroke="#3a7bd5" stroke-width="2"/>
+        <line x1="143" y1="80" x2="290" y2="80" stroke="#3a7bd5" stroke-width="2"/>
+        <circle cx="125" cy="80" r="18" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+        <text x="125" y="85" text-anchor="middle" font-size="14" font-weight="bold" fill="#3a7bd5">V</text>
+        <line x1="20" y1="140" x2="120" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="190" y1="140" x2="290" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="120" y="131" width="70" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <text x="155" y="164" text-anchor="middle" font-size="11">R</text>
+      </svg>
+      <div class="diagram-cap">The emf source (ε) and internal resistance (r) act together — you cannot get between them in a real cell. V is the terminal p.d.; R is the external (load) resistance.</div>
+    </figure>
+  </div>
+  <p>Using Ohm's law: emf = p.d. across R + p.d. across r, and since the same current I flows through both:</p>
+  <div class="formula-box">ε = IR + Ir &nbsp;&nbsp;&nbsp;&nbsp; ε = I(R + r)</div>
+</div>
+
+<div class="card">
+  <h3 class="sub-title" style="margin-top:0">Finding emf and r from a graph</h3>
+  <p>Rearranging ε = I(R + r) in terms of the terminal p.d., V (where V = IR):</p>
+  <div class="formula-box">ε = V + Ir &nbsp;&nbsp;&nbsp;&nbsp; V = −Ir + ε</div>
+  <p>This has the same form as a straight-line graph, y = mx + c, if we plot V (y-axis) against I (x-axis):</p>
+  <ul>
+    <li>gradient, m = −r (so the internal resistance is the <strong>magnitude</strong> of the gradient)</li>
+    <li>y-intercept, c = ε (the emf is the value of V when the graph is extrapolated back to I = 0)</li>
+  </ul>
+  <div class="diagram-row">
+    <figure>
+      <svg width="260" height="190" viewBox="0 0 260 190">
+        <line x1="40" y1="160" x2="245" y2="160" stroke="#1b2a4a" stroke-width="2"/>
+        <polygon points="252,160 242,155 242,165" fill="#1b2a4a"/>
+        <line x1="40" y1="160" x2="40" y2="15" stroke="#1b2a4a" stroke-width="2"/>
+        <polygon points="40,8 34,18 46,18" fill="#1b2a4a"/>
+        <text x="14" y="20" font-size="12">V/V</text>
+        <text x="236" y="180" font-size="12">I/A</text>
+        <line x1="40" y1="40" x2="190" y2="140" stroke="#e8533a" stroke-width="2.5"/>
+        <line x1="190" y1="140" x2="220" y2="160" stroke="#9fb3d1" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <circle cx="40" cy="40" r="3.5" fill="#e8533a"/>
+        <circle cx="220" cy="160" r="3" fill="#9fb3d1"/>
+        <text x="16" y="36" font-size="13" font-style="italic">ε</text>
+        <text x="108" y="76" font-size="12" font-style="italic">gradient = −r</text>
+        <text x="188" y="178" font-size="11">I(max)</text>
+      </svg>
+      <div class="diagram-cap">Sketch graph of V against I: the y-intercept (extrapolated back to I = 0) gives the emf, ε, and the magnitude of the (negative) gradient gives the internal resistance, r.</div>
+    </figure>
+  </div>
+</div>
+
+<div class="sim-card">
+  <h3 class="sub-title" style="margin-top:0">Try it yourself — interactive simulation</h3>
+  <p>Use the simulation below to carry out the investigation yourself. With the switch open, the voltmeter reads the emf. Close the switch, vary the rheostat, and record several V–I pairs — then plot V against I: the y-intercept (extrapolated to I = 0) gives the emf, and the magnitude of the gradient gives the internal resistance.</p>
+  <div class="sim-frame-wrap">
+    <iframe title="Finding the EMF and Internal Resistance of a Cell" loading="lazy" srcdoc="<!-- ===================================================================
+     EMF &amp; Internal Resistance of a Cell - investigation
+     Single-file, embed-safe HTML. All CSS/JS scoped under #ir-sim-root.
+     Method: V = e - I r  ->  intercept = EMF, |gradient| = internal resistance.
+     British English throughout. Canvas-based circuit + animation.
+     =================================================================== -->
+<div id=&quot;ir-sim-root&quot;>
+  <link href=&quot;https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap&quot; rel=&quot;stylesheet&quot;>
+
+  <style>
+    #ir-sim-root, #ir-sim-root * { box-sizing: border-box; }
+    #ir-sim-root {
+      --ink: #1f2632; --ink-soft: #515b6b; --ink-faint: #8a93a3;
+      --line: #e3e7ee; --line-soft: #eef1f6; --surface: #ffffff; --paper: #f6f4ef;
+      --accent: #1d4e89; --accent-soft: #e8eef6;
+      --emf: #7c3aed; --emf-soft: #efe8fb;
+      --copper: #b5651d;
+      --good: #15803d; --warn: #b45309; --hot: #d4391b;
+      --shadow: 0 1px 2px rgba(31,38,50,.05), 0 8px 26px rgba(31,38,50,.07);
+      width: 100%; min-height: 520px; margin: 0; padding: 0;
+      font-family: &quot;IBM Plex Sans&quot;, system-ui, sans-serif; color: var(--ink);
+      background: radial-gradient(120% 80% at 0% 0%, #fbfaf7 0%, #f3f1ec 60%, #eceae4 100%);
+      -webkit-font-smoothing: antialiased; line-height: 1.5;
+    }
+    #ir-sim-root .ir-wrap { max-width: 1180px; margin: 0 auto; padding: 26px 20px 34px; }
+
+    #ir-sim-root .ir-head { margin-bottom: 16px; }
+    #ir-sim-root .ir-eyebrow {
+      font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 11px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--accent); margin: 0 0 6px; font-weight: 500;
+    }
+    #ir-sim-root h1.ir-title {
+      font-family: &quot;Fraunces&quot;, Georgia, serif; font-weight: 600;
+      font-size: clamp(26px, 3.6vw, 40px); line-height: 1.05; color: var(--ink);
+      margin: 0 0 8px; letter-spacing: -.01em;
+    }
+    #ir-sim-root p.ir-lede { color: var(--ink-soft); font-size: 15px; max-width: 72ch; margin: 0; }
+
+    #ir-sim-root .ir-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+    #ir-sim-root .ir-card + .ir-card { margin-top: 16px; }
+    #ir-sim-root .ir-card-h {
+      padding: 13px 16px; border-bottom: 1px solid var(--line-soft);
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    #ir-sim-root .ir-card-h h2, #ir-sim-root .ir-card-h h3 {
+      font-family: &quot;Fraunces&quot;, Georgia, serif; font-weight: 600; font-size: 16px;
+      color: var(--ink); margin: 0; letter-spacing: -.005em;
+    }
+    #ir-sim-root .ir-card-b { padding: 16px; }
+
+    #ir-sim-root .ir-stage {
+      position: relative; width: 100%; min-height: 300px; aspect-ratio: 16 / 8;
+      background: linear-gradient(180deg, #fdfdfc 0%, #f7f6f2 100%);
+    }
+    #ir-sim-root.ir-narrow .ir-stage { aspect-ratio: 1 / 1; }
+    #ir-sim-root .ir-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: pointer; }
+    #ir-sim-root .ir-readouts {
+      position: absolute; top: 12px; left: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 8px; pointer-events: none;
+    }
+    #ir-sim-root .ir-chip {
+      background: rgba(255,255,255,.86); border: 1px solid var(--line); border-radius: 9px;
+      padding: 5px 9px; font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 12px; color: var(--ink);
+      backdrop-filter: blur(3px); box-shadow: 0 1px 2px rgba(31,38,50,.06);
+    }
+    #ir-sim-root .ir-chip b { color: var(--ink-faint); font-weight: 500; }
+    #ir-sim-root .ir-chip.ir-chip-warn { color: var(--hot); border-color: #f3c4b8; background: #fdeee9; }
+
+    #ir-sim-root .ir-hint {
+      font-size: 12.5px; color: var(--ink-soft); margin: 14px 0 0;
+      padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--line-soft); border-radius: 0 8px 8px 0;
+    }
+
+    #ir-sim-root .ir-grid {
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; align-items: start; margin-top: 16px;
+    }
+    #ir-sim-root.ir-narrow .ir-grid { grid-template-columns: 1fr; }
+
+    #ir-sim-root .ir-control { margin-bottom: 15px; }
+    #ir-sim-root .ir-control:last-child { margin-bottom: 0; }
+    #ir-sim-root .ir-lab { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+    #ir-sim-root .ir-lab span:first-child { font-size: 13px; font-weight: 600; color: var(--ink); }
+    #ir-sim-root .ir-val {
+      font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 13px; color: var(--accent);
+      background: var(--accent-soft); padding: 2px 8px; border-radius: 7px;
+    }
+    #ir-sim-root input[type=&quot;range&quot;] {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 6px;
+      background: var(--line); outline: none; cursor: pointer; margin: 0;
+    }
+    #ir-sim-root input[type=&quot;range&quot;]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent); border: 3px solid #fff; box-shadow: 0 1px 4px rgba(31,38,50,.25); cursor: pointer;
+    }
+    #ir-sim-root input[type=&quot;range&quot;]::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%; background: var(--accent);
+      border: 3px solid #fff; box-shadow: 0 1px 4px rgba(31,38,50,.25); cursor: pointer;
+    }
+
+    #ir-sim-root .ir-cells { display: flex; flex-wrap: wrap; gap: 7px; }
+    #ir-sim-root .ir-cell-btn {
+      appearance: none; cursor: pointer; border: 1px solid var(--line); background: var(--surface);
+      border-radius: 10px; padding: 8px 12px; font-family: &quot;IBM Plex Sans&quot;, sans-serif;
+      font-size: 13px; font-weight: 600; color: var(--ink-soft); transition: all .14s;
+    }
+    #ir-sim-root .ir-cell-btn:hover { border-color: #cfd6e0; color: var(--ink); }
+    #ir-sim-root .ir-cell-btn[aria-pressed=&quot;true&quot;] { background: var(--accent); color: #fff; border-color: transparent; }
+
+    #ir-sim-root .ir-btn {
+      appearance: none; cursor: pointer; font-family: &quot;IBM Plex Sans&quot;, sans-serif;
+      font-size: 13.5px; font-weight: 600; border-radius: 10px; padding: 10px 14px;
+      border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+      transition: transform .08s, background .15s, border-color .15s, box-shadow .15s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    #ir-sim-root .ir-btn:hover { border-color: #cfd6e0; box-shadow: var(--shadow); }
+    #ir-sim-root .ir-btn:active { transform: translateY(1px); }
+    #ir-sim-root .ir-btn[disabled] { opacity: .5; cursor: not-allowed; }
+    #ir-sim-root .ir-btn-primary { color: #fff; border-color: transparent; background: var(--accent); }
+    #ir-sim-root .ir-btn-primary:hover { filter: brightness(1.06); box-shadow: var(--shadow); }
+    #ir-sim-root .ir-btn-switch { background: var(--good); color: #fff; border-color: transparent; width: 100%; }
+    #ir-sim-root .ir-btn-switch.ir-open { background: var(--surface); color: var(--ink); border-color: var(--line); }
+    #ir-sim-root .ir-btn-row { display: flex; gap: 9px; flex-wrap: wrap; }
+    #ir-sim-root .ir-btn-row .ir-btn { flex: 1 1 auto; }
+
+    #ir-sim-root .ir-emfbox {
+      border: 1px solid transparent; border-radius: 11px; padding: 11px 13px; margin-bottom: 14px;
+      background: var(--emf-soft); font-size: 13px; color: var(--ink-soft); line-height: 1.5;
+    }
+    #ir-sim-root .ir-emfbox b { color: var(--emf); font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 16px; }
+    #ir-sim-root .ir-emfbox.ir-stale { background: var(--line-soft); opacity: .8; }
+    #ir-sim-root .ir-emfbox.ir-stale b { color: var(--ink-faint); }
+
+    #ir-sim-root .ir-meters { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    #ir-sim-root.ir-narrow .ir-meters { grid-template-columns: 1fr 1fr; }
+    #ir-sim-root .ir-meter { border: 1px solid var(--line); border-radius: 11px; padding: 10px 11px; background: var(--surface); }
+    #ir-sim-root .ir-meter .ir-mk { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-faint); font-weight: 600; margin-bottom: 3px; }
+    #ir-sim-root .ir-meter .ir-mv { font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 19px; color: var(--ink); font-weight: 500; }
+    #ir-sim-root .ir-meter .ir-mv small { font-size: 12px; color: var(--ink-faint); }
+    #ir-sim-root .ir-meter .ir-mv.ir-ol { color: var(--hot); }
+    #ir-sim-root .ir-meter.ir-mr { border-color: transparent; background: var(--accent-soft); }
+
+    #ir-sim-root .ir-eq {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 15px; margin-top: 14px;
+    }
+    #ir-sim-root .ir-eq .ir-eq-main { font-family: &quot;Fraunces&quot;, Georgia, serif; font-size: 19px; color: var(--ink); text-align: center; margin-bottom: 6px; }
+    #ir-sim-root .ir-eq .ir-eq-sub { font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 12px; color: var(--ink-soft); text-align: center; }
+
+    #ir-sim-root .ir-table-wrap { overflow-x: auto; }
+    #ir-sim-root table.ir-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    #ir-sim-root table.ir-table th, #ir-sim-root table.ir-table td {
+      text-align: right; padding: 7px 9px; border-bottom: 1px solid var(--line-soft);
+      font-family: &quot;IBM Plex Mono&quot;, monospace; color: var(--ink); white-space: nowrap;
+    }
+    #ir-sim-root table.ir-table th {
+      font-family: &quot;IBM Plex Sans&quot;, sans-serif; font-weight: 600; color: var(--ink-soft);
+      font-size: 11.5px; border-bottom: 1.5px solid var(--line);
+    }
+    #ir-sim-root table.ir-table th:first-child, #ir-sim-root table.ir-table td:first-child { text-align: left; color: var(--ink-faint); }
+    #ir-sim-root table.ir-table tr:last-child td { border-bottom: 0; }
+    #ir-sim-root .ir-empty { color: var(--ink-faint); font-size: 13px; text-align: center; padding: 18px 8px; }
+    #ir-sim-root .ir-del { cursor: pointer; color: var(--ink-faint); border: 0; background: none; font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 14px; padding: 0 4px; }
+    #ir-sim-root .ir-del:hover { color: var(--warn); }
+
+    #ir-sim-root .ir-graph-stage { position: relative; width: 100%; aspect-ratio: 3/2; min-height: 240px; margin-top: 14px; }
+    #ir-sim-root .ir-graph-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #ir-sim-root .ir-analysis {
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: var(--paper);
+      border: 1px solid var(--line); font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;
+    }
+    #ir-sim-root .ir-analysis b { color: var(--ink); }
+    #ir-sim-root .ir-mono { font-family: &quot;IBM Plex Mono&quot;, monospace; }
+    #ir-sim-root .ir-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 10px; line-height: 1.5; }
+    #ir-sim-root .ir-pill {
+      display: inline-block; font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 12px;
+      padding: 2px 8px; border-radius: 7px; background: var(--emf-soft); color: var(--emf); font-weight: 500;
+    }
+  </style>
+
+  <div class=&quot;ir-wrap&quot;>
+    <div class=&quot;ir-head&quot;>
+      <p class=&quot;ir-eyebrow&quot;>Electricity &amp;middot; EMF &amp;amp; Internal Resistance</p>
+      <h1 class=&quot;ir-title&quot;>Finding the EMF and Internal Resistance of a Cell</h1>
+      <p class=&quot;ir-lede&quot;>With the switch open the voltmeter shows the EMF. Close the switch, vary the rheostat to take pairs of V and I over the widest range, then plot V against I: the intercept (extrapolated to I = 0) gives the EMF and the magnitude of the gradient gives the internal resistance.</p>
+    </div>
+
+    <div class=&quot;ir-card&quot;>
+      <div class=&quot;ir-stage&quot; id=&quot;ir-stage&quot;>
+        <canvas id=&quot;ir-canvas&quot;></canvas>
+        <div class=&quot;ir-readouts&quot;>
+          <div class=&quot;ir-chip&quot;><b>rheostat R</b> <span id=&quot;ir-ro-R&quot;>30.0</span> &amp;Omega;</div>
+          <div class=&quot;ir-chip&quot;><b>ammeter</b> <span id=&quot;ir-ro-I&quot;>0.000</span> A</div>
+          <div class=&quot;ir-chip&quot;><b>voltmeter</b> <span id=&quot;ir-ro-V&quot;>0.00</span> V</div>
+        </div>
+      </div>
+    </div>
+    <p class=&quot;ir-hint&quot;>Tip: click the switch to open or close the circuit. Open the switch between readings and only close it briefly &amp;mdash; leaving current flowing warms the cell and its internal resistance drifts.</p>
+
+    <div class=&quot;ir-grid&quot;>
+      <div>
+        <div class=&quot;ir-card&quot;>
+          <div class=&quot;ir-card-h&quot;><h2>Set up the apparatus</h2></div>
+          <div class=&quot;ir-card-b&quot;>
+            <div class=&quot;ir-control&quot;>
+              <div class=&quot;ir-lab&quot;><span>Cell / battery under test</span></div>
+              <div class=&quot;ir-cells&quot; id=&quot;ir-cells&quot; role=&quot;group&quot; aria-label=&quot;Choose a cell&quot;></div>
+            </div>
+
+            <div class=&quot;ir-control&quot;>
+              <div class=&quot;ir-lab&quot;><span>Variable resistor (rheostat), R</span><span class=&quot;ir-val&quot; id=&quot;ir-v-R&quot;>30.0 &amp;Omega;</span></div>
+              <input type=&quot;range&quot; id=&quot;ir-r-R&quot; min=&quot;0.5&quot; max=&quot;30&quot; step=&quot;0.5&quot; value=&quot;30&quot;>
+            </div>
+
+            <div class=&quot;ir-control&quot;>
+              <button class=&quot;ir-btn ir-btn-switch ir-open&quot; id=&quot;ir-switch&quot; aria-pressed=&quot;false&quot;>Close switch</button>
+            </div>
+
+            <div class=&quot;ir-emfbox&quot; id=&quot;ir-emfbox&quot;>
+              Open-circuit voltmeter reading (switch open) &amp;asymp; EMF: <b id=&quot;ir-emf-open&quot;>&amp;mdash;</b> V
+            </div>
+
+            <div class=&quot;ir-meters&quot;>
+              <div class=&quot;ir-meter&quot;>
+                <div class=&quot;ir-mk&quot;>Ammeter (0&amp;ndash;2 A)</div>
+                <div class=&quot;ir-mv&quot; id=&quot;ir-m-Ibox&quot;><span id=&quot;ir-m-I&quot;>0.000</span> <small>A</small></div>
+              </div>
+              <div class=&quot;ir-meter&quot;>
+                <div class=&quot;ir-mk&quot;>Voltmeter (0&amp;ndash;20 V)</div>
+                <div class=&quot;ir-mv&quot;><span id=&quot;ir-m-V&quot;>0.00</span> <small>V</small></div>
+              </div>
+              <div class=&quot;ir-meter ir-mr&quot;>
+                <div class=&quot;ir-mk&quot;>External R = V/I</div>
+                <div class=&quot;ir-mv&quot;><span id=&quot;ir-m-R&quot;>&amp;mdash;</span> <small>&amp;Omega;</small></div>
+              </div>
+            </div>
+
+            <div class=&quot;ir-btn-row&quot;>
+              <button class=&quot;ir-btn ir-btn-primary&quot; id=&quot;ir-record&quot; disabled>Record this V&amp;ndash;I pair &amp;darr;</button>
+            </div>
+
+            <div class=&quot;ir-eq&quot;>
+              <div class=&quot;ir-eq-main&quot;>V = &amp;epsilon; &amp;minus; I&amp;nbsp;r</div>
+              <div class=&quot;ir-eq-sub&quot;>plot V (y) against I (x) &amp;rarr; intercept = &amp;epsilon;, gradient = &amp;minus;r</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=&quot;ir-card&quot;>
+        <div class=&quot;ir-card-h&quot;>
+          <h3>Results &amp;amp; analysis <span class=&quot;ir-pill&quot; id=&quot;ir-cell-tag&quot;>&amp;mdash;</span></h3>
+          <button class=&quot;ir-btn&quot; id=&quot;ir-clear&quot; style=&quot;padding:6px 11px;font-size:12px;&quot;>Clear</button>
+        </div>
+        <div class=&quot;ir-card-b&quot;>
+          <div class=&quot;ir-table-wrap&quot;>
+            <table class=&quot;ir-table&quot;>
+              <thead><tr><th>#</th><th>I / A</th><th>V / V</th><th></th></tr></thead>
+              <tbody id=&quot;ir-tbody&quot;>
+                <tr><td colspan=&quot;4&quot; class=&quot;ir-empty&quot;>Close the switch, adjust the rheostat and record a V&amp;ndash;I pair. Vary R over the widest range to spread your points out.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class=&quot;ir-graph-stage&quot; id=&quot;ir-graph-stage&quot;><canvas id=&quot;ir-graph&quot;></canvas></div>
+          <div class=&quot;ir-analysis&quot; id=&quot;ir-analysis&quot;>
+            Plot at least two points to fit a straight line. Extrapolate the line back to I = 0: the <b>y-intercept</b> is the EMF and the <b>magnitude of the gradient</b> is the internal resistance.
+          </div>
+          <p class=&quot;ir-note&quot;>Method note: the open-circuit reading is taken with no current flowing, so there are no &amp;ldquo;lost volts&amp;rdquo; across the internal resistance &amp;mdash; it should sit very close to the extrapolated intercept.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    &quot;use strict&quot;;
+    var root = document.getElementById(&quot;ir-sim-root&quot;);
+    if (!root || root.dataset.irInit === &quot;1&quot;) return;
+    root.dataset.irInit = &quot;1&quot;;
+
+    var TWO_PI = Math.PI * 2;
+    function $(id) { return document.getElementById(id); }
+    function fmt(x, d) { return (Math.round(x * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d); }
+    function gaussian() {
+      var u = 0, v = 0; while (u === 0) u = Math.random(); while (v === 0) v = Math.random();
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(TWO_PI * v);
+    }
+
+    var AMM_RANGE = 2.0;       // ammeter full scale / A
+    var HEAT_FRAC = 0.15;      // max fractional rise in r when hot
+    var TAU = 6;               // thermal time constant / s
+
+    // hidden true values per cell
+    var CELLS = [
+      { key: &quot;b45&quot;,   name: &quot;4.5 V battery&quot;,     emf: 4.50, r: 0.80 },
+      { key: &quot;aa&quot;,    name: &quot;1.5 V cell (fresh)&quot;, emf: 1.55, r: 0.40 },
+      { key: &quot;aaold&quot;, name: &quot;1.5 V cell (used)&quot;,  emf: 1.38, r: 1.50 },
+      { key: &quot;b6&quot;,    name: &quot;6 V battery&quot;,        emf: 6.00, r: 1.20 }
+    ];
+
+    var state = {
+      cellIdx: 0,
+      R: 30,
+      closed: false,
+      heat: 0,
+      readI: 0, readV: 0, overRange: false,
+      noiseV: 0, noiseI: 0,
+      openEMF: null,
+      data: [],
+      flowOffset: 0,
+      canvas: $(&quot;ir-canvas&quot;),
+      graph: $(&quot;ir-graph&quot;),
+      layout: null
+    };
+
+    function cell() { return CELLS[state.cellIdx]; }
+    function rEff() { return cell().r * (1 + HEAT_FRAC * state.heat); }
+    function currentTrue() { return cell().emf / (state.R + rEff()); }
+    function voltageTrue() { return cell().emf - currentTrue() * rEff(); } // = I*R
+
+    function newNoise() { state.noiseV = gaussian() * 0.01; state.noiseI = gaussian() * 0.004; }
+
+    function refreshReading() {
+      state.overRange = false;
+      if (state.closed) {
+        var I = currentTrue();
+        if (I > AMM_RANGE) state.overRange = true;
+        var Vd = voltageTrue() + state.noiseV;
+        var Id = I + state.noiseI;
+        state.readI = Math.max(0, Math.round(Id * 1000) / 1000);
+        state.readV = Math.max(0, Math.round(Vd * 100) / 100);
+      } else {
+        // open circuit: voltmeter reads EMF, no current
+        state.readI = 0;
+        state.readV = Math.round((cell().emf + state.noiseV) * 100) / 100;
+        state.openEMF = state.readV;
+      }
+
+      // ammeter
+      var ibox = $(&quot;ir-m-Ibox&quot;), iEl = $(&quot;ir-m-I&quot;);
+      if (state.overRange) { ibox.classList.add(&quot;ir-ol&quot;); iEl.textContent = &quot;OL&quot;; }
+      else { ibox.classList.remove(&quot;ir-ol&quot;); iEl.textContent = fmt(state.readI, 3); }
+      $(&quot;ir-m-V&quot;).textContent = fmt(state.readV, 2);
+      var R = (state.closed &amp;&amp; state.readI > 0 &amp;&amp; !state.overRange) ? state.readV / state.readI : null;
+      $(&quot;ir-m-R&quot;).innerHTML = (R != null) ? fmt(R, 2) : &quot;&amp;mdash;&quot;;
+
+      // chips
+      $(&quot;ir-ro-R&quot;).textContent = fmt(state.R, 1);
+      $(&quot;ir-ro-I&quot;).textContent = state.overRange ? &quot;OL&quot; : fmt(state.readI, 3);
+      $(&quot;ir-ro-V&quot;).textContent = fmt(state.readV, 2);
+
+      // open-circuit EMF box
+      var box = $(&quot;ir-emfbox&quot;);
+      if (state.openEMF != null) $(&quot;ir-emf-open&quot;).textContent = fmt(state.openEMF, 2);
+      box.classList.toggle(&quot;ir-stale&quot;, state.closed);
+
+      // record availability
+      $(&quot;ir-record&quot;).disabled = !state.closed || state.overRange || state.readI <= 0;
+    }
+
+    /* =================================================================
+       DRAW CIRCUIT
+       ================================================================= */
+    function fitCanvas(canvas) {
+      var rect = canvas.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      var w = Math.max(1, Math.round(rect.width)), h = Math.max(1, Math.round(rect.height));
+      if (canvas._w !== w || canvas._h !== h || canvas._dpr !== dpr) {
+        canvas.width = w * dpr; canvas.height = h * dpr; canvas._w = w; canvas._h = h; canvas._dpr = dpr;
+      }
+      var ctx = canvas.getContext(&quot;2d&quot;); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx: ctx, w: w, h: h };
+    }
+
+    function computeLayout(w, h) {
+      var narrow = root.classList.contains(&quot;ir-narrow&quot;);
+      var xL = w * 0.13, xR = w * 0.87;
+      var yTop = h * (narrow ? 0.16 : 0.20);
+      var yBot = h * (narrow ? 0.62 : 0.66);
+      return {
+        narrow: narrow, w: w, h: h, xL: xL, xR: xR, yTop: yTop, yBot: yBot,
+        cx: (xL + xR) / 2,
+        switchX: xL + (xR - xL) * 0.24,
+        ammX: xL + (xR - xL) * 0.70,
+        rheoY: (yTop + yBot) / 2,
+        voltY: yBot + h * (narrow ? 0.22 : 0.24)
+      };
+    }
+
+    function drawCircuit() {
+      var fit = fitCanvas(state.canvas), ctx = fit.ctx, w = fit.w, h = fit.h;
+      var L = computeLayout(w, h); state.layout = L;
+      ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = &quot;round&quot;; ctx.lineJoin = &quot;round&quot;;
+      var conductor = &quot;#3a4250&quot;;
+
+      var cellHalf = 26, vGap = 30;
+      // ---- main loop conductor ----
+      ctx.strokeStyle = conductor; ctx.lineWidth = 3;
+      // left side
+      ctx.beginPath(); ctx.moveTo(L.xL, L.yBot); ctx.lineTo(L.xL, L.yTop); ctx.stroke();
+      // top: xL -> switch (gap) -> ammeter (gap) -> xR
+      ctx.beginPath(); ctx.moveTo(L.xL, L.yTop); ctx.lineTo(L.switchX - 16, L.yTop); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L.switchX + 16, L.yTop); ctx.lineTo(L.ammX - 22, L.yTop); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L.ammX + 22, L.yTop); ctx.lineTo(L.xR, L.yTop); ctx.stroke();
+      // right side: xR top -> rheostat (gap) -> xR bottom
+      ctx.beginPath(); ctx.moveTo(L.xR, L.yTop); ctx.lineTo(L.xR, L.rheoY - 28); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L.xR, L.rheoY + 28); ctx.lineTo(L.xR, L.yBot); ctx.stroke();
+      // bottom: xR -> cell right -> cell -> cell left -> xL
+      ctx.beginPath(); ctx.moveTo(L.xR, L.yBot); ctx.lineTo(L.cx + cellHalf, L.yBot); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(L.cx - cellHalf, L.yBot); ctx.lineTo(L.xL, L.yBot); ctx.stroke();
+
+      // ---- components ----
+      drawCell(ctx, L.cx, L.yBot, cellHalf);
+      drawSwitch(ctx, L.switchX, L.yTop, state.closed);
+      drawMeter(ctx, L.ammX, L.yTop, &quot;A&quot;, state.overRange ? &quot;OL&quot; : fmt(state.readI, 3) + &quot; A&quot;, &quot;#1d4e89&quot;, state.overRange);
+      drawRheostat(ctx, L.xR, L.rheoY);
+
+      // ---- voltmeter across the cell ----
+      var vLx = L.cx - cellHalf - vGap, vRx = L.cx + cellHalf + vGap;
+      ctx.strokeStyle = &quot;#7c3aed&quot;; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(vLx, L.yBot); ctx.lineTo(vLx, L.voltY); ctx.lineTo(L.cx - 22, L.voltY); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(vRx, L.yBot); ctx.lineTo(vRx, L.voltY); ctx.lineTo(L.cx + 22, L.voltY); ctx.stroke();
+      // small connection nodes onto the bottom wire
+      ctx.fillStyle = &quot;#7c3aed&quot;;
+      ctx.beginPath(); ctx.arc(vLx, L.yBot, 3, 0, TWO_PI); ctx.fill();
+      ctx.beginPath(); ctx.arc(vRx, L.yBot, 3, 0, TWO_PI); ctx.fill();
+      drawMeter(ctx, L.cx, L.voltY, &quot;V&quot;, fmt(state.readV, 2) + &quot; V&quot;, &quot;#7c3aed&quot;, false);
+
+      // ---- current flow dots ----
+      if (state.closed &amp;&amp; !state.overRange &amp;&amp; state.readI > 0) drawFlow(ctx, L, cellHalf);
+      else if (state.closed &amp;&amp; state.overRange) {
+        ctx.fillStyle = &quot;#d4391b&quot;; ctx.font = &quot;600 12px 'IBM Plex Sans', sans-serif&quot;; ctx.textAlign = &quot;center&quot;;
+        ctx.fillText(&quot;current exceeds 2 A \u2014 increase R&quot;, L.cx, L.yTop - 8);
+      }
+    }
+
+    function drawCell(ctx, x, y, half) {
+      // battery: two cells (long thin +, short thick -)
+      ctx.strokeStyle = &quot;#3a4250&quot;;
+      var pairs = [ -10, 6 ];
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x - 16, y - 11); ctx.lineTo(x - 16, y + 11); ctx.stroke(); // long
+      ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.moveTo(x - 6, y - 7); ctx.lineTo(x - 6, y + 7); ctx.stroke();      // short
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x + 6, y - 11); ctx.lineTo(x + 6, y + 11); ctx.stroke();    // long
+      ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.moveTo(x + 16, y - 7); ctx.lineTo(x + 16, y + 7); ctx.stroke();    // short
+      ctx.fillStyle = &quot;#8a93a3&quot;; ctx.font = &quot;11px 'IBM Plex Mono', monospace&quot;; ctx.textAlign = &quot;center&quot;;
+      ctx.fillText(&quot;cell&quot;, x, y + 26);
+    }
+
+    function drawSwitch(ctx, x, y, closed) {
+      ctx.fillStyle = &quot;#3a4250&quot;;
+      ctx.beginPath(); ctx.arc(x - 16, y, 3.5, 0, TWO_PI); ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 16, y, 3.5, 0, TWO_PI); ctx.fill();
+      ctx.strokeStyle = closed ? &quot;#15803d&quot; : &quot;#b45309&quot;; ctx.lineWidth = 3.2;
+      ctx.beginPath(); ctx.moveTo(x - 16, y);
+      if (closed) ctx.lineTo(x + 16, y); else ctx.lineTo(x + 12, y - 13);
+      ctx.stroke();
+      ctx.fillStyle = closed ? &quot;#15803d&quot; : &quot;#b45309&quot;; ctx.font = &quot;10px 'IBM Plex Mono', monospace&quot;; ctx.textAlign = &quot;center&quot;;
+      ctx.fillText(closed ? &quot;closed&quot; : &quot;open&quot;, x, y - 16);
+    }
+
+    function drawMeter(ctx, x, y, letter, value, colour, alert) {
+      var r = 21;
+      ctx.fillStyle = &quot;#ffffff&quot;; ctx.strokeStyle = alert ? &quot;#d4391b&quot; : colour; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, TWO_PI); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = alert ? &quot;#d4391b&quot; : colour; ctx.font = &quot;600 15px 'Fraunces', serif&quot;; ctx.textAlign = &quot;center&quot;;
+      ctx.fillText(letter, x, y + 5);
+      ctx.font = &quot;11px 'IBM Plex Mono', monospace&quot;;
+      var tw = ctx.measureText(value).width + 12;
+      ctx.fillStyle = &quot;#ffffff&quot;; ctx.strokeStyle = &quot;#e3e7ee&quot;; ctx.lineWidth = 1;
+      roundRect(ctx, x - tw / 2, y + r + 4, tw, 18, 5); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = alert ? &quot;#d4391b&quot; : &quot;#1f2632&quot;; ctx.fillText(value, x, y + r + 16);
+    }
+
+    function drawRheostat(ctx, x, y) {
+      // resistor box on the vertical wire, with a diagonal arrow (variable)
+      var bw = 18, bh = 52;
+      ctx.fillStyle = &quot;#ffffff&quot;; ctx.strokeStyle = &quot;#3a4250&quot;; ctx.lineWidth = 2;
+      ctx.beginPath(); roundRect(ctx, x - bw / 2, y - bh / 2, bw, bh, 3); ctx.fill(); ctx.stroke();
+      // arrow across it
+      ctx.strokeStyle = &quot;#b5651d&quot;; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.moveTo(x - bw, y + bh * 0.36); ctx.lineTo(x + bw, y - bh * 0.36); ctx.stroke();
+      // arrowhead
+      ctx.beginPath();
+      ctx.moveTo(x + bw, y - bh * 0.36);
+      ctx.lineTo(x + bw - 8, y - bh * 0.36 + 2);
+      ctx.lineTo(x + bw - 3, y - bh * 0.36 + 9);
+      ctx.closePath(); ctx.fillStyle = &quot;#b5651d&quot;; ctx.fill();
+      // label
+      ctx.fillStyle = &quot;#515b6b&quot;; ctx.font = &quot;11px 'IBM Plex Mono', monospace&quot;; ctx.textAlign = &quot;left&quot;;
+      ctx.fillText(&quot;R = &quot; + fmt(state.R, 1) + &quot; \u03A9&quot;, x + bw + 6, y + 4);
+      ctx.fillStyle = &quot;#8a93a3&quot;; ctx.font = &quot;10px 'IBM Plex Mono', monospace&quot;;
+      ctx.fillText(&quot;rheostat&quot;, x + bw + 6, y + 18);
+    }
+
+    function drawFlow(ctx, L, cellHalf) {
+      var pts = [
+        { x: L.xL, y: L.yBot }, { x: L.xL, y: L.yTop },
+        { x: L.xR, y: L.yTop }, { x: L.xR, y: L.yBot }
+      ];
+      var loop = pts.concat([pts[0]]);
+      var segLen = [], total = 0;
+      for (var i = 0; i < loop.length - 1; i++) {
+        var dx = loop[i + 1].x - loop[i].x, dy = loop[i + 1].y - loop[i].y;
+        var len = Math.sqrt(dx * dx + dy * dy); segLen.push(len); total += len;
+      }
+      var spacing = 36, nDots = Math.floor(total / spacing);
+      ctx.fillStyle = &quot;rgba(29,78,137,0.85)&quot;;
+      for (var d = 0; d < nDots; d++) {
+        var dist = (state.flowOffset + d * spacing) % total;
+        var acc = 0, k = 0;
+        while (k < segLen.length &amp;&amp; acc + segLen[k] < dist) { acc += segLen[k]; k++; }
+        if (k >= segLen.length) k = segLen.length - 1;
+        var f = segLen[k] === 0 ? 0 : (dist - acc) / segLen[k];
+        var px = loop[k].x + (loop[k + 1].x - loop[k].x) * f;
+        var py = loop[k].y + (loop[k + 1].y - loop[k].y) * f;
+        // skip dots inside the cell gap on the bottom wire (cosmetic)
+        ctx.beginPath(); ctx.arc(px, py, 2.6, 0, TWO_PI); ctx.fill();
+      }
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    /* =================================================================
+       GRAPH  V vs I
+       ================================================================= */
+    function leastSquares(pts) {
+      var n = pts.length, sx = 0, sy = 0, sxy = 0, sxx = 0;
+      for (var i = 0; i < n; i++) { sx += pts[i].x; sy += pts[i].y; sxy += pts[i].x * pts[i].y; sxx += pts[i].x * pts[i].x; }
+      var denom = n * sxx - sx * sx; if (denom === 0) return null;
+      var m = (n * sxy - sx * sy) / denom;
+      return { m: m, c: (sy - m * sx) / n };
+    }
+
+    function drawGraph() {
+      var fit = fitCanvas(state.graph), ctx = fit.ctx, w = fit.w, h = fit.h;
+      ctx.clearRect(0, 0, w, h);
+      var colour = &quot;#1d4e89&quot;, emfCol = &quot;#7c3aed&quot;;
+      var padL = 50, padR = 16, padT = 16, padB = 38;
+      var gx0 = padL, gy0 = h - padB, gx1 = w - padR, gy1 = padT;
+
+      var ys = state.data.map(function (d) { return d.y; });
+      var xsv = state.data.map(function (d) { return d.x; });
+      var fitLine = state.data.length >= 2 ? leastSquares(state.data) : null;
+      var intercept = fitLine ? fitLine.c : 0;
+      var xMax = Math.max.apply(null, xsv.concat([0.5])) * 1.12;
+      var yMax = Math.max.apply(null, ys.concat([intercept, 1])) * 1.12;
+
+      function X(v) { return gx0 + (v / xMax) * (gx1 - gx0); }
+      function Y(v) { return gy0 - (v / yMax) * (gy0 - gy1); }
+
+      ctx.font = &quot;10px 'IBM Plex Mono', monospace&quot;;
+      var i;
+      for (i = 0; i <= 5; i++) {
+        var gv = (yMax / 5) * i, yy = Y(gv);
+        ctx.strokeStyle = &quot;#eef1f6&quot;; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(gx0, yy); ctx.lineTo(gx1, yy); ctx.stroke();
+        ctx.fillStyle = &quot;#9aa3b2&quot;; ctx.textAlign = &quot;right&quot;; ctx.fillText(fmt(gv, 1), gx0 - 6, yy + 3);
+      }
+      for (i = 0; i <= 5; i++) {
+        var xv = (xMax / 5) * i, xx = X(xv);
+        ctx.strokeStyle = &quot;#f4f6fa&quot;;
+        ctx.beginPath(); ctx.moveTo(xx, gy0); ctx.lineTo(xx, gy1); ctx.stroke();
+        ctx.fillStyle = &quot;#9aa3b2&quot;; ctx.textAlign = &quot;center&quot;; ctx.fillText(fmt(xv, 1), xx, gy0 + 14);
+      }
+      ctx.strokeStyle = &quot;#c4ccd8&quot;; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(gx0, gy1); ctx.lineTo(gx0, gy0); ctx.lineTo(gx1, gy0); ctx.stroke();
+
+      ctx.fillStyle = &quot;#515b6b&quot;; ctx.font = &quot;600 11px 'IBM Plex Sans', sans-serif&quot;; ctx.textAlign = &quot;center&quot;;
+      ctx.fillText(&quot;I / A&quot;, (gx0 + gx1) / 2, h - 6);
+      ctx.save(); ctx.translate(13, (gy0 + gy1) / 2); ctx.rotate(-Math.PI / 2);
+      ctx.fillText(&quot;V / V&quot;, 0, 0); ctx.restore();
+
+      if (fitLine) {
+        ctx.save();
+        ctx.beginPath(); ctx.rect(gx0, gy1, gx1 - gx0, gy0 - gy1); ctx.clip();
+        ctx.strokeStyle = colour; ctx.lineWidth = 1.6; ctx.setLineDash([6, 5]);
+        ctx.beginPath(); ctx.moveTo(X(0), Y(fitLine.c)); ctx.lineTo(X(xMax), Y(fitLine.m * xMax + fitLine.c));
+        ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+        // intercept marker (EMF)
+        if (intercept > 0 &amp;&amp; intercept <= yMax) {
+          ctx.strokeStyle = emfCol; ctx.fillStyle = &quot;#fff&quot;; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.arc(X(0), Y(intercept), 4.5, 0, TWO_PI); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = emfCol; ctx.font = &quot;600 11px 'IBM Plex Sans', sans-serif&quot;; ctx.textAlign = &quot;left&quot;;
+          ctx.fillText(&quot;\u03B5 \u2248 &quot; + fmt(intercept, 2) + &quot; V&quot;, X(0) + 8, Y(intercept) - 6);
+        }
+      }
+      state.data.forEach(function (d) {
+        ctx.fillStyle = colour; ctx.beginPath(); ctx.arc(X(d.x), Y(d.y), 4.2, 0, TWO_PI); ctx.fill();
+        ctx.strokeStyle = &quot;#fff&quot;; ctx.lineWidth = 1.4; ctx.stroke();
+      });
+      if (state.data.length === 0) {
+        ctx.fillStyle = &quot;#b6bdc9&quot;; ctx.font = &quot;12px 'IBM Plex Sans', sans-serif&quot;; ctx.textAlign = &quot;center&quot;;
+        ctx.fillText(&quot;Your V against I graph will appear here&quot;, (gx0 + gx1) / 2, (gy0 + gy1) / 2);
+      }
+      updateAnalysis(fitLine);
+    }
+
+    function updateAnalysis(fitLine) {
+      var el = $(&quot;ir-analysis&quot;);
+      if (!fitLine || state.data.length < 2) {
+        el.innerHTML = &quot;Plot at least two points to fit a straight line. Extrapolate the line back to I = 0: the <b>y-intercept</b> is the EMF and the <b>magnitude of the gradient</b> is the internal resistance.&quot;;
+        return;
+      }
+      var grad = fitLine.m, c = fitLine.c;
+      if (grad >= 0) { el.innerHTML = &quot;The line should slope downwards. Spread your readings over a wider range of currents to obtain a clear negative gradient.&quot;; return; }
+      var r = Math.abs(grad);
+      var html = &quot;Extrapolated y-intercept gives <b>EMF &amp;epsilon; = <span class='ir-mono'>&quot; + fmt(c, 2) + &quot; V</span></b>.<br>&quot; +
+        &quot;Magnitude of the gradient gives <b>internal resistance r = <span class='ir-mono'>&quot; + fmt(r, 2) + &quot; &amp;Omega;</span></b>.<br>&quot;;
+      if (state.openEMF != null) {
+        var diff = Math.abs(c - state.openEMF);
+        html += &quot;Open-circuit reading was <span class='ir-mono'>&quot; + fmt(state.openEMF, 2) + &quot; V</span> &amp;mdash; within <span class='ir-mono'>&quot; + fmt(diff, 2) + &quot; V</span> of the extrapolated intercept, as expected. &quot;;
+      }
+      html += &quot;<br><span style='color:var(--ink-faint)'>For comparison, this cell&amp;rsquo;s actual values are &amp;epsilon; = <span class='ir-mono'>&quot; +
+        fmt(cell().emf, 2) + &quot; V</span>, r = <span class='ir-mono'>&quot; + fmt(cell().r, 2) + &quot; &amp;Omega;</span>.</span>&quot;;
+      el.innerHTML = html;
+    }
+
+    /* =================================================================
+       TABLE
+       ================================================================= */
+    function renderTable() {
+      var tbody = $(&quot;ir-tbody&quot;);
+      if (state.data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan=&quot;4&quot; class=&quot;ir-empty&quot;>Close the switch, adjust the rheostat and record a V&amp;ndash;I pair. Vary R over the widest range to spread your points out.</td></tr>';
+        return;
+      }
+      var rows = &quot;&quot;;
+      state.data.forEach(function (d, idx) {
+        rows += &quot;<tr><td>&quot; + (idx + 1) + &quot;</td><td>&quot; + fmt(d.x, 3) + &quot;</td><td>&quot; + fmt(d.y, 2) +
+          '</td><td><button class=&quot;ir-del&quot; data-idx=&quot;' + idx + '&quot; aria-label=&quot;Remove row&quot;>\u00D7</button></td></tr>';
+      });
+      tbody.innerHTML = rows;
+      Array.prototype.forEach.call(tbody.querySelectorAll(&quot;.ir-del&quot;), function (b) {
+        b.addEventListener(&quot;click&quot;, function () { state.data.splice(parseInt(b.dataset.idx, 10), 1); renderTable(); drawGraph(); });
+      });
+    }
+
+    function recordReading() {
+      if (!state.closed || state.overRange || state.readI <= 0) return;
+      state.data.push({ x: state.readI, y: state.readV });
+      state.data.sort(function (a, b) { return a.x - b.x; });
+      renderTable(); drawGraph();
+    }
+
+    /* =================================================================
+       LOOP
+       ================================================================= */
+    var last = null;
+    function loop(now) {
+      if (last == null) last = now;
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+
+      var target = 0;
+      if (state.closed &amp;&amp; !state.overRange) target = Math.min(1, currentTrue() / 1.0);
+      else if (state.closed &amp;&amp; state.overRange) target = 1;
+      state.heat += (target - state.heat) * (1 - Math.exp(-dt / TAU));
+
+      if (state.closed &amp;&amp; !state.overRange) state.flowOffset = (state.flowOffset + currentTrue() * 70 * dt) % 100000;
+
+      refreshReading();
+      drawCircuit();
+      requestAnimationFrame(loop);
+    }
+
+    /* =================================================================
+       WIRING
+       ================================================================= */
+    var cellsHost = $(&quot;ir-cells&quot;);
+    CELLS.forEach(function (c, idx) {
+      var b = document.createElement(&quot;button&quot;);
+      b.className = &quot;ir-cell-btn&quot;;
+      b.setAttribute(&quot;aria-pressed&quot;, idx === 0 ? &quot;true&quot; : &quot;false&quot;);
+      b.textContent = c.name;
+      b.addEventListener(&quot;click&quot;, function () { selectCell(idx); });
+      cellsHost.appendChild(b);
+    });
+
+    function selectCell(idx) {
+      state.cellIdx = idx;
+      Array.prototype.forEach.call(cellsHost.querySelectorAll(&quot;.ir-cell-btn&quot;), function (b, i) {
+        b.setAttribute(&quot;aria-pressed&quot;, i === idx ? &quot;true&quot; : &quot;false&quot;);
+      });
+      state.data = []; renderTable(); drawGraph();
+      state.heat = 0; state.openEMF = null; newNoise();
+      $(&quot;ir-cell-tag&quot;).textContent = cell().name;
+      refreshReading();
+    }
+
+    $(&quot;ir-r-R&quot;).addEventListener(&quot;input&quot;, function () {
+      state.R = parseFloat(this.value);
+      $(&quot;ir-v-R&quot;).innerHTML = fmt(state.R, 1) + &quot; &amp;Omega;&quot;;
+      newNoise(); refreshReading();
+    });
+
+    function setSwitch(closed) {
+      state.closed = closed;
+      var btn = $(&quot;ir-switch&quot;);
+      btn.textContent = closed ? &quot;Open switch&quot; : &quot;Close switch&quot;;
+      btn.setAttribute(&quot;aria-pressed&quot;, closed ? &quot;true&quot; : &quot;false&quot;);
+      btn.classList.toggle(&quot;ir-open&quot;, !closed);
+      newNoise(); refreshReading();
+    }
+    $(&quot;ir-switch&quot;).addEventListener(&quot;click&quot;, function () { setSwitch(!state.closed); });
+
+    $(&quot;ir-record&quot;).addEventListener(&quot;click&quot;, recordReading);
+    $(&quot;ir-clear&quot;).addEventListener(&quot;click&quot;, function () { state.data = []; renderTable(); drawGraph(); });
+
+    // canvas: click switch to toggle
+    state.canvas.addEventListener(&quot;pointerdown&quot;, function (e) {
+      var rect = state.canvas.getBoundingClientRect();
+      var x = e.clientX - rect.left, y = e.clientY - rect.top;
+      var L = state.layout; if (!L) return;
+      if (Math.abs(x - L.switchX) < 30 &amp;&amp; Math.abs(y - L.yTop) < 26) setSwitch(!state.closed);
+    });
+
+    /* responsive */
+    new ResizeObserver(function (entries) {
+      var width = entries[0].contentRect.width;
+      if (width < 760) root.classList.add(&quot;ir-narrow&quot;); else root.classList.remove(&quot;ir-narrow&quot;);
+    }).observe(root);
+    new ResizeObserver(function () { drawCircuit(); }).observe($(&quot;ir-stage&quot;));
+    new ResizeObserver(function () { drawGraph(); }).observe($(&quot;ir-graph-stage&quot;));
+
+    /* init */
+    $(&quot;ir-cell-tag&quot;).textContent = cell().name;
+    newNoise();
+    renderTable();
+    refreshReading();
+    drawGraph();
+    requestAnimationFrame(loop);
+  })();
+  </script>
+</div>"></iframe>
+  </div>
+  <p class="print-only-note">Interactive simulation not included in the printed/PDF version — open the file in a browser to use it.</p>
+  <div class="sim-credit">
+    Simulation created by <strong>Dr Dan Jones</strong> (Dr Jones Physics) — used with attribution.<br>
+    View the original and more physics simulations at <a href="https://www.drjonesphysics.com/emf-expt" target="_blank" rel="noopener">drjonesphysics.com/emf-expt</a>.
+  </div>
+</div>
+
+<div class="card">
+  <h3 class="sub-title" style="margin-top:0">Worked examples</h3>
+  <p><strong>Example 1.</strong> What is the terminal p.d. for a cell of emf 2 V and internal resistance 1 Ω when it is connected to a 9 Ω resistor?</p>
+  <div class="note">
+    ε = IR + Ir = I(R + r)<br><br>
+    2 = I(9 + 1)<br><br>
+    I = 2/10 = 0.2 A<br><br>
+    V = IR = 0.2 × 9 = 1.8 V<br><br>
+    So this 2 V cell actually supplies only 1.8 V to the external circuit.
+  </div>
+  <p><strong>Example 2.</strong> Find the internal resistance of the cell if the emf is 2 V, the current is 0.2 A and R = 9 Ω.</p>
+  <div class="note">
+    ε = I(R + r)<br><br>
+    2 = 0.2(9 + r)<br><br>
+    r = 1 Ω
+  </div>
+  <p><strong>Example 3.</strong> The p.d. across the terminals of a cell is 3.0 V when it is not connected to a circuit (no current flowing). When connected to a circuit with a current of 0.37 A flowing, the terminal p.d. falls to 2.8 V. What is the internal resistance of the cell?</p>
+  <div class="note">
+    ε − V = Ir<br><br>
+    3.0 − 2.8 = Ir<br><br>
+    r = 0.2 / 0.37 = 0.54 Ω
+  </div>
+</div>
+
+<h2 class="section-title">Part B — Workbook: review questions</h2>
+<p>This is a review lesson, so most of the questions below revisit ideas you have already met. Use them to check how confident you are before the exam-style question at the end.</p>
+
+<h3 class="sub-title" style="margin-top:0">Your turn</h3>
+
+<div class="q" data-type="numeric" data-answer="1" data-tol="0.03" data-qname="Your turn 1: r from I=0.5A">
+  <div class="qtitle">1. A current of 0.5 A flows when a cell of emf 6 V is connected to an 11 Ω resistor. What is the internal resistance of the cell?</div>
+  r = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    ε = I(R + r)<br><br>
+    6 = 0.5(11 + r)<br><br>
+    12 = 11 + r<br><br>
+    r = … Ω
+  </div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="11.5" data-tol="0.02" data-qname="Your turn 2: V across 23Ω">
+  <div class="qtitle">2. A 12 V cell with internal resistance 1 Ω is connected to a 23 Ω resistor. What is the p.d. across the 23 Ω resistor?</div>
+  V = <input type="text" class="qinput"> V
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">I = ε/(R + r) = 12/(23 + 1) = 0.5 A. V = IR = 0.5 × 23 = … V</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="7.5" data-tol="0.02" data-qname="Your turn 3: terminal pd, I=3A">
+  <div class="qtitle">3. A cell of emf 12 V and internal resistance r = 1.5 Ω produces a current of 3.0 A. What is the potential difference across the cell terminals?</div>
+  V = <input type="text" class="qinput"> V
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">V = ε − Ir = 12 − (3.0 × 1.5) = 12 − 4.5 = … V</div>
+</div>
+
+<div class="diagram-row">
+  <figure>
+    <svg width="300" height="250" viewBox="0 0 300 250">
+      <line x1="40" y1="40" x2="90" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="30" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="96.5" y="34" width="3.5" height="12" fill="#1b2a4a"/>
+      <rect x="110" y="30" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="116.5" y="34" width="3.5" height="12" fill="#1b2a4a"/>
+      <line x1="120" y1="40" x2="210" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="210" y1="40" x2="210" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="40" x2="40" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+      <circle cx="40" cy="70" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+      <text x="40" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A</text>
+      <text x="62" y="75" font-size="12" font-weight="bold" fill="#e8533a">I = 3.0 A</text>
+      <line x1="40" y1="85" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="130" x2="90" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="121" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="110" y="115" text-anchor="middle" font-size="11">R</text>
+      <line x1="130" y1="130" x2="210" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="190" x2="90" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="181" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="110" y="222" text-anchor="middle" font-size="11">R</text>
+      <line x1="130" y1="190" x2="210" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+    </svg>
+    <div class="diagram-cap"><strong>(a) Parallel:</strong> the two resistors in parallel, ammeter reads the current leaving the cell.</div>
+  </figure>
+  <figure>
+    <svg width="260" height="170" viewBox="0 0 260 170">
+      <line x1="20" y1="30" x2="90" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="96.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+      <rect x="110" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="116.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+      <line x1="120" y1="30" x2="210" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="210" y1="30" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="20" y1="30" x2="20" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+      <circle cx="20" cy="70" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+      <text x="20" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A</text>
+      <text x="42" y="75" font-size="12" font-weight="bold" fill="#e8533a">I = 1.4 A</text>
+      <line x1="20" y1="85" x2="20" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="20" y1="140" x2="60" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="60" y="131" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="80" y="164" text-anchor="middle" font-size="11">R</text>
+      <line x1="100" y1="140" x2="140" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="140" y="131" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="160" y="164" text-anchor="middle" font-size="11">R</text>
+      <line x1="180" y1="140" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    </svg>
+    <div class="diagram-cap"><strong>(b) Series:</strong> the same two resistors in series, ammeter reads the total current.</div>
+  </figure>
+</div>
+
+<div class="q" data-type="numeric" data-answer="3.25" data-tol="0.02" data-qname="Your turn 4: two 4Ω resistors (r)">
+  <div class="qtitle">4. When two 4.0 Ω resistors are connected in parallel with a cell, the current leaving the cell is 3.0 A. When the same two resistors are connected in series with the cell, the total current is 1.4 A. Calculate the internal resistance of the cell.</div>
+  r = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    Parallel: R = (4×4)/(4+4) = 2 Ω, so ε = 3.0(2 + r) = 6 + 3r.<br><br>
+    Series: R = 4+4 = 8 Ω, so ε = 1.4(8 + r) = 11.2 + 1.4r.<br><br>
+    Setting equal: 6 + 3r = 11.2 + 1.4r<br><br>
+    1.6r = 5.2<br><br>
+    r = … Ω.
+  </div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="15.75" data-tol="0.02" data-qname="Your turn 4: two 4Ω resistors (emf)">
+  <div class="qtitle">4 (continued). Using your value of r, calculate the emf of the cell.</div>
+  ε = <input type="text" class="qinput"> V
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">ε = 6 + 3r = 6 + 3(3.25) = … V (check: ε = 11.2 + 1.4r = 11.2 + 1.4(3.25) gives the same value)</div>
+</div>
+
+<p>A cell of emf 12 V and internal resistance r = 2 Ω is connected to two resistors, X = 6 Ω and Y = 6 Ω, in parallel.</p>
+<div class="circuit-block">
+  <div class="circuit-flex">
+    <svg width="300" height="250" viewBox="0 0 300 250">
+      <line x1="40" y1="40" x2="90" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="30" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="96.5" y="34" width="3.5" height="12" fill="#1b2a4a"/>
+      <rect x="110" y="30" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="116.5" y="34" width="3.5" height="12" fill="#1b2a4a"/>
+      <text x="105" y="24" text-anchor="middle" font-size="11">ε = 12 V</text>
+      <line x1="120" y1="40" x2="140" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="140" y="31" width="36" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="158" y="26" text-anchor="middle" font-size="11">r = 2 Ω</text>
+      <line x1="176" y1="40" x2="210" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="210" y1="40" x2="210" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="40" x2="40" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+      <circle cx="40" cy="70" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+      <text x="40" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A</text>
+      <line x1="40" y1="85" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="130" x2="90" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="121" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="110" y="115" text-anchor="middle" font-size="11">Y = 6 Ω</text>
+      <line x1="130" y1="130" x2="210" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="190" x2="90" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="181" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="110" y="222" text-anchor="middle" font-size="11">X = 6 Ω</text>
+      <line x1="130" y1="190" x2="210" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>ε = 12 V, r = 2 Ω</td></tr>
+        <tr><td>X = Y = 6 Ω</td></tr>
+        <tr><td>Current through cell =</td><td><input class="reading-input" data-answer="2.4" data-tol="0.03"> A</td></tr>
+        <tr><td>Current through each branch =</td><td><input class="reading-input" data-answer="1.2" data-tol="0.03"> A</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    X ∥ Y = (6×6)/(6+6) = 3 Ω<br><br>
+    ε = I(R + r)<br><br>
+    12 = I(3 + 2)<br><br>
+    I = … A (current through the cell)<br><br>
+    Since X = Y, the current splits equally between the two branches: … A each.
+  </div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="b" data-qname="Show me Q6: power in external R">
+  <div class="qtitle">6. Using the symbols ε, I, R and r, what is the formula for the power dissipated in the <strong>external resistance</strong>?</div>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">Iε²</option>
+    <option value="b">I²R</option>
+    <option value="c">Ir</option>
+    <option value="d">I(r+R)</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+</div>
+
+<div class="q" data-type="mcq" data-answer="b" data-qname="Show me Q7: power in internal r">
+  <div class="qtitle">7. What is the formula for the power dissipated in the <strong>internal resistance</strong>?</div>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">Ir²</option>
+    <option value="b">I²r</option>
+    <option value="c">Iε</option>
+    <option value="d">I(r+R)²</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+</div>
+
+<h3 class="sub-title">Self-assessment questions</h3>
+
+<div class="diagram-row">
+  <figure>
+    <svg width="230" height="190" viewBox="0 0 230 190">
+      <line x1="20" y1="40" x2="85" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="85" y="30" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="91.5" y="34" width="3.5" height="12" fill="#1b2a4a"/>
+      <text x="90" y="14" text-anchor="middle" font-size="11">1.5 V</text>
+      <line x1="95" y1="40" x2="115" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="115" y="30" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="121.5" y="34" width="3.5" height="12" fill="#1b2a4a"/>
+      <text x="120" y="14" text-anchor="middle" font-size="11">1.5 V</text>
+      <line x1="125" y1="40" x2="210" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="210" y1="40" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="20" y1="40" x2="20" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="20" y1="140" x2="97" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <circle cx="115" cy="140" r="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="104" y1="129" x2="126" y2="151" stroke="#1b2a4a" stroke-width="1.5"/>
+      <line x1="104" y1="151" x2="126" y2="129" stroke="#1b2a4a" stroke-width="1.5"/>
+      <line x1="133" y1="140" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <text x="115" y="176" text-anchor="middle" font-size="11">2.5 V, 0.5 A</text>
+    </svg>
+    <div class="diagram-cap">Two 1.5 V cells in series supplying a lamp rated 2.5 V, 0.5 A.</div>
+  </figure>
+</div>
+
+<div class="q" data-type="numeric" data-answer="0.5" data-tol="0.03" data-qname="SA1: torch cells, r each">
+  <div class="qtitle">1. A typical hand-held torch runs off two 1.5 V cells (in series), yet has a lamp rated 2.5 V, 0.5 A. What is the internal resistance of each cell (assume they are identical)?</div>
+  r (each cell) = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    Total emf = 2 × 1.5 = 3 V<br><br>
+    ε = V + Ir<br><br>
+    3 = 2.5 + (0.5 × r<sub>total</sub>)<br><br>
+    r<sub>total</sub> = 0.5/0.5 = 1 Ω (for both cells), so r per cell = 1/2 = … Ω.<br><br>
+    (The 0.5 V "lost" is shared between the two cells.)
+  </div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="4" data-tol="0.03" data-qname="SA2: car battery lost volts">
+  <div class="qtitle">2. A typical car battery has an emf of 12 V and must provide a current of 80 A to the starter motor. If the internal resistance is 0.05 Ω, find the potential difference across this internal resistance when the starter motor is running.</div>
+  V<sub>r</sub> = <input type="text" class="qinput"> V
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">V<sub>r</sub> = Ir = 80 × 0.05 = … V ("lost volts"). The car battery needs a very low internal resistance so it can supply this high current without losing too much terminal p.d. Starting the car with the headlights on dims them, because the extra 4 V lost internally leaves only 8 V for the lights instead of the full 12 V.</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="60" data-tol="0.05" data-qname="SA3: EHT max current">
+  <div class="qtitle">3. Some school laboratories have EHT (Extra High Tension) power packs giving up to 3000 V. For safety, they are provided with a 50 MΩ resistor in series with the supply. What is the maximum current that could be drawn from the supply? Give your answer in μA.</div>
+  I<sub>max</sub> = <input type="text" class="qinput"> μA
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">Maximum current happens when the external resistance is 0 (short circuit): I<sub>max</sub> = ε/r = 3000/(50×10⁶) = 6 × 10⁻⁵ A = … μA. A torch bulb of 10 Ω connected across this supply would only receive about I×R ≈ 6 × 10⁻⁴ V — the 50 MΩ resistor dominates completely, which is exactly why it's there for safety.</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="200" data-tol="0.05" data-qname="SA4: solar cell internal resistance">
+  <div class="qtitle">4. A student experimenting with a solar cell connects a 1000 Ω voltmeter across it and reads a p.d. of 1.0 V. Using an (almost) infinite-resistance digital voltmeter instead, the reading is larger: 1.2 V. What is the internal resistance of the solar cell?</div>
+  r = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    The low-resistance voltmeter allows a small current to flow, so it reads less than the true emf; the near-infinite-resistance voltmeter draws (almost) no current, so it reads the true emf ≈ 1.2 V.<br><br>
+    With the 1000 Ω meter: I = V/R = 1.0/1000 = 0.001 A.<br><br>
+    Lost p.d. = 1.2 − 1.0 = 0.2 V = Ir<br><br>
+    r = 0.2/0.001 = … Ω.
+  </div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="8.4" data-tol="0.02" data-qname="SA5a: 9V battery terminal pd">
+  <div class="qtitle">5. A 9.0 V battery has an internal resistance of 12.0 Ω. (a) What is the potential difference across its terminals when it is supplying a current of 50.0 mA?</div>
+  V = <input type="text" class="qinput"> V
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">V = ε − Ir = 9 − (50×10⁻³ × 12) = 9 − 0.6 = … V</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="0.75" data-tol="0.02" data-qname="SA5b: 9V battery max current">
+  <div class="qtitle">5 (continued). (b) What is the maximum current this battery could supply?</div>
+  I<sub>max</sub> = <input type="text" class="qinput"> A
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">Maximum current occurs when R = 0: I<sub>max</sub> = ε/r = 9/12 = … A. (c) A sketch of terminal p.d. V against supplied current I would be a straight line sloping downward from V = ε (at I = 0) with gradient −r — so the internal resistance can be found from the magnitude of the gradient.</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="0.6" data-tol="0.03" data-qname="SA7: shorted cell r">
+  <div class="qtitle">6. When a cell is connected directly across a high-resistance voltmeter, the reading is 1.50 V. When the cell is shorted through a low-resistance ammeter, the current is 2.5 A. What is the internal resistance of the cell?</div>
+  r = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    emf = 1.5 V (high-resistance voltmeter draws almost no current, so reads the true emf).<br><br>
+    I<sub>max</sub> = 2.5 A occurs when R = 0 (short circuit), so I<sub>max</sub> = ε/r<br><br>
+    r = ε/I<sub>max</sub> = 1.5/2.5 = … Ω.
+  </div>
+</div>
+
+<!-- ================= RESULTS SUMMARY ================= -->
+<div class="summary-card">
+  <h2 class="section-title" style="border-bottom-color:#5a7ac0;">Results</h2>
+  <div id="scoreLine">Click "Calculate score" to mark your work.</div>
+  <button class="check-btn" onclick="computeAll()">Calculate score</button>
+  <button class="copy-btn" onclick="copySummary()">Copy summary</button>
+  <p style="font-size:0.85rem;color:#a9b8d8;">Paste the summary below into your Canvas submission.</p>
+  <textarea id="summaryText" readonly></textarea>
+</div>
+
+<!-- ================= EXAM-STYLE QUESTION (not marked, not for Canvas) ================= -->
+<div class="examq-section">
+<h2 class="section-title">Exam-style question</h2>
+<div class="examq-card">
+  <span class="examq-badge">Exam practice</span>
+  <p class="examq-note">This is a classic exam-style question (Cambridge Physics for the IB Diploma). It is for extra practice only and is not counted in the score above.</p>
+  <div class="qtitle">In the circuit below, a variable resistor is connected to a battery of emf ε.</div>
+  <div class="circuit-flex" style="margin:14px 0;">
+    <svg width="260" height="200" viewBox="0 0 260 200">
+      <line x1="40" y1="30" x2="100" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="130" y1="30" x2="210" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="100" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="106.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+      <rect x="120" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+      <rect x="126.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+      <text x="125" y="14" text-anchor="middle" font-size="13" font-style="italic">ε</text>
+      <line x1="40" y1="30" x2="40" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+      <circle cx="40" cy="75" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+      <text x="40" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A</text>
+      <line x1="40" y1="90" x2="40" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="210" y1="30" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="40" y1="110" x2="97" y2="110" stroke="#3a7bd5" stroke-width="2"/>
+      <line x1="133" y1="110" x2="210" y2="110" stroke="#3a7bd5" stroke-width="2"/>
+      <circle cx="115" cy="110" r="18" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+      <text x="115" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#3a7bd5">V</text>
+      <line x1="40" y1="140" x2="90" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="160" y1="140" x2="210" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+      <rect x="90" y="131" width="70" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+      <line x1="85" y1="155" x2="165" y2="125" stroke="#1b2a4a" stroke-width="2"/>
+      <polygon points="165.0,125.0 158.2,132.4 155.0,123.9" fill="#1b2a4a"/>
+    </svg>
+    <svg width="470" height="300" viewBox="0 0 470 300">
+      <line x1="60" y1="20" x2="60" y2="280" stroke="#1b2a4a" stroke-width="2"/>
+      <path d="M 60 20 L 55 30 L 65 30 Z" fill="#1b2a4a"/>
+      <line x1="60" y1="280" x2="430" y2="280" stroke="#1b2a4a" stroke-width="2"/>
+      <path d="M 430 280 L 420 275 L 420 285 Z" fill="#1b2a4a"/>
+      <line x1="60" y1="245" x2="420" y2="245" stroke="#dbe2ef" stroke-width="1"/>
+      <line x1="60" y1="210" x2="420" y2="210" stroke="#dbe2ef" stroke-width="1"/>
+      <line x1="60" y1="175" x2="420" y2="175" stroke="#dbe2ef" stroke-width="1"/>
+      <line x1="60" y1="140" x2="420" y2="140" stroke="#dbe2ef" stroke-width="1"/>
+      <line x1="60" y1="105" x2="420" y2="105" stroke="#dbe2ef" stroke-width="1"/>
+      <line x1="60" y1="70" x2="420" y2="70" stroke="#dbe2ef" stroke-width="1"/>
+      <line x1="60" y1="35" x2="420" y2="35" stroke="#dbe2ef" stroke-width="1"/>
+      <text x="52" y="284" text-anchor="end" font-size="11">0</text>
+      <text x="52" y="249" text-anchor="end" font-size="11">1</text>
+      <text x="52" y="214" text-anchor="end" font-size="11">2</text>
+      <text x="52" y="179" text-anchor="end" font-size="11">3</text>
+      <text x="52" y="144" text-anchor="end" font-size="11">4</text>
+      <text x="52" y="109" text-anchor="end" font-size="11">5</text>
+      <text x="52" y="74" text-anchor="end" font-size="11">6</text>
+      <text x="52" y="39" text-anchor="end" font-size="11">7</text>
+      <text x="30" y="30" text-anchor="middle" font-size="12">V/V</text>
+      <line x1="160" y1="285" x2="160" y2="275" stroke="#1b2a4a" stroke-width="1"/>
+      <line x1="260" y1="285" x2="260" y2="275" stroke="#1b2a4a" stroke-width="1"/>
+      <line x1="360" y1="285" x2="360" y2="275" stroke="#1b2a4a" stroke-width="1"/>
+      <text x="160" y="298" text-anchor="middle" font-size="11">1.0</text>
+      <text x="260" y="298" text-anchor="middle" font-size="11">2.0</text>
+      <text x="360" y="298" text-anchor="middle" font-size="11">3.0</text>
+      <text x="415" y="298" text-anchor="middle" font-size="12">I/A</text>
+      <line x1="60" y1="59.5" x2="110" y2="87.5" stroke="#9fb3d1" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="360" y1="227.5" x2="454" y2="280" stroke="#9fb3d1" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="110" y1="87.5" x2="360" y2="227.5" stroke="#e8533a" stroke-width="2.5"/>
+      <circle cx="110" cy="87.5" r="3" fill="#e8533a"/>
+      <circle cx="360" cy="227.5" r="3" fill="#e8533a"/>
+    </svg>
+  </div>
+  <p>The graph shows how the reading of the voltmeter (in V) varies with current (in A) as the variable resistance changes. Use the graph (extrapolating the dashed line where needed) to determine:</p>
+
+  <div style="margin:14px 0;">
+    <strong>a</strong> the internal resistance of the battery.<br>
+    r = <input type="text" class="qinput" id="examq-r"> Ω
+    <button class="check-btn" onclick="checkExamQ('examq-r', 1.6, 0.12)">Check</button>
+    <span class="feedback" id="examq-r-fb"></span>
+  </div>
+  <div style="margin:14px 0;">
+    <strong>b</strong> the emf of the battery.<br>
+    ε = <input type="text" class="qinput" id="examq-emf"> V
+    <button class="check-btn" onclick="checkExamQ('examq-emf', 6.3, 0.08)">Check</button>
+    <span class="feedback" id="examq-emf-fb"></span>
+  </div>
+  <div style="margin:14px 0;">
+    <strong>c</strong> the maximum current that can be established in this circuit.<br>
+    I<sub>max</sub> = <input type="text" class="qinput" id="examq-imax"> A
+    <button class="check-btn" onclick="checkExamQ('examq-imax', 3.9, 0.1)">Check</button>
+    <span class="feedback" id="examq-imax-fb"></span>
+  </div>
+
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">
+    Reading two points from the line, approximately (I = 0.5 A, V = 5.5 V) and (I = 3.0 A, V = 1.5 V):<br>
+    <strong>a</strong> gradient = (1.5 − 5.5)/(3.0 − 0.5) = −4.0/2.5 = −1.6, so r = |gradient| = … Ω.<br>
+    <strong>b</strong> extrapolating back to I = 0 (the y-intercept): ε = V + Ir = 5.5 + (1.6 × 0.5) = … V.<br>
+    <strong>c</strong> maximum current occurs when the variable resistance is reduced to 0 (short circuit): I<sub>max</sub> = ε/r = 6.3/1.6 = … A.
+  </div>
+  <p class="credit">Source: Cambridge Physics for the IB Diploma, Extension Worksheet — Topic 5, Worksheet 3. © Cambridge University Press 2012.</p>
+</div>
+</div>
+
+  <div class="print-btn-row">
+    <button class="print-btn" onclick="preparePrint()">Print / PDF</button>
+  </div>
+</div>
+<script>
+function toggleSolution(btn){
+  var sol = btn.nextElementSibling;
+  sol.classList.toggle('show');
+  btn.textContent = sol.classList.contains('show') ? 'Hide working' : 'Show working';
+}
+function withinTol(val, ans, tol){
+  if(isNaN(val)) return false;
+  var t = Math.max(tol*Math.abs(ans), 0.01);
+  return Math.abs(val-ans) <= t;
+}
+function checkNumeric(btn){
+  var q = btn.closest('.q');
+  var input = q.querySelector('.qinput');
+  var ans = parseFloat(q.getAttribute('data-answer'));
+  var tol = parseFloat(q.getAttribute('data-tol'))||0.02;
+  var val = parseFloat(input.value);
+  var fb = q.querySelector('.feedback');
+  if(withinTol(val, ans, tol)){
+    fb.textContent = 'Correct'; fb.className='feedback correct'; input.style.borderColor='#1a8a4a';
+  } else {
+    fb.textContent = 'Not quite'; fb.className='feedback incorrect'; input.style.borderColor='#c0392b';
+  }
+}
+function checkMCQ(btn){
+  var q = btn.closest('.q');
+  var sel = q.querySelector('.mcq-select');
+  var ans = q.getAttribute('data-answer');
+  var fb = q.querySelector('.feedback');
+  if(sel.value === ans){
+    fb.textContent = 'Correct'; fb.className='feedback correct';
+  } else {
+    fb.textContent = 'Not quite'; fb.className='feedback incorrect';
+  }
+}
+function checkCircuit(btn){
+  var block = btn.closest('.circuit-block');
+  var inputs = block.querySelectorAll('.reading-input');
+  var correct = 0;
+  inputs.forEach(function(inp){
+    var ans = parseFloat(inp.getAttribute('data-answer'));
+    var tol = parseFloat(inp.getAttribute('data-tol'))||0.02;
+    var val = parseFloat(inp.value);
+    if(withinTol(val, ans, tol)){ inp.style.borderColor='#1a8a4a'; correct++; }
+    else { inp.style.borderColor='#c0392b'; }
+  });
+  var fb = block.querySelector('.feedback');
+  fb.textContent = correct + ' / ' + inputs.length + ' correct';
+  fb.className = 'feedback ' + (correct===inputs.length ? 'correct':'incorrect');
+}
+function checkExamQ(inputId, ans, tol){
+  var input = document.getElementById(inputId);
+  var fb = document.getElementById(inputId + '-fb');
+  var val = parseFloat(input.value);
+  if(withinTol(val, ans, tol)){
+    fb.textContent = 'Correct'; fb.className='feedback correct'; input.style.borderColor='#1a8a4a';
+  } else {
+    fb.textContent = 'Not quite'; fb.className='feedback incorrect'; input.style.borderColor='#c0392b';
+  }
+}
+function computeAll(){
+  var total=0, correct=0, missing=[];
+  document.querySelectorAll('.q[data-type="numeric"]').forEach(function(q){
+    total++;
+    var input=q.querySelector('.qinput');
+    var ans=parseFloat(q.getAttribute('data-answer'));
+    var tol=parseFloat(q.getAttribute('data-tol'))||0.02;
+    var val=parseFloat(input.value);
+    if(withinTol(val,ans,tol)) correct++; else missing.push(q.getAttribute('data-qname')||'question');
+  });
+  document.querySelectorAll('.q[data-type="mcq"]').forEach(function(q){
+    total++;
+    var sel=q.querySelector('.mcq-select');
+    var ans=q.getAttribute('data-answer');
+    if(sel.value===ans) correct++; else missing.push(q.getAttribute('data-qname')||'question');
+  });
+  document.querySelectorAll('.circuit-block').forEach(function(block, idx){
+    var title = block.querySelector('.sub-title') ? block.querySelector('.sub-title').textContent : ('Circuit '+(idx+1));
+    block.querySelectorAll('.reading-input').forEach(function(inp, j){
+      total++;
+      var ans=parseFloat(inp.getAttribute('data-answer'));
+      var tol=parseFloat(inp.getAttribute('data-tol'))||0.02;
+      var val=parseFloat(inp.value);
+      if(withinTol(val,ans,tol)) correct++; else missing.push(title+' (blank '+(j+1)+')');
+    });
+  });
+  window._score = {total:total, correct:correct, missing:missing};
+  document.getElementById('scoreLine').textContent = 'Score: ' + correct + ' / ' + total + ' (' + Math.round(100*correct/total) + '%)';
+}
+function copySummary(){
+  if(!window._score) computeAll();
+  var s = window._score;
+  var name = document.getElementById('studentName').value || '(name not entered)';
+  var lines = [];
+  lines.push('EMF and Internal Resistance — Self-Marking Workbook');
+  lines.push('Name: ' + name);
+  lines.push('Score: ' + s.correct + ' / ' + s.total + ' (' + Math.round(100*s.correct/s.total) + '%)');
+  if(s.missing.length){
+    lines.push('');
+    lines.push('Items to review:');
+    s.missing.forEach(function(m){ lines.push(' - ' + m); });
+  }
+  var text = lines.join('\n');
+  document.getElementById('summaryText').value = text;
+  document.getElementById('summaryText').select();
+  try{ document.execCommand('copy'); }catch(e){}
+  if(navigator.clipboard){ navigator.clipboard.writeText(text).catch(function(){}); }
+}
+
+function preparePrint(){
+  document.querySelectorAll('.hint, .solution, .hint-box').forEach(function(el){
+    el.classList.add('show');
+    el.classList.add('visible');
+  });
+  var sBtn = document.getElementById('summarize');
+  if(sBtn){ try{ sBtn.click(); }catch(e){} }
+  if(typeof generateExport === 'function'){ try{ generateExport(); }catch(e){} }
+  if(typeof computeAll === 'function'){ try{ computeAll(); }catch(e){} }
+  setTimeout(function(){ window.print(); }, 60);
+}
+</script>
+</body>
+</html>
+
