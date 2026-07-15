@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Adding Resistors — Self-Marking Workbook</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --navy-dark:#12203a;
+    --blue:#2563eb;
+    --red:#e8533a;
+    --red-bg:#fff3f1;
+    --blue-bg:#e8f1ff;
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --border:#dbe2ef;
+    --good:#1a8a4a;
+    --bad:#c0392b;
+    --text:#1b2333;
+    --muted:#5a6478;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    margin:0;
+    padding:0 0 60px 0;
+    line-height:1.55;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px;}
+  header.top{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);
+    color:#fff;
+    padding:36px 20px 30px 20px;
+    margin-bottom:28px;
+  }
+  header.top .inner{max-width:920px;margin:0 auto;}
+  header.top h1{margin:0 0 6px 0;font-size:2rem;}
+  header.top p.tag{margin:0;color:#c9d4ea;font-size:1.05rem;}
+  .namebox{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:24px;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .namebox label{font-weight:600;margin-right:8px;color:var(--muted);}
+  .namebox input{
+    border:none;border-bottom:2px solid var(--border);
+    padding:4px 2px;font-size:1rem;background:transparent;min-width:220px;
+  }
+  .namebox input:focus{outline:none;border-bottom-color:var(--blue);}
+  h2.section-title{
+    color:var(--navy);
+    border-bottom:3px solid var(--blue);
+    padding-bottom:8px;
+    margin:40px 0 18px 0;
+    font-size:1.5rem;
+  }
+  h3.sub-title{color:var(--navy);margin:28px 0 10px 0;font-size:1.15rem;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px 24px;
+    margin-bottom:18px;
+  }
+  .note{
+    background:#fbfcfe;
+    border-left:4px solid var(--blue);
+    padding:14px 18px;
+    margin:14px 0;
+    border-radius:0 6px 6px 0;
+  }
+  .note.formula{font-size:1.1rem;}
+  .formula-box{
+    border:2px solid var(--blue);
+    border-radius:8px;
+    padding:14px 20px;
+    background:#f7faff;
+    display:inline-block;
+    margin:10px 0;
+    font-size:1.05rem;
+  }
+  .diagram-row{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin:14px 0;}
+  .diagram-cap{font-size:0.85rem;color:var(--muted);text-align:center;margin-top:4px;max-width:260px;}
+  figure{margin:0;text-align:center;}
+  .q{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:16px 20px;
+    margin:16px 0;
+    background:#fbfcfe;
+  }
+  .q .qtitle{font-weight:600;color:var(--navy);margin-bottom:8px;}
+  select.mcq-select, input.mcq-input{
+    font-size:1rem;padding:6px 10px;border:1px solid var(--border);border-radius:6px;margin-left:6px;
+  }
+  .reading-table{width:100%;border-collapse:collapse;margin:10px 0;}
+  .reading-table td{padding:6px 8px;vertical-align:middle;}
+  .reading-row input{
+    width:100px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:0.95rem;
+  }
+  .reading-row .unit{color:var(--muted);margin-left:4px;}
+  .reveal-btn{
+    background:var(--navy);color:#fff;border:none;border-radius:6px;
+    padding:8px 16px;font-size:0.9rem;cursor:pointer;margin-top:8px;
+  }
+  .reveal-btn:hover{background:var(--navy-dark);}
+  .solution{
+    display:none;
+    background:#f1f5fb;
+    border:1px dashed #9fb3d1;
+    border-radius:6px;
+    padding:12px 16px;
+    margin-top:10px;
+    font-size:0.95rem;
+  }
+  .solution.show{display:block;}
+  .check-btn{
+    background:var(--blue);color:#fff;border:none;border-radius:6px;
+    padding:7px 16px;font-size:0.9rem;cursor:pointer;margin-right:8px;
+  }
+  .check-btn:hover{background:#1d4fc4;}
+  .feedback{margin-left:10px;font-weight:600;font-size:0.9rem;}
+  .feedback.correct{color:var(--good);}
+  .feedback.incorrect{color:var(--bad);}
+  .circuit-block{
+    border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:20px 0;background:#fff;
+  }
+  .circuit-flex{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;}
+  .answer-box{
+    border:2px solid var(--blue);border-radius:8px;padding:14px 18px;min-width:230px;background:#f7faff;
+  }
+  .answer-box table{border-collapse:collapse;}
+  .answer-box td{padding:5px 6px;}
+  .answer-box input{width:85px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;}
+  table.results-table{width:100%;border-collapse:collapse;margin:14px 0;}
+  table.results-table th, table.results-table td{
+    border:1px solid var(--border);padding:8px 10px;text-align:center;font-size:0.9rem;
+  }
+  table.results-table th{background:#f1f5fb;color:var(--navy);}
+  table.results-table input{width:90px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;}
+  .credit{font-size:0.75rem;color:var(--muted);margin-top:4px;}
+  .summary-card{
+    background:var(--navy);color:#fff;border-radius:10px;padding:24px;margin-top:36px;
+  }
+  .summary-card h2{color:#fff;border-bottom:2px solid #5a7ac0;}
+  #scoreLine{font-size:1.3rem;font-weight:700;margin:10px 0;}
+  #summaryText{
+    width:100%;min-height:140px;background:#0f1a30;color:#d8e2f5;border:1px solid #3a4d75;
+    border-radius:6px;padding:10px;font-family:monospace;font-size:0.85rem;
+  }
+  .copy-btn{
+    background:#fff;color:var(--navy);border:none;border-radius:6px;padding:10px 20px;
+    font-weight:700;cursor:pointer;margin-top:10px;
+  }
+  .flag{color:var(--red);font-size:0.85rem;}
+  ol.notes-list li{margin-bottom:8px;}
+  .print-btn-row{text-align:center;margin:30px 0 8px;}
+  .print-btn{background:var(--navy);color:#fff;border:none;padding:12px 30px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;}
+  .print-btn:hover{opacity:0.9;}
+  @media print{
+    .print-btn-row{display:none !important;}
+    .check-btn,.reveal-btn,.hint-btn,.copy-btn{display:none !important;}
+    .hint,.solution,.hint-box{display:block !important;}
+    body{background:#fff;padding:6px;}
+    .q,.circuit-block{page-break-inside:avoid;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="inner">
+  <h1>Adding Resistors</h1>
+</div></header>
+
+<div class="wrap">
+
+<div class="namebox">
+  <div><label>Name</label><input type="text" id="studentName" placeholder="Enter your name"></div>
+</div>
+
+<!-- ================= NOTES SECTION (slides 1-7) ================= -->
+<h2 class="section-title">Part A — Notes: combining resistors</h2>
+
+<div class="card">
+  <h3 class="sub-title">Combining resistors</h3>
+  <p>Assuming the resistors are identical, consider the three groups below.</p>
+  <div class="diagram-row">
+    <figure>
+      <svg width="260" height="70" viewBox="0 0 260 70">
+        <line x1="10" y1="35" x2="40" y2="35" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="40" y="26" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="80" y1="35" x2="105" y2="35" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="105" y="26" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="145" y1="35" x2="170" y2="35" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="170" y="26" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="210" y1="35" x2="250" y2="35" stroke="#1b2a4a" stroke-width="2"/>
+      </svg>
+      <div class="diagram-cap">Group 1: three resistors in series</div>
+    </figure>
+    <figure>
+      <svg width="260" height="90" viewBox="0 0 260 90">
+        <line x1="5" y1="45" x2="30" y2="45" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="20" x2="30" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="20" x2="95" y2="20" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="70" x2="95" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="45" y="11" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="45" y="61" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="95" y1="20" x2="95" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="95" y1="45" x2="120" y2="45" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="120" y="36" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="160" y1="45" x2="250" y2="45" stroke="#1b2a4a" stroke-width="2"/>
+      </svg>
+      <div class="diagram-cap">Group 2: two in parallel, then one in series</div>
+    </figure>
+    <figure>
+      <svg width="260" height="110" viewBox="0 0 260 110">
+        <line x1="5" y1="55" x2="30" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="15" x2="30" y2="95" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="15" x2="215" y2="15" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="55" x2="215" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="30" y1="95" x2="215" y2="95" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="102" y="6" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="102" y="46" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <rect x="102" y="86" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="215" y1="15" x2="215" y2="95" stroke="#1b2a4a" stroke-width="2"/>
+        <line x1="215" y1="55" x2="250" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+      </svg>
+      <div class="diagram-cap">Group 3: three in parallel</div>
+    </figure>
+  </div>
+
+  <div class="q" data-type="mcq" data-answer="a" data-qname="Combining resistors — highest resistance">
+    <div class="qtitle">Assuming the resistors are identical, which group would have the <strong>highest</strong> resistance?</div>
+    <select class="mcq-select">
+      <option value="">-- choose --</option>
+      <option value="a">Group 1 (three in series)</option>
+      <option value="b">Group 2 (two in parallel, one in series)</option>
+      <option value="c">Group 3 (three in parallel)</option>
+    </select>
+    <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+    <span class="feedback"></span>
+  </div>
+
+  <div class="q" data-type="mcq" data-answer="c" data-qname="Combining resistors — lowest resistance">
+    <div class="qtitle">Which group would have the <strong>lowest</strong> resistance?</div>
+    <select class="mcq-select">
+      <option value="">-- choose --</option>
+      <option value="a">Group 1 (three in series)</option>
+      <option value="b">Group 2 (two in parallel, one in series)</option>
+      <option value="c">Group 3 (three in parallel)</option>
+    </select>
+    <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+    <span class="feedback"></span>
+  </div>
+
+  <button class="reveal-btn" onclick="toggleSolution(this)">Check your thinking</button>
+  <div class="solution"><p>Assuming the resistors are identical, group 1 (all three in series) would have the <strong>highest</strong> resistance, and group 3 (all three in parallel) would have the <strong>lowest</strong> resistance. Adding a resistor in series always increases the total resistance; adding a resistor in parallel always decreases it (it opens up an extra path for charge to flow).</p></div>
+</div>
+
+<div class="card">
+  <h3 class="sub-title">Modelling resistors: the rope-bridge analogy</h3>
+  <p>Imagine two rope bridges crossing a gorge, one after the other, each letting 20 people across per minute. Because every person must cross <em>both</em> bridges in turn, the two bridges act like resistors <strong>in series</strong>: putting a second obstacle in the only available path can only make the journey harder overall, so the total "resistance" to the flow of people increases.</p>
+  <p>Now imagine a second bridge built <strong>alongside</strong> the first, so people can choose either bridge. There are now two available routes, so more people can cross per minute overall than with a single bridge. This is the parallel case: adding an extra path in parallel makes it easier for charge (or people) to get through, so the total resistance decreases.</p>
+</div>
+
+<div class="card">
+  <h3 class="sub-title">Modelling resistors: the water-pump analogy</h3>
+  <p>A pump drives water around a closed pipe loop. A narrow section of pipe restricts the flow, acting like a resistor. If a second narrow section is added <strong>in series</strong> (one after the other in the same pipe), the water has to squeeze through both restrictions in turn, so the flow rate for a given pump effort drops — the combined resistance to flow is higher than either restriction alone.</p>
+  <div class="diagram-row">
+    <figure>
+      <svg width="260" height="150" viewBox="0 0 260 150">
+        <line x1="60" y1="20" x2="200" y2="20" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <line x1="220" y1="40" x2="220" y2="110" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <line x1="220" y1="110" x2="150" y2="110" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <line x1="140" y1="110" x2="80" y2="110" stroke="#3a7bd5" stroke-width="5" stroke-linecap="round"/>
+        <line x1="70" y1="110" x2="40" y2="110" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <line x1="40" y1="110" x2="40" y2="40" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <line x1="40" y1="30" x2="60" y2="20" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <line x1="220" y1="30" x2="200" y2="20" stroke="#3a7bd5" stroke-width="16" stroke-linecap="round"/>
+        <circle cx="130" cy="20" r="17" fill="#e8f1ff" stroke="#1b2a4a" stroke-width="2"/>
+        <text x="130" y="24" text-anchor="middle" font-size="10" fill="#1b2a4a">pump</text>
+        <line x1="80" y1="122" x2="80" y2="130" stroke="#333" stroke-width="1"/>
+        <line x1="140" y1="122" x2="140" y2="130" stroke="#333" stroke-width="1"/>
+        <line x1="80" y1="126" x2="140" y2="126" stroke="#333" stroke-width="1"/>
+        <text x="110" y="142" text-anchor="middle" font-size="10" fill="#333">narrow section</text>
+      </svg>
+      <div class="diagram-cap">The narrow section of pipe is clearly narrower than the rest of the loop — this is what restricts the flow, just as a resistor restricts current.</div>
+    </figure>
+  </div>
+  <p>If instead a second narrow section is added <strong>in parallel</strong> with the first (a second pipe alongside, so water can take either route), more water can flow overall for the same pump effort — the combined resistance to flow is lower than either restriction alone.</p>
+</div>
+
+<!-- ================= WORKBOOK PART 1 (slides 8-21) ================= -->
+<h2 class="section-title">Part B — Workbook: series and parallel resistors</h2>
+
+<div class="note formula">
+  <h3 class="sub-title" style="margin-top:0">How do we calculate total resistance in series circuits?</h3>
+  <svg width="260" height="90" viewBox="0 0 260 90">
+    <line x1="20" y1="15" x2="53.5" y2="15" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="83.5" y1="15" x2="160" y2="15" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="53.5" y="5" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="60" y="9" width="3.5" height="12" fill="#1b2a4a"/>
+    <rect x="73.5" y="5" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="80" y="9" width="3.5" height="12" fill="#1b2a4a"/>
+    <line x1="20" y1="15" x2="20" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="160" y1="15" x2="160" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="20" y1="70" x2="70" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="30" y="61" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="50" y="74" text-anchor="middle" font-size="10">R₁</text>
+    <line x1="70" y1="70" x2="105" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="105" y="61" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="125" y="74" text-anchor="middle" font-size="10">R₂</text>
+    <line x1="145" y1="70" x2="160" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <p>The relationship of the potential differences is known: V<sub>T</sub> = V<sub>1</sub> + V<sub>2</sub>. A model of an electron travelling around the circuit can be useful here as we can see that the electron must go through both resistors. Since I is the same everywhere in a series circuit, this can be written IR<sub>T</sub> = IR<sub>1</sub> + IR<sub>2</sub>. Cancelling for current gives:</p>
+  <div class="formula-box">R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub></div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="6" data-tol="0.02" data-qname="Series R1=2Ω,R2=4Ω">
+  <div class="qtitle">R₁ = 2 Ω, R₂ = 4 Ω (in series). What is R<sub>total</sub>?</div>
+  <svg width="260" height="140" viewBox="0 0 260 140">
+    <line x1="30" y1="30" x2="115" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="145" y1="30" x2="230" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="115" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="121.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+    <rect x="135" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="141.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+    <line x1="30" y1="30" x2="30" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="30" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="30" y1="100" x2="70" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="70" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="90" y="121" text-anchor="middle" font-size="10">R₁ = 2 Ω</text>
+    <line x1="110" y1="100" x2="150" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="150" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="170" y="121" text-anchor="middle" font-size="10">R₂ = 4 Ω</text>
+    <line x1="190" y1="100" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  R<sub>total</sub> = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">R<sub>T</sub> = R₁ + R₂ = 2 + 4 = … Ω</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="40" data-tol="0.02" data-qname="Series R1=6Ω,R2=34Ω">
+  <div class="qtitle">R₁ = 6 Ω, R₂ = 34 Ω (in series). What is R<sub>total</sub>?</div>
+  <svg width="260" height="140" viewBox="0 0 260 140">
+    <line x1="30" y1="30" x2="115" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="145" y1="30" x2="230" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="115" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="121.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+    <rect x="135" y="20" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="141.5" y="24" width="3.5" height="12" fill="#1b2a4a"/>
+    <line x1="30" y1="30" x2="30" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="30" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="30" y1="100" x2="70" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="70" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="90" y="121" text-anchor="middle" font-size="10">R₁ = 6 Ω</text>
+    <line x1="110" y1="100" x2="150" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="150" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="170" y="121" text-anchor="middle" font-size="10">R₂ = 34 Ω</text>
+    <line x1="190" y1="100" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  R<sub>total</sub> = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">R<sub>T</sub> = R₁ + R₂ = 6 + 34 = … Ω</div>
+</div>
+
+<div class="note formula">
+  <h3 class="sub-title" style="margin-top:0">How do we calculate total resistance in parallel circuits?</h3>
+  <svg width="180" height="130" viewBox="0 0 180 130">
+    <line x1="20" y1="15" x2="55" y2="15" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="85" y1="15" x2="120" y2="15" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="55" y="5" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="61.5" y="9" width="3.5" height="12" fill="#1b2a4a"/>
+    <rect x="75" y="5" width="1.5" height="20" fill="#1b2a4a"/>
+    <rect x="81.5" y="9" width="3.5" height="12" fill="#1b2a4a"/>
+    <line x1="20" y1="15" x2="20" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="120" y1="15" x2="120" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="20" y1="55" x2="55" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="55" y="46" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="75" y="59" text-anchor="middle" font-size="10">R₁</text>
+    <line x1="95" y1="55" x2="120" y2="55" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="20" y1="100" x2="55" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="55" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="75" y="104" text-anchor="middle" font-size="10">R₂</text>
+    <line x1="95" y1="100" x2="120" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <p>The relationship of the currents is known: I<sub>T</sub> = I<sub>1</sub> + I<sub>2</sub>. Since the potential difference is the same across each branch in a parallel circuit, this can be written V/R<sub>T</sub> = V/R₁ + V/R₂. Cancelling for potential difference gives:</p>
+  <div class="formula-box">1/R<sub>T</sub> = 1/R₁ + 1/R₂</div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="b" data-qname="MCQ: 40+(50||50)">
+  <div class="qtitle">What is R<sub>T</sub>?</div>
+  <svg width="360" height="130" viewBox="0 0 360 130">
+    <line x1="10" y1="65" x2="40" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="40" y="56" width="50" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="65" y="46" text-anchor="middle" font-size="11">40 Ω</text>
+    <line x1="90" y1="65" x2="120" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="120" y1="30" x2="120" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="120" y1="30" x2="150" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="120" y1="100" x2="150" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="150" y="21" width="50" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="175" y="16" text-anchor="middle" font-size="11">50 Ω</text>
+    <rect x="150" y="91" width="50" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="175" y="119" text-anchor="middle" font-size="11">50 Ω</text>
+    <line x1="200" y1="30" x2="230" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="200" y1="100" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="30" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="65" x2="350" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">40 Ω</option>
+    <option value="b">65 Ω</option>
+    <option value="c">90 Ω</option>
+    <option value="d">140 Ω</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">50 Ω ∥ 50 Ω = 25 Ω. R<sub>T</sub> = 40 + 25 = … Ω</div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="c" data-qname="MCQ: 40+(50||50)+(100||200)">
+  <div class="qtitle">What is R<sub>T</sub>?</div>
+  <svg width="460" height="130" viewBox="0 0 460 130">
+    <line x1="10" y1="65" x2="40" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="40" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="60" y="41" text-anchor="middle" font-size="11">40 Ω</text>
+    <line x1="80" y1="65" x2="110" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="30" x2="110" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="30" x2="135" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="100" x2="135" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="135" y="21" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="155" y="16" text-anchor="middle" font-size="11">50 Ω</text>
+    <rect x="135" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="155" y="128" text-anchor="middle" font-size="11">50 Ω</text>
+    <line x1="175" y1="30" x2="200" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="175" y1="100" x2="200" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="200" y1="30" x2="200" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="200" y1="65" x2="225" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="225" y1="30" x2="225" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="225" y1="30" x2="250" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="225" y1="100" x2="250" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="250" y="21" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="270" y="16" text-anchor="middle" font-size="11">100 Ω</text>
+    <rect x="250" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="270" y="128" text-anchor="middle" font-size="11">200 Ω</text>
+    <line x1="290" y1="30" x2="315" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="290" y1="100" x2="315" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="315" y1="30" x2="315" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="315" y1="65" x2="345" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">25 Ω</option>
+    <option value="b">40 Ω</option>
+    <option value="c">132 Ω</option>
+    <option value="d">532 Ω</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">50∥50 = 25 Ω. 100∥200 = 66.7 Ω. R<sub>T</sub> = 40 + 25 + 66.7 = … Ω</div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="c" data-qname="MCQ: 10+(20||40)+15+25">
+  <div class="qtitle">What is R<sub>T</sub>?</div>
+  <svg width="460" height="130" viewBox="0 0 460 130">
+    <line x1="10" y1="65" x2="40" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="40" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="60" y="41" text-anchor="middle" font-size="11">10 Ω</text>
+    <line x1="80" y1="65" x2="110" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="30" x2="110" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="30" x2="210" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="100" x2="210" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="140" y="21" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="160" y="16" text-anchor="middle" font-size="11">20 Ω</text>
+    <rect x="140" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="160" y="128" text-anchor="middle" font-size="11">40 Ω</text>
+    <line x1="210" y1="30" x2="210" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="210" y1="65" x2="240" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="240" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="260" y="41" text-anchor="middle" font-size="11">15 Ω</text>
+    <line x1="280" y1="65" x2="310" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="310" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="330" y="41" text-anchor="middle" font-size="11">25 Ω</text>
+    <line x1="350" y1="65" x2="380" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">25 Ω</option>
+    <option value="b">50 Ω</option>
+    <option value="c">63 Ω</option>
+    <option value="d">132 Ω</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">20∥40 = 13.3 Ω. R<sub>T</sub> = 10 + 13.3 + 15 + 25 = … Ω</div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="b" data-qname="MCQ: 100+200+100+(100||100)">
+  <div class="qtitle">What is R<sub>T</sub>?</div>
+  <svg width="460" height="130" viewBox="0 0 460 130">
+    <line x1="10" y1="65" x2="35" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="35" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="55" y="41" text-anchor="middle" font-size="11">100 Ω</text>
+    <line x1="75" y1="65" x2="100" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="100" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="120" y="41" text-anchor="middle" font-size="11">200 Ω</text>
+    <line x1="140" y1="65" x2="165" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="165" y="56" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="185" y="41" text-anchor="middle" font-size="11">100 Ω</text>
+    <line x1="205" y1="65" x2="230" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="30" x2="230" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="30" x2="335" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="230" y1="100" x2="335" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="265" y="21" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="285" y="16" text-anchor="middle" font-size="11">100 Ω</text>
+    <rect x="265" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="285" y="128" text-anchor="middle" font-size="11">100 Ω</text>
+    <line x1="335" y1="30" x2="335" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="335" y1="65" x2="365" y2="65" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">400 Ω</option>
+    <option value="b">450 Ω</option>
+    <option value="c">500 Ω</option>
+    <option value="d">600 Ω</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">100∥100 = 50 Ω. R<sub>T</sub> = 100 + 200 + 100 + 50 = … Ω</div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="c" data-qname="MCQ: 40+(50||70||30)">
+  <div class="qtitle">What is R<sub>T</sub>?</div>
+  <svg width="320" height="180" viewBox="0 0 320 180">
+    <line x1="10" y1="90" x2="40" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="40" y="81" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="60" y="66" text-anchor="middle" font-size="11">40 Ω</text>
+    <line x1="80" y1="90" x2="110" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="40" x2="110" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="40" x2="215" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="90" x2="215" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="110" y1="140" x2="215" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="145" y="31" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="165" y="26" text-anchor="middle" font-size="11">50 Ω</text>
+    <rect x="145" y="81" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="165" y="76" text-anchor="middle" font-size="11">70 Ω</text>
+    <rect x="145" y="131" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="165" y="168" text-anchor="middle" font-size="11">30 Ω</text>
+    <line x1="215" y1="40" x2="215" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="215" y1="90" x2="245" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">45 Ω</option>
+    <option value="b">50 Ω</option>
+    <option value="c">55 Ω</option>
+    <option value="d">190 Ω</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">1/50 + 1/70 + 1/30 ⟹ combined ≈ 14.8 Ω. R<sub>T</sub> = 40 + 14.8 ≈ … Ω</div>
+</div>
+
+<div class="q" data-type="mcq" data-answer="a" data-qname="MCQ: 20||(10+10)||10">
+  <div class="qtitle">What is R<sub>T</sub>?</div>
+  <svg width="320" height="180" viewBox="0 0 320 180">
+    <line x1="10" y1="90" x2="40" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="40" y1="40" x2="40" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="280" y1="40" x2="280" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="280" y1="90" x2="310" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="40" y1="40" x2="140" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="140" y="31" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="160" y="26" text-anchor="middle" font-size="11">20 Ω</text>
+    <line x1="180" y1="40" x2="280" y2="40" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="40" y1="90" x2="95" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="95" y="81" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="115" y="76" text-anchor="middle" font-size="11">10 Ω</text>
+    <line x1="135" y1="90" x2="185" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="185" y="81" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="205" y="76" text-anchor="middle" font-size="11">10 Ω</text>
+    <line x1="225" y1="90" x2="280" y2="90" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="40" y1="140" x2="140" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="140" y="131" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="160" y="168" text-anchor="middle" font-size="11">10 Ω</text>
+    <line x1="180" y1="140" x2="280" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+  </svg>
+  <select class="mcq-select">
+    <option value="">-- choose --</option>
+    <option value="a">5 Ω</option>
+    <option value="b">20 Ω</option>
+    <option value="c">40 Ω</option>
+    <option value="d">50 Ω</option>
+  </select>
+  <button class="check-btn" onclick="checkMCQ(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">The middle branch is 10+10 = 20 Ω, so all three branches are 20, 20 and 10 Ω. 1/R<sub>T</sub> = 1/20+1/20+1/10. R<sub>T</sub> = … Ω</div>
+</div>
+
+<!-- ================= INTERJECTION (slide 22) ================= -->
+<div class="note formula">
+  <h3 class="sub-title" style="margin-top:0">The notation can be annoying….</h3>
+  <p>For N resistors in parallel, the general rule is:</p>
+  <div class="formula-box">1/R<sub>T</sub> = 1/R₁ + 1/R₂ + 1/R₃ + … + 1/R<sub>N</sub></div>
+  <p>Note that R<sub>T</sub> is always <strong>smaller</strong> than the resistance of the smallest resistor in the parallel combination.</p>
+  <p>It is often more convenient to use conductance rather than resistance when dealing with resistors in parallel. The equivalent conductance for N resistors in parallel is:</p>
+  <div class="formula-box">G<sub>T</sub> = G₁ + G₂ + G₃ + … + G<sub>N</sub>, &nbsp; where G₁ = 1/R₁, G₂ = 1/R₂, … , G<sub>N</sub> = 1/R<sub>N</sub></div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="1.333" data-tol="0.03" data-qname="Parallel R1=4Ω,R2=2Ω">
+  <div class="qtitle">R₁ = 4 Ω, R₂ = 2 Ω (in parallel). What is R<sub>total</sub>?</div>
+  R<sub>total</sub> = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">1/R<sub>T</sub> = 1/4 + 1/2 = 3/4. R<sub>T</sub> = 4/3 = … Ω</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="3.4286" data-tol="0.03" data-qname="Parallel R1=8Ω,R2=6Ω">
+  <div class="qtitle">R₁ = 8 Ω, R₂ = 6 Ω (in parallel). What is R<sub>total</sub>?</div>
+  R<sub>total</sub> = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">1/R<sub>T</sub> = 1/8 + 1/6. R<sub>T</sub> = 24/7 = … Ω</div>
+</div>
+
+<div class="q" data-type="numeric" data-answer="100" data-tol="0.02" data-qname="Complex network A-B">
+  <div class="qtitle">What is the total resistance between A and B?</div>
+  <svg width="410" height="220" viewBox="0 0 410 220">
+    <text x="0" y="105" font-size="12">A</text>
+    <line x1="15" y1="100" x2="60" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="60" y1="30" x2="60" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="60" y1="30" x2="140" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="60" y1="100" x2="140" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="60" y1="170" x2="140" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="82" y="21" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="102" y="12" text-anchor="middle" font-size="10">240 Ω</text>
+    <rect x="82" y="91" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="102" y="82" text-anchor="middle" font-size="10">240 Ω</text>
+    <rect x="82" y="161" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="102" y="192" text-anchor="middle" font-size="10">120 Ω</text>
+    <line x1="140" y1="30" x2="140" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="140" y1="100" x2="175" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="175" y1="70" x2="175" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="175" y1="70" x2="195" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="195" y="61" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="215" y="52" text-anchor="middle" font-size="10">40 Ω</text>
+    <line x1="235" y1="70" x2="255" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="255" y="61" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="275" y="52" text-anchor="middle" font-size="10">40 Ω</text>
+    <line x1="295" y1="70" x2="320" y2="70" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="175" y1="130" x2="227" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+    <rect x="227" y="121" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="247" y="150" text-anchor="middle" font-size="10">80 Ω</text>
+    <line x1="267" y1="130" x2="320" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="320" y1="70" x2="320" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+    <line x1="320" y1="100" x2="360" y2="100" stroke="#1b2a4a" stroke-width="2"/>
+    <text x="375" y="105" font-size="12">B</text>
+  </svg>
+  R<sub>total</sub> = <input type="text" class="qinput"> Ω
+  <button class="check-btn" onclick="checkNumeric(this)">Check</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">240∥240∥120 = 60 Ω. (40+40)∥80 = 80∥80 = 40 Ω. R<sub>T</sub> = 60 + 40 = … Ω</div>
+</div>
+
+<!-- ================= PRACTICAL RESULTS (slide 28) ================= -->
+<h2 class="section-title">Part C — Practical: predicted vs. measured resistance</h2>
+<p>Each resistor below is 100 Ω. Calculate the predicted total resistance for each arrangement, then (in the lab) measure it with an ohmmeter and record the result.</p>
+<table class="results-table">
+  <tr><th style="width:190px">Diagram (each is 100 Ω)</th><th>Predicted resistance</th><th>Measured resistance</th></tr>
+  <tr>
+    <td><svg width="140" height="40" viewBox="0 0 140 40"><line x1="5" y1="20" x2="45" y2="20" stroke="#1b2a4a" stroke-width="2"/><rect x="45" y="11" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="85" y1="20" x2="135" y2="20" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="100" data-tol="0.02" class="pred-input" data-qname="Practical row1"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+  <tr>
+    <td><svg width="140" height="40" viewBox="0 0 140 40"><line x1="5" y1="20" x2="20" y2="20" stroke="#1b2a4a" stroke-width="2"/><rect x="20" y="11" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="55" y1="20" x2="70" y2="20" stroke="#1b2a4a" stroke-width="2"/><rect x="70" y="11" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="105" y1="20" x2="135" y2="20" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="200" data-tol="0.02" class="pred-input" data-qname="Practical row2"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+  <tr>
+    <td><svg width="140" height="40" viewBox="0 0 140 40"><line x1="2" y1="20" x2="14" y2="20" stroke="#1b2a4a" stroke-width="2"/><rect x="14" y="11" width="32" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="46" y1="20" x2="58" y2="20" stroke="#1b2a4a" stroke-width="2"/><rect x="58" y="11" width="32" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="90" y1="20" x2="102" y2="20" stroke="#1b2a4a" stroke-width="2"/><rect x="102" y="11" width="32" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="134" y1="20" x2="138" y2="20" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="300" data-tol="0.02" class="pred-input" data-qname="Practical row3"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+  <tr>
+    <td><svg width="140" height="60" viewBox="0 0 140 60"><line x1="5" y1="30" x2="35" y2="30" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="12" x2="35" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="12" x2="90" y2="12" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="48" x2="90" y2="48" stroke="#1b2a4a" stroke-width="2"/><rect x="45" y="3" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><rect x="45" y="39" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="90" y1="12" x2="90" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="90" y1="30" x2="135" y2="30" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="50" data-tol="0.02" class="pred-input" data-qname="Practical row4"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+  <tr>
+    <td><svg width="140" height="100" viewBox="0 0 140 100"><line x1="5" y1="50" x2="35" y2="50" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="18" x2="35" y2="82" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="18" x2="90" y2="18" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="50" x2="90" y2="50" stroke="#1b2a4a" stroke-width="2"/><line x1="35" y1="82" x2="90" y2="82" stroke="#1b2a4a" stroke-width="2"/><rect x="45" y="9" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><rect x="45" y="41" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><rect x="45" y="73" width="35" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="90" y1="18" x2="90" y2="82" stroke="#1b2a4a" stroke-width="2"/><line x1="90" y1="50" x2="135" y2="50" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="33.33" data-tol="0.03" class="pred-input" data-qname="Practical row5"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+  <tr>
+    <td><svg width="150" height="60" viewBox="0 0 150 60"><line x1="2" y1="30" x2="25" y2="30" stroke="#1b2a4a" stroke-width="2"/><line x1="25" y1="12" x2="25" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="25" y1="12" x2="70" y2="12" stroke="#1b2a4a" stroke-width="2"/><line x1="25" y1="48" x2="70" y2="48" stroke="#1b2a4a" stroke-width="2"/><rect x="33" y="3" width="30" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><rect x="33" y="39" width="30" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="70" y1="12" x2="70" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="70" y1="30" x2="95" y2="30" stroke="#1b2a4a" stroke-width="2"/><rect x="95" y="21" width="32" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="127" y1="30" x2="148" y2="30" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="150" data-tol="0.02" class="pred-input" data-qname="Practical row6"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+  <tr>
+    <td><svg width="150" height="60" viewBox="0 0 150 60"><line x1="2" y1="30" x2="20" y2="30" stroke="#1b2a4a" stroke-width="2"/><line x1="20" y1="12" x2="20" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="20" y1="12" x2="63" y2="12" stroke="#1b2a4a" stroke-width="2"/><line x1="20" y1="48" x2="63" y2="48" stroke="#1b2a4a" stroke-width="2"/><rect x="27" y="3" width="28" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><rect x="27" y="39" width="28" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="63" y1="12" x2="63" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="63" y1="30" x2="85" y2="30" stroke="#1b2a4a" stroke-width="2"/><line x1="85" y1="12" x2="85" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="85" y1="12" x2="128" y2="12" stroke="#1b2a4a" stroke-width="2"/><line x1="85" y1="48" x2="128" y2="48" stroke="#1b2a4a" stroke-width="2"/><rect x="92" y="3" width="28" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><rect x="92" y="39" width="28" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/><line x1="128" y1="12" x2="128" y2="48" stroke="#1b2a4a" stroke-width="2"/><line x1="128" y1="30" x2="148" y2="30" stroke="#1b2a4a" stroke-width="2"/></svg></td>
+    <td><input type="text" data-answer="100" data-tol="0.02" class="pred-input" data-qname="Practical row7"> Ω</td>
+    <td><input type="text" class="measured-input"></td>
+  </tr>
+</table>
+
+<!-- ================= CONCEPT CHECK CIRCUITS (slides 29-35) ================= -->
+<h2 class="section-title">Part D — Concept check: measuring resistance</h2>
+<p>Assume all meters are ideal. Fill in the missing values for each circuit.</p>
+
+<!-- CIRCUIT 29 -->
+<div class="circuit-block">
+  <h3 class="sub-title" style="margin-top:0">Circuit problem 1</h3>
+  <div class="circuit-flex">
+    <svg width="300" height="260" viewBox="0 0 300 260">
+<line x1="40" y1="60" x2="135" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="165" y1="60" x2="260" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="141.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="127" y1="60" x2="127" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="173" y1="60" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="30" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="260" y1="60" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="190" x2="90" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="90.0" y="181.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="130" y1="190" x2="185" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="200" cy="190" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="200" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="215" y1="190" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="82" y1="190" x2="82" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="138" y1="190" x2="138" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="82" y1="220" x2="138" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="110.0" cy="220" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="110.0" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>V₁ = 10 V</td></tr>
+        <tr><td>A₁ = 1 A</td></tr>
+        <tr><td>V₂ =</td><td><input class="reading-input" data-answer="10" data-tol="0.02"> V</td></tr>
+        <tr><td>R =</td><td><input class="reading-input" data-answer="10" data-tol="0.02"> Ω</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">Single loop, ideal ammeter ⟹ V₂ = V₁ = … V. R = V₂/A₁ = … Ω.</div>
+</div>
+
+<!-- CIRCUIT 30 -->
+<div class="circuit-block">
+  <h3 class="sub-title">Circuit problem 2</h3>
+  <div class="circuit-flex">
+    <svg width="300" height="260" viewBox="0 0 300 260">
+<line x1="40" y1="60" x2="135" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="165" y1="60" x2="260" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="141.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="127" y1="60" x2="127" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="173" y1="60" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="30" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="260" y1="60" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="190" x2="90" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="90.0" y="181.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="130" y1="190" x2="185" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="200" cy="190" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="200" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="215" y1="190" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="82" y1="190" x2="82" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="138" y1="190" x2="138" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="82" y1="220" x2="138" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="110.0" cy="220" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="110.0" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>A₁ = 0.7 A</td></tr>
+        <tr><td>R = 20 Ω</td></tr>
+        <tr><td>V₁ =</td><td><input class="reading-input" data-answer="14" data-tol="0.02"> V</td></tr>
+        <tr><td>V₂ =</td><td><input class="reading-input" data-answer="14" data-tol="0.02"> V</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">V₂ = A₁ × R = 0.7 × 20 = … V. Single loop, ideal ammeter ⟹ V₁ = V₂ = … V.</div>
+</div>
+
+<!-- CIRCUIT 31 -->
+<div class="circuit-block">
+  <h3 class="sub-title">Circuit problem 3</h3>
+  <div class="circuit-flex">
+    <svg width="340" height="280" viewBox="0 0 340 280">
+<line x1="40" y1="60" x2="135" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="165" y1="60" x2="260" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="141.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="127" y1="60" x2="127" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="173" y1="60" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="30" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="260" y1="60" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="60" x2="40" y2="115" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="40" cy="130" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="145" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="190" x2="70" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="70.0" y="181.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="110" y1="190" x2="140" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="155" cy="190" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="155" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="170" y1="190" x2="200" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="215" cy="190" r="15" fill="#fff" stroke="#1a1f2e" stroke-width="2"/>
+<line x1="206.45" y1="181.45" x2="223.55" y2="198.55" stroke="#1a1f2e" stroke-width="1.5"/>
+<line x1="223.55" y1="181.45" x2="206.45" y2="198.55" stroke="#1a1f2e" stroke-width="1.5"/>
+<line x1="230" y1="190" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="62" y1="190" x2="62" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="118" y1="190" x2="118" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="62" y1="220" x2="118" y2="220" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="90.0" cy="220" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="90.0" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="192" y1="190" x2="192" y2="240" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="238" y1="190" x2="238" y2="240" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="192" y1="240" x2="238" y2="240" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="215.0" cy="240" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="215.0" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">3</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>V₁ = 6 V</td></tr>
+        <tr><td>A₂ = 0.5 A</td></tr>
+        <tr><td>V₃ = 1 V</td></tr>
+        <tr><td>A₁ =</td><td><input class="reading-input" data-answer="0.5" data-tol="0.03"> A</td></tr>
+        <tr><td>V₂ =</td><td><input class="reading-input" data-answer="5" data-tol="0.02"> V</td></tr>
+        <tr><td>R =</td><td><input class="reading-input" data-answer="10" data-tol="0.02"> Ω</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">Single loop ⟹ A₁ = A₂ = … A. V₁ = V₂ + V₃ ⟹ V₂ = V₁ − V₃ = 6 − 1 = … V. R = V₂/A₂ = … Ω.</div>
+</div>
+
+<!-- CIRCUIT 32 -->
+<div class="circuit-block">
+  <h3 class="sub-title">Circuit problem 4</h3>
+  <p class="diagram-cap" style="text-align:left;max-width:none;">Assume the two resistors are identical.</p>
+  <div class="circuit-flex">
+    <svg width="300" height="260" viewBox="0 0 300 260">
+<line x1="40" y1="60" x2="135" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="165" y1="60" x2="260" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="141.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="127" y1="60" x2="127" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="173" y1="60" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="30" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="40" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="110" x2="40" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="260" y1="60" x2="260" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="260" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="260" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">4</tspan></text>
+<line x1="260" y1="110" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="130" x2="80" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="95" cy="130" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="95" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="110" y1="130" x2="135" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135.0" y="121.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="175" y1="130" x2="260" y2="130" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="130" x2="127" y2="158" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="183" y1="130" x2="183" y2="158" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="158" x2="183" y2="158" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="155.0" cy="158" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="155.0" y="163" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="40" y1="190" x2="80" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="95" cy="190" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="95" y="195" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">3</tspan></text>
+<line x1="110" y1="190" x2="135" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135.0" y="181.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="175" y1="190" x2="260" y2="190" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="190" x2="127" y2="218" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="183" y1="190" x2="183" y2="218" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="218" x2="183" y2="218" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="155.0" cy="218" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="155.0" y="223" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">3</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>V₁ = 6 V</td></tr>
+        <tr><td>A₃ = 0.3 A</td></tr>
+        <tr><td>A₁ =</td><td><input class="reading-input" data-answer="0.6" data-tol="0.03"> A</td></tr>
+        <tr><td>V₂ =</td><td><input class="reading-input" data-answer="6" data-tol="0.02"> V</td></tr>
+        <tr><td>A₂ =</td><td><input class="reading-input" data-answer="0.3" data-tol="0.03"> A</td></tr>
+        <tr><td>V₃ =</td><td><input class="reading-input" data-answer="6" data-tol="0.02"> V</td></tr>
+        <tr><td>R =</td><td><input class="reading-input" data-answer="20" data-tol="0.02"> Ω</td></tr>
+        <tr><td>A₄ =</td><td><input class="reading-input" data-answer="0.6" data-tol="0.03"> A</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">Both resistor branches are directly across the battery, so V₂ = V₃ = V₁ = … V. Since the resistors are identical and see the same pd, A₂ = A₃ = … A. R = V₂/A₂ = … Ω. A₁ = A₄ = A₂ + A₃ = …  A.</div>
+</div>
+
+<!-- CIRCUIT 33 -->
+<div class="circuit-block">
+  <h3 class="sub-title">Circuit problem 5</h3>
+  <div class="circuit-flex">
+    <svg width="320" height="250" viewBox="0 0 320 250">
+<line x1="40" y1="60" x2="135" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="165" y1="60" x2="260" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="141.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="127" y1="60" x2="127" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="173" y1="60" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="30" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="40" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="110" x2="40" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="260" y1="60" x2="260" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="260" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="260" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="260" y1="110" x2="260" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="170" x2="65" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="65.0" y="161.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="85" y="155.0" text-anchor="middle" font-size="10">R₁ = 3 Ω</text>
+<line x1="105" y1="170" x2="130" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="130.0" y="161.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="150" y="155.0" text-anchor="middle" font-size="10">R₂ = 2 Ω</text>
+<line x1="170" y1="170" x2="195" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="195.0" y="161.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="215" y="155.0" text-anchor="middle" font-size="10">R₃ = 5 Ω</text>
+<line x1="235" y1="170" x2="260" y2="170" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="57" y1="170" x2="57" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="113" y1="170" x2="113" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="57" y1="210" x2="113" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="85.0" cy="210" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="85.0" y="215" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="122" y1="170" x2="122" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="178" y1="170" x2="178" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="122" y1="210" x2="178" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="210" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="215" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">3</tspan></text>
+<line x1="187" y1="170" x2="187" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="243" y1="170" x2="243" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="187" y1="210" x2="243" y2="210" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="215.0" cy="210" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="215.0" y="215" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">4</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>R₁ = 3 Ω, R₂ = 2 Ω, R₃ = 5 Ω</td></tr>
+        <tr><td>A₁ = A₂ = 2 A</td></tr>
+        <tr><td>V₁ =</td><td><input class="reading-input" data-answer="20" data-tol="0.02"> V</td></tr>
+        <tr><td>V₂ =</td><td><input class="reading-input" data-answer="6" data-tol="0.02"> V</td></tr>
+        <tr><td>V₃ =</td><td><input class="reading-input" data-answer="4" data-tol="0.02"> V</td></tr>
+        <tr><td>V₄ =</td><td><input class="reading-input" data-answer="10" data-tol="0.02"> V</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">All three resistors are in series, so the same current flows through each — this is why A₁ = A₂ = 2 A. V₂ = I × R₁ = 2 × 3 = … V. V₃ = I × R₂ = 2 × 2 = … V. V₄ = I × R₃ = 2 × 5 = … V. V₁ = V₂ + V₃ + V₄ = … V (the total pd supplied by the battery).</div>
+</div>
+
+<!-- CIRCUIT 34 -->
+<div class="circuit-block">
+  <h3 class="sub-title">Circuit problem 6</h3>
+  <div class="circuit-flex">
+    <svg width="320" height="340" viewBox="0 0 320 340">
+<line x1="40" y1="60" x2="135" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="165" y1="60" x2="260" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="141.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="127" y1="60" x2="127" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="173" y1="60" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="30" x2="173" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="40" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="110" x2="40" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="260" y1="60" x2="260" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="140" x2="80" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="95" cy="140" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="95" y="145" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="110" y1="140" x2="135" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="135.0" y="131.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="155" y="125.0" text-anchor="middle" font-size="10">R₁ = 3 Ω</text>
+<line x1="175" y1="140" x2="260" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="140" x2="127" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="183" y1="140" x2="183" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="127" y1="180" x2="183" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="155.0" cy="180" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="155.0" y="185" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+<circle cx="40" cy="185" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="190" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">3</tspan></text>
+<line x1="40" y1="260" x2="90" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="90.0" y="251.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="110" y="245.0" text-anchor="middle" font-size="10">R₂</text>
+<line x1="130" y1="260" x2="170" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="170.0" y="251.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="190" y="245.0" text-anchor="middle" font-size="10">R₃</text>
+<line x1="210" y1="260" x2="260" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="82" y1="260" x2="82" y2="300" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="138" y1="260" x2="138" y2="300" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="82" y1="300" x2="138" y2="300" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="110.0" cy="300" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="110.0" y="305" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">3</tspan></text>
+<line x1="162" y1="260" x2="162" y2="300" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="218" y1="260" x2="218" y2="300" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="162" y1="300" x2="218" y2="300" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="190.0" cy="300" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="190.0" y="305" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">4</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>V₁ = 9 V</td></tr>
+        <tr><td>R₁ = 3 Ω</td></tr>
+        <tr><td>V₃ = 4 V</td></tr>
+        <tr><td>A₃ = 2 A</td></tr>
+        <tr><td>A₁ =</td><td><input class="reading-input" data-answer="5" data-tol="0.03"> A</td></tr>
+        <tr><td>V₂ =</td><td><input class="reading-input" data-answer="9" data-tol="0.02"> V</td></tr>
+        <tr><td>A₂ =</td><td><input class="reading-input" data-answer="3" data-tol="0.03"> A</td></tr>
+        <tr><td>R₂ =</td><td><input class="reading-input" data-answer="2" data-tol="0.03"> Ω</td></tr>
+        <tr><td>R₃ =</td><td><input class="reading-input" data-answer="2.5" data-tol="0.03"> Ω</td></tr>
+        <tr><td>V₄ =</td><td><input class="reading-input" data-answer="5" data-tol="0.03"> V</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">R₁ is directly across the battery ⟹ V₂ = V₁ = … V, so A₂ = V₂/R₁ = … A. R₂ and R₃ are in series forming a second branch across the battery, so V₃ + V₄ = V₁ ⟹ V₄ = V₁ − V₃ = 9 − 4 = … V. R₂ = V₃/A₃ = … Ω, R₃ = V₄/A₃ = … Ω. A₁ = A₂ + A₃ = … A.</div>
+</div>
+
+<!-- CIRCUIT 35 -->
+<div class="circuit-block">
+  <h3 class="sub-title">Circuit problem 7</h3>
+  <div class="circuit-flex">
+    <svg width="360" height="370" viewBox="0 0 360 370">
+<line x1="40" y1="60" x2="155" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="185" y1="60" x2="300" y2="60" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="155" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="161.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<rect x="175" y="50" width="1.5" height="20" fill="#1b2a4a"/>
+<rect x="181.5" y="54" width="3.5" height="12" fill="#1b2a4a"/>
+<line x1="147" y1="60" x2="147" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="193" y1="60" x2="193" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="147" y1="30" x2="193" y2="30" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="170.0" cy="30" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="170.0" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="40" y1="60" x2="40" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="40" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">3</tspan></text>
+<line x1="40" y1="110" x2="40" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="300" y1="60" x2="300" y2="80" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="300" cy="95" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="300" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">1</tspan></text>
+<line x1="300" y1="110" x2="300" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="40" y1="140" x2="75" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="90" cy="140" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="90" y="145" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">4</tspan></text>
+<line x1="105" y1="140" x2="130" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="130.0" y="131.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="150" y="125.0" text-anchor="middle" font-size="10">R₁</text>
+<line x1="170" y1="140" x2="190" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="190.0" y="131.0" width="40" height="18" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="210" y="125.0" text-anchor="middle" font-size="10">R₂</text>
+<line x1="230" y1="140" x2="300" y2="140" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="122" y1="140" x2="122" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="178" y1="140" x2="178" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="122" y1="180" x2="178" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="180" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="185" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="182" y1="140" x2="182" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="238" y1="140" x2="238" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="182" y1="180" x2="238" y2="180" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="210.0" cy="180" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="210.0" y="185" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">3</tspan></text>
+<circle cx="40" cy="185" r="15" fill="#fff3f1" stroke="#e8533a" stroke-width="2"/>
+<text x="40" y="190" text-anchor="middle" font-size="13" font-weight="bold" fill="#e8533a">A<tspan font-size="9" dy="2">2</tspan></text>
+<line x1="40" y1="260" x2="110" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="110" y1="244.0" x2="110" y2="276.0" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="190" y1="244.0" x2="190" y2="276.0" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="110" y1="244" x2="132" y2="244" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="168" y1="244" x2="190" y2="244" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="110" y1="276" x2="132" y2="276" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="168" y1="276" x2="190" y2="276" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="132.0" y="236.0" width="36" height="16" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<rect x="132.0" y="268.0" width="36" height="16" fill="#fff" stroke="#1b2a4a" stroke-width="2"/>
+<text x="150" y="228.0" text-anchor="middle" font-size="10">3 Ω</text>
+<text x="150" y="298.0" text-anchor="middle" font-size="10">2 Ω</text>
+<line x1="190" y1="260" x2="300" y2="260" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="70" y1="260" x2="70" y2="330" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="230" y1="260" x2="230" y2="330" stroke="#1b2a4a" stroke-width="2"/>
+<line x1="70" y1="330" x2="230" y2="330" stroke="#1b2a4a" stroke-width="2"/>
+<circle cx="150.0" cy="330" r="15" fill="#e8f1ff" stroke="#3a7bd5" stroke-width="2"/>
+<text x="150.0" y="335" text-anchor="middle" font-size="13" font-weight="bold" fill="#3a7bd5">V<tspan font-size="9" dy="2">4</tspan></text>
+    </svg>
+    <div class="answer-box">
+      <table>
+        <tr><td>A₄ = 4 A</td></tr>
+        <tr><td>V₂ = 5 V</td></tr>
+        <tr><td>V₃ = 3 V</td></tr>
+        <tr><td>3 Ω, 2 Ω</td></tr>
+        <tr><td>V₁ =</td><td><input class="reading-input" data-answer="8" data-tol="0.02"> V</td></tr>
+        <tr><td>A₁ =</td><td><input class="reading-input" data-answer="10.667" data-tol="0.03"> A</td></tr>
+        <tr><td>A₃ =</td><td><input class="reading-input" data-answer="10.667" data-tol="0.03"> A</td></tr>
+        <tr><td>R₁ =</td><td><input class="reading-input" data-answer="1.25" data-tol="0.03"> Ω</td></tr>
+        <tr><td>R₂ =</td><td><input class="reading-input" data-answer="0.75" data-tol="0.03"> Ω</td></tr>
+        <tr><td>V₄ =</td><td><input class="reading-input" data-answer="8" data-tol="0.02"> V</td></tr>
+        <tr><td>A₂ =</td><td><input class="reading-input" data-answer="6.667" data-tol="0.03"> A</td></tr>
+      </table>
+    </div>
+  </div>
+  <button class="check-btn" onclick="checkCircuit(this)">Check circuit</button>
+  <span class="feedback"></span>
+  <button class="reveal-btn" onclick="toggleSolution(this)">Show working</button>
+  <div class="solution">R₁ and R₂ are in series in a branch directly across the battery, carrying the given 4 A. The voltmeters read V₂ = 5 V across R₁ and V₃ = 3 V across R₂, so R₁ = V₂/A₄ = 5/4 = … Ω and R₂ = V₃/A₄ = 3/4 = … Ω. This branch's total pd = V₂ + V₃ = 5 + 3 = … V = V₁ (and V₄, since the 3 Ω ∥ 2 Ω branch is also directly across the battery). 3 Ω ∥ 2 Ω = 1.2 Ω, so A₂ = V₄/1.2 = … A. A₁ = A₃ = A₄ + A₂ = … A.</div>
+</div>
+
+<!-- ================= RESULTS SUMMARY ================= -->
+<div class="summary-card">
+  <h2 class="section-title" style="border-bottom-color:#5a7ac0;">Results</h2>
+  <div id="scoreLine">Click "Calculate score" to mark your work.</div>
+  <button class="check-btn" onclick="computeAll()">Calculate score</button>
+  <button class="copy-btn" onclick="copySummary()">Copy summary</button>
+  <p style="font-size:0.85rem;color:#a9b8d8;">Paste the summary below into your Canvas submission.</p>
+  <textarea id="summaryText" readonly></textarea>
+</div>
+
+  <div class="print-btn-row">
+    <button class="print-btn" onclick="preparePrint()">Print / PDF</button>
+  </div>
+</div>
+<script>
+function toggleSolution(btn){
+  var sol = btn.nextElementSibling;
+  sol.classList.toggle('show');
+  btn.textContent = sol.classList.contains('show') ? 'Hide working' : 'Show working';
+}
+function withinTol(val, ans, tol){
+  if(isNaN(val)) return false;
+  var t = Math.max(tol*Math.abs(ans), 0.01);
+  return Math.abs(val-ans) <= t;
+}
+function checkNumeric(btn){
+  var q = btn.closest('.q');
+  var input = q.querySelector('.qinput');
+  var ans = parseFloat(q.getAttribute('data-answer'));
+  var tol = parseFloat(q.getAttribute('data-tol'))||0.02;
+  var val = parseFloat(input.value);
+  var fb = q.querySelector('.feedback');
+  if(withinTol(val, ans, tol)){
+    fb.textContent = 'Correct'; fb.className='feedback correct'; input.style.borderColor='#1a8a4a';
+  } else {
+    fb.textContent = 'Not quite'; fb.className='feedback incorrect'; input.style.borderColor='#c0392b';
+  }
+}
+function checkMCQ(btn){
+  var q = btn.closest('.q');
+  var sel = q.querySelector('.mcq-select');
+  var ans = q.getAttribute('data-answer');
+  var fb = q.querySelector('.feedback');
+  if(sel.value === ans){
+    fb.textContent = 'Correct'; fb.className='feedback correct';
+  } else {
+    fb.textContent = 'Not quite'; fb.className='feedback incorrect';
+  }
+}
+function checkCircuit(btn){
+  var block = btn.closest('.circuit-block');
+  var inputs = block.querySelectorAll('.reading-input');
+  var correct = 0;
+  inputs.forEach(function(inp){
+    var ans = parseFloat(inp.getAttribute('data-answer'));
+    var tol = parseFloat(inp.getAttribute('data-tol'))||0.02;
+    var val = parseFloat(inp.value);
+    if(withinTol(val, ans, tol)){ inp.style.borderColor='#1a8a4a'; correct++; }
+    else { inp.style.borderColor='#c0392b'; }
+  });
+  var fb = block.querySelector('.feedback');
+  fb.textContent = correct + ' / ' + inputs.length + ' correct';
+  fb.className = 'feedback ' + (correct===inputs.length ? 'correct':'incorrect');
+}
+function computeAll(){
+  var total=0, correct=0, missing=[];
+  document.querySelectorAll('.q[data-type="numeric"]').forEach(function(q){
+    total++;
+    var input=q.querySelector('.qinput');
+    var ans=parseFloat(q.getAttribute('data-answer'));
+    var tol=parseFloat(q.getAttribute('data-tol'))||0.02;
+    var val=parseFloat(input.value);
+    if(withinTol(val,ans,tol)) correct++; else missing.push(q.getAttribute('data-qname')||'question');
+  });
+  document.querySelectorAll('.q[data-type="mcq"]').forEach(function(q){
+    total++;
+    var sel=q.querySelector('.mcq-select');
+    var ans=q.getAttribute('data-answer');
+    if(sel.value===ans) correct++; else missing.push(q.getAttribute('data-qname')||'question');
+  });
+  document.querySelectorAll('.pred-input').forEach(function(inp){
+    total++;
+    var ans=parseFloat(inp.getAttribute('data-answer'));
+    var tol=parseFloat(inp.getAttribute('data-tol'))||0.02;
+    var val=parseFloat(inp.value);
+    if(withinTol(val,ans,tol)) correct++; else missing.push(inp.getAttribute('data-qname')||'practical row');
+  });
+  document.querySelectorAll('.circuit-block').forEach(function(block, idx){
+    var title = block.querySelector('.sub-title') ? block.querySelector('.sub-title').textContent : ('Circuit '+(idx+1));
+    block.querySelectorAll('.reading-input').forEach(function(inp, j){
+      total++;
+      var ans=parseFloat(inp.getAttribute('data-answer'));
+      var tol=parseFloat(inp.getAttribute('data-tol'))||0.02;
+      var val=parseFloat(inp.value);
+      if(withinTol(val,ans,tol)) correct++; else missing.push(title+' (blank '+(j+1)+')');
+    });
+  });
+  window._score = {total:total, correct:correct, missing:missing};
+  document.getElementById('scoreLine').textContent = 'Score: ' + correct + ' / ' + total + ' (' + Math.round(100*correct/total) + '%)';
+}
+function copySummary(){
+  if(!window._score) computeAll();
+  var s = window._score;
+  var name = document.getElementById('studentName').value || '(name not entered)';
+  var lines = [];
+  lines.push('Adding Resistors — Self-Marking Workbook');
+  lines.push('Name: ' + name);
+  lines.push('Score: ' + s.correct + ' / ' + s.total + ' (' + Math.round(100*s.correct/s.total) + '%)');
+  if(s.missing.length){
+    lines.push('');
+    lines.push('Items to review:');
+    s.missing.forEach(function(m){ lines.push(' - ' + m); });
+  }
+  var text = lines.join('\n');
+  document.getElementById('summaryText').value = text;
+  document.getElementById('summaryText').select();
+  try{ document.execCommand('copy'); }catch(e){}
+  if(navigator.clipboard){ navigator.clipboard.writeText(text).catch(function(){}); }
+}
+
+function preparePrint(){
+  document.querySelectorAll('.hint, .solution, .hint-box').forEach(function(el){
+    el.classList.add('show');
+    el.classList.add('visible');
+  });
+  var sBtn = document.getElementById('summarize');
+  if(sBtn){ try{ sBtn.click(); }catch(e){} }
+  if(typeof generateExport === 'function'){ try{ generateExport(); }catch(e){} }
+  if(typeof computeAll === 'function'){ try{ computeAll(); }catch(e){} }
+  setTimeout(function(){ window.print(); }, 60);
+}
+</script>
+</body>
+</html>
