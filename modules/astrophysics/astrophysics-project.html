@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading the Light of the Universe — IB HL Astrophysics Guided Research</title>
+<style>
+  :root{
+    --bg-0:#0b0f1e;
+    --bg-1:#111730;
+    --bg-2:#161d3d;
+    --card:#151b36;
+    --card-border:#2a3363;
+    --text-0:#eef1fb;
+    --text-1:#c3c9e6;
+    --text-2:#8c93bd;
+    --accent-thermal:#ff9f5b;
+    --accent-wave:#5bc9ff;
+    --accent-fusion:#ff6b8b;
+    --accent-evo:#a58bff;
+    --accent-scale:#5bffb0;
+    --accent-gold:#f5c542;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(ellipse at 20% 0%, #1c2550 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, #241a3d 0%, transparent 50%),
+      var(--bg-0);
+    color:var(--text-0);
+    line-height:1.6;
+  }
+  .stars{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 80% 10%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 60% 70%, #fff 100%, transparent),
+      radial-gradient(1.5px 1.5px at 30% 85%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 90% 60%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 45% 40%, #fff 100%, transparent),
+      radial-gradient(1.5px 1.5px at 70% 90%, #fff 100%, transparent);
+    background-repeat:repeat;
+    background-size:600px 600px;
+    opacity:0.5;
+  }
+  header.hero{
+    padding:64px 24px 48px;
+    text-align:center;
+    max-width:920px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:12.5px;
+    color:var(--accent-gold);
+    font-weight:600;
+  }
+  h1{
+    font-size:clamp(28px,4.5vw,44px);
+    margin:14px 0 10px;
+    line-height:1.15;
+    background:linear-gradient(90deg,#fff, #b9c4ff 60%, #8fd9ff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .subtitle{
+    color:var(--text-1);
+    font-size:17px;
+    max-width:680px;
+    margin:0 auto 22px;
+  }
+  .driving-question{
+    margin:28px auto 0;
+    max-width:700px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    font-size:19px;
+    font-style:italic;
+    color:#fff;
+  }
+  nav{
+    position:sticky; top:0; z-index:10;
+    backdrop-filter:blur(10px);
+    background:rgba(11,15,30,0.85);
+    border-bottom:1px solid var(--card-border);
+    padding:12px 24px;
+    display:flex; gap:6px; justify-content:center; flex-wrap:wrap;
+  }
+  nav a{
+    color:var(--text-1);
+    text-decoration:none;
+    font-size:13.5px;
+    padding:8px 14px;
+    border-radius:20px;
+    transition:background .15s, color .15s;
+  }
+  nav a:hover{ background:rgba(255,255,255,0.08); color:#fff;}
+  main{max-width:1040px; margin:0 auto; padding:10px 24px 80px;}
+  section{margin-top:72px;}
+  section:first-of-type{margin-top:40px;}
+  h2{
+    font-size:26px; margin-bottom:6px; color:#fff;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-kicker{color:var(--text-2); font-size:14px; margin-bottom:26px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 24px;
+  }
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:820px){ .grid-2, .grid-3{grid-template-columns:1fr;} }
+
+  /* overview understanding map */
+  .u-table{width:100%; border-collapse:collapse; font-size:14px;}
+  .u-table th{
+    text-align:left; color:var(--text-2); font-weight:600;
+    font-size:12px; text-transform:uppercase; letter-spacing:.04em;
+    padding:8px 10px; border-bottom:1px solid var(--card-border);
+  }
+  .u-table td{padding:10px; border-bottom:1px solid rgba(255,255,255,0.05); vertical-align:top;}
+  .tag{
+    display:inline-block; font-size:11px; font-weight:700; padding:2px 8px;
+    border-radius:20px; color:#0b0f1e;
+  }
+
+  /* stage timeline */
+  .stage{
+    position:relative;
+    border-left:3px solid var(--stage-color, var(--accent-thermal));
+    padding-left:28px;
+    margin-bottom:38px;
+  }
+  .stage::before{
+    content:attr(data-num);
+    position:absolute; left:-22px; top:0;
+    width:40px; height:40px; border-radius:50%;
+    background:var(--stage-color, var(--accent-thermal));
+    color:#0b0f1e; font-weight:800; font-size:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stage-head{margin-left:8px;}
+  .stage-head h3{margin:0 0 4px; font-size:20px; color:#fff;}
+  .stage-head .meta{font-size:13px; color:var(--text-2); margin-bottom:14px;}
+  .stage-body{margin-left:8px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 14px;}
+  .pill{
+    font-size:11.5px; padding:4px 10px; border-radius:20px;
+    background:rgba(255,255,255,0.06); border:1px solid var(--card-border);
+    color:var(--text-1);
+  }
+  .box{
+    background:rgba(255,255,255,0.035);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:14px 16px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .box h4{margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-2);}
+  .eq{
+    font-family:'Cambria Math', Georgia, serif;
+    font-size:16px; color:#fff;
+    background:rgba(255,255,255,0.04);
+    padding:8px 12px; border-radius:8px;
+    display:inline-block; margin:4px 6px 4px 0;
+  }
+  ul.tight{margin:6px 0; padding-left:20px;}
+  ul.tight li{margin-bottom:4px; font-size:14.5px; color:var(--text-1);}
+  .checkpoint{
+    border-left:3px solid var(--accent-gold);
+    background:rgba(245,197,66,0.06);
+    padding:12px 16px; border-radius:0 10px 10px 0; margin-top:14px;
+    font-size:14.5px;
+  }
+  .checkpoint b{color:var(--accent-gold);}
+
+  /* synthesis */
+  .synthesis{
+    background:linear-gradient(135deg, rgba(90,90,220,0.12), rgba(90,220,180,0.08));
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:28px;
+  }
+
+  /* assessment cards */
+  .assess-card{
+    background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius);
+    padding:20px; display:flex; flex-direction:column; gap:10px;
+  }
+  .assess-card h3{margin:0; font-size:18px; color:#fff;}
+  .assess-badge{
+    align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.03em;
+    padding:3px 10px; border-radius:20px; text-transform:uppercase;
+  }
+  .assess-meta{font-size:12.5px; color:var(--text-2); display:flex; flex-wrap:wrap; gap:10px; margin-top:auto;}
+  .assess-meta span{background:rgba(255,255,255,0.05); padding:3px 8px; border-radius:6px;}
+
+  /* research log */
+  .log-item{
+    display:flex; align-items:flex-start; gap:12px;
+    padding:12px 14px; border-radius:10px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--card-border);
+    margin-bottom:10px;
+  }
+  .log-item input{margin-top:4px; width:16px; height:16px; accent-color:var(--accent-gold); cursor:pointer;}
+  .log-item.done label{ color:var(--text-2); text-decoration:line-through; }
+  .progress-wrap{
+    background:rgba(255,255,255,0.06); border-radius:20px; height:10px; overflow:hidden; margin:10px 0 22px;
+  }
+  .progress-bar{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-wave),var(--accent-fusion)); transition:width .3s;}
+  .progress-label{font-size:13px; color:var(--text-2); margin-bottom:4px;}
+
+  footer{
+    max-width:1040px; margin:0 auto; padding:0 24px 60px; color:var(--text-2); font-size:13.5px;
+  }
+  .notes-card{
+    background:rgba(255,255,255,0.03); border:1px dashed var(--card-border); border-radius:var(--radius);
+    padding:22px 24px;
+  }
+  .notes-card h2{font-size:18px;}
+  a.inline{color:var(--accent-wave);}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<header class="hero">
+  <div class="eyebrow">IB Physics HL &nbsp;·&nbsp; Guided Research Project &nbsp;·&nbsp; Draft v1</div>
+  <h1>Reading the Light of the Universe</h1>
+  <p class="subtitle">A photon arriving at your telescope is the only message a star or galaxy will ever send you. Everything you can know about it — how hot it is, how big, how far away, how it moves, how it will die — has to be reconstructed from that one thin stream of light.</p>
+  <div class="driving-question">
+    "Given nothing but the light we receive, what can we know about the life of a star — and what does that tell us about the future of the Universe itself?"
+  </div>
+</header>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#data">Your Star &amp; Data</a>
+  <a href="#journey">The Journey</a>
+  <a href="#synthesis">Synthesis</a>
+  <a href="#assessment">Assessment Options</a>
+</nav>
+
+<main>
+
+  <section id="overview">
+    <h2>🔭 Overview</h2>
+    <p class="section-kicker">What this project is, and why it's built this way</p>
+    <div class="card">
+      <p>This is an individual, guided research task (roughly <b>one week</b> of lessons + independent work) for IB Physics HL students. It doesn't introduce new isolated facts — it takes understandings students already have <i>in pieces</i> (a thermal law here, a wave phenomenon there, a diagram they memorised for a test) and forces them to be <b>combined</b> to answer one real scientific question, in the way an actual astrophysicist has to.</p>
+      <p>The throughline is <b>photons in, physical story out</b>: every stage of the journey adds one more thing you can legitimately claim to know about a star, using only the light arriving from it. By the end, students aren't just able to state Wien's law or the Doppler effect — they can explain how those separate tools, used together, are literally how humanity knows the Universe is expanding, how stars live and die, and what that implies for where everything is heading.</p>
+      <p>Two models run through the whole thing side by side:</p>
+      <div class="grid-2">
+        <div class="box" style="border-left:3px solid var(--accent-thermal);">
+          <h4>🔥 The Thermal Model</h4>
+          <p style="margin:0;">Treats a star as a black-body radiator. From its spectrum (colour) and brightness, we infer temperature, luminosity, radius.</p>
+        </div>
+        <div class="box" style="border-left:3px solid var(--accent-wave);">
+          <h4>🌊 The Wave Model</h4>
+          <p style="margin:0;">Treats starlight as waves whose spectral lines shift with relative motion, revealing velocity — and, scaled up, the expansion of space itself.</p>
+        </div>
+      </div>
+      <p style="margin-top:16px;">Where every syllabus understanding lands in the journey:</p>
+      <table class="u-table">
+        <tr><th>Code</th><th>Understanding</th><th>Stage</th></tr>
+        <tr><td><span class="tag" style="background:var(--accent-thermal);">B1</span></td><td>Stefan–Boltzmann law, L = σAT⁴</td><td>Stage 1 — Thermal</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-thermal);">B1</span></td><td>Apparent brightness, b</td><td>Stage 1 — Thermal</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-thermal);">B1</span></td><td>Luminosity, L</td><td>Stage 1 — Thermal</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-thermal);">B1</span></td><td>Wien's displacement law, λ<sub>max</sub>T = 2.9×10⁻³ mK</td><td>Stage 1 — Thermal</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-wave);">C5</span></td><td>Spectral line shifts reveal motion</td><td>Stage 2 — Wave</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-wave);">C2</span></td><td>Intensity (wave model — inverse-square spreading of energy)</td><td>Stage 2 — Wave</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-fusion);">E5</span></td><td>Stellar equilibrium: radiation pressure vs. gravity</td><td>Stage 3 — Structure</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-fusion);">E5</span></td><td>Fusion as the energy source in stars</td><td>Stage 3 — Structure</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-fusion);">E5</span></td><td>Density/temperature conditions for fusion</td><td>Stage 3 — Structure</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-evo);">E5</span></td><td>Effect of stellar mass on evolution</td><td>Stage 4 — Evolution</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-evo);">E5</span></td><td>HR diagram: regions and stellar properties</td><td>Stage 4 — Evolution</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-scale);">E5</span></td><td>Stellar parallax, d(pc) = 1/p(arcsec)</td><td>Stage 5 — Scale</td></tr>
+        <tr><td><span class="tag" style="background:var(--accent-scale);">E5</span></td><td>Determining stellar radii</td><td>Stage 5 — Scale</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="data">
+    <h2>⭐ Your Star &amp; Finding Real Data</h2>
+    <p class="section-kicker">Choose one star from the shortlist below, then pull its real measurements yourself from SIMBAD and the Gaia Archive</p>
+
+    <div class="card">
+      <p>Every value in this project — temperature, brightness, distance, velocity — is going to come from a real, professionally-measured catalogue, not a worksheet. Pick one star below to be <i>your</i> star for the whole project. Stars are grouped by where they'll eventually sit on the HR diagram, so a spread of choices across the class will give a great class-wide comparison at Stage 4.</p>
+
+      <table class="u-table">
+        <tr><th>Region</th><th>Star</th><th>Why it's worth choosing</th><th></th></tr>
+        <tr><td rowspan="5">Cool dwarfs<br><span style="color:var(--text-2);">(main sequence)</span></td><td><b>Tau Ceti</b></td><td>Nearest single Sun-like star; has its own planetary system</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td><b>61 Cygni A</b></td><td>The very first star to ever have its parallax measured (Bessel, 1838)</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td><b>Epsilon Eridani ("Ran")</b></td><td>Young Sun-like star with a debris disk and confirmed planets</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td><b>Barnard's Star</b></td><td>Closest single star to the Sun after the Alpha Centauri system</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td><b>Proxima Centauri</b></td><td>The single closest star to the Sun; hosts the planet Proxima b</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td rowspan="3">Hot dwarfs<br><span style="color:var(--text-2);">(main sequence)</span></td><td><b>Sirius A</b></td><td>The brightest star in the night sky</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td><b>Vega</b></td><td>The historic reference star the whole magnitude scale was once calibrated against</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td><b>Procyon A</b></td><td>Bright, and already visibly evolving off the main sequence</td><td><span class="pill">Great starter</span></td></tr>
+        <tr><td rowspan="2">Giants</td><td><b>Arcturus</b></td><td>Brightest star in the northern sky; a red giant seen with the naked eye</td><td><span class="pill">Rich comparison</span></td></tr>
+        <tr><td><b>Pollux</b></td><td>The nearest giant star to the Sun; has a confirmed planet</td><td><span class="pill">Rich comparison</span></td></tr>
+        <tr><td rowspan="3">Supergiants</td><td><b>Betelgeuse</b></td><td>Red supergiant nearing the end of its life — will one day go supernova</td><td><span class="pill">Rich comparison</span></td></tr>
+        <tr><td><b>Rigel</b></td><td>Blue supergiant; one of the most luminous stars visible to the naked eye</td><td><span class="pill">Rich comparison</span></td></tr>
+        <tr><td><b>Spica</b></td><td>Hot, massive, close binary system</td><td><span class="pill">Rich comparison</span></td></tr>
+        <tr><td rowspan="3">Stellar corpses<br><span style="color:var(--text-2);">(evolved endpoints)</span></td><td><b>Sirius B</b></td><td>The white dwarf companion of Sirius A — same distance, wildly different physics</td><td><span class="pill">Advanced</span></td></tr>
+        <tr><td><b>Procyon B</b></td><td>The white dwarf companion of Procyon A</td><td><span class="pill">Advanced</span></td></tr>
+        <tr><td><b>Van Maanen's Star</b></td><td>An isolated white dwarf, with no bright companion to compare it to</td><td><span class="pill">Advanced</span></td></tr>
+      </table>
+      <p style="font-size:13.5px; color:var(--text-2); margin-top:10px;">Strongest extension: choose <b>Sirius A + Sirius B</b>, or <b>Procyon A + B</b>, as a pair — same distance, same age, but one is still fusing and one is a stellar corpse. Excellent material for the Stage 3–4 equilibrium/evolution argument. (Drawn from and extending your existing Star Cards 3.0 set — the rest of that set, including the ultra-cool dwarfs and brown dwarfs, works well as a further extension for students who want a harder challenge.)</p>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <h4 style="margin-top:0; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:var(--text-2);">How to find your star's real data</h4>
+      <ol class="tight" style="padding-left:20px;">
+        <li><b>SIMBAD</b> (simbad.cds.unistra.fr/simbad) — search your star's name. Under <i>Basic data</i>, note its spectral type. Under <i>Measurements → Fluxes</i>, note its apparent magnitude (V if available, otherwise G). Under <i>Measurements</i>, note its parallax (in mas — divide by 1000 for arcsec) and, if listed, its radial velocity.</li>
+        <li><b>Gaia Archive</b> (gea.esac.esa.int/archive) — search the same star by name to find its Gaia DR3 parallax and photometry independently. Comparing the two sources is genuine evaluation material for your write-up: do they agree, and if not, why might that be?</li>
+      </ol>
+      <div class="box" style="margin-top:4px;">
+        <h4>From magnitude to apparent brightness, b</h4>
+        <p style="margin:0 0 8px;">Archives report brightness as an apparent <i>magnitude</i>, not directly as b in W m⁻². Bridge the two using the Sun as your calibration star, since you already know its brightness (the solar constant) and its magnitude:</p>
+        <span class="eq">b<sub>star</sub> = b<sub>☉</sub> × 10^(0.4 × (m<sub>☉</sub> − m<sub>star</sub>))</span>
+        <p style="margin:8px 0 0;">using b<sub>☉</sub> = 1361 W m⁻² and m<sub>☉</sub> = −26.74. This comes directly from how the magnitude scale is defined (a ratio scale in steps of 10<sup>0.4</sup> ≈ 2.512 per magnitude) — it isn't a new law, just a translation between a more common way of recording the information and apparent brightness — both are ways of describing the same brightness.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <h2>🧭 The Journey</h2>
+    <p class="section-kicker">Five stages, each adding one more layer of knowledge about the same target star</p>
+
+    <!-- STAGE 1 -->
+    <div class="stage" style="--stage-color:var(--accent-thermal);" data-num="1">
+      <div class="stage-head">
+        <h3>The Thermal Model — What colour tells you about temperature</h3>
+        <div class="meta">Suggested time: 1 lesson + homework</div>
+      </div>
+      <div class="stage-body">
+        <p>Every student is issued (or chooses, see Design Notes) a real star with a published spectrum and apparent brightness. The guiding question: <i>if all I have is a graph of intensity against wavelength, and a brightness measurement, what can I already say about this star?</i></p>
+        <div class="pill-row">
+          <span class="pill">Wien's law</span><span class="pill">Stefan–Boltzmann law</span><span class="pill">Apparent brightness</span><span class="pill">Luminosity</span><span class="pill">Inverse square law</span>
+        </div>
+        <div class="box">
+          <h4>Tools</h4>
+          <span class="eq">λ<sub>max</sub>T = 2.9 × 10⁻³ m K</span>
+          <span class="eq">L = σAT⁴</span>
+          <span class="eq">b = L / (4πd²)</span>
+        </div>
+        <div class="box">
+          <h4>Guiding questions</h4>
+          <ul class="tight">
+            <li>From the peak of your star's black-body curve, what is its surface temperature?</li>
+            <li>Why does a black-body spectrum let us treat a star — which is not literally black — as a black-body radiator?</li>
+            <li>If you know luminosity and apparent brightness, what have you actually determined, and why is that useful before you even know the distance?</li>
+          </ul>
+        </div>
+        <div class="checkpoint"><b>Checkpoint 1:</b> A one-paragraph "temperature dossier" for your star: measured T (from Wien's law), and a brief note on what apparent brightness alone can and cannot tell you.</div>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div class="stage" style="--stage-color:var(--accent-wave);" data-num="2">
+      <div class="stage-head">
+        <h3>The Wave Model — What a shifted line tells you about motion</h3>
+        <div class="meta">Suggested time: 1 lesson + homework</div>
+      </div>
+      <div class="stage-body">
+        <p>Now students look at their star's real radial-velocity data and at a second, larger-scale dataset, to see the same physics operating at two completely different scales.</p>
+        <div class="pill-row">
+          <span class="pill">Doppler shift</span><span class="pill">Redshift / blueshift</span><span class="pill">Radial velocity</span><span class="pill">Recession of galaxies</span><span class="pill">Hubble's Law</span>
+        </div>
+        <div class="box">
+          <h4>Tools</h4>
+          <span class="eq">Δλ / λ ≈ v / c</span>
+        </div>
+        <div class="box">
+          <h4>Part A — your star</h4>
+          <p style="margin:0;">Look up your star's radial velocity on SIMBAD (see <a href="#data" class="inline">Your Star &amp; Data</a>). Using the Hα line (rest wavelength 656.3 nm) as your reference, calculate the wavelength shift Δλ that radial velocity would produce, and state whether the line is redshifted or blueshifted.</p>
+        </div>
+        <div class="box">
+          <h4>Part B — how far, how fast: a galaxy cluster dataset</h4>
+          <p style="margin:0 0 10px;">The table below is a simplified teaching dataset (Ca II K line, rest wavelength 393.4 nm) modelled on the classic multi-cluster redshift–distance exercise. For each cluster: calculate the wavelength shift, then the recession velocity, then plot velocity (y) against distance (x).</p>
+          <table class="u-table">
+            <tr><th>Cluster</th><th>Distance (Mpc)</th><th>Observed λ of Ca II K (nm)</th></tr>
+            <tr><td>Virgo</td><td>17</td><td>395.0</td></tr>
+            <tr><td>Ursa Major</td><td>210</td><td>413.1</td></tr>
+            <tr><td>Corona Borealis</td><td>320</td><td>422.3</td></tr>
+            <tr><td>Boötes</td><td>480</td><td>438.0</td></tr>
+            <tr><td>Hydra</td><td>650</td><td>452.4</td></tr>
+          </table>
+          <p style="font-size:13px; color:var(--text-2); margin-top:8px;">(Rest wavelength of Ca II K: 393.4 nm. This dataset is simplified/idealised for teaching, not raw archive data — built so the gradient of your graph comes out close to the accepted value of the Hubble constant.)</p>
+        </div>
+        <div class="box">
+          <h4>Guiding questions</h4>
+          <ul class="tight">
+            <li>Is your star's spectrum redshifted or blueshifted relative to lab values? What does that mean physically?</li>
+            <li>What does the gradient of your velocity–distance graph represent, and what are its units?</li>
+            <li>What would it mean if, when astronomers looked at galaxy after galaxy, almost all of them showed redshift, and the further away a galaxy was, the larger its redshift?</li>
+            <li>The formula Δλ/λ ≈ v/c is only a non-relativistic approximation, so it becomes less accurate as v gets closer to c. Roughly what fraction of c is "too fast" for it to be trusted, and why doesn't that limit matter much for the velocities in this dataset?</li>
+          </ul>
+        </div>
+        <div class="checkpoint"><b>Checkpoint 2:</b> Your star's radial velocity → Δλ calculation, plus your completed cluster velocity–distance graph with an estimate of the Hubble constant read from its gradient.</div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div class="stage" style="--stage-color:var(--accent-fusion);" data-num="3">
+      <div class="stage-head">
+        <h3>Structure — Why the star hasn't collapsed, or exploded, yet</h3>
+        <div class="meta">Suggested time: 1 lesson + homework</div>
+      </div>
+      <div class="stage-body">
+        <p>Now the question shifts from "what is this star doing" to "why does this star exist in a steady state at all." Students build the equilibrium argument and connect it to the nuclear process that actually powers the radiation measured in Stage 1.</p>
+        <div class="pill-row">
+          <span class="pill">Hydrostatic equilibrium</span><span class="pill">Radiation pressure</span><span class="pill">Gravitational collapse</span><span class="pill">Nuclear fusion</span><span class="pill">Density &amp; temperature thresholds</span>
+        </div>
+        <div class="box">
+          <h4>Guiding questions</h4>
+          <ul class="tight">
+            <li>What two forces/pressures are in balance inside a stable star, and what happens if one temporarily "wins"?</li>
+            <li>Where does the outward pressure actually come from, physically?</li>
+            <li>Why does fusion require both extreme density and extreme temperature — what is each one doing to make fusion possible?</li>
+            <li>What would happen to your Stage-1 star's equilibrium if fusion in its core stopped tomorrow?</li>
+          </ul>
+        </div>
+        <div class="checkpoint"><b>Checkpoint 3:</b> A labelled force/pressure diagram of your star in equilibrium, with a short explanation of what maintains it and what fusion conditions are being met in the core right now.</div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div class="stage" style="--stage-color:var(--accent-evo);" data-num="4">
+      <div class="stage-head">
+        <h3>Evolution — Where mass takes you</h3>
+        <div class="meta">Suggested time: 1–2 lessons + homework</div>
+      </div>
+      <div class="stage-body">
+        <p>Students place their star on a Hertzsprung–Russell diagram using the T (Stage 1) and L (Stage 1) they already calculated, then use its position and estimated mass to argue about its past and predict its future.</p>
+        <div class="pill-row">
+          <span class="pill">HR diagram regions</span><span class="pill">Main sequence</span><span class="pill">Red giants / supergiants</span><span class="pill">White dwarfs</span><span class="pill">Stellar mass → fate</span>
+        </div>
+        <div class="box">
+          <h4>Guiding questions</h4>
+          <ul class="tight">
+            <li>Where does your star sit on the HR diagram, and what does that position alone tell you about its current life stage?</li>
+            <li>How does a star's mass set both how brightly it burns and how long it lasts?</li>
+            <li>Trace your star's likely future track across the HR diagram. What will it become?</li>
+            <li>Why do only the most massive stars end their lives explosively, while low-mass stars fade quietly?</li>
+          </ul>
+        </div>
+        <div class="checkpoint"><b>Checkpoint 4:</b> Plot your star on a blank HR diagram (template provided), annotate its current region, and sketch + justify its predicted evolutionary track.</div>
+      </div>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div class="stage" style="--stage-color:var(--accent-scale);" data-num="5">
+      <div class="stage-head">
+        <h3>Scale — Putting real numbers on distance and size</h3>
+        <div class="meta">Suggested time: 1 lesson + homework</div>
+      </div>
+      <div class="stage-body">
+        <p>The final piece: how far away is this star, actually, and how big is it? This stage closes the loop — once distance is known independently (parallax), apparent brightness from Stage 1 becomes a true measurement of luminosity, and radius can be derived without ever needing to "see" the star's disc.</p>
+        <div class="pill-row">
+          <span class="pill">Stellar parallax</span><span class="pill">d(pc) = 1/p(arcsec)</span><span class="pill">Stellar radius from L and T</span>
+        </div>
+        <div class="box">
+          <h4>Tools</h4>
+          <span class="eq">d (pc) = 1 / p (arcsec)</span>
+          <span class="eq">L = σAT⁴</span>
+        </div>
+        <div class="box">
+          <h4>Finding &amp; cross-checking your parallax</h4>
+          <p style="margin:0;">Pull your star's parallax from both SIMBAD and the Gaia Archive (see <a href="#data" class="inline">Your Star &amp; Data</a>). If the two disagree, that's not a mistake — it's real measurement uncertainty, and worth commenting on directly in your write-up.</p>
+        </div>
+        <div class="box">
+          <h4>Guiding questions</h4>
+          <ul class="tight">
+            <li>Why does parallax only work for relatively nearby stars — what breaks down at large distances?</li>
+            <li>Now that you have a genuine distance, combine it with your Stage-1 brightness to check or refine your luminosity value.</li>
+            <li>Using L and T, calculate your star's radius. How does it compare to the Sun's?</li>
+          </ul>
+        </div>
+        <div class="checkpoint"><b>Checkpoint 5:</b> Final data card for your star: T, L, R, distance, radial velocity, HR classification, predicted fate — every value traced back to the observation and law that produced it.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="synthesis">
+    <h2>🌌 Synthesis — So, what <em>is</em> the future of the Universe?</h2>
+    <p class="section-kicker">Where the two models meet</p>
+    <div class="synthesis">
+      <p>By Stage 5, you'll have a complete physical biography of one star, built entirely from light. Now zoom out from that single star to the Universe as a whole, using exactly the same two tools:</p>
+      <div class="grid-2" style="margin:18px 0;">
+        <div class="box" style="border-left:3px solid var(--accent-evo);">
+          <h4>The local future</h4>
+          <p style="margin:0;">Every star's story ends. Your Stage 3–4 work already predicts your star's death. Multiply that across every star in every galaxy, and stellar evolution alone tells you the Universe's light sources are finite — stars form, burn, and go dark on characteristic timescales set by their mass.</p>
+        </div>
+        <div class="box" style="border-left:3px solid var(--accent-wave);">
+          <h4>The large-scale future</h4>
+          <p style="margin:0;">Your Stage 2 Doppler measurement, repeated across thousands of galaxies, is the actual historical evidence (Hubble, 1929, and everyone since) that the Universe is expanding — and that the expansion is accelerating. That single measurable quantity, redshift, is the observational basis for every serious model of the Universe's ultimate fate.</p>
+        </div>
+      </div>
+      <p>By the end of this project, you should be able to give a physics-grounded (not just popular-science) answer to the driving question — naming exactly which measurement (spectral shift, black-body spectrum, HR position) supports which claim about the future: of your star, and of everything.</p>
+    </div>
+  </section>
+
+  <section id="assessment">
+    <h2>📝 Choose Your Assessment</h2>
+    <div class="grid-3">
+      <div class="assess-card" style="border-color:var(--accent-thermal);">
+        <span class="assess-badge" style="background:var(--accent-thermal); color:#1a0f00;">Option A</span>
+        <h3>Data-Based Investigation Report</h3>
+        <p style="font-size:14px; color:var(--text-1);">Students choose a real star from the shortlist (see <a href="#data" class="inline">Your Star &amp; Data</a>) and pull genuine data from SIMBAD and the Gaia Archive. They reconstruct T, L, R, distance and velocity as in the journey, then write a structured report culminating in a discussion linking their star's fate to the Universe's future.</p>
+        <p style="font-size:13.5px; color:var(--text-1);"><b>Assessed against:</b> the current DP Sciences IA criteria — Research Design, Data Analysis, Conclusion, Evaluation (6 marks each, 24 total) — applied here to this project rather than to the IA itself.</p>
+        <div class="assess-meta"><span>Most rigorous</span><span>Written report, ≤3000 words</span><span>~1 week to write up</span></div>
+      </div>
+      <div class="assess-card" style="border-color:var(--accent-evo);">
+        <span class="assess-badge" style="background:var(--accent-evo); color:#160a2e;">Option B</span>
+        <h3>Comparative Poster + Oral Defence</h3>
+        <p style="font-size:14px; color:var(--text-1);">Students choose 3–4 stars spanning different HR-diagram stages, produce a poster or infographic comparing them, then face a short oral defence probing whether they actually understand the physics behind their claims, not just the numbers on the page.</p>
+        <p style="font-size:13.5px; color:var(--text-1);"><b>Assessed against:</b> Content &amp; Accuracy, Comparative Insight, Design &amp; Communication, Oral Defence (6 marks each, 24 total) — a poster/oral-adapted version of the same four skills.</p>
+        <div class="assess-meta"><span>Most accessible</span><span>Visual + verbal</span><span>~8–10 min defence/student</span></div>
+      </div>
+      <div class="assess-card" style="border-color:var(--accent-wave);">
+        <span class="assess-badge" style="background:var(--accent-wave); color:#00131a;">Option C</span>
+        <h3>Structured Exam-Style Paper</h3>
+        <p style="font-size:14px; color:var(--text-1);">A standalone structured-question workbook, in the same numbered-question / command-term / mark-allocation style as your existing exam reviews, using given spectra/parallax/brightness data and finishing with a longer "discuss" question on implications for the Universe's future.</p>
+        <p style="font-size:13.5px; color:var(--text-1);"><b>Why it works:</b> fastest and most consistent to mark at scale; doubles as direct, realistic exam preparation under timed conditions.</p>
+        <div class="assess-meta"><span>Most exam-like</span><span>Timed paper</span><span>60–75 min</span></div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  Draft v1 · Built for IB Physics HL · Astrophysics — thermal &amp; wave models of stellar and cosmic evolution
+</footer>
+
+
+</body>
+</html>
