@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current and Circuits — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.85rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+  .ivgraphs{display:flex; gap:1.4rem; flex-wrap:wrap; justify-content:center; margin:1rem 0;}
+  .ivgraphs figure{max-width:170px; margin:0;}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Current and Circuits</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Current and Circuits</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Cells and circuit diagrams</a>
+    <a href="#s2">2. Charge and current</a>
+    <a href="#s3">3. Potential difference &amp; Kirchhoff's laws</a>
+    <a href="#s4">4. Series and parallel circuits</a>
+    <a href="#s5">5. Conductors, insulators &amp; resistance</a>
+    <a href="#s6">6. Ohm's law &amp; I&ndash;V characteristics</a>
+    <a href="#s7">7. Resistivity</a>
+    <a href="#s8">8. Combining resistors</a>
+    <a href="#s9">9. Emf and internal resistance</a>
+    <a href="#s10">10. Electrical power</a>
+    <a href="#s11">11. Variable resistors &amp; potentiometers</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Current and Circuits</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Every circuit starts with a source of energy — a cell, battery or solar panel — pushing charge carriers around a closed loop. This workbook builds up the whole picture: what current and potential difference actually are, why components resist the flow of charge, how resistors and cells behave when combined, and how all of this is put to use in dividing up a potential difference with a variable resistor. Work through the sections in order — each one leans on the ideas from the last.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Explain that cells provide a source of emf, using chemical reactions or (for solar cells) light as the energy source.</li>
+          <li>Interpret circuit diagrams and describe direct current as a flow of charge carriers, I = ΔQ/Δt.</li>
+          <li>Define potential difference as the work done per unit charge, and apply Kirchhoff's two laws.</li>
+          <li>Explain the origin of electrical resistance in terms of charge-carrier mobility, and use R = V/I and resistivity ρ = RA/L.</li>
+          <li>Distinguish ohmic from non-ohmic behaviour, including the heating effect of resistors, and use P = IV.</li>
+          <li>Combine resistors in series and parallel, and use ε = I(R + r) for a cell with internal resistance.</li>
+          <li>Explain how a variable resistor can be used as a potentiometer to divide a potential difference.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1: CELLS AND CIRCUIT DIAGRAMS ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Cells and Circuit Diagrams</h2>
+      <p>Whenever you use an electronic device, something has to supply the energy that pushes charge around the circuit. That "something" is almost always an electrical <strong>cell</strong> — a single cell is often loosely called a battery, though strictly a battery is two or more cells joined together.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> A cell provides a source of <strong>emf</strong> (electromotive force): it transfers energy to the charge carriers passing through it, using some other form of energy as the source. A <strong>chemical cell</strong> (the kind in a torch, phone or car) uses energy released by a chemical reaction. A <strong>solar cell</strong> (also called a photovoltaic cell) converts radiant energy from the Sun directly into electrical energy — no combustion or chemical reaction is involved.</p></div>
+
+      <p>Other sources of electrical energy exist too — a generator converts kinetic energy (for example from a wind turbine or a bicycle dynamo) into a p.d. — but cells and batteries are by far the most common source built into a portable circuit. Choosing between them involves trade-offs: convenience, cost, whether the energy source is renewable, whether the supply is continuous (a solar cell only works in daylight), and — as you'll meet in section 9 — the cell's internal resistance.</p>
+
+      <figure>
+        <svg viewBox="0 0 460 190" width="460" height="190" xmlns="http://www.w3.org/2000/svg" aria-label="Simple series circuit with cell, switch, resistor and ammeter">
+          <line x1="60" y1="40" x2="60" y2="88" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="48" y1="88" x2="72" y2="88" stroke="#173a5e" stroke-width="2"/>
+          <line x1="53" y1="100" x2="67" y2="100" stroke="#173a5e" stroke-width="5"/>
+          <line x1="60" y1="100" x2="60" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="34" y="86" font-size="13" fill="#173a5e" font-family="sans-serif">+</text>
+          <text x="34" y="106" font-size="13" fill="#173a5e" font-family="sans-serif">&#8722;</text>
+          <line x1="60" y1="40" x2="205" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="205" y="32" width="50" height="16" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <line x1="255" y1="40" x2="400" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <polygon points="150,34 150,46 164,40" fill="#0e7c86"/>
+          <text x="120" y="24" font-size="12" fill="#0e7c86" font-family="sans-serif">conventional current, I</text>
+          <line x1="400" y1="40" x2="400" y2="70" stroke="#173a5e" stroke-width="2.5"/>
+          <circle cx="400" cy="70" r="3" fill="#173a5e"/>
+          <line x1="400" y1="70" x2="378" y2="96" stroke="#173a5e" stroke-width="2"/>
+          <circle cx="400" cy="108" r="3" fill="#173a5e"/>
+          <line x1="400" y1="108" x2="400" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="60" y1="160" x2="213" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <circle cx="230" cy="160" r="17" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="230" y="165" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A</text>
+          <line x1="247" y1="160" x2="400" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="222" y="62" font-size="12" fill="#173a5e" font-family="sans-serif">R</text>
+        </svg>
+        <figcaption>Fig. 1.1 A simple series circuit: cell, switch, resistor and ammeter. Conventional current is always drawn flowing from + to &minus; around the external circuit.</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Circuit diagram:</b> a diagram that represents the arrangement of components in a circuit using standardised symbols, rather than a realistic drawing of the physical components. Every physicist, anywhere in the world, draws a cell, a resistor or an ammeter the same way.</div>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span> Standardised symbols matter because physics is an international, shared endeavour. If every textbook or engineer used their own idiosyncratic drawing style for components, circuits designed in one country could easily be misread in another — with potentially costly or dangerous consequences.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>Give one advantage and one disadvantage of a solar cell compared with a chemical cell as the energy source for a circuit.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">Advantage: a solar cell uses a renewable, freely available energy source and produces no pollution while running (chemical cells rely on materials that are mined/manufactured and eventually need disposal). Disadvantage: a solar cell only supplies a useful p.d. when illuminated, so it can't power a circuit continuously without extra storage (e.g. a rechargeable chemical cell) or backup, whereas a chemical cell works in the dark and can be made very compact and portable. (Any other reasonable, correctly justified pair of advantage/disadvantage is acceptable.)</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: CHARGE AND CURRENT ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Charge and Current</h2>
+      <p>"The flow of electrons" is a common description of current, but it isn't quite precise enough to calculate with. In a metal, the charge carriers are free (delocalized) electrons, and current is defined as the rate at which charge passes a point in the circuit.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Direct current (dc), <em>I</em>, is a flow of charge carriers, given by the rate of change of charge with time.</div>
+      <div class="eqn">I = &Delta;Q / &Delta;t</div>
+      <p>where <strong>I</strong> is current in amperes (A), <strong>&Delta;Q</strong> is the charge transferred in coulombs (C), and <strong>&Delta;t</strong> is the time interval in seconds (s). Rearranged, this also gives &Delta;Q = I&Delta;t.</p>
+
+      <p>Charge itself is quantised: every charge is a whole-number multiple of the elementary charge, <em>e</em> = 1.6 &times; 10<sup>&minus;19</sup> C. So the number of charge carriers passing a point is n = Q/e. A current of 1 A means 1 C of charge — about 6.25 &times; 10<sup>18</sup> electrons — passes a point every second.</p>
+
+      <div class="keyword"><b>Charge carrier:</b> a charged particle that is free to move (mobile). In a metal wire the charge carriers are delocalized electrons; in other conductors (solutions, ionised gases) they may be positive or negative ions.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>The current through an LED lamp is 50 mA. Calculate the charge that flows through the lamp in one minute.</p>
+        <p><strong>Answer:</strong><br>
+        &Delta;Q = I&Delta;t<br>
+        &Delta;Q = (50 &times; 10<sup>&minus;3</sup>) &times; 60</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">2</span><strong>The current in a wire is 0.35 A. Calculate the charge that passes a point in the wire in 10 s.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">&Delta;Q = I&Delta;t = 0.35 &times; 10</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>A charge of 210 C passes a point in a wire in 10 minutes. Calculate the average current.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">Convert the time to seconds first: 10 minutes = 600 s. I = &Delta;Q/&Delta;t = 210 / 600</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>An electron beam carries a current of 1.2 mA. Calculate how many electrons pass along the beam each minute (e = 1.6 &times; 10<sup>&minus;19</sup> C).</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">First find the charge: &Delta;Q = I&Delta;t = (1.2 &times; 10<sup>&minus;3</sup>) &times; 60. Then the number of electrons, n = &Delta;Q / e, using e = 1.6 &times; 10<sup>&minus;19</sup> C.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: POTENTIAL DIFFERENCE & KIRCHHOFF'S LAWS ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Potential Difference and Kirchhoff's Laws</h2>
+      <p>Current tells you how much charge is flowing; potential difference tells you how much energy each coulomb of that charge is transferring. It's the electrical equivalent of gravitational potential difference: a mass falls because of a difference in gravitational potential, transferring gravitational PE to kinetic energy. A charge carrier moves (or transfers energy) because of a difference in electric potential.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> The electric potential difference, <em>V</em>, is the work done per unit charge on moving a positive charge between two points along the path of the current.</div>
+      <div class="eqn">V = W / q</div>
+      <p>where <strong>W</strong> is the work done (energy transferred, in joules) and <strong>q</strong> is the charge moved (in coulombs). One volt means one joule of energy is transferred by each coulomb of charge moving between two points: 1 V = 1 J C<sup>&minus;1</sup>.</p>
+
+      <figure>
+        <svg viewBox="0 0 460 190" width="460" height="190" xmlns="http://www.w3.org/2000/svg" aria-label="Series loop with labelled points A, B and C for Kirchhoff's voltage law">
+          <line x1="60" y1="40" x2="60" y2="88" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="48" y1="88" x2="72" y2="88" stroke="#173a5e" stroke-width="2"/>
+          <line x1="53" y1="100" x2="67" y2="100" stroke="#173a5e" stroke-width="5"/>
+          <line x1="60" y1="100" x2="60" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="30" y="70" font-size="13" fill="#173a5e" font-family="sans-serif">&#949;</text>
+          <line x1="60" y1="40" x2="205" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="205" y="32" width="50" height="16" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="222" y="26" font-size="12" fill="#173a5e" font-family="sans-serif">R</text>
+          <line x1="255" y1="40" x2="400" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="400" y1="40" x2="400" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="60" y1="160" x2="400" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <polygon points="320,34 320,46 334,40" fill="#0e7c86"/>
+          <circle cx="60" cy="40" r="4" fill="#d98324"/>
+          <text x="42" y="30" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A</text>
+          <circle cx="400" cy="40" r="4" fill="#d98324"/>
+          <text x="408" y="30" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">B</text>
+          <circle cx="400" cy="160" r="4" fill="#d98324"/>
+          <text x="408" y="178" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">C</text>
+        </svg>
+        <figcaption>Fig. 3.1 A single series loop. As a positive test charge travels A &rarr; B &rarr; C and back to A, the total change in potential around the closed loop must be zero.</figcaption>
+      </figure>
+
+      <div class="keybox"><strong>Kirchhoff's voltage law (potential difference / loop rule).</strong> Energy is conserved, so the sum of the potential differences around any closed loop is zero (take pd added by a source as positive, and pd used up by components as negative).</div>
+
+      <div class="keybox"><strong>Kirchhoff's current law (current / junction rule).</strong> This follows from conservation of charge: charged particles cannot be created or destroyed, so the current entering any junction must equal the current leaving it.</div>
+
+      <p>In a <strong>parallel</strong> circuit, every branch between the same two points sees the same pd — this is a direct consequence of the voltage law, since a loop through the supply and just one branch must still sum to zero.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>A power pack has a p.d. of 10 V. Calculate the energy transferred to <em>one electron</em> as it moves through this p.d. (e = 1.6 &times; 10<sup>&minus;19</sup> C).</p>
+        <p><strong>Answer:</strong><br>
+        Energy transferred = charge &times; p.d.<br>
+        W = qV = (1.6 &times; 10<sup>&minus;19</sup>) &times; 10</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">5</span><strong>A 12 V battery in a simple series loop has only one bulb in the circuit. Using Kirchhoff's voltage law, state the p.d. across the bulb, showing your reasoning.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">Around the loop: +12 &minus; V<sub>bulb</sub> = 0, so V<sub>bulb</sub> = 12 V — the bulb takes the full battery p.d, since it's the only component in the loop.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>Two identical bulbs are connected in series across a 12 V battery. Use symmetry and Kirchhoff's voltage law to find the p.d. across each bulb.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">The two p.d.s must add to 12 V: 12 = V + V. Since the bulbs are identical, by symmetry they share this equally, so rearrange 2V = 12 to find V.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>At a junction, a current of 5 A flows in. One outgoing branch carries 3 A. Use Kirchhoff's current law to find the current in the other outgoing branch.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">Current in = current out: 5 = 3 + I<sub>3</sub>, so rearrange to find I<sub>3</sub>.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: SERIES AND PARALLEL CIRCUITS ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Series and Parallel Circuits</h2>
+      <p>Kirchhoff's two laws are all you need to analyse any circuit in this course — you don't need to memorise separate "rules" for series and parallel. But it's worth stating the patterns they produce explicitly, since you'll use them constantly:</p>
+      <ul style="margin:0.6rem 0 0.6rem 1.2rem;">
+        <li>Current in <strong>series</strong> is the same at every point (no junctions exist for charge to split at).</li>
+        <li>Current in <strong>parallel</strong> splits across each branch, in inverse proportion to resistance.</li>
+        <li>Potential difference in <strong>series</strong> splits across components, in proportion to resistance.</li>
+        <li>Potential difference in <strong>parallel</strong> is the same across every branch.</li>
+      </ul>
+
+      <figure>
+        <svg viewBox="0 0 500 190" width="500" height="190" xmlns="http://www.w3.org/2000/svg" aria-label="Series circuit with two lamps and three ammeter positions">
+          <line x1="50" y1="40" x2="450" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="450" y1="40" x2="450" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="450" y1="160" x2="50" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="50" y1="160" x2="50" y2="106" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="50" y1="94" x2="50" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="38" y1="94" x2="62" y2="94" stroke="#173a5e" stroke-width="2"/>
+          <line x1="43" y1="106" x2="57" y2="106" stroke="#173a5e" stroke-width="5"/>
+          <circle cx="140" cy="40" r="15" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="140" y="45" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A&#8321;</text>
+          <circle cx="240" cy="40" r="15" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <line x1="229" y1="51" x2="251" y2="29" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="229" y1="29" x2="251" y2="51" stroke="#173a5e" stroke-width="1.5"/>
+          <circle cx="320" cy="40" r="15" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="320" y="45" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A&#8322;</text>
+          <circle cx="400" cy="40" r="15" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <line x1="389" y1="51" x2="411" y2="29" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="389" y1="29" x2="411" y2="51" stroke="#173a5e" stroke-width="1.5"/>
+          <circle cx="450" cy="100" r="15" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="450" y="105" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A&#8323;</text>
+        </svg>
+        <figcaption>Fig. 4.1 Series circuit: ammeters A&#8321;, A&#8322; and A&#8323; all read the same current — there are no junctions for charge to split at.</figcaption>
+      </figure>
+
+      <figure>
+        <svg viewBox="0 0 460 220" width="460" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Parallel circuit with battery and ammeter on the main line, and a lamp with ammeter in each branch">
+          <line x1="80" y1="40" x2="80" y2="180" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="380" y1="40" x2="380" y2="180" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="80" y1="40" x2="163" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="177" y1="40" x2="240" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="163" y1="30" x2="163" y2="50" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="167" y1="34" x2="167" y2="46" stroke="#173a5e" stroke-width="3.5"/>
+          <line x1="173" y1="30" x2="173" y2="50" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="177" y1="34" x2="177" y2="46" stroke="#173a5e" stroke-width="3.5"/>
+          <circle cx="280" cy="40" r="15" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="280" y="45" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A&#8321;</text>
+          <line x1="295" y1="40" x2="380" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="80" y1="110" x2="380" y2="110" stroke="#173a5e" stroke-width="2.5"/>
+          <circle cx="180" cy="110" r="15" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <line x1="169" y1="121" x2="191" y2="99" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="169" y1="99" x2="191" y2="121" stroke="#173a5e" stroke-width="1.5"/>
+          <circle cx="280" cy="110" r="15" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="280" y="115" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A&#8322;</text>
+          <line x1="80" y1="180" x2="380" y2="180" stroke="#173a5e" stroke-width="2.5"/>
+          <circle cx="180" cy="180" r="15" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <line x1="169" y1="191" x2="191" y2="169" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="169" y1="169" x2="191" y2="191" stroke="#173a5e" stroke-width="1.5"/>
+          <circle cx="280" cy="180" r="15" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="280" y="185" text-anchor="middle" font-size="13" fill="#d98324" font-weight="bold" font-family="sans-serif">A&#8323;</text>
+        </svg>
+        <figcaption>Fig. 4.2 Parallel circuit: A&#8321; (main line) = A&#8322; + A&#8323; (branch currents), by Kirchhoff's current law.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">8</span><strong>Two identical bulbs are in series in a single loop, with an ammeter reading 0.7 A immediately after the battery. State the readings on ammeters placed (a) between the two bulbs and (b) after the second bulb, explaining your reasoning.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">It's a single series loop, so every ammeter reads the same current — there are no junctions. Both ammeters read 0.7 A.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>Two identical bulbs are connected in parallel across a battery. The ammeter in one branch reads 0.2 A. Use Kirchhoff's current law to find the current in the main line supplying both branches.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">Identical bulbs in parallel share the current equally, so the other branch also carries 0.2 A. Main-line current = sum of branch currents = 0.2 + 0.2.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>A circuit has a battery and ammeter A&#8321; in series with two parallel branches: branch 1 is a single bulb with ammeter A&#8322;, branch 2 is two identical bulbs in series with ammeter A&#8323;. If A&#8322; reads 0.3 A, and branch 2's total resistance is double branch 1's, find A&#8321; and A&#8323;.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">Both branches are directly across the battery, so they see the same p.d. Since branch 2 has double the resistance of branch 1, by V = IR it carries half the current: A&#8323; = A&#8322; / 2 = 0.3 / 2. Then A&#8321; = A&#8322; + A&#8323; (Kirchhoff's current law).</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: CONDUCTORS, INSULATORS & RESISTANCE ORIGIN ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Conductors, Insulators and the Origin of Resistance</h2>
+      <p>When the same p.d. is connected across different components, the currents produced vary hugely. This is because materials differ in how many mobile charge carriers they contain, and in how easily those carriers can move.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> A good electrical <strong>conductor</strong> has a large number of mobile charge carriers (usually free electrons) per unit volume, giving it low resistance. An <strong>insulator</strong> has very few mobile charge carriers, so a current through it is negligible — it has high resistance. A <strong>semiconductor</strong> (e.g. silicon) sits between the two, with a resistivity that changes a great deal with temperature and light.</p></div>
+
+      <figure>
+        <svg viewBox="0 0 460 160" width="460" height="160" xmlns="http://www.w3.org/2000/svg" aria-label="Metal lattice of fixed positive ions with mobile electrons drifting through it">
+          <rect x="0" y="0" width="460" height="160" fill="#0f1f30" rx="8"/>
+          <g>
+            <circle cx="50" cy="35" r="11" fill="#e8533a"/><text x="50" y="39" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="140" cy="35" r="11" fill="#e8533a"/><text x="140" y="39" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="230" cy="35" r="11" fill="#e8533a"/><text x="230" y="39" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="320" cy="35" r="11" fill="#e8533a"/><text x="320" y="39" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="410" cy="35" r="11" fill="#e8533a"/><text x="410" y="39" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="50" cy="80" r="11" fill="#e8533a"/><text x="50" y="84" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="140" cy="80" r="11" fill="#e8533a"/><text x="140" y="84" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="230" cy="80" r="11" fill="#e8533a"/><text x="230" y="84" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="320" cy="80" r="11" fill="#e8533a"/><text x="320" y="84" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="410" cy="80" r="11" fill="#e8533a"/><text x="410" y="84" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="50" cy="125" r="11" fill="#e8533a"/><text x="50" y="129" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="140" cy="125" r="11" fill="#e8533a"/><text x="140" y="129" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="230" cy="125" r="11" fill="#e8533a"/><text x="230" y="129" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="320" cy="125" r="11" fill="#e8533a"/><text x="320" y="129" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+            <circle cx="410" cy="125" r="11" fill="#e8533a"/><text x="410" y="129" text-anchor="middle" font-size="11" fill="#0f1f30" font-family="sans-serif">+</text>
+          </g>
+          <g fill="#00d2ff">
+            <circle cx="85" cy="55" r="4"/><circle cx="180" cy="20" r="4"/><circle cx="270" cy="100" r="4"/>
+            <circle cx="360" cy="60" r="4"/><circle cx="110" cy="105" r="4"/><circle cx="200" cy="140" r="4"/>
+            <circle cx="290" cy="45" r="4"/><circle cx="380" cy="115" r="4"/>
+          </g>
+          <line x1="30" y1="150" x2="430" y2="150" stroke="#00d2ff" stroke-width="2" marker-end="url(#driftArrow)"/>
+          <polygon points="430,146 430,154 442,150" fill="#00d2ff"/>
+          <text x="230" y="145" text-anchor="middle" font-size="11" fill="#dceaf0" font-family="sans-serif">net electron drift (slow) &mdash; superimposed on much faster random thermal motion</text>
+        </svg>
+        <figcaption>Fig. 5.1 In a metal, positive ions are fixed in the lattice; free electrons move randomly at high speed but gain a small net drift in one direction from the electric field &mdash; this drift is the current.</figcaption>
+      </figure>
+
+      <div class="stretch-box"><span class="tag">Extension &mdash; the Drude model</span> Paul Drude (1900) treated the free electrons in a metal like a gas: moving randomly at around 100,000 m s<sup>&minus;1</sup>, far faster than their drift velocity due to the field (typically only around 0.0001 m s<sup>&minus;1</sup>). Because the ion spacing limits how far an electron travels before it collides with an ion, electrons can't accelerate continuously — they repeatedly scatter, with an average time between collisions called the relaxation time. As temperature rises, the lattice ions vibrate more, scattering the drifting electrons more often. This reduces the relaxation time, which increases resistivity — the microscopic origin of a metal's resistance increasing with temperature. <strong>Resistance</strong> is, macroscopically, the result of charge carriers transferring energy to a vibrating lattice as they collide with it.</div>
+
+      <p>An ammeter (connected in series) needs almost zero resistance, or it would change the very current it's trying to measure. A voltmeter (connected in parallel) needs a very high resistance, so that almost no current takes the "shortcut" through the meter instead of through the component being measured.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">11</span><strong>State the ideal resistance of (a) an ammeter and (b) a voltmeter, explaining why each value is needed.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">(a) An ideal ammeter has zero resistance — since it sits in series with the current it's measuring, any resistance of its own would reduce that current and give a false low reading. (b) An ideal voltmeter has infinite resistance — since it sits in parallel with the component, a finite resistance would let some current bypass the component through the meter, and would also alter the p.d. it's supposed to be measuring.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>Explain, using the Drude model, why a metal's resistance increases as its temperature rises.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">As temperature rises, the positive ions in the lattice vibrate more vigorously. This means the drifting free electrons collide with the ions more often (the relaxation time between collisions falls), which resists their motion more strongly — increasing resistivity and therefore resistance.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: OHM'S LAW & I-V CHARACTERISTICS ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Resistance, Ohm's Law and I&ndash;V Characteristics</h2>
+      <p>Resistance measures how difficult it is to make a current pass through a component — it resists the flow of charge and so reduces the current for a given p.d.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Electrical resistance, <em>R</em>, is defined as the ratio of the potential difference across a conductor to the current flowing through it.</div>
+      <div class="eqn">R = V / I</div>
+      <p>The SI unit is the ohm, &Omega; (1 &Omega; = 1 V A<sup>&minus;1</sup>). Georg Ohm investigated this relationship experimentally and found that, for a conductor at constant temperature, current is proportional to p.d.: V &prop; I, or V = IR. This is <strong>Ohm's law</strong>.</p>
+
+      <div class="keyword"><b>Ohmic behaviour:</b> a component is described as ohmic if its current is proportional to the p.d. across it (at constant temperature) &mdash; its I&ndash;V graph is a straight line through the origin, and its resistance stays constant. Metal wires at constant temperature are ohmic. <b>Non-ohmic behaviour</b> means the resistance changes as the current changes &mdash; the I&ndash;V graph is curved.</div>
+
+      <div class="ivgraphs">
+        <figure>
+          <svg viewBox="0 0 150 130" width="150" height="122" xmlns="http://www.w3.org/2000/svg">
+            <line x1="30" y1="10" x2="30" y2="115" stroke="#173a5e" stroke-width="1.5"/>
+            <line x1="30" y1="110" x2="145" y2="110" stroke="#173a5e" stroke-width="1.5"/>
+            <line x1="30" y1="108" x2="140" y2="20" stroke="#d98324" stroke-width="2.5"/>
+            <text x="2" y="22" font-size="10" fill="#173a5e" font-family="sans-serif">I</text>
+            <text x="128" y="126" font-size="10" fill="#173a5e" font-family="sans-serif">V</text>
+          </svg>
+          <figcaption>1. Resistor (ohmic): I &prop; V, a straight line through the origin.</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 150 130" width="150" height="122" xmlns="http://www.w3.org/2000/svg">
+            <line x1="30" y1="10" x2="30" y2="115" stroke="#173a5e" stroke-width="1.5"/>
+            <line x1="30" y1="110" x2="145" y2="110" stroke="#173a5e" stroke-width="1.5"/>
+            <path d="M 30 108 Q 80 60 140 45" fill="none" stroke="#d98324" stroke-width="2.5"/>
+            <text x="2" y="22" font-size="10" fill="#173a5e" font-family="sans-serif">I</text>
+            <text x="128" y="126" font-size="10" fill="#173a5e" font-family="sans-serif">V</text>
+          </svg>
+          <figcaption>2. Filament lamp (non-ohmic): as V rises the filament heats up, so R increases and the curve bends over.</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 150 130" width="150" height="122" xmlns="http://www.w3.org/2000/svg">
+            <line x1="75" y1="10" x2="75" y2="115" stroke="#173a5e" stroke-width="1.5"/>
+            <line x1="10" y1="62" x2="145" y2="62" stroke="#173a5e" stroke-width="1.5"/>
+            <path d="M 75 62 L 100 62 Q 120 62 125 30" fill="none" stroke="#d98324" stroke-width="2.5"/>
+            <line x1="10" y1="66" x2="75" y2="66" stroke="#d98324" stroke-width="2"/>
+            <text x="60" y="22" font-size="10" fill="#173a5e" font-family="sans-serif">I</text>
+            <text x="128" y="76" font-size="10" fill="#173a5e" font-family="sans-serif">V</text>
+          </svg>
+          <figcaption>3. Diode (non-ohmic): almost zero current in reverse, then a sharp rise once forward-biased above a threshold.</figcaption>
+        </figure>
+      </div>
+
+      <div class="stretch-box"><span class="tag">The heating effect</span> Whenever a current passes through a resistor, some electrical energy is transferred to internal (thermal) energy — this is why a filament lamp gets hot enough to glow, and why the lamp above is non-ohmic: as it heats up, its resistance changes. Resistors used deliberately for heating (e.g. a kettle element) are designed to make the most of this effect.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>The current through an electrical component is 0.78 A when a p.d. of 4.4 V is applied across it. Calculate its resistance.</p>
+        <p><strong>Answer:</strong><br>
+        R = V / I<br>
+        R = 4.4 / 0.78</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">13</span><strong>A 12 V p.d. is applied across a resistor and a current of 2.0 A flows. Calculate the resistance.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">R = V / I = 12 / 2.0</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>A student plots an I&ndash;V graph for a component and gets a curve, not a straight line. State whether the component is ohmic, and explain how you can tell.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">The component is non-ohmic. A straight line through the origin on an I&ndash;V graph means constant resistance (I &prop; V), which is the definition of ohmic behaviour. A curve means the gradient (and so the ratio V/I) changes as the current changes — the resistance is not constant.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>A filament lamp has current 0.20 A when the p.d. across it is 1.0 V, and current 0.50 A when the p.d. is 4.0 V. Calculate its resistance at each p.d., and use your answers to explain why the lamp is non-ohmic.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">R = V/I at each point: R&#8321; = 1.0 / 0.20 and R&#8322; = 4.0 / 0.50. Once evaluated, these two resistances are different — the resistance has increased at the higher p.d. (because the filament is hotter), which is exactly what "non-ohmic" means.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7: RESISTIVITY ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Resistivity</h2>
+      <p>The resistance of a wire depends not just on the material it's made from, but on its shape. A long, thin wire has more resistance than a short, thick one of the same material — so it doesn't make sense to talk about "the resistance of copper" without specifying dimensions.</p>
+
+      <figure>
+        <svg viewBox="0 0 400 160" width="400" height="150" xmlns="http://www.w3.org/2000/svg" aria-label="A uniform wire of length L and cross-sectional area A">
+          <rect x="60" y="55" width="280" height="40" rx="20" fill="#eaf3fb" stroke="#173a5e" stroke-width="2"/>
+          <ellipse cx="335" cy="75" rx="10" ry="20" fill="#c7ddef" stroke="#173a5e" stroke-width="2"/>
+          <text x="335" y="30" text-anchor="middle" font-size="13" fill="#173a5e" font-family="sans-serif">area, A</text>
+          <line x1="335" y1="35" x2="335" y2="54" stroke="#173a5e" stroke-width="1"/>
+          <line x1="60" y1="120" x2="340" y2="120" stroke="#173a5e" stroke-width="1.5"/>
+          <polygon points="60,116 60,124 50,120" fill="#173a5e"/>
+          <polygon points="340,116 340,124 350,120" fill="#173a5e"/>
+          <text x="200" y="140" text-anchor="middle" font-size="13" fill="#173a5e" font-family="sans-serif">length, L</text>
+        </svg>
+        <figcaption>Fig. 7.1 A uniform wire of length L and cross-sectional area A.</figcaption>
+      </figure>
+
+      <p>For a given material at constant temperature, resistance is directly proportional to length (longer wires have more resistance) and inversely proportional to cross-sectional area (thicker wires have less resistance). Combining these:</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Resistivity, &rho;, is a property of the material itself — the resistance of a 1 m length with a 1 m&sup2; cross-section.</div>
+      <div class="eqn">&rho; = RA / L</div>
+      <p>Rearranged: R = &rho;L / A. The SI unit of resistivity is the ohm metre (&Omega; m) — note this is <em>not</em> "ohms per metre". Good conductors (copper, silver) have very low resistivities (&sim;10<sup>&minus;8</sup> &Omega; m); good insulators (glass, PTFE) have extremely high ones (&gt;10<sup>12</sup> &Omega; m).</p>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>Determine the resistance of a nichrome wire (resistivity 1.1 &times; 10<sup>&minus;6</sup> &Omega; m) at 20 &deg;C, if it has a length of 1.96 m and a radius of 0.21 mm.</p>
+        <p><strong>Answer:</strong><br>
+        R = &rho;L / A, where A = &pi;r&sup2; = &pi; &times; (0.21 &times; 10<sup>&minus;3</sup>)&sup2;<br>
+        R = [1.1 &times; 10<sup>&minus;6</sup> &times; &pi; &times; (0.21 &times; 10<sup>&minus;3</sup>)&sup2;] / 1.96</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">16</span><strong>A wire of uniform cross-sectional area 0.5 mm&sup2; has a length of 10 m and a resistance of 3 &Omega;. Calculate the resistivity of the material.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">Convert the area to m&sup2; first: A = 0.5 mm&sup2; = 0.5 &times; 10<sup>&minus;6</sup> m&sup2;. &rho; = RA / L = (3 &times; 0.5 &times; 10<sup>&minus;6</sup>) / 10</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>What length of alloy wire (resistivity 5.0 &times; 10<sup>&minus;7</sup> &Omega; m, diameter 0.50 mm) is required to make a 6.0 &Omega; resistor?</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">Radius r = 0.25 mm = 2.5 &times; 10<sup>&minus;4</sup> m, so A = &pi;r&sup2; = &pi; &times; (2.5 &times; 10<sup>&minus;4</sup>)&sup2;. Rearranging R = &rho;L/A gives L = RA / &rho; = (6.0 &times; A) / (5.0 &times; 10<sup>&minus;7</sup>) — substitute your value of A.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>A copper track on a circuit board (resistivity of copper 1.69 &times; 10<sup>&minus;8</sup> &Omega; m) is 35 &micro;m thick and 1.6 mm wide. Calculate the resistance of 1 cm of this track.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">A = thickness &times; width = (3.5 &times; 10<sup>&minus;5</sup>) &times; (1.6 &times; 10<sup>&minus;3</sup>) m&sup2;. R = &rho;L/A = [1.69 &times; 10<sup>&minus;8</sup> &times; 0.01] / A, using your value of A and L = 1 cm = 0.01 m.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8: COMBINING RESISTORS ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Combining Resistors</h2>
+      <p>Real circuits usually contain several resistors. Imagine two rope bridges crossing a gorge one after another: everyone must cross both, so adding a second bridge in the only available path makes the journey harder overall — this is the series case. Now imagine a second bridge built alongside the first: there are two available routes, so more people can cross per minute overall — this is the parallel case. Adding a resistor in series always increases total resistance; adding one in parallel always decreases it.</p>
+
+      <figure>
+        <svg viewBox="0 0 460 130" width="460" height="120" xmlns="http://www.w3.org/2000/svg" aria-label="Three resistors in series">
+          <line x1="30" y1="65" x2="90" y2="65" stroke="#173a5e" stroke-width="2.5"/>
+          <polygon points="45,60 45,70 58,65" fill="#0e7c86"/>
+          <rect x="90" y="53" width="60" height="24" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="120" y="40" text-anchor="middle" font-size="12" fill="#173a5e" font-family="sans-serif">R&#8321;</text>
+          <line x1="150" y1="65" x2="200" y2="65" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="200" y="53" width="60" height="24" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="230" y="40" text-anchor="middle" font-size="12" fill="#173a5e" font-family="sans-serif">R&#8322;</text>
+          <line x1="260" y1="65" x2="310" y2="65" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="310" y="53" width="60" height="24" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="340" y="40" text-anchor="middle" font-size="12" fill="#173a5e" font-family="sans-serif">R&#8323;</text>
+          <line x1="370" y1="65" x2="430" y2="65" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="30" y="95" font-size="12" fill="#0e7c86" font-family="sans-serif">I</text>
+        </svg>
+        <figcaption>Fig. 8.1 Resistors in series: the same current I flows through each in turn.</figcaption>
+      </figure>
+
+      <div class="eqn">R<sub>series</sub> = R&#8321; + R&#8322; + &hellip;</div>
+
+      <figure>
+        <svg viewBox="0 0 380 220" width="380" height="210" xmlns="http://www.w3.org/2000/svg" aria-label="Three resistors in parallel">
+          <line x1="60" y1="30" x2="60" y2="190" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="320" y1="30" x2="320" y2="190" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="60" y1="60" x2="150" y2="60" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="150" y="48" width="80" height="24" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="190" y="66" text-anchor="middle" font-size="12" fill="#173a5e" font-family="sans-serif">R&#8321;</text>
+          <line x1="230" y1="60" x2="320" y2="60" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="60" y1="120" x2="150" y2="120" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="150" y="108" width="80" height="24" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="190" y="126" text-anchor="middle" font-size="12" fill="#173a5e" font-family="sans-serif">R&#8322;</text>
+          <line x1="230" y1="120" x2="320" y2="120" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="60" y1="180" x2="150" y2="180" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="150" y="168" width="80" height="24" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="190" y="186" text-anchor="middle" font-size="12" fill="#173a5e" font-family="sans-serif">R&#8323;</text>
+          <line x1="230" y1="180" x2="320" y2="180" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="20" y="25" font-size="12" fill="#0e7c86" font-family="sans-serif">I<tspan font-size="9" dy="2">total</tspan></text>
+        </svg>
+        <figcaption>Fig. 8.2 Resistors in parallel: all three share the same p.d., and the total current splits between them.</figcaption>
+      </figure>
+
+      <div class="eqn">1 / R<sub>parallel</sub> = 1/R&#8321; + 1/R&#8322; + &hellip;</div>
+      <p>R<sub>parallel</sub> is always <strong>smaller</strong> than the smallest individual resistance in the combination — every extra branch gives charge another route through.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 8.1</span>
+        <p>A 5000 &Omega; resistor and an 8000 &Omega; resistor are connected in series. Calculate their combined resistance.</p>
+        <p><strong>Answer:</strong><br>
+        R = R&#8321; + R&#8322;<br>
+        R = 5000 + 8000</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">19</span><strong>Two resistors of 6 &Omega; and 34 &Omega; are connected in series. Calculate the total resistance.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">R<sub>T</sub> = R&#8321; + R&#8322; = 6 + 34</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">20</span><strong>Two resistors of 8 &Omega; and 6 &Omega; are connected in parallel. Calculate the total resistance.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">1/R<sub>T</sub> = 1/8 + 1/6. Combine the fractions over a common denominator, then invert to find R<sub>T</sub> — remember your final answer must be smaller than 6 &Omega;.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">21</span><strong>A 40 &Omega; resistor is in series with two 50 &Omega; resistors that are connected in parallel with each other. Calculate the total resistance of the network.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">First combine the parallel pair: 1/R<sub>p</sub> = 1/50 + 1/50, giving R<sub>p</sub> = 25 &Omega;. Then add the series resistor: R<sub>T</sub> = 40 + R<sub>p</sub>.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 9: EMF AND INTERNAL RESISTANCE ================= -->
+    <section class="topic" id="s9">
+      <h2>9. Emf and Internal Resistance</h2>
+      <p>A real cell isn't a perfect energy source — it's made from materials and chemicals that themselves have some resistance, called the cell's <strong>internal resistance</strong>, r. Some of the energy the cell puts in gets taken straight back out again heating the cell itself, before it ever reaches the rest of the circuit.</p>
+
+      <figure>
+        <svg viewBox="0 0 460 190" width="460" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="A cell of emf and internal resistance connected to an external resistor">
+          <rect x="28" y="55" width="70" height="80" fill="none" stroke="#5b6b78" stroke-width="1.5" stroke-dasharray="5,4" rx="8"/>
+          <line x1="63" y1="40" x2="63" y2="70" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="51" y1="70" x2="75" y2="70" stroke="#173a5e" stroke-width="2"/>
+          <line x1="56" y1="80" x2="70" y2="80" stroke="#173a5e" stroke-width="5"/>
+          <line x1="63" y1="80" x2="63" y2="95" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="48" y="95" width="30" height="18" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="63" y="108" text-anchor="middle" font-size="10" fill="#173a5e" font-family="sans-serif">r</text>
+          <line x1="63" y1="113" x2="63" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="12" y="60" font-size="13" fill="#173a5e" font-family="sans-serif">&#949;</text>
+          <line x1="63" y1="40" x2="205" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <rect x="205" y="32" width="50" height="16" fill="#fff" stroke="#173a5e" stroke-width="2"/>
+          <text x="222" y="26" font-size="12" fill="#173a5e" font-family="sans-serif">R</text>
+          <line x1="255" y1="40" x2="400" y2="40" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="400" y1="40" x2="400" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+          <line x1="63" y1="160" x2="400" y2="160" stroke="#173a5e" stroke-width="2.5"/>
+        </svg>
+        <figcaption>Fig. 9.1 A cell of emf &#949; and internal resistance r (dashed box) connected to an external resistor R.</figcaption>
+      </figure>
+
+      <div class="keybox"><strong>Key idea.</strong> Cells provide a source of emf, ε (the total energy transferred, per coulomb, that passes through the source). Electric cells are characterized by their emf and their internal resistance, r.</div>
+      <div class="eqn">&#949; = I(R + r)</div>
+      <p>The same current I flows through R and r, so &#949; = IR + Ir. The term IR is the <strong>terminal p.d.</strong> — what's actually available to the rest of the circuit; Ir is the "lost volts" dissipated inside the cell itself. When the switch is open (I = 0), an ideal voltmeter across the cell reads the full emf, since no p.d. is lost internally.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 9.1</span>
+        <p>A battery with an emf of 1.5 V and internal resistance 0.82 &Omega; is connected in a circuit with a 5.6 &Omega; fixed resistor. Calculate the current in the circuit.</p>
+        <p><strong>Answer:</strong><br>
+        I = &#949; / (R + r)<br>
+        I = 1.5 / (5.6 + 0.82)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">22</span><strong>A cell has emf 12 V and internal resistance 1 &Omega;, connected to a 23 &Omega; resistor. Calculate (a) the current, and (b) the terminal p.d. across the 23 &Omega; resistor.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">(a) I = &#949;/(R + r) = 12/(23 + 1). (b) V = IR, using the current from (a) and R = 23 &Omega;.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">23</span><strong>A battery has emf 12.0 V and internal resistance 1.5 &Omega;. Calculate the terminal p.d. when it is supplying a current of 3.0 A.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">V = &#949; &minus; Ir = 12.0 &minus; (3.0 &times; 1.5)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">24</span><strong>A high-resistance voltmeter reads 12.5 V across a battery's terminals with no current flowing. When connected to a lamp, a current of 2.5 A flows and the voltmeter reading falls to 11.8 V. Calculate the internal resistance of the battery.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">With no current, the voltmeter reads the emf: &#949; = 12.5 V. "Lost volts" V<sub>r</sub> = &#949; &minus; V<sub>terminal</sub> = 12.5 &minus; 11.8. Then r = V<sub>r</sub> / I, using I = 2.5 A.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 10: ELECTRICAL POWER ================= -->
+    <section class="topic" id="s10">
+      <h2>10. Electrical Power</h2>
+      <p>If a current of 3 A flows through a resistor with a p.d. of 6 V across it, then 3 C of charge passes every second, and each coulomb transfers 6 J — so energy is being transferred at 3 &times; 6 = 18 joules every second (18 W). More generally, the rate of energy transfer (power) dissipated by a resistor is:</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Electrical power, P, dissipated by a resistor.</div>
+      <div class="eqn">P = IV</div>
+      <p>Since V = IR, this can also be written two other useful ways:</p>
+      <div class="eqn">P = I&sup2;R = V&sup2; / R</div>
+      <p>To find the total energy transferred over a time t, use energy = power &times; time, so electrical energy = VIt. Whenever current passes through resistance, some of that energy becomes internal (thermal) energy — the heating effect discussed in section 6, used deliberately in kettles, heaters and irons, and unavoidably in every resistor that carries a current.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 10.1</span>
+        <p>An electric iron is labelled 230 V, 1100 W. Calculate the resistance of its heating coil.</p>
+        <p><strong>Answer:</strong><br>
+        P = V&sup2; / R<br>
+        1100 = 230&sup2; / R</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">25</span><strong>A 12 V p.d. is applied across a 240 &Omega; resistor. Calculate (a) the current and (b) the power dissipated.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">(a) I = V/R = 12/240. (b) P = IV, using your value of I and V = 12 V (or directly, P = V&sup2;/R = 12&sup2;/240).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">26</span><strong>A 2.00 kW household water heater has a resistance of 24.3 &Omega;. Calculate the current that flows through it, and state the mains voltage it must be designed for.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">Use P = I&sup2;R, rearranged: I&sup2; = P/R = 2000/24.3, then take the square root to find I. Once you have I, find the voltage from V = IR (or V = P/I).</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 11: VARIABLE RESISTORS & POTENTIOMETERS ================= -->
+    <section class="topic" id="s11">
+      <h2>11. Variable Resistors and Potentiometers</h2>
+      <p>Not every resistor has a fixed value. A <strong>variable resistor</strong> (sometimes called a rheostat when used to control current) lets you change the resistance in a circuit continuously, usually via a sliding or rotating contact.</p>
+
+      <div class="keyword"><b>Potentiometer:</b> a three-terminal variable resistor connected so that its sliding contact taps off a fraction of the full supply p.d. Moving the slider from one end to the other varies the output p.d. continuously from 0 V up to the full supply p.d. &mdash; this is the best way to vary the p.d. across a component under investigation.</div>
+
+      <h3>Live simulation: potentiometer as a potential divider</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="potCanvas" width="300" height="200"></canvas></div>
+          <div class="sim-controls">
+            <h4>Slide the wiper</h4>
+            <div class="sim-row"><label for="potSlider">Wiper position (0% = bottom, 100% = top)</label><input type="range" id="potSlider" min="0" max="100" step="1" value="50"></div>
+            <div class="sim-readout" id="potReadout">V<sub>in</sub> = 12.0 V &nbsp;&rarr;&nbsp; V<sub>out</sub> = 6.0 V</div>
+          </div>
+        </div>
+        <figcaption>Fig. 11.1 A potentiometer supplied with V<sub>in</sub> = 12 V (unloaded). V<sub>out</sub> is taken from the wiper, and varies from 0 V to the full 12 V as it slides along the track.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 11.1</span>
+        <p>A rheostat can vary from 0 to 48 &Omega; and is in series with a fixed 24 &Omega; component, across a constant 12 V supply of negligible internal resistance. Calculate the current when the rheostat is set to 24 &Omega;.</p>
+        <p><strong>Answer:</strong><br>
+        I = V / R<sub>total</sub><br>
+        I = 12 / (24 + 24)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">27</span><strong>Using the same rheostat and component as Worked example 11.1 (12 V supply, 24 &Omega; fixed component, rheostat 0&ndash;48 &Omega;), calculate the p.d. across the fixed component when the rheostat is set to 0 &Omega;, and again when it is set to 48 &Omega;.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
+        <div class="answer-panel" id="q27">At 0 &Omega;: I = 12/(24+0) = 0.50 A, so V<sub>component</sub> = IR = 0.50 &times; 24. At 48 &Omega;: I = 12/(24+48), so V<sub>component</sub> = I &times; 24 using this new current.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">28</span><strong>A potentiometer of total resistance 48 &Omega; is connected across a 12 V supply and used, unloaded, as a potential divider. The output is taken from a point one-quarter of the way up the track from the bottom (0 V) end. Calculate V<sub>out</sub>.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
+        <div class="answer-panel" id="q28">With no load, the p.d. divides in direct proportion to the resistance of each section of track. One-quarter of the way up means one-quarter of the total p.d.: V<sub>out</sub> = (1/4) &times; 12.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Cell</dt><dd>A device that transfers energy from another source (chemical reaction, or light for a solar/photovoltaic cell) to charge carriers passing through it.</dd>
+        <dt>Emf, &#949;</dt><dd>The total energy transferred, per unit charge, by a source of electrical energy — the theoretical maximum p.d. it can supply.</dd>
+        <dt>Circuit diagram</dt><dd>A diagram representing the arrangement of components in a circuit using standardised symbols.</dd>
+        <dt>Conventional current</dt><dd>The direction current is always drawn flowing in a circuit diagram: from the positive terminal, around the external circuit, to the negative terminal.</dd>
+        <dt>Charge carrier</dt><dd>A charged particle free to move; in a metal, delocalized (free) electrons.</dd>
+        <dt>Direct current (dc)</dt><dd>A flow of electric charge that is always in the same direction, I = &Delta;Q/&Delta;t.</dd>
+        <dt>Potential difference, V</dt><dd>The work done per unit charge on moving a positive charge between two points along the path of the current, V = W/q.</dd>
+        <dt>Kirchhoff's voltage law</dt><dd>The sum of the potential differences around any closed loop is zero.</dd>
+        <dt>Kirchhoff's current law</dt><dd>The current entering any junction equals the current leaving it.</dd>
+        <dt>Conductor</dt><dd>A material with many mobile charge carriers, and therefore low resistance.</dd>
+        <dt>Insulator</dt><dd>A material with very few mobile charge carriers, and therefore very high resistance.</dd>
+        <dt>Resistance, R</dt><dd>The ratio of p.d. across a conductor to the current through it, R = V/I. Unit: ohm (&Omega;).</dd>
+        <dt>Ohm's law</dt><dd>For a conductor at constant temperature, current is proportional to the p.d. across it.</dd>
+        <dt>Ohmic / non-ohmic</dt><dd>Ohmic components have constant resistance (I &prop; V); non-ohmic components' resistance changes with current, e.g. a filament lamp as it heats up.</dd>
+        <dt>Resistivity, &#961;</dt><dd>A material property equal to RA/L; the resistance of a 1 m length with 1 m&sup2; cross-sectional area. Unit: ohm metre (&Omega; m).</dd>
+        <dt>Series connection</dt><dd>Components connected one after another, so the same current passes through all of them.</dd>
+        <dt>Parallel connection</dt><dd>Components connected between the same two points, so they share the same p.d.</dd>
+        <dt>Internal resistance, r</dt><dd>The resistance of the materials inside a cell or battery itself.</dd>
+        <dt>Terminal p.d.</dt><dd>The p.d. actually available to the external circuit, equal to the emf minus the "lost volts" due to internal resistance.</dd>
+        <dt>Electrical power, P</dt><dd>The rate of energy transfer in a circuit, P = IV = I&sup2;R = V&sup2;/R.</dd>
+        <dt>Rheostat</dt><dd>A variable resistor used (with two terminals in use) to control current.</dd>
+        <dt>Potentiometer</dt><dd>A three-terminal variable resistor used with a sliding contact to produce a varying output p.d.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Current and Circuits Workbook · IB Physics Topic B.5, Current and circuits.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Potentiometer simulation ================= */
+(function(){
+  const canvas = document.getElementById('potCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const slider = document.getElementById('potSlider');
+  const readout = document.getElementById('potReadout');
+  const Vin = 12.0;
+
+  const trackX = 150, trackTop = 30, trackBottom = 170, trackWidth = 26;
+
+  function draw(){
+    const frac = parseFloat(slider.value) / 100; // 0 = bottom, 1 = top
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // supply rails
+    ctx.strokeStyle = '#dceaf0';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(40, trackTop); ctx.lineTo(trackX - trackWidth/2, trackTop);
+    ctx.moveTo(40, trackBottom); ctx.lineTo(trackX - trackWidth/2, trackBottom);
+    ctx.moveTo(40, trackTop); ctx.lineTo(40, trackBottom);
+    ctx.stroke();
+    ctx.fillStyle = '#dceaf0';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('+Vin', 44, trackTop - 6);
+    ctx.textAlign = 'left';
+    ctx.fillText('0V', 44, trackBottom + 16);
+
+    // resistive track (gradient teal -> navy, top = +Vin, bottom = 0V)
+    const grad = ctx.createLinearGradient(0, trackTop, 0, trackBottom);
+    grad.addColorStop(0, '#0e7c86');
+    grad.addColorStop(1, '#173a5e');
+    ctx.fillStyle = grad;
+    ctx.strokeStyle = '#dceaf0';
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, trackX - trackWidth/2, trackTop, trackWidth, trackBottom - trackTop, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    // wiper position (frac=1 at top, frac=0 at bottom)
+    const wiperY = trackBottom - frac * (trackBottom - trackTop);
+
+    // wiper contact + lead to output node
+    ctx.strokeStyle = '#d98324';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(trackX - trackWidth/2 - 6, wiperY);
+    ctx.lineTo(trackX + trackWidth/2 + 6, wiperY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(trackX + trackWidth/2 + 6, wiperY);
+    ctx.lineTo(240, wiperY);
+    ctx.lineTo(240, 100);
+    ctx.stroke();
+
+    // output node
+    ctx.fillStyle = '#fdf1e2';
+    ctx.beginPath();
+    ctx.arc(240, 100, 14, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.strokeStyle = '#d98324';
+    ctx.stroke();
+    ctx.fillStyle = '#173a5e';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.fillText('Vout', 240, 104);
+
+    const vout = frac * Vin;
+    readout.innerHTML = 'V<sub>in</sub> = ' + Vin.toFixed(1) + ' V &nbsp;&rarr;&nbsp; V<sub>out</sub> = ' + vout.toFixed(1) + ' V (' + Math.round(frac*100) + '% up the track)';
+  }
+
+  function roundRect(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  slider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>
