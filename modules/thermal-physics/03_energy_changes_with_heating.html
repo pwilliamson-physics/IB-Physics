@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Changes with Heating — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:340px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-row select{width:100%; padding:0.3rem; border-radius:6px; border:1px solid rgba(255,255,255,0.3); background:#152a42; color:#fff;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Energy Changes with Heating</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Energy Changes with Heating</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. A model for a gas</a>
+    <a href="#s2">2. The ideal gas law</a>
+    <a href="#s3">3. Internal energy of an ideal gas</a>
+    <a href="#s4">4. The first law of thermodynamics</a>
+    <a href="#s5">5. Four thermodynamic processes</a>
+    <a href="#s6">6. Heat engines and the Carnot cycle</a>
+    <a href="#s7">7. Entropy and the second law</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Energy Changes with Heating</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">In <em>Methods of Heating</em> and <em>Heating</em> you studied energy transfers for solids and liquids changing temperature and state. Here we study those same ideas — energy in, temperature and state changing — in much more depth, but for one state of matter only: the gas. Gases are the easiest state to model mathematically, and it is historically no accident that the science of thermodynamics itself grew out of trying to understand gases in steam engines. Before we can study how a gas's energy changes as it is heated, we need a model of a gas we can actually calculate with — the <strong>ideal gas</strong>. We won't derive that model from scratch; we'll take its assumptions and its key equation as given, and use them as the foundation for everything that follows: the first law of thermodynamics, the different ways a gas can be heated or compressed, heat engines, and finally entropy and the second law.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>State the assumptions of the ideal gas model, and use n = N/N<sub>A</sub> to relate amount of substance, number of particles and the Avogadro constant</li>
+          <li>Use the ideal gas law PV = Nk<sub>B</sub>T and PV = nRT, and explain how it follows from the empirical gas laws</li>
+          <li>Calculate the internal energy of an ideal monatomic gas from U = 3/2 Nk<sub>B</sub>T = 3/2 nRT</li>
+          <li>Apply the first law of thermodynamics, Q = ΔU + W, with the correct sign convention</li>
+          <li>Identify and calculate work, heat and internal energy change for isothermal, isovolumetric, adiabatic and isobaric processes</li>
+          <li>Interpret PV diagrams for thermodynamic cycles, and calculate the efficiency of a heat engine and of a Carnot cycle</li>
+          <li>Explain entropy and the second law of thermodynamics, both in macroscopic and microscopic (microstate) terms</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <section class="topic" id="s1">
+      <h2>1. A model for a gas</h2>
+      <p>Before we can study how the energy of a gas changes as it is heated, cooled, compressed or expanded, we need a way to describe the physical state of a gas — and a model of what a gas actually <em>is</em> at the particle level. This section sets up both: the measurable quantities pressure and amount of substance, and the kinetic theory model of an ideal gas.</p>
+
+      <h3>Pressure</h3>
+      <p>A force acting on a surface has an effect that depends not just on its size, but on the area over which it acts. <strong>Pressure</strong> is defined as the force acting perpendicular (normal) to a surface, per unit area of that surface.</p>
+      <div class="eqn">P = F / A</div>
+      <div class="keybox"><strong>Key idea.</strong> Pressure, P = F/A, where F is the force exerted perpendicular to the surface. SI unit: the pascal, Pa (1 Pa = 1 N m⁻²).</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>A student of mass 58 kg stands on one foot. The area of contact between her shoe and the floor is 130 cm². Calculate the pressure she exerts on the floor.</p>
+        <p><strong>Answer:</strong><br>
+        P = F/A = mg/A = (58 × 9.81) / (130 × 10⁻⁴)</p>
+      </div>
+
+      <h3>Amount of substance</h3>
+      <p>A gas sample typically contains an enormous number of particles — far too many to count individually. Instead we measure the <strong>amount of substance</strong>, n, in <strong>moles</strong>.</p>
+      <div class="eqn">n = N / N<sub>A</sub></div>
+      <div class="keybox"><strong>Key idea.</strong> The amount of substance, n, as given by n = N/N<sub>A</sub>, where N is the number of particles (atoms or molecules) and N<sub>A</sub> is the <strong>Avogadro constant</strong>, N<sub>A</sub> = 6.02 × 10²³ mol⁻¹.</div>
+      <div class="keyword"><b>Mole, mol:</b> the SI unit of amount of substance. One mole of a substance contains exactly the Avogadro constant's worth of its defining particles (6.02 × 10²³ atoms or molecules).</div>
+      <p>If you know the mass of a sample and its molar mass (the mass of one mole, in g mol⁻¹), you can find n directly: n = mass / molar mass. Combined with n = N/N<sub>A</sub>, this lets you move between mass, moles and number of particles for any sample of gas.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 1.2</span>
+        <p>A sample of neon gas (molar mass 20.2 g mol⁻¹) has a mass of 15.0 g. Calculate (a) the number of moles of neon in the sample, (b) the number of neon atoms in the sample.</p>
+        <p><strong>Answer:</strong><br>
+        (a) n = mass / molar mass = 15.0 / 20.2<br>
+        (b) N = n × N<sub>A</sub> = (15.0 / 20.2) × 6.02 × 10²³</p>
+      </div>
+
+      <h3>The ideal gas model</h3>
+      <p>To predict how a gas behaves, physicists use a simplified, idealized model: the <strong>ideal gas</strong>. Real gases only approximate this model, but under most everyday conditions the approximation is excellent — good enough that the equations built on it (which we meet in Section 2) accurately predict how real gases behave.</p>
+      <div class="keybox"><strong>Key idea.</strong> An ideal gas is described by the following assumptions:
+        <ul style="margin:0.5rem 0 0 0; padding-left:1.2rem;">
+          <li>it contains a very large number of identical particles;</li>
+          <li>the volume of the particles themselves is negligible compared with the volume occupied by the gas;</li>
+          <li>the particles move in random directions, with a wide range of speeds;</li>
+          <li>there are no forces between particles except during collisions, so an ideal gas has no (electrical) potential energy between its particles;</li>
+          <li>the particles obey Newton's laws of motion, and all collisions (between particles, and between particles and the container walls) are perfectly elastic.</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 460 240" width="460" height="240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrNavy1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#173a5e"/></marker>
+            <marker id="arrAmber1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#d98324"/></marker>
+          </defs>
+          <rect x="40" y="40" width="380" height="150" fill="none" stroke="#173a5e" stroke-width="2"/>
+          <!-- free particles with short velocity arrows -->
+          <circle cx="130" cy="80" r="4.5" fill="#173a5e"/>
+          <line x1="130" y1="80" x2="150" y2="94" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrNavy1)"/>
+          <circle cx="320" cy="70" r="4.5" fill="#173a5e"/>
+          <line x1="320" y1="70" x2="301" y2="87" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrNavy1)"/>
+          <circle cx="220" cy="130" r="4.5" fill="#173a5e"/>
+          <line x1="220" y1="130" x2="241" y2="116" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrNavy1)"/>
+          <circle cx="360" cy="150" r="4.5" fill="#173a5e"/>
+          <line x1="360" y1="150" x2="341" y2="136" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrNavy1)"/>
+          <circle cx="90" cy="160" r="4.5" fill="#173a5e"/>
+          <line x1="90" y1="160" x2="111" y2="172" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrNavy1)"/>
+          <!-- collision points: amber arrows show the particle rebounding back into the box after each collision -->
+          <circle cx="230" cy="40" r="4.5" fill="#173a5e"/>
+          <line x1="230" y1="40" x2="230" y2="60" stroke="#d98324" stroke-width="2" marker-end="url(#arrAmber1)"/>
+          <text x="230" y="74" text-anchor="middle" font-size="11" fill="#d98324">rebounds off the wall</text>
+          <circle cx="420" cy="110" r="4.5" fill="#173a5e"/>
+          <line x1="420" y1="110" x2="400" y2="110" stroke="#d98324" stroke-width="2" marker-end="url(#arrAmber1)"/>
+          <circle cx="150" cy="190" r="4.5" fill="#173a5e"/>
+          <line x1="150" y1="190" x2="150" y2="170" stroke="#d98324" stroke-width="2" marker-end="url(#arrAmber1)"/>
+        </svg>
+        <figcaption>Fig. 1.1 A gas exerts pressure because its particles are constantly colliding with the walls of their container and rebounding (amber arrows show the rebound direction). By Newton's third law, each collision also exerts an equal and opposite force on the wall itself, perpendicular to its surface; the pressure is the average effect of an enormous number of these collisions, spread over the wall's area. (This model can be developed mathematically to show that pressure is related to the average of (particle speed)², P = ⅓ρv² — see your presentation for that derivation. The essential idea for us is simpler: pressure is a large-scale, measurable effect of huge numbers of random particle collisions.)</figcaption>
+      </figure>
+
+      <div class="stretch-box">
+        <span class="tag">Worth knowing</span>
+        <strong>Real gases vs the ideal gas model.</strong> No real gas is perfectly ideal, but most real gases behave very close to an ideal gas under normal conditions. The model breaks down at high pressure or high density (particles are pushed close enough together that their own volume, and the forces between them, are no longer negligible) and at low temperature (particles move slowly enough that intermolecular forces start to matter — this is exactly what causes a real gas to condense into a liquid).
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>State four assumptions of the kinetic theory model of an ideal gas.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">Any four of: the gas contains a very large number of identical particles; the volume of the particles is negligible compared with the volume of the gas; the particles move randomly with a wide range of speeds; there are no forces between particles except during collisions; the particles obey Newton's laws of motion; all collisions are perfectly elastic.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>Using the model in Fig. 1.1, explain why the pressure of a fixed mass of gas increases if it is compressed into a smaller volume at constant temperature.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">At constant temperature the particles' average speed is unchanged. In a smaller volume, the particles have less distance to travel between collisions with the walls, so they collide with a given area of wall more frequently. More collisions per second per unit area means a greater average force per unit area — that is, a greater pressure.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>A gas cylinder contains 3.2 kg of oxygen gas (O₂, molar mass 32.0 g mol⁻¹). Calculate (a) the number of moles of oxygen in the cylinder, (b) the number of oxygen molecules in the cylinder.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">(a) n = mass / molar mass = 3200 / 32.0<br>(b) N = n × N<sub>A</sub> = (3200 / 32.0) × 6.02 × 10²³</div>
+      </div>
+      <div class="question">
+        <span class="qnum">4</span><strong>Explain why the ideal gas model is a good approximation to a real gas at low density, but a poor approximation at high density or low temperature.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">At low density the particles are, on average, far apart, so the volume of the particles themselves really is negligible compared with the volume of the container, and the particles spend almost all their time far enough apart that intermolecular forces are negligible — matching the assumptions of the model closely. At high density the particles are forced close together, so their own volume and the forces between them are no longer negligible. At low temperature the particles move more slowly, so intermolecular forces (which the model assumes are zero) have more time to act between collisions — this is what eventually causes a real gas to condense into a liquid, a state the ideal gas model cannot describe at all.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s2">
+      <h2>2. The ideal gas law</h2>
+      <p>A fixed amount of gas, n, sealed in a container, can be fully described by three measurable quantities: its pressure P, volume V and temperature T. Experiments carried out over the last few centuries — keeping one of these quantities fixed at a time — found simple, direct relationships between the other two. These are the <strong>empirical gas laws</strong>: "empirical" because they come purely from observation and experiment, not from a theoretical model.</p>
+
+      <table class="eqtable">
+        <tr><th>Law</th><th>Held constant</th><th>Relationship</th></tr>
+        <tr><td>Boyle's law</td><td>temperature, T</td><td>P ∝ 1/V, i.e. P<sub>1</sub>V<sub>1</sub> = P<sub>2</sub>V<sub>2</sub></td></tr>
+        <tr><td>Pressure law</td><td>volume, V</td><td>P ∝ T (K), i.e. P<sub>1</sub>/T<sub>1</sub> = P<sub>2</sub>/T<sub>2</sub></td></tr>
+        <tr><td>Charles' law</td><td>pressure, P</td><td>V ∝ T (K), i.e. V<sub>1</sub>/T<sub>1</sub> = V<sub>2</sub>/T<sub>2</sub></td></tr>
+      </table>
+      <div class="keybox"><strong>Key idea.</strong> In every empirical gas law, temperature must be measured in <strong>kelvin</strong>, not degrees Celsius — the proportionality only holds on the absolute scale.</div>
+
+      <h3>Explore each gas law</h3>
+      <div class="sim-embed">
+        <p class="instructions">Boyle's law: change the volume of the gas and watch how the pressure responds at constant temperature.</p>
+        <iframe class="sim-frame" src="https://www.drjonesphysics.com/boyles-law" loading="lazy" title="Boyle's law simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://www.drjonesphysics.com/boyles-law" target="_blank" rel="noopener">Dr Jones Physics</a>.</p>
+      </div>
+      <div class="sim-embed">
+        <p class="instructions">The pressure law: heat the gas at constant volume and watch how the pressure responds.</p>
+        <iframe class="sim-frame" src="https://www.drjonesphysics.com/pressure-law" loading="lazy" title="Pressure law simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://www.drjonesphysics.com/pressure-law" target="_blank" rel="noopener">Dr Jones Physics</a>.</p>
+      </div>
+      <div class="sim-embed">
+        <p class="instructions">Charles' law: heat the gas at constant pressure and watch how the volume responds.</p>
+        <iframe class="sim-frame" src="https://www.drjonesphysics.com/charles" loading="lazy" title="Charles' law simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://www.drjonesphysics.com/charles" target="_blank" rel="noopener">Dr Jones Physics</a>.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>A sample of gas has a volume of 480 cm³ at a pressure of 1.0 × 10⁵ Pa. The gas is compressed at constant temperature until its pressure is 2.4 × 10⁵ Pa. Calculate its new volume.</p>
+        <p><strong>Answer:</strong><br>
+        P₁V₁ = P₂V₂<br>
+        V₂ = P₁V₁ / P₂ = (1.0 × 10⁵ × 480) / (2.4 × 10⁵)</p>
+      </div>
+
+      <h3>Combining the gas laws</h3>
+      <p>The three empirical laws are all special cases of one more general relationship: for a fixed amount of gas, PV/T is constant.</p>
+      <div class="eqn">PV / T = constant, or P<sub>1</sub>V<sub>1</sub>/T<sub>1</sub> = P<sub>2</sub>V<sub>2</sub>/T<sub>2</sub></div>
+      <div class="keybox"><strong>Key idea.</strong> The ideal gas law equation can be derived from the empirical gas laws for constant pressure, constant volume and constant temperature: PV/T = constant.</div>
+      <p>This tells us how P, V and T are related for a <em>fixed</em> amount of gas — but it says nothing about how much gas there is. Experiments show that, at constant temperature and pressure, volume is directly proportional to the amount of gas, n. Combining this with PV/T = constant gives the full <strong>ideal gas law</strong> (also called the equation of state for an ideal gas):</p>
+      <div class="eqn">PV = nRT</div>
+      <div class="keybox"><strong>Key idea.</strong> The equations governing the behaviour of ideal gases: PV = Nk<sub>B</sub>T and PV = nRT, where R is the <strong>universal (molar) gas constant</strong>, R = 8.31 J K⁻¹ mol⁻¹, and k<sub>B</sub> is the <strong>Boltzmann constant</strong>, k<sub>B</sub> = 1.38 × 10⁻²³ J K⁻¹. Since n = N/N<sub>A</sub>, the two forms are linked by k<sub>B</sub> = R/N<sub>A</sub> — R is simply the macroscopic (per mole) version of the same constant that k<sub>B</sub> expresses per particle.</p></div>
+      <p>An <strong>ideal gas</strong> is defined as a gas that obeys PV = nRT perfectly, for any P, V, T and n. As you saw in Section 1, real gases obey this equation very closely under most everyday conditions.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 2.2</span>
+        <p>A cylinder of volume 8.0 × 10⁻³ m³ contains an ideal gas at a pressure of 3.0 × 10⁵ Pa and a temperature of 290 K. Calculate the amount of gas, in moles, in the cylinder.</p>
+        <p><strong>Answer:</strong><br>
+        PV = nRT<br>
+        n = PV / RT = (3.0 × 10⁵ × 8.0 × 10⁻³) / (8.31 × 290)</p>
+      </div>
+
+      <h3>Representing the state of a gas: PV diagrams</h3>
+      <p>Because P, V and T are all linked by PV = nRT, a fixed amount of gas can be represented as a single point on a graph of pressure against volume — a <strong>PV diagram</strong>. A curve of constant temperature on a PV diagram is called an <strong>isotherm</strong>; every point on it obeys Boyle's law, PV = constant. PV diagrams will become an essential tool from Section 5 onwards, for tracking exactly how a gas's state changes as it is heated, compressed or allowed to expand.</p>
+
+      <div class="sim-launch">
+        <p>Explore how pressure, volume, temperature and the number of particles are all linked for an ideal gas, using PhET's <em>Gas Properties</em> simulation. Try holding volume constant and heating the gas, or pushing the wall in at constant temperature, and watch the pressure gauge respond.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/en/simulations/gas-properties" target="_blank" rel="noopener">Launch simulation ↗</a>
+        <p class="credit">Simulation: <em>Gas Properties</em> by PhET Interactive Simulations, University of Colorado Boulder.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">5</span><strong>State Boyle's law, in words, and give its equation.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">For a fixed amount of gas at constant temperature, the pressure is inversely proportional to the volume: P ∝ 1/V, or P₁V₁ = P₂V₂.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>A fixed mass of gas at a pressure of 1.4 × 10⁵ Pa and a temperature of 15 °C occupies a volume of 620 cm³. The gas is heated at constant volume until its pressure is 1.9 × 10⁵ Pa. Calculate its final temperature in °C.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">Convert to kelvin first: T₁ = 15 + 273 = 288 K.<br>P₁/T₁ = P₂/T₂<br>T₂ = P₂T₁ / P₁ = (1.9 × 10⁵ × 288) / (1.4 × 10⁵)<br>Then subtract 273 to convert the answer back to °C.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">7</span><strong>A weather balloon contains 4.5 mol of helium at a pressure of 1.0 × 10⁵ Pa and a temperature of 293 K. Calculate the volume of the balloon.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">PV = nRT<br>V = nRT / P = (4.5 × 8.31 × 293) / (1.0 × 10⁵)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">8</span><strong>Explain why PV = nRT can be written as PV = Nk<sub>B</sub>T, and state how k<sub>B</sub> and R are related.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">The amount of substance n is related to the number of particles N by n = N/N<sub>A</sub>. Substituting into PV = nRT gives PV = (N/N<sub>A</sub>)RT = N(R/N<sub>A</sub>)T. Defining k<sub>B</sub> = R/N<sub>A</sub> gives PV = Nk<sub>B</sub>T. k<sub>B</sub> is simply R "per particle" rather than "per mole": k<sub>B</sub> = R/N<sub>A</sub> = 8.31/(6.02 × 10²³).</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s3">
+      <h2>3. Internal energy of an ideal gas</h2>
+      <p>Recall from <em>Heating</em> that the internal energy of a substance is the sum of the total random kinetic energy and total random potential energy of all its particles. For an ideal gas this simplifies dramatically: because the model assumes there are no forces between particles (Section 1), an ideal gas has no potential energy at all. Its internal energy is purely the total random <em>translational</em> kinetic energy of its particles.</p>
+      <div class="keybox"><strong>Key idea.</strong> The internal energy, U, of an ideal monatomic gas is related to the number of molecules (or amount of substance) by:</div>
+      <div class="eqn">U = 3/2 Nk<sub>B</sub>T = 3/2 nRT</div>
+      <p>This result follows from combining the ideal gas law PV = Nk<sub>B</sub>T with the kinetic theory relationship between pressure and the particles' average (speed)² (Section 1) — on average, each particle in an ideal gas has translational kinetic energy 3/2 k<sub>B</sub>T, so N particles together have total internal energy 3/2 Nk<sub>B</sub>T.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Because it has no potential energy, the internal energy of an ideal gas depends <em>only</em> on its temperature — not on its pressure or volume individually. Two samples of the same ideal gas at the same temperature have the same internal energy, however different their pressure and volume happen to be. This single fact will be essential when we look at different ways of heating a gas in Sections 4 and 5.</p></div>
+
+      <div class="stretch-box">
+        <span class="tag">Worth knowing</span>
+        <strong>Monatomic vs molecular gases.</strong> U = 3/2 Nk<sub>B</sub>T applies to a <em>monatomic</em> ideal gas (single atoms, such as helium or argon), whose particles can only have translational kinetic energy. Most real gases are molecular (O₂, N₂, CO₂...), and their molecules can also rotate and vibrate, storing extra internal energy in those motions. This makes their internal energy larger, for the same n and T, than the monatomic formula predicts — but the monatomic case is the one this course focuses on, since it is the simplest to calculate exactly.
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>Calculate the internal energy of 2.0 mol of a monatomic ideal gas at a temperature of 310 K.</p>
+        <p><strong>Answer:</strong><br>
+        U = 3/2 nRT = 1.5 × 2.0 × 8.31 × 310</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.2</span>
+        <p>The temperature of 0.40 mol of a monatomic ideal gas increases from 288 K to 320 K. Calculate the change in internal energy of the gas.</p>
+        <p><strong>Answer:</strong><br>
+        ΔU = 3/2 nRΔT = 1.5 × 0.40 × 8.31 × (320 − 288)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">9</span><strong>Calculate the total internal energy of 1.0 mol of a monatomic ideal gas at 0 °C.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">U = 3/2 nRT = 1.5 × 1.0 × 8.31 × 273</div>
+      </div>
+      <div class="question">
+        <span class="qnum">10</span><strong>Explain why the internal energy of an ideal gas depends only on its temperature, and not on its pressure or volume individually.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">An ideal gas has no potential energy, because the model assumes there are no forces between its particles. So its internal energy is entirely kinetic. The average translational kinetic energy of a particle, 3/2 k<sub>B</sub>T, is set only by the temperature — it doesn't matter what volume the gas occupies or what pressure it happens to be at. So for a fixed n, U = 3/2 nRT depends only on T.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">11</span><strong>A sample of 2.5 × 10²⁴ atoms of a monatomic ideal gas has a total internal energy of 5200 J. Calculate the temperature of the gas.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">U = 3/2 Nk<sub>B</sub>T<br>T = 2U / (3Nk<sub>B</sub>) = (2 × 5200) / (3 × 2.5 × 10²⁴ × 1.38 × 10⁻²³)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">12</span><strong>0.80 mol of a monatomic ideal gas is cooled from 400 K to 250 K. Calculate the change in internal energy of the gas, and state whether internal energy was transferred into or out of the gas.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">ΔU = 3/2 nRΔT = 1.5 × 0.80 × 8.31 × (250 − 400)<br>Since ΔT is negative, ΔU is negative — the internal energy decreased, so energy was transferred out of the gas.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s4">
+      <h2>4. The first law of thermodynamics</h2>
+      <p>We now have everything we need to describe how a gas's energy changes as it is heated. There are exactly two ways energy can be transferred into or out of a gas: as <strong>heating</strong> (thermal energy transfer, Q) and as <strong>work</strong> (mechanical energy transfer, W, done as the gas expands or is compressed).</p>
+
+      <h3>Work done when a gas changes volume</h3>
+      <p>Picture a gas trapped in a cylinder by a frictionless, gas-tight piston of area A. If the gas expands, pushing the piston out a small distance Δs at constant pressure P, the gas does work on the piston: W = (force) × (distance) = (PA) × Δs. Since the change in volume ΔV = AΔs, this becomes:</p>
+      <div class="eqn">W = PΔV</div>
+      <div class="keybox"><strong>Key idea.</strong> The work done by or on a closed system, W = PΔV, when its boundaries are changed, can be described in terms of pressure and change of volume of the system. If the pressure is not constant, the work done is equal to the area under the graph of the process on a PV diagram.</div>
+
+      <figure>
+        <svg viewBox="0 0 460 200" width="460" height="200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrTeal1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#0e7c86"/></marker>
+          </defs>
+          <!-- open-ended cylinder: closed left end, open right end -->
+          <rect x="40" y="30" width="300" height="120" fill="#eaf3fb"/>
+          <line x1="40" y1="30" x2="430" y2="30" stroke="#173a5e" stroke-width="2"/>
+          <line x1="40" y1="150" x2="430" y2="150" stroke="#173a5e" stroke-width="2"/>
+          <line x1="40" y1="26" x2="40" y2="154" stroke="#173a5e" stroke-width="4"/>
+          <text x="110" y="120" text-anchor="middle" font-size="13" fill="#173a5e">gas, P</text>
+
+          <!-- initial piston position (dashed reference) -->
+          <line x1="185" y1="22" x2="185" y2="158" stroke="#173a5e" stroke-width="2" stroke-dasharray="4,3"/>
+          <text x="185" y="15" text-anchor="middle" font-size="11" fill="#5b6b78">initial</text>
+
+          <!-- Δs arrow between the two piston positions -->
+          <line x1="189" y1="90" x2="332" y2="90" stroke="#0e7c86" stroke-width="2.2" marker-end="url(#arrTeal1)"/>
+          <text x="258" y="80" text-anchor="middle" font-size="12" fill="#0e7c86">Δs</text>
+
+          <!-- final piston (solid, clearly-edged) -->
+          <rect x="336" y="22" width="8" height="136" fill="#d7e0e8" stroke="#173a5e" stroke-width="2.5"/>
+          <text x="340" y="15" text-anchor="middle" font-size="11" fill="#173a5e" font-weight="600">final</text>
+          <text x="386" y="120" text-anchor="middle" font-size="12" fill="#5b6b78">area A</text>
+        </svg>
+        <figcaption>Fig. 4.1 A gas expanding at constant pressure P pushes its piston (area A, right edge shown in navy) from its initial position (dashed line) to its final position (solid grey), a distance Δs. The work done by the gas on the piston is W = (PA)Δs = PΔV, where ΔV is the extra volume — shaded blue — the gas now occupies.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A gas expands from a volume of 0.020 m³ to 0.045 m³ at a constant pressure of 1.4 × 10⁵ Pa. Calculate the work done by the gas.</p>
+        <p><strong>Answer:</strong><br>
+        W = PΔV = 1.4 × 10⁵ × (0.045 − 0.020)</p>
+      </div>
+
+      <h3>The first law of thermodynamics</h3>
+      <p>If an amount of thermal energy Q is transferred into a gas, the principle of conservation of energy tells us that this energy can only do one of two things: increase the gas's internal energy, and/or let the gas do work on its surroundings as it expands. This is the <strong>first law of thermodynamics</strong>:</p>
+      <div class="eqn">Q = ΔU + W</div>
+      <div class="keybox"><strong>Key idea.</strong> The first law of thermodynamics, Q = ΔU + W, results from applying conservation of energy to a closed system, and relates the internal energy of a system to the transfer of energy as heat and as work.</div>
+      <div class="stretch-box">
+        <span class="tag">Common mistake</span>
+        <strong>Watch your signs.</strong> Thermal energy transferred <em>into</em> the gas: +Q; transferred <em>out</em> of the gas: −Q. An <em>increase</em> in internal energy: +ΔU; a <em>decrease</em>: −ΔU. Work done <em>by</em> the gas as it expands: +W; work done <em>on</em> the gas as it is compressed: −W. Get in the habit of writing every term with its sign in brackets, as in the worked examples below.
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.2</span>
+        <p>80 J of work is done by a gas as it expands, while 150 J of thermal energy is transferred into it. Calculate the change in internal energy of the gas.</p>
+        <p><strong>Answer:</strong><br>
+        Q = ΔU + W<br>
+        (+150) = ΔU + (+80)<br>
+        ΔU = 150 − 80</p>
+      </div>
+
+      <p>Combining the first law with the internal energy equation from Section 3 lets us connect heating, work <em>and</em> temperature change for an ideal monatomic gas:</p>
+      <div class="eqn">ΔU = 3/2 Nk<sub>B</sub>ΔT = 3/2 nRΔT</div>
+      <div class="keybox"><strong>Key idea.</strong> For an ideal monatomic gas, the change in internal energy, ΔU = 3/2 Nk<sub>B</sub>ΔT = 3/2 nRΔT, is related to the change in its temperature.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">13</span><strong>State the first law of thermodynamics, and explain what each of the four sign conventions (+Q, −Q, +W, −W) represents physically.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">Q = ΔU + W. +Q means thermal energy is transferred into the gas; −Q means it is transferred out. +ΔU means the internal energy of the gas increases; −ΔU means it decreases. +W means the gas does work on the surroundings as it expands; −W means work is done on the gas as it is compressed.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">14</span><strong>A gas is compressed from a volume of 0.060 m³ to 0.035 m³ at a constant pressure of 2.0 × 10⁵ Pa. At the same time, 3200 J of thermal energy is removed from the gas. Calculate (a) the work done on the gas, (b) the change in internal energy of the gas.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">(a) W = PΔV = 2.0 × 10⁵ × (0.035 − 0.060). This is negative, showing that work is done <em>on</em> the gas as it is compressed.<br>(b) Q = ΔU + W, with Q = −3200 J and W as found in (a). ΔU = Q − W = (−3200) − [2.0 × 10⁵ × (0.035 − 0.060)]</div>
+      </div>
+      <div class="question">
+        <span class="qnum">15</span><strong>0.60 mol of a monatomic ideal gas is heated at constant pressure. 940 J of thermal energy is transferred into the gas, and it does 310 J of work as it expands. Calculate the temperature change of the gas.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">Q = ΔU + W, so ΔU = Q − W = 940 − 310.<br>ΔU = 3/2 nRΔT, so ΔT = ΔU / (1.5 × n × R) = (940 − 310) / (1.5 × 0.60 × 8.31)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">16</span><strong>Explain why, for an ideal gas held at constant volume, all of the thermal energy transferred into the gas goes into increasing its internal energy.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">At constant volume, ΔV = 0, so no work is done (W = PΔV = 0) — the gas cannot expand or be compressed. The first law then reduces to Q = ΔU, so every joule of thermal energy transferred in becomes an increase in internal energy (and so, for an ideal gas, an increase in temperature).</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s5">
+      <h2>5. Four thermodynamic processes</h2>
+      <p>Among all the possible ways a gas's state could change, it is useful to consider four extreme, special cases — each found by holding one of the four quantities in the first law fixed. In each case, the general equation Q = ΔU + W simplifies.</p>
+      <p>The prefix "iso-" comes from the Greek for "equal" — so isothermal, isovolumetric and isobaric each describe a process where one particular quantity stays exactly the same (constant) throughout.</p>
+      <ul style="padding-left:1.2rem;">
+        <li>ΔU = 0 — <strong>isothermal</strong> (constant temperature)</li>
+        <li>W = 0 — <strong>isovolumetric</strong> (constant volume)</li>
+        <li>Q = 0 — <strong>adiabatic</strong> (no thermal energy transfer)</li>
+        <li>ΔP = 0 — <strong>isobaric</strong> (constant pressure)</li>
+      </ul>
+
+      <figure class="wide">
+        <svg viewBox="0 0 470 400" width="470" height="400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrProc" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#0e7c86"/></marker>
+            <marker id="arrAxis5" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L6,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+
+          <!-- Panel (a): Isothermal -->
+          <g transform="translate(10,25)">
+            <text x="102" y="-10" text-anchor="middle" font-size="12.5" font-weight="600" fill="#173a5e">(a) Isothermal</text>
+            <line x1="30" y1="140" x2="200" y2="140" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <line x1="30" y1="140" x2="30" y2="10" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <text x="206" y="144" font-size="11" fill="#173a5e">V</text>
+            <text x="22" y="10" font-size="11" fill="#173a5e" text-anchor="end">P</text>
+            <path d="M53.1,32.9 L64.0,67.2 L74.9,84.9 L85.8,95.7 L96.8,102.9 L107.7,108.1 L118.6,112.1 L129.5,115.1 L140.4,117.6 L151.3,119.6 L162.3,121.3 L173.2,122.7 L184.1,123.9 L195.0,125.0" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <path d="M92.7,21.6 L100.6,34.8 L108.4,45.3 L116.3,54.0 L124.2,61.2 L132.0,67.2 L139.9,72.4 L147.8,77.0 L155.7,80.9 L163.5,84.4 L171.4,87.5 L179.3,90.3 L187.1,92.7 L195.0,95.0" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <path d="M79.5,40.0 L85.8,51.4 L92.2,60.4 L98.5,67.8 L104.9,73.9 L111.2,79.1 L117.6,83.5 L123.9,87.3 L130.3,90.6 L136.6,93.6 L143.0,96.2 L149.3,98.5 L155.7,100.6 L162.0,102.5" fill="none" stroke="#0e7c86" stroke-width="2.4" marker-end="url(#arrProc)"/>
+            <circle cx="79.5" cy="40.0" r="3.5" fill="#173a5e"/>
+            <text x="70" y="34" font-size="12" fill="#173a5e">A</text>
+            <circle cx="162.0" cy="102.5" r="3.5" fill="#173a5e"/>
+            <text x="167" y="100" font-size="12" fill="#173a5e">B</text>
+          </g>
+
+          <!-- Panel (b): Isovolumetric -->
+          <g transform="translate(240,25)">
+            <text x="102" y="-10" text-anchor="middle" font-size="12.5" font-weight="600" fill="#173a5e">(b) Isovolumetric</text>
+            <line x1="30" y1="140" x2="200" y2="140" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <line x1="30" y1="140" x2="30" y2="10" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <text x="206" y="144" font-size="11" fill="#173a5e">V</text>
+            <text x="22" y="10" font-size="11" fill="#173a5e" text-anchor="end">P</text>
+            <path d="M53.1,32.9 L64.0,67.2 L74.9,84.9 L85.8,95.7 L96.8,102.9 L107.7,108.1 L118.6,112.1 L129.5,115.1 L140.4,117.6 L151.3,119.6 L162.3,121.3 L173.2,122.7 L184.1,123.9 L195.0,125.0" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <path d="M92.7,21.6 L100.6,34.8 L108.4,45.3 L116.3,54.0 L124.2,61.2 L132.0,67.2 L139.9,72.4 L147.8,77.0 L155.7,80.9 L163.5,84.4 L171.4,87.5 L179.3,90.3 L187.1,92.7 L195.0,95.0" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <line x1="79.5" y1="40.0" x2="79.5" y2="115.0" stroke="#0e7c86" stroke-width="2.4" marker-end="url(#arrProc)"/>
+            <circle cx="79.5" cy="40.0" r="3.5" fill="#173a5e"/>
+            <text x="70" y="34" font-size="12" fill="#173a5e">A</text>
+            <circle cx="79.5" cy="115.0" r="3.5" fill="#173a5e"/>
+            <text x="86" y="119" font-size="12" fill="#173a5e">C</text>
+          </g>
+
+          <!-- Panel (c): Adiabatic -->
+          <g transform="translate(10,215)">
+            <text x="102" y="-10" text-anchor="middle" font-size="12.5" font-weight="600" fill="#173a5e">(c) Adiabatic</text>
+            <line x1="30" y1="140" x2="200" y2="140" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <line x1="30" y1="140" x2="30" y2="10" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <text x="206" y="144" font-size="11" fill="#173a5e">V</text>
+            <text x="22" y="10" font-size="11" fill="#173a5e" text-anchor="end">P</text>
+            <path d="M79.5,40.0 L86.4,52.2 L93.2,61.7 L100.1,69.3 L106.9,75.6 L113.8,80.9 L120.6,85.4 L127.5,89.2 L134.3,92.6 L141.2,95.5 L148.0,98.1 L154.9,100.4 L161.7,102.4 L168.6,104.3" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <path d="M79.5,40.0 L86.4,59.4 L93.2,73.5 L100.1,84.0 L106.9,92.0 L113.8,98.4 L120.6,103.5 L127.5,107.7 L134.3,111.1 L141.2,114.0 L148.0,116.5 L154.9,118.6 L161.7,120.4 L168.6,122.0" fill="none" stroke="#0e7c86" stroke-width="2.4" marker-end="url(#arrProc)"/>
+            <circle cx="79.5" cy="40.0" r="3.5" fill="#173a5e"/>
+            <text x="70" y="34" font-size="12" fill="#173a5e">A</text>
+            <circle cx="168.6" cy="122.0" r="3.5" fill="#173a5e"/>
+            <text x="174" y="119" font-size="12" fill="#173a5e">D</text>
+          </g>
+
+          <!-- Panel (d): Isobaric -->
+          <g transform="translate(240,215)">
+            <text x="102" y="-10" text-anchor="middle" font-size="12.5" font-weight="600" fill="#173a5e">(d) Isobaric</text>
+            <line x1="30" y1="140" x2="200" y2="140" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <line x1="30" y1="140" x2="30" y2="10" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxis5)"/>
+            <text x="206" y="144" font-size="11" fill="#173a5e">V</text>
+            <text x="22" y="10" font-size="11" fill="#173a5e" text-anchor="end">P</text>
+            <path d="M53.1,32.9 L64.0,67.2 L74.9,84.9 L85.8,95.7 L96.8,102.9 L107.7,108.1 L118.6,112.1 L129.5,115.1 L140.4,117.6 L151.3,119.6 L162.3,121.3 L173.2,122.7 L184.1,123.9 L195.0,125.0" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <path d="M92.7,21.6 L100.6,34.8 L108.4,45.3 L116.3,54.0 L124.2,61.2 L132.0,67.2 L139.9,72.4 L147.8,77.0 L155.7,80.9 L163.5,84.4 L171.4,87.5 L179.3,90.3 L187.1,92.7 L195.0,95.0" fill="none" stroke="#b9c6d3" stroke-width="1.3" stroke-dasharray="3,3"/>
+            <line x1="79.5" y1="40.0" x2="162.0" y2="40.0" stroke="#0e7c86" stroke-width="2.4" marker-end="url(#arrProc)"/>
+            <circle cx="79.5" cy="40.0" r="3.5" fill="#173a5e"/>
+            <text x="70" y="34" font-size="12" fill="#173a5e">A</text>
+            <circle cx="162.0" cy="40.0" r="3.5" fill="#173a5e"/>
+            <text x="167" y="34" font-size="12" fill="#173a5e">E</text>
+          </g>
+        </svg>
+        <figcaption>Fig. 5.1 The four thermodynamic processes, each starting from the same state A on a PV diagram. The dashed grey curves are neighbouring isotherms, shown for reference — the solid teal curve is the actual path followed in each case. Notice that the adiabatic curve (c) is steeper than an isotherm through the same points (compare to the dashed isotherm passing through A in that panel): because the temperature is also falling as an adiabatic expansion proceeds, the pressure drops faster than it would at constant temperature.</figcaption>
+      </figure>
+
+      <h3>Isothermal (ΔU = 0)</h3>
+      <p>The temperature — and so the internal energy — of the gas does not change. The first law reduces to Q = W: all the work done by the gas during an isothermal expansion is supplied by thermal energy transferred in; during a compression, the work done on the gas is all transferred away as thermal energy. For a process to genuinely approximate an isothermal change, it must happen slowly enough for the gas to stay in thermal equilibrium with its surroundings throughout. Isothermal changes obey Boyle's law: PV = constant.</p>
+      <div class="keybox"><strong>Key idea.</strong> In an isothermal change: Q = 0 + W, or Q = W.</div>
+
+      <h3>Isovolumetric (W = 0)</h3>
+      <p>There is no change in volume, so no work is done by or on the gas. The first law reduces to Q = ΔU: any thermal energy transferred into the gas becomes an increase in internal energy (and temperature); any thermal energy transferred out becomes a decrease.</p>
+      <div class="keybox"><strong>Key idea.</strong> In an isovolumetric change: Q = ΔU + 0, or Q = ΔU.</div>
+
+      <h3>Adiabatic (Q = 0)</h3>
+      <p>No thermal energy is transferred between the gas and its surroundings at all. The first law reduces to 0 = ΔU + W, so ΔU = −W: in an adiabatic expansion the gas does work using only its own internal energy, so its temperature falls; in an adiabatic compression, all the work done on the gas becomes an increase in internal energy, so its temperature rises. For a process to approximate an adiabatic change, it must happen rapidly, in a well-insulated container, so there is no time for thermal energy to be transferred.</p>
+      <div class="keybox"><strong>Key idea.</strong> In an adiabatic change: 0 = ΔU + W, so ΔU = −W for a compression, and −ΔU = W for an expansion. Adiabatic processes in monatomic ideal gases can be modelled by the equation PV<sup>5/3</sup> = constant.</div>
+
+      <h3>Isobaric (ΔP = 0)</h3>
+      <p>The pressure stays constant as the gas expands or is compressed — this happens whenever a gas is free to change volume while its temperature changes, keeping its pressure equal to that of its surroundings. The general first law equation applies with no simplification, and the work done is simply W = PΔV.</p>
+      <div class="keybox"><strong>Key idea.</strong> In an isobaric change: Q = ΔU + W (and W = PΔV).</div>
+
+      <table class="eqtable">
+        <tr><th>Process</th><th>Held constant</th><th>First law reduces to</th></tr>
+        <tr><td>Isothermal</td><td>temperature (ΔU = 0)</td><td>Q = W</td></tr>
+        <tr><td>Isovolumetric</td><td>volume (W = 0)</td><td>Q = ΔU</td></tr>
+        <tr><td>Adiabatic</td><td>— (Q = 0)</td><td>ΔU = −W</td></tr>
+        <tr><td>Isobaric</td><td>pressure (ΔP = 0)</td><td>Q = ΔU + W</td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>An ideal monatomic gas is compressed adiabatically, reducing its volume by a factor of 6.0. Determine the factor by which its pressure increases.</p>
+        <p><strong>Answer:</strong><br>
+        PV<sup>5/3</sup> = constant, so P₁V₁<sup>5/3</sup> = P₂V₂<sup>5/3</sup><br>
+        P₂/P₁ = (V₁/V₂)<sup>5/3</sup> = 6.0<sup>5/3</sup></p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 5.2</span>
+        <p>A gas is compressed isothermally, so that the work done on it is 640 J. State the thermal energy transferred, and whether it is transferred into or out of the gas.</p>
+        <p><strong>Answer:</strong><br>
+        Isothermal: Q = W. Since work is done <em>on</em> the gas, W = −640 J.<br>
+        Q = W = −640 J: 640 J of thermal energy is transferred <em>out of</em> the gas.</p>
+      </div>
+
+      <h3>Live simulation: PV diagram explorer</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="pvCanvas" width="300" height="260"></canvas></div>
+          <div class="sim-controls">
+            <h4>Drive a gas along each process</h4>
+            <div class="sim-row">
+              <label for="pvSelect">Process</label>
+              <select id="pvSelect">
+                <option value="isothermal">Isothermal expansion (ΔU = 0)</option>
+                <option value="isovolumetric">Isovolumetric cooling (W = 0)</option>
+                <option value="adiabatic">Adiabatic expansion (Q = 0)</option>
+                <option value="isobaric">Isobaric expansion (ΔP = 0)</option>
+              </select>
+            </div>
+            <div class="sim-row"><label for="pvSlider">Drive the process: <span id="pvSliderVal">0%</span></label><input type="range" id="pvSlider" min="0" max="100" step="1" value="0"></div>
+            <div class="sim-readout" id="pvReadout">Choose a process and drag the slider.</div>
+          </div>
+        </div>
+        <figcaption>Fig. 5.2 Choose a process and drag the slider to drive the gas from state A along that process. The readout shows the resulting P, V and the signs of Q, ΔU and W at each stage.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">17</span><strong>A gas is heated at constant volume. Explain what happens to its pressure and temperature, and state the values of Q, ΔU and W that apply (in terms of each other).</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">This is an isovolumetric process. W = 0, since there is no volume change. Q = ΔU: all the thermal energy transferred in increases the internal energy of the gas, so its temperature rises. Since PV = nRT and V is constant, P is proportional to T, so the pressure also rises.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">18</span><strong>An ideal monatomic gas expands adiabatically. Using the first law, explain why its temperature must fall.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Adiabatic means Q = 0, so 0 = ΔU + W. As the gas expands it does positive work on its surroundings (+W), so ΔU = −W must be negative. Since ΔU = 3/2 nRΔT for an ideal gas, a negative ΔU means a negative ΔT — the temperature falls. Physically, the gas can only do work by drawing on its own internal energy, since no thermal energy is being supplied from outside.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">19</span><strong>The volume of an ideal monatomic gas is increased in an adiabatic expansion from 2.0 × 10⁻³ m³ to 5.0 × 10⁻³ m³. If the initial pressure was 3.4 × 10⁵ Pa, calculate the final pressure.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">P₁V₁<sup>5/3</sup> = P₂V₂<sup>5/3</sup><br>P₂ = P₁(V₁/V₂)<sup>5/3</sup> = 3.4 × 10⁵ × (2.0 × 10⁻³ / 5.0 × 10⁻³)<sup>5/3</sup></div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>Copy and complete: for each process below, state whether Q, ΔU and W are positive (+), negative (−), zero (0), or cannot be determined without more information (±). Isothermal expansion; adiabatic compression; isobaric expansion; isovolumetric pressure decrease.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">Isothermal expansion: ΔU = 0, W = +, Q = +.<br>Adiabatic compression: Q = 0, W = −, ΔU = +.<br>Isobaric expansion: ΔP = 0, W = +, ΔU = +, Q = + (from Q = ΔU + W, both positive).<br>Isovolumetric pressure decrease: W = 0, ΔU = −, Q = − (temperature and pressure fall together at constant volume).</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s6">
+      <h2>6. Heat engines and the Carnot cycle</h2>
+      <p>A gas doing useful work by expanding — pushing a piston, say — cannot expand forever. To do continuous useful work, it must be compressed back to its starting state and expanded again, over and over: a <strong>thermodynamic cycle</strong>. A device that does this to convert a flow of thermal energy into useful mechanical work is a <strong>heat engine</strong>.</p>
+
+      <figure>
+        <svg viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrEng" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#d98324"/></marker>
+          </defs>
+          <rect x="70" y="10" width="160" height="40" rx="4" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="150" y="34" text-anchor="middle" font-size="13" fill="#173a5e">hot reservoir, T<tspan font-size="10" dy="2">h</tspan></text>
+          <line x1="150" y1="50" x2="150" y2="95" stroke="#d98324" stroke-width="2.5" marker-end="url(#arrEng)"/>
+          <text x="158" y="76" font-size="13" fill="#d98324">Q<tspan font-size="10" dy="2">h</tspan></text>
+          <rect x="70" y="100" width="160" height="90" rx="10" fill="#eaf3fb" stroke="#173a5e" stroke-width="2"/>
+          <text x="150" y="150" text-anchor="middle" font-size="14" fill="#173a5e" font-weight="600">heat engine</text>
+          <line x1="230" y1="145" x2="275" y2="145" stroke="#0e7c86" stroke-width="2.5" marker-end="url(#arrEng)"/>
+          <text x="240" y="138" font-size="13" fill="#0e7c86">W</text>
+          <line x1="150" y1="190" x2="150" y2="235" stroke="#d98324" stroke-width="2.5" marker-end="url(#arrEng)"/>
+          <text x="158" y="216" font-size="13" fill="#d98324">Q<tspan font-size="10" dy="2">c</tspan></text>
+          <rect x="70" y="240" width="160" height="40" rx="4" fill="#eaf7ee" stroke="#3f9a5c" stroke-width="2"/>
+          <text x="150" y="264" text-anchor="middle" font-size="13" fill="#173a5e">cold reservoir, T<tspan font-size="10" dy="2">c</tspan></text>
+        </svg>
+        <figcaption>Fig. 6.1 Energy flow in a heat engine. A temperature difference (T<sub>h</sub> − T<sub>c</sub>) drives a flow of thermal energy: Q<sub>h</sub> flows out of the hot reservoir into the engine, Q<sub>c</sub> flows out of the engine into the cold reservoir, and the difference is transferred as useful mechanical work, W.</figcaption>
+      </figure>
+
+      <div class="keybox"><strong>Key idea.</strong> Cyclic gas processes are used to run heat engines. Because the gas returns to its starting state at the end of each cycle, the net work done <em>by</em> the gas over one complete cycle is equal to the area enclosed by the loop on a PV diagram.</div>
+
+      <h3>Efficiency of a heat engine</h3>
+      <p>By conservation of energy, the thermal energy taken in from the hot reservoir either becomes useful work or is rejected to the cold reservoir: Q<sub>h</sub> = W + Q<sub>c</sub>. The <strong>efficiency</strong> of a heat engine compares the useful work produced with the energy that had to be supplied to produce it:</p>
+      <div class="eqn">η = useful work / input energy = W / Q<sub>h</sub> = (Q<sub>h</sub> − Q<sub>c</sub>)/Q<sub>h</sub> = 1 − Q<sub>c</sub>/Q<sub>h</sub></div>
+      <div class="keybox"><strong>Key idea.</strong> A heat engine can respond to different cycles, and is characterized by its efficiency, η = useful work / input energy.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>A heat engine takes in 4.0 × 10⁴ J of thermal energy from its hot reservoir each cycle, and rejects 2.4 × 10⁴ J to its cold reservoir. Calculate (a) the useful work done per cycle, (b) the efficiency of the engine.</p>
+        <p><strong>Answer:</strong><br>
+        (a) W = Q<sub>h</sub> − Q<sub>c</sub> = 4.0 × 10⁴ − 2.4 × 10⁴<br>
+        (b) η = W/Q<sub>h</sub> = (4.0 × 10⁴ − 2.4 × 10⁴) / 4.0 × 10⁴</p>
+      </div>
+
+      <h3>The Carnot cycle</h3>
+      <p>No real engine can convert 100% of the thermal energy it takes in into useful work — but how efficient <em>could</em> an engine possibly be, in principle, operating between two given reservoir temperatures? The idealized, reversible cycle that achieves the maximum theoretically possible efficiency is called the <strong>Carnot cycle</strong>, proposed by Sadi Carnot in 1824.</p>
+      <div class="keybox"><strong>Key idea.</strong> The Carnot cycle is a four-stage process: an isothermal expansion at T<sub>h</sub> (A→B), followed by an adiabatic expansion (B→C) that cools the gas to T<sub>c</sub>; then an isothermal compression at T<sub>c</sub> (C→D), followed by an adiabatic compression (D→A) that returns the gas to T<sub>h</sub>, closing the cycle.</div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 460 320" width="460" height="320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrCarnot" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#0e7c86"/></marker>
+            <marker id="arrAxisC" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L6,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+          <line x1="60" y1="290" x2="440" y2="290" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxisC)"/>
+          <line x1="60" y1="290" x2="60" y2="10" stroke="#173a5e" stroke-width="1.5" marker-end="url(#arrAxisC)"/>
+          <text x="446" y="294" font-size="12" fill="#173a5e">V</text>
+          <text x="52" y="10" font-size="12" fill="#173a5e" text-anchor="end">P</text>
+
+          <path d="M115.1,27.7 L118.7,44.9 L122.3,59.9 L125.9,73.1 L129.4,84.9 L133.0,95.4 L136.6,104.9 L140.2,113.5 L143.8,121.3 L147.3,128.4 L150.9,134.9 L154.5,140.9 L158.1,146.5 L161.7,151.6 L165.2,156.4 L168.8,160.8 L172.4,164.9 L176.0,168.8 L179.5,172.4 L183.1,175.9 L186.7,179.1 L190.3,182.1" fill="none" stroke="#0e7c86" stroke-width="2.6" marker-end="url(#arrCarnot)"/>
+          <path d="M190.3,182.1 L201.2,195.5 L212.1,206.2 L223.0,215.1 L233.9,222.5 L244.8,228.7 L255.7,233.9 L266.6,238.4 L277.6,242.4 L288.5,245.8 L299.4,248.8 L310.3,251.4 L321.2,253.8 L332.1,255.9 L343.0,257.7 L353.9,259.4 L364.8,261.0 L375.7,262.4 L386.6,263.6 L397.6,264.8 L408.5,265.8 L419.4,266.8" fill="none" stroke="#173a5e" stroke-width="2.6" marker-end="url(#arrCarnot)"/>
+          <path d="M419.4,266.8 L409.2,266.3 L399.1,265.7 L389.0,265.1 L378.9,264.5 L368.7,263.8 L358.6,263.0 L348.5,262.3 L338.4,261.4 L328.2,260.5 L318.1,259.5 L308.0,258.5 L297.9,257.3 L287.7,256.1 L277.6,254.7 L267.5,253.2 L257.4,251.5 L247.2,249.6 L237.1,247.5 L227.0,245.2 L216.9,242.6 L206.7,239.5" fill="none" stroke="#0e7c86" stroke-width="2.6" marker-end="url(#arrCarnot)"/>
+          <path d="M206.7,239.5 L202.4,237.1 L198.0,234.4 L193.7,231.5 L189.3,228.4 L184.9,224.9 L180.6,221.1 L176.2,216.8 L171.8,212.1 L167.5,206.9 L163.1,201.0 L158.7,194.4 L154.4,186.9 L150.0,178.4 L145.7,168.6 L141.3,157.3 L136.9,144.1 L132.6,128.6 L128.2,110.2 L123.8,88.1 L119.5,61.1 L115.1,27.7" fill="none" stroke="#173a5e" stroke-width="2.6" marker-end="url(#arrCarnot)"/>
+
+          <circle cx="115.1" cy="27.7" r="4" fill="#d98324"/>
+          <text x="115.1" y="13.7" text-anchor="middle" font-size="13" font-weight="600" fill="#173a5e">A</text>
+          <circle cx="190.3" cy="182.1" r="4" fill="#d98324"/>
+          <text x="206.0" y="179.3" text-anchor="middle" font-size="13" font-weight="600" fill="#173a5e">B</text>
+          <circle cx="419.4" cy="266.8" r="4" fill="#d98324"/>
+          <text x="419.4" y="252.8" text-anchor="middle" font-size="13" font-weight="600" fill="#173a5e">C</text>
+          <circle cx="206.7" cy="239.5" r="4" fill="#d98324"/>
+          <text x="195.7" y="258.6" text-anchor="middle" font-size="13" font-weight="600" fill="#173a5e">D</text>
+
+          <text x="209.3" y="116.5" text-anchor="middle" font-size="12" fill="#0e7c86">isothermal, T<tspan font-size="9" dy="2">h</tspan></text>
+          <text x="318.6" y="225.7" text-anchor="middle" font-size="12" fill="#173a5e">adiabatic</text>
+          <text x="323.8" y="210.0" text-anchor="middle" font-size="12" fill="#0e7c86">isothermal, T<tspan font-size="9" dy="2">c</tspan></text>
+          <text x="116.4" y="216.9" text-anchor="middle" font-size="12" fill="#173a5e">adiabatic</text>
+        </svg>
+        <figcaption>Fig. 6.2 The Carnot cycle plotted precisely on a PV diagram, for one mole of a monatomic ideal gas with T<sub>h</sub> = 500 K and T<sub>c</sub> = 250 K. A→B: isothermal expansion at T<sub>h</sub> (teal). B→C: adiabatic expansion, cooling the gas to T<sub>c</sub> (navy). C→D: isothermal compression at T<sub>c</sub> (teal). D→A: adiabatic compression, returning the gas to T<sub>h</sub> (navy), closing the cycle. Notice the adiabatic legs (B→C and D→A) are steeper and span a wider range of volume than the isothermal legs — because temperature is also falling as the gas expands adiabatically, pressure drops faster than it would at constant temperature. The area enclosed is the net useful work done per cycle.</figcaption>
+      </figure>
+
+      <p>Because it is idealized and fully reversible (every stage happens infinitely slowly, with no friction or other losses), the Carnot cycle achieves the maximum efficiency thermodynamically possible for any heat engine operating between temperatures T<sub>h</sub> and T<sub>c</sub>:</p>
+      <div class="eqn">η<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub></div>
+      <div class="keybox"><strong>Key idea.</strong> The Carnot cycle sets a limit for the efficiency of a heat engine at the temperatures of its heat reservoirs: η<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub>. (Temperatures must be in kelvin.) We will see <em>why</em> this equation holds when we look at entropy in Section 7.</div>
+      <div class="stretch-box">
+        <span class="tag">Worth knowing</span>
+        <strong>No real engine reaches η<sub>Carnot</sub>.</strong> Real engines are never perfectly reversible — friction, turbulence and rapid (non-quasi-static) changes all make real cycles less efficient than the Carnot limit for the same T<sub>h</sub> and T<sub>c</sub>. The Carnot efficiency is a ceiling, not a target that can be reached in practice.
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.2</span>
+        <p>Calculate the maximum theoretical efficiency of a heat engine operating between a hot reservoir at 500 °C and a cold reservoir at 50 °C.</p>
+        <p><strong>Answer:</strong><br>
+        η<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub> = 1 − (50 + 273)/(500 + 273)</p>
+      </div>
+
+      <h3>Live simulation: Carnot efficiency calculator</h3>
+      <figure class="wide">
+        <div class="sim-wrap sim-wrap-light">
+          <div class="sim-canvas-box"><canvas id="carnotCanvas" width="300" height="260"></canvas></div>
+          <div class="sim-controls">
+            <h4>Vary the reservoir temperatures</h4>
+            <div class="sim-row"><label for="thSlider">Hot reservoir, T<sub>h</sub>: <span id="thVal">500</span> K</label><input type="range" id="thSlider" min="320" max="900" step="10" value="500"></div>
+            <div class="sim-row"><label for="tcSlider">Cold reservoir, T<sub>c</sub>: <span id="tcVal">250</span> K</label><input type="range" id="tcSlider" min="150" max="310" step="10" value="250"></div>
+            <div class="sim-readout" id="carnotReadout">η = 50%</div>
+          </div>
+        </div>
+        <figcaption>Fig. 6.3 Drag the sliders to see how the reservoir temperatures set the maximum possible efficiency of a heat engine. Notice how much a lower T<sub>c</sub> helps compared with the same increase in T<sub>h</sub> — can you see why, from the equation?</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">21</span><strong>Describe the four stages of a Carnot cycle, in order, and state what happens to the gas's temperature during each.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">A→B: isothermal expansion at T<sub>h</sub> — temperature constant. B→C: adiabatic expansion — temperature falls from T<sub>h</sub> to T<sub>c</sub>. C→D: isothermal compression at T<sub>c</sub> — temperature constant. D→A: adiabatic compression — temperature rises from T<sub>c</sub> back to T<sub>h</sub>, closing the cycle.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">22</span><strong>A heat engine takes in 8.5 × 10⁵ J of thermal energy per cycle and has an efficiency of 0.35. Calculate the useful work done per cycle and the thermal energy rejected to the cold reservoir per cycle.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">η = W/Q<sub>h</sub>, so W = ηQ<sub>h</sub> = 0.35 × 8.5 × 10⁵.<br>Q<sub>c</sub> = Q<sub>h</sub> − W = 8.5 × 10⁵ − (0.35 × 8.5 × 10⁵)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">23</span><strong>A power station's steam turbine operates with an inlet steam temperature of 560 °C and rejects heat to a condenser at 35 °C. Calculate the maximum theoretical (Carnot) efficiency of the plant.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">η<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub> = 1 − (35 + 273)/(560 + 273)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">24</span><strong>Using η<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub>, explain whether it is more effective to increase efficiency by raising T<sub>h</sub> by 50 K, or by lowering T<sub>c</sub> by 50 K, starting from T<sub>h</sub> = 600 K, T<sub>c</sub> = 300 K.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">Starting efficiency: 1 − 300/600 = 0.500. Raising T<sub>h</sub> to 650 K: 1 − 300/650 ≈ 0.538. Lowering T<sub>c</sub> to 250 K: 1 − 250/600 ≈ 0.583. Lowering T<sub>c</sub> gives the bigger improvement, because T<sub>c</sub>/T<sub>h</sub> is more sensitive to changes in the smaller of the two temperatures — this is why power stations put so much engineering effort into cooling their condensers as effectively as possible.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s7">
+      <h2>7. Entropy and the second law</h2>
+      <p>Section 6 stated, without proof, that no heat engine can be more efficient than a Carnot cycle operating between the same two temperatures, and that even a Carnot engine can never be 100% efficient. Why not? The answer lies in a quantity called <strong>entropy</strong>, which turns out to govern which processes can happen at all, and in which direction.</p>
+
+      <h3>Irreversibility</h3>
+      <p>Watch a video of coffee cooling, an egg breaking, or ice melting in a warm room, played backwards — you would recognize immediately that something is wrong. These processes are <strong>irreversible</strong>: they happen spontaneously in one direction only. Nothing in the first law of thermodynamics (conservation of energy) forbids a cup of coffee spontaneously drawing thermal energy back out of the room and getting hotter — energy would still be conserved — yet it never happens.</p>
+      <div class="keybox"><strong>Key idea.</strong> Almost all real, macroscopic processes are irreversible. Entropy, S, is a thermodynamic quantity that relates to the degree of disorder of the particles in a system, and it is entropy — not energy — that explains <em>why</em> processes run in only one direction.</div>
+
+      <h3>Entropy and disorder</h3>
+      <p>Entropy is best understood not as a measure of "messiness," but as a measure of how many different microscopic arrangements — <strong>microstates</strong> — of a system's particles all look identical from the outside. The short video below explains this idea clearly, using a simple example of a small number of particles distributed between two halves of a container.</p>
+      <div class="sim-launch">
+        <a href="https://www.youtube.com/watch?v=YM-uykVfq_E" target="_blank" rel="noopener" style="display:block; margin:0 auto 0.8rem; max-width:400px; position:relative;">
+          <img src="https://img.youtube.com/vi/YM-uykVfq_E/hqdefault.jpg" alt="What is entropy? — TED-Ed video thumbnail" style="width:100%; display:block; border-radius:8px;">
+        </a>
+        <p>Watch "What is entropy?" — a short video explaining entropy in terms of microstates and disorder, the same idea introduced above.</p>
+        <a class="launch-btn" href="https://www.youtube.com/watch?v=YM-uykVfq_E" target="_blank" rel="noopener">Watch video ↗</a>
+        <p class="credit">"What is entropy?" — lesson by Jeff Phillips, TED-Ed.</p>
+      </div>
+      <div class="keybox"><strong>Key idea.</strong> The greater the number of possible microstates of a system, the greater its disorder, and the greater its entropy:</div>
+      <div class="eqn">S = k<sub>B</sub> ln Ω</div>
+      <p>where Ω is the number of possible microstates of the system.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>Calculate the entropy of a system that has 1 × 10²² possible microstates.</p>
+        <p><strong>Answer:</strong><br>
+        S = k<sub>B</sub> ln Ω = (1.38 × 10⁻²³) × ln(1 × 10²²)</p>
+      </div>
+
+      <h3>The second law of thermodynamics</h3>
+      <div class="keybox"><strong>Key idea.</strong> The second law of thermodynamics refers to the change in entropy of an isolated system, and sets constraints on possible physical processes and on the overall evolution of the system: in every process, the total entropy of any isolated system, or the Universe as a whole, always increases.</div>
+      <p>Because a random system is overwhelmingly more likely to become more disordered than less, and because everything that happens is ultimately driven by the random behaviour of enormous numbers of particles, the total entropy of an isolated system essentially never decreases. This single statistical fact can be expressed in several equivalent ways:</p>
+      <table class="eqtable">
+        <tr><th>Version</th><th>Statement</th></tr>
+        <tr><td>General</td><td>The total entropy of an isolated system (or the Universe as a whole) always increases.</td></tr>
+        <tr><td>Clausius</td><td>Thermal energy cannot spontaneously transfer from a region of lower temperature to a region of higher temperature.</td></tr>
+        <tr><td>Kelvin–Planck</td><td>When extracting energy from a heat reservoir, it is impossible to convert all of it into work.</td></tr>
+      </table>
+
+      <div class="stretch-box">
+        <span class="tag">Worth knowing</span>
+        <p>The second law has consequences far beyond engines and gases. Every living organism maintains a highly ordered, low-entropy internal structure — but the second law still applies to the organism <em>and its surroundings</em> together, so this local decrease in entropy must be paid for by an even greater increase in the entropy of its environment, for example as waste heat and waste products.</p>
+        <p style="font-style:italic; margin-top:0.6rem;">"Pollution is not, as we are so often told, a product of moral turpitude. It is an inevitable consequence of life at work. The second law of thermodynamics clearly states that the low entropy and intricate, dynamic organization of a living system can only function through the excretion of low-grade products and low-grade energy to the environment."</p>
+        <p style="text-align:right; font-size:0.85rem; color:#5b6b78; margin-top:0.3rem;">— Lovelock, James. <em>Gaia: A New Look at Life on Earth.</em> Oxford University Press, 2009.</p>
+      </div>
+
+      <div class="keybox"><strong>Key idea.</strong> Processes in real isolated systems are almost always irreversible, and consequently the entropy of a real isolated system always increases. The entropy of a <em>non</em>-isolated system (such as the coffee, or the contents of a refrigerator) can decrease locally — but only if it is compensated by an equal or greater increase in the entropy of the surroundings.</div>
+
+      <h3>Calculating entropy change</h3>
+      <p>For real systems, tracking every microstate is impossible — but changes in entropy can be found much more directly from macroscopic quantities: thermal energy and temperature.</p>
+      <div class="eqn">ΔS = ΔQ / T</div>
+      <div class="keybox"><strong>Key idea.</strong> Entropy can be determined in terms of macroscopic quantities such as thermal energy and temperature, as given by ΔS = ΔQ/T, and also in terms of the properties of individual particles of the system, as given by S = k<sub>B</sub> ln Ω.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.2</span>
+        <p>Calculate the entropy change when 5000 J of thermal energy flows out of a cup of coffee at 70 °C into the surrounding room at 25 °C. (Assume both temperatures stay constant.)</p>
+        <p><strong>Answer:</strong><br>
+        Entropy decrease of the coffee: ΔS = ΔQ/T = −5000 / (273 + 70)<br>
+        Entropy increase of the room: ΔS = ΔQ/T = +5000 / (273 + 25)<br>
+        Because the room is cooler than the coffee, the increase in the room's entropy is larger than the decrease in the coffee's entropy — so the total (coffee + room) entropy increases, consistent with the second law.</p>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Worth knowing</span>
+        <strong>Why real engines fall short of the Carnot limit.</strong> Every real process — friction, turbulence, rapid (non-quasi-static) expansion — is irreversible, and every irreversible process increases the total entropy of the engine and its surroundings. That extra entropy corresponds to potential work that has been irretrievably "wasted" as low-grade thermal energy, rather than converted to useful work. A Carnot cycle is the theoretical limit precisely because it is perfectly reversible — every stage happens infinitely slowly, generating no extra entropy at all. This is also why heat energy can never be converted to work with 100% efficiency: doing so would require extracting entropy from a heat reservoir with nowhere for that entropy to go, violating the second law.
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">25</span><strong>State the second law of thermodynamics, and explain what is meant by an "isolated system" in this context.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">The second law states that the total entropy of an isolated system, or of the Universe as a whole, always increases in every process. An isolated system is one that cannot exchange either energy or matter with its surroundings — so nothing outside it can supply or remove entropy, and the total entropy inside can only increase (or, for a perfectly reversible process, stay the same).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">26</span><strong>Determine the increase in entropy of 500 g of ice when it melts at 0 °C. (Specific latent heat of fusion of water, L<sub>f</sub> = 3.34 × 10⁵ J kg⁻¹.)</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">ΔQ = mL<sub>f</sub> = 0.500 × 3.34 × 10⁵<br>ΔS = ΔQ/T = (0.500 × 3.34 × 10⁵) / (273 + 0)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">27</span><strong>Calculate the entropy of a system that has 4 × 10³⁰ possible microstates.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
+        <div class="answer-panel" id="q27">S = k<sub>B</sub> ln Ω = (1.38 × 10⁻²³) × ln(4 × 10³⁰)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">28</span><strong>Using the idea of entropy, explain why no real heat engine can achieve the Carnot efficiency for its operating temperatures.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
+        <div class="answer-panel" id="q28">The Carnot cycle is perfectly reversible, generating no extra entropy anywhere in the process. Real engines always involve irreversible effects — friction, turbulence, rapid changes — each of which increases the total entropy of the engine and its surroundings. That increase in entropy corresponds to energy that becomes unavailable for doing useful work, so a real engine converts a smaller fraction of Q<sub>h</sub> into work than the Carnot limit allows, for the same T<sub>h</sub> and T<sub>c</sub>.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Pressure, P</dt><dd>Force acting perpendicular to a surface, per unit area: P = F/A. SI unit: pascal, Pa.</dd>
+        <dt>Amount of substance, n</dt><dd>A measure of the number of particles in a sample, in moles: n = N/N<sub>A</sub>.</dd>
+        <dt>Avogadro constant, N<sub>A</sub></dt><dd>The number of particles in one mole of a substance: N<sub>A</sub> = 6.02 × 10²³ mol⁻¹.</dd>
+        <dt>Ideal gas</dt><dd>A theoretical model of a gas whose particles have negligible volume, exert no forces on each other except during perfectly elastic collisions, and obey PV = nRT exactly.</dd>
+        <dt>Universal (molar) gas constant, R</dt><dd>The constant in PV = nRT; R = 8.31 J K⁻¹ mol⁻¹.</dd>
+        <dt>Boltzmann constant, k<sub>B</sub></dt><dd>The "per particle" version of the gas constant, k<sub>B</sub> = R/N<sub>A</sub> = 1.38 × 10⁻²³ J K⁻¹.</dd>
+        <dt>Internal energy, U</dt><dd>The total random kinetic and potential energy of all the particles in a system. For an ideal monatomic gas, U = 3/2 Nk<sub>B</sub>T = 3/2 nRT.</dd>
+        <dt>First law of thermodynamics</dt><dd>Q = ΔU + W: the thermal energy transferred into a system either increases its internal energy or is used as it does work on its surroundings, or both.</dd>
+        <dt>Work done, W</dt><dd>The mechanical energy transferred as a system's volume changes; at constant pressure, W = PΔV. Positive when done by the gas (expansion); negative when done on the gas (compression).</dd>
+        <dt>Isothermal process</dt><dd>A change at constant temperature (ΔU = 0), so Q = W.</dd>
+        <dt>Isovolumetric process</dt><dd>A change at constant volume (W = 0), so Q = ΔU.</dd>
+        <dt>Adiabatic process</dt><dd>A change with no thermal energy transfer (Q = 0), so ΔU = −W. For a monatomic ideal gas, PV<sup>5/3</sup> = constant.</dd>
+        <dt>Isobaric process</dt><dd>A change at constant pressure (ΔP = 0).</dd>
+        <dt>Heat engine</dt><dd>A device that uses a flow of thermal energy from a hot reservoir to a cold reservoir to do useful mechanical work.</dd>
+        <dt>Efficiency, η</dt><dd>The fraction of the energy supplied to a heat engine that is converted to useful work: η = W/Q<sub>h</sub>.</dd>
+        <dt>Carnot cycle</dt><dd>An idealized, reversible four-stage thermodynamic cycle (isothermal expansion, adiabatic expansion, isothermal compression, adiabatic compression) that achieves the maximum theoretically possible efficiency between two given temperatures: η<sub>Carnot</sub> = 1 − T<sub>c</sub>/T<sub>h</sub>.</dd>
+        <dt>Reversible process</dt><dd>A process that could be reversed so that the system and all of its surroundings return exactly to their original states, with no change in total entropy. An idealization — real macroscopic processes are never perfectly reversible.</dd>
+        <dt>Irreversible process</dt><dd>A process that cannot be undone without leaving some other change in the surroundings; entropy always increases during an irreversible process.</dd>
+        <dt>Entropy, S</dt><dd>A thermodynamic quantity that relates to the degree of disorder of the particles in a system. Can be found from macroscopic quantities, ΔS = ΔQ/T, or from the number of microstates, S = k<sub>B</sub> ln Ω.</dd>
+        <dt>Microstate</dt><dd>One possible detailed arrangement of the particles of a system consistent with its overall (macroscopic) state.</dd>
+        <dt>Second law of thermodynamics</dt><dd>The total entropy of an isolated system, or of the Universe as a whole, always increases.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Energy Changes with Heating Workbook · Companion resources: <em>Methods of Heating</em> and <em>Heating</em> — the earlier workbooks in this set.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Per-simulation draw-loop scripts go here ================= */
+
+/* ================= Fig 5.2 sim: PV diagram explorer ================= */
+(function(){
+  const canvas = document.getElementById('pvCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const select = document.getElementById('pvSelect');
+  const slider = document.getElementById('pvSlider');
+  const sliderVal = document.getElementById('pvSliderVal');
+  const readout = document.getElementById('pvReadout');
+
+  const n = 1.0, R = 8.31, T_A = 300;
+  const V_A = 5.0e-3;
+  const P_A = (n*R*T_A)/V_A;
+  const adiaConst = P_A * Math.pow(V_A, 5/3);
+
+  const targets = {
+    isothermal:    {V:1.0e-2},
+    isovolumetric: {V:V_A, P:2.5e5},
+    adiabatic:     {V:1.0e-2},
+    isobaric:      {V:1.0e-2}
+  };
+
+  const Vmin=0, Vmax=0.013, Pmin=0, Pmax=6.0e5;
+  const plot = {x0:45, x1:280, y0:225, y1:20};
+  function toXY(V,P){
+    const x = plot.x0 + (V-Vmin)/(Vmax-Vmin)*(plot.x1-plot.x0);
+    const y = plot.y0 - (P-Pmin)/(Pmax-Pmin)*(plot.y0-plot.y1);
+    return [x,y];
+  }
+
+  function stateAt(proc, frac){
+    if(proc === 'isovolumetric'){
+      const P = P_A + (targets.isovolumetric.P-P_A)*frac;
+      return {V:V_A, P:P};
+    } else if(proc === 'isobaric'){
+      const V = V_A + (targets.isobaric.V-V_A)*frac;
+      return {V:V, P:P_A};
+    } else if(proc === 'isothermal'){
+      const V = V_A + (targets.isothermal.V-V_A)*frac;
+      return {V:V, P:(n*R*T_A)/V};
+    } else {
+      const V = V_A + (targets.adiabatic.V-V_A)*frac;
+      return {V:V, P: adiaConst / Math.pow(V,5/3)};
+    }
+  }
+
+  function computeEnergies(proc, state){
+    const T = (state.P*state.V)/(n*R);
+    const dU = 1.5*n*R*(T-T_A);
+    let W, Q;
+    if(proc==='isothermal'){ W = n*R*T_A*Math.log(state.V/V_A); Q = W; }
+    else if(proc==='isovolumetric'){ W = 0; Q = dU; }
+    else if(proc==='adiabatic'){ Q = 0; W = -dU; }
+    else { W = P_A*(state.V-V_A); Q = dU + W; }
+    return {T:T, dU:dU, W:W, Q:Q};
+  }
+
+  function fullPath(proc, steps){
+    const pts = [];
+    for(let i=0;i<=steps;i++){ pts.push(stateAt(proc, i/steps)); }
+    return pts;
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.strokeStyle = '#7c93ab';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(plot.x0, plot.y0); ctx.lineTo(plot.x1, plot.y0);
+    ctx.moveTo(plot.x0, plot.y0); ctx.lineTo(plot.x0, plot.y1);
+    ctx.stroke();
+    ctx.fillStyle = '#dceaf0';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('V', plot.x1-6, plot.y0+16);
+    ctx.textAlign = 'right';
+    ctx.fillText('P', plot.x0-6, plot.y1+4);
+    ctx.textAlign = 'left';
+
+    const proc = select.value;
+    const pathPts = fullPath(proc, 30);
+    ctx.strokeStyle = '#0e7c86';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    pathPts.forEach(function(s,i){
+      const xy = toXY(s.V,s.P);
+      if(i===0) ctx.moveTo(xy[0],xy[1]); else ctx.lineTo(xy[0],xy[1]);
+    });
+    ctx.stroke();
+
+    const aXY = toXY(V_A,P_A);
+    ctx.fillStyle = '#f4f8fb';
+    ctx.beginPath(); ctx.arc(aXY[0],aXY[1],4,0,2*Math.PI); ctx.fill();
+    ctx.fillText('A', aXY[0]-14, aXY[1]-6);
+
+    const frac = parseFloat(slider.value)/100;
+    const state = stateAt(proc, frac);
+    const cXY = toXY(state.V,state.P);
+    ctx.fillStyle = '#d98324';
+    ctx.beginPath(); ctx.arc(cXY[0],cXY[1],5,0,2*Math.PI); ctx.fill();
+
+    const e = computeEnergies(proc, state);
+    sliderVal.textContent = Math.round(frac*100) + '%';
+    readout.innerHTML =
+      'V = ' + state.V.toExponential(2) + ' m&sup3;, P = ' + state.P.toExponential(2) + ' Pa, T = ' + Math.round(e.T) + ' K<br>' +
+      'Q = ' + Math.round(e.Q) + ' J, &Delta;U = ' + Math.round(e.dU) + ' J, W = ' + Math.round(e.W) + ' J';
+  }
+
+  select.addEventListener('change', draw);
+  slider.addEventListener('input', draw);
+  draw();
+})();
+
+/* ================= Fig 6.3 sim: Carnot efficiency calculator ================= */
+(function(){
+  const canvas = document.getElementById('carnotCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const thSlider = document.getElementById('thSlider');
+  const tcSlider = document.getElementById('tcSlider');
+  const thVal = document.getElementById('thVal');
+  const tcVal = document.getElementById('tcVal');
+  const readout = document.getElementById('carnotReadout');
+
+  const maxT = 900;
+  const baseY = 220, barH = 180;
+
+  function draw(){
+    const Th = parseFloat(thSlider.value);
+    const Tc = parseFloat(tcSlider.value);
+    const eta = 1 - Tc/Th;
+
+    thVal.textContent = Th;
+    tcVal.textContent = Tc;
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#f4f8fb';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    // Th bar
+    const thH = (Th/maxT)*barH;
+    ctx.fillStyle = '#d98324';
+    ctx.fillRect(50, baseY-thH, 40, thH);
+    ctx.strokeStyle = '#22305a';
+    ctx.strokeRect(50, baseY-barH, 40, barH);
+    ctx.fillStyle = '#22305a';
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Th', 70, baseY+16);
+
+    // Tc bar
+    const tcH = (Tc/maxT)*barH;
+    ctx.fillStyle = '#0e7c86';
+    ctx.fillRect(130, baseY-tcH, 40, tcH);
+    ctx.strokeStyle = '#22305a';
+    ctx.strokeRect(130, baseY-barH, 40, barH);
+    ctx.fillStyle = '#22305a';
+    ctx.fillText('Tc', 150, baseY+16);
+
+    // efficiency bar
+    const etaH = eta*barH;
+    ctx.fillStyle = '#3f9a5c';
+    ctx.fillRect(220, baseY-etaH, 40, etaH);
+    ctx.strokeStyle = '#22305a';
+    ctx.strokeRect(220, baseY-barH, 40, barH);
+    ctx.fillStyle = '#22305a';
+    ctx.fillText('η', 240, baseY+16);
+
+    // percentage label
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillStyle = '#173a5e';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.round(eta*100) + '%', 240, baseY-barH-10);
+
+    readout.innerHTML = 'η = 1 &minus; T<sub>c</sub>/T<sub>h</sub> = 1 &minus; ' + Tc + '/' + Th + ' = ' + (Math.round(eta*1000)/10) + '%';
+  }
+
+  thSlider.addEventListener('input', draw);
+  tcSlider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

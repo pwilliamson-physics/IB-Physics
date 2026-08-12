@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methods of Heating — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:340px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-row select{width:100%; padding:0.3rem; border-radius:6px; border:1px solid rgba(255,255,255,0.4); background:#0f1f30; color:#dceaf0;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Methods of Heating</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Methods of Heating</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Particles in solids, liquids, gases</a>
+    <a href="#s2">2. Temperature and thermal equilibrium</a>
+    <a href="#s3">3. Internal energy and phase change</a>
+    <a href="#s4">4. Three ways to transfer thermal energy</a>
+    <a href="#s5">5. Conduction</a>
+    <a href="#s6">6. Convection</a>
+    <a href="#s7">7. Radiation and black bodies</a>
+    <a href="#s8">8. Wien's law and the black-body spectrum</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Methods of Heating</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Every day you feel thermal energy on the move: a metal spoon warming in soup, warm air rising from a radiator, sunlight warming your skin across empty space. This workbook builds the particle model of matter and temperature from the ground up, then uses it to explain the three ways thermal energy travels — conduction, convection and radiation — finishing with the physics of how hot objects glow. The next two workbooks in this set, <em>Heating</em> and <em>Energy Changes with Heating</em>, build directly on the ideas developed here.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Describe the arrangement, separation and motion of particles in solids, liquids and gases, and use density ρ = m/V.</li>
+          <li>Convert between Kelvin and Celsius temperatures, and explain why temperature difference determines the direction of thermal energy transfer.</li>
+          <li>Explain internal energy in terms of particle kinetic and potential energy, and describe a phase change as a change in particle behaviour at constant temperature.</li>
+          <li>State the three mechanisms of thermal energy transfer: conduction, convection and thermal radiation.</li>
+          <li>Explain conduction in terms of the kinetic energy of particles, and use ΔQ/Δt = kAΔT/Δx to calculate the rate of thermal energy transfer.</li>
+          <li>Describe convection qualitatively in terms of changes in fluid density.</li>
+          <li>Describe thermal radiation and black bodies, and apply the Stefan–Boltzmann law L = σAT⁴.</li>
+          <li>Apply Wien's displacement law λ<sub>max</sub>T = 2.9 × 10⁻³ m·K to relate a black body's peak wavelength to its temperature.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Particles in solids, liquids and gases</h2>
+      <p>Almost everything you will learn in this workbook rests on one idea: all matter is made of a huge number of tiny particles (atoms, ions or molecules) which are constantly moving, with forces acting between them when they get close enough. This is the <strong>kinetic theory of matter</strong>, and it explains why solids, liquids and gases behave so differently.</p>
+
+      <div class="keybox"><strong>Kinetic theory of matter.</strong> All matter is made up of a very large number of small particles which are in constant motion, with forces acting between them.</div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 235" width="700" height="235" xmlns="http://www.w3.org/2000/svg">
+          <text x="105" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Solid</text>
+          <rect x="30" y="40" width="150" height="120" fill="none" stroke="#b9c6d3" stroke-width="2"/>
+          <g fill="#a33d5b">
+            <circle cx="72" cy="105" r="11"/><circle cx="94" cy="105" r="11"/><circle cx="116" cy="105" r="11"/><circle cx="138" cy="105" r="11"/>
+            <circle cx="72" cy="127" r="11"/><circle cx="94" cy="127" r="11"/><circle cx="116" cy="127" r="11"/><circle cx="138" cy="127" r="11"/>
+            <circle cx="72" cy="149" r="11"/><circle cx="94" cy="149" r="11"/><circle cx="116" cy="149" r="11"/><circle cx="138" cy="149" r="11"/>
+          </g>
+          <text x="105" y="180" text-anchor="middle" font-size="10.5" fill="#4a5568">regular pattern, touching,</text>
+          <text x="105" y="193" text-anchor="middle" font-size="10.5" fill="#4a5568">vibrate about fixed positions</text>
+
+          <text x="350" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Liquid</text>
+          <path d="M270,40 L270,145 Q270,160 285,160 L405,160 Q420,160 420,145 L420,40" fill="none" stroke="#b9c6d3" stroke-width="2"/>
+          <g fill="#a33d5b">
+            <circle cx="283.1" cy="96.1" r="11"/><circle cx="303.5" cy="96.3" r="11"/><circle cx="324.5" cy="94.9" r="11"/><circle cx="342.2" cy="96.9" r="11"/><circle cx="363.1" cy="95.3" r="11"/><circle cx="385.8" cy="95.9" r="11"/>
+            <circle cx="294.2" cy="113.3" r="11"/><circle cx="313.5" cy="112.5" r="11"/><circle cx="333.5" cy="114.4" r="11"/><circle cx="353.1" cy="114.0" r="11"/><circle cx="373.6" cy="112.3" r="11"/><circle cx="393.9" cy="113.6" r="11"/>
+            <circle cx="284.3" cy="129.6" r="11"/><circle cx="305.3" cy="130.7" r="11"/><circle cx="324.8" cy="131.8" r="11"/><circle cx="344.8" cy="131.9" r="11"/><circle cx="363.6" cy="131.6" r="11"/><circle cx="382.8" cy="131.9" r="11"/>
+            <circle cx="295.4" cy="146.2" r="11"/><circle cx="311.7" cy="146.5" r="11"/><circle cx="333.7" cy="147.0" r="11"/><circle cx="352.5" cy="146.7" r="11"/><circle cx="371.0" cy="146.9" r="11"/><circle cx="389.5" cy="147.0" r="11"/>
+          </g>
+          <line x1="270" y1="60" x2="420" y2="60" stroke="#8fb0c7" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="350" y="180" text-anchor="middle" font-size="10.5" fill="#4a5568">disordered, but still touching —</text>
+          <text x="350" y="193" text-anchor="middle" font-size="10.5" fill="#4a5568">particles can move past each other</text>
+
+          <text x="595" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Gas</text>
+          <rect x="520" y="40" width="150" height="120" fill="none" stroke="#b9c6d3" stroke-width="2" stroke-dasharray="4 3"/>
+          <g fill="#a33d5b">
+            <circle cx="548" cy="63" r="11"/><circle cx="628" cy="75" r="11"/><circle cx="585" cy="122" r="11"/><circle cx="650" cy="142" r="11"/>
+            <circle cx="537" cy="140" r="11"/><circle cx="610" cy="103" r="11"/>
+          </g>
+          <g stroke="#a33d5b" stroke-width="1.6" fill="none">
+            <line x1="561" y1="55" x2="577" y2="45" marker-end="url(#arrG)"/>
+            <line x1="640" y1="65" x2="655" y2="52" marker-end="url(#arrG)"/>
+            <line x1="596" y1="130" x2="610" y2="143" marker-end="url(#arrG)"/>
+            <line x1="638" y1="150" x2="622" y2="158" marker-end="url(#arrG)"/>
+            <line x1="537" y1="140" x2="552" y2="150" marker-end="url(#arrG)"/>
+            <line x1="620" y1="94" x2="633" y2="82" marker-end="url(#arrG)"/>
+          </g>
+          <defs><marker id="arrG" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#a33d5b"/></marker></defs>
+          <text x="595" y="180" text-anchor="middle" font-size="10.5" fill="#4a5568">no pattern, far apart,</text>
+          <text x="595" y="193" text-anchor="middle" font-size="10.5" fill="#4a5568">move randomly at high speed</text>
+        </svg>
+        <figcaption>Fig. 1.1 A particle model of the three states of matter, drawn with particles of the same size and colour throughout. Solid: a regular, touching arrangement, settled at the bottom of its container, vibrating in place. Liquid: a disordered but still-touching arrangement that flows to fill the bottom of its container (the dashed line marks its surface). Gas: widely separated particles filling the whole container, moving randomly at high speed.</figcaption>
+      </figure>
+
+      <table class="eqtable">
+        <tr><th></th><th>Solid</th><th>Liquid</th><th>Gas</th></tr>
+        <tr><td>Arrangement</td><td>regular pattern</td><td>no fixed pattern</td><td>no pattern</td></tr>
+        <tr><td>Forces between particles</td><td>strong enough to hold particles in place</td><td>strong enough to keep particles close, but they can move past each other</td><td>negligible, except during collisions</td></tr>
+        <tr><td>Separation of particles</td><td>close together</td><td>close together</td><td>much further apart</td></tr>
+        <tr><td>Motion of particles</td><td>vibrate about fixed positions</td><td>limited random movement is possible</td><td>move randomly in all directions, usually at high speed</td></tr>
+      </table>
+
+      <h3>Density</h3>
+      <p>The more massive the individual particles are, and/or the closer together they are packed, the greater the density of a substance.</p>
+      <div class="eqn">density, <b>ρ = m / V</b> &nbsp; SI unit: kg m⁻³</div>
+      <p>Gases are typically around 1000 times less dense than the same substance as a solid or liquid, because their particles are so much further apart.</p>
+
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        <p style="margin:0;">Because density depends on the volume between particles as well as their mass, a "1000× less dense" gas does not mean the gas particles are 1000× further apart — density scales with the <em>cube</em> of the typical particle separation, so a 1000× drop in density corresponds to particles being roughly 1000<sup>1/3</sup> ≈ 10× further apart on average.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>A sample of olive oil has a mass of 125 g and a volume of 137 cm³. Calculate its density in SI units.</p>
+        <p><strong>Answer:</strong><br>
+        Convert to SI units: m = 125 g = 0.125 kg; V = 137 cm³ = 137 × 10⁻⁶ m³<br>
+        ρ = m/V = 0.125 / (137 × 10⁻⁶)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>An aluminium bar has dimensions 4.0 cm × 4.0 cm × 20.0 cm.</strong> The density of aluminium is 2710 kg m⁻³. Calculate the mass of the bar. (Convert all lengths to metres first.)
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">V = 0.040 × 0.040 × 0.200 = 3.2 × 10⁻⁴ m³. m = ρV = 2710 × (3.2 × 10⁻⁴) — complete the multiplication to find the mass in kg.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>Ice floats on liquid water.</strong> Using the idea of density and particle separation, explain what this tells us about how the particles are arranged in ice compared with liquid water.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">Since ice floats, ice must be less dense than liquid water. As the mass of the particles is unchanged when water freezes, this means the particles in ice must, on average, be slightly further apart (occupy a slightly greater volume) than in liquid water — an unusual property of water compared with most other substances.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>Gold can be hammered into extremely thin sheets called gold leaf.</strong> A sample of gold leaf has a mass of 1.0 g, a thickness of 1.8 × 10⁻⁷ m, and the density of gold is 19300 kg m⁻³. Determine the area of gold leaf this sample could cover. (Volume = area × thickness.)
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">m = 1.0 g = 1.0 × 10⁻³ kg. V = m/ρ = (1.0 × 10⁻³)/19300. Then, since V = area × thickness, area = V / (1.8 × 10⁻⁷) — complete both divisions to find the area in m².</div>
+      </div>
+      <div class="question">
+        <span class="qnum">4</span><strong>Explain, in terms of the kinetic theory of matter, why gases are much easier to compress than solids or liquids.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">In a gas, the particles are far apart with negligible forces between them, so there is a large amount of empty space between particles that can be reduced by squeezing the gas into a smaller volume. In solids and liquids, the particles are already close together (effectively "touching"), so there is very little space left to remove, and strong forces between particles resist being pushed closer.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Temperature and thermal equilibrium</h2>
+      <p>In everyday life, temperature is just a number from a thermometer. But physically, temperature tells us something much more important: which way thermal energy will flow.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> The resultant flow of thermal energy between two bodies is always from the one at higher temperature to the one at lower temperature.</div>
+
+      <p>If two objects are in thermal contact (able to transfer thermal energy between them) and there is no net flow of thermal energy between them, they are at the same temperature — they are in <strong>thermal equilibrium</strong>.</p>
+      <div class="keyword"><b>Thermal equilibrium:</b> the state reached when two (or more) objects in thermal contact are at the same temperature, so there is no net transfer of thermal energy between them.</div>
+
+      <h3>Live simulation: reaching thermal equilibrium</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="teqCanvas" width="460" height="270"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Two objects in thermal contact</h4>
+            <div class="sim-row">
+              <label for="teqA0">Object A starting temperature: <span id="teqA0Val">90</span>°C</label>
+              <input type="range" id="teqA0" min="20" max="100" step="1" value="90">
+            </div>
+            <div class="sim-row">
+              <label for="teqB0">Object B starting temperature: <span id="teqB0Val">10</span>°C</label>
+              <input type="range" id="teqB0" min="0" max="80" step="1" value="10">
+            </div>
+            <div class="sim-btns">
+              <button onclick="teqStart()">Start</button>
+              <button class="alt" onclick="teqReset()">Reset</button>
+            </div>
+            <div class="sim-readout" id="teqReadout" style="margin-top:0.7rem;">A: 90 °C &nbsp; B: 10 °C</div>
+          </div>
+        </div>
+        <figcaption>Fig. 2.1 Two objects, A (red) and B (blue), placed in good thermal contact. Thermal energy flows from the hotter to the cooler object until both reach the same equilibrium temperature. Set the starting temperatures and press Start.</figcaption>
+      </figure>
+
+      <h3>Kelvin and Celsius scales</h3>
+      <p>Two temperature scales are used throughout this course. The <strong>Celsius scale</strong> is based on the freezing point (0 °C) and boiling point (100 °C) of pure water. The <strong>Kelvin scale</strong> is the absolute temperature scale used in physics, based on <strong>absolute zero</strong> (0 K) — the theoretical temperature at which the kinetic energy of particles is a minimum.</p>
+      <div class="eqn">temperature in kelvin, <b>T/K = θ/°C + 273</b></div>
+
+      <div class="keybox"><strong>Key idea.</strong> Because the kelvin and the degree Celsius represent exactly the same <em>size</em> of temperature step — the two scales are simply offset from each other by 273 — a <em>change</em> in temperature, ΔT, has the same numerical value whether it is expressed in kelvin or in degrees Celsius.</div>
+
+      <div class="stretch-box">
+        <span class="tag">Common mistake</span>
+        <p style="margin:0;">0 °C is simply the freezing point of pure water — it has no other special meaning, and it is <em>not</em> a "true zero". It would be wrong to think that 20 °C is "twice as hot" as 10 °C, since neither value is measured from an absolute zero of thermal energy. On the Kelvin scale, however, 0 K genuinely does correspond to (almost) zero particle kinetic energy, so ratios of Kelvin temperatures do have physical meaning.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>a) The boiling point of nitrogen is −196 °C. Convert this to kelvin.<br>
+        b) The melting point of copper is 1358 K. Convert this to degrees Celsius.<br>
+        c) Overnight, the temperature at a weather station fell from +6 °C to −9 °C. Calculate this change in temperature in kelvin.</p>
+        <p><strong>Answer:</strong><br>
+        a) T = −196 + 273 = <br>
+        b) θ = 1358 − 273 = <br>
+        c) ΔT = (−9) − (+6) =  &nbsp;(the size of this change is the same in kelvin as in °C)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">5</span><strong>Convert the following kelvin temperatures into degrees Celsius:</strong> a) 310 K &nbsp; b) 195 K &nbsp; c) 4 K.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">Use θ/°C = T/K − 273: a) 310 − 273 = 37 °C &nbsp; b) 195 − 273 = −78 °C &nbsp; c) 4 − 273 = −269 °C.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>The lowest temperature ever recorded on Earth's surface was −89.2 °C (Antarctica); the highest was 56.7 °C (California).</strong>
+        a) State both temperatures in kelvin.
+        b) Calculate the difference between the highest and lowest recorded temperatures, in kelvin.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">a) −89.2 + 273 = 183.8 K; 56.7 + 273 = 329.7 K. b) Difference = 56.7 − (−89.2) = 145.9 (K or °C — the same either way).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">7</span><strong>A block of metal at 85 °C is placed in good thermal contact with an identical block of the same metal at 25 °C, and the pair is well insulated from their surroundings.</strong> Describe, in terms of thermal energy transfer, what happens to the temperature of each block over time, and state the final temperature reached (assume the blocks are identical).
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">Thermal energy flows from the hotter block (85 °C) to the cooler block (25 °C), so the hotter block cools down while the cooler block warms up. The rate of transfer decreases as the temperature difference decreases. Because the blocks are identical, they reach a common equilibrium temperature exactly halfway between the two starting temperatures: 55 °C.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">8</span><strong>A student is measuring the temperature of a beaker of water using a thermometer.</strong> Explain why the student must wait for a short time, with the thermometer bulb held in the water, before taking the reading.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">The thermometer needs time to reach thermal equilibrium with the water — that is, time for thermal energy to be exchanged between the thermometer and the water until they are at the same temperature. Only once this equilibrium has been reached will the thermometer's reading be an accurate measurement of the water's temperature.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Internal energy and phase change</h2>
+      <p>All the particles in a substance are moving (or, in a solid, vibrating), so they have kinetic energy. Where there are forces between particles, there is also potential energy associated with their separation. Together, these make up the <strong>internal energy</strong> of the substance.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> The internal energy of a substance is the sum of the total random kinetic energy and total potential energy of all the particles inside it.</div>
+      <div class="keybox"><strong>Key idea.</strong> A rise in the temperature of a substance corresponds to its particles gaining, on average, kinetic energy.</div>
+
+      <div class="stretch-box">
+        <span class="tag">Extension</span>
+        <p style="margin:0 0 0.4rem 0;">More precisely, the average random <em>translational</em> kinetic energy of particles in a gas is directly proportional to the absolute (kelvin) temperature:</p>
+        <div class="eqn" style="background:transparent; border-color:#d9c9ec;">Ē<sub>k</sub> = (3/2) k<sub>B</sub>T</div>
+        <p style="margin:0;">where k<sub>B</sub> is the <strong>Boltzmann constant</strong>, k<sub>B</sub> = 1.38 × 10⁻²³ J K⁻¹. This equation only relates directly to temperature for translational kinetic energy in a gas — the internal energy of solids and liquids is more complicated because of the significant forces between particles.</p>
+      </div>
+
+      <h3>Phase change</h3>
+      <p>Melting, freezing, boiling and condensing are all examples of a <strong>phase change</strong> (change of state). While a phase change is happening, energy is still being transferred to (or from) the substance — but its temperature does not change.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> A phase change represents a change in particle behaviour (their arrangement and separation) arising from a change in a substance's (potential) energy, at constant temperature.</div>
+
+      <p>During melting, for example, energy supplied to a solid does not increase the average kinetic energy of its particles (so the temperature does not rise); instead, it is used to weaken and break the forces holding particles in their fixed positions, increasing their potential energy and allowing them to move past one another as a liquid. The same is true of boiling, but for the much larger separation needed to become a gas.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+          <line x1="70" y1="250" x2="660" y2="250" stroke="#4a5568" stroke-width="1.5"/>
+          <line x1="70" y1="250" x2="70" y2="20" stroke="#4a5568" stroke-width="1.5"/>
+          <path d="M70.0,235.6 L181.1,206.9 L278.2,206.9 L417.1,63.1 L528.1,63.1 L660.0,34.4" fill="none" stroke="#a33d5b" stroke-width="3"/>
+          <line x1="60" y1="206.9" x2="660" y2="206.9" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="60" y1="63.1" x2="660" y2="63.1" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="55" y="210.5" text-anchor="end" font-size="12" fill="#4a5568">0°C</text>
+          <text x="55" y="66.7" text-anchor="end" font-size="12" fill="#4a5568">100°C</text>
+          <text x="365" y="278" text-anchor="middle" font-size="13" fill="#4a5568">energy supplied →</text>
+          <text x="18" y="140" font-size="13" fill="#4a5568" transform="rotate(-90 18 140)">temperature</text>
+
+          <g font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">
+            <circle cx="100" cy="242" r="10" fill="#173a5e"/><text x="100" y="246">a</text>
+            <circle cx="229" cy="185" r="10" fill="#173a5e"/><text x="229" y="189">b</text>
+            <circle cx="390" cy="178" r="10" fill="#173a5e"/><text x="390" y="182">c</text>
+            <circle cx="472" cy="45" r="10" fill="#173a5e"/><text x="472" y="49">d</text>
+            <circle cx="600" cy="98" r="10" fill="#173a5e"/><text x="600" y="102">e</text>
+          </g>
+        </svg>
+        <figcaption>Fig. 3.1 A heating curve for a pure substance (e.g. water) warmed steadily from solid to gas. (a) solid warms, KE↑; (b) melting — solid + liquid together, energy breaks bonds so PE↑ while T stays constant; (c) liquid warms, KE↑; (d) boiling — liquid + gas together, energy separates particles further so PE↑ while T stays constant; (e) gas warms, KE↑.</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Note:</b> The quantities of energy needed for a temperature rise (specific heat capacity) and for a phase change (specific latent heat) are treated quantitatively in the next workbook in this set, <em>Heating</em>.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">9</span><strong>A beaker of ice is heated steadily and its temperature is monitored.</strong> Explain why the temperature of the ice/water mixture stays at 0 °C for a period of time, even though the heater is continuously supplying energy.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">While melting is taking place, the energy supplied is used to break the forces holding the particles in their fixed solid positions (increasing their potential energy), rather than increasing their average kinetic energy. Since temperature depends on average kinetic energy, the temperature does not rise until melting is complete and all the energy supplied goes back into raising the kinetic energy of the (now liquid) particles.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">10</span><strong>Using Figure 3.1, describe what is physically happening to the substance and its particles during each of the following sections of the graph:</strong> a) the rising section between 0 °C and 100 °C; b) the flat section at 100 °C.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">a) The substance is entirely liquid; energy supplied increases the average kinetic energy of the particles, so the temperature rises steadily. b) The substance is boiling — both liquid and gas are present together; energy supplied is used to separate the particles much further apart (a large increase in potential energy) rather than increasing their kinetic energy, so the temperature remains constant at 100 °C until boiling is complete.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">11</span><strong>Two identical, sealed, insulated containers hold the same gas.</strong> Container P is at 400 K; container Q is at 200 K. Using Ē<sub>k</sub> = (3/2)k<sub>B</sub>T, determine the ratio of the average translational kinetic energy of a particle in P to that in Q.
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">Since Ē<sub>k</sub> ∝ T, the ratio is simply the ratio of the absolute temperatures: 400/200 = 2. A particle in P has, on average, twice the translational kinetic energy of a particle in Q.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Three ways to transfer thermal energy</h2>
+      <p>Whenever there is a temperature difference, thermal energy will flow from the hotter region to the cooler one. There are three distinct mechanisms by which this can happen, and the rest of this workbook looks at each one in turn.</p>
+
+      <table class="eqtable">
+        <tr><th>Mechanism</th><th>What is transferred?</th><th>Needs a medium?</th></tr>
+        <tr><td><strong>Conduction</strong></td><td>kinetic energy, passed particle to particle</td><td>yes (solids, liquids, gases)</td></tr>
+        <tr><td><strong>Convection</strong></td><td>thermal energy, carried by the bulk movement of a fluid</td><td>yes — only in liquids and gases</td></tr>
+        <tr><td><strong>Thermal radiation</strong></td><td>electromagnetic waves, emitted from a surface</td><td>no — can cross a vacuum</td></tr>
+      </table>
+
+      <div class="keybox"><strong>Key idea.</strong> Conduction, convection and thermal radiation are the three primary mechanisms for thermal energy transfer.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">12</span><strong>For each situation below, state which single mechanism is the primary way that thermal energy is transferred, and justify your choice:</strong>
+        a) sunlight warming your skin on a cold but clear day;
+        b) a metal teaspoon left standing in a hot cup of tea becoming warm to the touch;
+        c) warm air spreading upward and outward from a radiator to heat a whole room.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">a) Radiation — the energy crosses the vacuum of space from the Sun to the Earth, which is only possible by electromagnetic waves. b) Conduction — kinetic energy is passed from the hot tea, through the particles of the solid metal spoon, up to the handle. c) Convection — the bulk movement of warmed, less dense air carries thermal energy around the room.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">13</span><strong>Explain why neither conduction nor convection can be responsible for the Sun's thermal energy reaching the Earth.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">Both conduction and convection require a material medium (a substance whose particles can pass on kinetic energy, or whose bulk can circulate). Almost all of the space between the Sun and the Earth is vacuum, containing no particles to carry energy this way. Only thermal radiation (electromagnetic waves) can travel through a vacuum.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Conduction</h2>
+      <p>Imagine one end of a solid rod being heated. The particles at that end vibrate more vigorously (they gain kinetic energy). Through the forces connecting them to their neighbours, some of this extra kinetic energy is passed along the rod, particle to particle, without any of the particles moving from their fixed positions.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Thermal conduction occurs because of the transfer of kinetic energy between particles that are in contact with each other, without the particles themselves changing position.</div>
+
+      <p>Solids are generally better thermal conductors than liquids, and liquids conduct better than gases — because their particles are closer together and the forces between them are stronger. Metals are by far the best conductors of all, because they also contain many free (delocalised) electrons that can carry kinetic energy through the material very quickly.</p>
+
+      <table class="eqtable">
+        <tr><th>Substance</th><th>Thermal conductivity, k / W m⁻¹ K⁻¹</th></tr>
+        <tr><td>air</td><td>0.025</td></tr>
+        <tr><td>wood</td><td>0.15</td></tr>
+        <tr><td>water</td><td>0.59</td></tr>
+        <tr><td>glass</td><td>0.86</td></tr>
+        <tr><td>iron</td><td>84</td></tr>
+        <tr><td>copper</td><td>385</td></tr>
+      </table>
+      <div class="keyword"><b>Thermal conductivity, k:</b> a constant that represents how readily a substance conducts thermal energy; a larger value of k means the substance is a better conductor. A substance with a very low k is called a <b>thermal insulator</b>.</div>
+
+      <h3>A quantitative treatment</h3>
+      <p>The rate at which thermal energy is conducted through a material depends on the type of material, its cross-sectional area, and how steeply the temperature changes across its thickness (its temperature gradient):</p>
+      <div class="eqn">rate of thermal energy transfer by conduction: <b>ΔQ/Δt = kA · ΔT/Δx</b></div>
+      <p>where A is the cross-sectional area, Δx is the thickness of the material, and ΔT is the temperature difference across that thickness. Since ΔQ/Δt is energy transferred per second, it is measured in watts (W).</p>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A single-glazed window pane has dimensions 1.2 m × 0.8 m and a thickness of 6.0 mm. The thermal conductivity of the glass is 0.86 W m⁻¹ K⁻¹. On a winter day, the temperature inside a room is 22 °C and the outside temperature is 9 °C. Calculate the rate of thermal energy transfer through the window.</p>
+        <p><strong>Answer:</strong><br>
+        A = 1.2 × 0.8 = 0.96 m²; Δx = 6.0 mm = 6.0 × 10⁻³ m; ΔT = 22 − 9 = 13 K<br>
+        ΔQ/Δt = kA·ΔT/Δx = 0.86 × 0.96 × 13 / (6.0 × 10⁻³)</p>
+      </div>
+
+      <h3>Live simulation: exploring the conduction equation</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="condCanvas" width="460" height="230"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Rate of conduction: ΔQ/Δt = kAΔT/Δx</h4>
+            <div class="sim-row">
+              <label for="condMaterial">Material</label>
+              <select id="condMaterial">
+                <option value="0.025">Air (k = 0.025)</option>
+                <option value="0.15">Wood (k = 0.15)</option>
+                <option value="0.59">Water (k = 0.59)</option>
+                <option value="0.86" selected>Glass (k = 0.86)</option>
+                <option value="84">Iron (k = 84)</option>
+                <option value="385">Copper (k = 385)</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="condDT">Temperature difference, ΔT: <span id="condDTVal">40</span> K</label>
+              <input type="range" id="condDT" min="5" max="100" step="1" value="40">
+            </div>
+            <div class="sim-row">
+              <label for="condDx">Thickness, Δx: <span id="condDxVal">5.0</span> cm</label>
+              <input type="range" id="condDx" min="1" max="20" step="0.5" value="5">
+            </div>
+            <div class="sim-row">
+              <label for="condA">Cross-sectional area, A: <span id="condAVal">20</span> cm²</label>
+              <input type="range" id="condA" min="5" max="50" step="1" value="20">
+            </div>
+            <div class="sim-readout" id="condReadout">ΔQ/Δt = … W</div>
+          </div>
+        </div>
+        <figcaption>Fig. 5.1 A simplified visual model of conduction along a bar: warmer particles (left) vibrate with greater amplitude than cooler particles (right). Choose a material and adjust ΔT, thickness and area to see how the calculated rate of energy transfer responds.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">14</span><strong>A layer of polyurethane foam insulation (k = 0.030 W m⁻¹ K⁻¹) in a cavity wall has a thickness of 7.5 cm and an area of 1.0 m².</strong> If the rate of thermal energy flow through the foam is 6.0 W, calculate the temperature difference across the foam. (Rearrange the conduction equation first.)
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">Rearranging: ΔT = (ΔQ/Δt) × Δx / (kA) = 6.0 × 0.075 / (0.030 × 1.0) — complete the calculation to find ΔT in K (which is numerically the same as °C).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">15</span><strong>Frying pans are usually made from metal, but their handles are usually made from plastic or wood.</strong> Using the thermal conductivities in the table above, explain this choice of materials.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">Metal has a very high thermal conductivity, so the base of the pan conducts thermal energy efficiently from the hob to the food, cooking it quickly. Plastic or wood have a very low thermal conductivity, so the handle conducts very little thermal energy from the hot pan to the cook's hand, letting it be held safely.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">16</span><strong>Wetsuits, worn by surfers and divers, are made from neoprene foam rubber, which traps many small pockets of air.</strong> Explain how this design keeps the wearer warm in cold water.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">Air has a very low thermal conductivity, so the many trapped pockets of air within the foam act as good thermal insulators, greatly reducing the rate at which thermal energy is conducted away from the wearer's body into the surrounding cold water.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">17</span><strong>Double-glazed windows use two parallel sheets of glass with a thin gap of air (or another gas) between them, rather than one thick sheet of glass, or a very wide gap.</strong> Explain why (a) having a gap at all reduces conductive heat loss compared with a single thick pane, and (b) the gap is kept narrow rather than made very wide.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">a) Air has a much lower thermal conductivity than glass, so trapping a layer of air between two panes conducts far less thermal energy than the same thickness of glass would. b) If the gap were made very wide, the trapped air could set up convection currents, carrying thermal energy across the gap by a different mechanism and reducing the benefit of the insulating layer — so the gap is kept narrow enough to limit this convective movement.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Convection</h2>
+      <p>Conduction can occur in solids, liquids and gases — but liquids and gases have another way of transferring thermal energy, one that is not available to solids: bulk movement of the fluid itself.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Thermal convection is the transfer of thermal energy because of the movement of a fluid, arising from differences in its density.</div>
+
+      <p>When part of a fluid is heated, it expands slightly and becomes less dense than the surrounding, cooler fluid. Because of its increased buoyancy, the warmer, less dense fluid rises above the cooler, denser fluid, which sinks to take its place. This sets up a continuous circulation known as a <strong>convection current</strong>.</p>
+
+      <div class="keyword"><b>Note:</b> Convection cannot occur in solids, because the particles are held in fixed positions and cannot circulate as a bulk fluid.</div>
+
+      <h3>Live simulation: convection in a gas</h3>
+      <div class="sim-embed">
+        <p class="instructions">This tool visualises individual gas particles above a heated surface. Watch how particles near the heat source speed up and spread out (becoming less dense), rise, then cool and sink elsewhere in the container — the microscopic picture behind the convection currents described above.</p>
+        <iframe class="sim-frame" src="https://www.drjonesphysics.com/conv-gas" style="height:640px;" loading="lazy" title="Convection in a gas simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://www.drjonesphysics.com/conv-gas" target="_blank" rel="noopener">Dr Dan Jones (drjonesphysics.com)</a>. If the embedded version above doesn't load, open it directly in a new tab via that link.</p>
+      </div>
+
+      <p>Convection currents explain a huge range of everyday phenomena: room heaters are placed near the floor while air-conditioning units are placed near the ceiling; the coolest part of a fridge is near the bottom while a freezer compartment is at the top; ocean currents mix water in seas and lakes; molten rock circulates in the Earth's mantle; and clouds, storms and global wind patterns are all driven by convection in the atmosphere.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">18</span><strong>The heating element of an electric kettle is placed near the bottom of the kettle, not near the top.</strong> Explain, in terms of convection, why this is an effective design.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Water heated at the bottom expands and becomes less dense, so it rises; cooler, denser water from above sinks to take its place and is, in turn, heated. This sets up a convection current that circulates thermal energy throughout the whole volume of water, heating it much more quickly and evenly than if the heater were at the top (where the warmed water would simply stay at the top, and convection could not distribute the energy downward).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">19</span><strong>In a refrigerator, the freezer compartment is usually placed at the top, above the main storage area.</strong> Explain why this placement helps keep the food below it cool.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">Air cooled by the freezer compartment becomes denser and sinks, displacing the warmer, less dense air below it, which rises to be cooled in turn. This sets up a convection current that continuously circulates cool air down through the fridge, keeping the whole compartment cold, rather than the cold air simply staying trapped at the top.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>Coastal regions often experience an onshore breeze (from the sea toward the land) during the day, because land heats up faster than the sea.</strong> Explain, with reference to thermal energy transfer, how this temperature difference produces the onshore breeze.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">During the day, the land warms up faster than the sea, so the air above the land is warmed (by conduction and radiation from the ground) more than the air above the sea. This warmed air over the land expands, becomes less dense, and rises; cooler, denser air from over the sea then flows in along the surface to replace it, producing an onshore breeze — this is a large-scale convection current.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>A simple hot-air balloon rises when the air trapped inside its envelope is heated by a burner.</strong> Explain, in terms of density, why heating the air causes the balloon to rise.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">Heating the air inside the envelope makes it expand, reducing its density. Once the average density of the balloon (envelope, basket and heated air) is lower than that of the surrounding, cooler outside air, the balloon experiences a net upward buoyancy force and rises — the same underlying idea as a warm parcel of fluid rising in a convection current.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Radiation and black bodies</h2>
+      <p>Unlike conduction and convection, thermal radiation needs no medium at all. All matter, at any temperature above absolute zero, emits electromagnetic waves because of the movement of charged particles within its atoms. This is most commonly infrared radiation, but a hot enough object also emits visible light.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> All objects continuously emit (and absorb) thermal radiation. The power radiated from a surface depends on its surface temperature, its surface area, and the nature of the surface itself.</div>
+
+      <h3>Good absorbers and good emitters</h3>
+      <p>Dark, matte (dull) surfaces are good absorbers of thermal radiation — very little is reflected. White or shiny surfaces reflect and scatter radiation well, so they are poor absorbers.</p>
+      <div class="keybox"><strong>Key idea.</strong> Any surface which is a good absorber of thermal radiation will also be a good emitter. Dark, matte surfaces emit and absorb radiation well; white, shiny surfaces are poor at both absorbing and emitting.</div>
+
+      <h3>Live simulation: infrared emission</h3>
+      <div class="sim-embed">
+        <p class="instructions">This tool lets you compare the infrared radiation emitted by different objects and surfaces directly, using a simulated thermal camera view. Explore how emission changes with temperature and with the type of surface.</p>
+        <iframe class="sim-frame" src="https://www.drjonesphysics.com/ir-emission" style="height:640px;" loading="lazy" title="Infrared emission simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://www.drjonesphysics.com/ir-emission" target="_blank" rel="noopener">Dr Dan Jones (drjonesphysics.com)</a>. If the embedded version above doesn't load, open it directly in a new tab via that link.</p>
+      </div>
+
+      <h3>Black bodies</h3>
+      <div class="keyword"><b>Black body:</b> an idealised object with a surface that absorbs all of the electromagnetic radiation falling on it. A perfect black body is also a perfect emitter of thermal radiation.</div>
+      <p>No real surface is a perfect black body, but many familiar surfaces (soil, water, human skin, most vegetation) behave approximately like one. Perhaps confusingly, a "black body" does not have to look black — the Sun behaves approximately as a black body, yet it is so hot that it emits enormous quantities of visible light.</p>
+
+      <h3>The Stefan–Boltzmann law</h3>
+      <p>The total power radiated (across all wavelengths) from a black body of surface area A and absolute temperature T is given by the Stefan–Boltzmann law:</p>
+      <div class="eqn">Stefan–Boltzmann law: <b>L = σAT⁴</b></div>
+      <p>where L is the power radiated (sometimes called luminosity when referring to a radiating body such as a star), and σ is the <strong>Stefan–Boltzmann constant</strong>, σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴.</p>
+
+      <div class="stretch-box">
+        <span class="tag">Extension</span>
+        <p style="margin:0;">Real surfaces are not perfect black bodies. The <strong>emissivity</strong>, e, of a surface (0 ≤ e ≤ 1) compares how well it radiates to an ideal black body at the same temperature: L = eσAT⁴, with e = 1 for a perfect black body and e < 1 for a real, imperfect emitter.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>A small sphere of red-hot metal has a radius of 3.0 cm and a uniform surface temperature of 1200 °C. Assuming it behaves as a perfect black body, calculate the total power it radiates.</p>
+        <p><strong>Answer:</strong><br>
+        Surface area of a sphere, A = 4πr² = 4π × (0.030)²<br>
+        T = 1200 + 273 = 1473 K<br>
+        L = σAT⁴ = (5.67 × 10⁻⁸) × [4π × (0.030)²] × (1473)⁴</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">22</span><strong>Emergency "survival blankets", used to protect long-distance runners from losing body heat, are made from thin plastic sheets with a shiny, reflective (usually silver-coloured) coating.</strong> Explain how the reflective coating helps to protect the wearer from losing thermal energy by radiation.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">A shiny surface is a poor emitter of thermal radiation, so it significantly reduces the rate at which thermal energy radiated by the wearer's body escapes through the blanket. (The shiny surface is also a poor absorber, but here it is the reduced emission from the inner surface that matters most.)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">23</span><strong>A mug of coffee has a surface area of 180 cm² and a surface temperature of 60 °C.</strong> Treating it as a perfect black body, calculate the maximum power it radiates.
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">A = 180 cm² = 180 × 10⁻⁴ m² = 1.80 × 10⁻² m². T = 60 + 273 = 333 K. L = σAT⁴ = (5.67 × 10⁻⁸) × (1.80 × 10⁻²) × (333)⁴ — complete the calculation. (This will be an overestimate, since a real coffee mug is not a perfect black body and also loses energy by conduction and convection.)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">24</span><strong>A metal bar is heated from a temperature of 400 K to 800 K, with its surface area unchanged.</strong> By what factor does the power it radiates increase?
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">Since L ∝ T⁴ (with A, σ and e unchanged), the factor is (800/400)⁴ = 2⁴ = 16. The bar radiates 16 times as much power at 800 K as it did at 400 K.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Wien's law and the black-body spectrum</h2>
+      <p>A black body does not emit all of its radiation at one single wavelength — it emits a continuous spread of wavelengths, called its <strong>emission spectrum</strong>. The shape of this spectrum depends only on the body's temperature.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 400" width="700" height="400" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="330" x2="660" y2="330" stroke="#4a5568" stroke-width="1.5"/>
+          <line x1="60" y1="330" x2="60" y2="30" stroke="#4a5568" stroke-width="1.5"/>
+          <path d="M60.0,330.0 L70.0,329.9 L80.0,326.2 L90.0,307.5 L100.0,266.6 L110.0,211.4 L120.0,156.1 L130.0,111.0 L140.0,80.5 L150.0,64.3 L160.0,60.0 L170.0,64.6 L180.0,75.1 L190.0,89.4 L200.0,105.6 L210.0,122.6 L220.0,139.5 L230.0,155.7 L240.0,171.1 L250.0,185.3 L260.0,198.5 L270.0,210.4 L280.0,221.3 L290.0,231.2 L300.0,240.1 L310.0,248.2 L320.0,255.4 L330.0,262.0 L340.0,267.8 L350.0,273.2 L360.0,277.9 L370.0,282.3 L380.0,286.2 L390.0,289.7 L400.0,292.9 L410.0,295.8 L420.0,298.4 L430.0,300.8 L440.0,303.0 L450.0,305.0 L460.0,306.8 L470.0,308.4 L480.0,309.9 L490.0,311.3 L500.0,312.6 L510.0,313.8 L520.0,314.8 L530.0,315.8 L540.0,316.7 L550.0,317.6 L560.0,318.3 L570.0,319.1 L580.0,319.7 L590.0,320.3 L600.0,320.9 L610.0,321.4 L620.0,321.9 L630.0,322.4 L640.0,322.8 L650.0,323.2 L660.0,323.6" fill="none" stroke="#a33d5b" stroke-width="2.6"/>
+          <path d="M60.0,330.0 L70.0,330.0 L80.0,329.9 L90.0,328.8 L100.0,324.5 L110.0,315.6 L120.0,302.5 L130.0,287.6 L140.0,273.3 L150.0,261.0 L160.0,251.8 L170.0,245.7 L180.0,242.4 L190.0,241.5 L200.0,242.5 L210.0,244.9 L220.0,248.2 L230.0,252.1 L240.0,256.4 L250.0,260.8 L260.0,265.3 L270.0,269.7 L280.0,273.9 L290.0,277.9 L300.0,281.6 L310.0,285.2 L320.0,288.5 L330.0,291.5 L340.0,294.3 L350.0,297.0 L360.0,299.4 L370.0,301.6 L380.0,303.6 L390.0,305.5 L400.0,307.3 L410.0,308.9 L420.0,310.3 L430.0,311.7 L440.0,312.9 L450.0,314.1 L460.0,315.1 L470.0,316.1 L480.0,317.0 L490.0,317.8 L500.0,318.6 L510.0,319.3 L520.0,320.0 L530.0,320.6 L540.0,321.1 L550.0,321.7 L560.0,322.2 L570.0,322.6 L580.0,323.0 L590.0,323.4 L600.0,323.8 L610.0,324.1 L620.0,324.4 L630.0,324.7 L640.0,325.0 L650.0,325.3 L660.0,325.5" fill="none" stroke="#1f7a6c" stroke-width="2.6"/>
+          <path d="M60.0,330.0 L70.0,330.0 L80.0,330.0 L90.0,330.0 L100.0,329.9 L110.0,329.6 L120.0,328.7 L130.0,327.3 L140.0,325.2 L150.0,322.7 L160.0,320.0 L170.0,317.4 L180.0,315.1 L190.0,313.1 L200.0,311.5 L210.0,310.3 L220.0,309.5 L230.0,309.1 L240.0,309.0 L250.0,309.1 L260.0,309.5 L270.0,310.0 L280.0,310.6 L290.0,311.3 L300.0,312.0 L310.0,312.8 L320.0,313.6 L330.0,314.4 L340.0,315.1 L350.0,315.9 L360.0,316.7 L370.0,317.4 L380.0,318.1 L390.0,318.7 L400.0,319.3 L410.0,319.9 L420.0,320.5 L430.0,321.0 L440.0,321.5 L450.0,322.0 L460.0,322.4 L470.0,322.9 L480.0,323.3 L490.0,323.6 L500.0,324.0 L510.0,324.3 L520.0,324.6 L530.0,324.9 L540.0,325.2 L550.0,325.4 L560.0,325.6 L570.0,325.9 L580.0,326.1 L590.0,326.3 L600.0,326.5 L610.0,326.6 L620.0,326.8 L630.0,327.0 L640.0,327.1 L650.0,327.2 L660.0,327.4" fill="none" stroke="#c1791f" stroke-width="2.6"/>
+          <line x1="160" y1="60" x2="160" y2="330" stroke="#a33d5b" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="160" y="48" text-anchor="middle" font-size="12" fill="#a33d5b" font-weight="bold">5000 K</text>
+          <text x="230" y="230" text-anchor="middle" font-size="12" fill="#1f7a6c" font-weight="bold">4000 K</text>
+          <text x="290" y="298" text-anchor="middle" font-size="12" fill="#c1791f" font-weight="bold">3000 K</text>
+          <text x="0.5" y="345" font-size="11" fill="#4a5568">0</text>
+          <text x="142.8" y="345" text-anchor="middle" font-size="11" fill="#4a5568">0.5</text>
+          <text x="246.2" y="345" text-anchor="middle" font-size="11" fill="#4a5568">1.0</text>
+          <text x="349.7" y="345" text-anchor="middle" font-size="11" fill="#4a5568">1.5</text>
+          <text x="453.1" y="345" text-anchor="middle" font-size="11" fill="#4a5568">2.0</text>
+          <text x="556.6" y="345" text-anchor="middle" font-size="11" fill="#4a5568">2.5</text>
+          <text x="660" y="345" text-anchor="middle" font-size="11" fill="#4a5568">3.0</text>
+          <text x="360" y="375" text-anchor="middle" font-size="13" fill="#4a5568">wavelength / 10⁻⁶ m</text>
+          <text x="20" y="180" font-size="13" fill="#4a5568" transform="rotate(-90 20 180)">relative power per wavelength interval</text>
+        </svg>
+        <figcaption>Fig. 8.1 Black-body emission spectra at three different surface temperatures. As temperature increases, the total power emitted increases sharply (area under the curve, L ∝ T⁴) and the peak wavelength, λ<sub>max</sub>, shifts to shorter wavelengths.</figcaption>
+      </figure>
+
+      <p>There is a simple inverse relationship between a black body's absolute surface temperature and the wavelength at which it emits the most power, λ<sub>max</sub>. This is known as <strong>Wien's displacement law</strong>:</p>
+      <div class="eqn">Wien's displacement law: <b>λ<sub>max</sub>T = 2.9 × 10⁻³ m·K</b></div>
+
+      <div class="example">
+        <span class="tag">Worked example 8.1</span>
+        <p>A star's spectrum peaks at a wavelength of 4.0 × 10⁻⁷ m. Determine its surface temperature.</p>
+        <p><strong>Answer:</strong><br>
+        λ<sub>max</sub>T = 2.9 × 10⁻³<br>
+        T = (2.9 × 10⁻³) / (4.0 × 10⁻⁷)</p>
+      </div>
+
+      <h3>Live simulation: PhET Blackbody Spectrum</h3>
+      <div class="sim-launch">
+        <p>Change a black body's temperature and watch its emission spectrum change shape in real time. Turn on "Graph Values" to read off the peak wavelength directly, and check that your readings are consistent with Wien's law.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/en/simulations/blackbody-spectrum" target="_blank" rel="noopener">Launch Blackbody Spectrum ↗</a>
+        <p class="credit">Simulation by <a href="https://phet.colorado.edu/en/simulations/blackbody-spectrum" target="_blank" rel="noopener">PhET Interactive Simulations, University of Colorado Boulder</a>.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">25</span><strong>Using Figure 8.1, estimate the peak wavelength emitted by a black body at 4000 K, and check that your estimate is consistent with Wien's law.</strong>
+        <textarea class="answer-lines long" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">From the graph, the 4000 K curve peaks at roughly λ<sub>max</sub> ≈ 0.7–0.75 × 10⁻⁶ m. Checking with Wien's law: λ<sub>max</sub> = (2.9 × 10⁻³)/4000 ≈ 7.3 × 10⁻⁷ m = 0.73 × 10⁻⁶ m, which agrees well with the graph.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">26</span><strong>Microwave radiation with a peak wavelength of about 1.1 mm arrives at Earth uniformly from every direction in space — the Cosmic Microwave Background, left over from the early Universe.</strong> Calculate the temperature associated with this radiation.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">λ<sub>max</sub>T = 2.9 × 10⁻³. T = (2.9 × 10⁻³)/(1.1 × 10⁻³) — complete the division. (This gives a temperature only a few kelvin above absolute zero — remarkably cold, consistent with radiation left over from a Universe that has expanded and cooled enormously since the Big Bang.)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">27</span><strong>Star X has twice the surface temperature of Star Y, but both stars have the same radius.</strong> Determine: a) the ratio of their peak emitted wavelengths, λ<sub>max,X</sub> : λ<sub>max,Y</sub>; b) the ratio of their radiated powers (luminosities), L<sub>X</sub> : L<sub>Y</sub>.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
+        <div class="answer-panel" id="q27">a) Since λ<sub>max</sub>T = constant, λ<sub>max</sub> ∝ 1/T. So λ<sub>max,X</sub> : λ<sub>max,Y</sub> = 1/2 : 1 = 1 : 2 — Star X's peak wavelength is half that of Star Y (it is hotter, so bluer/shorter wavelength). b) Since L = σAT⁴ and A is the same for both, L ∝ T⁴, so L<sub>X</sub> : L<sub>Y</sub> = 2⁴ : 1⁴ = 16 : 1 — Star X radiates 16 times as much power as Star Y.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Kinetic theory of matter</dt><dd>All matter is made up of a very large number of small particles which are in constant motion, with forces acting between them.</dd>
+        <dt>Density, ρ</dt><dd>Mass per unit volume of a substance; ρ = m/V.</dd>
+        <dt>Thermal equilibrium</dt><dd>The state reached when objects in thermal contact are at the same temperature, so there is no net transfer of thermal energy between them.</dd>
+        <dt>Celsius scale</dt><dd>Temperature scale based on the freezing point (0 °C) and boiling point (100 °C) of pure water.</dd>
+        <dt>Kelvin scale</dt><dd>The absolute temperature scale used in physics, based on absolute zero (0 K); T/K = θ/°C + 273.</dd>
+        <dt>Absolute zero</dt><dd>0 K (−273 °C); the temperature at which the kinetic energy of particles is a minimum.</dd>
+        <dt>Internal energy</dt><dd>The sum of the total random kinetic energy and total potential energy of all the particles in a substance.</dd>
+        <dt>Phase change</dt><dd>A change in particle behaviour (arrangement and separation) arising from a change in energy at constant temperature — e.g. melting, boiling.</dd>
+        <dt>Thermal conduction</dt><dd>The transfer of thermal energy through a substance, particle to particle, by the transfer of kinetic energy.</dd>
+        <dt>Thermal conductivity, k</dt><dd>A constant representing how readily a substance conducts thermal energy; a larger value means a better conductor.</dd>
+        <dt>Thermal insulator</dt><dd>A material with a low thermal conductivity that significantly reduces the flow of thermal energy.</dd>
+        <dt>Thermal convection</dt><dd>The transfer of thermal energy by the bulk movement of a fluid, arising from differences in its density.</dd>
+        <dt>Thermal radiation</dt><dd>Electromagnetic radiation emitted by all matter because of the movement of charged particles within its atoms; most commonly infrared.</dd>
+        <dt>Black body</dt><dd>An idealised object whose surface absorbs all electromagnetic radiation falling on it, and which is also a perfect emitter of thermal radiation.</dd>
+        <dt>Emissivity, e</dt><dd>A measure (0 ≤ e ≤ 1) of how well a real surface radiates compared with an ideal black body at the same temperature.</dd>
+        <dt>Stefan–Boltzmann law</dt><dd>L = σAT⁴; gives the total power radiated from a black body of surface area A and absolute temperature T.</dd>
+        <dt>Wien's displacement law</dt><dd>λ<sub>max</sub>T = 2.9 × 10⁻³ m·K; relates a black body's peak emission wavelength to its absolute temperature.</dd>
+      </dl>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Fig 2.1: thermal equilibrium simulation ================= */
+(function(){
+  const canvas = document.getElementById('teqCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const a0Slider = document.getElementById('teqA0');
+  const b0Slider = document.getElementById('teqB0');
+  const a0Val = document.getElementById('teqA0Val');
+  const b0Val = document.getElementById('teqB0Val');
+  const readout = document.getElementById('teqReadout');
+
+  const graphLeft = 45, graphRight = W - 15, graphTop = 15, graphBottom = 150;
+  const tMax = 320; // frames
+  const tau = 70;
+
+  let t = 0;
+  let running = false;
+  let histA = [], histB = [];
+  let A0 = parseFloat(a0Slider.value), B0 = parseFloat(b0Slider.value);
+
+  function tempAt(T0, Teq, tt){
+    return Teq + (T0 - Teq) * Math.exp(-tt / tau);
+  }
+
+  function tempToY(temp){
+    const tMin = -10, tMaxScale = 110;
+    return graphBottom - (temp - tMin) / (tMaxScale - tMin) * (graphBottom - graphTop);
+  }
+
+  function drawThermometer(x, temp, color, label){
+    const y0 = 220, y1 = 175;
+    const frac = Math.max(0, Math.min(1, (temp + 10) / 120));
+    const barY = y0 - (y0 - y1) * frac;
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1;
+    ctx.strokeRect(x - 8, y1, 16, y0 - y1);
+    ctx.fillStyle = color;
+    ctx.fillRect(x - 8, barY, 16, y0 - barY);
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(label, x, y0 + 16);
+    ctx.fillText(temp.toFixed(0) + '°C', x, y0 + 30);
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0, 0, W, H);
+
+    const Teq = (A0 + B0) / 2;
+
+    // axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(graphLeft, graphTop); ctx.lineTo(graphLeft, graphBottom); ctx.lineTo(graphRight, graphBottom); ctx.stroke();
+    ctx.fillStyle = '#9fb3c2'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('temperature vs. time', graphLeft, 10);
+
+    // equilibrium dashed line
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.setLineDash([4,3]);
+    const yEq = tempToY(Teq);
+    ctx.beginPath(); ctx.moveTo(graphLeft, yEq); ctx.lineTo(graphRight, yEq); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // plot history
+    function plot(hist, color){
+      if(hist.length < 2) return;
+      ctx.strokeStyle = color; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for(let i=0;i<hist.length;i++){
+        const px = graphLeft + (hist[i].t / tMax) * (graphRight - graphLeft);
+        const py = tempToY(hist[i].temp);
+        if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.stroke();
+    }
+    plot(histA, '#e08a8a');
+    plot(histB, '#7fc8e8');
+
+    let TA = A0, TB = B0;
+    if(histA.length){ TA = histA[histA.length-1].temp; TB = histB[histB.length-1].temp; }
+
+    // thermometers
+    drawThermometer(graphLeft + 40, TA, '#e08a8a', 'A');
+    drawThermometer(graphRight - 40, TB, '#7fc8e8', 'B');
+
+    readout.textContent = 'A: ' + TA.toFixed(0) + ' °C   B: ' + TB.toFixed(0) + ' °C';
+
+    if(running && t < tMax){
+      t += 2;
+      const TAnew = tempAt(A0, Teq, t);
+      const TBnew = tempAt(B0, Teq, t);
+      histA.push({t: t, temp: TAnew});
+      histB.push({t: t, temp: TBnew});
+      requestAnimationFrame(draw);
+    } else if(running){
+      running = false;
+    }
+  }
+
+  window.teqStart = function(){
+    if(running) return;
+    A0 = parseFloat(a0Slider.value);
+    B0 = parseFloat(b0Slider.value);
+    if(histA.length === 0){
+      histA.push({t:0, temp:A0});
+      histB.push({t:0, temp:B0});
+      t = 0;
+    }
+    running = true;
+    draw();
+  };
+
+  window.teqReset = function(){
+    running = false;
+    t = 0;
+    histA = []; histB = [];
+    A0 = parseFloat(a0Slider.value);
+    B0 = parseFloat(b0Slider.value);
+    draw();
+  };
+
+  a0Slider.addEventListener('input', function(){
+    a0Val.textContent = a0Slider.value;
+    if(!running && histA.length === 0) draw();
+  });
+  b0Slider.addEventListener('input', function(){
+    b0Val.textContent = b0Slider.value;
+    if(!running && histA.length === 0) draw();
+  });
+
+  draw();
+})();
+
+/* ================= Fig 5.1: conduction rate explorer ================= */
+(function(){
+  const canvas = document.getElementById('condCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const materialSel = document.getElementById('condMaterial');
+  const dtSlider = document.getElementById('condDT');
+  const dxSlider = document.getElementById('condDx');
+  const aSlider = document.getElementById('condA');
+  const dtVal = document.getElementById('condDTVal');
+  const dxVal = document.getElementById('condDxVal');
+  const aVal = document.getElementById('condAVal');
+  const readout = document.getElementById('condReadout');
+
+  let t = 0;
+  const N = 14;
+  const barLeft = 40, barRight = W - 40, barTop = 70, barBottom = 150;
+
+  function formatRate(rate){
+    if(rate >= 1000) return (rate/1000).toFixed(2) + ' kW';
+    if(rate >= 1) return rate.toFixed(2) + ' W';
+    if(rate >= 0.001) return (rate*1000).toFixed(2) + ' mW';
+    return rate.toExponential(2) + ' W';
+  }
+
+  function draw(){
+    const k = parseFloat(materialSel.value);
+    const dT = parseFloat(dtSlider.value);
+    const dxCm = parseFloat(dxSlider.value);
+    const aCm2 = parseFloat(aSlider.value);
+    dtVal.textContent = dT.toFixed(0);
+    dxVal.textContent = dxCm.toFixed(1);
+    aVal.textContent = aCm2.toFixed(0);
+
+    const dxM = dxCm / 100;
+    const aM2 = aCm2 / 10000;
+    const rate = k * aM2 * dT / dxM;
+    readout.textContent = 'ΔQ/Δt = kA·ΔT/Δx = ' + formatRate(rate);
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    ctx.fillStyle = '#dceaf0'; ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('hot', barLeft - 4, barTop - 12);
+    ctx.textAlign = 'right';
+    ctx.fillText('cold', barRight + 4, barTop - 12);
+
+    // gradient bar
+    const grad = ctx.createLinearGradient(barLeft, 0, barRight, 0);
+    grad.addColorStop(0, '#c0392b');
+    grad.addColorStop(1, '#2b6fc0');
+    ctx.fillStyle = grad;
+    ctx.fillRect(barLeft, barTop, barRight - barLeft, barBottom - barTop);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1;
+    ctx.strokeRect(barLeft, barTop, barRight - barLeft, barBottom - barTop);
+
+    ctx.fillStyle = '#9fb3c2'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Δx', (barLeft+barRight)/2, barBottom + 20);
+    ctx.textAlign = 'left';
+    ctx.fillText('A (cross-section, into the page)', barLeft, barBottom + 40);
+  }
+
+  materialSel.addEventListener('input', draw);
+  dtSlider.addEventListener('input', draw);
+  dxSlider.addEventListener('input', draw);
+  aSlider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heating — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+  .sumlink{background:var(--soft-amber); border:1px solid #f0d5ab; border-left:4px solid var(--amber); border-radius:8px; padding:0.7rem 1.1rem; margin:0.9rem 0; font-size:0.88rem; color:#6b4a12;}
+  .sumlink b{color:var(--amber);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:360px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-row select{width:100%; padding:0.3rem; border-radius:6px; border:1px solid rgba(255,255,255,0.4); background:#0f1f30; color:#dceaf0;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  /* lighter variant, for sims where a temperature/height scale needs strong contrast */
+  .sim-wrap.sim-wrap-light{background:#f4f8fb; border:1px solid var(--border);}
+  .sim-wrap-light .sim-canvas-box canvas{background:#f4f8fb;}
+  .sim-wrap-light .sim-controls{color:#1f2933;}
+  .sim-wrap-light .sim-controls h4{color:var(--navy);}
+  .sim-wrap-light .sim-row select{background:#fff; color:#1f2933; border:1px solid var(--border);}
+  .sim-wrap-light .sim-readout{background:#fff; border:1px solid var(--border); color:#1f2933;}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Heating</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Heating</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. The heating curve</a>
+    <a href="#s2">2. Internal energy along the curve</a>
+    <a href="#s3">3. Specific heat capacity</a>
+    <a href="#s4">4. Specific latent heat</a>
+    <a href="#s5">5. Putting it together</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Heating</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">In <em>Methods of Heating</em> you met the particle model, temperature, internal energy and the three ways thermal energy can be transferred. This workbook puts all of that to work on a single, central problem: what happens, quantitatively, as you heat 1&nbsp;kg of ice at &minus;5&nbsp;°C all the way through to steam at 120&nbsp;°C? A single temperature&ndash;energy graph runs through every section of this workbook — you will keep coming back to it as you build up the tools (specific heat capacity and specific latent heat) needed to calculate exactly how much energy each stage requires.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Recall that a phase change is a change in particle behaviour arising from a change in energy, at constant temperature.</li>
+          <li>Interpret a temperature&ndash;energy graph for a substance heated from solid through to gas, identifying each stage.</li>
+          <li>Explain how internal energy changes during warming and during a phase change, and relate this to the gradient of the graph.</li>
+          <li>Calculate the thermal energy transferred to a substance using Q = mcΔT, where c is the specific heat capacity.</li>
+          <li>Calculate the thermal energy transferred during a phase change using Q = mL, where L is the specific latent heat.</li>
+          <li>Combine Q = mcΔT and Q = mL, and use conservation of energy, to solve multi-stage heating and calorimetry problems.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. The heating curve</h2>
+      <p>In <em>Methods of Heating</em> you saw that a phase change — melting, freezing, boiling or condensing — is a change in particle behaviour that happens at constant temperature, because the energy supplied is being used to change the particles' arrangement and separation, not their average kinetic energy.</p>
+      <div class="keybox"><strong>Recap.</strong> A phase change represents a change in particle behaviour arising from a change in a substance's energy, at constant temperature.</div>
+      <p>This idea becomes far more useful once you can track it on a graph. Fig. 1.1 below shows what happens as exactly 1&nbsp;kg of ice, starting at &minus;5&nbsp;°C, is heated steadily all the way to steam at 120&nbsp;°C. This single graph is the backbone of the whole workbook — every later section comes back to it.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="70" y1="15" x2="70" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="252" x2="660" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <!-- temperature gridlines -->
+          <line x1="70" y1="226.2" x2="660" y2="226.2" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="194.5" x2="660" y2="194.5" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="162.7" x2="660" y2="162.7" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="131.0" x2="660" y2="131.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="99.3"  x2="660" y2="99.3"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="67.6"  x2="660" y2="67.6"  stroke="#e2e8ef" stroke-width="1"/>
+          <text x="60" y="237.6" text-anchor="end" font-size="10" fill="#5b6b78">&minus;5</text>
+          <text x="60" y="229.7" text-anchor="end" font-size="10" fill="#5b6b78">0</text>
+          <text x="60" y="198.0" text-anchor="end" font-size="10" fill="#5b6b78">20</text>
+          <text x="60" y="166.2" text-anchor="end" font-size="10" fill="#5b6b78">40</text>
+          <text x="60" y="134.5" text-anchor="end" font-size="10" fill="#5b6b78">60</text>
+          <text x="60" y="102.8" text-anchor="end" font-size="10" fill="#5b6b78">80</text>
+          <text x="60" y="71.1"  text-anchor="end" font-size="10" fill="#5b6b78">100</text>
+          <text x="60" y="39.4"  text-anchor="end" font-size="10" fill="#5b6b78">120</text>
+          <!-- energy gridlines -->
+          <line x1="166.3" y1="15" x2="166.3" y2="252" stroke="#eef2f5" stroke-width="1"/>
+          <line x1="262.7" y1="15" x2="262.7" y2="252" stroke="#eef2f5" stroke-width="1"/>
+          <line x1="359.0" y1="15" x2="359.0" y2="252" stroke="#eef2f5" stroke-width="1"/>
+          <line x1="455.3" y1="15" x2="455.3" y2="252" stroke="#eef2f5" stroke-width="1"/>
+          <line x1="551.6" y1="15" x2="551.6" y2="252" stroke="#eef2f5" stroke-width="1"/>
+          <line x1="648.0" y1="15" x2="648.0" y2="252" stroke="#eef2f5" stroke-width="1"/>
+          <text x="70.0"  y="266" text-anchor="middle" font-size="10" fill="#5b6b78">0</text>
+          <text x="166.3" y="266" text-anchor="middle" font-size="10" fill="#5b6b78">500</text>
+          <text x="262.7" y="266" text-anchor="middle" font-size="10" fill="#5b6b78">1000</text>
+          <text x="359.0" y="266" text-anchor="middle" font-size="10" fill="#5b6b78">1500</text>
+          <text x="455.3" y="266" text-anchor="middle" font-size="10" fill="#5b6b78">2000</text>
+          <text x="551.6" y="266" text-anchor="middle" font-size="10" fill="#5b6b78">2500</text>
+          <text x="648.0" y="266" text-anchor="middle" font-size="10" fill="#5b6b78">3000</text>
+          <!-- axis titles -->
+          <text x="365" y="288" text-anchor="middle" font-size="11.5" fill="#22305a">Energy supplied to 1 kg of the substance / kJ</text>
+          <text x="18" y="133" text-anchor="middle" font-size="11.5" fill="#22305a" transform="rotate(-90 18 133)">Temperature / °C</text>
+          <!-- the curve -->
+          <path d="M70.0,234.1 L72.0,226.2 L136.4,226.2 L216.9,67.6 L652.3,67.6 L660.0,35.9" fill="none" stroke="#0e7c86" stroke-width="3"/>
+          <!-- badges with leader lines -->
+          <line x1="28.0" y1="232.0" x2="71.0" y2="230.1" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="28.0" cy="232.0" r="9" fill="#173a5e"/><text x="28.0" y="235.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">a</text>
+          <line x1="104.2" y1="203.0" x2="104.2" y2="226.2" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="104.2" cy="203.0" r="9" fill="#173a5e"/><text x="104.2" y="206.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">b</text>
+          <line x1="190.0" y1="160.0" x2="176.7" y2="146.9" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="190.0" cy="160.0" r="9" fill="#173a5e"/><text x="190.0" y="163.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">c</text>
+          <line x1="434.6" y1="48.0" x2="434.6" y2="67.6" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="434.6" cy="48.0" r="9" fill="#173a5e"/><text x="434.6" y="51.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">d</text>
+          <line x1="656.0" y1="15.0" x2="656.1" y2="51.8" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="656.0" cy="15.0" r="9" fill="#173a5e"/><text x="656.0" y="18.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">e</text>
+        </svg>
+        <figcaption>Fig. 1.1 Temperature of 1 kg of H<sub>2</sub>O as it is heated steadily from ice at &minus;5 °C to steam at 120 °C, drawn to scale on the energy axis. (a) solid ice warms; (b) ice melts, solid → liquid, at constant temperature; (c) liquid water warms; (d) water boils, liquid → gas, at constant temperature; (e) steam warms. Notice how much wider regions (b) and especially (d) are than the warming ramps — changing state takes far more energy than simply warming a liquid or solid by a few degrees.</figcaption>
+      </figure>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>For each of the labelled regions (a)&ndash;(e) on Fig. 1.1, state whether the 1 kg sample is a solid, a liquid, a gas, or undergoing a phase change.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">(a) solid (ice warming). (b) phase change — melting, solid → liquid. (c) liquid (water warming). (d) phase change — boiling, liquid → gas. (e) gas (steam warming).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>Explain why the temperature does not change during regions (b) and (d), even though energy is still being transferred to the substance the whole time.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">During a phase change the energy supplied is used to change the arrangement and separation of the particles (weakening or breaking the forces between them), not to increase their average kinetic energy. Since temperature is a measure of average particle kinetic energy, the temperature stays constant until the phase change is complete.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>Describe how the arrangement and motion of the particles differs between region (a) and region (c).</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">In region (a) the substance is solid ice: particles are held close together in a regular, touching arrangement and can only vibrate about fixed positions. In region (c) it is liquid water: particles are still close together and touching, but the arrangement is disordered and particles are free to move past one another, so the liquid can flow.</div>
+      </div>
+
+      <h3>Live simulation: heating curve explorer</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="heatCurveCanvas" width="460" height="290"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Explore the heating curve</h4>
+            <div class="sim-row">
+              <label for="heatEnergySlider">Energy supplied to the 1 kg sample</label>
+              <input type="range" id="heatEnergySlider" min="0" max="3062420" step="1000" value="0">
+            </div>
+            <div class="sim-readout" id="heatReadout" style="margin-top:0.4rem;">Energy supplied: 0 kJ<br>Temperature: &minus;5.0 °C<br>State: solid (ice), warming</div>
+          </div>
+        </div>
+        <figcaption>Drag the slider to supply energy to the 1 kg sample and watch its temperature and particle arrangement change. The marker follows exactly the same curve as Fig. 1.1.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Internal energy along the curve</h2>
+      <p>Recall that the <strong>internal energy</strong> of a substance is the sum of the total random kinetic energy and total potential energy of all its particles. Every joule of energy supplied in Fig. 1.1 increases the internal energy of the sample — the graph simply shows you which form that increase takes at each stage.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Where the temperature is changing — (a), (c) or (e) — the internal energy change is a change in the kinetic energy: the particles move (or vibrate) faster/slower, on average, and the temperature changes.</div>
+      <div class="keybox"><strong>Key idea.</strong> During a phase-change region — (b) or (d) — the internal energy changes as the bonding between particles changes while their average kinetic energy — and so their temperature — stays the same. This is a change in potential energy.</div>
+
+      <h3>The gradient of the graph</h3>
+      <p>The steepness of each warming ramp is not the same. Region (a) is much steeper than region (c): a small amount of energy raises the temperature of ice by a lot, while the same amount of energy raises the temperature of water by much less.</p>
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        <strong>Gradient and specific heat capacity.</strong> For a warming region, the gradient of a temperature&ndash;energy graph is ΔT/ΔQ. As you will see in Section 3, ΔQ = mcΔT, so the gradient is equal to 1/(mc). A substance with a small specific heat capacity c (like ice) produces a steep gradient; a substance with a large c (like water) produces a shallow one.
+      </div>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>State which form of energy (kinetic or potential) is increasing during region (c), and which is increasing during region (d).</strong>
+        <textarea class="answer-lines" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">Region (c): kinetic energy is increasing (the liquid water is warming). Region (d): potential energy is increasing (the water is boiling — particles are being separated into a gas against the forces between them, at constant temperature).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>Region (a) is much steeper than region (c) on Fig. 1.1. Suggest a reason for this, in terms of the specific heat capacities of ice and water.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">The specific heat capacity of ice is smaller than that of water, so a given amount of energy produces a larger temperature change in ice than in the same mass of water. Since the gradient of the graph is 1/(mc), a smaller c gives a steeper gradient — this is why region (a) rises so much more sharply than region (c).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>Explain, in terms of internal energy, why melting ice at 0 °C requires a continuous supply of energy even though the temperature does not change.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">The energy supplied during melting increases the potential energy of the particles as the fixed, ordered solid structure is broken down into the more loosely-arranged liquid structure. This raises the total internal energy of the substance even though the average kinetic energy of the particles — and hence the temperature — does not change.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Specific heat capacity</h2>
+      <p>Section 2 showed that the gradient of a warming region depends on the substance. To calculate warming energies precisely, physicists use the <strong>specific heat capacity</strong>, c, of a substance.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+          <line x1="70" y1="15" x2="70" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="252" x2="660" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="220.0" x2="660" y2="220.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="188.0" x2="660" y2="188.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="156.0" x2="660" y2="156.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="124.0" x2="660" y2="124.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="92.0"  x2="660" y2="92.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="60.0"  x2="660" y2="60.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="28.0"  x2="660" y2="28.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <text x="60" y="255.5" text-anchor="end" font-size="10" fill="#5b6b78">&minus;20</text>
+          <text x="60" y="223.5" text-anchor="end" font-size="10" fill="#5b6b78">0</text>
+          <text x="60" y="191.5" text-anchor="end" font-size="10" fill="#5b6b78">20</text>
+          <text x="60" y="159.5" text-anchor="end" font-size="10" fill="#5b6b78">40</text>
+          <text x="60" y="127.5" text-anchor="end" font-size="10" fill="#5b6b78">60</text>
+          <text x="60" y="95.5"  text-anchor="end" font-size="10" fill="#5b6b78">80</text>
+          <text x="60" y="63.5"  text-anchor="end" font-size="10" fill="#5b6b78">100</text>
+          <text x="60" y="31.5"  text-anchor="end" font-size="10" fill="#5b6b78">120</text>
+          <text x="365" y="288" text-anchor="middle" font-size="11.5" fill="#22305a">Time</text>
+          <text x="18" y="133" text-anchor="middle" font-size="11.5" fill="#22305a" transform="rotate(-90 18 133)">Temperature / °C</text>
+          <path d="M70.0,252.0 L115.0,220.0 L179.4,220.0 L259.9,60.0 L652.3,60.0 L660.0,28.0" fill="none" stroke="#0e7c86" stroke-width="3"/>
+          <line x1="78.6" y1="216.4" x2="92.5" y2="236.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="78.6" cy="216.4" r="9" fill="#173a5e"/><text x="78.6" y="219.9" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">a</text>
+          <line x1="147.2" y1="196.0" x2="147.2" y2="220.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="147.2" cy="196.0" r="9" fill="#173a5e"/><text x="147.2" y="199.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">b</text>
+          <line x1="241.0" y1="150.8" x2="219.6" y2="140.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="241.0" cy="150.8" r="9" fill="#173a5e"/><text x="241.0" y="154.3" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">c</text>
+          <line x1="456.1" y1="32.0" x2="456.1" y2="60.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="456.1" cy="32.0" r="9" fill="#173a5e"/><text x="456.1" y="35.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">d</text>
+          <line x1="676.0" y1="44.0" x2="656.1" y2="44.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="676.0" cy="44.0" r="9" fill="#173a5e"/><text x="676.0" y="47.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">e</text>
+        </svg>
+        <figcaption>Fig. 3.1 The same five-stage structure as Fig. 1.1 — this is the reference graph used throughout your summative assessment task, with time (rather than energy) on the x-axis, now starting the solid at &minus;20 °C so region (a) is clearly visible. (Proportions are adjusted for clarity and not drawn precisely to scale.)</figcaption>
+      </figure>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>Why is the x-axis of Fig. 3.1 labelled "Time," when the equivalent graph in Section 1 (Fig. 1.1) was labelled "Energy supplied"?</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">If the substance is heated by a heater working at constant power P, the energy supplied is directly proportional to the time for which it has been heating (Q = Pt). This means a graph of temperature against time has exactly the same shape as a graph of temperature against energy supplied — only the horizontal axis label (and its scale) changes. The same graph can be used for either, provided the heating power stays constant.</div>
+      </div>
+
+      <div class="keyword"><b>Specific heat capacity, c:</b> the amount of thermal energy needed to raise the temperature of a unit mass (1 kg) of a substance by 1 K (or 1 °C — a change of 1 K is identical to a change of 1 °C).</div>
+      <p>Regions (a), (c) and (e) on Fig. 1.1 — the three warming ramps — are all governed by specific heat capacity. The thermal energy Q transferred is given by:</p>
+      <div class="eqn">Q = mcΔT</div>
+      <table class="eqtable">
+        <tr><th>Symbol</th><th>Quantity</th><th>SI unit</th></tr>
+        <tr><td>Q</td><td>thermal energy transferred</td><td>J</td></tr>
+        <tr><td>m</td><td>mass</td><td>kg</td></tr>
+        <tr><td>c</td><td>specific heat capacity</td><td>J kg<sup>&minus;1</sup> K<sup>&minus;1</sup></td></tr>
+        <tr><td>ΔT</td><td>change in temperature</td><td>K (or °C)</td></tr>
+      </table>
+
+      <table class="eqtable">
+        <tr><th>Substance</th><th>c / J kg<sup>&minus;1</sup> K<sup>&minus;1</sup></th></tr>
+        <tr><td>ice</td><td>2100</td></tr>
+        <tr><td>water (liquid)</td><td>4180</td></tr>
+        <tr><td>steam</td><td>1996</td></tr>
+        <tr><td>aluminium</td><td>897</td></tr>
+        <tr><td>iron / steel</td><td>450</td></tr>
+        <tr><td>copper</td><td>390</td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example</span>
+        A 0.20 kg aluminium block is heated from 18 °C to 85 °C. Calculate the thermal energy required. (c<sub>aluminium</sub> = 897 J kg<sup>&minus;1</sup> K<sup>&minus;1</sup>)
+        <p style="margin-bottom:0;">ΔT = 85 &minus; 18 = 67 K<br>
+        Q = mcΔT<br>
+        Q = 0.20 × 897 × 67</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>0.50 kg of water is heated by 30,000 J. Calculate the temperature rise, ΔT. (c<sub>water</sub> = 4180 J kg<sup>&minus;1</sup> K<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">Rearranging Q = mcΔT for ΔT:<br>ΔT = Q/(mc)<br>ΔT = 30 000/(0.50 × 4180)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>A 0.30 kg sample of an unknown liquid absorbs 8100 J of energy and its temperature rises from 20 °C to 41 °C. Calculate the specific heat capacity of the liquid.</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">ΔT = 41 &minus; 20 = 21 K<br>Rearranging Q = mcΔT for c:<br>c = Q/(mΔT)<br>c = 8100/(0.30 × 21)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>Equal masses of copper and water, both initially at the same temperature, are given equal amounts of thermal energy. Explain which one reaches a higher final temperature, and why.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">Copper reaches the higher final temperature. Copper has a much smaller specific heat capacity than water (390 compared with 4180 J kg⁻¹K⁻¹), so for the same mass and the same energy input, ΔT = Q/(mc) is much larger for copper than for water.</div>
+      </div>
+
+      <h3>Live simulation: comparing specific heat capacities</h3>
+      <figure class="wide">
+        <div class="sim-wrap sim-wrap-light">
+          <div class="sim-canvas-box">
+            <canvas id="shcCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Same energy, different materials</h4>
+            <div class="sim-row">
+              <label for="shcMatA">Block A material</label>
+              <select id="shcMatA">
+                <option value="4180">Water (4180)</option>
+                <option value="897" selected>Aluminium (897)</option>
+                <option value="450">Iron (450)</option>
+                <option value="390">Copper (390)</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="shcMatB">Block B material</label>
+              <select id="shcMatB">
+                <option value="4180" selected>Water (4180)</option>
+                <option value="897">Aluminium (897)</option>
+                <option value="450">Iron (450)</option>
+                <option value="390">Copper (390)</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="shcEnergy">Energy supplied to each block (1 kg)</label>
+              <input type="range" id="shcEnergy" min="0" max="40000" step="500" value="20000">
+            </div>
+            <div class="sim-readout" id="shcReadout" style="margin-top:0.4rem;">Both blocks start at 20 °C.</div>
+          </div>
+        </div>
+        <figcaption>Fig. 3.2 Two 1 kg blocks, both starting at 20 °C, are given exactly the same amount of energy. The block with the smaller specific heat capacity always shows the larger temperature rise.</figcaption>
+      </figure>
+
+      <div class="sim-launch">
+        <strong>PhET simulation: Energy Forms and Changes</strong>
+        <p style="margin:0.5rem 0 0 0; font-size:0.92rem;">Heat iron, brick and water with a burner or a thermometer, and watch "energy chunks" flow in and transfer between objects — a great way to build intuition for why different materials warm up at different rates for the same energy input.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/en/simulations/energy-forms-and-changes" target="_blank" rel="noopener">Launch simulation ↗</a>
+        <p class="credit">PhET Interactive Simulations, University of Colorado Boulder.</p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Specific latent heat</h2>
+      <p>Regions (b) and (d) on Fig. 1.1 — the two plateaus — cannot be calculated with Q = mcΔT, because ΔT = 0 during a phase change. Instead, physicists use the <strong>specific latent heat</strong>, L, of a substance.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+          <line x1="70" y1="15" x2="70" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="252" x2="660" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="220.0" x2="660" y2="220.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="188.0" x2="660" y2="188.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="156.0" x2="660" y2="156.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="124.0" x2="660" y2="124.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="92.0"  x2="660" y2="92.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="60.0"  x2="660" y2="60.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="28.0"  x2="660" y2="28.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <text x="60" y="255.5" text-anchor="end" font-size="10" fill="#5b6b78">&minus;20</text>
+          <text x="60" y="223.5" text-anchor="end" font-size="10" fill="#5b6b78">0</text>
+          <text x="60" y="191.5" text-anchor="end" font-size="10" fill="#5b6b78">20</text>
+          <text x="60" y="159.5" text-anchor="end" font-size="10" fill="#5b6b78">40</text>
+          <text x="60" y="127.5" text-anchor="end" font-size="10" fill="#5b6b78">60</text>
+          <text x="60" y="95.5"  text-anchor="end" font-size="10" fill="#5b6b78">80</text>
+          <text x="60" y="63.5"  text-anchor="end" font-size="10" fill="#5b6b78">100</text>
+          <text x="60" y="31.5"  text-anchor="end" font-size="10" fill="#5b6b78">120</text>
+          <text x="365" y="288" text-anchor="middle" font-size="11.5" fill="#22305a">Time</text>
+          <text x="18" y="133" text-anchor="middle" font-size="11.5" fill="#22305a" transform="rotate(-90 18 133)">Temperature / °C</text>
+          <path d="M70.0,252.0 L115.0,220.0 L179.4,220.0 L259.9,60.0 L652.3,60.0 L660.0,28.0" fill="none" stroke="#0e7c86" stroke-width="3"/>
+          <line x1="78.6" y1="216.4" x2="92.5" y2="236.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="78.6" cy="216.4" r="9" fill="#173a5e"/><text x="78.6" y="219.9" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">a</text>
+          <line x1="147.2" y1="196.0" x2="147.2" y2="220.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="147.2" cy="196.0" r="9" fill="#173a5e"/><text x="147.2" y="199.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">b</text>
+          <line x1="241.0" y1="150.8" x2="219.6" y2="140.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="241.0" cy="150.8" r="9" fill="#173a5e"/><text x="241.0" y="154.3" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">c</text>
+          <line x1="456.1" y1="32.0" x2="456.1" y2="60.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="456.1" cy="32.0" r="9" fill="#173a5e"/><text x="456.1" y="35.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">d</text>
+          <line x1="676.0" y1="44.0" x2="656.1" y2="44.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="676.0" cy="44.0" r="9" fill="#173a5e"/><text x="676.0" y="47.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">e</text>
+        </svg>
+        <figcaption>Fig. 4.1 The same reference graph again, exactly as it appears throughout your summative assessment task, now starting the solid at &minus;20 °C so region (a) is clearly visible. Regions (b) and (d) — the two plateaus — are the focus of this section. (Proportions are adjusted for clarity and not drawn precisely to scale.)</figcaption>
+      </figure>
+
+      <div class="sumlink"><b>Summative task — Slide 6 (continued).</b> Identify the areas on the graph described by specific latent heat, and explain the term.</div>
+
+      <div class="keyword"><b>Specific latent heat, L:</b> the amount of thermal energy needed to change the state of a unit mass (1 kg) of a substance, without any change in temperature.</div>
+      <p>The thermal energy Q transferred during a phase change is given by:</p>
+      <div class="eqn">Q = mL</div>
+      <table class="eqtable">
+        <tr><th>Symbol</th><th>Quantity</th><th>SI unit</th></tr>
+        <tr><td>Q</td><td>thermal energy transferred</td><td>J</td></tr>
+        <tr><td>m</td><td>mass</td><td>kg</td></tr>
+        <tr><td>L</td><td>specific latent heat</td><td>J kg<sup>&minus;1</sup></td></tr>
+      </table>
+      <p>There are two specific latent heats for a given substance: the <strong>specific latent heat of fusion</strong>, L<sub>f</sub> (melting/freezing — region b), and the much larger <strong>specific latent heat of vaporisation</strong>, L<sub>v</sub> (boiling/condensing — region d).</p>
+      <table class="eqtable">
+        <tr><th>Water</th><th>Value</th></tr>
+        <tr><td>L<sub>f</sub> (fusion, at 0 °C)</td><td>334 000 J kg<sup>&minus;1</sup></td></tr>
+        <tr><td>L<sub>v</sub> (vaporisation, at 100 °C)</td><td>2 260 000 J kg<sup>&minus;1</sup></td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example</span>
+        Calculate the thermal energy needed to boil away 0.40 kg of water at 100 °C. (L<sub>v</sub> = 2 260 000 J kg<sup>&minus;1</sup>)
+        <p style="margin-bottom:0;">Q = mL<sub>v</sub><br>
+        Q = 0.40 × 2 260 000</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>Calculate the thermal energy needed to melt 0.75 kg of ice at 0 °C. (L<sub>f</sub> = 334 000 J kg<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">Q = mL<sub>f</sub><br>Q = 0.75 × 334 000</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>A 0.20 kg sample of a substance requires 45 000 J of energy to completely melt at its melting point. Calculate its specific latent heat of fusion.</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">Rearranging Q = mL for L:<br>L = Q/m<br>L = 45 000/0.20</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>Explain, in terms of particle separation, why the specific latent heat of vaporisation of water is so much larger than its specific latent heat of fusion.</strong>
+        <textarea class="answer-lines long" placeholder="Type your answer here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">During melting, particles remain close together — they gain enough energy to move past one another, but the forces between them are still largely intact. During vaporisation, particles must be separated almost completely, moving from close together (liquid) to far apart (gas) against the full strength of the attractive forces between them. Much more energy is needed to achieve this much larger increase in separation, so L<sub>v</sub> ≫ L<sub>f</sub>.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>Combined question. Calculate the total thermal energy needed to convert 0.50 kg of ice at 0 °C into water at 40 °C. (L<sub>f</sub> = 334 000 J kg<sup>&minus;1</sup>; c<sub>water</sub> = 4180 J kg<sup>&minus;1</sup>K<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines long" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">This is a two-stage process: melting the ice, then warming the resulting water.<br>
+        Stage 1 (melt): Q<sub>1</sub> = mL<sub>f</sub> = 0.50 × 334 000<br>
+        Stage 2 (warm): Q<sub>2</sub> = mcΔT = 0.50 × 4180 × 40<br>
+        Total energy Q = Q<sub>1</sub> + Q<sub>2</sub> — calculate each stage, then add them together.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Putting it together</h2>
+      <p>You now have everything you need to calculate the total energy represented by every stage of Fig. 1.1 — the same calculation your summative task asks you to complete.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+          <line x1="70" y1="15" x2="70" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="252" x2="660" y2="252" stroke="#5b6b78" stroke-width="1.4"/>
+          <line x1="70" y1="220.0" x2="660" y2="220.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="188.0" x2="660" y2="188.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="156.0" x2="660" y2="156.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="124.0" x2="660" y2="124.0" stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="92.0"  x2="660" y2="92.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="60.0"  x2="660" y2="60.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <line x1="70" y1="28.0"  x2="660" y2="28.0"  stroke="#e2e8ef" stroke-width="1"/>
+          <text x="60" y="255.5" text-anchor="end" font-size="10" fill="#5b6b78">&minus;20</text>
+          <text x="60" y="223.5" text-anchor="end" font-size="10" fill="#5b6b78">0</text>
+          <text x="60" y="191.5" text-anchor="end" font-size="10" fill="#5b6b78">20</text>
+          <text x="60" y="159.5" text-anchor="end" font-size="10" fill="#5b6b78">40</text>
+          <text x="60" y="127.5" text-anchor="end" font-size="10" fill="#5b6b78">60</text>
+          <text x="60" y="95.5"  text-anchor="end" font-size="10" fill="#5b6b78">80</text>
+          <text x="60" y="63.5"  text-anchor="end" font-size="10" fill="#5b6b78">100</text>
+          <text x="60" y="31.5"  text-anchor="end" font-size="10" fill="#5b6b78">120</text>
+          <text x="365" y="288" text-anchor="middle" font-size="11.5" fill="#22305a">Time</text>
+          <text x="18" y="133" text-anchor="middle" font-size="11.5" fill="#22305a" transform="rotate(-90 18 133)">Temperature / °C</text>
+          <path d="M70.0,252.0 L115.0,220.0 L179.4,220.0 L259.9,60.0 L652.3,60.0 L660.0,28.0" fill="none" stroke="#0e7c86" stroke-width="3"/>
+          <line x1="78.6" y1="216.4" x2="92.5" y2="236.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="78.6" cy="216.4" r="9" fill="#173a5e"/><text x="78.6" y="219.9" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">a</text>
+          <line x1="147.2" y1="196.0" x2="147.2" y2="220.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="147.2" cy="196.0" r="9" fill="#173a5e"/><text x="147.2" y="199.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">b</text>
+          <line x1="241.0" y1="150.8" x2="219.6" y2="140.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="241.0" cy="150.8" r="9" fill="#173a5e"/><text x="241.0" y="154.3" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">c</text>
+          <line x1="456.1" y1="32.0" x2="456.1" y2="60.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="456.1" cy="32.0" r="9" fill="#173a5e"/><text x="456.1" y="35.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">d</text>
+          <line x1="676.0" y1="44.0" x2="656.1" y2="44.0" stroke="#173a5e" stroke-width="1" stroke-dasharray="2 2"/>
+          <circle cx="676.0" cy="44.0" r="9" fill="#173a5e"/><text x="676.0" y="47.5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">e</text>
+        </svg>
+        <figcaption>Fig. 5.1 The same reference graph one last time, now starting the solid at &minus;20 °C so region (a) is clearly visible — this is the graph your capstone calculation below works through, stage by stage. (Proportions are adjusted for clarity and not drawn precisely to scale.)</figcaption>
+      </figure>
+
+      <div class="sumlink"><b>Summative task — Slide 7.</b> Complete an example calculation showing the energy for each section of the graph as 1 kg of ice at &minus;5 °C turns into 1 kg of steam at 120 °C.</div>
+
+      <table class="eqtable">
+        <tr><th>Region</th><th>Change</th><th>Formula</th></tr>
+        <tr><td>(a)</td><td>ice warms, &minus;5 °C → 0 °C</td><td>Q = mcΔT (c<sub>ice</sub>)</td></tr>
+        <tr><td>(b)</td><td>ice melts at 0 °C</td><td>Q = mL<sub>f</sub></td></tr>
+        <tr><td>(c)</td><td>water warms, 0 °C → 100 °C</td><td>Q = mcΔT (c<sub>water</sub>)</td></tr>
+        <tr><td>(d)</td><td>water boils at 100 °C</td><td>Q = mL<sub>v</sub></td></tr>
+        <tr><td>(e)</td><td>steam warms, 100 °C → 120 °C</td><td>Q = mcΔT (c<sub>steam</sub>)</td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example — stages (a) and (b)</span>
+        For 1 kg of ice warming from &minus;5 °C to 0 °C, then melting: (c<sub>ice</sub> = 2100 J kg<sup>&minus;1</sup>K<sup>&minus;1</sup>; L<sub>f</sub> = 334 000 J kg<sup>&minus;1</sup>)
+        <p>Stage (a): ΔT = 0 &minus; (&minus;5) = 5 K<br>
+        Q<sub>a</sub> = mcΔT = 1 × 2100 × 5</p>
+        <p style="margin-bottom:0;">Stage (b): Q<sub>b</sub> = mL<sub>f</sub> = 1 × 334 000</p>
+      </div>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>Calculate Q<sub>c</sub>, the energy needed for stage (c): 1 kg of water warming from 0 °C to 100 °C. (c<sub>water</sub> = 4180 J kg<sup>&minus;1</sup>K<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">Q<sub>c</sub> = mcΔT = 1 × 4180 × 100</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>Calculate Q<sub>d</sub>, the energy needed for stage (d): 1 kg of water boiling at 100 °C. (L<sub>v</sub> = 2 260 000 J kg<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">Q<sub>d</sub> = mL<sub>v</sub> = 1 × 2 260 000</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>Calculate Q<sub>e</sub>, the energy needed for stage (e): 1 kg of steam warming from 100 °C to 120 °C. (c<sub>steam</sub> = 1996 J kg<sup>&minus;1</sup>K<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">Q<sub>e</sub> = mcΔT = 1 × 1996 × 20</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>Capstone calculation. Using the worked example and your answers to Q15&ndash;Q17, find the total thermal energy needed to convert 1 kg of ice at &minus;5 °C into steam at 120 °C.</strong>
+        <textarea class="answer-lines long" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Total energy Q = Q<sub>a</sub> + Q<sub>b</sub> + Q<sub>c</sub> + Q<sub>d</sub> + Q<sub>e</sub><br>
+        Add together your five calculated values from the worked example and Q15&ndash;Q17 above. You should find that Q<sub>d</sub> (boiling) is by far the largest single contribution — consistent with how much wider region (d) is than the other regions on Fig. 1.1.</div>
+      </div>
+
+      <h3>Conservation of energy: calorimetry</h3>
+      <p>When two substances at different temperatures are combined in an isolated system, the total energy is conserved: the thermal energy lost by the hotter substance equals the thermal energy gained by the cooler one.</p>
+      <div class="keybox"><strong>Key idea.</strong> For an isolated system: energy lost by the hotter substance = energy gained by the cooler substance.</div>
+
+      <div class="question">
+        <span class="qnum">19</span><strong>A 0.10 kg block of iron at 150 °C is dropped into 0.40 kg of water at 15 °C, in an insulated container. Assuming no energy is lost to the surroundings, set up (but do not solve) the conservation of energy equation for this system, and identify what it could be used to find. (c<sub>iron</sub> = 450 J kg<sup>&minus;1</sup>K<sup>&minus;1</sup>; c<sub>water</sub> = 4180 J kg<sup>&minus;1</sup>K<sup>&minus;1</sup>)</strong>
+        <textarea class="answer-lines long" placeholder="Type your working here..."></textarea>
+        <button class="reveal-btn" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">Energy lost by iron = energy gained by water:<br>
+        m<sub>iron</sub>c<sub>iron</sub>(150 &minus; T<sub>f</sub>) = m<sub>water</sub>c<sub>water</sub>(T<sub>f</sub> &minus; 15)<br>
+        0.10 × 450 × (150 &minus; T<sub>f</sub>) = 0.40 × 4180 × (T<sub>f</sub> &minus; 15)<br>
+        This equation could be solved for T<sub>f</sub>, the final equilibrium temperature of the iron and water once they reach thermal equilibrium.</div>
+      </div>
+
+      <h3>Live simulation: calorimetry mixer</h3>
+      <figure class="wide">
+        <div class="sim-wrap sim-wrap-light">
+          <div class="sim-canvas-box">
+            <canvas id="calCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Mix a hot object with cool water</h4>
+            <div class="sim-row">
+              <label for="calMat">Hot object material</label>
+              <select id="calMat">
+                <option value="390">Copper (390)</option>
+                <option value="450" selected>Iron (450)</option>
+                <option value="897">Aluminium (897)</option>
+                <option value="129">Lead (129)</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="calMassObj">Mass of hot object / kg</label>
+              <input type="range" id="calMassObj" min="0.05" max="0.50" step="0.01" value="0.10">
+            </div>
+            <div class="sim-row">
+              <label for="calTObj">Initial temperature of hot object / °C</label>
+              <input type="range" id="calTObj" min="50" max="200" step="1" value="150">
+            </div>
+            <div class="sim-row">
+              <label for="calMassWater">Mass of water / kg</label>
+              <input type="range" id="calMassWater" min="0.10" max="1.00" step="0.01" value="0.40">
+            </div>
+            <div class="sim-row">
+              <label for="calTWater">Initial temperature of water / °C</label>
+              <input type="range" id="calTWater" min="5" max="30" step="1" value="15">
+            </div>
+            <div class="sim-readout" id="calReadout" style="margin-top:0.4rem;">Final equilibrium temperature: — °C</div>
+          </div>
+        </div>
+        <figcaption>Fig. 5.2 Adjust the mass, material and starting temperature of the hot object and the water. The simulation applies conservation of energy — m₁c₁(T₁ − T_f) = m₂c₂(T_f − T₂) — to find the equilibrium temperature they both settle to.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Phase change</dt><dd>A change in particle behaviour (arrangement and separation) arising from a change in a substance's energy, at constant temperature — e.g. melting, boiling.</dd>
+        <dt>Internal energy</dt><dd>The sum of the total random kinetic energy and total potential energy of all the particles in a substance.</dd>
+        <dt>Specific heat capacity, c</dt><dd>The thermal energy needed to raise the temperature of a unit mass (1 kg) of a substance by 1 K; Q = mcΔT.</dd>
+        <dt>Specific latent heat, L</dt><dd>The thermal energy needed to change the state of a unit mass (1 kg) of a substance, at constant temperature; Q = mL.</dd>
+        <dt>Specific latent heat of fusion, L<sub>f</sub></dt><dd>The specific latent heat associated with melting or freezing.</dd>
+        <dt>Specific latent heat of vaporisation, L<sub>v</sub></dt><dd>The specific latent heat associated with boiling or condensing; always much larger than L<sub>f</sub> for the same substance.</dd>
+        <dt>Boiling</dt><dd>A phase change from liquid to gas occurring throughout the bulk of a liquid, only at the boiling point, at constant temperature.</dd>
+        <dt>Evaporation</dt><dd>A phase change from liquid to gas occurring only at the free surface of a liquid, at any temperature, as the most energetic particles escape; produces a cooling effect on the liquid left behind.</dd>
+        <dt>Conservation of energy (calorimetry)</dt><dd>In an isolated system, the total energy is conserved: thermal energy lost by a hotter substance equals thermal energy gained by a cooler substance.</dd>
+      </dl>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Fig 1.1 sim: heating curve explorer ================= */
+(function(){
+  const canvas = document.getElementById('heatCurveCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const slider = document.getElementById('heatEnergySlider');
+  const readout = document.getElementById('heatReadout');
+
+  const TOTAL = 3062420;
+  const bounds = [0, 10500, 344500, 762500, 3022500, TOTAL];
+  const temps  = [-5, 0, 0, 100, 100, 120];
+
+  const x0 = 50, x1 = 430, yBot = 215, yTop = 20;
+  function xE(E){ return x0 + (x1-x0) * E / TOTAL; }
+  function yT(T){ return yBot + (yTop-yBot) * (T-(-5)) / 125; }
+
+  function stateFor(E){
+    if(E <= bounds[1]){
+      const T = -5 + (E/bounds[1])*5;
+      return {T: T, label: 'solid (ice), warming'};
+    } else if(E <= bounds[2]){
+      return {T: 0, label: 'melting — solid → liquid (constant T)'};
+    } else if(E <= bounds[3]){
+      const frac = (E-bounds[2])/(bounds[3]-bounds[2]);
+      return {T: frac*100, label: 'liquid (water), warming'};
+    } else if(E <= bounds[4]){
+      return {T: 100, label: 'boiling — liquid → gas (constant T)'};
+    } else {
+      const frac = (E-bounds[4])/(bounds[5]-bounds[4]);
+      return {T: 100 + frac*20, label: 'gas (steam), warming'};
+    }
+  }
+
+  function draw(){
+    const E = parseFloat(slider.value);
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    // axes
+    ctx.strokeStyle = 'rgba(220,234,240,0.5)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(x0,yTop); ctx.lineTo(x0,yBot); ctx.lineTo(x1,yBot); ctx.stroke();
+    ctx.fillStyle = '#9fb3c2'; ctx.font = '10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Energy supplied / kJ', (x0+x1)/2, yBot+28);
+    ctx.save();
+    ctx.translate(16, (yTop+yBot)/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('Temperature / °C', 0, 0);
+    ctx.restore();
+    ctx.textAlign='right';
+    ctx.fillText('120', x0-6, yTop+4);
+    ctx.fillText('0', x0-6, yT(0)+4);
+    ctx.fillText('-5', x0-6, yBot+4);
+
+    // curve
+    ctx.strokeStyle = '#4fb8c4'; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for(let i=0;i<bounds.length;i++){
+      const px = xE(bounds[i]), py = yT(temps[i]);
+      if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+
+    // marker
+    const st = stateFor(E);
+    const mx = xE(Math.min(E,TOTAL)), my = yT(st.T);
+    ctx.fillStyle = '#d98324';
+    ctx.beginPath(); ctx.arc(mx,my,6,0,2*Math.PI); ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    readout.innerHTML = 'Energy supplied: ' + (E/1000).toFixed(1) + ' kJ<br>Temperature: ' + st.T.toFixed(1) + ' °C<br>State: ' + st.label;
+  }
+
+  slider.addEventListener('input', draw);
+  draw();
+})();
+
+/* ================= Fig 3.2 sim: specific heat capacity comparator ================= */
+(function(){
+  const canvas = document.getElementById('shcCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const matA = document.getElementById('shcMatA');
+  const matB = document.getElementById('shcMatB');
+  const energySlider = document.getElementById('shcEnergy');
+  const readout = document.getElementById('shcReadout');
+
+  const names = {'4180':'Water', '897':'Aluminium', '450':'Iron', '390':'Copper'};
+  const startT = 20;
+  const maxDisplayT = 130;
+  const baseY = 225, topY = 25, barWidth = 90, axisX = 55;
+
+  function colorForTemp(t){
+    const frac = Math.max(0, Math.min(1, (t-20)/(maxDisplayT-20)));
+    const r = Math.round(70 + frac*175);
+    const g = Math.round(120 - frac*60);
+    const b = Math.round(200 - frac*160);
+    return 'rgb('+r+','+g+','+b+')';
+  }
+
+  function drawBar(cx, c, E, label){
+    const dT = E/(1*c);
+    const finalT = startT + dT;
+    const h = Math.max(2, (finalT/maxDisplayT) * (baseY-topY));
+    const top = baseY - h;
+    ctx.fillStyle = colorForTemp(finalT);
+    ctx.fillRect(cx - barWidth/2, top, barWidth, h);
+    ctx.strokeStyle = 'rgba(23,58,94,0.35)'; ctx.strokeRect(cx - barWidth/2, top, barWidth, h);
+    ctx.fillStyle = '#22305a'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(label, cx, baseY+18);
+    ctx.fillText('ΔT ≈ ' + dT.toFixed(0) + ' K', cx, top-18);
+    ctx.fillText('final ≈ ' + finalT.toFixed(0) + ' °C', cx, top-6);
+    return {dT: dT, finalT: finalT};
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#f4f8fb'; ctx.fillRect(0,0,W,H);
+
+    // y-axis: temperature scale
+    ctx.strokeStyle = '#c7d6e2'; ctx.lineWidth = 1;
+    ctx.fillStyle = '#5b6b78'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    for(let t=20; t<=maxDisplayT; t+=20){
+      const y = baseY - (t/maxDisplayT)*(baseY-topY);
+      ctx.beginPath(); ctx.moveTo(axisX, y); ctx.lineTo(430, y); ctx.stroke();
+      ctx.fillText(t.toFixed(0), axisX-6, y+3.5);
+    }
+    ctx.strokeStyle = '#5b6b78'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(axisX, topY); ctx.lineTo(axisX, baseY); ctx.lineTo(430, baseY); ctx.stroke();
+    ctx.save();
+    ctx.translate(14, (topY+baseY)/2); ctx.rotate(-Math.PI/2);
+    ctx.textAlign='center'; ctx.fillText('Temperature / °C', 0, 0);
+    ctx.restore();
+
+    const E = parseFloat(energySlider.value);
+    const cA = parseFloat(matA.value), cB = parseFloat(matB.value);
+    const resA = drawBar(160, cA, E, names[String(cA)] + ' (c=' + cA + ')');
+    const resB = drawBar(330, cB, E, names[String(cB)] + ' (c=' + cB + ')');
+
+    readout.innerHTML = 'Both blocks start at 20 °C and are given ' + (E/1000).toFixed(1) + ' kJ each. ' +
+      names[String(cA)] + ' reaches ' + resA.finalT.toFixed(0) + ' °C; ' +
+      names[String(cB)] + ' reaches ' + resB.finalT.toFixed(0) + ' °C.';
+  }
+
+  matA.addEventListener('input', draw);
+  matB.addEventListener('input', draw);
+  energySlider.addEventListener('input', draw);
+  draw();
+})();
+
+/* ================= Fig 5.2 sim: calorimetry mixer ================= */
+(function(){
+  const canvas = document.getElementById('calCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const matSel = document.getElementById('calMat');
+  const massObj = document.getElementById('calMassObj');
+  const tObj = document.getElementById('calTObj');
+  const massWater = document.getElementById('calMassWater');
+  const tWater = document.getElementById('calTWater');
+  const readout = document.getElementById('calReadout');
+
+  const cWater = 4180;
+  const maxT = 200;
+  const baseY = 225, topY = 25, barWidth = 90, axisX = 55;
+
+  function colorForTemp(t){
+    const frac = Math.max(0, Math.min(1, t/maxT));
+    const r = Math.round(70 + frac*175);
+    const g = Math.round(120 - frac*60);
+    const b = Math.round(200 - frac*160);
+    return 'rgb('+r+','+g+','+b+')';
+  }
+
+  function drawBar(cx, tInitial, tFinal, label){
+    const h = Math.max(2, (tInitial/maxT) * (baseY-topY));
+    const top = baseY - h;
+    ctx.fillStyle = colorForTemp(tInitial);
+    ctx.fillRect(cx - barWidth/2, top, barWidth, h);
+    ctx.strokeStyle = 'rgba(23,58,94,0.35)'; ctx.strokeRect(cx - barWidth/2, top, barWidth, h);
+
+    const hf = Math.max(2, (tFinal/maxT) * (baseY-topY));
+    const topf = baseY - hf;
+    ctx.strokeStyle = '#173a5e'; ctx.lineWidth = 2; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(cx-barWidth/2-6, topf); ctx.lineTo(cx+barWidth/2+6, topf); ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#22305a'; ctx.font='11px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(label, cx, baseY+18);
+    ctx.fillText('start: ' + tInitial.toFixed(0) + ' °C', cx, top-6 < topY+10 ? topY+10 : top-6);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#f4f8fb'; ctx.fillRect(0,0,W,H);
+
+    // y-axis: temperature scale
+    ctx.strokeStyle = '#c7d6e2'; ctx.lineWidth = 1;
+    ctx.fillStyle = '#5b6b78'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    for(let t=0; t<=maxT; t+=40){
+      const y = baseY - (t/maxT)*(baseY-topY);
+      ctx.beginPath(); ctx.moveTo(axisX, y); ctx.lineTo(430, y); ctx.stroke();
+      ctx.fillText(t.toFixed(0), axisX-6, y+3.5);
+    }
+    ctx.strokeStyle = '#5b6b78'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(axisX, topY); ctx.lineTo(axisX, baseY); ctx.lineTo(430, baseY); ctx.stroke();
+    ctx.save();
+    ctx.translate(14, (topY+baseY)/2); ctx.rotate(-Math.PI/2);
+    ctx.textAlign='center'; ctx.fillText('Temperature / °C', 0, 0);
+    ctx.restore();
+
+    const c1 = parseFloat(matSel.value);
+    const m1 = parseFloat(massObj.value), T1 = parseFloat(tObj.value);
+    const m2 = parseFloat(massWater.value), T2 = parseFloat(tWater.value);
+    const Tf = (m1*c1*T1 + m2*cWater*T2) / (m1*c1 + m2*cWater);
+
+    drawBar(160, T1, Tf, 'hot object');
+    drawBar(330, T2, Tf, 'water');
+
+    ctx.fillStyle = '#d98324'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('dashed line = equilibrium T_f = ' + Tf.toFixed(1) + ' °C', 240, 18);
+
+    readout.innerHTML = 'Final equilibrium temperature: ' + Tf.toFixed(1) + ' °C';
+  }
+
+  [matSel, massObj, tObj, massWater, tWater].forEach(el => el.addEventListener('input', draw));
+  draw();
+})();
+
+</script>
+</body>
+</html>
