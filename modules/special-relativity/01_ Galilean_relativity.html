@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galilean Relativity — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:"Segoe UI", Helvetica, Arial, sans-serif; color:var(--ink);
+    background:#fff; padding-top:56px; line-height:1.55;
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI", Helvetica, Arial, sans-serif; color:var(--navy); line-height:1.25;}
+  a{color:var(--teal-dark);}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; background:var(--navy); color:#fff;
+    display:flex; align-items:center; gap:14px; padding:0 18px; z-index:200;
+    box-shadow:0 2px 6px rgba(0,0,0,0.18); font-size:0.92rem;
+  }
+  .topbar .tb-title{font-weight:600; margin-right:auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .topbar button{
+    font-family:inherit; font-size:0.85rem; border:1px solid rgba(255,255,255,0.4); background:transparent;
+    color:#fff; padding:7px 12px; border-radius:6px; cursor:pointer; white-space:nowrap;
+  }
+  .topbar button:hover{background:rgba(255,255,255,0.12);}
+  .topbar button.primary{background:var(--amber); border-color:var(--amber); color:#fff; font-weight:600;}
+  .topbar button.primary:hover{background:#c1751f;}
+  .save-note{font-size:0.78rem; color:#cfe0ee; max-width:230px; display:none;}
+  @media (min-width:900px){.save-note{display:block;}}
+
+  /* ===== Layout ===== */
+  .layout{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav.sidebar{
+    position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto; flex:0 0 210px;
+    background:var(--soft-grey); border-right:1px solid var(--border); padding:18px 10px;
+  }
+  nav.sidebar a{
+    display:block; padding:8px 10px; margin-bottom:2px; border-radius:6px; text-decoration:none;
+    color:var(--ink); font-size:0.88rem; border-left:3px solid transparent;
+  }
+  nav.sidebar a:hover{background:var(--soft-blue);}
+  nav.sidebar a.active{border-left-color:var(--teal); background:var(--soft-blue); color:var(--teal-dark); font-weight:600;}
+  main{flex:1 1 auto; min-width:0; padding:0 0 60px 0;}
+
+  /* ===== Cover ===== */
+  .cover{
+    background:linear-gradient(135deg, var(--navy), var(--teal-dark)); color:#fff;
+    padding:56px 46px 44px; scroll-margin-top:66px;
+  }
+  .cover h1{color:#fff; font-size:2.3rem; margin:0 0 18px;}
+  .cover p.intro{max-width:760px; font-size:1.05rem; color:#eaf3fb;}
+  .goals{
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.28); border-radius:10px;
+    padding:18px 22px; max-width:760px; margin-top:20px;
+  }
+  .goals p{margin:0 0 8px; font-weight:600;}
+  .goals ul{margin:0; padding-left:20px;}
+  .goals li{margin-bottom:6px;}
+  .name-box{margin-top:26px; max-width:420px;}
+  .name-box label{display:block; font-size:0.85rem; color:#cfe0ee; margin-bottom:4px;}
+  .name-box input{
+    width:100%; padding:8px 10px; border-radius:6px; border:1px solid rgba(255,255,255,0.4);
+    background:rgba(255,255,255,0.95); font-size:0.95rem;
+  }
+
+  /* ===== Sections ===== */
+  section.topic{padding:38px 46px; border-bottom:1px solid var(--border); scroll-margin-top:66px;}
+  section.topic h2{font-size:1.5rem; border-bottom:3px solid var(--teal); padding-bottom:8px; margin-bottom:18px;}
+  section.topic h3{font-size:1.15rem; margin-top:30px; color:var(--teal-dark);}
+  p{margin:0.8em 0;}
+
+  .keybox{
+    background:var(--soft-blue); border-left:4px solid var(--navy); border-radius:6px;
+    padding:14px 18px; margin:18px 0;
+  }
+  .keybox p{margin:0.4em 0;}
+
+  .eqn{
+    font-family:"Cambria Math", Cambria, Georgia, "Times New Roman", serif; font-size:1.25rem; text-align:center;
+    background:var(--soft-purple); border:1px solid #ded0ef; border-radius:8px; padding:16px 10px; margin:18px 0; color:var(--navy);
+  }
+  .eqn .cond{display:block; font-family:"Segoe UI", Helvetica, Arial, sans-serif; font-size:0.78rem; color:#5c4a80; margin-top:6px;}
+
+  .keyword{
+    background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px;
+    padding:12px 18px; margin:18px 0;
+  }
+  .keyword .kw-tag{font-weight:700; font-size:0.72rem; letter-spacing:0.06em; color:#a35a13; text-transform:uppercase; display:block; margin-bottom:4px;}
+
+  .example{
+    background:var(--soft-green); border:1px solid #cbe8d3; border-radius:8px; padding:16px 18px; margin:20px 0;
+  }
+  .example .ex-tag{
+    font-weight:700; font-size:0.72rem; letter-spacing:0.06em; color:#1f7a41; text-transform:uppercase;
+    display:block; margin-bottom:8px;
+  }
+  .example .ex-step{margin:0.35em 0; font-family:"Cambria Math", Cambria, Georgia, serif; font-size:1.02rem;}
+  .example .ex-blank{color:#8a6d00; background:#fff7d6; padding:1px 8px; border-radius:4px; font-weight:600;}
+
+  .stretch-box{
+    background:var(--soft-purple); border-left:4px solid var(--purple); border-radius:6px;
+    padding:14px 18px; margin:18px 0;
+  }
+  .stretch-box .st-tag{font-weight:700; font-size:0.72rem; letter-spacing:0.06em; color:var(--purple); text-transform:uppercase; display:block; margin-bottom:6px;}
+
+  table.eqtable{border-collapse:collapse; width:100%; margin:18px 0; font-size:0.94rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:9px 12px; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+  table.eqtable input.cell-input{
+    width:100%; border:1px solid var(--border); border-radius:4px; padding:5px 6px; font-family:inherit; font-size:0.92rem;
+  }
+
+  figure{margin:22px 0; text-align:center;}
+  figure svg{max-width:100%; height:auto; background:#fff;}
+  figcaption{font-size:0.85rem; color:#52606d; margin-top:8px;}
+
+  /* ===== Questions ===== */
+  .question{
+    border:1px solid var(--border); border-radius:8px; padding:16px 18px 18px; margin:22px 0; background:#fff;
+  }
+  .qnum{
+    display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%;
+    background:var(--teal); color:#fff; font-weight:700; font-size:0.88rem; margin-right:10px; flex:0 0 auto;
+  }
+  .q-head{display:flex; align-items:flex-start; margin-bottom:10px;}
+  .q-text{padding-top:3px;}
+  .hint{
+    font-size:0.86rem; color:#6a5a1a; background:#fff9e6; border:1px dashed #e3cf7a; border-radius:6px;
+    padding:8px 12px; margin:10px 0 4px 38px; display:none;
+  }
+  .hint.open{display:block;}
+  .hint-btn{
+    background:none; border:none; color:#a3821f; font-size:0.82rem; cursor:pointer; text-decoration:underline;
+    margin-left:38px; padding:2px 0;
+  }
+  textarea.answer-lines{
+    width:calc(100% - 38px); margin-left:38px; margin-top:8px; min-height:54px; resize:none; overflow:hidden;
+    border:1px solid var(--line); border-radius:6px; padding:10px 12px; font-family:inherit; font-size:0.95rem;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 27px, var(--border) 28px);
+    line-height:28px; background-color:#fffefb;
+  }
+  .q-actions{margin-left:38px; margin-top:10px;}
+  .reveal-btn{
+    background:var(--teal); color:#fff; border:none; padding:7px 14px; border-radius:6px; font-size:0.85rem;
+    cursor:pointer; font-weight:600;
+  }
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{
+    display:none; margin:12px 0 0 38px; background:var(--soft-green); border-left:4px solid #2f9e5c;
+    border-radius:6px; padding:12px 16px; font-size:0.94rem;
+  }
+  .answer-panel.open{display:block;}
+  .answer-panel .ans-tag{font-weight:700; font-size:0.72rem; letter-spacing:0.06em; color:#1f7a41; text-transform:uppercase; display:block; margin-bottom:6px;}
+  .answer-panel .ex-step{margin:0.3em 0; font-family:"Cambria Math", Cambria, Georgia, serif;}
+
+  /* ===== Simulations ===== */
+  .sim-wrap{border:1px solid var(--border); border-radius:10px; padding:18px; margin:24px 0; background:#f7f9fb;}
+  .sim-wrap h4{margin:0 0 10px; color:var(--navy); font-size:1rem;}
+  .sim-canvas-box{background:#0f1f30; border-radius:8px; overflow:hidden; display:flex; justify-content:center;}
+  .sim-canvas-box canvas{display:block; max-width:100%; height:auto;}
+  .sim-controls{display:flex; flex-wrap:wrap; gap:14px 26px; align-items:center; margin-top:14px; font-size:0.88rem;}
+  .sim-controls .ctrl{display:flex; flex-direction:column; gap:4px; min-width:170px;}
+  .sim-controls input[type=range]{width:100%;}
+  .sim-controls button{
+    background:var(--navy); color:#fff; border:none; padding:8px 16px; border-radius:6px; cursor:pointer; font-size:0.88rem;
+  }
+  .sim-controls button:hover{background:#0f2c49;}
+  .sim-readout{
+    margin-top:12px; background:#fff; border:1px solid var(--border); border-radius:6px; padding:10px 14px;
+    font-family:"Cambria Math", Cambria, Georgia, serif; font-size:0.98rem; display:flex; flex-wrap:wrap; gap:8px 28px;
+  }
+  .sim-readout span.val{font-weight:700; color:var(--navy);}
+  .sim-readout span.sim-readout-label{
+    flex-basis:100%; font-family:"Segoe UI", Helvetica, Arial, sans-serif; font-size:0.82rem;
+    font-weight:600; color:#52606d; text-transform:uppercase; letter-spacing:0.03em; margin-bottom:2px;
+  }
+  .sim-print-note{display:none;}
+  .sim-embed-credit{font-size:0.78rem; color:#52606d; margin-top:6px;}
+
+  /* ===== Glossary ===== */
+  dl.glossary{margin:0;}
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:14px;}
+  dl.glossary dd{margin:2px 0 0 0; color:#3a4652;}
+
+  /* ===== Print ===== */
+  @media print{
+    .topbar, nav.sidebar, .reveal-btn, .hint-btn, .sim-controls, .sim-canvas-box{display:none !important;}
+    .sim-print-note{display:block !important; font-style:italic; color:#52606d; padding:10px; border:1px dashed var(--border); border-radius:6px;}
+    body{padding-top:0;}
+    .layout{display:block;}
+    section.topic{padding:14px 4px; border-bottom:1px solid #ccc;}
+    .answer-panel{display:none;}
+    body.answers-visible .answer-panel{display:block !important;}
+    .cover{background:var(--navy) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="tb-title">Galilean Relativity — Student Workbook</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear answers</button>
+  <span class="save-note">Answers are not saved automatically — print or copy your work before closing this tab.</span>
+  <button class="primary" onclick="window.print()">Print</button>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <a href="#cover">Cover</a>
+    <a href="#s1">1. Reference frames</a>
+    <a href="#s2">2. Inertial frames &amp; Galilean relativity</a>
+    <a href="#s3">3. The Galilean transformation equations</a>
+    <a href="#s4">4. The velocity addition equation</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Galilean Relativity</h1>
+      <p class="intro">
+        Whenever something moves, the answer to "how fast?" depends on who is asking. A ball rolling across the
+        floor of a train looks completely different to a passenger sitting still on the train and to someone
+        standing on the platform watching the train go by. This workbook introduces <strong>reference frames</strong> —
+        the coordinate systems we use to describe motion — and the simple equations that let us convert a
+        measurement made in one reference frame into a measurement made in another. These equations were worked
+        out by Galileo and refined by Newton, and the whole set of ideas is known as <strong>Galilean relativity</strong>.
+      </p>
+      <div class="goals">
+        <p>By the end of this workbook you should be able to:</p>
+        <ul>
+          <li>explain what is meant by a reference frame, an event and an inertial reference frame</li>
+          <li>state that Newton's laws of motion are the same in every inertial reference frame — this is Galilean relativity</li>
+          <li>use the Galilean transformation equations, x′ = x − vt and t′ = t, to relate the position and time of an event as measured in two reference frames</li>
+          <li>use the Galilean velocity addition equation, u′ = u − v, to relate the velocity of an object as measured in two reference frames</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label for="student-name">Name</label>
+        <input type="text" id="student-name" placeholder="Type your name here">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Reference frames</h2>
+
+      <p>
+        Imagine you are sitting on a train, reading a book. To you, the book is not moving at all. But to someone
+        standing on the platform watching the train go past, both you and the book are moving very quickly. Neither
+        person is wrong — they are simply describing the same situation from a different <strong>reference frame</strong>.
+      </p>
+
+      <div class="keybox">
+        <p>A <strong>reference frame</strong> is a coordinate system, with a set of axes and a clock, that we use to
+        assign a position and a time to something that happens.</p>
+        <p>A single, precisely located and timed happening — a flash of light, a ball bouncing, two cars passing
+        each other — is called an <strong>event</strong>.</p>
+      </div>
+
+      <p>
+        Physicists often imagine a hypothetical person, called an <strong>observer</strong>, taking the measurements
+        in a particular reference frame. An observer is always at rest relative to their own reference frame — the
+        observer on the train is at rest in the train's reference frame, and the observer on the platform is at rest
+        in the platform's reference frame.
+      </p>
+
+      <figure>
+        <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig1title">
+          <title id="fig1title">Two observers see two different paths for the same ball</title>
+          <!-- ground -->
+          <line x1="30" y1="215" x2="690" y2="215" stroke="#5c6b78" stroke-width="2"/>
+          <!-- cart at start -->
+          <g>
+            <rect x="90" y="175" width="90" height="34" rx="4" fill="#0e7c86" opacity="0.85"/>
+            <circle cx="106" cy="215" r="9" fill="#173a5e"/>
+            <circle cx="164" cy="215" r="9" fill="#173a5e"/>
+            <!-- person -->
+            <circle cx="121.5" cy="163" r="9" fill="#d98324"/>
+            <line x1="121.5" y1="172" x2="121.5" y2="175" stroke="#d98324" stroke-width="4"/>
+          </g>
+          <!-- cart at later position (dashed, showing where it has moved to) -->
+          <g opacity="0.55">
+            <rect x="400" y="175" width="90" height="34" rx="4" fill="none" stroke="#0e7c86" stroke-width="2" stroke-dasharray="5 4"/>
+            <circle cx="416" cy="215" r="9" fill="none" stroke="#173a5e" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="474" cy="215" r="9" fill="none" stroke="#173a5e" stroke-width="1.5" stroke-dasharray="3 3"/>
+          </g>
+          <!-- straight path seen by observer A (double arrow, up and back down) -->
+          <line x1="121.5" y1="141" x2="121.5" y2="76" stroke="#173a5e" stroke-width="2.5" marker-end="url(#arrowNavy)" marker-start="url(#arrowNavy)"/>
+          <text x="132" y="105" font-size="12.5" fill="#173a5e" font-family="Segoe UI, sans-serif">path seen by</text>
+          <text x="132" y="119" font-size="12.5" fill="#173a5e" font-family="Segoe UI, sans-serif">observer A (on the cart)</text>
+
+          <!-- parabola path seen by observer B -->
+          <path d="M121.5,141 Q276.5,46 431.5,141" fill="none" stroke="#d98324" stroke-width="2.5" marker-end="url(#arrowAmber)"/>
+          <text x="330" y="70" font-size="12.5" fill="#a35a13" font-family="Segoe UI, sans-serif">path seen by</text>
+          <text x="330" y="84" font-size="12.5" fill="#a35a13" font-family="Segoe UI, sans-serif">observer B (on the ground)</text>
+
+          <!-- observer B stick figure -->
+          <g>
+            <circle cx="610" cy="192" r="9" fill="#1f2933"/>
+            <line x1="610" y1="201" x2="610" y2="215" stroke="#1f2933" stroke-width="4"/>
+            <line x1="610" y1="206" x2="598" y2="215" stroke="#1f2933" stroke-width="3"/>
+            <line x1="610" y1="206" x2="622" y2="215" stroke="#1f2933" stroke-width="3"/>
+            <text x="610" y="236" font-size="12.5" fill="#1f2933" font-family="Segoe UI, sans-serif" text-anchor="middle">observer B</text>
+          </g>
+          <text x="121.5" y="235" font-size="12.5" fill="#1f2933" font-family="Segoe UI, sans-serif" text-anchor="middle">Observer A is on the moving cart</text>
+          <defs>
+            <marker id="arrowNavy" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/>
+            </marker>
+            <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#d98324"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Figure 1. Observer A throws a ball straight up while riding on a moving cart. A, who moves
+        with the cart, sees the ball go straight up and straight back down. B, standing still on the ground, sees
+        the same ball follow a curved path, because the cart (and the ball) are also moving sideways in B's
+        reference frame.</figcaption>
+      </figure>
+
+      <p>
+        Both descriptions in Figure 1 are correct — they are just measurements taken in different reference frames.
+        This is the central idea behind everything in this workbook: <em>all</em> reference frames are equally valid.
+        There is no single "correct" point of view.
+      </p>
+
+      <div class="question" id="q1">
+        <div class="q-head"><span class="qnum">1</span><span class="q-text">
+          In your own words, explain what is meant by an <strong>event</strong> in physics, and give an example of
+          your own (not one already used in this workbook).
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h1')">Need a hint?</button>
+        <div class="hint" id="h1">Think about something that happens at one specific place and one specific instant
+        — not something that lasts a long time or covers a large distance.</div>
+        <textarea class="answer-lines" rows="2"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a1')">Show answer</button></div>
+        <div class="answer-panel" id="a1">
+          <span class="ans-tag">Model answer</span>
+          <p>An event is a single, precisely located happening — it occurs at one specific point in space and at
+          one specific instant in time. Example: a firework exploding, a car's indicator light flashing once, or
+          two runners crossing the finish line at the same moment.</p>
+        </div>
+      </div>
+
+      <div class="question" id="q2">
+        <div class="q-head"><span class="qnum">2</span><span class="q-text">
+          Using Figure 1, explain why observer A records a straight-line path for the ball, while observer B
+          records a curved path — even though it is the same ball, thrown in the same way.
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h2')">Need a hint?</button>
+        <div class="hint" id="h2">A is moving sideways at the same speed as the ball's sideways motion the whole
+        time. B is not.</div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a2')">Show answer</button></div>
+        <div class="answer-panel" id="a2">
+          <span class="ans-tag">Model answer</span>
+          <p>In A's reference frame, A and the ball are both moving sideways with the cart at the same speed, so
+          A only ever sees the ball's up-and-down motion — a straight vertical line. In B's reference frame, the
+          ball has both an up-and-down motion (from being thrown) and a sideways motion (because it is moving with
+          the cart), so B sees the combination of the two as a curved path.</p>
+        </div>
+      </div>
+
+      <div class="question" id="q3">
+        <div class="q-head"><span class="qnum">3</span><span class="q-text">
+          A skydiver jumps from a plane and, a few seconds later, pulls their parachute cord, which slows their
+          fall sharply. Describe how this event (the parachute opening) would be described by <strong>(a)</strong>
+          a camera that is falling alongside the skydiver at the same speed, and <strong>(b)</strong> an observer
+          standing on the ground.
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h3')">Need a hint?</button>
+        <div class="hint" id="h3">Ask yourself: in each reference frame, who (or what) is treated as "not moving",
+        and what does everything else appear to do relative to that?</div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a3')">Show answer</button></div>
+        <div class="answer-panel" id="a3">
+          <span class="ans-tag">Model answer</span>
+          <p><strong>(a)</strong> In the falling camera's reference frame, the camera treats itself as stationary,
+          so before the cord is pulled the skydiver appears to stay still relative to the camera. The moment the
+          cord is pulled, the skydiver decelerates and appears to move away from the camera (upwards, relative to
+          the camera). <strong>(b)</strong> In the ground observer's reference frame, the skydiver is falling
+          quickly downwards the whole time; when the cord is pulled, the observer simply records the skydiver's
+          downward speed decreasing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Inertial frames and Galilean relativity</h2>
+
+      <p>
+        Some reference frames are more useful than others for applying Newton's laws of motion. Picture an observer
+        floating in deep space, far from any planets, inside a spacecraft with no windows. If the observer very
+        carefully releases a small object in mid-air, what happens to it?
+      </p>
+
+      <p>
+        If the spacecraft is moving at a constant velocity (in a straight line, at a steady speed) — or is
+        completely at rest — the released object simply stays exactly where it was let go. It does not drift
+        towards any wall. But if the spacecraft is <em>accelerating</em> (its engines are firing, speeding it up),
+        the object appears to drift backwards, towards the rear wall, even though no force is acting on it. To the
+        observer, it would look as though Newton's first law had been broken.
+      </p>
+
+      <div class="keybox">
+        <p>An <strong>inertial reference frame</strong> is one that is not accelerating. Newton's laws of motion
+        apply correctly, exactly as we normally state them, only in inertial reference frames.</p>
+      </div>
+
+      <p>
+        This idea — that the same laws of motion apply, unchanged, in every inertial reference frame, no matter how
+        fast that frame is moving (as long as it isn't accelerating) — is the heart of <strong>Galilean relativity</strong>.
+      </p>
+
+      <div class="keyword">
+        <span class="kw-tag">Key idea</span>
+        Newton's laws of motion are the same in all inertial reference frames. This is known as <strong>Galilean relativity</strong>.
+        There is no single reference frame that is "correct" or "truly stationary" — every inertial observer's
+        point of view is equally valid.
+      </div>
+
+      <div class="stretch-box">
+        <span class="st-tag">Worth remembering</span>
+        <p>It's tempting to assume the ground beneath your feet is "properly" stationary. It isn't! The Earth spins
+        on its axis once roughly every 24 hours, and its radius is about 6400 km. A point on the equator is
+        therefore moving at roughly:</p>
+        <p class="ex-step" style="text-align:center">v = 2πR / T = (2 × π × 6.4 × 10⁶) / (24 × 3600) ≈ 465 m s⁻¹</p>
+        <p>That's roughly 1700 km/h — faster than a jet airliner — yet you don't feel it, because you, the ground,
+        and the air around you are all moving together at (very nearly) constant velocity. For everyday physics we
+        still treat the Earth's surface as a good inertial reference frame, even though it is moving.</p>
+      </div>
+
+      <div class="question" id="q4">
+        <div class="q-head"><span class="qnum">4</span><span class="q-text">
+          State, in your own words, what is meant by an <strong>inertial reference frame</strong>.
+        </span></div>
+        <textarea class="answer-lines" rows="2"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a4')">Show answer</button></div>
+        <div class="answer-panel" id="a4">
+          <span class="ans-tag">Model answer</span>
+          <p>An inertial reference frame is a reference frame that is not accelerating (it is either at rest or
+          moving with constant velocity). Newton's laws of motion apply correctly within such a frame.</p>
+        </div>
+      </div>
+
+      <div class="question" id="q5">
+        <div class="q-head"><span class="qnum">5</span><span class="q-text">
+          For each situation below, state whether the reference frame described is <strong>inertial</strong> or
+          <strong>non-inertial</strong>, and give a reason.
+          <br>(a) a lift (elevator) moving upwards at a constant 1.5 m s⁻¹
+          <br>(b) a car braking sharply as it approaches a red light
+          <br>(c) a satellite travelling in a circular orbit around the Earth at constant speed
+          <br>(d) a spacecraft drifting through deep space with its engines switched off
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h5')">Need a hint?</button>
+        <div class="hint" id="h5">A reference frame is non-inertial if its speed or direction of travel is
+        changing. Moving in a circle at constant speed still counts as accelerating, because the direction of
+        motion is constantly changing.</div>
+        <textarea class="answer-lines" rows="4"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a5')">Show answer</button></div>
+        <div class="answer-panel" id="a5">
+          <span class="ans-tag">Model answer</span>
+          <p>(a) Inertial — constant velocity, so no acceleration. (b) Non-inertial — the car's speed is decreasing,
+          so it is accelerating (decelerating). (c) Non-inertial — even though the speed is constant, the direction
+          keeps changing, so the velocity (and therefore the frame) is accelerating. (d) Inertial — no engines
+          firing, so no resultant force and no acceleration.</p>
+        </div>
+      </div>
+
+      <div class="question" id="q6">
+        <div class="q-head"><span class="qnum">6</span><span class="q-text">
+          Explain how an observer floating inside a windowless spacecraft, with no view of the outside world, could
+          use the "release an object in mid-air" thought experiment to test whether their spacecraft is an inertial
+          reference frame.
+        </span></div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a6')">Show answer</button></div>
+        <div class="answer-panel" id="a6">
+          <span class="ans-tag">Model answer</span>
+          <p>The observer releases a small object gently in mid-air, with no force applied to it. If the object
+          stays exactly where it was released, no resultant force is acting on it, so the spacecraft is not
+          accelerating — it is an inertial reference frame. If the object appears to drift towards one wall on its
+          own, the spacecraft itself must be accelerating in the opposite direction, so it is a non-inertial frame.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. The Galilean transformation equations</h2>
+
+      <p>
+        If two observers are in different (inertial) reference frames, how do we convert a measurement made by one
+        of them into the equivalent measurement made by the other? We call this process a <strong>transformation</strong>.
+      </p>
+
+      <p>
+        Suppose reference frame S is stationary, and reference frame S′ (say, S′ is a camera) moves at a constant
+        velocity v relative to S, along the x-direction. We will always assume that the origins of S and S′ are in
+        the same place at t = 0 — the moment the clocks in both frames are started.
+      </p>
+
+      <p>
+        An event that happens somewhere along the x-axis can be given coordinates (x, t) in frame S, and different
+        coordinates (x′, t′) in frame S′. In Newton's model of the Universe, it was assumed that <strong>time
+        passes at the same rate for every observer</strong>, however they are moving. That single assumption leads
+        directly to the Galilean transformation equations.
+      </p>
+
+      <div class="eqn">
+        x′ = x − vt<br>t′ = t
+        <span class="cond">where v is the velocity of frame S′ relative to frame S, and the origins of S and S′ coincide at t = t′ = 0</span>
+      </div>
+
+      <p>
+        The second equation, t′ = t, looks almost too simple to be worth writing down — but it is a genuine
+        assumption, not something that can be proved. Galileo and Newton assumed that every observer, however fast
+        they are moving, would agree on the time of any event and on the time interval between two events. This
+        assumption works extremely well at everyday speeds.
+      </p>
+
+      <h3>Exploring the transformation</h3>
+      <p>
+        The simulation below matches the scenario of a stationary object on a sports field, 88 m from a fixed
+        starting point, with a camera moving away from that starting point at a constant velocity v. Use the time
+        slider to see how x′ — the object's distance from the moving camera — changes, while x itself (the object's
+        distance from the stationary starting point) stays fixed.
+      </p>
+
+      <div class="sim-wrap">
+        <h4>Simulation 1 — Galilean reference frames</h4>
+        <div class="sim-canvas-box">
+          <canvas id="sim1canvas" width="640" height="300" aria-label="Animation of a stationary reference frame S and a moving reference frame S prime approaching a fixed object, each with its own vertical axis"></canvas>
+        </div>
+        <p class="sim-print-note">Interactive simulation — view this workbook on a computer or tablet to use it.</p>
+        <div class="sim-controls">
+          <div class="ctrl">
+            <label for="sim1-v">Camera velocity, v = <span id="sim1-vval">2.0</span> m s⁻¹</label>
+            <input type="range" id="sim1-v" min="0.5" max="5" step="0.5" value="2">
+          </div>
+          <div class="ctrl">
+            <label for="sim1-x">Object's distance in S, x = <span id="sim1-xval">88</span> m</label>
+            <input type="range" id="sim1-x" min="40" max="120" step="4" value="88">
+          </div>
+          <div class="ctrl">
+            <label for="sim1-t">Time, t = <span id="sim1-tval">0.0</span> s</label>
+            <input type="range" id="sim1-t" min="0" max="10" step="0.1" value="0">
+          </div>
+          <button id="sim1play">Play</button>
+          <button onclick="sim1Reset()">Reset</button>
+        </div>
+        <div class="sim-readout">
+          <span>t = <span class="val" id="sim1-out-t">0.0 s</span></span>
+          <span>x = <span class="val" id="sim1-out-x">88.0 m</span></span>
+          <span>vt = <span class="val" id="sim1-out-vt">0.0 m</span></span>
+          <span>x′ = x − vt = <span class="val" id="sim1-out-xp">88.0 m</span></span>
+        </div>
+      </div>
+
+      <div class="question" id="q7">
+        <div class="q-head"><span class="qnum">7</span><span class="q-text">
+          Using the default settings on Simulation 1 (x = 88 m, v = 2.0 m s⁻¹), read off the value of x′ at t = 2 s,
+          t = 4 s and t = 6 s, and note them below. Then describe, in words, the pattern you see as t increases.
+        </span></div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a7')">Show answer</button></div>
+        <div class="answer-panel" id="a7">
+          <span class="ans-tag">Model answer</span>
+          <p>t = 2 s: x′ = 88 − (2 × 2) = 84 m. t = 4 s: x′ = 88 − (2 × 4) = 80 m. t = 6 s: x′ = 88 − (2 × 6) = 76 m.
+          As t increases, x′ decreases at a constant rate of 2 m per second — because the camera is catching up to
+          the object at 2 m s⁻¹, so the object's distance from the camera shrinks by 2 m every second, while its
+          distance from the fixed starting point, x, does not change at all.</p>
+        </div>
+      </div>
+
+      <div class="example">
+        <span class="ex-tag">Worked example</span>
+        <p>A train passes a platform, travelling at a constant velocity of 20 m s⁻¹. The observer on the platform
+        (frame S) and the observer on the train (frame S′) both start their clocks at the instant the train passes.
+        After 5.0 s, the observer on the platform records a flash of light (the event) at x = 120 m, t = 5.0 s.
+        Determine the position, x′, of this event according to the observer on the train.</p>
+        <p class="ex-step">x′ = x − vt</p>
+        <p class="ex-step">x′ = 120 − (20 × 5.0)</p>
+        <p class="ex-step">x′ = 120 − 100 = <span class="ex-blank">complete this step yourself</span></p>
+        <p>(Since t′ = t, the time of the event is the same for both observers: t′ = 5.0 s.)</p>
+      </div>
+
+      <div class="question" id="q8">
+        <div class="q-head"><span class="qnum">8</span><span class="q-text">
+          A cyclist rides past a lamppost at a constant velocity of 8.0 m s⁻¹, starting her stopwatch at the moment
+          she passes it. 6.0 s later, she notices a dog barking at a point 70 m from the lamppost (measured by
+          someone standing still next to the lamppost). Calculate the position of the barking dog, x′, according to
+          the cyclist.
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h8')">Need a hint?</button>
+        <div class="hint" id="h8">Let the person by the lamppost be reference frame S, and the cyclist be reference
+        frame S′. Use x′ = x − vt.</div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a8')">Show answer</button></div>
+        <div class="answer-panel" id="a8">
+          <span class="ans-tag">Model answer</span>
+          <p class="ex-step">x′ = x − vt</p>
+          <p class="ex-step">x′ = 70 − (8.0 × 6.0)</p>
+          <p class="ex-step">x′ = 70 − 48 = 22 (finish evaluating this yourself, including units)</p>
+        </div>
+      </div>
+
+      <div class="question" id="q9">
+        <div class="q-head"><span class="qnum">9</span><span class="q-text">
+          Explain why t′ = t is described as an <strong>assumption</strong> of Galilean relativity, rather than
+          something that has been proved to be true.
+        </span></div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a9')">Show answer</button></div>
+        <div class="answer-panel" id="a9">
+          <span class="ans-tag">Model answer</span>
+          <p>Newton and Galileo simply assumed that time passes at the same rate for every observer, no matter how
+          they are moving, because this matches everyday experience — at ordinary speeds, no one has ever noticed
+          two clocks disagreeing because one was moving. It was accepted as a sensible starting point (a postulate),
+          not something that had been directly tested at very high speeds.</p>
+        </div>
+      </div>
+
+      <div class="question" id="q10">
+        <div class="q-head"><span class="qnum">10</span><span class="q-text">
+          A drone hovers at a fixed point, x = −40 m (that is, 40 m behind the origin of frame S). A second drone,
+          representing the origin of frame S′, flies past the origin of S at t = 0 and travels at a constant
+          velocity of v = −5.0 m s⁻¹ (moving in the negative x-direction). Calculate x′, the position of the first
+          drone according to the second drone, at t = 3.0 s.
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h10')">Need a hint?</button>
+        <div class="hint" id="h10">Substitute the values directly into x′ = x − vt, being careful with the negative
+        signs.</div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a10')">Show answer</button></div>
+        <div class="answer-panel" id="a10">
+          <span class="ans-tag">Model answer</span>
+          <p class="ex-step">x′ = x − vt</p>
+          <p class="ex-step">x′ = (−40) − (−5.0 × 3.0)</p>
+          <p class="ex-step">x′ = −40 − (−15) = −40 + 15 = (finish evaluating this yourself, including sign and units)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. The velocity addition equation</h2>
+
+      <p>
+        We often need to relate the velocity of a moving object, as measured by two different observers. Suppose an
+        object has velocity u in the stationary frame S, and velocity u′ in frame S′, which is itself moving at
+        velocity v relative to S. Because x′ = x − vt, working out how the object's position changes with time in
+        each frame leads to a very similar-looking equation for velocity.
+      </p>
+
+      <div class="eqn">
+        u′ = u − v
+        <span class="cond">the Galilean velocity addition equation, where u is the object's velocity in frame S and u′ is its velocity in frame S′, which moves at velocity v relative to S</span>
+      </div>
+
+      <p>
+        This equation is often rearranged as u = u′ + v when u′ (the velocity in the moving frame) is the known
+        quantity and u (the velocity in the stationary, "ground" frame) is what needs to be found.
+      </p>
+
+      <div class="sim-wrap">
+        <h4>Simulation 2 — velocity addition</h4>
+        <p style="margin-top:0; font-size:0.92rem;">Drag the sliders to set the train's velocity, v, and the ball's
+        velocity relative to the train, u′. Watch how the ball moves relative to the ground.</p>
+        <div class="sim-canvas-box">
+          <canvas id="sim2canvas" width="640" height="220" aria-label="Animation of a ball rolling inside a moving train, shown relative to the ground"></canvas>
+        </div>
+        <p class="sim-print-note">Interactive simulation — view this workbook on a computer or tablet to use it.</p>
+        <div class="sim-controls">
+          <div class="ctrl">
+            <label for="sim2-v">Train velocity, v = <span id="sim2-vval">4.0</span> m s⁻¹</label>
+            <input type="range" id="sim2-v" min="-8" max="8" step="0.5" value="4">
+          </div>
+          <div class="ctrl">
+            <label for="sim2-u">Ball's velocity relative to train, u′ = <span id="sim2-uval">2.0</span> m s⁻¹</label>
+            <input type="range" id="sim2-u" min="-8" max="8" step="0.5" value="2">
+          </div>
+          <button id="sim2play">Play</button>
+          <button onclick="sim2Reset()">Reset</button>
+        </div>
+        <div class="sim-readout">
+          <span class="sim-readout-label">From the reference frame of the ground observer:</span>
+          <span>v = <span class="val" id="sim2-out-v">4.0 m s⁻¹</span></span>
+          <span>u′ = <span class="val" id="sim2-out-u">2.0 m s⁻¹</span></span>
+          <span>u = u′ + v = <span class="val" id="sim2-out-uground">6.0 m s⁻¹</span></span>
+        </div>
+      </div>
+
+      <div class="example">
+        <span class="ex-tag">Worked example</span>
+        <p>A train is moving with a constant velocity of 16.0 m s⁻¹. A ball rolls along the floor of the train, in
+        the direction of travel, with a constant velocity of 3.0 m s⁻¹ relative to the train.</p>
+        <p><strong>(a)</strong> Calculate the velocity of the ball as recorded by an observer standing on the
+        ground outside.</p>
+        <p class="ex-step">u′ = u − v</p>
+        <p class="ex-step">3.0 = u − 16.0</p>
+        <p class="ex-step">u = 3.0 + 16.0 = <span class="ex-blank">complete this step yourself</span></p>
+        <p><strong>(b)</strong> Now suppose instead the ball rolls towards the <em>back</em> of the train with the
+        same speed. Set up the equation for this case (do not evaluate the final answer).</p>
+        <p class="ex-step">u′ = u − v</p>
+        <p class="ex-step">−3.0 = u − 16.0</p>
+        <p class="ex-step">u = −3.0 + 16.0 = <span class="ex-blank">complete this step yourself</span></p>
+      </div>
+
+      <div class="question" id="q11">
+        <div class="q-head"><span class="qnum">11</span><span class="q-text">
+          Using the same train from the worked example (v = 16.0 m s⁻¹), now suppose the whole train is travelling
+          in the <em>opposite</em> direction, so v = −16.0 m s⁻¹, while the ball still rolls towards the front of
+          the train at u′ = 3.0 m s⁻¹ relative to the train. Calculate u, the ball's velocity according to the
+          ground observer.
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h11')">Need a hint?</button>
+        <div class="hint" id="h11">u′ = u − v, so u = u′ + v. Substitute the values carefully, including the
+        negative sign on v.</div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a11')">Show answer</button></div>
+        <div class="answer-panel" id="a11">
+          <span class="ans-tag">Model answer</span>
+          <p class="ex-step">u′ = u − v</p>
+          <p class="ex-step">3.0 = u − (−16.0)</p>
+          <p class="ex-step">u = 3.0 − 16.0 = (finish evaluating this yourself, including sign and units)</p>
+        </div>
+      </div>
+
+      <div class="question" id="q12">
+        <div class="q-head"><span class="qnum">12</span><span class="q-text">
+          A skateboarder, D, moves at a constant 4.0 m s⁻¹ across a playground. While moving, D throws a ball
+          forwards so that, relative to the skateboard, the ball travels at 2.0 m s⁻¹. Calculate the velocity of
+          the ball, u, as recorded by a stationary observer, C, standing on the ground.
+        </span></div>
+        <button class="hint-btn" onclick="toggleHint('h12')">Need a hint?</button>
+        <div class="hint" id="h12">The skateboard is frame S′, moving at v = 4.0 m s⁻¹. The ball's velocity
+        relative to the skateboard is u′ = 2.0 m s⁻¹.</div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a12')">Show answer</button></div>
+        <div class="answer-panel" id="a12">
+          <span class="ans-tag">Model answer</span>
+          <p class="ex-step">u′ = u − v</p>
+          <p class="ex-step">2.0 = u − 4.0</p>
+          <p class="ex-step">u = 2.0 + 4.0 = (finish evaluating this yourself, including units)</p>
+        </div>
+      </div>
+
+      <div class="question" id="q13">
+        <div class="q-head"><span class="qnum">13</span><span class="q-text">
+          Newton assumed that distance and time were the same for every observer (x and t could be transformed
+          simply, and t′ = t exactly). Using the equation u′ = u − v, explain why <strong>velocity</strong> is
+          different: why can two observers, in different inertial reference frames, never agree on the velocity of
+          a moving object (unless v = 0)?
+        </span></div>
+        <textarea class="answer-lines" rows="3"></textarea>
+        <div class="q-actions"><button class="reveal-btn" onclick="toggleAnswer('a13')">Show answer</button></div>
+        <div class="answer-panel" id="a13">
+          <span class="ans-tag">Model answer</span>
+          <p>Because u′ = u − v, the velocity measured in frame S′ always differs from the velocity measured in
+          frame S by exactly v, the relative velocity between the two frames. Unless the two frames happen to be at
+          rest relative to each other (v = 0), the two observers will always calculate a different value for the
+          object's velocity — velocity is not invariant (the same for everyone); it depends on the observer's own
+          reference frame.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Reference frame</dt>
+        <dd>A coordinate system, with axes and a clock, used to assign a position and a time to an event.</dd>
+
+        <dt>Event</dt>
+        <dd>A single incident that occurs at one exact point in space and one exact instant in time.</dd>
+
+        <dt>Observer</dt>
+        <dd>A hypothetical person who takes measurements from a single, specific reference frame, and is always at
+        rest relative to that frame.</dd>
+
+        <dt>Inertial reference frame</dt>
+        <dd>A reference frame that is not accelerating, in which Newton's laws of motion apply correctly.</dd>
+
+        <dt>Galilean relativity</dt>
+        <dd>The idea that Newton's laws of motion are the same in every inertial reference frame — there is no
+        single "correct" reference frame.</dd>
+
+        <dt>Galilean transformation</dt>
+        <dd>The pair of equations, x′ = x − vt and t′ = t, used to convert the position and time of an event from
+        one inertial reference frame to another.</dd>
+
+        <dt>Velocity addition equation</dt>
+        <dd>The equation u′ = u − v, which relates the velocity of an object as measured in two different inertial
+        reference frames moving at relative velocity v.</dd>
+      </dl>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ===================== Self-marking / topbar controls ===================== */
+function toggleAnswer(id){
+  var el = document.getElementById(id);
+  var btn = el.previousElementSibling.querySelector ? null : null;
+  el.classList.toggle('open');
+  var actionsRow = el.previousElementSibling;
+  var button = actionsRow.querySelector('.reveal-btn');
+  if(button){
+    button.textContent = el.classList.contains('open') ? 'Hide answer' : 'Show answer';
+  }
+}
+function toggleHint(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){
+    el.classList.add('open');
+    var actionsRow = el.previousElementSibling;
+    var button = actionsRow ? actionsRow.querySelector('.reveal-btn') : null;
+    if(button) button.textContent = 'Hide answer';
+  });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){
+    el.classList.remove('open');
+    var actionsRow = el.previousElementSibling;
+    var button = actionsRow ? actionsRow.querySelector('.reveal-btn') : null;
+    if(button) button.textContent = 'Show answer';
+  });
+  document.body.classList.remove('answers-visible');
+}
+function clearMyAnswers(){
+  document.querySelectorAll('textarea.answer-lines').forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+function autosize(el){
+  el.style.height = 'auto';
+  el.style.height = Math.max(54, el.scrollHeight) + 'px';
+}
+function initFillables(){
+  document.querySelectorAll('textarea.answer-lines').forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+/* highlight active sidebar link on scroll */
+function initSidebarHighlight(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.sidebar a'));
+  var sections = links.map(function(l){ return document.querySelector(l.getAttribute('href')); });
+  function onScroll(){
+    var pos = window.scrollY + 90;
+    var activeIdx = 0;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].offsetTop <= pos) activeIdx = i;
+    }
+    links.forEach(function(l,i){ l.classList.toggle('active', i===activeIdx); });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+}
+initFillables();
+initSidebarHighlight();
+
+/* ===================== Simulation 1: Galilean reference frames ===================== */
+(function(){
+  var canvas = document.getElementById('sim1canvas');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+
+  var vSlider = document.getElementById('sim1-v');
+  var xSlider = document.getElementById('sim1-x');
+  var tSlider = document.getElementById('sim1-t');
+  var vVal = document.getElementById('sim1-vval');
+  var xVal = document.getElementById('sim1-xval');
+  var tVal = document.getElementById('sim1-tval');
+  var outT = document.getElementById('sim1-out-t');
+  var outX = document.getElementById('sim1-out-x');
+  var outVt = document.getElementById('sim1-out-vt');
+  var outXp = document.getElementById('sim1-out-xp');
+  var playBtn = document.getElementById('sim1play');
+
+  var playing = false;
+  var rafId = null;
+  var lastTime = null;
+  var currentT = parseFloat(tSlider.value); // accumulated time, kept independent of the
+                                              // range input's own value (which snaps to `step`)
+
+  function state(){
+    return {
+      v: parseFloat(vSlider.value),
+      x: parseFloat(xSlider.value),
+      t: currentT
+    };
+  }
+
+  /* Map a physical distance (0 to 130 m) onto the drawing area */
+  var padLeft = 40, padRight = 40;
+  var trackLen = W - padLeft - padRight;
+  var maxMetres = 130;
+  function toPx(m){ return padLeft + (m / maxMetres) * trackLen; }
+
+  function draw(){
+    var s = state();
+    var vt = s.v * s.t;
+    var xp = s.x - vt;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    var yS = 95, yS2 = 225;
+    var axisTop = 22, axisBottom = 285;
+    var camPx = toPx(Math.min(vt, maxMetres));
+
+    // Stationary vertical axis, through the origin of frame S (frame S never moves)
+    drawAxis(toPx(0), axisTop, axisBottom, '#7ea9cf', false);
+    // Moving vertical axis, through the origin of frame S' — i.e. through the centre of the
+    // camera — which travels along with the camera as vt increases
+    drawAxis(camPx, axisTop, axisBottom, '#7ecca8', true);
+
+    // Frame S (stationary) track
+    ctx.strokeStyle = '#5f88ad'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(toPx(0), yS); ctx.lineTo(toPx(maxMetres), yS); ctx.stroke();
+    ctx.fillStyle = '#9fc4e3'; ctx.font = '13px Segoe UI, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('Frame S (stationary)', padLeft, yS - 55);
+
+    // vt bracket between origin O and camera — drawn above the frame S line
+    if(vt > 0.5){
+      ctx.strokeStyle = '#6d7d8c'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.moveTo(toPx(0), yS - 32); ctx.lineTo(toPx(Math.min(vt,maxMetres)), yS - 32); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#9fb4c4'; ctx.textAlign = 'center'; ctx.font = '11.5px Segoe UI, sans-serif';
+      ctx.fillText('vt = ' + Math.min(vt,maxMetres).toFixed(1) + ' m', toPx(Math.min(vt,maxMetres))/2 + padLeft/2, yS - 38);
+    }
+
+    // Origin marker for S
+    drawTick(toPx(0), yS, '#9fc4e3', 'O', 'left');
+    // Object (fixed at x) in S
+    drawDot(toPx(s.x), yS, '#f2b807');
+    ctx.fillStyle = '#f2b807'; ctx.textAlign = 'center'; ctx.font = '12px Segoe UI, sans-serif';
+    ctx.fillText('object', toPx(s.x), yS - 14);
+    ctx.fillText('x = ' + s.x.toFixed(1) + ' m', toPx(s.x), yS + 26);
+
+    // Frame S' (moving camera) track
+    ctx.strokeStyle = '#5fad86'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(toPx(0), yS2); ctx.lineTo(toPx(maxMetres), yS2); ctx.stroke();
+    ctx.fillStyle = '#a6e3c4'; ctx.textAlign = 'left'; ctx.font = '13px Segoe UI, sans-serif';
+    ctx.fillText("Frame S′ (camera, moving at v)", padLeft, yS2 + 40);
+
+    // Camera, sitting on the moving axis
+    drawCamera(camPx, yS2);
+    ctx.fillStyle = '#a6e3c4'; ctx.textAlign = 'center'; ctx.font = '12px Segoe UI, sans-serif';
+    ctx.fillText("O′ (camera)", camPx, yS2 + 26);
+
+    // Object position relative to camera, drawn on S' track too (same physical object)
+    drawDot(toPx(s.x), yS2, '#f2b807');
+
+    // x' bracket between camera and object
+    if(s.x > vt){
+      ctx.strokeStyle = '#e0e6ea'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.moveTo(camPx, yS2 - 18); ctx.lineTo(toPx(s.x), yS2 - 18); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#e0e6ea'; ctx.textAlign = 'center'; ctx.font = '12px Segoe UI, sans-serif';
+      ctx.fillText("x′ = " + xp.toFixed(1) + ' m', (camPx + toPx(s.x))/2, yS2 - 24);
+    }
+
+    // readouts
+    outT.textContent = s.t.toFixed(1) + ' s';
+    outX.textContent = s.x.toFixed(1) + ' m';
+    outVt.textContent = vt.toFixed(1) + ' m';
+    outXp.textContent = xp.toFixed(1) + ' m';
+  }
+
+  /* A vertical reference axis. `moving` = true draws it dashed (frame S', which travels with
+     the camera); `moving` = false draws it solid (frame S, which never moves). A small
+     arrowhead at the top makes it read as an axis rather than a stray line. */
+  function drawAxis(px, yTop, yBottom, color, moving){
+    ctx.save();
+    ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.globalAlpha = 0.55;
+    if(moving) ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(px, yTop); ctx.lineTo(px, yBottom); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(px, yTop - 7);
+    ctx.lineTo(px - 4, yTop + 2);
+    ctx.lineTo(px + 4, yTop + 2);
+    ctx.closePath();
+    ctx.fillStyle = color; ctx.fill();
+    ctx.restore();
+  }
+
+  function drawDot(px, py, color){
+    ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI*2); ctx.fillStyle = color; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = '#0f1f30'; ctx.stroke();
+  }
+  function drawTick(px, py, color, label, align){
+    ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(px, py-10); ctx.lineTo(px, py+10); ctx.stroke();
+    ctx.fillStyle = color; ctx.font = '12px Segoe UI, sans-serif';
+    ctx.textAlign = align === 'left' ? 'left' : 'right';
+    ctx.fillText(label, align === 'left' ? px + 6 : px - 6, py - 14);
+  }
+  function drawCamera(px, py){
+    ctx.fillStyle = '#173a5e';
+    ctx.fillRect(px-14, py-10, 28, 18);
+    ctx.beginPath(); ctx.arc(px, py-10, 7, Math.PI, 2*Math.PI); ctx.fillStyle = '#0e7c86'; ctx.fill();
+    ctx.strokeStyle = '#a6e3c4'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(px-14, py-10, 28, 18);
+  }
+
+  function updateLabels(){
+    vVal.textContent = parseFloat(vSlider.value).toFixed(1);
+    xVal.textContent = parseFloat(xSlider.value).toFixed(0);
+    tVal.textContent = currentT.toFixed(1);
+  }
+
+  [vSlider, xSlider].forEach(function(el){
+    el.addEventListener('input', function(){ updateLabels(); draw(); });
+  });
+  tSlider.addEventListener('input', function(){
+    currentT = parseFloat(tSlider.value);
+    updateLabels();
+    draw();
+  });
+
+  function tick(now){
+    if(!playing) return;
+    if(lastTime === null) lastTime = now;
+    var dt = (now - lastTime) / 1000;
+    lastTime = now;
+    var max = parseFloat(tSlider.max);
+    currentT = currentT + dt;
+    if(currentT > max){ currentT = max; playing = false; playBtn.textContent = 'Play'; }
+    tSlider.value = currentT.toFixed(2);
+    updateLabels();
+    draw();
+    if(playing) rafId = requestAnimationFrame(tick);
+  }
+
+  playBtn.addEventListener('click', function(){
+    playing = !playing;
+    playBtn.textContent = playing ? 'Pause' : 'Play';
+    if(playing){ lastTime = null; rafId = requestAnimationFrame(tick); }
+    else if(rafId){ cancelAnimationFrame(rafId); }
+  });
+
+  window.sim1Reset = function(){
+    playing = false; playBtn.textContent = 'Play';
+    if(rafId) cancelAnimationFrame(rafId);
+    currentT = 0;
+    tSlider.value = 0; vSlider.value = 2; xSlider.value = 88;
+    updateLabels(); draw();
+  };
+
+  updateLabels();
+  draw();
+})();
+
+/* ===================== Simulation 2: velocity addition ===================== */
+(function(){
+  var canvas = document.getElementById('sim2canvas');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+
+  var vSlider = document.getElementById('sim2-v');
+  var uSlider = document.getElementById('sim2-u');
+  var vVal = document.getElementById('sim2-vval');
+  var uVal = document.getElementById('sim2-uval');
+  var outV = document.getElementById('sim2-out-v');
+  var outU = document.getElementById('sim2-out-u');
+  var outUg = document.getElementById('sim2-out-uground');
+  var playBtn = document.getElementById('sim2play');
+
+  var trainX = 260; // train's centre position in px (wraps around)
+  var ballRel = 0;  // ball's position relative to train centre, in px
+  var playing = false;
+  var rafId = null;
+  var lastTime = null;
+  var trainW = 130, trainH = 46;
+  var groundY = 165;
+  var scale = 6; // px per (m/s) per second of animation -> visual speed scaling
+
+  function state(){
+    return { v: parseFloat(vSlider.value), u: parseFloat(uSlider.value) };
+  }
+
+  function draw(){
+    var s = state();
+    var uGround = s.u + s.v;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    // ground line
+    ctx.strokeStyle = '#5c6b78'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(20, groundY+40); ctx.lineTo(W-20, groundY+40); ctx.stroke();
+
+    // wrap train position within visible track
+    var trackMin = 60, trackMax = W-60;
+    var tx = ((trainX - trackMin) % (trackMax-trackMin) + (trackMax-trackMin)) % (trackMax-trackMin) + trackMin;
+
+    // train body
+    ctx.fillStyle = '#173a5e';
+    roundRect(ctx, tx-trainW/2, groundY-trainH+2, trainW, trainH, 6);
+    ctx.fill();
+    ctx.strokeStyle = '#3a5c82'; ctx.lineWidth = 1.5;
+    roundRect(ctx, tx-trainW/2, groundY-trainH+2, trainW, trainH, 6);
+    ctx.stroke();
+    // wheels
+    ctx.fillStyle = '#0f1f30';
+    circle(ctx, tx-trainW/2+18, groundY+8, 8, '#e0e6ea');
+    circle(ctx, tx+trainW/2-18, groundY+8, 8, '#e0e6ea');
+    // direction arrow for train
+    drawArrow(tx, groundY-trainH-14, s.v >= 0 ? 1 : -1, '#5fad86');
+    ctx.fillStyle = '#a6e3c4'; ctx.font = '12px Segoe UI, sans-serif';
+    fillTextClamped('v = ' + s.v.toFixed(1) + ' m s⁻¹', tx, groundY-trainH-24);
+
+    // ball position: wraps within the train's floor width
+    var floorHalf = trainW/2 - 16;
+    var bx = tx + clampWrap(ballRel, -floorHalf, floorHalf);
+    var by = groundY - 14;
+    circle(ctx, bx, by, 7, '#f2b807');
+    drawArrow(bx, by-16, s.u >= 0 ? 1 : -1, '#f2b807');
+    ctx.fillStyle = '#f2d98a'; ctx.font = '11.5px Segoe UI, sans-serif';
+    fillTextClamped("u′ = " + s.u.toFixed(1) + ' m s⁻¹', bx, by-24);
+
+    // ground observer, fixed position
+    var ox = 60, oy = groundY + 40;
+    circle(ctx, ox, oy-24, 8, '#e0e6ea');
+    ctx.strokeStyle = '#e0e6ea'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(ox, oy-16); ctx.lineTo(ox, oy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, oy-12); ctx.lineTo(ox-9, oy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, oy-12); ctx.lineTo(ox+9, oy); ctx.stroke();
+    ctx.fillStyle = '#e0e6ea'; ctx.font = '11.5px Segoe UI, sans-serif'; ctx.textAlign='left';
+    ctx.fillText('ground observer', ox+14, oy-6);
+
+    outV.textContent = s.v.toFixed(1) + ' m s⁻¹';
+    outU.textContent = s.u.toFixed(1) + ' m s⁻¹';
+    outUg.textContent = uGround.toFixed(1) + ' m s⁻¹';
+  }
+
+  function clampWrap(val, min, max){
+    var range = max-min;
+    var v = ((val-min) % range + range) % range + min;
+    return v;
+  }
+  /* Draw text centred on cx, but clamp so it never overflows the canvas edges
+     (a label that would run off the side switches to a left/right anchor instead,
+     offset a small margin in from the edge). */
+  function fillTextClamped(text, cx, y){
+    var margin = 8;
+    var w = ctx.measureText(text).width;
+    var left = cx - w/2, right = cx + w/2;
+    if(left < margin){
+      ctx.textAlign = 'left';
+      ctx.fillText(text, margin, y);
+    } else if(right > W - margin){
+      ctx.textAlign = 'right';
+      ctx.fillText(text, W - margin, y);
+    } else {
+      ctx.textAlign = 'center';
+      ctx.fillText(text, cx, y);
+    }
+  }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r);
+    ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);
+    ctx.arcTo(x,y,x+w,y,r);
+    ctx.closePath();
+  }
+  function circle(ctx,x,y,r,color){
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle = color; ctx.fill();
+  }
+  function drawArrow(cx, cy, dir, color){
+    var len = 16;
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(cx - dir*len/2, cy); ctx.lineTo(cx + dir*len/2, cy); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx + dir*len/2, cy);
+    ctx.lineTo(cx + dir*len/2 - dir*6, cy-4);
+    ctx.lineTo(cx + dir*len/2 - dir*6, cy+4);
+    ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+  }
+
+  function updateLabels(){
+    vVal.textContent = parseFloat(vSlider.value).toFixed(1);
+    uVal.textContent = parseFloat(uSlider.value).toFixed(1);
+  }
+  [vSlider, uSlider].forEach(function(el){
+    el.addEventListener('input', function(){ updateLabels(); draw(); });
+  });
+
+  function tick(now){
+    if(!playing) return;
+    if(lastTime === null) lastTime = now;
+    var dt = (now - lastTime)/1000;
+    lastTime = now;
+    var s = state();
+    trainX += s.v * scale * dt;
+    ballRel += s.u * scale * dt;
+    draw();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  playBtn.addEventListener('click', function(){
+    playing = !playing;
+    playBtn.textContent = playing ? 'Pause' : 'Play';
+    if(playing){ lastTime = null; rafId = requestAnimationFrame(tick); }
+    else if(rafId){ cancelAnimationFrame(rafId); }
+  });
+
+  window.sim2Reset = function(){
+    playing = false; playBtn.textContent = 'Play';
+    if(rafId) cancelAnimationFrame(rafId);
+    trainX = 260; ballRel = 0;
+    vSlider.value = 4; uSlider.value = 2;
+    updateLabels(); draw();
+  };
+
+  updateLabels();
+  draw();
+})();
+</script>
+</body>
+</html>

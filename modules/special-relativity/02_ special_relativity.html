@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Relativity — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .eqn .cond{display:block; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:0.76rem; color:#5b6b78; margin-top:0.4rem;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .example .step{margin:0.3em 0; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .example .blank{color:#8a6d00; background:#fff7d6; padding:1px 8px; border-radius:4px; font-weight:600; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .hint-btn{background:none; border:none; color:#a3821f; font-size:0.82rem; cursor:pointer; text-decoration:underline; padding:0.3rem 0 0 0; display:block;}
+  .hint{display:none; font-size:0.86rem; color:#6a5a1a; background:#fff9e6; border:1px dashed #e3cf7a; border-radius:6px; padding:0.55rem 0.8rem; margin:0.4rem 0 0 0;}
+  .hint.open{display:block;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+  .answer-panel .ans-tag{display:block; font-weight:700; font-size:0.72rem; letter-spacing:0.05em; color:#1f7a41; text-transform:uppercase; margin-bottom:0.4rem;}
+  .answer-panel .step{margin:0.3em 0; font-family:"Cambria Math",Cambria,Georgia,serif;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30; max-width:100%; height:auto;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-readout div{margin:0.15rem 0;}
+  .sim-readout .val{font-weight:700; color:#fff;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn, .hint-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+    .hint{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Special Relativity — Student Workbook</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Special Relativity</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. The postulates of special relativity</a>
+    <a href="#s2">2. The Lorentz transformation equations</a>
+    <a href="#s3">3. Proper time and proper length</a>
+    <a href="#s4">4. Time dilation</a>
+    <a href="#s5">5. Length contraction</a>
+    <a href="#s6">6. The relativity of simultaneity</a>
+    <a href="#s7">7. Evidence from muon decay</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Special Relativity</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:660px; font-size:0.98rem; color:#dceaf0;">
+        In the last workbook, Galilean relativity showed that Newton's laws are the same in every inertial
+        reference frame, and gave us simple equations for converting a position or a velocity from one frame to
+        another. Those equations work brilliantly at everyday speeds — but they quietly assume that every
+        observer agrees on distances and on time itself. Einstein questioned that assumption. Starting from just
+        two simple statements about how the Universe behaves, he showed that time, length and simultaneity are
+        not as fixed as Newton believed — and that the evidence for this is real, measurable, and observed every
+        day in particles falling from the sky.
+      </p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>state Einstein's two postulates of special relativity</li>
+          <li>explain how these postulates lead to the Lorentz transformation equations for the coordinates of an event in two inertial reference frames</li>
+          <li>explain what is meant by a proper time interval and a proper length</li>
+          <li>use the time dilation equation, Δt = γΔt₀</li>
+          <li>use the length contraction equation to relate an object's proper length to its observed length</li>
+          <li>explain the relativity of simultaneity</li>
+          <li>explain how muon decay experiments provide experimental evidence for time dilation and length contraction</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1: POSTULATES ================= -->
+    <section class="topic" id="s1">
+      <h2>1. The postulates of special relativity</h2>
+
+      <p>
+        Galilean relativity assumes that if you add the speed of a moving source to the speed of whatever it
+        fires out, you get the total speed as seen by someone standing still. Fire a laser from a spaceship moving
+        at half the speed of light, and Galilean relativity predicts the light should now travel at 1.5 times its
+        normal speed. But when this was tested — most famously in the Michelson–Morley experiment of 1887 — no
+        such change was ever detected. The speed of light stubbornly refused to add up the way Newtonian physics
+        said it should.
+      </p>
+
+      <p>
+        In 1905, Einstein resolved this by starting from two simple statements, or <strong>postulates</strong>,
+        and working out what must logically follow from them.
+      </p>
+
+      <div class="keybox">
+        <strong>Einstein's postulates of special relativity:</strong>
+        <ol style="margin:0.5rem 0 0 0; padding-left:1.3rem;">
+          <li>The laws of physics are the same in all inertial reference frames.</li>
+          <li>The speed of light in a vacuum is measured to be the same by all observers in inertial reference frames, regardless of the motion of the light source or the observer.</li>
+        </ol>
+      </div>
+
+      <p>
+        The first postulate is really just Galilean relativity again — no inertial observer's frame is any more
+        "correct" than any other. The second is the strange, new idea: however fast you are moving, and however
+        fast the thing that emitted the light was moving, you will always measure light in a vacuum to travel at
+        exactly c = 3.00 × 10⁸ m s⁻¹.
+      </p>
+
+      <figure>
+        <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig1title">
+          <title id="fig1title">Two spaceships moving away from the Sun at different speeds each measure light to travel at c</title>
+          <circle cx="70" cy="120" r="24" fill="#d98324"/>
+          <text x="70" y="125" font-size="12" fill="#fff" text-anchor="middle" font-family="Segoe UI, sans-serif" font-weight="700">Sun</text>
+
+          <!-- Ship A: arrow from the Sun, pointing to the ship -->
+          <line x1="92.6" y1="111.8" x2="262.6" y2="49.9" stroke="#173a5e" stroke-width="2" marker-end="url(#arrowNavy1)"/>
+          <text x="185.1" y="52.6" font-size="12.5" fill="#173a5e" font-family="Segoe UI, sans-serif" text-anchor="middle">v = 0.5c</text>
+
+          <g transform="translate(275.8,45.1) rotate(-20)">
+            <polygon points="2,-7 -7,-15 9,-7" fill="#0e7c86"/>
+            <polygon points="2,7 -7,15 9,7" fill="#0e7c86"/>
+            <rect x="0" y="-7" width="26" height="14" rx="6" fill="#e7edf2" stroke="#173a5e" stroke-width="1.5"/>
+            <polygon points="26,-7 26,7 40,0" fill="#173a5e"/>
+            <circle cx="15" cy="0" r="3.2" fill="#d98324" stroke="#173a5e" stroke-width="1"/>
+          </g>
+          <text x="322" y="25" font-size="12" fill="#0a5b62" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="start">Ship A</text>
+          <text x="322" y="39" font-size="11.5" fill="#0a5b62" font-family="Segoe UI, sans-serif" text-anchor="start" font-style="italic">measures light as c</text>
+
+          <!-- Ship B: arrow from the Sun, pointing to the ship -->
+          <line x1="92.6" y1="128.2" x2="262.6" y2="190.1" stroke="#173a5e" stroke-width="2" marker-end="url(#arrowNavy1)"/>
+          <text x="185.1" y="187.4" font-size="12.5" fill="#173a5e" font-family="Segoe UI, sans-serif" text-anchor="middle">v = 0.75c</text>
+
+          <g transform="translate(275.8,194.9) rotate(20)">
+            <polygon points="2,-7 -7,-15 9,-7" fill="#0e7c86"/>
+            <polygon points="2,7 -7,15 9,7" fill="#0e7c86"/>
+            <rect x="0" y="-7" width="26" height="14" rx="6" fill="#e7edf2" stroke="#173a5e" stroke-width="1.5"/>
+            <polygon points="26,-7 26,7 40,0" fill="#173a5e"/>
+            <circle cx="15" cy="0" r="3.2" fill="#d98324" stroke="#173a5e" stroke-width="1"/>
+          </g>
+          <text x="322" y="201" font-size="11.5" fill="#0a5b62" font-family="Segoe UI, sans-serif" text-anchor="start" font-style="italic">measures light as c</text>
+          <text x="322" y="215" font-size="12" fill="#0a5b62" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="start">Ship B</text>
+
+          <defs>
+            <marker id="arrowNavy1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. 1.1 Ship A and ship B move away from the Sun at different speeds. Each is an equally valid
+        inertial reference frame, so an observer on either ship — and an observer who stayed behind at the Sun —
+        all measure the speed of any light beam they observe as exactly c.</figcaption>
+      </figure>
+
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        Postulate 2 is not really a separate, independent assumption — it follows logically from postulate 1.
+        Maxwell's equations, which describe how electric and magnetic fields behave, predict the speed of light
+        from two physical constants (the permittivity and permeability of free space).
+        <div class="eqn" style="margin:0.8rem 0;">
+          c = 1 / √(ε₀μ₀)
+          <span class="cond">where ε₀ is the permittivity of free space and μ₀ is the permeability of free space</span>
+        </div>
+        Since these are the same constants everywhere, Maxwell's equations are a "law of physics" — so if
+        postulate 1 is true and the laws of physics really are the same in every inertial frame, the speed of
+        light they predict, c, must be measured as the same in every inertial frame too.
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>State Einstein's two postulates of special relativity, in your own words.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">
+          <span class="ans-tag">Model answer</span>
+          1. The laws of physics are the same in every inertial reference frame. 2. The speed of light in a vacuum
+          is measured as the same by every observer in an inertial reference frame, no matter how the light source
+          or the observer are moving.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>Using Figure 1.1, explain why an observer on ship A and an observer on
+        ship B both measure the same beam of sunlight to be travelling at c, even though A and B are moving away
+        from the Sun (and from each other) at different speeds.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Think about postulate 2 directly — it doesn't matter how fast the observer, or the source of the light, is moving.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">
+          <span class="ans-tag">Model answer</span>
+          By Einstein's second postulate, the speed of light in a vacuum is measured as c by every observer in an
+          inertial reference frame, regardless of their own velocity or the velocity of the source. So although A
+          and B are moving at different speeds relative to the Sun and to each other, each of them individually
+          measures the same beam of light to be travelling at exactly c.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>Explain briefly why the Michelson–Morley experiment was significant for
+        the development of special relativity.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">
+          <span class="ans-tag">Model answer</span>
+          The experiment tried to detect a difference in the speed of light depending on the direction it was
+          measured in, as Newtonian physics predicted there should be. No such difference was found: the speed of
+          light appeared constant regardless of the observer's motion. This result could not be explained by
+          Galilean relativity, and it was evidence that led Einstein towards his second postulate.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: LORENTZ TRANSFORMATION ================= -->
+    <section class="topic" id="s2">
+      <h2>2. The Lorentz transformation equations</h2>
+
+      <p>
+        Recall the Galilean transformation equations from the last workbook: x′ = x − vt and t′ = t. These work
+        because Newtonian physics assumes every observer agrees on time. But Einstein's second postulate breaks
+        that assumption — if every observer measures the <em>same</em> speed of light, then their measurements of
+        distance and time travelled by that light cannot both be the ordinary, Galilean kind. Something has to
+        give.
+      </p>
+
+      <p>
+        Working through the consequences of the two postulates, Einstein arrived at a new pair of transformation
+        equations — the <strong>Lorentz transformation equations</strong> — which replace the Galilean ones at any
+        speed, and reduce to the familiar Galilean equations when v is small compared with c.
+      </p>
+
+      <div class="eqn">
+        x′ = γ(x − vt) &nbsp;&nbsp;&nbsp; t′ = γ(t − vx/c²)
+        <span class="cond">where v is the velocity of frame S′ relative to frame S, c is the speed of light, and γ (gamma) is the Lorentz factor below</span>
+      </div>
+
+      <div class="eqn">
+        γ = 1 / √(1 − v²/c²)
+        <span class="cond">the Lorentz factor — always greater than or equal to 1, and equal to 1 only when v = 0</span>
+      </div>
+
+      <p>
+        You are not expected to derive these equations — only to use them, and to understand what γ tells you.
+        Notice that when v is very small compared with c, v²/c² is almost zero, γ is almost exactly 1, and the
+        Lorentz equations collapse back into the Galilean equations x′ = x − vt and t′ = t. This is why Galilean
+        relativity works so well for everyday speeds: it is simply the v ≪ c approximation of the full, Lorentz
+        picture.
+      </p>
+
+      <figure>
+        <svg viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig2title">
+          <title id="fig2title">Graph of the Lorentz factor gamma against v over c</title>
+          <line x1="55" y1="195" x2="440" y2="195" stroke="#5b6b78" stroke-width="1.5"/>
+          <line x1="55" y1="195" x2="55" y2="18" stroke="#5b6b78" stroke-width="1.5"/>
+          <text x="247" y="209" font-size="12.5" fill="#3a4753" text-anchor="middle" font-family="Segoe UI, sans-serif">v / c</text>
+          <text x="16" y="30" font-size="12.5" fill="#3a4753" font-family="Segoe UI, sans-serif">γ</text>
+          <text x="45" y="199" font-size="10.5" fill="#5b6b78" text-anchor="end" font-family="Segoe UI, sans-serif">0</text>
+          <text x="440" y="207" font-size="10.5" fill="#5b6b78" text-anchor="end" font-family="Segoe UI, sans-serif">1.0</text>
+          <line x1="55" y1="177.5" x2="440" y2="177.5" stroke="#e3e9ee" stroke-width="1"/>
+          <text x="45" y="181" font-size="10.5" fill="#5b6b78" text-anchor="end" font-family="Segoe UI, sans-serif">1</text>
+          <line x1="55" y1="107" x2="440" y2="107" stroke="#e3e9ee" stroke-width="1"/>
+          <text x="45" y="111" font-size="10.5" fill="#5b6b78" text-anchor="end" font-family="Segoe UI, sans-serif">5</text>
+          <line x1="55" y1="20" x2="440" y2="20" stroke="#e3e9ee" stroke-width="1"/>
+          <text x="45" y="24" font-size="10.5" fill="#5b6b78" text-anchor="end" font-family="Segoe UI, sans-serif">10</text>
+          <path d="M 55.0,177.5 L 62.7,177.5 L 70.4,177.5 L 78.1,177.5 L 85.8,177.4 L 93.5,177.4 L 101.2,177.4 L 108.9,177.3 L 116.6,177.3 L 124.3,177.2 L 132.0,177.1 L 139.7,177.1 L 147.4,177.0 L 155.1,176.9 L 162.8,176.8 L 170.5,176.7 L 178.2,176.5 L 185.9,176.4 L 193.6,176.2 L 201.3,176.1 L 209.0,175.9 L 216.7,175.7 L 224.4,175.5 L 232.1,175.3 L 239.8,175.1 L 247.5,174.8 L 255.2,174.5 L 262.9,174.2 L 270.6,173.9 L 278.3,173.5 L 286.0,173.1 L 293.7,172.7 L 301.4,172.2 L 309.1,171.7 L 316.8,171.1 L 324.5,170.5 L 332.2,169.8 L 339.9,169.0 L 347.6,168.1 L 355.3,167.0 L 363.0,165.8 L 370.7,164.4 L 378.4,162.7 L 386.1,160.7 L 393.8,158.2 L 401.5,154.9 L 409.2,150.3 L 416.9,143.7 L 424.6,132.5 L 432.3,107.1 L 436.1,70.9" fill="none" stroke="#0e7c86" stroke-width="2.5"/>
+        </svg>
+        <figcaption>Fig. 2.1 The Lorentz factor γ stays close to 1 until v/c gets close to 1, then rises very
+        steeply. At everyday speeds (v/c well below 0.1), γ is indistinguishable from 1 and relativistic effects
+        are negligible.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>Calculate the Lorentz factor γ for a spacecraft travelling at v = 2.4 × 10⁸ m s⁻¹ (c = 3.00 × 10⁸ m s⁻¹).</p>
+        <p class="step">γ = 1 / √(1 − v²/c²)</p>
+        <p class="step">γ = 1 / √(1 − (2.4×10⁸)²/(3.00×10⁸)²)</p>
+        <p class="step">γ = 1 / √(1 − 0.64) = 1 / √0.36 = <span class="blank">complete this step yourself</span></p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.2</span>
+        <p>In frame S, an event occurs at x = 240 m and t = 2.0 × 10⁻⁶ s. Frame S′ moves at v = 1.8 × 10⁸ m s⁻¹
+        relative to S, with their origins coinciding at t = t′ = 0. Given γ = 1.25 for this speed, find x′.</p>
+        <p class="step">x′ = γ(x − vt)</p>
+        <p class="step">x′ = 1.25 × (240 − (1.8×10⁸ × 2.0×10⁻⁶))</p>
+        <p class="step">x′ = 1.25 × (240 − 360) = 1.25 × (−120) = <span class="blank">complete this step yourself</span></p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>Explain why the Galilean transformation equations are only an
+        approximation, and state the condition under which they become accurate.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">
+          <span class="ans-tag">Model answer</span>
+          The Galilean equations assume every observer agrees on time (t′ = t exactly), which is not true once
+          v²/c² becomes significant. They are the v ≪ c approximation of the full Lorentz transformation — accurate
+          whenever the relative velocity v is very small compared with the speed of light c, so that γ ≈ 1.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>Calculate the Lorentz factor γ for a particle travelling at v = 0.90c.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Since v is already given as a fraction of c, substitute v/c = 0.90 directly — the c's cancel and you don't need the value of c at all.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">γ = 1 / √(1 − v²/c²) = 1 / √(1 − 0.90²)</p>
+          <p class="step">γ = 1 / √(1 − 0.81) = 1 / √0.19 = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>In frame S, an event occurs at x = 500 m at t = 1.0 × 10⁻⁶ s. Frame S′
+        moves at v = 1.5 × 10⁸ m s⁻¹ relative to S (γ = 1.15 for this speed). Calculate x′.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">x′ = γ(x − vt)</p>
+          <p class="step">x′ = 1.15 × (500 − (1.5×10⁸ × 1.0×10⁻⁶))</p>
+          <p class="step">x′ = 1.15 × (500 − 150) = 1.15 × 350 = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: PROPER TIME AND PROPER LENGTH ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Proper time and proper length</h2>
+
+      <p>
+        Because different inertial observers can measure different values for the time between two events, and for
+        the length of an object, physicists give a special name to the measurement made by the one observer for
+        whom the measurement is as simple as possible.
+      </p>
+
+      <div class="keybox">
+        <strong>Proper time interval, Δt₀:</strong> the time interval between two events as measured by an
+        observer for whom <em>both events happen at the same position</em> — that is, an observer who does not
+        need to move between the two events to witness them both.
+      </div>
+
+      <div class="keybox">
+        <strong>Proper length, L₀:</strong> the length of an object as measured by an observer who is at rest
+        relative to that object — that is, in the same reference frame as the object itself.
+      </div>
+
+      <p>
+        Every other inertial observer, moving relative to the events or the object, will measure a <em>longer</em>
+        time interval than the proper time, and a <em>shorter</em> length than the proper length. The proper time
+        is always the smallest possible time interval between two events, and the proper length is always the
+        largest possible length of an object.
+      </p>
+
+      <div class="stretch-box">
+        <span class="tag">Common mistake</span>
+        "Proper" here does not mean "correct" or "official" — every inertial observer's measurement is equally
+        valid. It simply identifies which observer is in the most convenient position: at rest relative to the two
+        events (for proper time), or at rest relative to the object (for proper length).
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>A muon is created high in the atmosphere and decays a short time later,
+        closer to the ground. One observer travels down with the muon; a second observer stays fixed on the
+        ground and watches the muon pass. Which observer measures the proper time interval between the muon's
+        creation and its decay? Explain your answer.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">The proper time is measured by whoever sees both events (creation and decay) happen at the same position as themselves.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">
+          <span class="ans-tag">Model answer</span>
+          The observer travelling down with the muon measures the proper time, because both events — the muon's
+          creation and its decay — happen at the same position relative to that observer (right where the muon
+          is). The ground observer sees the muon created at one position and decaying at a different position, so
+          they measure a longer, non-proper time interval.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>A metre rule is carried on board a spaceship. Which observer measures
+        its proper length: an astronaut on the spaceship, or a scientist watching the spaceship fly past from a
+        planet? Explain your answer.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">
+          <span class="ans-tag">Model answer</span>
+          The astronaut on the spaceship measures the proper length, because the astronaut is at rest relative to
+          the metre rule (they are in the same reference frame). The scientist on the planet is moving relative to
+          the rule, so they measure a shorter, contracted length.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>Two firework shells explode at different points along a straight
+        firing range, one after the other. An engineer stands exactly halfway between the two explosion points and
+        does not move. A drone flies at constant velocity from directly above the first explosion point towards
+        the second, arriving just as the second shell explodes. Which of these two observers could, in principle,
+        measure the proper time interval between the two explosions? Explain your answer.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">
+          <span class="ans-tag">Model answer</span>
+          Neither observer measures the proper time interval, because neither is present at the same position as
+          both explosions: the engineer is at a fixed point between the two, not at either explosion, and the
+          drone is at a different position for each explosion too. The proper time interval could only be measured
+          by an observer who is at the position of the first explosion when it happens, and also at the position
+          of the second explosion when it happens.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: TIME DILATION ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Time dilation</h2>
+
+      <p>
+        We can now combine the second postulate (light always travels at c) with the definition of proper time to
+        work out exactly how much longer a non-proper time interval is. A neat way to see this is with a thought
+        experiment called a <strong>light clock</strong>: two mirrors, facing each other, with a single pulse of
+        light bouncing between them. Every time the light completes one bounce, the clock "ticks".
+      </p>
+
+      <p>
+        Rachel is on board a rocket, holding a light clock oriented so the light bounces straight up and down. To
+        Rachel, the light simply travels straight up to the top mirror and straight back down — a distance she
+        calls 2L, taking a proper time Δt₀ (because, to Rachel, both the "up" event and the "down" event happen at
+        the same position: right in front of her).
+      </p>
+
+      <p>
+        Mateo is floating in his own inertial frame, watching Rachel's rocket fly past at speed v. From Mateo's
+        point of view, the light does not simply go straight up and down — because the whole clock (and its
+        mirrors) are moving sideways with the rocket. So Mateo sees the light trace out a longer, zig-zag path.
+      </p>
+
+      <div class="sim-wrap">
+        <figure class="wide" style="margin:0; max-width:none;">
+        <div class="sim-canvas-box"><canvas id="lightClockCanvas" width="460" height="290" aria-label="Animated light clock, showing the straight path seen by Rachel on the rocket and the longer zig-zag path seen by Mateo watching from outside"></canvas></div>
+        <div class="sim-controls">
+          <h4>Simulation — the light clock</h4>
+          <div class="sim-row">
+            <label for="lcVelocity">Rocket velocity, v = <span id="lcVelocityVal">0.60</span>c</label>
+            <input type="range" id="lcVelocity" min="0" max="0.98" step="0.02" value="0.60">
+          </div>
+          <div class="sim-readout">
+            <div>Proper time (Rachel, on the rocket), Δt₀ = <span class="val" id="lcT0">1.00</span> tick-units</div>
+            <div>Time Mateo measures, Δt = γΔt₀ = <span class="val" id="lcT">1.25</span> tick-units</div>
+            <div>Lorentz factor, γ = <span class="val" id="lcGamma">1.25</span></div>
+          </div>
+          <div class="sim-btns">
+            <button id="lcPlay">Play</button>
+            <button class="alt" onclick="lcReset()">Reset</button>
+          </div>
+        </div>
+        </figure>
+      </div>
+      <p class="sim-print-note">Interactive simulation — open the online version of this workbook to use it.</p>
+      <figcaption style="text-align:center; margin-top:0.7rem; margin-bottom:1rem;">Fig. 4.1 The light clock: Rachel (top path, moving with the rocket) always sees the light travel straight up and
+      down. Mateo (bottom path, watching from outside) sees the same light trace a longer zig-zag, because the
+      mirrors themselves are moving. Since both must measure the same speed of light, c, but Mateo's path is
+      longer, Mateo's clock reading must be longer too.</figcaption>
+
+      <p>
+        Because both Rachel and Mateo must measure the light travelling at exactly the same speed, c (postulate 2),
+        and Mateo's path is geometrically longer, Mateo must measure a longer time for one tick of the clock. Using
+        Pythagoras' theorem on the zig-zag triangle gives exactly the Lorentz factor, γ, as the ratio between the
+        two:
+      </p>
+
+      <div class="eqn">
+        Δt = γΔt₀
+        <span class="cond">where Δt₀ is the proper time interval (measured by an observer for whom both events happen at the same place) and Δt is the (longer) time interval measured by any other inertial observer</span>
+      </div>
+
+      <div class="keyword">
+        <b>Time dilation:</b> the effect by which a moving clock is measured to run slow — that is, any observer
+        who is moving relative to a clock measures a longer time between its ticks than an observer at rest
+        relative to the clock does.
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Exam hint</span>
+        Δt₀ (proper time) is always the <em>smaller</em> of the two values, and Δt is always the <em>larger</em>.
+        If a question gives you a speed as a fraction of c (for example 0.80c), it is usually easiest to substitute
+        0.80c directly for v in the equation for γ — the two c's cancel, so you never need to look up the value of
+        c at all.
+      </div>
+
+      <div class="sim-launch">
+        <p>Want to try a different, independently built version of the light clock? This one lets you set the
+        rocket's velocity directly and watch the light bounce in real time.</p>
+        <a class="launch-btn" href="https://galileoandeinstein.phys.virginia.edu/more_stuff/Applets/Lightclock/home.html" target="_blank" rel="noopener">Launch the light clock simulation ↗</a>
+        <p class="credit">Simulation by Michael Fowler, University of Virginia (galileoandeinstein.phys.virginia.edu).</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A spacecraft passes the Earth at v = 0.80c. A clock on board the spacecraft measures a proper time
+        interval of Δt₀ = 5.0 s between two events that happen at the same place on the spacecraft. Calculate the
+        time interval Δt measured by an observer on Earth.</p>
+        <p class="step">γ = 1 / √(1 − v²/c²) = 1 / √(1 − 0.80²) = 1 / √0.36 = 1.67</p>
+        <p class="step">Δt = γΔt₀</p>
+        <p class="step">Δt = 1.67 × 5.0 = <span class="blank">complete this step yourself</span></p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>A muon, created in the upper atmosphere, has a proper lifetime of
+        Δt₀ = 2.2 μs before it decays. It travels towards the Earth at v = 0.995c. Calculate the lifetime Δt of the
+        muon as measured by an observer on the ground.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">First find γ using v/c = 0.995, then use Δt = γΔt₀.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">γ = 1 / √(1 − 0.995²) = 1 / √(1 − 0.990025) = 1 / √0.009975 ≈ 10.0</p>
+          <p class="step">Δt = γΔt₀ = 10.0 × 2.2×10⁻⁶ = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>A spaceship passes the Earth at 2.7 × 10⁸ m s⁻¹. A signal light on
+        Earth is switched on for a proper time of 1.4 × 10⁻⁵ s, as measured on the Earth. For how long is the
+        light on, as measured by an observer on the spaceship? (c = 3.00 × 10⁸ m s⁻¹)</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Be careful — here it is the Earth-based observer who is at rest relative to the two events (the light switching on and off), so it is the Earth time that is the proper time, Δt₀.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">v/c = 2.7×10⁸ / 3.00×10⁸ = 0.90</p>
+          <p class="step">γ = 1 / √(1 − 0.90²) = 1 / √0.19 ≈ 2.29</p>
+          <p class="step">Δt = γΔt₀ = 2.29 × 1.4×10⁻⁵ = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>The average lifetime of muons at rest in a laboratory is measured as
+        2.2 μs. A separate beam of fast-moving muons, produced in the same laboratory, is measured to have an
+        average lifetime of 6.4 μs. Calculate the speed of these muons as a fraction of c.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Find γ first (γ = Δt / Δt₀), then rearrange γ = 1/√(1 − v²/c²) for v. Remember to square both γ and the ratio correctly when you rearrange — it is easy to forget to square one of the terms.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">γ = Δt / Δt₀ = 6.4 / 2.2 = 2.91</p>
+          <p class="step">γ = 1/√(1 − v²/c²) → v²/c² = 1 − 1/γ² = 1 − 1/2.91²</p>
+          <p class="step">v/c = √(1 − 1/2.91²) = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>Using Figure 4.1 and the light clock simulation, explain in your own
+        words why Mateo (the outside observer) must measure a <em>longer</em> time for one tick of the clock than
+        Rachel does, without using any equations.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">
+          <span class="ans-tag">Model answer</span>
+          Mateo sees the light travel further for each tick, because the mirrors are moving sideways with the
+          rocket while the light also moves up and down, so the light traces a longer, diagonal path. Both Rachel
+          and Mateo must measure the light travelling at the same speed, c (postulate 2). If the distance Mateo
+          measures is longer but the speed is the same for both of them, then the time Mateo measures for one tick
+          must also be longer.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: LENGTH CONTRACTION ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Length contraction</h2>
+
+      <p>
+        Time dilation has a natural partner. If a moving clock runs slow, then a moving ruler must also measure
+        shorter — otherwise observers in different frames would disagree about basic quantities like speed itself.
+        Using the Lorentz transformation equations to compare how two observers measure the length of the same
+        object leads directly to the <strong>length contraction</strong> equation.
+      </p>
+
+      <div class="eqn">
+        L = L₀ / γ
+        <span class="cond">where L₀ is the proper length of the object (measured at rest relative to it) and L is the (shorter) length measured by an observer moving relative to the object, at relative speed v</span>
+      </div>
+
+      <div class="keyword">
+        <b>Length contraction:</b> the effect by which a moving object is measured to be shorter, along its
+        direction of travel, than its proper length. There is no contraction in directions perpendicular to the
+        motion.
+      </div>
+
+      <p>
+        Notice that L is always smaller than L₀, since γ ≥ 1 — exactly the opposite pattern to time dilation, where
+        the non-proper time Δt is always <em>larger</em> than Δt₀. It can help to remember: moving clocks run slow
+        (time gets longer), moving rulers shrink (length gets shorter).
+      </p>
+
+      <div class="sim-wrap">
+        <figure class="wide" style="margin:0; max-width:none;">
+        <div class="sim-canvas-box"><canvas id="lengthCanvas" width="460" height="230" aria-label="Animated spaceship shown at rest with its proper length, and moving past an observer with its contracted length"></canvas></div>
+        <div class="sim-controls">
+          <h4>Simulation — length contraction</h4>
+          <div class="sim-row">
+            <label for="lenVelocity">Spaceship velocity, v = <span id="lenVelocityVal">0.60</span>c</label>
+            <input type="range" id="lenVelocity" min="0" max="0.98" step="0.02" value="0.60">
+          </div>
+          <div class="sim-row">
+            <label for="lenL0">Proper length, L₀ = <span id="lenL0Val">100</span> m</label>
+            <input type="range" id="lenL0" min="40" max="160" step="5" value="100">
+          </div>
+          <div class="sim-readout">
+            <div>Lorentz factor, γ = <span class="val" id="lenGamma">1.25</span></div>
+            <div>Observed length, L = L₀/γ = <span class="val" id="lenL">80.0</span> m</div>
+          </div>
+          <div class="sim-btns">
+            <button id="lenPlay">Play</button>
+            <button class="alt" onclick="lenReset()">Reset</button>
+          </div>
+        </div>
+        </figure>
+      </div>
+      <p class="sim-print-note">Interactive simulation — open the online version of this workbook to use it.</p>
+      <figcaption style="text-align:center; margin-top:0.7rem; margin-bottom:1rem;">Fig. 5.1 The top ship is shown at rest, with its full proper length L₀. The bottom ship is the same ship,
+      travelling at speed v relative to the observer — its measured length, L, is contracted along the direction
+      of travel.</figcaption>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A spaceship has a proper length of L₀ = 100 m. It moves at v = 0.80c relative to an observer on a
+        space station. Calculate the length of the spaceship as measured by the observer.</p>
+        <p class="step">γ = 1 / √(1 − 0.80²) = 1 / √0.36 = 1.67</p>
+        <p class="step">L = L₀ / γ</p>
+        <p class="step">L = 100 / 1.67 = <span class="blank">complete this step yourself</span></p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>A train carriage has a proper length of 15 m. Observer B, standing on
+        the platform, watches the train pass at a uniform speed of 0.80c. Calculate the length of the carriage as
+        measured by observer B.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">The 15 m given is the proper length, L₀ — it's measured by an observer (on the train) at rest relative to the carriage.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">γ = 1 / √(1 − 0.80²) = 1 / √0.36 = 1.67</p>
+          <p class="step">L = L₀ / γ = 15 / 1.67 = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>A spaceship of length 60.0 m (as measured by its own crew) passes the
+        Earth at a speed of 0.980c. Calculate its length as measured by an observer on Earth.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">γ = 1 / √(1 − 0.980²) = 1 / √(1 − 0.9604) = 1 / √0.0396 ≈ 5.03</p>
+          <p class="step">L = L₀ / γ = 60.0 / 5.03 = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>A UFO is spherical when at rest. Describe, without calculation, what
+        shape it would appear to an observer that it passed at a relative speed of 0.50c.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Length contraction only shortens an object along its direction of travel — nothing happens to the dimensions at right angles to the motion.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">
+          <span class="ans-tag">Model answer</span>
+          It would appear flattened into an oval (ellipsoid) shape: contracted along the direction of travel, but
+          unchanged in the two directions perpendicular to the motion.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>An observer measures the length of a metre rule, orientated along the
+        direction of travel, to be 80 cm. Calculate the speed of the rule relative to the observer.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Rearrange L = L₀/γ to find γ first (γ = L₀/L), then rearrange γ = 1/√(1 − v²/c²) for v, remembering to square both γ and the length ratio.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">γ = L₀ / L = 100 / 80 = 1.25</p>
+          <p class="step">v/c = √(1 − 1/γ²) = √(1 − 1/1.25²)</p>
+          <p class="step">v/c = √(1 − 0.64) = (finish evaluating this yourself, then multiply by c)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: RELATIVITY OF SIMULTANEITY ================= -->
+    <section class="topic" id="s6">
+      <h2>6. The relativity of simultaneity</h2>
+
+      <p>
+        Two events are <strong>simultaneous</strong> if they happen at the same time. In everyday life we take
+        this for granted as an absolute fact — either two things happened at the same moment, or they didn't. But
+        because different inertial observers can measure different time intervals (time dilation), it turns out
+        they can also disagree about whether two events happened at the same time at all.
+      </p>
+
+      <p>
+        Imagine two bolts of lightning strike a fast-moving train at the same instant, at two points: A (the front
+        of the train) and B (the back). An observer standing on the embankment, exactly halfway between A and B,
+        sees both flashes of light arrive at the same moment — for this observer, the two strikes were
+        simultaneous.
+      </p>
+
+      <p>
+        Now consider Carla, sitting exactly halfway between A and B — but on board the moving train. By the time
+        the light from each strike reaches her, the train has moved. Because the train is travelling towards the
+        position where the strike at A happened, the light from A has less distance left to travel to reach her;
+        because the train is moving away from where B happened, the light from B has further to travel. So Carla
+        sees the flash from A arrive first, and the flash from B arrive some time later.
+      </p>
+
+      <figure>
+        <svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig3title">
+          <title id="fig3title">A train with lightning strikes at each end, showing why the events are not simultaneous for an observer on the train</title>
+          <line x1="30" y1="150" x2="430" y2="150" stroke="#5b6b78" stroke-width="2"/>
+          <rect x="140" y="110" width="180" height="34" rx="5" fill="#0e7c86" opacity="0.9"/>
+          <circle cx="163" cy="150" r="9" fill="#173a5e"/>
+          <circle cx="297" cy="150" r="9" fill="#173a5e"/>
+          <circle cx="230" cy="127" r="7" fill="#d98324"/>
+          <text x="230" y="108" font-size="12" fill="#173a5e" text-anchor="middle" font-family="Segoe UI, sans-serif" font-weight="700">Carla (C)</text>
+
+          <polygon points="130,60 138,80 128,80 136,100 116,74 126,74" fill="#d98324"/>
+          <text x="130" y="50" font-size="13" fill="#a35a13" text-anchor="middle" font-family="Segoe UI, sans-serif" font-weight="700">A</text>
+          <polygon points="330,60 338,80 328,80 336,100 316,74 326,74" fill="#d98324"/>
+          <text x="330" y="50" font-size="13" fill="#a35a13" text-anchor="middle" font-family="Segoe UI, sans-serif" font-weight="700">B</text>
+
+          <line x1="230" y1="127" x2="145" y2="99" stroke="#0e7c86" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowTeal)"/>
+          <line x1="230" y1="127" x2="315" y2="99" stroke="#0e7c86" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowTeal)"/>
+
+          <line x1="220" y1="170" x2="180" y2="170" stroke="#173a5e" stroke-width="2" marker-end="url(#arrowNavyLeft)"/>
+          <text x="200" y="185" font-size="12" fill="#173a5e" text-anchor="middle" font-family="Segoe UI, sans-serif">train moves towards A</text>
+
+          <text x="98" y="104" font-size="11.5" fill="#3a4753" text-anchor="end" font-family="Segoe UI, sans-serif" font-style="italic">reaches C first</text>
+          <text x="362" y="104" font-size="11.5" fill="#3a4753" text-anchor="start" font-family="Segoe UI, sans-serif" font-style="italic">reaches C later</text>
+
+          <defs>
+            <marker id="arrowTeal" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/>
+            </marker>
+            <marker id="arrowNavyLeft" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/>
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>Fig. 6.1 Lightning strikes A and B at the same instant, as measured by an observer on the
+        embankment. The train (and Carla, sitting at its centre) is moving towards A, so light from A reaches her
+        sooner than light from B — to Carla, the two strikes are not simultaneous.</figcaption>
+      </figure>
+
+      <div class="keybox">
+        <strong>The relativity of simultaneity:</strong> two events that are simultaneous in one inertial reference
+        frame are, in general, <em>not</em> simultaneous in a different inertial reference frame that is moving
+        relative to the first. Simultaneity is only absolute if the two events happen at exactly the same place.
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        This is not a trick of light delay that could be "corrected for" — it is a genuine disagreement about
+        whether the two events happened at the same time. Both the embankment observer and Carla are correct, in
+        their own reference frames. There is no absolute answer to "did A and B really happen at the same time?"
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>Using Figure 6.1, explain why the embankment observer (standing still,
+        exactly halfway between A and B) measures the two lightning strikes as simultaneous.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">
+          <span class="ans-tag">Model answer</span>
+          The embankment observer is exactly halfway between A and B and is not moving, so the light from each
+          strike has to travel exactly the same distance to reach them, at exactly the same speed, c. Since the
+          strikes happened at the same instant and the light from each takes the same time to arrive, the observer
+          sees both flashes arrive together — simultaneously.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">19</span><strong>Suppose the train in Figure 6.1 were travelling in the opposite
+        direction (towards B instead of A). State which strike Carla would now observe first, and explain why.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Think about which strike's light now has less distance to travel to reach Carla, given the new direction of travel.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">
+          <span class="ans-tag">Model answer</span>
+          Carla would now see strike B first. Since the train is moving towards B, the light from B has less
+          distance to travel to reach her, while the light from A has to catch up to the train, taking longer to
+          arrive.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">20</span><strong>Explain why two events that happen at exactly the same position are
+        simultaneous for every inertial observer, with no disagreement possible.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">
+          <span class="ans-tag">Model answer</span>
+          If two events happen at the same position, there is no distance for light (or any signal) from one event
+          to travel further than light from the other to reach any given observer — there is no asymmetry in
+          arrival time for any observer to disagree about, regardless of how that observer is moving. The relativity
+          of simultaneity only arises when two events happen at different positions.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7: MUON DECAY ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Evidence from muon decay</h2>
+
+      <p>
+        Time dilation and length contraction are not just abstract mathematics — they are tested every day by
+        cosmic ray muons. Muons are unstable particles, produced when cosmic rays strike the upper atmosphere,
+        roughly 10 km above the Earth's surface. They travel down towards the ground at speeds close to c, but
+        they are unstable, decaying with a half-life of only about 1.5 μs.
+      </p>
+
+      <p>
+        Using ordinary (non-relativistic) physics, we can calculate roughly how long the journey to the ground
+        should take, and therefore how many half-lives pass, and therefore what fraction of the original muons
+        should survive to reach a detector at ground level. That classical calculation predicts that only a tiny
+        fraction — often quoted as around one in a million — should survive the trip. In reality, a much larger
+        fraction, often around 20%, is detected at the ground. Special relativity resolves the mystery, and it
+        does so in two different but equally valid ways, depending on whose reference frame you choose to work in.
+      </p>
+
+      <div class="sim-wrap">
+        <figure class="wide" style="margin:0; max-width:none;">
+        <div class="sim-canvas-box"><canvas id="muonCanvas" width="460" height="260" aria-label="Muons falling from the upper atmosphere towards a detector, comparing the Earth frame and the muon frame"></canvas></div>
+        <div class="sim-controls">
+          <h4>Simulation — muon survival</h4>
+          <div class="sim-row">
+            <label for="muonVelocity">Muon speed, v = <span id="muonVelocityVal">0.995</span>c</label>
+            <input type="range" id="muonVelocity" min="0.9" max="0.999" step="0.001" value="0.995">
+          </div>
+          <div class="sim-row">
+            <label><input type="checkbox" id="muonFrameToggle"> Show it from the muon's frame (length contraction) instead of the Earth's frame (time dilation)</label>
+          </div>
+          <div class="sim-readout">
+            <div id="muonFrameLabel">Earth frame: distance fixed at 10 000 m</div>
+            <div>Lorentz factor, γ = <span class="val" id="muonGamma">10.0</span></div>
+            <div id="muonMainReadout">Muon half-life, as measured on Earth: <span class="val" id="muonLifetime">15.0</span> μs</div>
+            <div>Half-lives elapsed: <span class="val" id="muonHalfLives">1.02</span></div>
+            <div>Fraction surviving to the ground: <span class="val" id="muonFraction">49%</span></div>
+            <div>Muons remaining (of 5 shown): <span class="val" id="muonRemaining">2 / 5</span></div>
+          </div>
+          <div class="sim-btns">
+            <button id="muonPlay">Play</button>
+            <button class="alt" onclick="muonReset()">Reset</button>
+          </div>
+        </div>
+        </figure>
+      </div>
+      <p class="sim-print-note">Interactive simulation — open the online version of this workbook to use it.</p>
+      <figcaption style="text-align:center; margin-top:0.7rem; margin-bottom:1rem;">Fig. 7.1 Muons falling from the upper atmosphere. Tick the box to switch between the Earth's explanation (the
+      muon's decay clock is time-dilated, so it survives longer) and the muon's own explanation (the 10 km of
+      atmosphere is length-contracted, so there is less distance to cross).</figcaption>
+
+      <div class="keybox">
+        <strong>Explanation 1 — from the Earth's reference frame (time dilation):</strong> the Earth observer sees
+        the muon's internal "clock" (its decay) running slow, because the muon is moving at high speed. Its
+        half-life, measured from Earth, is dilated to γ times its proper half-life. Because each half-life lasts
+        longer as measured from Earth, fewer half-lives pass during the (roughly fixed) 10 km journey, so far more
+        muons survive to reach the ground than the non-relativistic calculation predicts.
+      </div>
+
+      <div class="keybox">
+        <strong>Explanation 2 — from the muon's reference frame (length contraction):</strong> in the muon's own
+        frame, its half-life is simply its normal, proper half-life — nothing is dilated. Instead, it is the 10 km
+        thickness of the atmosphere that is contracted, to just 10 km / γ. Since the muon has much less distance to
+        cross, the journey takes far less proper time, so once again, far more muons survive.
+      </div>
+
+      <p>
+        Both explanations are correct descriptions of the same physical outcome — the number of muons that reach
+        the ground — because they are simply the same situation, described from two different, equally valid
+        inertial reference frames.
+      </p>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>Muons are created 10 000 m above the ground, travelling at v = 0.995c. Their proper half-life is
+        1.5 μs. Using the Earth's frame, calculate (a) the time taken for the journey, as measured from Earth, and
+        (b) how many half-lives this represents.</p>
+        <p class="step">(a) Non-relativistically, time ≈ distance / speed = 10 000 / (0.995 × 3.00×10⁸)</p>
+        <p class="step">time = 10 000 / 2.985×10⁸ = <span class="blank">complete this step yourself</span> s</p>
+        <p>(b) Number of half-lives = time ÷ 1.5×10⁻⁶ s. (Note: this is the time as measured on Earth — but because
+        of time dilation, the muon's own decay clock ticks through <em>fewer</em> proper half-lives than this
+        calculation alone would suggest for a stationary muon; that is exactly why more muons survive than
+        classical physics predicts.)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">21</span><strong>Explain, in terms of time dilation, why more muons reach the Earth's
+        surface than a non-relativistic calculation predicts.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">
+          <span class="ans-tag">Model answer</span>
+          From the Earth's frame, the muon is moving at high speed, so its internal decay "clock" is time-dilated —
+          it runs slow compared with a muon at rest. This means the muon's half-life, as measured from Earth, is
+          longer than its proper half-life. Since each half-life takes longer, fewer half-lives occur during the
+          journey to the ground, so a larger fraction of the original muons survive to be detected than a
+          non-relativistic calculation (which ignores time dilation) would predict.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">22</span><strong>Explain, in terms of length contraction, why more muons reach the
+        Earth's surface than a non-relativistic calculation predicts. Do not refer to time dilation in your
+        answer.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Think about the problem entirely from the muon's own point of view — in the muon's frame, its own half-life is not dilated at all.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">
+          <span class="ans-tag">Model answer</span>
+          In the muon's own reference frame, its half-life is simply its ordinary, proper half-life. However, the
+          thickness of the atmosphere the muon must cross is length-contracted in the muon's frame, since the
+          atmosphere is moving relative to the muon at high speed. With a much shorter distance to cross, the
+          journey takes less proper time, so fewer half-lives pass, and a larger fraction of muons survive to
+          reach the ground.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">23</span><strong>A muon is created 2000 m above a detector and travels at 0.996c. Its
+        proper half-life is 1.5 μs. Using the Earth's frame, calculate (a) the time taken for the journey as
+        measured on Earth, and (b) the number of half-lives this represents.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">For part (a), use time = distance / speed with speed ≈ 0.996 × 3.00×10⁸ m s⁻¹. For part (b), divide your answer to (a) by the half-life.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">
+          <span class="ans-tag">Model answer</span>
+          <p class="step">(a) t = distance / speed = 2000 / (0.996 × 3.00×10⁸) = 2000 / 2.988×10⁸ ≈ 6.7×10⁻⁶ s</p>
+          <p class="step">(b) number of half-lives = 6.7×10⁻⁶ / 1.5×10⁻⁶ = (finish evaluating this yourself)</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">24</span><strong>Explain why muon decay is considered strong experimental evidence for
+        special relativity, rather than just a mathematical curiosity.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">
+          <span class="ans-tag">Model answer</span>
+          Muon decay is a real, measurable phenomenon: detectors on the ground genuinely count far more muons
+          arriving than non-relativistic physics predicts. Special relativity is the only theory that correctly
+          predicts the observed survival rate, whether the calculation is carried out from the Earth's frame
+          (using time dilation) or from the muon's frame (using length contraction) — both give the same, correct
+          answer, which matches experiment. This makes it direct, repeatable experimental evidence, not just a
+          theoretical prediction.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Postulate</dt>
+        <dd>A basic statement taken as the starting point for a theory, from which other results are worked out logically.</dd>
+
+        <dt>Lorentz transformation equations</dt>
+        <dd>The equations x′ = γ(x − vt) and t′ = γ(t − vx/c²), which relate the position and time of an event in
+        two inertial reference frames at any relative speed, and which reduce to the Galilean transformation
+        equations when v ≪ c.</dd>
+
+        <dt>Lorentz factor, γ</dt>
+        <dd>γ = 1 / √(1 − v²/c²). Always ≥ 1, and equal to 1 only when v = 0.</dd>
+
+        <dt>Proper time interval, Δt₀</dt>
+        <dd>The time interval between two events as measured by an observer for whom both events happen at the
+        same position. Always the smallest possible measured time interval.</dd>
+
+        <dt>Proper length, L₀</dt>
+        <dd>The length of an object as measured by an observer at rest relative to the object. Always the largest
+        possible measured length.</dd>
+
+        <dt>Time dilation</dt>
+        <dd>The effect by which a clock moving relative to an observer is measured to run slow: Δt = γΔt₀.</dd>
+
+        <dt>Length contraction</dt>
+        <dd>The effect by which an object moving relative to an observer is measured to be shorter, along its
+        direction of travel, than its proper length: L = L₀ / γ.</dd>
+
+        <dt>Relativity of simultaneity</dt>
+        <dd>Two events that are simultaneous in one inertial reference frame are, in general, not simultaneous in
+        a different inertial reference frame moving relative to the first.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Special Relativity Workbook · Companion resources: <em>Galilean Relativity</em>.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('shown');
+}
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+function toggleHint(btn){
+  var hint = btn.nextElementSibling;
+  if(hint && hint.classList.contains('hint')){ hint.classList.toggle('open'); }
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Simulation 1: the light clock ================= */
+(function(){
+  var canvas = document.getElementById('lightClockCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+
+  var vSlider = document.getElementById('lcVelocity');
+  var vVal = document.getElementById('lcVelocityVal');
+  var t0Out = document.getElementById('lcT0');
+  var tOut = document.getElementById('lcT');
+  var gammaOut = document.getElementById('lcGamma');
+  var playBtn = document.getElementById('lcPlay');
+
+  var playing = false;
+  var rafId = null;
+  var lastTime = null;
+  var phase = 0; // 0..1 progress through one full up-down tick
+
+  function gammaOf(v){ return 1/Math.sqrt(1-v*v); }
+
+  function draw(){
+    var v = parseFloat(vSlider.value);
+    var gamma = gammaOf(v);
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    var topY = 55, botY = 235;
+    var mirrorHalfW = 46;
+
+    /* --- Rachel's frame: light bounces straight up/down at fixed x --- */
+    var racX = 120;
+    ctx.strokeStyle = '#5fad86'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(racX-mirrorHalfW, topY); ctx.lineTo(racX+mirrorHalfW, topY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(racX-mirrorHalfW, botY); ctx.lineTo(racX+mirrorHalfW, botY); ctx.stroke();
+    ctx.strokeStyle = 'rgba(166,227,196,0.35)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(racX, topY); ctx.lineTo(racX, botY); ctx.stroke();
+
+    var racFrac = phase < 0.5 ? phase*2 : (1-phase)*2;
+    var racY = topY + racFrac*(botY-topY);
+    dot(racX, racY, '#f2b807');
+
+    ctx.fillStyle = '#a6e3c4'; ctx.font = '12px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText("Rachel's view (on the rocket)", racX, topY-16);
+
+    /* --- Mateo's frame: mirrors drift sideways, light zig-zags --- */
+    var driftPxPerTick = 130 + v*120; // wider zig-zag for higher v (visual, not to scale)
+    var mateoBaseX = 300;
+    var startX = mateoBaseX - driftPxPerTick/2;
+    var midX = mateoBaseX;
+    var endX = mateoBaseX + driftPxPerTick/2;
+
+    ctx.strokeStyle = '#5f88ad'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(startX-mirrorHalfW, topY); ctx.lineTo(startX+mirrorHalfW, topY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(startX-mirrorHalfW, botY); ctx.lineTo(startX+mirrorHalfW, botY); ctx.stroke();
+    ctx.strokeStyle = 'rgba(159,196,227,0.35)'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(startX, topY); ctx.lineTo(midX, botY); ctx.lineTo(endX, topY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    var mx, my;
+    if(phase < 0.5){
+      var f = phase*2;
+      mx = startX + f*(midX-startX);
+      my = topY + f*(botY-topY);
+    } else {
+      var f2 = (phase-0.5)*2;
+      mx = midX + f2*(endX-midX);
+      my = botY - f2*(botY-topY);
+    }
+    dot(mx, my, '#f2b807');
+
+    ctx.fillStyle = '#9fc4e3'; ctx.font = '12px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText("Mateo's view (watching from outside)", mateoBaseX, topY-16);
+
+    /* readouts */
+    t0Out.textContent = '1.00';
+    tOut.textContent = gamma.toFixed(2);
+    gammaOut.textContent = gamma.toFixed(2);
+  }
+
+  function dot(x,y,color){
+    ctx.beginPath(); ctx.arc(x,y,6,0,Math.PI*2); ctx.fillStyle = color; ctx.fill();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = '#0f1f30'; ctx.stroke();
+  }
+
+  function updateLabels(){ vVal.textContent = parseFloat(vSlider.value).toFixed(2); }
+  vSlider.addEventListener('input', function(){ updateLabels(); draw(); });
+
+  function tick(now){
+    if(!playing) return;
+    if(lastTime === null) lastTime = now;
+    var dt = (now-lastTime)/1000;
+    lastTime = now;
+    var v = parseFloat(vSlider.value);
+    var gamma = gammaOf(v);
+    /* Rachel completes one tick per (1/gamma) seconds of "sim time" scaled so slower gamma isn't too fast */
+    var ticksPerSecond = 0.45;
+    phase += dt*ticksPerSecond;
+    if(phase >= 1) phase -= Math.floor(phase);
+    draw();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  playBtn.addEventListener('click', function(){
+    playing = !playing;
+    playBtn.textContent = playing ? 'Pause' : 'Play';
+    if(playing){ lastTime = null; rafId = requestAnimationFrame(tick); }
+    else if(rafId){ cancelAnimationFrame(rafId); }
+  });
+
+  window.lcReset = function(){
+    playing = false; playBtn.textContent = 'Play';
+    if(rafId) cancelAnimationFrame(rafId);
+    phase = 0; vSlider.value = 0.60;
+    updateLabels(); draw();
+  };
+
+  updateLabels();
+  draw();
+})();
+
+/* ================= Simulation 2: length contraction ================= */
+(function(){
+  var canvas = document.getElementById('lengthCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+
+  var vSlider = document.getElementById('lenVelocity');
+  var vVal = document.getElementById('lenVelocityVal');
+  var l0Slider = document.getElementById('lenL0');
+  var l0Val = document.getElementById('lenL0Val');
+  var gammaOut = document.getElementById('lenGamma');
+  var lOut = document.getElementById('lenL');
+  var playBtn = document.getElementById('lenPlay');
+
+  var playing = false;
+  var rafId = null;
+  var lastTime = null;
+  var shipX = -80;
+
+  function gammaOf(v){ return 1/Math.sqrt(1-v*v); }
+
+  function drawShip(cx, cy, halfLen, color, label, labelX){
+    var h = 28;
+    ctx.fillStyle = color;
+    roundRect(ctx, cx-halfLen, cy-h/2, halfLen*2, h, 8);
+    ctx.fill();
+    ctx.strokeStyle = '#e0e6ea'; ctx.lineWidth = 1.5;
+    roundRect(ctx, cx-halfLen, cy-h/2, halfLen*2, h, 8);
+    ctx.stroke();
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11.5px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    /* label is drawn at a fixed position (labelX, defaulting to cx) so it stays put
+       and does not clip off the canvas edge as the ship itself drifts/wraps during
+       animation */
+    ctx.fillText(label, (labelX === undefined ? cx : labelX), cy-h/2-8);
+  }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+
+  function draw(){
+    var v = parseFloat(vSlider.value);
+    var L0 = parseFloat(l0Slider.value);
+    var gamma = gammaOf(v);
+    var L = L0/gamma;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    var scale = 1.5; // px per metre
+    var midX = W/2;
+
+    /* top: ship at rest, proper length */
+    var yTop = 70;
+    drawShip(midX, yTop, (L0*scale)/2, '#0e7c86', 'at rest: proper length L₀ = ' + L0.toFixed(0) + ' m');
+
+    /* bottom: moving ship, contracted length, animated drifting across */
+    var yBot = 175;
+    var trackMin = 40, trackMax = W-40;
+    var sx = ((shipX - trackMin) % (trackMax-trackMin) + (trackMax-trackMin)) % (trackMax-trackMin) + trackMin;
+    drawShip(sx, yBot, (L*scale)/2, '#d98324', 'moving at v: observed length L = ' + L.toFixed(1) + ' m', midX);
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(40, yBot+34); ctx.lineTo(W-40, yBot+34); ctx.stroke();
+
+    gammaOut.textContent = gamma.toFixed(2);
+    lOut.textContent = L.toFixed(1);
+  }
+
+  function updateLabels(){
+    vVal.textContent = parseFloat(vSlider.value).toFixed(2);
+    l0Val.textContent = parseFloat(l0Slider.value).toFixed(0);
+  }
+  [vSlider, l0Slider].forEach(function(el){ el.addEventListener('input', function(){ updateLabels(); draw(); }); });
+
+  function tick(now){
+    if(!playing) return;
+    if(lastTime === null) lastTime = now;
+    var dt = (now-lastTime)/1000;
+    lastTime = now;
+    shipX += dt*60;
+    draw();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  playBtn.addEventListener('click', function(){
+    playing = !playing;
+    playBtn.textContent = playing ? 'Pause' : 'Play';
+    if(playing){ lastTime = null; rafId = requestAnimationFrame(tick); }
+    else if(rafId){ cancelAnimationFrame(rafId); }
+  });
+
+  window.lenReset = function(){
+    playing = false; playBtn.textContent = 'Play';
+    if(rafId) cancelAnimationFrame(rafId);
+    shipX = -80; vSlider.value = 0.60; l0Slider.value = 100;
+    updateLabels(); draw();
+  };
+
+  updateLabels();
+  draw();
+})();
+
+/* ================= Simulation 3: muon survival ================= */
+(function(){
+  var canvas = document.getElementById('muonCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+
+  var vSlider = document.getElementById('muonVelocity');
+  var vVal = document.getElementById('muonVelocityVal');
+  var frameToggle = document.getElementById('muonFrameToggle');
+  var frameLabel = document.getElementById('muonFrameLabel');
+  var mainReadout = document.getElementById('muonMainReadout');
+  var gammaOut = document.getElementById('muonGamma');
+  var lifetimeOut = document.getElementById('muonLifetime');
+  var halfLivesOut = document.getElementById('muonHalfLives');
+  var fractionOut = document.getElementById('muonFraction');
+  var playBtn = document.getElementById('muonPlay');
+
+  var c = 3.00e8;
+  var altitude = 10000; // m
+  var properHalfLife = 1.5e-6; // s
+  var playing = false;
+  var rafId = null;
+  var lastTime = null;
+  var muonY = 30;
+  var NMUONS = 5;
+  var muonDX = [-70, -35, 0, 35, 70];
+  var remainingOut = document.getElementById('muonRemaining');
+
+  function gammaOf(v){ return 1/Math.sqrt(1-v*v); }
+
+  function compute(){
+    var vfrac = parseFloat(vSlider.value);
+    var v = vfrac*c;
+    var gamma = gammaOf(vfrac);
+    var earthFrame = !frameToggle.checked;
+    var travelTime, distance, hl;
+    if(earthFrame){
+      // Earth frame: the 10 km distance is unchanged, but the muon's half-life is
+      // time-dilated, so we divide by the dilated (longer) half-life.
+      distance = altitude;
+      travelTime = distance/v;
+      hl = travelTime/(gamma*properHalfLife);
+    } else {
+      // Muon frame: the muon's half-life is its ordinary proper half-life, but the
+      // 10 km atmosphere is length-contracted, so there is less distance to cross.
+      distance = altitude/gamma;
+      travelTime = distance/v;
+      hl = travelTime/properHalfLife;
+    }
+    var fraction = Math.pow(0.5, hl);
+
+    /* Split the 5 muons shown into individual decay times using the median order
+       statistics of an exponential decay (rank j of N, quantile p_j = (j-0.5)/N),
+       so that the fraction of the 5 that survive the whole journey matches, as
+       closely as 5 discrete particles can, the fraction predicted by fraction()
+       above. progress is measured 0 (top of atmosphere) to 1 (ground). */
+    var decayProgress = [];
+    for(var j=1; j<=NMUONS; j++){
+      var p = (j-0.5)/NMUONS;
+      decayProgress.push(hl>0 ? (-Math.log2(1-p))/hl : Infinity);
+    }
+    var survivingCount = 0;
+    for(var k=0;k<NMUONS;k++){ if(decayProgress[k] > 1) survivingCount++; }
+
+    return {vfrac:vfrac, gamma:gamma, distance:distance, travelTime:travelTime, halfLives:hl,
+            fraction:fraction, earthFrame:earthFrame, decayProgress:decayProgress, survivingCount:survivingCount};
+  }
+
+  function draw(){
+    var s = compute();
+
+    ctx.clearRect(0,0,W,H);
+    var grad = ctx.createLinearGradient(0,0,0,H);
+    grad.addColorStop(0,'#0f1f30'); grad.addColorStop(1,'#132840');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,W,H);
+
+    var groundY = 225;
+    ctx.strokeStyle = '#5c6b78'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(30, groundY); ctx.lineTo(W-30, groundY); ctx.stroke();
+    ctx.fillStyle = '#dceaf0'; ctx.font = '12px Segoe UI, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('detector', 34, groundY+18);
+
+    var topY = 35;
+    ctx.fillStyle = '#9fb4c4'; ctx.font = '12px Segoe UI, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText(s.earthFrame ? 'atmosphere: 10 000 m' : 'atmosphere (contracted): ' + s.distance.toFixed(0) + ' m', 34, topY-8);
+    ctx.fillStyle = '#f2d98a'; ctx.font = '11.5px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('5 muons, created together', 230, topY-8);
+
+    var progress = Math.min(1, muonY/185);
+    var my = topY + muonY;
+    if(my > groundY-10) my = groundY-10;
+
+    for(var i=0;i<NMUONS;i++){
+      var dx = muonDX[i];
+      var dp = s.decayProgress[i];
+      if(progress < dp){
+        /* still alive: falls with the rest */
+        dot(230+dx, my, '#f2b807');
+      } else {
+        /* decayed: leave a faint ring frozen at the height it decayed */
+        var decayY = topY + Math.min(dp,1)*185;
+        ring(230+dx, decayY, 'rgba(180,190,200,0.55)');
+      }
+    }
+
+    var barX = 340, barW = 70, barTop = 60, barH = 150;
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(barX, barTop, barW, barH);
+    var fillH = barH*s.fraction;
+    ctx.fillStyle = '#5fad86';
+    ctx.fillRect(barX, barTop+barH-fillH, barW, fillH);
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11.5px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText((s.fraction*100).toFixed(0)+'% survive', barX+barW/2, barTop-10);
+
+    frameLabel.textContent = s.earthFrame ? 'Earth frame: distance fixed at 10 000 m' : "Muon's frame: distance contracted to " + s.distance.toFixed(0) + ' m';
+    mainReadout.innerHTML = s.earthFrame
+      ? 'Muon half-life, as measured on Earth: <span class="val">' + (s.gamma*properHalfLife/1e-6).toFixed(1) + '</span> μs'
+      : "Journey time, in the muon's own frame: <span class=\"val\">" + (s.travelTime/1e-6).toFixed(2) + '</span> μs';
+    gammaOut.textContent = s.gamma.toFixed(1);
+    halfLivesOut.textContent = s.halfLives.toFixed(2);
+    fractionOut.textContent = (s.fraction*100).toFixed(0) + '%';
+    if(remainingOut){
+      var aliveNow = 0;
+      for(var m=0;m<NMUONS;m++){ if(progress < s.decayProgress[m]) aliveNow++; }
+      remainingOut.textContent = aliveNow + ' / ' + NMUONS;
+    }
+  }
+
+  function dot(x,y,color){
+    ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2); ctx.fillStyle = color; ctx.fill();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = '#0f1f30'; ctx.stroke();
+  }
+
+  function ring(x,y,color){
+    ctx.beginPath(); ctx.arc(x,y,6,0,Math.PI*2);
+    ctx.lineWidth = 1.5; ctx.strokeStyle = color; ctx.stroke();
+  }
+
+  function updateLabels(){ vVal.textContent = parseFloat(vSlider.value).toFixed(3); }
+  [vSlider, frameToggle].forEach(function(el){ el.addEventListener('input', function(){ updateLabels(); draw(); }); });
+
+  function tick(now){
+    if(!playing) return;
+    if(lastTime === null) lastTime = now;
+    var dt = (now-lastTime)/1000;
+    lastTime = now;
+    muonY += dt*70;
+    if(muonY > 185){ muonY = 0; }
+    draw();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  playBtn.addEventListener('click', function(){
+    playing = !playing;
+    playBtn.textContent = playing ? 'Pause' : 'Play';
+    if(playing){ lastTime = null; rafId = requestAnimationFrame(tick); }
+    else if(rafId){ cancelAnimationFrame(rafId); }
+  });
+
+  window.muonReset = function(){
+    playing = false; playBtn.textContent = 'Play';
+    if(rafId) cancelAnimationFrame(rafId);
+    muonY = 0; vSlider.value = 0.995; frameToggle.checked = false;
+    updateLabels(); draw();
+  };
+
+  updateLabels();
+  draw();
+})();
+</script>
+</body>
+</html>
