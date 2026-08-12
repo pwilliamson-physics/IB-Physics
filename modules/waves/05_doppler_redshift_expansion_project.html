@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Doppler Effect, Red Shift & the Expanding Universe — Guided Investigation",
+  "schemaVersion": 1,
+  "description": "IB Physics HL guided-research project (Topic C.5): the Doppler effect for sound and light as a precursor to relativity, red shift and the comparison of spectra, and an open investigation into the expanding Universe, with an interactive wavefront simulation and a link to Dr Dan Jones' Redshift Simulator.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From a Passing Siren to an Expanding Universe — IB HL Guided Investigation</title>
+<style>
+  :root{
+    --bg-0:#0b0f1e;
+    --bg-1:#111730;
+    --bg-2:#161d3d;
+    --card:#151b36;
+    --card-border:#2a3363;
+    --text-0:#eef1fb;
+    --text-1:#c3c9e6;
+    --text-2:#8c93bd;
+    --accent-doppler:#5bc9ff;
+    --accent-redshift:#ff5b5b;
+    --accent-relativity:#a58bff;
+    --accent-invest:#5bffb0;
+    --accent-gold:#f5c542;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(ellipse at 20% 0%, #1c2550 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, #3d1a1a 0%, transparent 50%),
+      var(--bg-0);
+    color:var(--text-0);
+    line-height:1.6;
+  }
+  .stars{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 80% 10%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 60% 70%, #fff 100%, transparent),
+      radial-gradient(1.5px 1.5px at 30% 85%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 90% 60%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 45% 40%, #fff 100%, transparent),
+      radial-gradient(1.5px 1.5px at 70% 90%, #fff 100%, transparent);
+    background-repeat:repeat;
+    background-size:600px 600px;
+    opacity:0.5;
+  }
+  header.hero{ padding:64px 24px 48px; text-align:center; max-width:920px; margin:0 auto; }
+  .eyebrow{ text-transform:uppercase; letter-spacing:.14em; font-size:12.5px; color:var(--accent-gold); font-weight:600; }
+  h1{
+    font-size:clamp(26px,4.2vw,42px); margin:14px 0 10px; line-height:1.15;
+    background:linear-gradient(90deg,#fff, #ffd8b9 55%, #8fd9ff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .subtitle{ color:var(--text-1); font-size:17px; max-width:700px; margin:0 auto 22px; }
+  .driving-question{
+    margin:28px auto 0; max-width:720px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border:1px solid var(--card-border); border-radius:var(--radius);
+    padding:22px 26px; font-size:19px; font-style:italic; color:#fff;
+  }
+  .dq-label{
+    display:block; font-style:normal; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.12em; color:var(--accent-gold);
+    margin-bottom:8px;
+  }
+  nav{
+    position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+    background:rgba(11,15,30,0.85); border-bottom:1px solid var(--card-border);
+    padding:12px 24px; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;
+  }
+  nav a{ color:var(--text-1); text-decoration:none; font-size:13.5px; padding:8px 14px; border-radius:20px; transition:background .15s, color .15s; }
+  nav a:hover{ background:rgba(255,255,255,0.08); color:#fff; }
+  main{max-width:1040px; margin:0 auto; padding:10px 24px 80px;}
+  section{margin-top:72px;}
+  section:first-of-type{margin-top:40px;}
+  h2{ font-size:26px; margin-bottom:6px; color:#fff; display:flex; align-items:center; gap:10px; }
+  .section-kicker{color:var(--text-2); font-size:14px; margin-bottom:26px;}
+  .card{ background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:22px 24px; }
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:820px){ .grid-2, .grid-3{grid-template-columns:1fr;} }
+
+  .u-table{width:100%; border-collapse:collapse; font-size:14px;}
+  .u-table th{ text-align:left; color:var(--text-2); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em; padding:8px 10px; border-bottom:1px solid var(--card-border); }
+  .u-table td{padding:10px; border-bottom:1px solid rgba(255,255,255,0.05); vertical-align:top;}
+  .tag{ display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; color:#0b0f1e; }
+
+  .stage{ position:relative; border-left:3px solid var(--stage-color, var(--accent-doppler)); padding-left:28px; margin-bottom:38px; }
+  .stage::before{
+    content:attr(data-num); position:absolute; left:-22px; top:0; width:40px; height:40px; border-radius:50%;
+    background:var(--stage-color, var(--accent-doppler)); color:#0b0f1e; font-weight:800; font-size:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stage-head{margin-left:8px;}
+  .stage-head h3{margin:0 0 4px; font-size:20px; color:#fff;}
+  .stage-head .meta{font-size:13px; color:var(--text-2); margin-bottom:14px;}
+  .stage-body{margin-left:8px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 14px;}
+  .pill{ font-size:11.5px; padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.06); border:1px solid var(--card-border); color:var(--text-1); }
+  .box{ background:rgba(255,255,255,0.035); border:1px solid var(--card-border); border-radius:10px; padding:14px 16px; margin:12px 0; font-size:14.5px; }
+  .box h4{margin:0 0 8px; font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-2);}
+  .eq{ font-family:'Cambria Math', Georgia, serif; font-size:16px; color:#fff; background:rgba(255,255,255,0.04); padding:8px 12px; border-radius:8px; display:inline-block; margin:4px 6px 4px 0; }
+  ul.tight{margin:6px 0; padding-left:20px;}
+  ul.tight li{margin-bottom:4px; font-size:14.5px; color:var(--text-1);}
+  .checkpoint{ border-left:3px solid var(--accent-gold); background:rgba(245,197,66,0.06); padding:12px 16px; border-radius:0 10px 10px 0; margin-top:14px; font-size:14.5px; }
+  .checkpoint b{color:var(--accent-gold);}
+  .synthesis{ background:linear-gradient(135deg, rgba(91,201,255,0.10), rgba(255,91,91,0.08)); border:1px solid var(--card-border); border-radius:var(--radius); padding:28px; }
+  .assess-card{ background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:20px; display:flex; flex-direction:column; gap:10px; }
+  .assess-card h3{margin:0; font-size:18px; color:#fff;}
+  .assess-badge{ align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.03em; padding:3px 10px; border-radius:20px; text-transform:uppercase; }
+  .assess-meta{font-size:12.5px; color:var(--text-2); display:flex; flex-wrap:wrap; gap:10px; margin-top:auto;}
+  .assess-meta span{background:rgba(255,255,255,0.05); padding:3px 8px; border-radius:6px;}
+  .log-item{ display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,0.03); border:1px solid var(--card-border); margin-bottom:10px; }
+  .log-item input{margin-top:4px; width:16px; height:16px; accent-color:var(--accent-invest); cursor:pointer;}
+  .log-item.done label{ color:var(--text-2); text-decoration:line-through; }
+  footer{ max-width:1040px; margin:0 auto; padding:0 24px 60px; color:var(--text-2); font-size:13.5px; }
+  a.inline{color:var(--accent-doppler);}
+
+  /* simulation components (dark-theme rebuild of the wave-workbook sim pattern) */
+  .sim-wrap{ display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start; }
+  .sim-canvas-box{ background:#05070f; border:1px solid var(--card-border); border-radius:10px; padding:10px; }
+  .sim-canvas-box canvas{ display:block; border-radius:6px; }
+  .sim-controls{ flex:1; min-width:220px; }
+  .sim-controls h4{margin:0 0 10px; font-size:14px; color:#fff;}
+  .sim-row{margin-bottom:14px;}
+  .sim-row label{display:block; font-size:13.5px; color:var(--text-1); margin-bottom:6px;}
+  .sim-row select, .sim-row input[type=range]{width:100%;}
+  .sim-row select{
+    background:var(--bg-2); color:var(--text-0); border:1px solid var(--card-border);
+    border-radius:8px; padding:8px 10px; font-size:13.5px;
+  }
+  .sim-readout{ font-size:13.5px; color:var(--text-1); background:rgba(255,255,255,0.04); border:1px solid var(--card-border); border-radius:8px; padding:10px 12px; margin-top:10px; line-height:1.55; }
+
+  /* external simulation launch card */
+  .sim-launch{
+    display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap;
+    background:linear-gradient(135deg, rgba(255,91,91,0.14), rgba(91,201,255,0.08));
+    border:1px solid var(--card-border); border-radius:var(--radius); padding:22px 24px; margin:16px 0;
+  }
+  .sim-launch .launch-text h4{margin:0 0 6px; color:#fff; font-size:16px;}
+  .sim-launch .launch-text p{margin:0; color:var(--text-1); font-size:14px; max-width:480px;}
+  .launch-btn{
+    display:inline-block; background:var(--accent-redshift); color:#1a0505; font-weight:700;
+    padding:12px 22px; border-radius:24px; text-decoration:none; font-size:14px; white-space:nowrap;
+  }
+  .launch-btn:hover{ filter:brightness(1.08); }
+  .credit{font-size:12px; color:var(--text-2); margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<header class="hero">
+  <div class="eyebrow">IB Physics HL &nbsp;·&nbsp; Topic C.5 &nbsp;·&nbsp; Guided Investigation &nbsp;·&nbsp; Draft v1</div>
+  <h1>From a Passing Siren to an Expanding Universe</h1>
+  <p class="subtitle">A stationary listener and a moving source disagree about the pitch of a sound. That simple disagreement — that frequency depends on <em>relative</em> motion, not on some absolute standard of rest — turns out to be one of the most consequential ideas in physics. Scaled up from sound to starlight, it becomes the best evidence we have that the Universe itself is expanding.</p>
+  <div class="driving-question" id="drivingQuestion">
+    <span class="dq-label">🎯 Driving question — for the whole project</span>
+    "If the pitch of a passing siren can tell you how fast an ambulance is moving, what can the colour of starlight tell you about how fast — and in what direction — the entire Universe is moving?"
+  </div>
+</header>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#doppler">Part 1 · Doppler Effect</a>
+  <a href="#redshift">Part 2 · Red Shift</a>
+  <a href="#investigation">Part 3 · Investigation</a>
+  <a href="#synthesis">Synthesis</a>
+  <a href="#outputs">Your Submission</a>
+</nav>
+
+<main>
+
+  <section id="overview">
+    <h2>🌌 Overview</h2>
+    <p class="section-kicker">What this project is, and why it's built this way</p>
+    <div class="card">
+      <p>This project runs in three parts, each building directly on the last. It starts somewhere completely ordinary — a passing car, a siren, a source of sound moving relative to you — and ends somewhere extraordinary: genuine evidence, that you will handle and interpret yourself, that the Universe is expanding.</p>
+      <p>The thread connecting all three parts is <b>relative motion</b>. The Doppler effect only cares about the motion of a source <i>relative to</i> an observer — it doesn't matter, for sound, which one you call "moving." That idea seems almost trivial for sound. But push it to light, where nothing can travel faster than light itself and there is no medium for it to move "relative to," and the same simple idea stops being trivial — it becomes one of the cracks in classical physics that Einstein's relativity was built to explain. You won't derive relativity here, but you will meet the exact observation that made it necessary.</p>
+      <div class="grid-2">
+        <div class="box" style="border-left:3px solid var(--accent-doppler);">
+          <h4>🔊 Part 1 — The Doppler Effect</h4>
+          <p style="margin:0;">Why a moving source or observer changes the frequency you detect, for both sound and light — and why the two cases turn out not to be quite the same.</p>
+        </div>
+        <div class="box" style="border-left:3px solid var(--accent-redshift);">
+          <h4>🌈 Part 2 — Red Shift &amp; Spectra</h4>
+          <p style="margin:0;">How the Doppler effect shows up in starlight as a shift in spectral lines, and what comparing two spectra can tell you about motion in space.</p>
+        </div>
+      </div>
+      <p style="margin-top:16px;">Where each syllabus understanding lands in the project:</p>
+      <table class="u-table">
+        <tr><th>Understanding</th><th>Part</th></tr>
+        <tr><td>The nature of the Doppler effect for sound waves and electromagnetic waves</td><td><span class="tag" style="background:var(--accent-doppler);">1</span> Doppler Effect</td></tr>
+        <tr><td>Representing the Doppler effect with wavefront diagrams (source or observer moving)</td><td><span class="tag" style="background:var(--accent-doppler);">1</span> Doppler Effect</td></tr>
+        <tr><td>Observed frequency for sound/mechanical waves — the data-booklet equations</td><td><span class="tag" style="background:var(--accent-doppler);">1</span> Doppler Effect</td></tr>
+        <tr><td>Relative change in frequency/wavelength for light, Δƒ/ƒ = Δλ/λ ≈ v/c</td><td><span class="tag" style="background:var(--accent-redshift);">2</span> Red Shift</td></tr>
+        <tr><td>Spectral line shifts reveal the motion of stars and galaxies</td><td><span class="tag" style="background:var(--accent-invest); color:#04150d;">3</span> Investigation</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= PART 1: DOPPLER EFFECT ================= -->
+  <section id="doppler">
+    <h2>🔊 Part 1 — The Doppler Effect</h2>
+    <p class="section-kicker">What changes, what doesn't, and why it depends only on relative motion</p>
+
+    <div class="stage" style="--stage-color:var(--accent-doppler);" data-num="1">
+      <div class="stage-head">
+        <h3>The nature of the effect</h3>
+        <div class="meta">Sound and electromagnetic waves</div>
+      </div>
+      <div class="stage-body">
+        <p>Start with what you already know from experience: an ambulance siren sounds higher-pitched as it approaches and drops as it passes and recedes. Nothing about the siren itself changes — what changes is the relationship between the source and you.</p>
+        <div class="box">
+          <h4>Doppler effect</h4>
+          <p style="margin:0;">When there is relative motion between a source of waves and an observer, the frequency (and wavelength) received by the observer is different from the frequency (and wavelength) emitted by the source.</p>
+        </div>
+        <p>This happens for <b>any</b> wave — sound, water, light — but the details differ. Sound needs a medium (air) to travel through, so "the source moving" and "the observer moving" are physically distinguishable cases with (very slightly) different formulas. Light needs no medium, and its speed <i>c</i> is the same for every observer no matter how they're moving — which is precisely the observation that makes the Doppler effect for light subtly stranger than the Doppler effect for sound. Hold onto that thought; Part 2 comes back to it.</p>
+        <div class="checkpoint"><b>Discuss:</b> if sound didn't need a medium either, would "source moving" and "observer moving" still give genuinely different results? What does the existence of a medium (air, for sound) add to the situation that light doesn't have?</div>
+      </div>
+    </div>
+
+    <div class="stage" style="--stage-color:var(--accent-doppler);" data-num="2">
+      <div class="stage-head">
+        <h3>Wavefront diagrams — seeing why it happens</h3>
+        <div class="meta">Representing the Doppler effect when the source or the observer moves</div>
+      </div>
+      <div class="stage-body">
+        <p>The clearest way to see <i>why</i> the frequency changes is to draw the wavefronts themselves — each one a circle, expanding outward from wherever the source was at the instant it was emitted. Explore the three cases below: a stationary reference case, a moving observer, and a moving source.</p>
+
+        <figure class="wide" style="margin:18px 0;">
+          <div class="sim-wrap">
+            <div class="sim-canvas-box">
+              <canvas id="wavefrontCanvas" width="460" height="260"></canvas>
+            </div>
+            <div class="sim-controls">
+              <h4>Wavefront explorer</h4>
+              <div class="sim-row">
+                <label for="wavefrontConfig">Configuration</label>
+                <select id="wavefrontConfig">
+                  <option value="both">Both stationary (reference)</option>
+                  <option value="observer">Observer moving, source stationary</option>
+                  <option value="source" selected>Source moving, observers stationary</option>
+                </select>
+              </div>
+              <div class="sim-row">
+                <label for="wavefrontSpeed">Source/observer speed, u/v = <span id="wavefrontSpeedReadout">0.50</span></label>
+                <input type="range" id="wavefrontSpeed" min="0" max="0.85" step="0.01" value="0.50">
+              </div>
+              <div class="sim-readout" id="wavefrontFreqReadout">—</div>
+            </div>
+          </div>
+        </figure>
+
+        <ul class="tight">
+          <li>Notice that the wavefronts themselves are still circles, centred on wherever the source was <i>when each one was emitted</i> — the source doesn't drag the wave pattern along with it.</li>
+          <li>What changes is the <b>spacing</b> between successive wavefronts on each side — bunched together ahead of a moving source (shorter wavelength, higher frequency received there) and spread out behind it (longer wavelength, lower frequency).</li>
+        </ul>
+        <div class="checkpoint"><b>Discuss:</b> using the simulation, compare the "observer moving" and "source moving" cases at the same speed ratio. Do the two frequency readouts come out exactly equal? Try to explain, from the wavefront pictures alone, why they might not have to.</div>
+      </div>
+    </div>
+
+    <div class="stage" style="--stage-color:var(--accent-doppler);" data-num="3">
+      <div class="stage-head">
+        <h3>The equations (data booklet)</h3>
+        <div class="meta">Observed frequency for sound and mechanical waves</div>
+      </div>
+      <div class="stage-body">
+        <div class="box">
+          <h4>Tools — moving source, stationary observer</h4>
+          <span class="eq">f ' = f · v / (v ∓ u<sub>s</sub>)</span>
+          <p style="margin:8px 0 0;">Use <b>−</b> when the source moves towards the observer (frequency increases); use <b>+</b> when it moves away (frequency decreases).</p>
+        </div>
+        <div class="box">
+          <h4>Tools — moving observer, stationary source</h4>
+          <span class="eq">f ' = f · (v ± u<sub>o</sub>) / v</span>
+          <p style="margin:8px 0 0;">Use <b>+</b> when the observer moves towards the source; use <b>−</b> when they move away. <i>v</i> is always the wave's own speed through its medium — never the speed of the source or observer.</p>
+        </div>
+        <div class="checkpoint"><b>Try it:</b> a level-crossing bell emits a constant tone while a train approaches, passes through, and recedes at constant speed. Without doing any arithmetic yet, sketch (axes only need to be labelled, not scaled) how the frequency <i>heard by a person standing at the crossing</i> changes with time — then sketch the same thing for a passenger sitting on the train. Only once you're confident in the <i>shape</i> of both graphs, pick your own numbers and check they're consistent with the equations above.</div>
+      </div>
+    </div>
+
+    <div class="stage" style="--stage-color:var(--accent-relativity);" data-num="4">
+      <div class="stage-head">
+        <h3>A hint of things to come</h3>
+        <div class="meta">Why "just relative motion" is a bigger idea than it looks</div>
+      </div>
+      <div class="stage-body">
+        <p>Look back at the two equations above. For everyday speeds (a car, a train, even a jet aircraft), <i>u</i> is so much smaller than <i>v</i> that "source moving" and "observer moving" give almost identical answers — the distinction barely matters in practice. Sound gets away with having two slightly different formulas because it has a medium (the air) that defines a special, absolute frame of rest to measure speeds against.</p>
+        <p>Light doesn't have that luxury. There is no medium, no absolute rest frame — and experiment after experiment has confirmed that <i>every</i> observer measures the same value of <i>c</i>, regardless of how they or the source are moving. That single stubborn fact is what forced Einstein to abandon the idea of absolute time and space altogether, and build special relativity instead. The Doppler effect for light, which you'll use throughout Part 2, is already a <i>relativistic</i> phenomenon — we just don't need the full machinery of relativity to use its low-speed approximation.</p>
+        <div class="checkpoint"><b>Discuss (no equations needed):</b> ambulances and police sirens are the textbook example of the Doppler effect — but they also change loudness as they pass, which is <i>not</i> the Doppler effect. What's actually causing the loudness to change, and why is it easy to muddle the two effects together?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PART 2: RED SHIFT ================= -->
+  <section id="redshift">
+    <h2>🌈 Part 2 — Red Shift and the Comparison of Spectra</h2>
+    <p class="section-kicker">What a shifted spectral line tells you about motion in space</p>
+
+    <div class="stage" style="--stage-color:var(--accent-redshift);" data-num="1">
+      <div class="stage-head">
+        <h3>The Doppler effect for light</h3>
+        <div class="meta">Δƒ/ƒ = Δλ/λ ≈ v/c</div>
+      </div>
+      <div class="stage-body">
+        <p>For light, the full relativistic Doppler formula is more involved than the sound-wave equations in Part 1 — but whenever the relative speed <i>v</i> between source and observer is much smaller than <i>c</i> (which is true for essentially every star and galaxy you'll meet in this project), it reduces to a very clean approximation.</p>
+        <div class="box">
+          <h4>Tools</h4>
+          <span class="eq">Δƒ/ƒ = Δλ/λ ≈ v/c</span>
+          <p style="margin:8px 0 0;">Valid when v ≪ c. Δλ = λ<sub>observed</sub> − λ<sub>rest</sub>. A <b>positive</b> Δλ (longer observed wavelength) means the source is <b>receding</b> — this is <b>red shift</b>. A <b>negative</b> Δλ means the source is <b>approaching</b> — <b>blue shift</b>.</p>
+        </div>
+        <p>Notice this is really the same idea as Part 1's moving-source equation, just written differently and simplified for v ≪ c — the physics (relative motion changes the received wavelength) hasn't changed, only the size of the effect and the fact that light's constant speed makes source-moving and observer-moving genuinely indistinguishable.</p>
+      </div>
+    </div>
+
+    <div class="stage" style="--stage-color:var(--accent-redshift);" data-num="2">
+      <div class="stage-head">
+        <h3>Comparing two spectra</h3>
+        <div class="meta">The same star, two spectra, one shift</div>
+      </div>
+      <div class="stage-body">
+        <p>You can't watch a single spectral line and see it shift in real time. What you actually do is compare a spectrum measured on Earth (from a lab source, or the Sun) against a spectrum received from a distant, moving object — line by line.</p>
+        <figure class="wide" style="margin:18px 0;">
+          <svg viewBox="0 0 640 250" width="640" height="250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="specGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#6b4cff"/>
+                <stop offset="30%" stop-color="#4c9bff"/>
+                <stop offset="55%" stop-color="#4cffb0"/>
+                <stop offset="75%" stop-color="#eaff4c"/>
+                <stop offset="100%" stop-color="#ff4c4c"/>
+              </linearGradient>
+              <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ff5b5b"/></marker>
+            </defs>
+            <text x="20" y="20" font-size="12" fill="#c3c9e6">Rest spectrum (lab source on Earth)</text>
+            <rect x="20" y="30" width="600" height="34" fill="url(#specGrad)" opacity="0.55" rx="3"/>
+            <line x1="171.4" y1="26" x2="171.4" y2="68" stroke="#fff" stroke-width="2.4"/>
+            <line x1="278.6" y1="26" x2="278.6" y2="68" stroke="#fff" stroke-width="2.4"/>
+            <line x1="514.9" y1="26" x2="514.9" y2="68" stroke="#fff" stroke-width="2.4"/>
+            <text x="171.4" y="82" font-size="11" text-anchor="middle"><tspan fill="#f5c542" font-weight="700">Hγ</tspan><tspan fill="#c3c9e6"> 434.0nm</tspan></text>
+            <text x="278.6" y="82" font-size="11" text-anchor="middle"><tspan fill="#f5c542" font-weight="700">Hβ</tspan><tspan fill="#c3c9e6"> 486.1nm</tspan></text>
+            <text x="514.9" y="82" font-size="11" text-anchor="middle"><tspan fill="#f5c542" font-weight="700">Hα</tspan><tspan fill="#c3c9e6"> 656.3nm</tspan></text>
+
+            <path d="M 171.4,96 L 190.5,124" stroke="#ff5b5b" stroke-width="1.6" marker-end="url(#arrow)"/>
+            <path d="M 278.6,96 L 304.9,124" stroke="#ff5b5b" stroke-width="1.6" marker-end="url(#arrow)"/>
+            <path d="M 514.9,96 L 556.7,124" stroke="#ff5b5b" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+            <text x="20" y="140" font-size="12" fill="#c3c9e6">Observed spectrum (light received from a receding galaxy)</text>
+            <rect x="20" y="150" width="600" height="34" fill="url(#specGrad)" opacity="0.55" rx="3"/>
+            <line x1="190.5" y1="146" x2="190.5" y2="188" stroke="#fff" stroke-width="2.4"/>
+            <line x1="304.9" y1="146" x2="304.9" y2="188" stroke="#fff" stroke-width="2.4"/>
+            <line x1="556.7" y1="146" x2="556.7" y2="188" stroke="#fff" stroke-width="2.4"/>
+            <text x="190.5" y="202" font-size="11" text-anchor="middle"><tspan fill="#f5c542" font-weight="700">Hγ'</tspan><tspan fill="#c3c9e6"> 447.0nm</tspan></text>
+            <text x="304.9" y="202" font-size="11" text-anchor="middle"><tspan fill="#f5c542" font-weight="700">Hβ'</tspan><tspan fill="#c3c9e6"> 500.7nm</tspan></text>
+            <text x="556.7" y="202" font-size="11" text-anchor="middle"><tspan fill="#f5c542" font-weight="700">Hα'</tspan><tspan fill="#c3c9e6"> 676.0nm</tspan></text>
+
+            <rect x="60" y="222" width="520" height="20" rx="4" fill="rgba(255,91,91,0.10)"/>
+            <text x="320" y="236" font-size="12.5" fill="#ffb3b3" text-anchor="middle">every line shifts the same fractional amount, Δλ/λ — towards red</text>
+          </svg>
+          <figcaption>The three hydrogen Balmer lines (H-γ, H-β, H-α — the same lines used in the linked simulator below), shown at rest and shifted by an illustrative 3% red shift. Every line moves by the <i>same fraction</i> of its own wavelength, not the same number of nanometres — which is exactly why you need more than one line to be confident you're looking at a genuine shift, rather than just a different set of elements.</figcaption>
+        </figure>
+        <div class="checkpoint"><b>Discuss:</b> why is it safer to identify a red shift from the <i>pattern</i> of several lines shifting together than from a single line moving? What could make a single shifted line misleading?</div>
+      </div>
+    </div>
+
+    <div class="stage" style="--stage-color:var(--accent-redshift);" data-num="3">
+      <div class="stage-head">
+        <h3>Explore it yourself</h3>
+        <div class="meta">Dr Dan Jones' Redshift Simulator (Hookean Physics)</div>
+      </div>
+      <div class="stage-body">
+        <p>This tool lets you drag a recession-speed slider and watch the hydrogen line spectrum shift in real time, with the exact λ<sub>obs</sub>/λ<sub>rest</sub> calculation shown alongside. It's built on Google Sites, which doesn't allow itself to be embedded directly in another page — so it opens in a new tab.</p>
+        <div class="sim-launch">
+          <div class="launch-text">
+            <h4>Redshift Simulator (Hydrogen Spectrum)</h4>
+            <p>Recession-speed slider, live spectrum shift, and the relativistic redshift calculation shown step by step.</p>
+          </div>
+          <a class="launch-btn" href="https://sites.google.com/view/hookean-physics/redshift" target="_blank" rel="noopener">Open the simulator ↗</a>
+        </div>
+        <p class="credit">Redshift Simulator by Dr Dan Jones, Hookean Physics (sites.google.com/view/hookean-physics).</p>
+        <div class="checkpoint"><b>Try it:</b> push the slider until the H-α line (rest wavelength 656.3 nm) has shifted onto what was originally the H-β position. Read off the recession speed the tool reports. Then check it yourself: does v/c ≈ Δλ/λ actually hold at that speed, or has the simulator moved on to the full relativistic formula? (Look at the equation it displays.)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PART 3: OPEN INVESTIGATION ================= -->
+  <section id="investigation">
+    <h2>🔭 Part 3 — Investigation: Is the Universe Expanding?</h2>
+    <p class="section-kicker">An open investigation — shifts in spectral lines provide information about the motion of stars and galaxies in space</p>
+
+    <div class="card">
+      <p>Everything so far has been about a single source and a single observer. Now zoom out as far as it's possible to zoom: in the 1920s, Edwin Hubble and others measured the red shift of light from dozens of distant galaxies, and found something that at first looks impossible — almost every one of them is receding from us, and the further away a galaxy is, the faster it appears to be moving.</p>
+      <div class="driving-question" id="investigationQuestion" style="font-size:16px; margin-top:18px;">
+        <span class="dq-label">🔭 Investigation question — for Part 3 specifically</span>
+        "What does that pattern actually tell you — and does it really mean we're at the centre of the Universe?"
+      </div>
+      <p style="margin-top:16px;">This part of the project is deliberately open. There isn't a worksheet of numbered questions with an answer key — you're given a physical model and a real dataset, and asked to build an evidence-based argument, the way an astronomer actually would.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="box" style="border-left:3px solid var(--accent-invest);">
+        <h4>Build it — the elastic-band Universe</h4>
+        <p>Thread 5–6 washers (or paper clips) onto a chain of elastic bands, and label one your <b>home galaxy</b> and the rest <b>A</b> to <b>E</b>. Measure the distance from home to each of the others. Now stretch the whole chain until it's roughly twice as long, and measure those same distances again.</p>
+        <p style="margin:8px 0 0;">Plot the <i>change</i> in each distance against its <i>original</i> distance from home. Then relabel a <em>different</em> washer as "home" and repeat the whole measurement from scratch, on the same stretched (or freshly reset) band. <i>(Adapted from the Institute of Physics' "Elastic Band Universe" activity.)</i></p>
+      </div>
+      <div class="box" style="border-left:3px solid var(--accent-invest);">
+        <h4>Read it — real recession data</h4>
+        <p style="margin:0 0 10px;">Five galaxies, their distance from Earth, and the speed at which they're receding, from Doppler-shift measurements:</p>
+        <table class="u-table">
+          <tr><th>Galaxy</th><th>Distance / 10²⁰ km</th><th>Speed / km s⁻¹</th></tr>
+          <tr><td>NGC 3627</td><td>3.1</td><td>750</td></tr>
+          <tr><td>NGC 4775</td><td>8.2</td><td>1900</td></tr>
+          <tr><td>NGC 3147</td><td>13.6</td><td>2500</td></tr>
+          <tr><td>NGC 6745</td><td>19.7</td><td>4250</td></tr>
+          <tr><td>NGC 554</td><td>22.1</td><td>5200</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:20px;">
+      <h4>Open investigation prompts</h4>
+      <p>These are starting points, not a checklist to work through in order. A strong investigation will draw on <b>both</b> the model and the real data above, and go beyond simply reporting numbers.</p>
+      <ul class="tight">
+        <li>What does the gradient of a recession-speed vs. distance graph actually represent, physically — and what are its units?</li>
+        <li>In your elastic-band model, what happened to the graph's gradient when you changed which washer was "home"? What does that tell you about whether any single galaxy — including ours — occupies a special central position?</li>
+        <li>If speed really is proportional to distance for every galaxy you can measure, what would that imply about where all the galaxies were, much further back in time?</li>
+        <li>The Doppler-effect equation you used in Part 2 (Δλ/λ ≈ v/c) describes light shifting because a source moves <i>through</i> space. Cosmological red shift is caused by space itself expanding while the light is in transit. Does your evidence so far actually let you tell these two explanations apart — or do they predict the same pattern in your data?</li>
+        <li><b>The Cosmic Microwave Background.</b> Find out what the CMBR is, and why its discovery (Penzias and Wilson, 1965) is considered independent evidence for an expanding Universe, on top of galaxy red shifts.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h4>Extend your investigation — choose at least one</h4>
+      <ul class="tight">
+        <li><b>Hubble time.</b> If recession speed v = H₀d, and speed = distance/time, what would you get if you combined those two relationships? Using H₀ ≈ 70 km s⁻¹ Mpc⁻¹, what value does that give you — and what might it represent? What assumption about the expansion rate does this calculation quietly depend on?</li>
+        <li><b>Olbers' paradox.</b> "The sky is dark at night." Why is that actually a puzzle, if the Universe is infinite in both space and time — and how does an expanding, finitely-old Universe resolve it?</li>
+        <li><b>A two-dimensional model.</b> The elastic-band Universe is one-dimensional. Sketch (or actually build, with dots on a balloon) what a two-dimensional version would look like, and whether your "no special centre" conclusion still holds.</li>
+        <li><b>If everything is the centre, why isn't matter smooth?</b> If space itself is expanding uniformly and no galaxy occupies a special position, why do we see galaxies, clusters, and voids at all — shouldn't matter be spread perfectly evenly through the Universe rather than clumped into structures?</li>
+      </ul>
+    </div>
+
+    <div class="box" style="border:1px dashed var(--card-border);">
+      <h4>Track your evidence</h4>
+      <div class="log-item"><input type="checkbox" id="log1"><label for="log1">Elastic-band model built and measured, for at least two different "home" galaxies</label></div>
+      <div class="log-item"><input type="checkbox" id="log2"><label for="log2">Recession speed vs. distance graphed from the real NGC dataset, with a gradient calculated</label></div>
+      <div class="log-item"><input type="checkbox" id="log3"><label for="log3">At least one extension prompt investigated (Hubble time, Olbers' paradox, the 2D model, or why matter isn't smooth)</label></div>
+      <div class="log-item"><input type="checkbox" id="log4"><label for="log4">A clear, evidence-based answer to "are we at the centre of the expansion?"</label></div>
+    </div>
+
+    <div class="checkpoint"><b>What a strong investigation looks like:</b> it integrates at least two independent lines of evidence (not just one graph in isolation), is explicit about the reasoning connecting each piece of evidence to your conclusion, directly addresses the "special position" question, and is honest about the limits of what your evidence can and can't establish.</div>
+  </section>
+
+  <section id="synthesis">
+    <h2>🌠 Synthesis</h2>
+    <p class="section-kicker">Where relative motion becomes cosmology</p>
+    <div class="synthesis">
+      <p>Trace the thread back from where you finished to where you started. A moving ambulance and a stationary listener disagree about pitch because frequency depends on relative motion — that's Part 1, and it's true for any wave. Push that same idea to light, where nothing can outrun the wave itself, and it stops being a curiosity: it's a genuine crack in classical physics, one that Einstein resolved with relativity rather than a new formula.</p>
+      <p>That same relative-motion effect, applied to starlight instead of sound, becomes red shift — Part 2's tool for reading a star or galaxy's motion directly off its spectrum, without ever needing to visit it. And when that tool is turned on the whole sky at once, in Part 3, the pattern it reveals — every distant galaxy receding, faster the further away it is — becomes the central observational evidence for an expanding Universe, and for the idea that everything, everywhere, once began at a single point.</p>
+      <p>By the end of this project you should be able to give a physics-grounded answer to <a href="#drivingQuestion" style="color:var(--accent-gold);">the driving question at the top of the page</a> — naming exactly which piece of physics (a wavefront diagram, a shifted spectral line, a recession-speed graph) supports each part of your answer.</p>
+    </div>
+  </section>
+
+  <section id="outputs">
+    <h2>📝 Your Submission</h2>
+    <p class="section-kicker">How to capture and present your investigation</p>
+    <div class="grid-2">
+      <div class="assess-card" style="border-color:var(--accent-invest);">
+        <span class="assess-badge" style="background:var(--accent-invest); color:#04150d;">Option A</span>
+        <h3>Written Investigation Report</h3>
+        <p style="font-size:14px; color:var(--text-1);">A structured but open report: your elastic-band results, your graph and gradient from the real dataset, your chosen extension, and a final evidence-based discussion answering the driving question. Written in your own words, with your own diagrams.</p>
+        <div class="assess-meta"><span>Most rigorous</span><span>Written, ≤1500 words</span><span>Individual</span></div>
+      </div>
+      <div class="assess-card" style="border-color:var(--accent-relativity);">
+        <span class="assess-badge" style="background:var(--accent-relativity); color:#160a2e;">Option B</span>
+        <h3>Investigation Journal</h3>
+        <p style="font-size:14px; color:var(--text-1);">A running log kept as you go through Parts 1–3: what you did, what you noticed, what surprised you, and how your thinking changed. Less formal than a report — closer to how a real research notebook works — finishing with the same evidence-based conclusion.</p>
+        <div class="assess-meta"><span>Most reflective</span><span>Ongoing log</span><span>Individual</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<script>
+(function(){
+  const canvas = document.getElementById('wavefrontCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const midY = H/2;
+  const configSelect = document.getElementById('wavefrontConfig');
+  const speedSlider = document.getElementById('wavefrontSpeed');
+  const speedReadout = document.getElementById('wavefrontSpeedReadout');
+  const freqReadout = document.getElementById('wavefrontFreqReadout');
+
+  const vWaveVisual = 70;   // px/s, visual wavefront expansion speed (fixed, for legibility)
+  const period = 0.55;      // s between wavefront emissions
+  const cycleLength = 6.0;  // s, then the whole animation repeats
+  const emitTimes = [];
+  for(let t=0; t<cycleLength; t+=period) emitTimes.push(t);
+
+  const f0 = 400;      // demo source frequency, Hz (arbitrary, for the readout only)
+  const vSound = 340;  // demo wave speed, m/s (arbitrary, for the readout only)
+
+  const centerX = W/2;
+  const sourceX0 = 90, sourceTravel = 190;   // moving-source visual path (fixed, decoupled from u/v)
+  const obsX0 = 400, obsTravel = 150;        // moving-observer visual path (fixed, decoupled from u/v)
+
+  let startTime = null;
+
+  function draw(now){
+    if(startTime === null) startTime = now;
+    const simTime = ((now - startTime)/1000) % cycleLength;
+    const ratio = parseFloat(speedSlider.value);
+    speedReadout.textContent = ratio.toFixed(2);
+    const config = configSelect.value;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0,0,W,H);
+
+    if(config === 'source'){
+      const srcNow = sourceX0 + (simTime/cycleLength)*sourceTravel;
+      emitTimes.forEach(et=>{
+        if(et>simTime) return;
+        const age = simTime-et;
+        const r = age*vWaveVisual;
+        if(r<=1) return;
+        const ex = sourceX0 + (et/cycleLength)*sourceTravel;
+        ctx.beginPath(); ctx.arc(ex, midY, r, 0, Math.PI*2);
+        ctx.strokeStyle='rgba(91,201,255,0.55)'; ctx.lineWidth=1.4; ctx.stroke();
+      });
+      ctx.fillStyle='#f5c542'; ctx.beginPath(); ctx.arc(srcNow, midY, 6, 0, Math.PI*2); ctx.fill();
+
+      const obsAheadX = W-36, obsBehindX = 36;
+      ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(obsAheadX, midY, 5, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(obsBehindX, midY, 5, 0, Math.PI*2); ctx.fill();
+      ctx.font='11px sans-serif'; ctx.fillStyle='#c3c9e6';
+      ctx.textAlign='right';
+      ctx.fillText('observer ahead', obsAheadX+18, midY-90);
+      ctx.fillText('(approached)', obsAheadX+18, midY-77);
+      ctx.textAlign='left';
+      ctx.fillText('observer behind', obsBehindX-18, midY-90);
+      ctx.fillText('(left behind)', obsBehindX-18, midY-77);
+      ctx.textAlign='center';
+
+      const uS = ratio*vSound;
+      const fAhead = f0*vSound/(vSound-uS);
+      const fBehind = f0*vSound/(vSound+uS);
+      freqReadout.innerHTML = 'Demo values: f = 400 Hz, wave speed v = 340 m s⁻¹, source speed uₛ = '+uS.toFixed(0)+' m s⁻¹.<br>Observer ahead: f\' = f·v/(v−uₛ) = '+fAhead.toFixed(0)+' Hz<br>Observer behind: f\' = f·v/(v+uₛ) = '+fBehind.toFixed(0)+' Hz';
+
+    } else if(config === 'observer'){
+      emitTimes.forEach(et=>{
+        if(et>simTime) return;
+        const age = simTime-et;
+        const r = age*vWaveVisual;
+        if(r<=1) return;
+        ctx.beginPath(); ctx.arc(centerX, midY, r, 0, Math.PI*2);
+        ctx.strokeStyle='rgba(91,201,255,0.55)'; ctx.lineWidth=1.4; ctx.stroke();
+      });
+      ctx.fillStyle='#f5c542'; ctx.beginPath(); ctx.arc(centerX, midY, 6, 0, Math.PI*2); ctx.fill();
+
+      const prog = simTime/cycleLength;
+      const obsNow = obsX0 - prog*obsTravel;
+      ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(obsNow, midY, 5, 0, Math.PI*2); ctx.fill();
+      ctx.font='11px sans-serif'; ctx.fillStyle='#c3c9e6'; ctx.textAlign='center';
+      ctx.fillText('moving observer', obsNow, midY-90);
+      ctx.fillText('(travelling towards source)', obsNow, midY-77);
+
+      const uO = ratio*vSound;
+      const fToward = f0*(vSound+uO)/vSound;
+      const fAway = f0*(vSound-uO)/vSound;
+      freqReadout.innerHTML = 'Demo values: f = 400 Hz, wave speed v = 340 m s⁻¹, observer speed u₀ = '+uO.toFixed(0)+' m s⁻¹.<br>Moving towards the source: f\' = f(v+u₀)/v = '+fToward.toFixed(0)+' Hz<br>(Moving away instead would give f\' = f(v−u₀)/v = '+fAway.toFixed(0)+' Hz)';
+
+    } else {
+      emitTimes.forEach(et=>{
+        if(et>simTime) return;
+        const age = simTime-et;
+        const r = age*vWaveVisual;
+        if(r<=1) return;
+        ctx.beginPath(); ctx.arc(centerX, midY, r, 0, Math.PI*2);
+        ctx.strokeStyle='rgba(91,201,255,0.55)'; ctx.lineWidth=1.4; ctx.stroke();
+      });
+      ctx.fillStyle='#f5c542'; ctx.beginPath(); ctx.arc(centerX, midY, 6, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(70, midY, 5, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(W-70, midY, 5, 0, Math.PI*2); ctx.fill();
+      ctx.font='11px sans-serif'; ctx.fillStyle='#c3c9e6'; ctx.textAlign='center';
+      ctx.fillText('stationary observer', 70, midY-90);
+      ctx.fillText('stationary observer', W-70, midY-90);
+
+      freqReadout.innerHTML = 'No relative motion between source and either observer: both measure exactly the emitted frequency, f\' = f.';
+    }
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>

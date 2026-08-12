@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Interference of Waves Workbook",
+  "schemaVersion": 1,
+  "description": "IB Physics workbook: Interference of Waves (Topic C.3, HL) — diffraction, superposition, coherence, path difference, Young's double-slit experiment, single-slit diffraction, modulation, and diffraction gratings — in the shared house style, with four interactive canvas simulations. Answers show working only, not final numbers.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interference of Waves — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+  .tag.hl{display:inline-block; background:var(--purple); color:#fff; font-size:0.68rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:4px; vertical-align:middle; margin-left:0.5rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+  .answer-panel .hint{color:#5b6b78; font-style:italic; font-size:0.88rem;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:340px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-row select{width:100%; padding:0.3rem; border-radius:6px; border:1px solid rgba(255,255,255,0.3); background:#16283c; color:#fff; font-size:0.85rem;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-readout.alert{background:rgba(217,131,36,0.28); border:1px solid var(--amber); font-weight:700;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Interference of Waves</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Interference of Waves</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Diffraction</a>
+    <a href="#s2">2. Superposition of waves</a>
+    <a href="#s3">3. Coherence and interference</a>
+    <a href="#s4">4. Path difference</a>
+    <a href="#s5">5. Young's double-slit experiment</a>
+    <a href="#s6">6. Single-slit diffraction</a>
+    <a href="#s7">7. Modulation</a>
+    <a href="#s8">8. Diffraction gratings</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Interference of Waves</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Shine a laser through two narrow slits and, instead of two bright lines, you get a whole pattern of stripes. Listen to two loudspeakers playing the same note and, as you walk past them, the sound gets loud, quiet, loud, quiet — even though neither speaker changed volume. Both are the same phenomenon: waves from two sources overlapping, reinforcing in some places and cancelling in others. This workbook builds up from diffraction and superposition to the two big HL results — Young's double-slit equation and the diffraction grating equation — that let physicists measure the wavelength of light itself.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Describe how waves diffract around obstacles and through apertures, and interpret wavefront-ray diagrams for it.</li>
+          <li>Apply the principle of superposition to waves and wave pulses.</li>
+          <li>Explain why double-source interference requires coherent sources.</li>
+          <li>State and apply the conditions for constructive interference (path difference = nλ) and destructive interference (path difference = (n + ½)λ).</li>
+          <li>Apply Young's double-slit equation, s = λD/d.</li>
+          <li>Apply the single-slit diffraction equation, θ = λ/b, and describe the intensity pattern it produces.</li>
+          <li>Explain how the single-slit pattern modulates the double-slit interference pattern.</li>
+          <li>Apply the diffraction grating equation, nλ = d sinθ, to interference patterns from multiple slits.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Diffraction — waves bending around things</h2>
+      <p>The <em>Wave Nature</em> and <em>Velocity Change</em> workbooks showed what happens when a wave meets a boundary and reflects or refracts. This workbook is about a third thing that can happen: a wave can meet an <strong>obstacle</strong> or pass through a narrow <strong>aperture</strong> (gap) and bend around it. This is called <strong>diffraction</strong>.</p>
+
+      <div class="keybox">
+        <strong>Diffraction.</strong> The spreading of a wave as it passes through an aperture, or the bending of a wave around the edge of an obstacle. Unlike reflection and refraction, diffraction doesn't need a change of medium — it happens to any wave meeting any gap or edge.
+      </div>
+
+      <p>How much a wave diffracts depends on the size of the gap or obstacle <em>compared with the wavelength</em>:</p>
+      <div class="keybox">
+        <strong>The rule.</strong>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem;">
+          <li>Gap or obstacle <strong>much larger</strong> than λ → very little diffraction; the wave mostly carries straight on, spreading only slightly at the edges.</li>
+          <li>Gap or obstacle <strong>similar in size to, or smaller than,</strong> λ → strong diffraction; the wave spreads out through almost a full half-circle, as if the gap itself were a new point source.</li>
+        </ul>
+      </div>
+
+      <p>This is why you can hear someone talking through an open doorway even if you can't see them. Sound wavelengths (roughly a few centimetres to a few metres) are comparable to the width of a doorway, so sound diffracts strongly around the doorframe and spreads into the whole room. Light, by contrast, has a wavelength of only about 500 nm — many thousands of times smaller than a doorway — so it diffracts by an immeasurably small amount and travels through the doorway in what looks like a dead straight line, casting a sharp-edged shadow. The same reasoning explains why a radar dish is built much bigger than the radio wavelength it uses (so the beam stays narrow and directional, rather than diffracting and spreading everywhere), while a Wi-Fi router's much longer wavelength diffracts happily around door frames and furniture to reach every room in a house.</p>
+
+      <h3>Explaining diffraction: Huygens' construction</h3>
+      <p>In 1690, Christiaan Huygens suggested a way to predict how any wavefront moves forward: treat every point on a wavefront as if it were its own tiny point source of "secondary wavelets", all spreading out at the wave's normal speed. A little later, the new wavefront is simply the smooth curve that touches (is tangent to) all of those secondary wavelets — their common <strong>envelope</strong>. Away from any obstacle, this construction just reproduces the ordinary straight (or spherical) wavefront. But at a gap in a barrier, something interesting happens: only the wavelets from sources <em>inside</em> the gap survive, and it's the envelope of <em>those</em> wavelets — not the original full wavefront — that continues onward. The simulation below lets you see this directly.</p>
+
+      <h3>Live simulation: diffraction through a gap</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="huygensCanvas" width="460" height="300"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Huygens' construction at a gap</h4>
+            <div class="sim-row">
+              <label for="gapSlider">Gap width = <span id="gapReadout">…</span></label>
+              <input type="range" id="gapSlider" min="10" max="220" step="2" value="120">
+            </div>
+            <div class="sim-readout" id="gapText">…</div>
+          </div>
+        </div>
+        <figcaption>Fig. 1.1 Plane wavefronts (vertical lines) approach a gap from the left. Every point across the gap acts as a Huygens source of circular secondary wavelets — drag the slider to see how a wide gap keeps the wavefronts almost flat, while a narrow gap produces near-circular spreading.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>State the rule connecting the amount of diffraction to the size of a gap or obstacle relative to the wavelength.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">Diffraction is strongest when the gap or obstacle is similar in size to, or smaller than, the wavelength; it becomes negligible when the gap or obstacle is much larger than the wavelength.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>Explain, in terms of wavelength, why you can hear around a corner but not see around one.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">Sound wavelengths are comparable in size to typical gaps and corners (walls, doorways), so sound diffracts strongly around them and reaches your ears. Light has a much, much smaller wavelength than any everyday gap or corner, so it diffracts a negligible amount and travels in effectively straight lines — you only see what is in a direct line of sight.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>Using the simulation above, set the gap to its narrowest value and then to its widest value.</strong> Describe how the shape of the wavefronts beyond the barrier differs between the two cases.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">At the narrowest gap setting, the wavefronts beyond the barrier are almost perfect semicircles, spreading in every direction as if the gap were a single point source. At the widest gap setting, the wavefronts stay almost flat and straight across most of the gap's width, curving noticeably only very close to the two edges.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Superposition of waves and pulses</h2>
+      <p>To understand what happens when two or more waves meet, we need one more idea: the <strong>principle of superposition</strong>. It applies to any waves at all — pulses, continuous waves, water waves, sound, light — whenever they occupy the same place at the same time.</p>
+      <div class="keybox">
+        <strong>Principle of superposition.</strong> When two or more waves meet at a point, the overall (resultant) displacement at that point is the vector sum of the individual displacements of each wave. Immediately afterwards, each wave continues on its way completely unaffected by the meeting — superposition changes what you see at that instant, not the waves themselves.
+      </div>
+      <p>Superposition applies whether the waves are travelling in the same direction, opposite directions, or at an angle to each other, and whether the displacements point the same way (adding to something bigger) or opposite ways (partially or fully cancelling).</p>
+
+      <h3>Superposition of pulses</h3>
+      <p>The clearest way to see superposition is to watch two short pulses travelling towards each other along a rope or spring. As they overlap, the rope's displacement at every point is simply the sum of what each pulse would have produced there on its own — then the two pulses emerge from the overlap and carry on exactly as before, as though nothing happened.</p>
+
+      <h3>Live simulation: superposition of two pulses</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="pulseCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Two pulses meeting</h4>
+            <div class="sim-row">
+              <label for="pulseSignSelect">Second pulse is…</label>
+              <select id="pulseSignSelect">
+                <option value="same">The same way up (in phase)</option>
+                <option value="opposite">Upside down (out of phase)</option>
+              </select>
+            </div>
+            <div class="sim-btns">
+              <button onclick="restartPulseSim()">Restart</button>
+            </div>
+            <div class="sim-readout" id="pulseText">Watch the resultant (teal) curve as the two pulses (faint red and blue) overlap.</div>
+          </div>
+        </div>
+        <figcaption>Fig. 2.1 Two pulses approach from opposite ends of a rope. The teal curve is the actual displacement of the rope — the vector sum of the two individual pulses shown faintly behind it.</figcaption>
+      </figure>
+
+      <h3>Superposition of continuous waves</h3>
+      <p>The same principle applies to continuous, repeating waves. If two waves of the same frequency arrive at a point <strong>in phase</strong> (crest meets crest), their displacements add constructively, producing a bigger resultant wave. If they arrive <strong>exactly out of phase</strong> (crest meets trough), their displacements subtract — if their amplitudes are equal, the resultant is zero. At every phase relationship in between, the resultant amplitude lies somewhere between these two extremes.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">4</span><strong>Two waves pass through the same point at the same instant. Wave A has a displacement of +3.0 cm there; wave B has a displacement of −1.5 cm.</strong> State the resultant displacement at that point, and name the principle you used.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">Resultant displacement = (+3.0 cm) + (−1.5 cm), found using the principle of superposition (the resultant is the vector sum of the individual displacements).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">5</span><strong>Using the simulation above, set the second pulse to "upside down (out of phase)" and restart it.</strong> Describe what the rope looks like at the exact instant the two pulses fully overlap, and explain what happens immediately afterwards.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">If the two pulses have equal and opposite shapes, at the instant of full overlap the rope's displacement is zero everywhere (the two displacements cancel exactly by superposition) — even though the rope clearly still has energy passing through it. Immediately afterwards, the two pulses emerge from the overlap and continue travelling in their original directions, completely unaffected by having met.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>Two identical sinusoidal waves of amplitude x₀ arrive at a point exactly in phase.</strong> State the amplitude of the resultant wave at that point, in terms of x₀.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">2x₀ — since the two displacements are always equal and add at every instant, the resultant amplitude is the simple sum of the two individual amplitudes.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Coherence and interference patterns</h2>
+      <p>Superposition happens every time waves overlap — but usually the pattern you'd see is changing chaotically from instant to instant, because the phase relationship between the waves keeps drifting randomly. To get a <strong>stable</strong>, unchanging pattern of reinforcement and cancellation — an <strong>interference pattern</strong> — the two sources must be <strong>coherent</strong>.</p>
+
+      <div class="keybox">
+        <strong>Coherent waves</strong> have the same frequency and a constant (unchanging) phase difference — which, for two sources emitting in step, usually just means the same frequency and the same wave shape.<br><br>
+        <strong>Interference pattern</strong> — the constant, stable pattern of constructive and destructive superposition produced when two coherent sources overlap.
+      </div>
+
+      <p>Two separate light bulbs are never coherent: each one is made of billions of atoms emitting light independently, with random, constantly-shifting phases, so any interference pattern they might briefly produce is scrambled and washed out faster than the eye (or any detector) could see it. Two loudspeakers driven by the <em>same</em> signal generator, on the other hand, are automatically coherent — they're both being told to vibrate by exactly the same electrical signal, so their phase relationship never drifts. This is why interference of light is comparatively hard to demonstrate (it needs a trick, as Section 5 shows), while interference of sound from two speakers is easy to hear directly.</p>
+
+      <p>Where two coherent sources overlap, every point in the overlap region has its own fixed path difference from the two sources, and therefore its own fixed phase relationship — some points end up permanently reinforcing (constructive interference), others permanently cancelling (destructive interference), and this fixed spatial pattern is what makes an interference pattern something you can actually observe, measure, and photograph.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">7</span><strong>State the two properties that two wave sources must share to be coherent.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">The same frequency, and a constant (unchanging) phase difference between them.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">8</span><strong>Explain why two separate torches shone so their beams overlap do not produce a visible interference pattern, even though superposition is still technically happening.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">The light from the two torches is not coherent — each torch's light comes from huge numbers of independent atomic emissions with random, rapidly-changing phases. The pattern of constructive and destructive interference is still occurring at every instant, but it changes randomly far too fast to be seen, so the eye only registers the time-averaged result: a smooth, unpatterned overlap of brightness.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Path difference, and the conditions for interference</h2>
+      <p>To predict exactly <em>where</em> constructive and destructive interference will occur, we compare how far each wave has travelled to reach a given point — the <strong>path difference</strong>.</p>
+      <div class="keybox">
+        <strong>Path difference</strong> — the difference between the distances travelled by two waves (from their two sources) to reach the same point.
+      </div>
+      <p>If the two sources emit in phase with each other, then at any point where the path difference is a whole number of wavelengths, both waves arrive back in phase — crest meets crest — and interfere constructively. At any point where the path difference is a whole number of wavelengths <em>plus exactly half a wavelength</em>, the waves arrive exactly out of phase — crest meets trough — and interfere destructively.</p>
+      <div class="eqn">Constructive interference: <b>path difference = nλ</b>&nbsp;&nbsp;&nbsp;&nbsp;Destructive interference: <b>path difference = (n + ½)λ</b></div>
+      <p>where n = 0, 1, 2, 3 … is a whole number. n = 0 (path difference zero) is the <strong>central maximum</strong> — the point exactly the same distance from both sources.</p>
+
+      <div class="keyword"><b>Perfect cancellation needs equal amplitudes.</b> True destructive interference — a resultant of exactly zero — only happens if the two waves arrive with equal amplitude as well as opposite phase. Since one wave has almost always travelled slightly further than the other, and amplitude generally decreases with distance, perfectly zero destructive interference is really an idealisation; in practice the cancellation is very nearly, but not quite, complete.</div>
+
+      <h3>Worked example: is it a maximum or a minimum?</h3>
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>Two loudspeakers emit coherent sound waves of wavelength 0.60 m. At a certain point, the waves have travelled 2.4 m from one speaker and 3.0 m from the other. Determine whether this point is a point of constructive or destructive interference.</p>
+        <p><strong>Answer:</strong><br>
+        path difference = 3.0 − 2.4 = 0.6 m<br>
+        path difference ÷ λ = 0.6 / 0.60</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">9</span><strong>Two coherent water-wave sources produce waves of wavelength 3.0 cm. A point P is 18.0 cm from one source and 22.5 cm from the other.</strong> Calculate the path difference, and state (with a reason) whether P is a point of constructive or destructive interference.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">path difference = 22.5 − 18.0 = 4.5 cm<br>number of wavelengths = path difference ÷ λ = 4.5 ÷ 3.0 — compare the result with the nλ and (n + ½)λ conditions to decide whether P is a point of constructive or destructive interference.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">10</span><strong>Two speakers, 4.0 m apart, emit a coherent tone of frequency 680 Hz through air (speed of sound 340 m s⁻¹).</strong> A listener stands 3.0 m from one speaker and 4.6 m from the other. First calculate the wavelength of the sound, then determine whether the listener is at a maximum or a minimum.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">λ = v/f = 340/680<br>path difference = 4.6 − 3.0 = 1.6 m<br>path difference ÷ λ — compare the result with the nλ and (n + ½)λ conditions to decide.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">11</span><strong>For the speakers in question 10, state one other frequency (different from 680 Hz) that would put the same listener at the <em>opposite</em> type of interference point (i.e. a minimum instead of a maximum, or vice versa), and explain your reasoning.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">The path difference (1.6 m) is fixed by the geometry and doesn't depend on frequency, so what needs to change is how many wavelengths fit into 1.6 m. Any frequency that makes 1.6 m equal to a whole number of wavelengths (instead of a whole number plus a half) will flip the interference type — for example, using λ = v/f with 1.6 m = 1λ, 2λ, or any other whole-number condition, and solving f = v/λ for that case.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Young's double-slit experiment</h2>
+      <p>Interference of light is hard to observe directly, for two reasons: separate light sources are never coherent (Section 3), and light's wavelength is so tiny that any interference pattern is extremely small and closely spaced. In 1801, Thomas Young found an elegant way around both problems at once — and in doing so gave the first real evidence that light travels as a wave.</p>
+
+      <div class="keybox">
+        <strong>Young's trick.</strong> Shine light through a single narrow slit first, then let that light fall on <em>two</em> further narrow slits placed very close together. Because both of the second pair of slits are illuminated by the same original wavefront, the light diffracting out from each one is automatically coherent with the other — solving the coherence problem without needing a laser. (A laser, with its naturally coherent output, makes a modern version of the experiment even easier to set up.)
+      </div>
+
+      <p>Each slit diffracts the light passing through it into a spreading wave (Section 1), and the two spreading, coherent waves then overlap and interfere, producing a series of equally-spaced bright and dark bands — <strong>fringes</strong> — on a distant screen.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 800 300" width="800" height="300" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">(a) experimental geometry (not to scale)</text>
+          <line x1="90" y1="132" x2="90" y2="168" stroke="#22305a" stroke-width="3"/>
+          <text x="70" y="126" font-size="10" fill="#22305a" text-anchor="end">S₁</text>
+          <text x="70" y="176" font-size="10" fill="#22305a" text-anchor="end">S₂</text>
+          <line x1="470" y1="40" x2="470" y2="260" stroke="#22305a" stroke-width="3"/>
+          <text x="470" y="272" font-size="10" fill="#22305a" text-anchor="middle">screen</text>
+          <line x1="90" y1="132" x2="470" y2="103.3" stroke="#a33d5b" stroke-width="1.8"/>
+          <line x1="90" y1="168" x2="470" y2="103.3" stroke="#1f7a6c" stroke-width="1.8"/>
+          <circle cx="470" cy="103.3" r="3.5" fill="#d98324"/>
+          <text x="480" y="99" font-size="10" fill="#d98324">P</text>
+          <line x1="90" y1="150" x2="470" y2="150" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="280" y="164" font-size="10" fill="#4a5568" text-anchor="middle">D</text>
+          <line x1="470" y1="150" x2="470" y2="103.3" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="484" y="128" font-size="10" fill="#4a5568">s</text>
+          <path d="M 130 150 A 40 40 0 0 0 129.7 145.1" fill="none" stroke="#d98324" stroke-width="1.5"/>
+          <text x="146" y="146.6" text-anchor="middle" font-size="11" fill="#d98324">θ</text>
+          <text x="60" y="205" font-size="10" fill="#4a5568">d = slit separation</text>
+          <line x1="90" y1="180" x2="90" y2="188" stroke="#4a5568" stroke-width="1"/>
+
+          <text x="655" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">(b) path-difference construction, zoomed (not to scale)</text>
+          <line x1="650" y1="122" x2="650" y2="178" stroke="#22305a" stroke-width="2.5"/>
+          <text x="636" y="118" font-size="10" fill="#22305a" text-anchor="end">S₁</text>
+          <text x="636" y="182" font-size="10" fill="#22305a" text-anchor="end">S₂</text>
+          <text x="644" y="152" font-size="10" fill="#22305a" text-anchor="end">d</text>
+          <line x1="650" y1="122" x2="775.8" y2="60.6" stroke="#a33d5b" stroke-width="1.8"/>
+          <line x1="650" y1="178" x2="775.8" y2="116.6" stroke="#1f7a6c" stroke-width="1.8"/>
+          <line x1="650" y1="178" x2="710" y2="178" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <path d="M 684 178 A 34 34 0 0 0 680.6 163.1" fill="none" stroke="#d98324" stroke-width="1.5"/>
+          <text x="698.7" y="166.8" text-anchor="middle" font-size="11" fill="#d98324">θ</text>
+          <line x1="650" y1="122" x2="672.1" y2="167.2" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="4 2"/>
+          <path d="M 672.1 167.2 L 668.6 160.0 L 661.4 163.5 L 664.9 170.7 Z" fill="none" stroke="#4a5568" stroke-width="1"/>
+          <line x1="650" y1="178" x2="672.1" y2="167.2" stroke="#d98324" stroke-width="2.6"/>
+          <text x="628" y="192" font-size="10.5" fill="#d98324">path difference = d sinθ</text>
+          <line x1="655" y1="187" x2="668" y2="172" stroke="#d98324" stroke-width="1"/>
+        </svg>
+        <figcaption>Fig. 5.1 (a) The overall geometry: slit separation d, slit-to-screen distance D, and fringe offset s from the central maximum at angle θ. (b) Zoomed in on the slits (with θ deliberately exaggerated for clarity): since D ≫ d the two rays to P are almost parallel, so the extra distance travelled by the lower ray — the path difference — is d sinθ.</figcaption>
+      </figure>
+
+      <p>Because D is always vastly bigger than d in a real experiment, the small-angle approximation sinθ ≈ tanθ ≈ θ (in radians) applies, and s = D tanθ ≈ D sinθ. Combining this with the constructive-interference condition path difference = d sinθ = nλ, and using n = 1 for the spacing between adjacent bright fringes, gives the equation used to find the wavelength of light from the pattern it produces:</p>
+      <div class="eqn">Separation of fringes: <b>s = λD / d</b></div>
+      <table class="eqtable">
+        <tr><th>Symbol</th><th>Quantity</th></tr>
+        <tr><td>s</td><td>separation of the fringes on the screen</td></tr>
+        <tr><td>λ</td><td>wavelength of the light</td></tr>
+        <tr><td>D</td><td>distance from the slits to the screen</td></tr>
+        <tr><td>d</td><td>separation of the two slits</td></tr>
+      </table>
+      <p>The closer the slits are together (smaller d), the <em>wider</em> apart the fringes become — a slightly counterintuitive result worth checking directly in the simulation below.</p>
+
+      <h3>Worked example</h3>
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>In a double-slit experiment, the slits are separated by 0.48 mm and the screen is 1.96 m away. The centres of the first and ninth bright fringes are measured to be 2.25 cm apart. Determine the wavelength of the light used.</p>
+        <p><strong>Answer:</strong><br>
+        Nine fringes counted from the first to the ninth means 8 fringe-spacings span the measured distance, so s = 2.25×10⁻² / 8.<br>
+        s = λD/d &nbsp;⟹&nbsp; λ = sd/D = (2.25×10⁻²/8) × (0.48×10⁻³) / 1.96</p>
+      </div>
+
+      <h3>Live simulation: Young's double-slit explorer</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="youngCanvas" width="460" height="300"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Double-slit fringe pattern</h4>
+            <div class="sim-row">
+              <label for="wavelengthSlider">Wavelength, λ = <span id="wavelengthReadout">550</span> nm</label>
+              <input type="range" id="wavelengthSlider" min="400" max="700" step="5" value="550">
+            </div>
+            <div class="sim-row">
+              <label for="slitSepSlider">Slit separation, d = <span id="slitSepReadout">0.30</span> mm</label>
+              <input type="range" id="slitSepSlider" min="0.10" max="1.00" step="0.01" value="0.30">
+            </div>
+            <div class="sim-readout" id="youngReadout">…</div>
+          </div>
+        </div>
+        <figcaption>Fig. 5.2 Screen distance is fixed at D = 2.0 m. The upper strip shows the fringe pattern (coloured by wavelength); the graph below plots relative intensity across the screen. Try reducing d and watch what happens to the fringe spacing.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">12</span><strong>In a double-slit experiment, red laser light of wavelength 6.5×10⁻⁷ m passes through slits separated by 0.40 mm, producing fringes on a screen 3.0 m away.</strong> Calculate the fringe separation.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">s = λD/d = (6.5×10⁻⁷ × 3.0) / (0.40×10⁻³)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">13</span><strong>A teacher wants fringes at least 0.50 cm apart using a green laser (λ = 5.32×10⁻⁷ m) and slits of separation 0.50 mm.</strong> Determine the closest distance she can place the screen from the slits to achieve this.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">s = λD/d, rearranged for the minimum D: D = sd/λ = (0.50×10⁻²) × (0.50×10⁻³) / (5.32×10⁻⁷)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">14</span><strong>Using the simulation above, explain what happens to the fringe pattern as you decrease the slit separation, d, and explain why this makes sense using the equation s = λD/d.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">As d decreases, the fringes get further apart (s increases). This matches the equation s = λD/d: since d is on the denominator, making it smaller (with λ and D unchanged) makes s bigger.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. A closer look: single-slit diffraction</h2>
+      <p>Section 5 treated each slit as if it were infinitely narrow — a single point re-emitting the wave. Real slits have a finite width, b, and once b is only a few wavelengths across (rather than effectively zero), the diffraction pattern produced by a <em>single</em> slit on its own becomes worth examining closely — because, as Section 7 will show, it shapes everything a double slit or grating produces too.</p>
+
+      <p>Using Huygens' idea from Section 1, imagine the slit divided into many secondary point sources spread evenly across its width, b. Straight ahead (θ = 0°) all of these secondary wavelets travel the same distance to reach the screen, so they interfere constructively — this is the bright <strong>central maximum</strong>. At larger angles θ, the secondary wavelets from opposite sides of the slit have a path difference of b sinθ, and it turns out that when this path difference reaches exactly one whole wavelength, the wavelets from every point in the slit can be paired off (a wavelet from the near edge with one exactly half a slit-width away, and so on) so that <em>every</em> pair cancels — producing the <strong>first minimum</strong> of the pattern.</p>
+
+      <figure>
+        <svg viewBox="0 0 380 240" width="380" height="240" xmlns="http://www.w3.org/2000/svg">
+          <text x="190" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">first minimum: edge wavelets exactly cancel</text>
+          <line x1="210" y1="122" x2="210" y2="178" stroke="#22305a" stroke-width="3"/>
+          <text x="196" y="118" font-size="10" fill="#22305a" text-anchor="end">top edge</text>
+          <text x="196" y="182" font-size="10" fill="#22305a" text-anchor="end">bottom edge</text>
+          <text x="218" y="152" font-size="10" fill="#22305a">b</text>
+          <line x1="210" y1="122" x2="335.8" y2="60.6" stroke="#a33d5b" stroke-width="1.8"/>
+          <line x1="210" y1="178" x2="335.8" y2="116.6" stroke="#1f7a6c" stroke-width="1.8"/>
+          <line x1="210" y1="178" x2="270" y2="178" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <path d="M 244 178 A 34 34 0 0 0 240.6 163.1" fill="none" stroke="#d98324" stroke-width="1.5"/>
+          <text x="258.7" y="166.8" text-anchor="middle" font-size="11" fill="#d98324">θ</text>
+          <line x1="210" y1="122" x2="232.1" y2="167.2" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="4 2"/>
+          <path d="M 232.1 167.2 L 228.6 160.0 L 221.4 163.5 L 224.9 170.7 Z" fill="none" stroke="#4a5568" stroke-width="1"/>
+          <line x1="210" y1="178" x2="232.1" y2="167.2" stroke="#d98324" stroke-width="2.6"/>
+          <text x="196" y="203" font-size="10.5" fill="#d98324" text-anchor="middle">path difference = b sinθ = λ</text>
+        </svg>
+        <figcaption>Fig. 6.1 Path difference between wavelets from the two edges of a single slit of width b (angle exaggerated, not to scale). The first minimum occurs where this equals exactly one wavelength.</figcaption>
+      </figure>
+
+      <p>Since diffraction angles for light are always small, sinθ ≈ θ (in radians), giving the angle of the first minimum directly:</p>
+      <div class="eqn">Angle of first diffraction minimum: <b>θ = λ / b</b></div>
+      <p>Further minima occur at θ = 2λ/b, 3λ/b, 4λ/b, … — but the resulting <strong>intensity pattern</strong> is not evenly spread between them. Almost all of the wave's energy stays in the wide, bright central maximum (stretching from −λ/b to +λ/b); each successive side fringe is both narrower and very much dimmer than the last.</p>
+
+      <h3>Live simulation: single-slit diffraction explorer</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="singleSlitCanvas" width="460" height="280"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Single-slit intensity pattern</h4>
+            <div class="sim-row">
+              <label for="ssWavelengthSlider">Wavelength, λ = <span id="ssWavelengthReadout">550</span> nm</label>
+              <input type="range" id="ssWavelengthSlider" min="400" max="700" step="5" value="550">
+            </div>
+            <div class="sim-row">
+              <label for="slitWidthSlider">Slit width, b = <span id="slitWidthReadout">4.0</span> μm</label>
+              <input type="range" id="slitWidthSlider" min="1.0" max="10.0" step="0.1" value="4.0">
+            </div>
+            <div class="sim-readout" id="ssReadout">…</div>
+          </div>
+        </div>
+        <figcaption>Fig. 6.2 Relative intensity against angle for light diffracted through a single slit. Dashed lines mark the first, second and third minima.</figcaption>
+      </figure>
+
+      <h3>Worked example</h3>
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>Monochromatic light of wavelength 663 nm is shone through a single slit of width 0.0730 mm. Calculate the angle at which the first minimum of the diffraction pattern is formed.</p>
+        <p><strong>Answer:</strong><br>
+        θ = λ/b = (663×10⁻⁹) / (7.30×10⁻⁵)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">15</span><strong>Determine the wavelength of light that has a first diffraction minimum at an angle of 0.0038 rad when passing through a slit of width 0.15 mm.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">θ = λ/b &nbsp;⟹&nbsp; λ = θb = 0.0038 × (0.15×10⁻³)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">16</span><strong>Light of wavelength 6.2×10⁻⁷ m is diffracted through a narrow slit, producing a central maximum of width 2.8 cm on a screen 1.92 m from the slit.</strong> Using the small-angle approximation (half-width of central maximum ≈ θ × screen distance, and θ = λ/b), calculate the width of the slit.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">half-width of central maximum = 2.8/2 = 1.4 cm = 1.4×10⁻² m<br>θ ≈ (half-width)/(screen distance) = (1.4×10⁻²)/1.92<br>b = λ/θ — substitute the value of θ found above and the given λ.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">17</span><strong>Using the simulation above, describe what happens to the width of the central maximum as you increase the slit width, b.</strong> Explain why this makes sense using θ = λ/b.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">As b increases, the central maximum becomes narrower (the whole pattern shrinks towards θ = 0). This matches θ = λ/b: with b on the denominator, a larger b gives a smaller θ for the first minimum, so the bright central region is squeezed into a smaller angular range.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. How single-slit diffraction modulates the double-slit pattern</h2>
+      <p>Section 5's equation, s = λD/d, was derived by treating each slit as infinitely thin. In reality, every slit has some finite width, b, which — as Section 6 showed — produces its own single-slit diffraction pattern. So what does a real double-slit experiment actually show?</p>
+      <div class="keybox">
+        <strong>The single-slit pattern modulates the double-slit pattern.</strong> The double-slit interference fringes (closely spaced, set by d) still appear at exactly the positions predicted by nλ = d sinθ — but their <em>brightness</em> is scaled by the single-slit diffraction envelope (set by b). Since d is always bigger than b (you can't fit two whole slits' worth of separation into less space than one slit's width), the interference fringes are always more closely spaced than the diffraction envelope that contains them.</div>
+
+      <p>The result is a fine set of interference fringes (from the two slits interfering with each other) with their overall brightness following the broad shape of the single-slit envelope (from diffraction within each slit) — fringes near the centre are bright, fringes further out fade, and any interference fringe that happens to fall exactly on a single-slit <em>minimum</em> is suppressed almost entirely, producing a "missing order".</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 236" width="700" height="236" xmlns="http://www.w3.org/2000/svg">
+          <text x="350" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">modulated double-slit pattern (d = 4b in this example — order n = 4 is missing)</text>
+          <line x1="30" y1="190" x2="670" y2="190" stroke="#b9c6d3" stroke-width="1"/>
+          <path id="envelopePath" fill="none" stroke="#d98324" stroke-width="1.6" stroke-dasharray="5 3"/>
+          <path id="envelopePathNeg" fill="none" stroke="#d98324" stroke-width="1.6" stroke-dasharray="5 3"/>
+          <g id="fringeBars"></g>
+          <text x="350" y="228" text-anchor="middle" font-size="10" fill="#5b6b78">angle (central maximum at centre)</text>
+        </svg>
+        <script>
+        (function(){
+          var svgNS = "http://www.w3.org/2000/svg";
+          var W=700, x0=30, x1=670, baseline=190, height=160;
+          var d_over_b = 4; // d = 4b
+          var thetaMax = 5; // in units of lambda/b
+          function envelope(u){ // u in units of lambda/b ; sinc^2
+            var beta = Math.PI*u;
+            if(Math.abs(u) < 1e-6) return 1;
+            var v = Math.sin(beta)/beta;
+            return v*v;
+          }
+          function interference(u){ // u in units of lambda/b ; cos^2(pi * d_over_b * u)
+            var delta = Math.PI*d_over_b*u;
+            var c = Math.cos(delta);
+            return c*c;
+          }
+          var pathPts = [];
+          for(var i=0;i<=200;i++){
+            var u = -thetaMax + (2*thetaMax*i/200);
+            var x = x0 + (x1-x0)*(i/200);
+            var y = baseline - height*envelope(u);
+            pathPts.push(x.toFixed(1)+","+y.toFixed(1));
+          }
+          document.getElementById('envelopePath').setAttribute('d','M '+pathPts.join(' L '));
+          var negHeight = 6; // small decorative mirror only — keep well clear of the axis labels below
+          var pathPtsNeg = [];
+          for(var i=0;i<=200;i++){
+            var u = -thetaMax + (2*thetaMax*i/200);
+            var x = x0 + (x1-x0)*(i/200);
+            var y = baseline + negHeight*envelope(u);
+            pathPtsNeg.push(x.toFixed(1)+","+y.toFixed(1));
+          }
+          document.getElementById('envelopePathNeg').setAttribute('d','M '+pathPtsNeg.join(' L '));
+          var bars = document.getElementById('fringeBars');
+          var nMax = Math.floor(thetaMax*d_over_b);
+          for(var n=-nMax;n<=nMax;n++){
+            var u = n/d_over_b;
+            if(Math.abs(u) > thetaMax) continue;
+            var amp = envelope(u);
+            if(amp < 0.003) continue; // suppressed / missing order
+            var x = x0 + (x1-x0)*((u+thetaMax)/(2*thetaMax));
+            var barH = height*amp;
+            var rect = document.createElementNS(svgNS,'rect');
+            rect.setAttribute('x', (x-3.2).toFixed(1));
+            rect.setAttribute('y', (baseline-barH).toFixed(1));
+            rect.setAttribute('width','6.4');
+            rect.setAttribute('height', barH.toFixed(1));
+            rect.setAttribute('fill', n===0? '#173a5e' : '#1f7a6c');
+            bars.appendChild(rect);
+            if(n % 2 === 0){ // only label every second order — otherwise labels overlap
+              var label = document.createElementNS(svgNS,'text');
+              label.setAttribute('x', x.toFixed(1));
+              label.setAttribute('y', (baseline+14).toFixed(1));
+              label.setAttribute('font-size','9');
+              label.setAttribute('fill','#5b6b78');
+              label.setAttribute('text-anchor','middle');
+              label.textContent = 'n='+n;
+              bars.appendChild(label);
+            }
+          }
+        })();
+        </script>
+        <figcaption>Fig. 7.1 Double-slit interference fringes (vertical bars), their height set by the single-slit diffraction envelope (dashed amber curve). Because d = 4b here, every 4th order interference fringe (n = ±4, ±8 …) lands exactly on a single-slit minimum and is missing entirely.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">18</span><strong>Explain what is meant by saying that the single-slit pattern "modulates" the double-slit pattern.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">The positions of the double-slit interference fringes are unaffected — they still occur wherever nλ = d sinθ. But the brightness (intensity) of each fringe is scaled by the value of the single-slit diffraction envelope at that same angle, so fringes near the centre (where the envelope is high) are bright, and fringes further out (where the envelope is low) are dim or, at an envelope minimum, missing entirely.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">19</span><strong>In a double-slit experiment, the slit separation is exactly 3 times the slit width (d = 3b).</strong> State which interference orders (values of n) will be missing from the pattern, and explain your reasoning.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">An interference order n is missing whenever it coincides with a single-slit diffraction minimum, i.e. whenever nλ/d = mλ/b for some whole number m ≥ 1. With d = 3b, this requires n/3 = m, i.e. n must be a multiple of 3 — so orders n = ±3, ±6, ±9 … are missing.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Multiple slits and diffraction gratings</h2>
+      <p>Nothing about the derivation of nλ = d sinθ in Section 5 actually relied on there being exactly two slits — the same path-difference reasoning applies equally to light from any two <em>adjacent</em> slits in a row of any number of evenly-spaced slits.</p>
+
+      <figure>
+        <svg viewBox="0 0 380 240" width="380" height="240" xmlns="http://www.w3.org/2000/svg">
+          <text x="190" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">the same construction applies between any adjacent pair of slits</text>
+          <line x1="210" y1="128" x2="210" y2="172" stroke="#22305a" stroke-width="2.5"/>
+          <text x="196" y="124" font-size="10" fill="#22305a" text-anchor="end">slit m</text>
+          <text x="196" y="182" font-size="10" fill="#22305a" text-anchor="end">slit m+1</text>
+          <text x="218" y="153" font-size="10" fill="#22305a">d</text>
+          <line x1="210" y1="128" x2="339.8" y2="75.6" stroke="#a33d5b" stroke-width="1.8"/>
+          <line x1="210" y1="172" x2="339.8" y2="119.6" stroke="#1f7a6c" stroke-width="1.8"/>
+          <line x1="210" y1="172" x2="264" y2="172" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <path d="M 244 172 A 34 34 0 0 0 241.5 159.3" fill="none" stroke="#d98324" stroke-width="1.5"/>
+          <text x="259.1" y="162.5" text-anchor="middle" font-size="11" fill="#d98324">θ</text>
+          <line x1="210" y1="128" x2="225.3" y2="165.8" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="4 2"/>
+          <path d="M 225.3 165.8 L 222.3 158.4 L 214.9 161.4 L 217.9 168.8 Z" fill="none" stroke="#4a5568" stroke-width="1"/>
+          <line x1="210" y1="172" x2="225.3" y2="165.8" stroke="#d98324" stroke-width="2.6"/>
+          <text x="196" y="203" font-size="10.5" fill="#d98324" text-anchor="middle">path difference = d sinθ</text>
+        </svg>
+        <figcaption>Fig. 8.1 Every pair of neighbouring slits, separated by d, produces the same path difference d sinθ towards a distant angle θ (angle exaggerated, not to scale).</figcaption>
+      </figure>
+
+      <div class="eqn">Constructive interference from multiple slits: <b>nλ = d sinθ</b></div>
+      <p>This means the bright fringes from any number of evenly-spaced slits — two, ten, or many thousands — appear at exactly the <em>same angles</em>, regardless of how many slits there are. What changes with more slits is not <em>where</em> the maxima fall, but how they look:</p>
+      <div class="keybox">
+        <strong>More slits → sharper, brighter peaks.</strong> Increasing the number of slits (with d and λ unchanged) makes each interference maximum both more intense (intensity scales with the <em>square</em> of the number of slits) and much narrower / better defined, while the regions between maxima become darker. The angular <em>positions</em> of the maxima are set only by d, not by how many slits contribute.
+      </div>
+
+      <p>A <strong>diffraction grating</strong> takes this to its extreme: a single piece of glass or plastic ruled with an enormous number of parallel slits (or lines) packed very close together — commonly hundreds of lines per millimetre. With d this small and so many slits contributing, the maxima become extremely sharp, bright, and precisely located, making diffraction gratings the tool of choice for measuring wavelengths and analysing the spectra of light sources.</p>
+
+      <h3>Live simulation: how the number of slits changes the pattern</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="gratingCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Multiple-slit interference</h4>
+            <div class="sim-row">
+              <label for="numSlitsSlider">Number of slits, N = <span id="numSlitsReadout">2</span></label>
+              <input type="range" id="numSlitsSlider" min="2" max="20" step="1" value="2">
+            </div>
+            <div class="sim-readout" id="gratingReadout">Watch how the peaks sharpen and brighten as N increases — their positions don't move.</div>
+          </div>
+        </div>
+        <figcaption>Fig. 8.2 Relative intensity against sinθ for N evenly-spaced slits (d fixed). The maxima stay at the same sinθ positions predicted by nλ = d sinθ regardless of N.</figcaption>
+      </figure>
+
+      <h3>Worked example</h3>
+      <div class="example">
+        <span class="tag">Worked example 8.1</span>
+        <p>A diffraction grating has 600 lines per millimetre. Calculate the angle of the second-order (n = 2) maximum for light of wavelength 594 nm.</p>
+        <p><strong>Answer:</strong><br>
+        d = 1/(600 lines mm⁻¹) = 1/(600×10³ lines m⁻¹)<br>
+        nλ = d sinθ &nbsp;⟹&nbsp; sinθ = nλ/d = (2 × 594×10⁻⁹) / (1/(600×10³))</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">20</span><strong>Light of wavelength 460 nm is incident on a diffraction grating with 200 lines per millimetre.</strong> Calculate the angle of the third-order (n = 3) maximum.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">d = 1/(200×10³) m<br>sinθ = nλ/d = (3 × 460×10⁻⁹) / (1/(200×10³))</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>A diffraction grating produces a first-order (n = 1) maximum at 20.8° for light of a certain wavelength.</strong> Explain, without recalculating, whether the third-order (n = 3) maximum for the <em>same</em> light and grating will occur at an angle more or less than three times 20.8°, and why.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">Less than three times 20.8°. The grating equation gives sinθ (not θ itself) proportional to n, so sinθ triples for n = 3 — but because sine grows more slowly than its angle at larger angles, an angle whose sine has tripled is less than three times the original angle.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">22</span><strong>Using the simulation above, describe how the pattern changes as you increase N from 2 to 20, and state which quantity (position or sharpness of the maxima) is affected.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">As N increases, the maxima stay at exactly the same positions (sinθ values) but become dramatically taller, narrower, and better separated from each other — the pattern goes from broad, low humps at N = 2 to sharp, well-defined spikes at N = 20. So it is the sharpness and brightness of the maxima that changes with N, not their position.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">23</span><strong>A grating with 600 lines per millimetre is used with light of wavelength 700 nm.</strong> Show that no third-order (n = 3) maximum can exist for this combination.
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">d = 1/(600×10³) m<br>sinθ = nλ/d = (3 × 700×10⁻⁹) / (1/(600×10³))<br>Calculate this value and compare it with the maximum possible value of sinθ (which is 1) — if it exceeds 1, no such angle θ exists and that order cannot be seen.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Diffraction</dt><dd>The spreading of a wave through an aperture, or its bending around an obstacle; strongest when the gap/obstacle size is comparable to or smaller than the wavelength.</dd>
+        <dt>Huygens' construction</dt><dd>A method for predicting how a wavefront moves forward by treating every point on it as a source of secondary circular wavelets, whose envelope forms the new wavefront.</dd>
+        <dt>Superposition (principle of)</dt><dd>The resultant displacement where two or more waves meet is the vector sum of their individual displacements; the waves are unaffected afterwards.</dd>
+        <dt>Coherent waves</dt><dd>Waves with the same frequency and a constant phase difference.</dd>
+        <dt>Interference pattern</dt><dd>The stable, fixed pattern of constructive and destructive interference produced by two (or more) coherent sources overlapping.</dd>
+        <dt>Path difference</dt><dd>The difference between the distances travelled by two waves, from their sources, to reach the same point.</dd>
+        <dt>Constructive interference</dt><dd>Reinforcement of waves that occurs where the path difference is a whole number of wavelengths (nλ).</dd>
+        <dt>Destructive interference</dt><dd>Cancellation of waves that occurs where the path difference is a whole number of wavelengths plus a half ((n + ½)λ).</dd>
+        <dt>Fringe</dt><dd>One bright or dark band in an interference or diffraction pattern.</dd>
+        <dt>Young's double-slit experiment</dt><dd>The classic experiment demonstrating the interference of light using two closely-spaced, coherently-illuminated slits; s = λD/d.</dd>
+        <dt>Single-slit diffraction</dt><dd>The diffraction pattern produced by light passing through one slit of finite width b; first minimum at θ = λ/b.</dd>
+        <dt>Modulation</dt><dd>Here, the way the single-slit diffraction envelope scales the intensity of the double- (or multiple-) slit interference fringes, without changing their positions.</dd>
+        <dt>Diffraction grating</dt><dd>A large number of evenly-spaced parallel slits, used to produce sharp, precisely-located interference maxima; nλ = d sinθ.</dd>
+        <dt>Order (of a maximum)</dt><dd>The whole number n in nλ = d sinθ, labelling how many wavelengths of path difference correspond to a given maximum (n = 0 is the central maximum).</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Interference of Waves Workbook · Companion resources: <em>Wave Nature</em>, <em>Velocity Change</em>, and <em>Standing Waves</em>.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  initFillables();
+});
+
+/* ================= SIM 1: Huygens diffraction-through-a-gap ================= */
+(function(){
+  const canvas = document.getElementById('huygensCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const gapSlider = document.getElementById('gapSlider');
+  const gapReadout = document.getElementById('gapReadout');
+  const gapText = document.getElementById('gapText');
+
+  const barrierX = 150;
+  const wavelengthPx = 26;
+  const speed = 70; // px per second
+  const nSources = 18;
+  const period = wavelengthPx / speed;
+
+  let generations = []; // {t0}
+  let lastSpawn = -period;
+  let startTime = null;
+
+  function draw(now){
+    if(startTime === null) startTime = now;
+    const elapsed = (now - startTime) / 1000;
+
+    const gapPx = parseFloat(gapSlider.value);
+    const ratio = gapPx / wavelengthPx;
+    gapReadout.textContent = ratio.toFixed(1) + ' × λ';
+    gapText.innerHTML = ratio < 1.2
+      ? 'Gap is smaller than (or about) one wavelength — the gap behaves almost like a single point source, and the wavefronts spread through nearly a full half-circle.'
+      : (ratio < 3.5
+        ? 'Gap is a few wavelengths wide — noticeable spreading, strongest right at the edges.'
+        : 'Gap is many wavelengths wide — the wavefronts stay almost flat in the middle, curving only very close to the two edges.');
+
+    // spawn new generation each period
+    while(elapsed - lastSpawn >= period){
+      lastSpawn += period;
+      generations.push({t0: lastSpawn});
+    }
+    generations = generations.filter(g => (elapsed - g.t0)*speed < 340);
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    const gapTop = H/2 - gapPx/2, gapBot = H/2 + gapPx/2;
+
+    // incoming plane wavefronts (left of barrier)
+    ctx.strokeStyle = 'rgba(159,227,212,0.55)'; ctx.lineWidth = 1.6;
+    const phase = (elapsed*speed) % wavelengthPx;
+    for(let k=-1; k<8; k++){
+      const x = barrierX - phase - k*wavelengthPx;
+      if(x < 0 || x > barrierX) continue;
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+    }
+
+    // secondary wavelets beyond the barrier, clipped to right half
+    ctx.save();
+    ctx.beginPath(); ctx.rect(barrierX,0,W-barrierX,H); ctx.clip();
+    ctx.strokeStyle = 'rgba(159,227,212,0.5)'; ctx.lineWidth = 1.3;
+    for(const gen of generations){
+      const radius = (elapsed - gen.t0) * speed;
+      if(radius < 2) continue;
+      for(let i=0;i<nSources;i++){
+        const sy = gapTop + (gapBot-gapTop)*(i/(nSources-1));
+        ctx.beginPath();
+        ctx.arc(barrierX, sy, radius, 0, Math.PI*2);
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+
+    // barrier
+    ctx.fillStyle = '#cfe3ee';
+    ctx.fillRect(barrierX-4, 0, 8, gapTop);
+    ctx.fillRect(barrierX-4, gapBot, 8, H-gapBot);
+
+    // gap markers
+    ctx.fillStyle = '#d98324'; ctx.font = '10px sans-serif'; ctx.textAlign='left';
+    ctx.fillText('gap', barrierX+8, gapTop-6);
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ================= SIM 2: superposition of two pulses ================= */
+let pulseSimState = null;
+function restartPulseSim(){
+  pulseSimState = { startTime: null };
+}
+(function(){
+  const canvas = document.getElementById('pulseCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const midY = H/2;
+  const signSelect = document.getElementById('pulseSignSelect');
+  const pulseText = document.getElementById('pulseText');
+  restartPulseSim();
+  signSelect.addEventListener('change', restartPulseSim);
+
+  function pulseShape(x, center, sign, width){
+    const dx = (x-center)/width;
+    return sign * 46 * Math.exp(-dx*dx*4);
+  }
+
+  function draw(now){
+    if(pulseSimState.startTime === null) pulseSimState.startTime = now;
+    const elapsed = (now - pulseSimState.startTime)/1000;
+    const speed = 140;
+    const width = 26;
+    const sign2 = signSelect.value === 'opposite' ? -1 : 1;
+
+    const centerA = 20 + speed*elapsed;
+    const centerB = W-20 - speed*elapsed;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,midY); ctx.lineTo(W,midY); ctx.stroke();
+
+    // faint individual pulses
+    ctx.beginPath();
+    for(let x=0;x<=W;x+=2){ const y = midY - pulseShape(x,centerA,1,width); if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
+    ctx.strokeStyle = 'rgba(224,138,138,0.55)'; ctx.lineWidth=1.4; ctx.stroke();
+    ctx.beginPath();
+    for(let x=0;x<=W;x+=2){ const y = midY - pulseShape(x,centerB,sign2,width); if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
+    ctx.strokeStyle = 'rgba(120,170,224,0.55)'; ctx.lineWidth=1.4; ctx.stroke();
+
+    // resultant (superposition)
+    ctx.beginPath();
+    for(let x=0;x<=W;x+=2){
+      const y = midY - (pulseShape(x,centerA,1,width) + pulseShape(x,centerB,sign2,width));
+      if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = '#5fd0c0'; ctx.lineWidth=2.6; ctx.stroke();
+
+    if(centerA > W+30 && false){} // no-op guard
+    if(elapsed*speed > W+60){ pulseSimState.startTime = null; }
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ================= SIM 3: Young's double-slit explorer ================= */
+(function(){
+  const canvas = document.getElementById('youngCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const wavelengthSlider = document.getElementById('wavelengthSlider');
+  const wavelengthReadout = document.getElementById('wavelengthReadout');
+  const slitSepSlider = document.getElementById('slitSepSlider');
+  const slitSepReadout = document.getElementById('slitSepReadout');
+  const youngReadout = document.getElementById('youngReadout');
+  const D = 2.0; // metres, fixed
+
+  function wavelengthToColor(nm){
+    let r,g,b;
+    if(nm < 440){ r=(440-nm)/(440-400)*0.6+0.2; g=0; b=1; }
+    else if(nm < 490){ r=0; g=(nm-440)/(490-440); b=1; }
+    else if(nm < 510){ r=0; g=1; b=(510-nm)/(510-490); }
+    else if(nm < 580){ r=(nm-510)/(580-510); g=1; b=0; }
+    else if(nm < 645){ r=1; g=(645-nm)/(645-580); b=0; }
+    else { r=1; g=0; b=0; }
+    return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
+  }
+
+  function draw(){
+    const lambda_nm = parseFloat(wavelengthSlider.value);
+    const d_mm = parseFloat(slitSepSlider.value);
+    wavelengthReadout.textContent = lambda_nm;
+    slitSepReadout.textContent = d_mm.toFixed(2);
+
+    const lambda = lambda_nm * 1e-9;
+    const d = d_mm * 1e-3;
+    const s = lambda*D/d; // metres
+
+    const color = wavelengthToColor(lambda_nm);
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    const stripY = 20, stripH = 60;
+    const graphTop = 100, graphBot = 250, graphMid = (graphTop+graphBot)/2;
+    const screenHalfWidth_m = 0.03; // represents +-3cm of screen shown across canvas width
+    const pxPerM = (W-40) / (2*screenHalfWidth_m);
+
+    // intensity strip
+    for(let px=20; px<=W-20; px++){
+      const y_m = ((px-20)/(W-40) - 0.5) * 2*screenHalfWidth_m;
+      const delta = Math.PI * d * y_m / (lambda*D);
+      const intensity = Math.pow(Math.cos(delta),2);
+      const c = Math.round(intensity*255);
+      ctx.fillStyle = `rgba(${c},${c},${c},1)`;
+      // tint with wavelength color
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = shadeColor(color, intensity);
+      ctx.fillRect(px, stripY, 1, stripH);
+    }
+
+    // intensity graph
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(20,graphBot); ctx.lineTo(W-20,graphBot); ctx.stroke();
+    ctx.beginPath();
+    for(let px=20; px<=W-20; px++){
+      const y_m = ((px-20)/(W-40) - 0.5) * 2*screenHalfWidth_m;
+      const delta = Math.PI * d * y_m / (lambda*D);
+      const intensity = Math.pow(Math.cos(delta),2);
+      const y = graphBot - intensity*(graphBot-graphTop);
+      if(px===20) ctx.moveTo(px,y); else ctx.lineTo(px,y);
+    }
+    ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+
+    youngReadout.innerHTML = 'Fringe separation, s = λD/d = ' + (s*1000).toFixed(2) + ' mm &nbsp;(D fixed at 2.0 m)';
+
+    function shadeColor(rgbStr, factor){
+      const m = rgbStr.match(/\d+/g).map(Number);
+      return `rgb(${Math.round(m[0]*factor)},${Math.round(m[1]*factor)},${Math.round(m[2]*factor)})`;
+    }
+  }
+  [wavelengthSlider, slitSepSlider].forEach(el => el.addEventListener('input', draw));
+  draw();
+})();
+
+/* ================= SIM 4: single-slit diffraction explorer ================= */
+(function(){
+  const canvas = document.getElementById('singleSlitCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const wavelengthSlider = document.getElementById('ssWavelengthSlider');
+  const wavelengthReadout = document.getElementById('ssWavelengthReadout');
+  const widthSlider = document.getElementById('slitWidthSlider');
+  const widthReadout = document.getElementById('slitWidthReadout');
+  const ssReadout = document.getElementById('ssReadout');
+
+  function draw(){
+    const lambda_nm = parseFloat(wavelengthSlider.value);
+    const b_um = parseFloat(widthSlider.value);
+    wavelengthReadout.textContent = lambda_nm;
+    widthReadout.textContent = b_um.toFixed(1);
+
+    const lambda = lambda_nm*1e-9;
+    const b = b_um*1e-6;
+    const theta1 = lambda/b; // first minimum, radians (small angle)
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    const marginL=30, marginR=20, top=20, bot=220;
+    const thetaRange = Math.max(theta1*4.2, 0.02);
+
+    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(marginL,bot); ctx.lineTo(W-marginR,bot); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo((marginL+W-marginR)/2,top); ctx.lineTo((marginL+W-marginR)/2,bot); ctx.stroke();
+
+    function xOf(theta){ return (marginL+W-marginR)/2 + theta/thetaRange * (W-marginL-marginR)/2; }
+    function intensity(theta){
+      if(Math.abs(theta) < 1e-9) return 1;
+      const beta = Math.PI*b*Math.sin(theta)/lambda;
+      const v = Math.sin(beta)/beta;
+      return v*v;
+    }
+
+    ctx.beginPath();
+    for(let px=marginL; px<=W-marginR; px++){
+      const theta = (px - (marginL+W-marginR)/2) / ((W-marginL-marginR)/2) * thetaRange;
+      const I = intensity(theta);
+      const y = bot - I*(bot-top);
+      if(px===marginL) ctx.moveTo(px,y); else ctx.lineTo(px,y);
+    }
+    ctx.strokeStyle = '#5fd0c0'; ctx.lineWidth=2.2; ctx.stroke();
+
+    // mark minima
+    ctx.strokeStyle = 'rgba(217,131,36,0.7)'; ctx.setLineDash([4,3]); ctx.lineWidth=1.2;
+    ctx.fillStyle = '#d98324'; ctx.font='9px sans-serif'; ctx.textAlign='center';
+    for(let m=1; m<=3; m++){
+      const thetaM = m*theta1;
+      if(thetaM > thetaRange) break;
+      [1,-1].forEach(sgn => {
+        const x = xOf(sgn*thetaM);
+        if(x < marginL || x > W-marginR) return;
+        ctx.beginPath(); ctx.moveTo(x,top); ctx.lineTo(x,bot); ctx.stroke();
+        ctx.fillText('m='+m, x, bot+14);
+      });
+    }
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#dceaf0'; ctx.font='10px sans-serif'; ctx.textAlign='left';
+    ctx.fillText('angle from centre →', marginL, bot+28);
+
+    ssReadout.innerHTML = 'First minimum at θ = λ/b = ' + (theta1*1000).toFixed(2) + ' × 10⁻³ rad (' + (theta1*180/Math.PI).toFixed(2) + '°)';
+  }
+  [wavelengthSlider, widthSlider].forEach(el => el.addEventListener('input', draw));
+  draw();
+})();
+
+/* ================= SIM 5: multi-slit grating sharpening ================= */
+(function(){
+  const canvas = document.getElementById('gratingCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const nSlider = document.getElementById('numSlitsSlider');
+  const nReadout = document.getElementById('numSlitsReadout');
+  const gratingReadout = document.getElementById('gratingReadout');
+
+  function draw(){
+    const N = parseInt(nSlider.value);
+    nReadout.textContent = N;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    const marginL=30, marginR=20, top=20, bot=200;
+    const sinThetaRange = 1.05; // plot sin(theta) axis from -1.05 to 1.05, orders spaced by d/lambda = 3 (arbitrary illustrative ratio)
+    const dOverLambda = 3.2;
+
+    ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(marginL,bot); ctx.lineTo(W-marginR,bot); ctx.stroke();
+
+    function xOf(u){ return marginL + (u+sinThetaRange)/(2*sinThetaRange)*(W-marginL-marginR); }
+    function intensity(u){
+      const delta = Math.PI*dOverLambda*u;
+      const s1 = Math.sin(N*delta);
+      const s2 = Math.sin(delta);
+      if(Math.abs(s2) < 1e-6) return 1;
+      const v = s1/(N*s2);
+      return v*v;
+    }
+
+    ctx.beginPath();
+    const steps = 500;
+    for(let i=0;i<=steps;i++){
+      const u = -sinThetaRange + 2*sinThetaRange*i/steps;
+      const I = intensity(u);
+      const x = xOf(u);
+      const y = bot - I*(bot-top);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = '#5fd0c0'; ctx.lineWidth=1.8; ctx.stroke();
+
+    ctx.fillStyle = '#dceaf0'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('sinθ  (central maximum at centre; d and λ fixed)', (marginL+W-marginR)/2, bot+22);
+
+    gratingReadout.innerHTML = 'N = ' + N + ' slits &nbsp;— peak intensity scales with N² (relative height capped here for display), width scales with 1/N.';
+  }
+  nSlider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

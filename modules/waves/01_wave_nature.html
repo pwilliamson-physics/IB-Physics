@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Wave Nature Workbook",
+  "schemaVersion": 1,
+  "description": "IB Physics workbook: The Nature of Waves (Topic C.2 and the start of C.3) — transverse & longitudinal waves, λ/f/T/v, sound, electromagnetic waves, wavefronts & rays, and reflection — in the shared house style, with four interactive canvas simulations.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nature of Waves — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px;}
+  .layout{display:flex; min-height:100vh;}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .fab{position:fixed; right:1.6rem; bottom:1.6rem; background:var(--amber); color:#fff; border:none; border-radius:50px; padding:0.85rem 1.4rem; font-size:0.98rem; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.25); cursor:pointer; z-index:100;}
+  .fab:hover{background:#c0721c;}
+  .toolbar{position:fixed; right:1.6rem; bottom:5.3rem; z-index:100; display:flex; flex-direction:column; gap:0.5rem;}
+  .toolbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.55rem 1.1rem; font-size:0.82rem; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.12);}
+  .toolbar button:hover{background:var(--soft-blue);}
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .fab, .toolbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>The Nature of Waves</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. What is a wave?</a>
+    <a href="#s2">2. Transverse &amp; longitudinal waves</a>
+    <a href="#s3">3. Describing a wave: λ, A, T</a>
+    <a href="#s4">4. Wave speed: v = fλ = λ/T</a>
+    <a href="#s5">5. The nature of sound waves</a>
+    <a href="#s6">6. The nature of EM waves</a>
+    <a href="#s7">7. Mechanical vs EM waves</a>
+    <a href="#s8">8. Wavefronts and rays</a>
+    <a href="#s9">9. Reflection at boundaries</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>The Nature of Waves</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Waves are one of the great unifying ideas in physics: the same handful of concepts — wavelength, frequency, period, speed — describe everything from ripples on a pond to the light arriving from a galaxy billions of light years away. This workbook builds the wave "toolkit" from the ground up, then puts it to work on two very different kinds of wave: sound and light. It finishes by asking what happens when a wave reaches a boundary. The other three workbooks in this set (<em>Velocity Change</em>, <em>Interference</em>, <em>Standing Waves</em>) build directly on what you learn here.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Describe waves as transverse or longitudinal, and use a simple particle/spring model to explain how each type transfers energy without transferring matter.</li>
+          <li>Define and apply wavelength λ, frequency ƒ, time period T and wave speed v, including v = ƒλ = λ/T.</li>
+          <li>Explain the nature of sound waves as a longitudinal mechanical wave, and relate pitch and loudness to frequency and amplitude.</li>
+          <li>Explain the nature of electromagnetic waves as transverse oscillations of electric and magnetic fields that require no medium, and describe the electromagnetic spectrum.</li>
+          <li>Compare and contrast mechanical waves and electromagnetic waves.</li>
+          <li>Describe waves travelling in two and three dimensions using wavefronts and rays.</li>
+          <li>Apply the law of reflection to rays and to wavefronts at a boundary, and explain the difference between reflective and non-reflective surfaces.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. What is a wave?</h2>
+      <p>Drop a pebble into a still pond and rings of ripples spread outward from the splash. Shake one end of a rope and a "wiggle" travels along it to the other end. In both cases, something is clearly moving away from the source — but it is not the water itself, and it is not the rope itself. A cork floating on the pond bobs up and down as the ripple passes but ends up back where it started; a piece of tape on the rope oscillates side to side but travels nowhere. What actually moves outward is <strong>energy</strong>.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> A <strong>travelling (or progressive) wave</strong> is an oscillating disturbance that transfers energy away from a source, through a medium or through space, without any net transfer of the matter of the medium itself.</div>
+
+      <figure>
+        <svg viewBox="0 0 460 190" width="460" height="190" xmlns="http://www.w3.org/2000/svg">
+          <text x="60" y="30" font-size="12" fill="#22305a">hand shaking end A</text>
+          <path d="M60,120 Q95,70 130,120 T200,120 T270,120 T340,120" fill="none" stroke="#1f7a6c" stroke-width="3"/>
+          <circle cx="200" cy="120" r="5" fill="#a33d5b"/>
+          <text x="200" y="145" text-anchor="middle" font-size="11" fill="#a33d5b">point P oscillates</text>
+          <line x1="200" y1="63" x2="200" y2="177" stroke="#a33d5b" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="150" y1="35" x2="330" y2="35" stroke="#c1791f" stroke-width="2.5" marker-end="url(#arrowN1)"/>
+          <defs><marker id="arrowN1" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c1791f"/></marker></defs>
+          <text x="240" y="25" text-anchor="middle" font-size="11" fill="#c1791f">movement of energy</text>
+          <text x="345" y="124" font-size="12" fill="#22305a">B</text>
+          <text x="45" y="124" font-size="12" fill="#22305a">A</text>
+        </svg>
+        <figcaption>Fig. 1.1 A wave created by continuously shaking one end of a rope. Energy travels from A to B; each point on the rope (such as P) simply oscillates about a fixed position.</figcaption>
+      </figure>
+
+      <p>The substance through which a mechanical wave travels — air, water, a rope, the ground — is called the <strong>medium</strong>. Not every wave needs one.</p>
+
+      <table class="eqtable">
+        <tr><th></th><th>Mechanical waves</th><th>Electromagnetic waves</th></tr>
+        <tr><td>What is oscillating?</td><td>particles of a physical medium</td><td>electric and magnetic fields</td></tr>
+        <tr><td>Needs a medium?</td><td>yes</td><td>no — can cross a vacuum</td></tr>
+        <tr><td>Examples</td><td>sound, water waves, waves on a string, seismic (earthquake) waves</td><td>light, radio waves, X-rays, gamma rays</td></tr>
+      </table>
+      <p style="font-size:0.9rem; color:#5b6b78; margin-top:0.4rem;">Sections 5-7 return to this distinction in much more depth.</p>
+
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        <p style="margin:0;">A very common error is to think a wave carries the medium along with it. It doesn't. A gull floating on the sea rises and falls as waves pass beneath it, but it isn't swept out to sea by every wave — the water (and the gull) mostly stays put; only the disturbance, and the energy it carries, moves on.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>A cork floats on the surface of a pond.</strong> A single circular ripple wave, produced by a dropped pebble, passes underneath it. Describe the motion of the cork while the ripple passes, and state whether the cork ends up further from the point where the pebble landed.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">The cork bobs up and down (oscillates vertically) about its original position as the ripple passes, then returns to rest. It does not end up further from the splash — only the disturbance (and the energy associated with it) travels outward, not the water or anything floating on it.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>State two examples of mechanical waves and one example of an electromagnetic wave.</strong> For one of your mechanical examples, identify the medium through which it travels.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">Any two of: sound, water waves, waves on a string/rope, seismic waves (mechanical); any one of: light, radio waves, microwaves, X-rays, gamma rays (electromagnetic). Example medium: sound travels through air (or water, or a solid).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>Explain, in terms of energy and matter, why a wave is different from simply throwing an object (like a ball) from A to B.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">Throwing a ball transfers energy from A to B by physically moving matter (the ball) from A to B. A wave transfers energy from A to B without any net transfer of matter — the particles of the medium (or, for an EM wave, the fields) merely oscillate about fixed positions as the disturbance and its energy pass through.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Transverse and longitudinal waves</h2>
+      <p>It helps to picture a mechanical medium as a long line of small masses, each connected to its neighbours by springs (representing the internal forces that pull a disturbed particle back towards its neighbours). If you shake the end of this chain, there are exactly two independent ways to do it: shake it <em>side to side</em>, or shake it <em>back and forth along its length</em>. These two choices produce the two fundamental families of mechanical wave.</p>
+
+      <div class="keybox"><strong>Transverse wave.</strong> Each particle of the medium oscillates <strong>perpendicular</strong> to the direction in which the wave transfers energy.</div>
+      <div class="keybox"><strong>Longitudinal wave.</strong> Each particle of the medium oscillates <strong>parallel</strong> to the direction in which the wave transfers energy.</div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 230" width="700" height="230" xmlns="http://www.w3.org/2000/svg">
+          <text x="175" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Transverse</text>
+          <line x1="30" y1="80" x2="330" y2="80" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="2 2"/>
+          <path d="M30,80 Q55,35 80,80 T130,80 T180,80 T230,80 T280,80 T330,80" fill="none" stroke="#1f7a6c" stroke-width="2.5"/>
+          <g stroke="#a33d5b" stroke-width="1.6">
+            <line x1="55" y1="80" x2="55" y2="52" marker-end="url(#arT)"/>
+            <line x1="105" y1="80" x2="105" y2="108" marker-end="url(#arT)"/>
+            <line x1="155" y1="80" x2="155" y2="52" marker-end="url(#arT)"/>
+            <line x1="205" y1="80" x2="205" y2="108" marker-end="url(#arT)"/>
+            <line x1="255" y1="80" x2="255" y2="52" marker-end="url(#arT)"/>
+          </g>
+          <defs><marker id="arT" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#a33d5b"/></marker></defs>
+          <line x1="30" y1="130" x2="330" y2="130" stroke="#c1791f" stroke-width="2.5" marker-end="url(#arE1)"/>
+          <defs><marker id="arE1" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c1791f"/></marker></defs>
+          <text x="180" y="150" text-anchor="middle" font-size="11" fill="#c1791f">energy transfer</text>
+          <text x="80" y="180" font-size="11" fill="#a33d5b">particle motion ⟂ to energy transfer</text>
+          <text x="80" y="200" font-size="10" fill="#4a5568">e.g. waves on a string, water surface, light</text>
+
+          <text x="530" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Longitudinal</text>
+          <g fill="#22305a">
+            <circle cx="380" cy="80" r="4"/><circle cx="392" cy="80" r="4"/><circle cx="404" cy="80" r="4"/>
+            <circle cx="430" cy="80" r="4"/><circle cx="458" cy="80" r="4"/><circle cx="486" cy="80" r="4"/>
+            <circle cx="498" cy="80" r="4"/><circle cx="510" cy="80" r="4"/>
+            <circle cx="536" cy="80" r="4"/><circle cx="564" cy="80" r="4"/><circle cx="592" cy="80" r="4"/>
+            <circle cx="604" cy="80" r="4"/><circle cx="616" cy="80" r="4"/>
+            <circle cx="642" cy="80" r="4"/><circle cx="670" cy="80" r="4"/>
+          </g>
+          <text x="392" y="105" text-anchor="middle" font-size="10" fill="#a33d5b">compression</text>
+          <text x="458" y="105" text-anchor="middle" font-size="10" fill="#1f7a6c">rarefaction</text>
+          <text x="504" y="105" text-anchor="middle" font-size="10" fill="#a33d5b">compression</text>
+          <line x1="380" y1="130" x2="680" y2="130" stroke="#c1791f" stroke-width="2.5" marker-end="url(#arE2)"/>
+          <defs><marker id="arE2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c1791f"/></marker></defs>
+          <text x="530" y="150" text-anchor="middle" font-size="11" fill="#c1791f">energy transfer</text>
+          <text x="430" y="180" font-size="11" fill="#a33d5b">particle motion ∥ to energy transfer</text>
+          <text x="430" y="200" font-size="10" fill="#4a5568">e.g. sound, compressed springs ("slinky")</text>
+        </svg>
+        <figcaption>Fig. 2.1 In a transverse wave, particles move perpendicular to the direction of energy transfer, producing crests and troughs. In a longitudinal wave, particles move parallel to it, producing regions of compression (particles closer together) and rarefaction (particles further apart).</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Crest / trough:</b> the highest / lowest point of a transverse wave. &nbsp; <b>Compression / rarefaction:</b> a region of increased / decreased particle density (and pressure) in a longitudinal wave.</div>
+
+      <h3>Live simulation: watch the particles move</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="tlCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Transverse vs. longitudinal</h4>
+            <div class="sim-row">
+              <div class="sim-btns">
+                <button id="tlModeTrans" onclick="setTLMode('transverse')">Transverse</button>
+                <button id="tlModeLong" class="alt" onclick="setTLMode('longitudinal')">Longitudinal</button>
+              </div>
+            </div>
+            <div class="sim-row">
+              <label for="tlFreq">Frequency</label>
+              <input type="range" id="tlFreq" min="0.3" max="2.5" step="0.05" value="1">
+            </div>
+            <div class="sim-row">
+              <label for="tlAmp">Amplitude</label>
+              <input type="range" id="tlAmp" min="5" max="30" step="1" value="18">
+            </div>
+            <div class="sim-readout">Watch one highlighted particle (in amber). In transverse mode it moves up/down; in longitudinal mode it moves left/right, bunching up with its neighbours to form compressions.</div>
+          </div>
+        </div>
+        <figcaption>Fig. 2.2 The same wave energy, moving left to right, drawn two ways. Toggle the mode and watch how an individual particle's motion differs.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">4</span><strong>Seismologists classify earthquake waves as P-waves (primary) or S-waves (secondary).</strong> P-waves are longitudinal and travel through both solids and liquids; S-waves are transverse and can only travel through solids. Explain, in terms of particle motion, why a transverse wave cannot travel through a liquid, while a longitudinal wave can.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">A transverse wave needs the medium to resist being sheared sideways (i.e. it needs a restoring force when particles are displaced perpendicular to the direction of travel) — liquids (and gases) flow freely and don't resist this sideways shearing, so they cannot support a transverse wave. A longitudinal wave only needs the medium to resist being compressed, which liquids (and gases) do, so longitudinal waves can travel through them.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">5</span><strong>A "slinky" spring lying on a table is given a single sharp push along its length.</strong> Describe what you would see travel along the spring, and state the type of wave this represents.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">A single region where the coils are pushed closer together (a compression) travels along the spring, followed by the coils returning to their normal spacing. This is a longitudinal pulse.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>Using the simulation above, switch between transverse and longitudinal mode at the same frequency.</strong> In your own words, describe one similarity and one difference between the two particle motions you observe.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">This is a descriptive, simulation-based question. Similarity: in both modes each particle oscillates back and forth about a fixed rest position at the same frequency, and neighbouring particles are slightly out of phase with each other, which is what makes the pattern appear to travel. Difference: in transverse mode the oscillation is vertical (perpendicular to the direction of travel), producing crests/troughs, while in longitudinal mode it is horizontal (parallel to the direction of travel), producing compressions/rarefactions.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Describing a wave: wavelength, amplitude, period</h2>
+      <p>Whatever kind of wave we're dealing with, the same small set of quantities describes it completely.</p>
+
+      <div class="keybox">
+        <strong>Key definitions.</strong>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem;">
+          <li><strong>Wavelength, λ</strong> — the shortest distance between two points on a wave that are oscillating in phase (e.g. crest to crest, or compression to compression). Unit: metre (m).</li>
+          <li><strong>Amplitude</strong> — the maximum displacement of a particle of the medium from its equilibrium (rest) position.</li>
+          <li><strong>Time period, T</strong> — the time taken for one complete oscillation of a particle, or equivalently the time for one full wavelength to pass a fixed point. Unit: second (s).</li>
+          <li><strong>Frequency, ƒ</strong> — the number of complete oscillations per second, or the number of wavelengths passing a fixed point per second. Unit: hertz (Hz). ƒ = 1/T.</li>
+        </ul>
+      </div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 210" width="700" height="210" xmlns="http://www.w3.org/2000/svg">
+          <text x="175" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">displacement – position ("snapshot")</text>
+          <line x1="20" y1="105" x2="330" y2="105" stroke="#4a5568" stroke-width="1"/>
+          <path d="M20,105 Q55,50 90,105 T160,105 T230,105 T300,105" fill="none" stroke="#a33d5b" stroke-width="2.5"/>
+          <line x1="55" y1="50" x2="55" y2="35" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="195" y1="50" x2="195" y2="35" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="55" y1="40" x2="195" y2="40" stroke="#4a5568" stroke-width="1"/>
+          <text x="125" y="32" text-anchor="middle" font-size="11" fill="#4a5568">wavelength, λ</text>
+          <text x="330" y="108" font-size="11" fill="#4a5568">position</text>
+          <text x="10" y="60" font-size="11" fill="#4a5568">x₀</text>
+
+          <text x="530" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">displacement – time ("one particle's history")</text>
+          <line x1="370" y1="105" x2="680" y2="105" stroke="#4a5568" stroke-width="1"/>
+          <path d="M370,105 Q405,50 440,105 T510,105 T580,105 T650,105" fill="none" stroke="#1f7a6c" stroke-width="2.5"/>
+          <line x1="405" y1="50" x2="405" y2="35" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="545" y1="50" x2="545" y2="35" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="405" y1="40" x2="545" y2="40" stroke="#4a5568" stroke-width="1"/>
+          <text x="475" y="32" text-anchor="middle" font-size="11" fill="#4a5568">time period, T</text>
+          <text x="680" y="108" font-size="11" fill="#4a5568">time</text>
+        </svg>
+        <figcaption>Fig. 3.1 The same sinusoidal shape can represent two different things: a photograph of the whole wave at one instant (left, wavelength read off the x-axis), or a video of one single particle over time (right, period read off the x-axis).</figcaption>
+      </figure>
+
+      <div class="stretch-box">
+        <span class="tag">Common mistake</span>
+        <p style="margin:0;">Both graphs above can represent <em>either</em> a transverse <em>or</em> a longitudinal wave — the vertical axis is "displacement," which for a longitudinal wave means displacement <em>along the direction of travel</em>, not up/down in real space. Don't assume a sine-shaped graph automatically means a transverse wave.</p>
+      </div>
+
+      <div class="keyword"><b>Pulse:</b> a single, short-duration wave disturbance (not a continuous, repeating wave) — for example, one clap, or one flick of a rope.</div>
+
+      <h3>Live simulation: phase, progressive and stationary waves</h3>
+      <div class="sim-embed">
+        <p class="instructions">This tool visualises how neighbouring particles on a wave are out of phase with each other by a varying amount — the same "shortest distance between two points moving in phase" idea behind the definition of wavelength above. It also lets you compare this <em>progressive</em> (travelling) wave against a <em>stationary</em> (standing) wave, which you'll meet properly in the Standing Waves workbook later in this set — for now, focus on the progressive wave view and how the phase difference between two points changes smoothly with their separation.</p>
+        <iframe class="sim-frame" src="https://www.drjonesphysics.com/phase-progressive-and-stationary" style="height:640px;" loading="lazy" title="Phase, progressive and stationary waves simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://www.drjonesphysics.com/phase-progressive-and-stationary" target="_blank" rel="noopener">Dr Dan Jones (drjonesphysics.com)</a>. If the embedded version above doesn't load, open it directly in a new tab via that link.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">7</span><strong>A transverse wave has a period of 0.40 s.</strong> Calculate its frequency.
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">ƒ = 1/T = 1/0.40 = 2.5 Hz.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">8</span><strong>Sketch a displacement–time graph for a transverse wave of amplitude 3.0 cm and period 2.0 s,</strong> assuming the particle starts (at t = 0) at its maximum positive displacement. Continue your sketch for a duration of 6.0 s.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">A cosine-shaped curve starting at +3.0 cm at t = 0, crossing zero at t = 0.5 s, reaching −3.0 cm at t = 1.0 s, back to zero at t = 1.5 s, and +3.0 cm again at t = 2.0 s — repeating this full cycle three times over the 6.0 s shown (three complete periods).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">9</span><strong>A longitudinal sound pulse is produced by a single hand-clap.</strong> Explain, using the term "pulse" correctly, why this is different from the sound produced by a continuously ringing bell.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">A hand-clap produces a single, short-duration disturbance — a pulse — with no repeating pattern. A continuously ringing bell produces a repeating, periodic disturbance with a well-defined wavelength, period and frequency, i.e. a continuous travelling wave rather than a single pulse.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Wave speed: v = ƒλ = λ/T</h2>
+      <p>Every time period T, a wave advances forward by exactly one wavelength λ (that's what "period" and "wavelength" mean, put together). Speed is distance divided by time, so:</p>
+      <div class="eqn">wave speed, <b>v = λ / T</b></div>
+      <p>Since frequency and period are reciprocals (ƒ = 1/T), this can equally be written as:</p>
+      <div class="eqn"><b>v = ƒλ</b> &nbsp; (or, combining both forms: <b>v = ƒλ = λ/T</b>)</div>
+      <div class="keybox"><strong>Key idea.</strong> v, ƒ and λ are all properties of the wave itself, but v is set by the <em>medium</em> the wave is travelling through (its stiffness, density, temperature, etc.) — not by the source. If a wave crosses into a new medium, its speed and wavelength can change, but (as you'll see in Sections 5-6) its frequency, which is set by the source, generally stays the same.</p></div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>Ripples spread across a ripple tank. A stroboscope photograph shows 6 crests spread over a distance of 18.0 cm. A stopwatch shows that 25 ripples pass a fixed point in 10.0 s. Determine: (a) the wavelength, (b) the period, (c) the frequency, (d) the wave speed.</p>
+        <p><strong>Answer:</strong><br>
+        a) 6 crests span 5 wavelength-gaps, so λ = 18.0 cm / 5 = 3.60 cm = 0.0360 m<br>
+        b) T = 10.0 s / 25 = 0.400 s<br>
+        c) ƒ = 1/T = 1/0.400 = 2.50 Hz<br>
+        d) v = ƒλ = 2.50 × 0.0360 = 0.0900 m s⁻¹</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.2</span>
+        <p>A loudspeaker emits a pure musical note of frequency 440 Hz (concert pitch A). The speed of sound in air is 340 m s⁻¹. Calculate the wavelength of this sound wave in air.</p>
+        <p><strong>Answer:</strong><br>
+        v = ƒλ &nbsp;⟹&nbsp; λ = v/ƒ = 340/440 = 0.773 m</p>
+      </div>
+
+      <h3>Live simulation: link λ, ƒ, T and v</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="vftCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>v = ƒλ explorer</h4>
+            <div class="sim-row">
+              <label for="lambdaSlider">Wavelength, λ = <span id="lambdaReadout">2.0</span> m</label>
+              <input type="range" id="lambdaSlider" min="0.5" max="4" step="0.1" value="2.0">
+            </div>
+            <div class="sim-row">
+              <label for="speedSlider">Wave speed, v = <span id="speedReadout">1.0</span> m s⁻¹</label>
+              <input type="range" id="speedSlider" min="0.2" max="3" step="0.1" value="1.0">
+            </div>
+            <div class="sim-readout" style="line-height:1.6;">
+              Frequency, ƒ = v/λ = <span id="freqReadout">…</span><br>
+              Period, T = 1/ƒ = <span id="periodReadout">…</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 4.1 Drag either slider and watch the wave animate at the resulting speed. Notice that ƒ and T are always <em>calculated</em> from λ and v — you can't set all four independently.</figcaption>
+      </figure>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Wave on a String</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Drive a string with an oscillator and directly control its frequency, amplitude, and damping.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
+        <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">10</span><strong>A radio station broadcasts at a frequency of 96.0 MHz. Radio waves travel at the speed of light, 3.00 × 10⁸ m s⁻¹.</strong> Calculate the wavelength of these radio waves.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">λ = v/ƒ = (3.00×10⁸)/(96.0×10⁶) = 3.13 m.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">11</span><strong>Water waves of wavelength 4.0 m travel at 2.0 m s⁻¹ towards a harbour wall.</strong> Determine the period and frequency of these waves, and state how many complete waves reach the wall in one minute.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">T = λ/v = 4.0/2.0 = 2.0 s; ƒ = 1/T = 0.50 Hz; in 60 s, number of waves = ƒ × 60 = 30 waves.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">12</span><strong>Two students each set up a wave with frequency 5.0 Hz on identical ripple tanks, but one tank contains deeper water than the other (waves travel faster in deeper water).</strong> Explain what will happen to the wavelength in the deeper tank compared with the shallower one.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">Since v = ƒλ and ƒ is fixed by the source (the same in both tanks), a larger v in the deeper tank means a proportionally larger λ (λ = v/ƒ) — the wavelength will be longer in the deeper water.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">13</span><strong>Using the simulation above, set λ = 1.0 m and v = 2.0 m s⁻¹.</strong> Read off the resulting frequency and period, then check your reading by calculating ƒ and T yourself from v = ƒλ.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">ƒ = v/λ = 2.0/1.0 = 2.0 Hz; T = 1/ƒ = 0.50 s — this should match the simulation's live readout.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. The nature of sound waves</h2>
+      <p>Sound is a <strong>longitudinal mechanical wave</strong>. It is produced whenever a surface vibrates rapidly — a loudspeaker cone, a guitar string, human vocal cords — pushing the particles of the surrounding medium back and forth. Each push forward creates a brief region of higher pressure and particle density (a <strong>compression</strong>); each pull back creates a region of lower pressure and density (a <strong>rarefaction</strong>). This alternating pattern of compressions and rarefactions travels outward through the medium as sound.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Because sound is a mechanical wave, it <strong>needs a medium</strong> — sound cannot travel through a vacuum. This is why, famously, "in space, no one can hear you scream": there are no air particles in the vacuum of space to compress and carry the disturbance.</div>
+
+      <p>The human ear can typically detect sound waves with frequencies from about 20 Hz to 20 kHz — the <strong>audible range</strong>. Frequencies above this range are called <strong>ultrasound</strong>; frequencies below it are called <strong>infrasound</strong>. Many animals (dogs, bats, dolphins) can hear well beyond the human range in one direction or the other.</p>
+
+      <table class="eqtable">
+        <tr><th>Perceived quality</th><th>Physical wave property</th></tr>
+        <tr><td>Pitch (how "high" or "low" a note sounds)</td><td>frequency, ƒ</td></tr>
+        <tr><td>Loudness (volume)</td><td>amplitude (intensity ∝ amplitude²)</td></tr>
+      </table>
+
+      <div class="keybox"><strong>Speed of sound.</strong> Sound generally travels faster when the particles of the medium are closer together and the forces between them are stronger. This means sound usually travels fastest through solids, slower through liquids, and slowest through gases such as air. In air, the speed of sound also increases slightly as temperature rises (about 340 m s⁻¹ at room temperature), because warmer air molecules move — and collide, transmitting the disturbance — faster.</div>
+
+      <div class="stretch-box">
+        <span class="tag">Extension: the decibel scale</span>
+        <p style="margin:0 0 0.5rem 0;">Because the human ear can detect an enormous range of sound intensities, loudness is usually measured on a <strong>logarithmic</strong> scale, in decibels (dB), rather than a simple linear scale. Each extra 10 dB represents a sound that is 10× more intense — so a 70 dB sound (busy traffic) is 100× more intense than a 50 dB sound (quiet conversation), not just "20 more."</p>
+      </div>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Sound Waves</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Watch compressions and rarefactions spread out from a speaker in real time, and adjust frequency and amplitude.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/sims/html/sound-waves/latest/sound-waves_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
+        <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">14</span><strong>Explain why astronauts on a spacewalk cannot talk to each other directly (through the vacuum of space) and must instead use radio.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">Speech is carried by sound, which is a mechanical (longitudinal) wave and needs a medium of particles to compress and transmit the disturbance. In the vacuum of space there is no medium, so sound cannot travel between the astronauts. Radio waves are electromagnetic and can travel through a vacuum, so they are used instead.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">15</span><strong>Taking the speed of sound in air as 340 m s⁻¹, calculate the wavelength of sound at the two edges of the human audible range: 20 Hz and 20 000 Hz.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">At 20 Hz: λ = 340/20 = 17 m. At 20 000 Hz: λ = 340/20000 = 0.017 m (1.7 cm).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">16</span><strong>A student increases the volume of a musical note without changing which note is being played.</strong> State which property of the sound wave has changed, and which has stayed the same. Explain your reasoning.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">The amplitude has increased (louder = more energy = larger amplitude); the frequency has stayed the same (the pitch/note is unchanged, and pitch is determined by frequency).</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. The nature of electromagnetic waves</h2>
+      <p>Light behaves very differently from sound in one crucial respect: it reaches us from the Sun after crossing roughly 150 million kilometres of essentially empty space. There is no medium there for light to "push" — so what, exactly, is oscillating?</p>
+
+      <div class="keybox"><strong>Key idea.</strong> An <strong>electromagnetic (EM) wave</strong> consists of oscillating electric and magnetic fields, at right angles to each other and to the direction the wave travels. No physical medium is required — an EM wave is a self-sustaining disturbance in the electric and magnetic fields themselves, and can travel through a vacuum (also called <strong>free space</strong>).</div>
+
+      <div class="keybox"><strong>Key fact.</strong> The speed of light is actually derived purely from two universal constants and therefore, in the absence of a medium, will always have the same value. That means that all electromagnetic waves travel at the same speed in a vacuum, the <strong>speed of light</strong>: <strong>c = 3.00 × 10⁸ m s⁻¹</strong>. This is a universal constant — it does not depend on frequency or wavelength, or on the source.</div>
+
+      <p>Visible light is only a tiny slice of a much larger family. The full range of electromagnetic waves, ordered by wavelength (or equivalently by frequency, since v = ƒλ = c is fixed), is called the <strong>electromagnetic spectrum</strong>.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 150" width="700" height="150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="45" width="90" height="40" fill="#6b4c9a"/><text x="65" y="69" text-anchor="middle" font-size="11" fill="#fff">Gamma</text>
+          <rect x="110" y="45" width="90" height="40" fill="#8a5aa8"/><text x="155" y="69" text-anchor="middle" font-size="11" fill="#fff">X-ray</text>
+          <rect x="200" y="45" width="70" height="40" fill="#a33d5b"/><text x="235" y="69" text-anchor="middle" font-size="10" fill="#fff">UV</text>
+          <rect x="270" y="45" width="60" height="40" fill="url(#visGrad)"/><text x="300" y="69" text-anchor="middle" font-size="10" fill="#22305a">visible</text>
+          <linearGradient id="visGrad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#7a3fa0"/><stop offset="20%" stop-color="#3a5fc8"/><stop offset="40%" stop-color="#1f9a8a"/>
+            <stop offset="60%" stop-color="#7ab83a"/><stop offset="80%" stop-color="#e0b02a"/><stop offset="100%" stop-color="#d94a2a"/>
+          </linearGradient>
+          <rect x="330" y="45" width="90" height="40" fill="#c1791f"/><text x="375" y="69" text-anchor="middle" font-size="11" fill="#fff">Infrared</text>
+          <rect x="420" y="45" width="110" height="40" fill="#0e7c86"/><text x="475" y="69" text-anchor="middle" font-size="11" fill="#fff">Microwave</text>
+          <rect x="530" y="45" width="150" height="40" fill="#173a5e"/><text x="605" y="69" text-anchor="middle" font-size="11" fill="#fff">Radio</text>
+          <line x1="20" y1="95" x2="680" y2="95" stroke="#4a5568" stroke-width="1.4" marker-end="url(#arSpec)"/>
+          <defs><marker id="arSpec" markerWidth="9" markerHeight="9" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#4a5568"/></marker></defs>
+          <text x="30" y="112" font-size="10" fill="#4a5568">shorter λ, higher ƒ, more energetic</text>
+          <text x="530" y="112" font-size="10" fill="#4a5568">longer λ, lower ƒ, less energetic</text>
+          <text x="20" y="30" font-size="10" fill="#5b6b78">increasing wavelength →</text>
+        </svg>
+        <figcaption>Fig. 6.2 The electromagnetic spectrum. The boundaries between regions are not sharp — this is a continuous spectrum, and the labels are just a convenient guide.</figcaption>
+      </figure>
+
+      <table class="eqtable">
+        <tr><th>Region</th><th>Approx. wavelength</th><th>Typical uses</th></tr>
+        <tr><td>Radio waves</td><td>&gt; 0.1 m</td><td>broadcasting, communications</td></tr>
+        <tr><td>Microwaves</td><td>1 mm – 0.1 m</td><td>mobile phones, radar, microwave ovens</td></tr>
+        <tr><td>Infrared (IR)</td><td>700 nm – 1 mm</td><td>thermal imaging, remote controls, fibre-optic links</td></tr>
+        <tr><td>Visible light</td><td>400 nm – 700 nm</td><td>human vision, optical instruments</td></tr>
+        <tr><td>Ultraviolet (UV)</td><td>10 nm – 400 nm</td><td>sterilisation, fluorescence</td></tr>
+        <tr><td>X-rays</td><td>0.01 nm – 10 nm</td><td>medical &amp; security imaging</td></tr>
+        <tr><td>Gamma rays</td><td>&lt; 0.01 nm</td><td>cancer treatment, sterilisation</td></tr>
+      </table>
+
+      <div class="keyword"><b>Important:</b> when a light wave passes into a different transparent medium (e.g. from air into glass), its speed changes and so its wavelength changes (λ = v/ƒ) — but its <strong>frequency stays the same</strong>, because frequency is set by the source that originally produced the wave, not by the medium it happens to be passing through.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>A Wi-Fi router transmits at a frequency of 2.40 GHz. Calculate the wavelength of this signal in air (assume the speed of the signal in air ≈ c).</p>
+        <p><strong>Answer:</strong><br>
+        λ = c/ƒ = (3.00×10⁸)/(2.40×10⁹) = 0.125 m (12.5 cm)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">17</span><strong>A gamma ray has a wavelength of 2.0 × 10⁻¹³ m.</strong> Calculate its frequency in a vacuum.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">ƒ = c/λ = (3.00×10⁸)/(2.0×10⁻¹³) = 1.5×10²¹ Hz.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">18</span><strong>Identify which region of the electromagnetic spectrum is used by (a) a household microwave oven, (b) a television remote control, (c) an airport security body scanner.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">a) microwaves; b) infrared; c) X-rays (millimetre-wave body scanners use microwaves — either is acceptable if justified).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">19</span><strong>Explain why radio signals from a distant space probe can reach Earth, while a shout from an astronaut on that probe could not.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">Radio waves are electromagnetic waves — oscillating electric and magnetic fields that require no medium and can cross the vacuum of space. A shout is a sound wave, which is mechanical and needs particles of a medium to compress and carry the disturbance; there is no such medium in space, so sound cannot travel between the probe and Earth.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Mechanical waves vs. electromagnetic waves</h2>
+      <p>Sections 5 and 6 looked at sound and light individually. It's worth stepping back and comparing the two wave families directly, side by side.</p>
+
+      <table class="eqtable">
+        <tr><th>Property</th><th>Mechanical waves</th><th>Electromagnetic waves</th></tr>
+        <tr><td>What oscillates?</td><td>particles of a physical medium</td><td>electric &amp; magnetic fields</td></tr>
+        <tr><td>Needs a medium?</td><td>yes</td><td>no</td></tr>
+        <tr><td>Can cross a vacuum?</td><td>no</td><td>yes</td></tr>
+        <tr><td>Can be transverse or longitudinal?</td><td>yes — either, depending on the medium and wave type</td><td>always transverse</td></tr>
+        <tr><td>Speed depends on…</td><td>the properties of the medium (density, stiffness, temperature, …)</td><td>the medium too — but equals a fixed value <em>c</em> in a vacuum</td></tr>
+        <tr><td>Typical examples</td><td>sound, water waves, waves on strings, seismic waves</td><td>radio, microwaves, infrared, light, ultraviolet, X-rays, gamma rays</td></tr>
+      </table>
+
+      <div class="keybox"><strong>What they have in common.</strong> Despite these differences, both families are still described by the <em>same</em> underlying wave model — the same v = ƒλ = λ/T relationship applies to both, and (as the companion workbooks in this set explore) both mechanical and electromagnetic waves show reflection, refraction, diffraction and interference. The physical "carrier" is different, but the mathematics of wave behaviour is shared.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">20</span><strong>Classify each of the following as a mechanical wave or an electromagnetic wave: (a) an ocean swell, (b) a Wi-Fi signal, (c) the vibration felt from a passing truck, (d) sunlight, (e) an ultrasound scan.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">a) mechanical (water wave); b) electromagnetic (radio/microwave); c) mechanical (a seismic/vibration wave through the ground); d) electromagnetic (light); e) mechanical (ultrasound is a high-frequency sound wave).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>A student claims: "Electromagnetic waves are just a special, very fast kind of mechanical wave."</strong> Explain what is scientifically wrong with this statement.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">This is incorrect because the two are fundamentally different in what is oscillating and whether a medium is required. A mechanical wave is an oscillation of matter (particles of a medium) and cannot exist without that medium. An electromagnetic wave is an oscillation of electric and magnetic fields and requires no medium at all — it isn't simply a "fast" version of a mechanical wave, it is a different physical phenomenon that happens to obey the same general wave equations.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Wavefronts and rays</h2>
+      <p>So far, every diagram in this workbook has shown a wave travelling in one dimension, along a single line. Real waves — ripples on a pond, sound spreading through a room, light leaving a bulb — spread out in two or three dimensions. To describe this, physicists use two complementary pictures: <strong>wavefronts</strong> and <strong>rays</strong>.</p>
+
+      <div class="keybox">
+        <strong>Key definitions.</strong>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem;">
+          <li><strong>Wavefront</strong> — a line (in 2D) or surface (in 3D) joining all the neighbouring points of a wave that are oscillating in phase with each other (for example, joining all the crests). Successive wavefronts are one wavelength apart.</li>
+          <li><strong>Ray</strong> — a line showing the direction in which a wave is transferring energy. Rays are always <strong>perpendicular</strong> to the wavefronts at every point.</li>
+        </ul>
+      </div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 240" width="700" height="240" xmlns="http://www.w3.org/2000/svg">
+          <text x="175" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Point source: circular (or spherical) wavefronts</text>
+          <circle cx="175" cy="130" r="20" fill="none" stroke="#1f7a6c" stroke-width="1.6"/>
+          <circle cx="175" cy="130" r="45" fill="none" stroke="#1f7a6c" stroke-width="1.6"/>
+          <circle cx="175" cy="130" r="70" fill="none" stroke="#1f7a6c" stroke-width="1.6"/>
+          <circle cx="175" cy="130" r="95" fill="none" stroke="#1f7a6c" stroke-width="1.6"/>
+          <circle cx="175" cy="130" r="4" fill="#a33d5b"/>
+          <g stroke="#a33d5b" stroke-width="1.6" marker-end="url(#arRay1)">
+            <line x1="175" y1="130" x2="175" y2="25"/>
+            <line x1="175" y1="130" x2="175" y2="235"/>
+            <line x1="175" y1="130" x2="70" y2="130"/>
+            <line x1="175" y1="130" x2="280" y2="130"/>
+            <line x1="175" y1="130" x2="105" y2="60"/>
+            <line x1="175" y1="130" x2="245" y2="60"/>
+            <line x1="175" y1="130" x2="105" y2="200"/>
+            <line x1="175" y1="130" x2="245" y2="200"/>
+          </g>
+          <defs><marker id="arRay1" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#a33d5b"/></marker></defs>
+          <text x="175" y="225" text-anchor="middle" font-size="10" fill="#4a5568">radial rays ⟂ to wavefronts</text>
+
+          <text x="530" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Distant source: parallel ("plane") wavefronts</text>
+          <line x1="420" y1="35" x2="420" y2="225" stroke="#1f7a6c" stroke-width="1.6"/>
+          <line x1="460" y1="35" x2="460" y2="225" stroke="#1f7a6c" stroke-width="1.6"/>
+          <line x1="500" y1="35" x2="500" y2="225" stroke="#1f7a6c" stroke-width="1.6"/>
+          <line x1="540" y1="35" x2="540" y2="225" stroke="#1f7a6c" stroke-width="1.6"/>
+          <g stroke="#a33d5b" stroke-width="1.6" marker-end="url(#arRay2)">
+            <line x1="410" y1="70" x2="640" y2="70"/>
+            <line x1="410" y1="110" x2="640" y2="110"/>
+            <line x1="410" y1="150" x2="640" y2="150"/>
+            <line x1="410" y1="190" x2="640" y2="190"/>
+          </g>
+          <defs><marker id="arRay2" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#a33d5b"/></marker></defs>
+          <text x="530" y="225" text-anchor="middle" font-size="10" fill="#4a5568">parallel rays ⟂ to parallel wavefronts</text>
+        </svg>
+        <figcaption>Fig. 8.1 A point source (e.g. a pebble dropped in a pond, or a lamp close up) produces circular/spherical wavefronts and radial rays. A source that is very far away compared to the wavelength (e.g. sunlight reaching Earth) produces wavefronts that are essentially flat and parallel — a "plane wave" — with parallel rays.</figcaption>
+      </figure>
+
+      <h3>Live simulation: point source vs. distant source</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="wfCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Wavefronts &amp; rays</h4>
+            <div class="sim-row">
+              <div class="sim-btns">
+                <button id="wfModePoint" onclick="setWFMode('point')">Point source</button>
+                <button id="wfModePlane" class="alt" onclick="setWFMode('plane')">Distant source (plane wave)</button>
+              </div>
+            </div>
+            <div class="sim-row">
+              <label for="wfSpeed">Wavefront spacing (λ)</label>
+              <input type="range" id="wfSpeed" min="18" max="45" step="1" value="30">
+            </div>
+            <div class="sim-readout">New wavefronts (blue) continuously appear and spread outward, one wavelength apart; the rays (amber) always stay perpendicular to them.</div>
+          </div>
+        </div>
+        <figcaption>Fig. 8.2 Toggle between a nearby point source and a very distant source to see the wavefronts flatten out.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">22</span><strong>Explain why sunlight reaching the Earth's surface is normally modelled using parallel rays, even though the Sun is technically a point source of spherical wavefronts.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">The Sun is so far from the Earth (about 150 million km) compared to the size of the region being illuminated that the spherical wavefronts arriving are, for all practical purposes, flat over that region — a tiny patch of a huge sphere looks like a plane. So the wavefronts can be treated as parallel, and the rays (perpendicular to them) as parallel too.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">23</span><strong>In a ripple tank, a dipper produces circular wavefronts spaced 2.0 cm apart, and the tank shows the wave travelling at 8.0 cm s⁻¹.</strong> Calculate the frequency at which the dipper is oscillating.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">ƒ = v/λ = 8.0/2.0 = 4.0 Hz.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">24</span><strong>State the geometric relationship between a ray and the wavefront it crosses, at the point where they cross.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">They are always perpendicular (at right angles) to each other.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 9 ================= -->
+    <section class="topic" id="s9">
+      <h2>9. Reflection at boundaries</h2>
+      <p>When a wave reaches a boundary between two different media, at least some of its energy is sent back into the medium it came from. This is <strong>reflection</strong>, and — remarkably — it obeys exactly the same rule for every kind of wave: water ripples off the side of a bath, sound off a canyon wall, or light off a mirror.</p>
+
+      <div class="keybox"><strong>The law of reflection.</strong> The <strong>angle of incidence</strong> equals the <strong>angle of reflection</strong>, where both angles are measured from the <strong>normal</strong> — an imaginary line perpendicular to the surface at the point where the wave strikes it (not from the surface itself).</div>
+
+      <figure>
+        <svg viewBox="0 0 420 230" width="420" height="230" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="170" x2="380" y2="170" stroke="#22305a" stroke-width="2.5"/>
+          <text x="386" y="174" font-size="10" fill="#22305a">surface</text>
+          <line x1="210" y1="30" x2="210" y2="170" stroke="#4a5568" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <text x="216" y="40" font-size="10" fill="#4a5568">normal</text>
+          <line x1="135.4" y1="63.5" x2="210" y2="170" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#arInc)"/>
+          <defs><marker id="arInc" markerWidth="9" markerHeight="9" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#a33d5b"/></marker></defs>
+          <text x="90" y="55" font-size="10" fill="#a33d5b">incident ray</text>
+          <line x1="210" y1="170" x2="284.6" y2="63.5" stroke="#1f7a6c" stroke-width="2.2" marker-end="url(#arRef)"/>
+          <defs><marker id="arRef" markerWidth="9" markerHeight="9" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1f7a6c"/></marker></defs>
+          <text x="255" y="55" font-size="10" fill="#1f7a6c">reflected ray</text>
+          <path d="M 210 136 A 34 34 0 0 0 190.5 142.1" fill="none" stroke="#a33d5b" stroke-width="1.6"/>
+          <text x="192" y="119" text-anchor="middle" font-size="12" fill="#a33d5b">θᵢ</text>
+          <path d="M 210 136 A 34 34 0 0 1 229.5 142.1" fill="none" stroke="#1f7a6c" stroke-width="1.6"/>
+          <text x="228" y="119" text-anchor="middle" font-size="12" fill="#1f7a6c">θᵣ</text>
+        </svg>
+        <figcaption>Fig. 9.1 Reflection of a single ray: the angle of incidence θᵢ (between the incident ray and the normal) equals the angle of reflection θᵣ (between the reflected ray and the normal).</figcaption>
+      </figure>
+
+      <h3>Live simulation: check the law of reflection</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="reflCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Angle of incidence vs. reflection</h4>
+            <div class="sim-row">
+              <label for="angleSlider">Angle of incidence = <span id="angleReadout">40</span>°</label>
+              <input type="range" id="angleSlider" min="5" max="80" step="1" value="40">
+            </div>
+            <div class="sim-readout" style="line-height:1.6;">
+              Angle of incidence: <span id="thetaIReadout">…</span><br>
+              Angle of reflection: <span id="thetaRReadout">…</span><br>
+              <strong>The reflected ray always mirrors the incident ray exactly.</strong>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 9.2 Drag the slider to change the incident ray's angle and confirm that the reflected ray always leaves at the same angle to the normal.</figcaption>
+      </figure>
+
+      <p>This law applies just as well to whole wavefronts, not just single rays: parallel wavefronts meeting a flat boundary reflect so that the angle the incoming wavefronts make with the boundary equals the angle the outgoing wavefronts make with it.</p>
+
+      <figure>
+        <svg viewBox="0 0 420 200" width="420" height="200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="150" x2="380" y2="150" stroke="#22305a" stroke-width="2.5"/>
+          <text x="386" y="154" font-size="10" fill="#22305a">surface</text>
+
+          <!-- incident wavefronts: each drawn perpendicular to the incident ray in Fig. 9.1,
+               spaced one wavelength apart, travelling toward point P -->
+          <g stroke="#a33d5b" stroke-width="2.2">
+            <line x1="226.0" y1="99.7" x2="157.2" y2="147.9"/>
+            <line x1="207.7" y1="73.5" x2="138.9" y2="121.7"/>
+            <line x1="189.3" y1="47.3" x2="120.5" y2="95.5"/>
+          </g>
+          <line x1="173.3" y1="97.6" x2="184.8" y2="114.0" stroke="#a33d5b" stroke-width="1.8" marker-end="url(#arWFi)"/>
+          <defs><marker id="arWFi" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#a33d5b"/></marker></defs>
+
+          <!-- reflected wavefronts: perpendicular to the reflected ray in Fig. 9.1, same spacing
+               (wavelength is unchanged by reflection), travelling away from point P -->
+          <g stroke="#1f7a6c" stroke-width="2.2">
+            <line x1="194.0" y1="99.7" x2="262.8" y2="147.9"/>
+            <line x1="212.3" y1="73.5" x2="281.1" y2="121.7"/>
+            <line x1="230.7" y1="47.3" x2="299.5" y2="95.5"/>
+          </g>
+          <line x1="246.7" y1="97.6" x2="258.2" y2="81.2" stroke="#1f7a6c" stroke-width="1.8" marker-end="url(#arWFr)"/>
+          <defs><marker id="arWFr" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#1f7a6c"/></marker></defs>
+
+          <circle cx="210" cy="150" r="3.5" fill="#22305a"/>
+          <text x="210" y="172" text-anchor="middle" font-size="9.5" fill="#22305a">point P — same point as Fig. 9.1</text>
+          <text x="150" y="35" text-anchor="middle" font-size="10" fill="#a33d5b">incident wavefronts</text>
+          <text x="270" y="35" text-anchor="middle" font-size="10" fill="#1f7a6c">reflected wavefronts</text>
+        </svg>
+        <figcaption>Fig. 9.3 Reflection of parallel wavefronts — the same geometry as Fig. 9.1, but drawn as the wavefronts (perpendicular to the rays) rather than the rays themselves. Each wavefront reflects at the exact point where it meets the surface (here, point P), and its spacing — the wavelength — is preserved on the way out.</figcaption>
+      </figure>
+
+      <p>The image the reflected rays appear to come from a plane mirror is as far <em>behind</em> the mirror as the real object is in front of it — this is why your reflection appears to be "inside" the mirror, the same distance away as you are.</p>
+
+      <div class="keyword"><b>Specular vs. diffuse reflection.</b> Smooth, shiny, usually pale surfaces (glass, polished metal, still water) reflect parallel rays in an orderly, parallel way — <strong>specular reflection</strong> — which produces a clear image. Rough, matt, usually dark surfaces (fabric, unpolished stone, paper) reflect the same parallel rays off in many different directions — <strong>diffuse reflection</strong>, or <strong>scattering</strong> — which produces no clear image, even though each individual ray still obeys the law of reflection at the microscopic level.</div>
+
+      <div class="stretch-box">
+        <span class="tag">Try it</span>
+        <p style="margin:0;">A detector is placed inside a "mirror maze" made from several flat mirrors at right angles. A beam enters and reflects off three mirrors before reaching the detector, striking them at 45°, 60° and 30° respectively. Because the law of reflection applies at <em>every</em> surface independently, you can trace the beam's path through the whole maze one bounce at a time, just by applying θᵢ = θᵣ at each mirror in turn.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">25</span><strong>A light ray strikes a plane mirror at an angle of 35° to the mirror's surface (not to the normal).</strong> Calculate the angle of incidence and the angle of reflection, both measured from the normal.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">Angle of incidence = 90° − 35° = 55° (measured from the normal, not the surface). By the law of reflection, angle of reflection = 55° also.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">26</span><strong>State, with a reason, whether a sheet of white paper and a sheet of polished metal each produce a clear image by reflection.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">Polished metal: yes, it produces a clear image, because its surface is smooth so parallel incoming rays are reflected in an orderly, still-parallel way (specular reflection). White paper: no, it does not produce a clear image, because its surface is rough at a microscopic level, so parallel incoming rays are scattered off in many different directions (diffuse reflection) even though each ray individually still obeys the law of reflection.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">27</span><strong>Using the simulation above, set the angle of incidence to 65°.</strong> Predict the angle of reflection before checking the readout, then explain in one sentence why this relationship holds true for any type of wave, not just light.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
+        <div class="answer-panel" id="q27">The angle of reflection should also be 65°. The law of reflection is a general geometric consequence of how any wavefront reflects off a boundary — it doesn't depend on what the wave physically is (light, sound, water), only on the geometry of the boundary, so it applies equally to every kind of wave.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Wave (travelling / progressive)</dt><dd>An oscillating disturbance that transfers energy away from a source, without net transfer of matter.</dd>
+        <dt>Propagation</dt><dd>The movement of a wave, and the energy it carries, away from its source.</dd>
+        <dt>Medium</dt><dd>The substance through which a mechanical wave travels.</dd>
+        <dt>Mechanical wave</dt><dd>A wave involving the oscillation of particles of a physical medium; cannot travel through a vacuum.</dd>
+        <dt>Electromagnetic wave</dt><dd>A transverse wave of oscillating, perpendicular electric and magnetic fields; requires no medium and travels at c = 3.00 × 10⁸ m s⁻¹ in a vacuum.</dd>
+        <dt>Transverse wave</dt><dd>A wave in which particle oscillation is perpendicular to the direction of energy transfer.</dd>
+        <dt>Crest / trough</dt><dd>The highest / lowest point of a transverse wave.</dd>
+        <dt>Longitudinal wave</dt><dd>A wave in which particle oscillation is parallel to the direction of energy transfer.</dd>
+        <dt>Compression / rarefaction</dt><dd>A region of increased / decreased particle density and pressure in a longitudinal wave.</dd>
+        <dt>Wavelength, λ</dt><dd>The shortest distance between two points on a wave oscillating in phase; e.g. crest to crest.</dd>
+        <dt>Amplitude</dt><dd>The maximum displacement of a particle from its equilibrium position.</dd>
+        <dt>Time period, T</dt><dd>The time taken for one complete oscillation, or for one wavelength to pass a fixed point.</dd>
+        <dt>Frequency, ƒ</dt><dd>The number of complete oscillations per second; ƒ = 1/T. Unit: hertz (Hz).</dd>
+        <dt>Wave speed, v</dt><dd>The speed at which a wave's energy is transferred; v = ƒλ = λ/T.</dd>
+        <dt>Pulse</dt><dd>A single, short-duration wave disturbance rather than a continuous repeating wave.</dd>
+        <dt>Sound</dt><dd>A longitudinal mechanical wave detectable by the human ear, typically 20 Hz – 20 kHz.</dd>
+        <dt>Ultrasound / infrasound</dt><dd>Sound frequencies above / below the human audible range.</dd>
+        <dt>Pitch / loudness</dt><dd>The perceived quality of sound corresponding to frequency / amplitude.</dd>
+        <dt>Vacuum (free space)</dt><dd>A region with no matter; electromagnetic waves can cross it, mechanical waves cannot.</dd>
+        <dt>Electromagnetic spectrum</dt><dd>The full continuous range of electromagnetic waves, from radio waves (long λ) to gamma rays (short λ).</dd>
+        <dt>Wavefront</dt><dd>A line or surface joining neighbouring points of a wave that are oscillating in phase; successive wavefronts are one wavelength apart.</dd>
+        <dt>Ray</dt><dd>A line showing the direction in which a wave transfers energy; always perpendicular to the wavefronts.</dd>
+        <dt>Plane wave</dt><dd>A wave with flat, parallel wavefronts, typically produced by a very distant source.</dd>
+        <dt>Reflection</dt><dd>The return of some or all of a wave's energy into its original medium when it meets a boundary.</dd>
+        <dt>Normal</dt><dd>An imaginary line perpendicular to a surface at the point where a ray meets it.</dd>
+        <dt>Angle of incidence / reflection</dt><dd>The angle between the incident / reflected ray and the normal.</dd>
+        <dt>Law of reflection</dt><dd>The angle of incidence equals the angle of reflection.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">The Nature of Waves Workbook · Companion resources: <em>Velocity Change</em>, <em>Interference</em>, and <em>Standing Waves</em>.</footer>
+  </main>
+</div>
+
+<div class="toolbar no-print">
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <div id="saveStatus" style="font-size:0.72rem; color:#5b6b78; text-align:center; background:#fff; border:1px solid var(--border); border-radius:50px; padding:0.35rem 0.8rem;">Answers are not saved automatically — print or copy your work before closing this tab</div>
+</div>
+<button class="fab no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Fig 2.2: transverse vs longitudinal particle animation ================= */
+(function(){
+  const canvas = document.getElementById('tlCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const N = 24;
+  const spacing = 380 / (N - 1);
+  const startX = 40;
+  const midY = 130;
+  let mode = 'transverse';
+  let t = 0;
+
+  window.setTLMode = function(m){
+    mode = m;
+    document.getElementById('tlModeTrans').classList.toggle('alt', m !== 'transverse');
+    document.getElementById('tlModeLong').classList.toggle('alt', m !== 'longitudinal');
+  };
+
+  function draw(){
+    const freq = parseFloat(document.getElementById('tlFreq').value);
+    const amp = parseFloat(document.getElementById('tlAmp').value);
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    const k = 2 * Math.PI / (6 * spacing);
+    const w = 2 * Math.PI * freq;
+
+    // energy-direction arrow
+    ctx.strokeStyle = '#d98324'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(startX, 30); ctx.lineTo(startX + 320, 30); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(startX + 320, 30); ctx.lineTo(startX + 310, 25); ctx.lineTo(startX + 310, 35); ctx.closePath();
+    ctx.fillStyle = '#d98324'; ctx.fill();
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('energy transfer →', startX, 20);
+
+    const pts = [];
+    for(let i = 0; i < N; i++){
+      const x0 = startX + i * spacing;
+      const phase = k * (i * spacing) - w * t;
+      if(mode === 'transverse'){
+        const y = midY + amp * Math.sin(phase);
+        pts.push({x: x0, y: y});
+      } else {
+        const dx = amp * 0.8 * Math.sin(phase);
+        pts.push({x: x0 + dx, y: midY});
+      }
+    }
+
+    if(mode === 'transverse'){
+      ctx.strokeStyle = '#5fd0c0'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      pts.forEach((p,i)=>{ if(i===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y); });
+      ctx.stroke();
+    }
+
+    pts.forEach((p, i)=>{
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 5, 0, 2*Math.PI);
+      ctx.fillStyle = (i === Math.floor(N/2)) ? '#d98324' : '#cfe3ee';
+      ctx.fill();
+    });
+
+    if(mode === 'transverse'){
+      const hp = pts[Math.floor(N/2)];
+      ctx.strokeStyle = 'rgba(217,131,36,0.5)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(hp.x, midY - 40); ctx.lineTo(hp.x, midY + 40); ctx.stroke();
+    }
+
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(mode === 'transverse' ? 'watch the amber particle move up/down' : 'watch the amber particle move left/right', W/2, H - 15);
+
+    t += 0.02;
+    requestAnimationFrame(draw);
+  }
+  document.getElementById('tlFreq').addEventListener('input', function(){});
+  document.getElementById('tlAmp').addEventListener('input', function(){});
+  setTLMode('transverse');
+  draw();
+})();
+
+/* ================= Fig 4.1: v = f*lambda explorer ================= */
+(function(){
+  const canvas = document.getElementById('vftCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pxPerM = 90;
+  const midY = 130;
+  let t = 0, lastTime = null;
+
+  const lambdaSlider = document.getElementById('lambdaSlider');
+  const speedSlider = document.getElementById('speedSlider');
+  const lambdaReadout = document.getElementById('lambdaReadout');
+  const speedReadout = document.getElementById('speedReadout');
+  const freqReadout = document.getElementById('freqReadout');
+  const periodReadout = document.getElementById('periodReadout');
+
+  function updateReadouts(){
+    const lambda = parseFloat(lambdaSlider.value);
+    const v = parseFloat(speedSlider.value);
+    const f = v / lambda;
+    const T = 1 / f;
+    lambdaReadout.textContent = lambda.toFixed(1);
+    speedReadout.textContent = v.toFixed(1);
+    freqReadout.textContent = f.toFixed(2) + ' Hz';
+    periodReadout.textContent = T.toFixed(2) + ' s';
+  }
+
+  function draw(now){
+    if(lastTime === null) lastTime = now;
+    const dt = (now - lastTime) / 1000;
+    lastTime = now;
+    const lambda = parseFloat(lambdaSlider.value);
+    const v = parseFloat(speedSlider.value);
+    t += dt * v;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(30, midY); ctx.lineTo(430, midY); ctx.stroke();
+
+    const k = 2 * Math.PI / lambda;
+    ctx.strokeStyle = '#5fd0c0'; ctx.lineWidth = 2.4;
+    ctx.beginPath();
+    for(let px = 30; px <= 430; px++){
+      const x = (px - 30) / pxPerM;
+      const y = midY - 55 * Math.sin(k * (x - t));
+      if(px === 30) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+    }
+    ctx.stroke();
+
+    // mark one wavelength
+    ctx.strokeStyle = 'rgba(217,131,36,0.7)'; ctx.lineWidth = 1;
+    const x1 = 60, x2 = 60 + lambda * pxPerM;
+    ctx.beginPath(); ctx.moveTo(x1, 40); ctx.lineTo(x1, 55); ctx.moveTo(x2, 40); ctx.lineTo(x2, 55); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x1, 47); ctx.lineTo(x2, 47); ctx.stroke();
+    ctx.fillStyle = '#d98324'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('λ', (x1+x2)/2, 38);
+
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('distance →', 350, midY + 100);
+
+    updateReadouts();
+    requestAnimationFrame(draw);
+  }
+  lambdaSlider.addEventListener('input', updateReadouts);
+  speedSlider.addEventListener('input', updateReadouts);
+  updateReadouts();
+  requestAnimationFrame(draw);
+})();
+
+/* ================= Fig 8.2: wavefronts & rays (point source vs plane wave) ================= */
+(function(){
+  const canvas = document.getElementById('wfCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  let mode = 'point';
+  let t = 0;
+
+  window.setWFMode = function(m){
+    mode = m;
+    document.getElementById('wfModePoint').classList.toggle('alt', m !== 'point');
+    document.getElementById('wfModePlane').classList.toggle('alt', m !== 'plane');
+  };
+
+  function draw(){
+    const spacing = parseFloat(document.getElementById('wfSpeed').value);
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle = '#5fd0c0';
+    ctx.lineWidth = 1.6;
+
+    if(mode === 'point'){
+      const maxR = Math.hypot(W,H)/2 + 20;
+      for(let r = (t % spacing); r < maxR; r += spacing){
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, 2*Math.PI);
+        ctx.stroke();
+      }
+      ctx.fillStyle = '#a33d5b';
+      ctx.beginPath(); ctx.arc(cx, cy, 4, 0, 2*Math.PI); ctx.fill();
+      ctx.strokeStyle = '#d98324'; ctx.lineWidth = 1.6;
+      for(let a = 0; a < 8; a++){
+        const ang = a * Math.PI / 4;
+        const rx = cx + 110 * Math.cos(ang), ry = cy + 110 * Math.sin(ang);
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(rx, ry); ctx.stroke();
+      }
+    } else {
+      const off = t % spacing;
+      for(let x = off; x < W; x += spacing){
+        ctx.beginPath(); ctx.moveTo(x, 15); ctx.lineTo(x, H-15); ctx.stroke();
+      }
+      ctx.strokeStyle = '#d98324'; ctx.lineWidth = 1.6;
+      [50, 90, 130, 170, 210].forEach(function(y){
+        ctx.beginPath(); ctx.moveTo(20, y); ctx.lineTo(W-20, y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W-30, y-5); ctx.lineTo(W-20,y); ctx.lineTo(W-30,y+5); ctx.stroke();
+      });
+    }
+
+    t += 1.1;
+    requestAnimationFrame(draw);
+  }
+  setWFMode('point');
+  draw();
+})();
+
+/* ================= Fig 9.2: law of reflection ray simulator ================= */
+(function(){
+  const canvas = document.getElementById('reflCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const px = W/2, py = 200;
+  const rayLen = 140;
+
+  const slider = document.getElementById('angleSlider');
+  const angleReadout = document.getElementById('angleReadout');
+  const thetaIReadout = document.getElementById('thetaIReadout');
+  const thetaRReadout = document.getElementById('thetaRReadout');
+
+  function draw(){
+    const angleDeg = parseFloat(slider.value);
+    const angleRad = angleDeg * Math.PI / 180;
+    angleReadout.textContent = angleDeg;
+    thetaIReadout.textContent = angleDeg + '°';
+    thetaRReadout.textContent = angleDeg + '°';
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    // mirror surface
+    ctx.strokeStyle = '#cfe3ee'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(20, py); ctx.lineTo(W-20, py); ctx.stroke();
+
+    // normal
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(px, py-90); ctx.lineTo(px, py); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // incident ray (from upper-left)
+    const ix = px - rayLen * Math.sin(angleRad);
+    const iy = py - rayLen * Math.cos(angleRad);
+    ctx.strokeStyle = '#e08a8a'; ctx.lineWidth = 2.4;
+    ctx.beginPath(); ctx.moveTo(ix, iy); ctx.lineTo(px, py); ctx.stroke();
+    drawArrowhead(ix, iy, px, py, '#e08a8a');
+
+    // reflected ray (to upper-right)
+    const rx = px + rayLen * Math.sin(angleRad);
+    const ry = py - rayLen * Math.cos(angleRad);
+    ctx.strokeStyle = '#5fd0c0'; ctx.lineWidth = 2.4;
+    ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(rx, ry); ctx.stroke();
+    drawArrowhead(px, py, rx, ry, '#5fd0c0');
+
+    // angle arcs
+    ctx.strokeStyle = '#e08a8a'; ctx.lineWidth = 1.3;
+    ctx.beginPath(); ctx.arc(px, py, 34, -Math.PI/2, -Math.PI/2 - angleRad, true); ctx.stroke();
+    ctx.strokeStyle = '#5fd0c0';
+    ctx.beginPath(); ctx.arc(px, py, 34, -Math.PI/2, -Math.PI/2 + angleRad, false); ctx.stroke();
+
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('normal', px, py - 95);
+    ctx.fillStyle = '#e08a8a'; ctx.fillText('incident', ix - 10, iy - 6);
+    ctx.fillStyle = '#5fd0c0'; ctx.fillText('reflected', rx + 12, ry - 6);
+  }
+
+  function drawArrowhead(x1,y1,x2,y2,color){
+    const ang = Math.atan2(y2-y1, x2-x1);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - 9*Math.cos(ang - 0.4), y2 - 9*Math.sin(ang - 0.4));
+    ctx.lineTo(x2 - 9*Math.cos(ang + 0.4), y2 - 9*Math.sin(ang + 0.4));
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  slider.addEventListener('input', draw);
+  draw();
+})();
+
+</script>
+</body>
+</html>

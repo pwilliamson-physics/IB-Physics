@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Standing Waves and Resonance Workbook",
+  "schemaVersion": 1,
+  "description": "IB Physics workbook: Standing Waves and Resonance (Topic C.4) — formation of standing waves, nodes and antinodes, standing wave patterns in strings and pipes, natural frequency, resonance, and damping — in the shared house style, with five interactive canvas simulations. Answers show working only, not final numbers.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standing Waves and Resonance — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:340px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-print-note{display:none;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-row select{width:100%; padding:0.3rem; border-radius:6px; border:1px solid #445b70; background:#16283c; color:#dceaf0;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Standing Waves and Resonance</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Standing Waves and Resonance</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Formation of standing waves</a>
+    <a href="#s2">2. Nodes and antinodes</a>
+    <a href="#s3">3. Standing waves on strings</a>
+    <a href="#s4">4. Standing waves in pipes</a>
+    <a href="#s5">5. Natural frequency and resonance</a>
+    <a href="#s6">6. Damping</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Standing Waves and Resonance</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Pluck a guitar string, blow across the top of a bottle, or push a child on a swing at just the right moment — in each case a wave is doing something quite different from carrying energy from A to B. It is trapped, reflecting back and forth, building up a fixed pattern that seems to sit still while it oscillates. This workbook looks at how that happens, what determines the possible patterns on strings and in pipes, and why matching a driving frequency to a system's own natural frequency can make its amplitude grow dramatically — for better (musical instruments, MRI scanners) or worse (collapsing bridges).</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Explain the formation of a standing wave as the superposition of two identical waves travelling in opposite directions.</li>
+          <li>Identify nodes and antinodes on a standing wave, and describe the relative amplitude and phase of points along it.</li>
+          <li>Describe and calculate the possible harmonics of standing waves on a string fixed at both ends.</li>
+          <li>Describe and calculate the possible harmonics of standing waves in open and closed pipes.</li>
+          <li>Explain natural frequency and resonance, and describe how the amplitude of a driven oscillation depends on the driving frequency.</li>
+          <li>Describe the effects of light, critical and heavy damping on an oscillating system, and on its resonant response.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. The formation of standing waves</h2>
+      <p>Every wave you met in the earlier workbooks was a <strong>travelling wave</strong>: it carried energy steadily away from its source, and every point it passed through repeated the same motion, just slightly delayed. Standing waves are different. A <strong>standing wave</strong> is a pattern that stays in the same place — it doesn't travel anywhere — even though every point within it is still oscillating.</p>
+
+      <p>Standing waves form when two waves of the <em>same amplitude, wavelength and frequency</em>, travelling in <em>opposite directions</em>, overlap and superpose. This happens very naturally: send a wave along a string with one end fixed, and it reflects off that fixed end, creating a second wave travelling back the way it came. The original (incident) wave and the reflected wave then overlap continuously, and if the length of the string is just right for the wavelength involved, the superposition of the two settles into a stable, unmoving pattern.</p>
+
+      <div class="keybox"><strong>Standing wave.</strong> The pattern produced by the superposition of two waves of equal amplitude, wavelength and frequency, travelling in opposite directions through the same region. Unlike a travelling wave, a standing wave does not transfer energy from one place to another.</div>
+
+      <figure>
+        <svg viewBox="0 0 640 210" width="640" height="210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arRight" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1f7a6c"/></marker>
+            <marker id="arLeft" markerWidth="9" markerHeight="9" refX="1" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#a33d5b"/></marker>
+          </defs>
+          <text x="320" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Two identical waves travelling in opposite directions</text>
+          <path d="M50,65 Q85,35 120,65 T190,65 T260,65 T330,65 T400,65" fill="none" stroke="#1f7a6c" stroke-width="2.6" marker-end="url(#arRight)"/>
+          <text x="45" y="40" font-size="11" fill="#1f7a6c" text-anchor="start">travelling right</text>
+          <path d="M400,150 Q365,120 330,150 T260,150 T190,150 T120,150 T50,150" fill="none" stroke="#a33d5b" stroke-width="2.6" marker-end="url(#arLeft)"/>
+          <text x="405" y="180" font-size="11" fill="#a33d5b" text-anchor="end">travelling left</text>
+          <line x1="440" y1="107" x2="590" y2="107" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#arRight)"/>
+          <text x="515" y="97" font-size="11" fill="#5b6b78" text-anchor="middle">superpose</text>
+        </svg>
+        <figcaption>Fig. 1.1 Two waves of equal amplitude, wavelength and frequency, travelling in opposite directions, overlap continuously to produce a standing wave. The live simulation below shows their sum.</figcaption>
+      </figure>
+
+      <h3>Live simulation: forming a standing wave</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="formCanvas" width="460" height="240"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Superposition of two travelling waves</h4>
+            <div class="sim-row">
+              <button onclick="toggleComponents()" id="compToggleBtn" style="background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;">Hide component waves</button>
+            </div>
+            <div class="sim-readout" id="formReadout">The teal curve moves right; the maroon curve moves left. The bold white curve is their sum.</div>
+          </div>
+        </div>
+        <p class="sim-print-note">Interactive simulation — open the online version to watch two counter-travelling waves combine into a standing wave.</p>
+      </figure>
+
+      <p>Watch the points where the bold resultant curve always crosses zero, however long the simulation runs. However the two component waves shift, their sum is always exactly zero at those fixed points — they never move. Everywhere else, the resultant oscillates up and down, but always about a fixed position, with an amplitude that depends on where along the pattern that point sits.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>Explain why a standing wave does not transfer energy from one end of it to the other, even though the two travelling waves that form it each individually carry energy.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">The two component waves carry equal amounts of energy in opposite directions, so the net energy flow past any point, averaged over a cycle, is zero. Energy is still transported by each individual wave, but the same amount flows each way, cancelling out overall — so the standing wave pattern itself stores energy (it oscillates between kinetic and potential/elastic forms) without transferring it onward.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>Using the simulation above, describe what is special about the points where the resultant (bold) curve always crosses zero, compared with every other point on the pattern.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">At those points, the two component waves are always exactly out of phase with each other (crest meeting trough), whatever instant you look at, so their displacements always cancel completely and the resultant displacement is permanently zero. Every other point is only out of phase by varying amounts as time passes, so its resultant displacement rises and falls.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>State the three conditions that two travelling waves must satisfy in order to produce a stable standing wave pattern when they overlap.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">The two waves must have the same amplitude, the same wavelength (and therefore the same frequency), and must be travelling in opposite directions through the same region.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Nodes and antinodes</h2>
+      <p>A standing wave pattern remains fixed in space, but the amount of oscillation is not the same everywhere along it.</p>
+      <div class="keybox">
+        <strong>Node.</strong> A point on a standing wave where the displacement is always zero.<br>
+        <strong>Antinode.</strong> A point on a standing wave where the amplitude of oscillation is greatest.
+      </div>
+      <p>Between one node and the next, every point oscillates <em>in phase</em> with every other point in that same stretch — they all reach maximum displacement at the same instant, and all pass through zero at the same instant — but with different amplitudes, rising smoothly from zero at the nodes to a maximum at the antinode in the middle. Cross over a node into the next stretch of the pattern, and the oscillation there is exactly <em>out of phase</em> with the one before it: while one side is at its positive maximum, the other is at its negative maximum.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 680 230" width="680" height="230" xmlns="http://www.w3.org/2000/svg">
+          <text x="340" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Amplitude varies along a standing wave; phase does not (within one loop)</text>
+          <line x1="60" y1="150" x2="620" y2="150" stroke="#b9c6d3" stroke-width="1"/>
+          <path d="M 60.0,150.0 L 69.3,144.3 L 78.7,138.6 L 88.0,133.0 L 97.3,127.6 L 106.7,122.5 L 116.0,117.7 L 125.3,113.2 L 134.7,109.1 L 144.0,105.5 L 153.3,102.4 L 162.7,99.8 L 172.0,97.7 L 181.3,96.2 L 190.7,95.3 L 200.0,95.0 L 209.3,95.3 L 218.7,96.2 L 228.0,97.7 L 237.3,99.8 L 246.7,102.4 L 256.0,105.5 L 265.3,109.1 L 274.7,113.2 L 284.0,117.7 L 293.3,122.5 L 302.7,127.6 L 312.0,133.0 L 321.3,138.6 L 330.7,144.3 L 340.0,150.0 L 349.3,155.7 L 358.7,161.4 L 368.0,167.0 L 377.3,172.4 L 386.7,177.5 L 396.0,182.3 L 405.3,186.8 L 414.7,190.9 L 424.0,194.5 L 433.3,197.6 L 442.7,200.2 L 452.0,202.3 L 461.3,203.8 L 470.7,204.7 L 480.0,205.0 L 489.3,204.7 L 498.7,203.8 L 508.0,202.3 L 517.3,200.2 L 526.7,197.6 L 536.0,194.5 L 545.3,190.9 L 554.7,186.8 L 564.0,182.3 L 573.3,177.5 L 582.7,172.4 L 592.0,167.0 L 601.3,161.4 L 610.7,155.7 L 620.0,150.0" fill="none" stroke="#6b4c9a" stroke-width="1.4" stroke-dasharray="5 3"/>
+          <path d="M 60.0,150.0 L 69.3,155.7 L 78.7,161.4 L 88.0,167.0 L 97.3,172.4 L 106.7,177.5 L 116.0,182.3 L 125.3,186.8 L 134.7,190.9 L 144.0,194.5 L 153.3,197.6 L 162.7,200.2 L 172.0,202.3 L 181.3,203.8 L 190.7,204.7 L 200.0,205.0 L 209.3,204.7 L 218.7,203.8 L 228.0,202.3 L 237.3,200.2 L 246.7,197.6 L 256.0,194.5 L 265.3,190.9 L 274.7,186.8 L 284.0,182.3 L 293.3,177.5 L 302.7,172.4 L 312.0,167.0 L 321.3,161.4 L 330.7,155.7 L 340.0,150.0 L 349.3,144.3 L 358.7,138.6 L 368.0,133.0 L 377.3,127.6 L 386.7,122.5 L 396.0,117.7 L 405.3,113.2 L 414.7,109.1 L 424.0,105.5 L 433.3,102.4 L 442.7,99.8 L 452.0,97.7 L 461.3,96.2 L 470.7,95.3 L 480.0,95.0 L 489.3,95.3 L 498.7,96.2 L 508.0,97.7 L 517.3,99.8 L 526.7,102.4 L 536.0,105.5 L 545.3,109.1 L 554.7,113.2 L 564.0,117.7 L 573.3,122.5 L 582.7,127.6 L 592.0,133.0 L 601.3,138.6 L 610.7,144.3 L 620.0,150.0" fill="none" stroke="#6b4c9a" stroke-width="1.4" stroke-dasharray="5 3"/>
+          <path d="M 60.0,150.0 L 69.3,146.4 L 78.7,142.9 L 88.0,139.5 L 97.3,136.1 L 106.7,132.9 L 116.0,130.0 L 125.3,127.2 L 134.7,124.7 L 144.0,122.4 L 153.3,120.5 L 162.7,118.8 L 172.0,117.6 L 181.3,116.6 L 190.7,116.1 L 200.0,115.9 L 209.3,116.1 L 218.7,116.6 L 228.0,117.6 L 237.3,118.8 L 246.7,120.5 L 256.0,122.4 L 265.3,124.7 L 274.7,127.2 L 284.0,130.0 L 293.3,132.9 L 302.7,136.1 L 312.0,139.5 L 321.3,142.9 L 330.7,146.4 L 340.0,150.0 L 349.3,153.6 L 358.7,157.1 L 368.0,160.5 L 377.3,163.9 L 386.7,167.1 L 396.0,170.0 L 405.3,172.8 L 414.7,175.3 L 424.0,177.6 L 433.3,179.5 L 442.7,181.2 L 452.0,182.4 L 461.3,183.4 L 470.7,183.9 L 480.0,184.1 L 489.3,183.9 L 498.7,183.4 L 508.0,182.4 L 517.3,181.2 L 526.7,179.5 L 536.0,177.6 L 545.3,175.3 L 554.7,172.8 L 564.0,170.0 L 573.3,167.1 L 582.7,163.9 L 592.0,160.5 L 601.3,157.1 L 610.7,153.6 L 620.0,150.0" fill="none" stroke="#0e7c86" stroke-width="2.6"/>
+          <line x1="130.0" y1="111.1" x2="130.0" y2="188.9" stroke="#d98324" stroke-width="1.3" marker-start="url(#nnArrow)" marker-end="url(#nnArrow)"/>
+          <line x1="200.0" y1="95.0" x2="200.0" y2="205.0" stroke="#d98324" stroke-width="1.3" marker-start="url(#nnArrow)" marker-end="url(#nnArrow)"/>
+          <line x1="270.0" y1="111.1" x2="270.0" y2="188.9" stroke="#d98324" stroke-width="1.3" marker-start="url(#nnArrow)" marker-end="url(#nnArrow)"/>
+          <line x1="410.0" y1="111.1" x2="410.0" y2="188.9" stroke="#d98324" stroke-width="1.3" marker-start="url(#nnArrow)" marker-end="url(#nnArrow)"/>
+          <line x1="480.0" y1="95.0" x2="480.0" y2="205.0" stroke="#d98324" stroke-width="1.3" marker-start="url(#nnArrow)" marker-end="url(#nnArrow)"/>
+          <line x1="550.0" y1="111.1" x2="550.0" y2="188.9" stroke="#d98324" stroke-width="1.3" marker-start="url(#nnArrow)" marker-end="url(#nnArrow)"/>
+          <defs><marker id="nnArrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M4,0 L8,4 L4,8 L0,4 Z" fill="#d98324"/></marker></defs>
+          <circle cx="60" cy="150" r="4" fill="#173a5e"/>
+          <circle cx="340" cy="150" r="4" fill="#173a5e"/>
+          <circle cx="620" cy="150" r="4" fill="#173a5e"/>
+          <text x="60" y="220" font-size="11" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="200" y="220" font-size="11" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="340" y="220" font-size="11" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="480" y="220" font-size="11" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="620" y="220" font-size="11" fill="#173a5e" text-anchor="middle">N</text>
+        </svg>
+        <figcaption>Fig. 2.1 The dashed purple curves show the envelope — the maximum extent the pattern ever reaches. The solid teal curve is a snapshot at one instant: it touches zero at exactly the same points (nodes, N) as the envelope, and its amplitude at any position is a fixed fraction of the envelope's height there. The amber arrows show how far each point actually swings — zero at the nodes, greatest at the antinodes (A), and smoothly in between.</figcaption>
+      </figure>
+
+      <table class="eqtable">
+        <tr><th></th><th>Standing wave</th><th>Travelling wave</th></tr>
+        <tr><td>Energy transfer</td><td>No energy is transferred</td><td>Energy is transferred through the medium</td></tr>
+        <tr><td>Amplitude</td><td>Varies with position: zero at nodes, maximum at antinodes</td><td>The same at every point</td></tr>
+        <tr><td>Phase</td><td>All points between adjacent nodes are in phase; points either side of a node are out of phase</td><td>Points one wavelength apart are in phase; other separations are generally out of phase</td></tr>
+        <tr><td>Wavelength</td><td>Twice the distance between adjacent nodes (or adjacent antinodes)</td><td>The shortest distance between two points in phase</td></tr>
+      </table>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">4</span><strong>State the phase relationship between two points that lie within the same loop of a standing wave (i.e. between the same pair of adjacent nodes, with no node between them).</strong>
+        <textarea class="answer-lines" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">They are in phase with each other — they reach maximum displacement at the same instant and pass through zero at the same instant, even though their amplitudes are different.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">5</span><strong>State the phase relationship between two points on either side of a node, in adjacent loops of a standing wave.</strong>
+        <textarea class="answer-lines" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">They are exactly out of phase (in antiphase) with each other — when one side is at its positive maximum, the other is at its negative maximum.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>The distance between two adjacent nodes of a standing wave on a string is measured to be 0.42 m.</strong> Determine the wavelength of the standing wave.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">The distance between adjacent nodes is always λ/2, so λ = 2 × 0.42 m.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">7</span><strong>Explain, using the idea of superposition, why a node is a point of permanently zero displacement.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">A node is a point where the two component travelling waves are always exactly out of phase with each other, whatever instant you look at — so by the principle of superposition their displacements always add to zero there, however the individual waves move.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Standing wave patterns on strings</h2>
+      <p>If a string fixed at both ends is plucked or vibrated, it can only settle into a standing wave that has a <strong>node at each fixed end</strong> — the string obviously cannot move at a point that is clamped in place. These fixed-end requirements are called the <strong>boundary conditions</strong> of the system, and they determine exactly which wavelengths (and so which frequencies) are actually possible.</p>
+      <div class="keybox"><strong>Boundary conditions.</strong> The physical conditions imposed at the ends of a standing wave system, which determine whether there is a node or an antinode there. A fixed end must be a node; a free end must be an antinode.</div>
+
+      <p>The simplest possible pattern — a single loop, with a node at each end and one antinode in the middle — is called the <strong>first harmonic</strong>. It is usually the dominant mode of vibration, but a whole series of other <strong>harmonics</strong> (modes of vibration) can also occur, each fitting an extra half-wavelength loop into the same string length.</p>
+
+      <div class="keyword"><b>Important IB terminology:</b> the lowest-frequency standing wave a system can support is always called the <strong>first harmonic</strong> in this course — not the "fundamental". Higher modes are the second harmonic, third harmonic, and so on — the terms "overtone" and "fundamental" are not used.</div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 700 300" width="700" height="300" xmlns="http://www.w3.org/2000/svg">
+          <text x="380" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Modes of vibration of a string fixed at both ends (length l)</text>
+          <!-- n=1 -->
+          <line x1="150" y1="35" x2="150" y2="72" stroke="#22305a" stroke-width="2.5"/>
+          <line x1="610" y1="35" x2="610" y2="72" stroke="#22305a" stroke-width="2.5"/>
+          <path d="M 150.0,60.0 L 159.6,58.7 L 169.2,57.4 L 178.8,56.1 L 188.3,54.8 L 197.9,53.6 L 207.5,52.3 L 217.1,51.2 L 226.7,50.0 L 236.2,48.9 L 245.8,47.8 L 255.4,46.8 L 265.0,45.9 L 274.6,45.0 L 284.2,44.1 L 293.8,43.4 L 303.3,42.7 L 312.9,42.1 L 322.5,41.5 L 332.1,41.1 L 341.7,40.7 L 351.2,40.4 L 360.8,40.2 L 370.4,40.0 L 380.0,40.0 L 389.6,40.0 L 399.2,40.2 L 408.8,40.4 L 418.3,40.7 L 427.9,41.1 L 437.5,41.5 L 447.1,42.1 L 456.7,42.7 L 466.2,43.4 L 475.8,44.1 L 485.4,45.0 L 495.0,45.9 L 504.6,46.8 L 514.2,47.8 L 523.8,48.9 L 533.3,50.0 L 542.9,51.2 L 552.5,52.3 L 562.1,53.6 L 571.7,54.8 L 581.2,56.1 L 590.8,57.4 L 600.4,58.7 L 610.0,60.0" fill="none" stroke="#a33d5b" stroke-width="2"/>
+          <text x="70" y="63" font-size="11" fill="#22305a" text-anchor="start">1st harmonic</text>
+          <text x="622" y="52" font-size="10" fill="#5b6b78">λ₀ = 2l, f₀</text>
+          <text x="150" y="80" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="380" y="80" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="610" y="80" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <!-- n=2 -->
+          <line x1="150" y1="101" x2="150" y2="151" stroke="#22305a" stroke-width="2.5"/>
+          <line x1="610" y1="101" x2="610" y2="151" stroke="#22305a" stroke-width="2.5"/>
+          <path d="M 150.0,126.0 L 159.6,123.4 L 169.2,120.8 L 178.8,118.3 L 188.3,116.0 L 197.9,113.8 L 207.5,111.9 L 217.1,110.1 L 226.7,108.7 L 236.2,107.5 L 245.8,106.7 L 255.4,106.2 L 265.0,106.0 L 274.6,106.2 L 284.2,106.7 L 293.8,107.5 L 303.3,108.7 L 312.9,110.1 L 322.5,111.9 L 332.1,113.8 L 341.7,116.0 L 351.2,118.3 L 360.8,120.8 L 370.4,123.4 L 380.0,126.0 L 389.6,128.6 L 399.2,131.2 L 408.8,133.7 L 418.3,136.0 L 427.9,138.2 L 437.5,140.1 L 447.1,141.9 L 456.7,143.3 L 466.2,144.5 L 475.8,145.3 L 485.4,145.8 L 495.0,146.0 L 504.6,145.8 L 514.2,145.3 L 523.8,144.5 L 533.3,143.3 L 542.9,141.9 L 552.5,140.1 L 562.1,138.2 L 571.7,136.0 L 581.2,133.7 L 590.8,131.2 L 600.4,128.6 L 610.0,126.0" fill="none" stroke="#a33d5b" stroke-width="2"/>
+          <text x="70" y="129" font-size="11" fill="#22305a" text-anchor="start">2nd harmonic</text>
+          <text x="622" y="118" font-size="10" fill="#5b6b78">λ = 2l/2, f = 2f₀</text>
+          <text x="150" y="163" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="265" y="163" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="380" y="163" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="495" y="163" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="610" y="163" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <!-- n=3 -->
+          <line x1="150" y1="167" x2="150" y2="217" stroke="#22305a" stroke-width="2.5"/>
+          <line x1="610" y1="167" x2="610" y2="217" stroke="#22305a" stroke-width="2.5"/>
+          <path d="M 150.0,192.0 L 159.6,188.1 L 169.2,184.3 L 178.8,180.9 L 188.3,177.9 L 197.9,175.4 L 207.5,173.5 L 217.1,172.4 L 226.7,172.0 L 236.2,172.4 L 245.8,173.5 L 255.4,175.4 L 265.0,177.9 L 274.6,180.9 L 284.2,184.3 L 293.8,188.1 L 303.3,192.0 L 312.9,195.9 L 322.5,199.7 L 332.1,203.1 L 341.7,206.1 L 351.2,208.6 L 360.8,210.5 L 370.4,211.6 L 380.0,212.0 L 389.6,211.6 L 399.2,210.5 L 408.8,208.6 L 418.3,206.1 L 427.9,203.1 L 437.5,199.7 L 447.1,195.9 L 456.7,192.0 L 466.2,188.1 L 475.8,184.3 L 485.4,180.9 L 495.0,177.9 L 504.6,175.4 L 514.2,173.5 L 523.8,172.4 L 533.3,172.0 L 542.9,172.4 L 552.5,173.5 L 562.1,175.4 L 571.7,177.9 L 581.2,180.9 L 590.8,184.3 L 600.4,188.1 L 610.0,192.0" fill="none" stroke="#a33d5b" stroke-width="2"/>
+          <text x="70" y="195" font-size="11" fill="#22305a" text-anchor="start">3rd harmonic</text>
+          <text x="622" y="184" font-size="10" fill="#5b6b78">λ = 2l/3, f = 3f₀</text>
+          <text x="150" y="229" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="226.7" y="229" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="303.3" y="229" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="380" y="229" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="456.7" y="229" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="533.3" y="229" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="610" y="229" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <!-- n=4 -->
+          <line x1="150" y1="233" x2="150" y2="283" stroke="#22305a" stroke-width="2.5"/>
+          <line x1="610" y1="233" x2="610" y2="283" stroke="#22305a" stroke-width="2.5"/>
+          <path d="M 150.0,258.0 L 159.6,252.8 L 169.2,248.0 L 178.8,243.9 L 188.3,240.7 L 197.9,238.7 L 207.5,238.0 L 217.1,238.7 L 226.7,240.7 L 236.2,243.9 L 245.8,248.0 L 255.4,252.8 L 265.0,258.0 L 274.6,263.2 L 284.2,268.0 L 293.8,272.1 L 303.3,275.3 L 312.9,277.3 L 322.5,278.0 L 332.1,277.3 L 341.7,275.3 L 351.2,272.1 L 360.8,268.0 L 370.4,263.2 L 380.0,258.0 L 389.6,252.8 L 399.2,248.0 L 408.8,243.9 L 418.3,240.7 L 427.9,238.7 L 437.5,238.0 L 447.1,238.7 L 456.7,240.7 L 466.2,243.9 L 475.8,248.0 L 485.4,252.8 L 495.0,258.0 L 504.6,263.2 L 514.2,268.0 L 523.8,272.1 L 533.3,275.3 L 542.9,277.3 L 552.5,278.0 L 562.1,277.3 L 571.7,275.3 L 581.2,272.1 L 590.8,268.0 L 600.4,263.2 L 610.0,258.0" fill="none" stroke="#a33d5b" stroke-width="2"/>
+          <text x="70" y="261" font-size="11" fill="#22305a" text-anchor="start">4th harmonic</text>
+          <text x="622" y="250" font-size="10" fill="#5b6b78">λ = 2l/4, f = 4f₀</text>
+          <text x="150" y="295" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="207.5" y="295" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="265" y="295" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="322.5" y="295" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="380" y="295" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="437.5" y="295" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="495" y="295" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="552.5" y="295" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="610" y="295" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+        </svg>
+        <figcaption>Fig. 3.1 The first four harmonics of a string of length l, fixed at both ends. Each successive harmonic fits one more half-wavelength loop into the same length.</figcaption>
+      </figure>
+
+      <p>If a string of length <em>l</em> is fixed at both ends, the wavelength of the first harmonic, λ₀, is 2<em>l</em> — the longest wave that can fit a node at each end. Since v = fλ, the frequency of the first harmonic is:</p>
+      <div class="eqn">f₀ = v / λ₀ = v / 2l</div>
+      <p>where v is the speed of the wave along the string (which depends on its tension and mass per unit length, as covered in Topic C.1). Every other harmonic is a whole-number multiple of this: the wavelengths are 2<em>l</em>, 2<em>l</em>/2, 2<em>l</em>/3, 2<em>l</em>/4 … and the frequencies are f₀, 2f₀, 3f₀, 4f₀ …</p>
+
+      <div class="keybox"><strong>The wavelength of the first harmonic is fixed by the length of the system and its boundary conditions.</strong> The equation v = fλ then connects that wavelength to the frequency, once the wave speed is known.</div>
+
+      <h3>Live simulation: standing waves on a string</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="stringCanvas" width="460" height="240"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>String fixed at both ends</h4>
+            <div class="sim-row">
+              <label for="harmonicSlider">Harmonic, n = <span id="harmonicReadout">1</span></label>
+              <input type="range" id="harmonicSlider" min="1" max="6" step="1" value="1">
+            </div>
+            <div class="sim-readout" id="stringReadout">String length L = 0.60 m, first-harmonic frequency f₀ = 200 Hz (fixed for this demo).<br>λₙ = 2L/n = 1.20 m<br>fₙ = n × f₀ = 200 Hz</div>
+          </div>
+        </div>
+        <p class="sim-print-note">Interactive simulation — open the online version to explore harmonics 1–6 on a fixed string.</p>
+      </figure>
+
+      <h3>Worked example</h3>
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>A cello string has a length of 0.70 m. Waves travel along it at 246 m s⁻¹.</p>
+        <p><strong>Answer:</strong><br>
+        λ₀ = 2l = 2 × 0.70 m = 1.40 m<br>
+        f₀ = v/λ₀ = 246 / 1.40</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">8</span><strong>A guitar string of length 0.65 m vibrates in its first harmonic. Waves travel along the string at 191 m s⁻¹.</strong> Determine the frequency of the first harmonic.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">λ₀ = 2l = 2 × 0.65 m = 1.30 m<br>f₀ = v/λ₀ = 191/1.30</div>
+      </div>
+      <div class="question">
+        <span class="qnum">9</span><strong>A string of length 0.84 m, fixed at both ends, supports a first harmonic of frequency 96 Hz.</strong> Determine the wavelength and frequency of the third harmonic on this string.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">λ = 2l/3 = (2 × 0.84)/3<br>f = 3 × f₀ = 3 × 96</div>
+      </div>
+      <div class="question">
+        <span class="qnum">10</span><strong>Explain why the ends of a string that is fixed at both ends must always be nodes, whichever harmonic is present.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">A fixed end is clamped in place and physically cannot move, so its displacement must always be zero — which is exactly the definition of a node. This boundary condition must be satisfied for any standing wave that forms on the string, whatever harmonic it is.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">11</span><strong>Using the simulation above, describe how the spacing between adjacent nodes changes as the harmonic number n is increased, for the same fixed string length L.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">As n increases, more nodes appear along the same length of string, so adjacent nodes get closer together — the node spacing is L/n, which decreases as n increases.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Standing wave patterns in pipes</h2>
+      <p>Standing waves also form in columns of air, such as inside a pipe, tube or bottle — this time as longitudinal sound waves rather than transverse waves on a string. As with strings, the possible patterns depend entirely on the boundary conditions at the two ends of the pipe.</p>
+      <div class="keybox">A pipe open at both ends must have an <strong>antinode</strong> at each end. A pipe closed at one end and open at the other must have a <strong>node</strong> at the closed end and an <strong>antinode</strong> at the open end.</div>
+
+      <h3>Pipes open at both ends</h3>
+      <p>An open end is free to move, so it must be an antinode — the air there is free to oscillate with maximum amplitude. This gives exactly the same set of possible patterns as a string fixed at both ends, just with the node/antinode roles swapped: <strong>every</strong> harmonic (1st, 2nd, 3rd, 4th …) is possible, and the equations are identical: λ₀ = 2l, f₀ = v/2l, with the same whole-number multiples for higher harmonics.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 640 264" width="640" height="264" xmlns="http://www.w3.org/2000/svg">
+          <text x="350" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Open pipe (antinode at each end) — first three harmonics</text>
+          <text x="150" y="28" font-size="10" fill="#5b6b78" text-anchor="middle">open end</text>
+          <text x="560" y="28" font-size="10" fill="#5b6b78" text-anchor="middle">open end</text>
+          <!-- n=1 -->
+          <line x1="150" y1="46.0" x2="560" y2="46.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="150" y1="94.0" x2="560" y2="94.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 150.0,46.0 L 158.5,46.1 L 167.1,46.2 L 175.6,46.5 L 184.2,46.8 L 192.7,47.3 L 201.2,47.8 L 209.8,48.5 L 218.3,49.2 L 226.9,50.0 L 235.4,51.0 L 244.0,52.0 L 252.5,53.0 L 261.0,54.2 L 269.6,55.4 L 278.1,56.7 L 286.7,58.0 L 295.2,59.4 L 303.8,60.8 L 312.3,62.3 L 320.8,63.8 L 329.4,65.3 L 337.9,66.9 L 346.5,68.4 L 355.0,70.0 L 363.5,71.6 L 372.1,73.1 L 380.6,74.7 L 389.2,76.2 L 397.7,77.7 L 406.2,79.2 L 414.8,80.6 L 423.3,82.0 L 431.9,83.3 L 440.4,84.6 L 449.0,85.8 L 457.5,87.0 L 466.0,88.0 L 474.6,89.0 L 483.1,90.0 L 491.7,90.8 L 500.2,91.5 L 508.8,92.2 L 517.3,92.7 L 525.8,93.2 L 534.4,93.5 L 542.9,93.8 L 551.5,93.9 L 560.0,94.0" fill="none" stroke="#1f7a6c" stroke-width="2.2"/>
+          <text x="140" y="74.0" font-size="11" fill="#22305a" text-anchor="end">1st harmonic</text>
+          <text x="580" y="40.0" font-size="9.5" fill="#5b6b78">λ₀=2l, f₀</text>
+          <text x="150.0" y="110.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="355.0" y="110.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="560.0" y="110.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <!-- n=2 -->
+          <line x1="150" y1="118.0" x2="560" y2="118.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="150" y1="166.0" x2="560" y2="166.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 150.0,118.0 L 158.5,118.2 L 167.1,118.8 L 175.6,119.8 L 184.2,121.2 L 192.7,123.0 L 201.2,125.0 L 209.8,127.4 L 218.3,130.0 L 226.9,132.8 L 235.4,135.8 L 244.0,138.9 L 252.5,142.0 L 261.0,145.1 L 269.6,148.2 L 278.1,151.2 L 286.7,154.0 L 295.2,156.6 L 303.8,159.0 L 312.3,161.0 L 320.8,162.8 L 329.4,164.2 L 337.9,165.2 L 346.5,165.8 L 355.0,166.0 L 363.5,165.8 L 372.1,165.2 L 380.6,164.2 L 389.2,162.8 L 397.7,161.0 L 406.2,159.0 L 414.8,156.6 L 423.3,154.0 L 431.9,151.2 L 440.4,148.2 L 449.0,145.1 L 457.5,142.0 L 466.0,138.9 L 474.6,135.8 L 483.1,132.8 L 491.7,130.0 L 500.2,127.4 L 508.8,125.0 L 517.3,123.0 L 525.8,121.2 L 534.4,119.8 L 542.9,118.8 L 551.5,118.2 L 560.0,118.0" fill="none" stroke="#1f7a6c" stroke-width="2.2"/>
+          <text x="140" y="146.0" font-size="11" fill="#22305a" text-anchor="end">2nd harmonic</text>
+          <text x="580" y="112.0" font-size="9.5" fill="#5b6b78">λ=2l/2, f=2f₀</text>
+          <text x="150.0" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="252.5" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="355.0" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="457.5" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="560.0" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <!-- n=3 -->
+          <line x1="150" y1="190.0" x2="560" y2="190.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="150" y1="238.0" x2="560" y2="238.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 150.0,190.0 L 158.5,190.5 L 167.1,191.8 L 175.6,194.0 L 184.2,197.0 L 192.7,200.7 L 201.2,204.8 L 209.8,209.3 L 218.3,214.0 L 226.9,218.7 L 235.4,223.2 L 244.0,227.3 L 252.5,231.0 L 261.0,234.0 L 269.6,236.2 L 278.1,237.5 L 286.7,238.0 L 295.2,237.5 L 303.8,236.2 L 312.3,234.0 L 320.8,231.0 L 329.4,227.3 L 337.9,223.2 L 346.5,218.7 L 355.0,214.0 L 363.5,209.3 L 372.1,204.8 L 380.6,200.7 L 389.2,197.0 L 397.7,194.0 L 406.2,191.8 L 414.8,190.5 L 423.3,190.0 L 431.9,190.5 L 440.4,191.8 L 449.0,194.0 L 457.5,197.0 L 466.0,200.7 L 474.6,204.8 L 483.1,209.3 L 491.7,214.0 L 500.2,218.7 L 508.8,223.2 L 517.3,227.3 L 525.8,231.0 L 534.4,234.0 L 542.9,236.2 L 551.5,237.5 L 560.0,238.0" fill="none" stroke="#1f7a6c" stroke-width="2.2"/>
+          <text x="140" y="218.0" font-size="11" fill="#22305a" text-anchor="end">3rd harmonic</text>
+          <text x="580" y="184.0" font-size="9.5" fill="#5b6b78">λ=2l/3, f=3f₀</text>
+          <text x="150.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="218.3" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="286.7" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="355.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="423.3" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="491.7" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="560.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+        </svg>
+        <figcaption>Fig. 4.1 The first three harmonics in a pipe open at both ends. The two grey rails represent the physical walls of the pipe; the curve is the maximum sideways displacement of the vibrating air at each point, which always reaches the rails (an antinode) at both open ends and touches the centreline (a node) in between — not a transverse wave, since sound in a pipe is longitudinal.</figcaption>
+      </figure>
+
+      <h3>Pipes closed at one end</h3>
+      <p>A pipe closed at one end and open at the other needs a node at the closed end (the air there cannot move) and an antinode at the open end. The simplest pattern that satisfies both conditions at once is a <em>quarter</em> wavelength — not a half wavelength — so the first harmonic has a longer wavelength, and therefore a lower frequency, than an open pipe of the same length:</p>
+      <div class="eqn">λ₀ = 4l, &nbsp;&nbsp; f₀ = v/4l</div>
+      <p>Because the pattern must still end on a node at the closed end and an antinode at the open end, only the <strong>odd-numbered</strong> harmonics (1st, 3rd, 5th, 7th …) are possible for a pipe closed at one end — the even harmonics simply don't fit the boundary conditions.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 640 264" width="640" height="264" xmlns="http://www.w3.org/2000/svg">
+          <text x="350" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="#22305a">Closed pipe (node at closed end, antinode at open end) — only odd harmonics</text>
+          <text x="150" y="28" font-size="10" fill="#5b6b78" text-anchor="middle">closed end</text>
+          <text x="560" y="28" font-size="10" fill="#5b6b78" text-anchor="middle">open end</text>
+          <!-- n=1 -->
+          <line x1="150" y1="46.0" x2="560" y2="46.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="150" y1="94.0" x2="560" y2="94.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="145" y="46.0" width="6" height="48.0" fill="#173a5e"/>
+          <path d="M 150.0,70.0 L 158.5,69.2 L 167.1,68.4 L 175.6,67.6 L 184.2,66.9 L 192.7,66.1 L 201.2,65.3 L 209.8,64.6 L 218.3,63.8 L 226.9,63.0 L 235.4,62.3 L 244.0,61.5 L 252.5,60.8 L 261.0,60.1 L 269.6,59.4 L 278.1,58.7 L 286.7,58.0 L 295.2,57.3 L 303.8,56.7 L 312.3,56.0 L 320.8,55.4 L 329.4,54.8 L 337.9,54.2 L 346.5,53.6 L 355.0,53.0 L 363.5,52.5 L 372.1,52.0 L 380.6,51.4 L 389.2,51.0 L 397.7,50.5 L 406.2,50.0 L 414.8,49.6 L 423.3,49.2 L 431.9,48.8 L 440.4,48.5 L 449.0,48.1 L 457.5,47.8 L 466.0,47.5 L 474.6,47.3 L 483.1,47.0 L 491.7,46.8 L 500.2,46.6 L 508.8,46.5 L 517.3,46.3 L 525.8,46.2 L 534.4,46.1 L 542.9,46.1 L 551.5,46.0 L 560.0,46.0" fill="none" stroke="#c1791f" stroke-width="2.2"/>
+          <text x="140" y="74.0" font-size="11" fill="#22305a" text-anchor="end">1st harmonic</text>
+          <text x="580" y="40.0" font-size="9.5" fill="#5b6b78">λ₀=4l, f₀</text>
+          <text x="150.0" y="110.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="560.0" y="110.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <!-- n=3 -->
+          <line x1="150" y1="118.0" x2="560" y2="118.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="150" y1="166.0" x2="560" y2="166.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="145" y="118.0" width="6" height="48.0" fill="#173a5e"/>
+          <path d="M 150.0,142.0 L 158.5,139.6 L 167.1,137.3 L 175.6,135.0 L 184.2,132.8 L 192.7,130.7 L 201.2,128.7 L 209.8,126.8 L 218.3,125.0 L 226.9,123.4 L 235.4,122.0 L 244.0,120.8 L 252.5,119.8 L 261.0,119.0 L 269.6,118.5 L 278.1,118.1 L 286.7,118.0 L 295.2,118.1 L 303.8,118.5 L 312.3,119.0 L 320.8,119.8 L 329.4,120.8 L 337.9,122.0 L 346.5,123.4 L 355.0,125.0 L 363.5,126.8 L 372.1,128.7 L 380.6,130.7 L 389.2,132.8 L 397.7,135.0 L 406.2,137.3 L 414.8,139.6 L 423.3,142.0 L 431.9,144.4 L 440.4,146.7 L 449.0,149.0 L 457.5,151.2 L 466.0,153.3 L 474.6,155.3 L 483.1,157.2 L 491.7,159.0 L 500.2,160.6 L 508.8,162.0 L 517.3,163.2 L 525.8,164.2 L 534.4,165.0 L 542.9,165.5 L 551.5,165.9 L 560.0,166.0" fill="none" stroke="#c1791f" stroke-width="2.2"/>
+          <text x="140" y="146.0" font-size="11" fill="#22305a" text-anchor="end">3rd harmonic</text>
+          <text x="580" y="112.0" font-size="9.5" fill="#5b6b78">λ=4l/3, f=3f₀</text>
+          <text x="150.0" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="286.7" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="423.3" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="560.0" y="182.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <!-- n=5 -->
+          <line x1="150" y1="190.0" x2="560" y2="190.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="150" y1="238.0" x2="560" y2="238.0" stroke="#9fb3c4" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="145" y="190.0" width="6" height="48.0" fill="#173a5e"/>
+          <path d="M 150.0,214.0 L 158.5,210.1 L 167.1,206.3 L 175.6,202.7 L 184.2,199.4 L 192.7,196.5 L 201.2,194.0 L 209.8,192.1 L 218.3,190.8 L 226.9,190.1 L 235.4,190.1 L 244.0,190.6 L 252.5,191.8 L 261.0,193.6 L 269.6,196.0 L 278.1,198.8 L 286.7,202.0 L 295.2,205.5 L 303.8,209.3 L 312.3,213.2 L 320.8,217.1 L 329.4,221.0 L 337.9,224.6 L 346.5,228.0 L 355.0,231.0 L 363.5,233.5 L 372.1,235.5 L 380.6,237.0 L 389.2,237.8 L 397.7,238.0 L 406.2,237.5 L 414.8,236.5 L 423.3,234.8 L 431.9,232.6 L 440.4,229.8 L 449.0,226.7 L 457.5,223.2 L 466.0,219.4 L 474.6,215.6 L 483.1,211.6 L 491.7,207.8 L 500.2,204.1 L 508.8,200.7 L 517.3,197.6 L 525.8,195.0 L 534.4,192.8 L 542.9,191.3 L 551.5,190.3 L 560.0,190.0" fill="none" stroke="#c1791f" stroke-width="2.2"/>
+          <text x="140" y="218.0" font-size="11" fill="#22305a" text-anchor="end">5th harmonic</text>
+          <text x="580" y="184.0" font-size="9.5" fill="#5b6b78">λ=4l/5, f=5f₀</text>
+          <text x="150.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="232.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="314.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="396.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+          <text x="478.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">N</text>
+          <text x="560.0" y="254.0" font-size="10" fill="#173a5e" text-anchor="middle">A</text>
+        </svg>
+        <figcaption>Fig. 4.2 The first, third and fifth harmonics in a pipe closed at one end (left) and open at the other (right). The solid navy bar marks the closed end (a node — the pipe wall itself stops the air moving there); the right end is left open, where the wave always reaches the rail (an antinode). The second, fourth … harmonics cannot occur, because they would require an antinode at the closed end.</figcaption>
+      </figure>
+
+      <h3>Live simulation: standing waves in a pipe</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="pipeCanvas" width="460" height="240"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Open vs. closed pipe</h4>
+            <div class="sim-row">
+              <label for="pipeTypeSelect">Boundary conditions</label>
+              <select id="pipeTypeSelect">
+                <option value="open">Open at both ends</option>
+                <option value="closed">Closed at one end</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="pipeHarmonicSelect">Harmonic</label>
+              <select id="pipeHarmonicSelect"></select>
+            </div>
+            <div class="sim-readout" id="pipeReadout">Pipe length L = 0.50 m, speed of sound v = 340 m/s (fixed for this demo).</div>
+          </div>
+        </div>
+        <p class="sim-print-note">Interactive simulation — open the online version to compare open- and closed-pipe harmonics.</p>
+      </figure>
+
+      <h3>Worked example</h3>
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A bicycle pump, closed at one end by a fingertip, behaves as a pipe closed at one end with an effective length of 0.62 m. Take the speed of sound as 343 m s⁻¹.</p>
+        <p><strong>Answer:</strong><br>
+        λ₀ = 4l = 4 × 0.62 m = 2.48 m<br>
+        f₀ = v/λ₀ = 343/2.48</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">12</span><strong>An organ pipe of length 1.15 m is open at both ends. Take the speed of sound as 340 m s⁻¹.</strong> Determine the frequency of its first harmonic.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">λ₀ = 2l = 2 × 1.15 m = 2.30 m<br>f₀ = v/λ₀ = 340/2.30</div>
+      </div>
+      <div class="question">
+        <span class="qnum">13</span><strong>A different pipe, also of length 1.15 m, is closed at one end. Take the speed of sound as 340 m s⁻¹.</strong> Determine the frequency of its first harmonic, and explain why only odd-numbered harmonics are possible for this pipe.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">λ₀ = 4l = 4 × 1.15 m = 4.60 m<br>f₀ = v/λ₀ = 340/4.60<br>Only odd harmonics fit the boundary conditions (a node at the closed end and an antinode at the open end at the same time) — the even-numbered patterns would require an antinode at the closed end, which is not possible.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">14</span><strong>Explain why the first-harmonic frequency of a pipe closed at one end is lower than that of an open pipe of the same length.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">The closed pipe's first harmonic has a wavelength of 4l, twice as long as the open pipe's first-harmonic wavelength of 2l, because only a quarter wavelength (not a half) fits between a node and an antinode. Since f = v/λ and v is the same in both cases, the longer wavelength gives a lower frequency.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">15</span><strong>Using the simulation above, describe how the set of available harmonics changes when you switch the boundary conditions from "open at both ends" to "closed at one end".</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">For the open pipe, every harmonic (1st, 2nd, 3rd, 4th …) is available. Switching to a closed pipe removes all of the even-numbered harmonics, leaving only the odd-numbered ones (1st, 3rd, 5th …), and the first-harmonic frequency drops because its wavelength is now 4l instead of 2l.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Natural frequency and resonance</h2>
+      <p>Pluck a ruler clamped to a desk, tap a wine glass, or strike a tuning fork, and each will vibrate at its own characteristic frequency (or set of frequencies) once disturbed and left alone.</p>
+      <div class="keybox"><strong>Natural frequency.</strong> The frequency at which a system oscillates when it is disturbed and then left to vibrate freely, without any external influence.</div>
+      <p>The natural frequency depends only on the physical properties of the system — its dimensions, mass, stiffness or tension — not on how hard it was disturbed. A simple mass on a spring, for example, has a natural frequency set by its mass m and the spring constant k (Topic C.1).</p>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>Given the time period T of an oscillating system, what is its natural frequency f₀?</strong> Then state the equation for the natural frequency of a mass m on a spring of spring constant k (Topic C.1), in terms of m and k.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">f₀ = 1/T, for any oscillating system.<br>For a mass–spring system: f₀ = (1/2π) × √(k/m)</div>
+      </div>
+
+      <h3>Forced vibrations and driving frequency</h3>
+      <p>If instead a system is continuously pushed by an external periodic force — such as repeatedly pushing a child on a swing — it undergoes a <strong>forced vibration</strong> at the frequency of that external force, called the <strong>driving frequency</strong>, which need not be the same as the system's natural frequency.</p>
+      <div class="keybox"><strong>Forced vibration.</strong> An oscillation that occurs because an external periodic (driving) force acts on a system, potentially at a frequency different from the system's own natural frequency.</div>
+
+      <h3>Resonance</h3>
+      <p>Something special happens when the driving frequency matches the natural frequency: the amplitude of the oscillation grows, often dramatically. This is <strong>resonance</strong>.</p>
+      <div class="keybox"><strong>Resonance.</strong> The large increase in amplitude (and energy) of an oscillation that occurs when a periodic driving force acts on a system at the same frequency as the system's natural frequency, and in phase with its motion.</div>
+      <p>A graph of amplitude against driving frequency — a <strong>frequency–response graph</strong> — rises to a sharp maximum at the <strong>resonant frequency</strong>, which is at, or very close to, the natural frequency of the system.</p>
+
+      <h3>Live simulation: resonance</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="resonanceCanvas" width="460" height="260"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Amplitude vs. driving frequency</h4>
+            <div class="sim-row">
+              <label for="dampingSelectRes">Damping level</label>
+              <select id="dampingSelectRes">
+                <option value="light">Light damping</option>
+                <option value="medium" selected>Increased damping</option>
+                <option value="heavy">Heavy damping</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="drivingFreqSlider">Driving frequency = <span id="drivingFreqReadout">1.00</span> × natural frequency</label>
+              <input type="range" id="drivingFreqSlider" min="0.4" max="1.6" step="0.01" value="1.00">
+            </div>
+            <div class="sim-readout" id="resonanceReadout">Relative amplitude at this driving frequency: —</div>
+          </div>
+        </div>
+        <p class="sim-print-note">Interactive simulation — open the online version to explore how amplitude depends on driving frequency and damping.</p>
+      </figure>
+
+      <p>The resonant frequency is at, or very close to, the natural frequency — but the height and sharpness of the peak depend strongly on the amount of damping present, as you can see by switching damping level in the simulation above. Greater damping produces a lower, broader peak, and shifts the resonant frequency very slightly below the natural frequency.</p>
+
+      <h3>Worked example</h3>
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A trolley of mass 0.40 kg is attached to a spring of spring constant 65 N m⁻¹ and set oscillating horizontally.</p>
+        <p><strong>Answer:</strong><br>
+        f₀ = (1/2π) × √(k/m) = (1/2π) × √(65/0.40)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">17</span><strong>A 0.25 kg mass hangs from a spring of spring constant 18 N m⁻¹ and is set oscillating vertically.</strong> Determine its natural frequency.
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">f₀ = (1/2π) × √(k/m) = (1/2π) × √(18/0.25)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">18</span><strong>State what is meant by resonance, in terms of driving frequency and natural frequency.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Resonance occurs when a system is driven by a periodic external force whose frequency equals (and is in phase with) the system's own natural frequency, causing the amplitude of oscillation to increase to a maximum.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">19</span><strong>Using the simulation above, describe how the amplitude changes as the driving frequency is moved further away from the natural frequency, in either direction.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">The amplitude falls away from its maximum on both sides of the natural frequency — it does not matter whether the driving frequency is higher or lower than the natural frequency, moving away from it in either direction reduces the amplitude.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>Soldiers marching in step are traditionally told to "break step" (stop marching in time with each other) when crossing a bridge.</strong> Explain why, in terms of resonance.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">Marching in step applies a strong periodic driving force to the bridge at the marching frequency. If that frequency happened to match the bridge's natural frequency, resonance could build the bridge's oscillation amplitude to a dangerously large value. Breaking step removes the regular, synchronised driving force, so this risk is avoided.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Damping</h2>
+      <p>No real oscillator vibrates forever. Resistive forces — friction, air resistance, internal forces in the material — act against the motion and remove energy from the system, transferring it to the surroundings as heat (and sometimes sound).</p>
+      <div class="keybox"><strong>Damping.</strong> The dissipation of energy from an oscillator due to resistive forces, causing the amplitude of oscillation to decrease over time.</div>
+      <p>The amount of damping present can vary enormously between systems, and is usually described using three broad categories.</p>
+      <div class="keybox">
+        <strong>Light damping</strong> — the system continues to oscillate for a long time, with its amplitude decreasing gradually.<br>
+        <strong>Critical damping</strong> — the system returns to equilibrium as quickly as possible, without oscillating at all.<br>
+        <strong>Heavy damping</strong> — the resistive forces are so large that the system takes a long time to return to equilibrium, again without oscillating.
+      </div>
+
+      <h3>Live simulation: types of damping</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="dampingCanvas" width="460" height="240"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Displacement vs. time</h4>
+            <div class="sim-row">
+              <label for="dampingTypeSelect">Damping type</label>
+              <select id="dampingTypeSelect">
+                <option value="light" selected>Light damping</option>
+                <option value="critical">Critical damping</option>
+                <option value="heavy">Heavy damping</option>
+              </select>
+            </div>
+            <div class="sim-readout">The pale dashed curve shows the undamped case for comparison.</div>
+          </div>
+        </div>
+        <p class="sim-print-note">Interactive simulation — open the online version to compare light, critical and heavy damping.</p>
+      </figure>
+
+      <p>Both critical and heavy damping bring the system back to equilibrium without any oscillation at all — the difference between them is only how quickly this happens. Critical damping is the fastest possible return to equilibrium without overshooting; heavier damping actually returns more slowly than critical damping, because the very large resistive force also opposes the motion needed to get back to equilibrium in the first place.</p>
+
+      <div class="stretch-box">
+        <span class="tag">Real-world resonance and damping</span>
+        <p>Engineers spend a great deal of effort managing resonance and damping in real structures. A car's suspension is designed to be close to critically damped, so that after going over a bump it settles quickly without bouncing repeatedly. Bridges and skyscrapers are designed so that their natural frequencies don't coincide with likely driving frequencies from wind, footsteps or earthquakes — and where that can't be guaranteed, damping is deliberately built in. The Millennium Bridge in London had to close soon after opening in 2000 because pedestrians' footsteps drove it into resonance; the fix was to add extra dampers. Resonance isn't always unwanted, though — magnetic resonance imaging (MRI) scanners deliberately drive hydrogen nuclei in the body at their resonant frequency to produce detailed medical images, and a microwave oven heats food because its radiation frequency is resonant with water molecules.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">21</span><strong>Describe the difference between light damping and heavy damping, in terms of whether the system oscillates and how long it takes to stop moving.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">With light damping, the system continues to oscillate for a relatively long time, with its amplitude decaying gradually. With heavy damping, the system does not oscillate at all — the resistive forces are so large that it takes a long time (compared to its natural period) to creep back to equilibrium.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">22</span><strong>State which type of damping is used in a car's suspension system, and explain why that choice is preferred over the alternatives.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">A car's suspension is designed to be close to critically damped. This is preferred because it returns the car body to its equilibrium position as quickly as possible after a bump, without the discomfort (and loss of control) of repeated bouncing that would occur with lighter damping, and without the sluggish, slow response of heavier damping.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">23</span><strong>Using the simulation above, compare the total time taken for the light-damping case and the heavy-damping case to reach approximately zero displacement.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">The light-damping case actually takes longer overall to settle to (approximately) zero displacement than the heavily-damped case appears to at first glance, because it keeps oscillating with slowly-decaying amplitude — but neither is as fast as the critically-damped case, which reaches zero soonest of all without overshooting.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">24</span><strong>Explain, using the idea of damping, why the resonance peak in Section 5's simulation becomes shorter and broader as the damping level is increased.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">Greater damping dissipates more energy from the oscillation at every driving frequency, so the maximum amplitude that can build up at resonance is smaller (a shorter peak). Because damping resists the motion over a wider range of driving frequencies too, not just exactly at resonance, the amplitude falls off more gently either side of the peak, making it broader.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Standing (stationary) wave</dt><dd>The stable, unmoving pattern produced by the superposition of two waves of equal amplitude, wavelength and frequency travelling in opposite directions.</dd>
+        <dt>Node</dt><dd>A point on a standing wave where the displacement is always zero.</dd>
+        <dt>Antinode</dt><dd>A point on a standing wave where the amplitude of oscillation is greatest.</dd>
+        <dt>Boundary conditions</dt><dd>The physical conditions at the ends of a standing wave system (fixed or free) that determine whether there is a node or antinode there.</dd>
+        <dt>Harmonic</dt><dd>One of the possible standing wave patterns (modes of vibration) a system can support.</dd>
+        <dt>First harmonic</dt><dd>The standing wave pattern with the lowest possible frequency (and longest possible wavelength) for a given system. Higher harmonics are whole-number multiples of this frequency. ("Fundamental" and "overtone" are not used in this course.)</dd>
+        <dt>Open pipe</dt><dd>A pipe open at both ends, requiring an antinode at each end; supports every harmonic.</dd>
+        <dt>Closed pipe</dt><dd>A pipe closed at one end and open at the other, requiring a node at the closed end and an antinode at the open end; supports only odd-numbered harmonics.</dd>
+        <dt>Natural frequency</dt><dd>The frequency at which a system oscillates when disturbed and then left to vibrate freely, without external influence.</dd>
+        <dt>Forced vibration</dt><dd>An oscillation driven by an external periodic force, potentially at a frequency different from the system's natural frequency.</dd>
+        <dt>Driving frequency</dt><dd>The frequency of an external periodic force acting on an oscillating system.</dd>
+        <dt>Resonance</dt><dd>The large increase in amplitude of an oscillation that occurs when the driving frequency equals the natural frequency of the system.</dd>
+        <dt>Resonant frequency</dt><dd>The driving frequency at which resonance (maximum amplitude) occurs; at, or very close to, the natural frequency.</dd>
+        <dt>Damping</dt><dd>The dissipation of energy from an oscillator due to resistive forces, reducing its amplitude over time.</dd>
+        <dt>Critical damping</dt><dd>The degree of damping that returns a system to equilibrium in the shortest possible time without oscillating.</dd>
+        <dt>Heavy damping</dt><dd>Damping strong enough to prevent oscillation entirely, but which returns the system to equilibrium more slowly than critical damping.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Standing Waves and Resonance Workbook · Companion resources: <em>The Nature of Waves</em>, <em>Velocity Change in Waves</em>, and <em>Interference of Waves</em>.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  initFillables();
+});
+
+/* ================= SIM 1: formation of a standing wave ================= */
+let showComponents = true;
+function toggleComponents(){
+  showComponents = !showComponents;
+  document.getElementById('compToggleBtn').textContent = showComponents ? 'Hide component waves' : 'Show component waves';
+}
+(function(){
+  const canvas = document.getElementById('formCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const midY = H/2;
+  const amp = 42;
+  const k = (2*Math.PI)/120;   // spatial frequency (px)
+  const w = 2.6;               // angular frequency (rad/s)
+  let startTime = null;
+
+  function drawCurve(fn, color, width){
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    for(let x=20; x<=W-20; x+=2){
+      const y = midY - fn(x);
+      if(x===20) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+
+  function draw(now){
+    if(startTime === null) startTime = now;
+    const t = (now - startTime)/1000;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(20,midY); ctx.lineTo(W-20,midY); ctx.stroke();
+
+    const waveA = x => amp*Math.sin(k*x - w*t);   // travelling right
+    const waveB = x => amp*Math.sin(k*x + w*t);   // travelling left
+
+    if(showComponents){
+      drawCurve(waveA, 'rgba(31,122,106,0.55)', 1.6);
+      drawCurve(waveB, 'rgba(163,61,91,0.55)', 1.6);
+    }
+    drawCurve(x => waveA(x)+waveB(x), '#ffffff', 2.6);
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ================= SIM 2: standing waves on a string ================= */
+(function(){
+  const canvas = document.getElementById('stringCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const x0 = 40, x1 = W-40, midY = H/2, amp = 75;
+  const slider = document.getElementById('harmonicSlider');
+  const readoutN = document.getElementById('harmonicReadout');
+  const readout = document.getElementById('stringReadout');
+  const L = 0.60, f0 = 200;
+  let startTime = null;
+
+  function draw(now){
+    if(startTime === null) startTime = now;
+    const t = (now - startTime)/1000;
+    const n = parseInt(slider.value);
+    readoutN.textContent = n;
+    const fn = n*f0;
+    const lambdaN = 2*L/n;
+    readout.innerHTML = 'String length L = 0.60 m, first-harmonic frequency f₀ = 200 Hz (fixed for this demo).<br>λₙ = 2L/n = ' + lambdaN.toFixed(2) + ' m<br>fₙ = n × f₀ = ' + fn.toFixed(0) + ' Hz';
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    // fixed-end posts
+    ctx.fillStyle = '#cfe3ee';
+    ctx.fillRect(x0-6, midY-amp-15, 8, 2*amp+30);
+    ctx.fillRect(x1-2, midY-amp-15, 8, 2*amp+30);
+
+    // envelope (dashed)
+    ctx.strokeStyle = 'rgba(107,76,154,0.55)'; ctx.lineWidth = 1.3; ctx.setLineDash([5,4]);
+    ctx.beginPath();
+    for(let x=x0;x<=x1;x+=3){
+      const u=(x-x0)/(x1-x0);
+      const y = midY - amp*Math.sin(n*Math.PI*u);
+      if(x===x0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    ctx.beginPath();
+    for(let x=x0;x<=x1;x+=3){
+      const u=(x-x0)/(x1-x0);
+      const y = midY + amp*Math.sin(n*Math.PI*u);
+      if(x===x0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // oscillating string at this instant. Use a fixed, slow visual rate rather than the
+    // true physical frequency fn (200-1200 Hz) — animating at the real frequency samples
+    // far below its own Nyquist rate at 60fps and aliases into random-looking flicker
+    // instead of a smooth oscillation, and gets worse the higher the harmonic. The true
+    // frequency is still given numerically in the readout above.
+    const timeFactor = Math.cos(2*Math.PI*1.2*t);
+    ctx.strokeStyle = '#9fe3d4'; ctx.lineWidth = 2.6;
+    ctx.beginPath();
+    for(let x=x0;x<=x1;x+=3){
+      const u=(x-x0)/(x1-x0);
+      const y = midY - amp*Math.sin(n*Math.PI*u)*timeFactor;
+      if(x===x0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+
+    // node markers
+    ctx.fillStyle = '#173a5e';
+    for(let i=0;i<=n;i++){
+      const x = x0 + (x1-x0)*i/n;
+      ctx.beginPath(); ctx.arc(x, midY, 4, 0, Math.PI*2); ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  slider.addEventListener('input', function(){});
+  requestAnimationFrame(draw);
+})();
+
+/* ================= SIM 3: standing waves in a pipe ================= */
+(function(){
+  const canvas = document.getElementById('pipeCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const x0 = 40, x1 = W-40, midY = H/2, amp = 75;
+  const typeSelect = document.getElementById('pipeTypeSelect');
+  const harmSelect = document.getElementById('pipeHarmonicSelect');
+  const readout = document.getElementById('pipeReadout');
+  const L = 0.50, v = 340;
+  let startTime = null;
+
+  function rebuildHarmonics(){
+    const isOpen = typeSelect.value === 'open';
+    harmSelect.innerHTML = '';
+    const opts = isOpen ? [1,2,3,4,5,6] : [1,3,5,7,9];
+    opts.forEach(function(n){
+      const opt = document.createElement('option');
+      opt.value = n; opt.textContent = 'n = ' + n + (n===1 ? ' (first harmonic)' : '');
+      harmSelect.appendChild(opt);
+    });
+  }
+  typeSelect.addEventListener('change', rebuildHarmonics);
+  rebuildHarmonics();
+
+  function draw(now){
+    if(startTime === null) startTime = now;
+    const t = (now - startTime)/1000;
+    const isOpen = typeSelect.value === 'open';
+    const n = parseInt(harmSelect.value || '1');
+
+    const lambda = isOpen ? (2*L/n) : (4*L/n);
+    const f = v/lambda;
+    readout.innerHTML = 'Pipe length L = 0.50 m, speed of sound v = 340 m/s (fixed for this demo).<br>Boundary: ' + (isOpen?'open at both ends':'closed at one end') + ', n = ' + n + '<br>λ = ' + lambda.toFixed(3) + ' m<br>f = ' + f.toFixed(0) + ' Hz';
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    function shape(x, scale){
+      const u=(x-x0)/(x1-x0);
+      // Open pipe: antinode (maximum displacement) at BOTH ends -> cosine shape. Closed
+      // pipe: node at the closed end (x0), antinode at the open end (x1) -> sine shape.
+      // Either way, every antinode reaches the same maximum, so it always meets the rails.
+      return isOpen ? scale*Math.cos(n*Math.PI*u) : scale*Math.sin(n*Math.PI*u/2);
+    }
+
+    // pipe walls: two straight rails spanning the full length, representing the physical,
+    // fixed width of the tube (it doesn't change with harmonic). Convention: x0 (left) is
+    // the closed end for a closed pipe, open for an open pipe; x1 (right) is always open.
+    ctx.strokeStyle = '#9fb3c4'; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x0, midY-amp); ctx.lineTo(x1, midY-amp); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x0, midY+amp); ctx.lineTo(x1, midY+amp); ctx.stroke();
+    if(!isOpen){
+      // solid cap marks the closed end
+      ctx.fillStyle = '#cfe3ee';
+      ctx.fillRect(x0-5, midY-amp, 6, 2*amp);
+    }
+
+    // centreline (zero displacement)
+    ctx.strokeStyle = 'rgba(255,255,255,0.22)'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(x0, midY); ctx.lineTo(x1, midY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // instantaneous curve — a fixed, slow visual rate is used here (not the true, far too
+    // fast, physical frequency) so the oscillation is smooth to watch at every harmonic;
+    // the true frequency is given numerically in the readout below.
+    const timeFactor = Math.cos(2*Math.PI*1.2*t);
+    ctx.strokeStyle = '#f2c14e'; ctx.lineWidth = 2.6;
+    ctx.beginPath();
+    for(let x=x0;x<=x1;x+=3){ const y=midY-shape(x,amp)*timeFactor; if(x===x0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
+    ctx.stroke();
+
+    // node/antinode markers, evenly spaced at i/n along the pipe. Open pipe starts/ends on
+    // an antinode; closed pipe starts on a node (closed end) and ends on an antinode.
+    ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+    for(let i=0;i<=n;i++){
+      const x = x0 + (x1-x0)*i/n;
+      const isNode = isOpen ? (i%2===1) : (i%2===0);
+      ctx.fillStyle = isNode ? '#173a5e' : '#d98324';
+      ctx.beginPath(); ctx.arc(x, midY, 3.2, 0, Math.PI*2); ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ================= SIM 4: resonance frequency-response ================= */
+(function(){
+  const canvas = document.getElementById('resonanceCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const marginL=45, marginR=20, marginT=20, marginB=35;
+  const plotW = W-marginL-marginR, plotH = H-marginT-marginB;
+  const dampSelect = document.getElementById('dampingSelectRes');
+  const freqSlider = document.getElementById('drivingFreqSlider');
+  const freqReadout = document.getElementById('drivingFreqReadout');
+  const readout = document.getElementById('resonanceReadout');
+
+  const gammaFor = { light:0.09, medium:0.28, heavy:0.55 };
+
+  function amplitude(fRatio, gamma){
+    // driven damped oscillator amplitude response, omega0=1
+    const denom = Math.sqrt(Math.pow(1-fRatio*fRatio,2) + Math.pow(gamma*fRatio,2));
+    return 1/denom;
+  }
+
+  function xOf(fRatio){ return marginL + plotW*(fRatio-0.3)/(1.8-0.3); }
+  function yOf(a, maxA){ return marginT + plotH*(1 - a/maxA); }
+
+  function drawCurve(gamma, color, width){
+    // find max amplitude across range for normalisation reference (use light-damping peak as global max)
+    ctx.beginPath();
+    ctx.strokeStyle = color; ctx.lineWidth = width;
+    for(let i=0;i<=150;i++){
+      const fR = 0.3 + (1.8-0.3)*i/150;
+      const a = amplitude(fR, gamma);
+      const y = yOf(a, globalMax);
+      const x = xOf(fR);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+
+  let globalMax = 1/(gammaFor.light*1); // approx peak for lightest damping (at fRatio=1)
+
+  function draw(){
+    const level = dampSelect.value;
+    const fRatio = parseFloat(freqSlider.value);
+    freqReadout.textContent = fRatio.toFixed(2);
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+
+    // axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(marginL, marginT); ctx.lineTo(marginL, H-marginB); ctx.lineTo(W-marginR, H-marginB); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.font = '10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('driving frequency / natural frequency', (marginL+W-marginR)/2, H-8);
+    ctx.save(); ctx.translate(14, (marginT+H-marginB)/2); ctx.rotate(-Math.PI/2); ctx.fillText('amplitude', 0,0); ctx.restore();
+
+    // natural frequency marker
+    const xNat = xOf(1.0);
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(xNat, marginT); ctx.lineTo(xNat, H-marginB); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillText('natural frequency', xNat, marginT-6);
+
+    // draw all three curves faint, highlight selected
+    ['light','medium','heavy'].forEach(function(key){
+      const isActive = key===level;
+      drawCurve(gammaFor[key], isActive ? '#f2c14e' : 'rgba(159,227,212,0.35)', isActive ? 2.6 : 1.4);
+    });
+
+    // marker dot at current driving frequency on active curve
+    const aNow = amplitude(fRatio, gammaFor[level]);
+    const px = xOf(fRatio), py = yOf(aNow, globalMax);
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath(); ctx.arc(px,py,4,0,Math.PI*2); ctx.fill();
+
+    readout.textContent = 'Relative amplitude at this driving frequency: ' + aNow.toFixed(2) + ' (peak ≈ ' + (1/gammaFor[level]/globalMax).toFixed(2) + ' at resonance for this damping level)';
+  }
+  dampSelect.addEventListener('change', draw);
+  freqSlider.addEventListener('input', draw);
+  draw();
+})();
+
+/* ================= SIM 5: damping types (displacement vs time) ================= */
+(function(){
+  const canvas = document.getElementById('dampingCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const marginL=20, marginR=20, marginT=20, marginB=30;
+  const plotW = W-marginL-marginR, plotH = H-marginT-marginB;
+  const midY = marginT + plotH/2;
+  const typeSelect = document.getElementById('dampingTypeSelect');
+
+  const omega0 = 9.0; // rad/s, undamped angular frequency
+
+  function xOf(t, tMax){ return marginL + plotW*(t/tMax); }
+
+  function undamped(t){ return Math.cos(omega0*t); }
+  function light(t){
+    const beta = 0.9;
+    const wd = Math.sqrt(Math.max(omega0*omega0 - beta*beta, 0.01));
+    return Math.exp(-beta*t)*Math.cos(wd*t);
+  }
+  function critical(t){
+    const betaC = omega0;
+    return (1+betaC*t)*Math.exp(-betaC*t);
+  }
+  function heavy(t){
+    const betaH = omega0*0.35;
+    return Math.exp(-betaH*t);
+  }
+
+  function drawCurve(fn, color, width, dashed){
+    const tMax = 3.2;
+    ctx.beginPath();
+    ctx.strokeStyle = color; ctx.lineWidth = width;
+    if(dashed) ctx.setLineDash([4,3]); else ctx.setLineDash([]);
+    for(let i=0;i<=200;i++){
+      const t = tMax*i/200;
+      const y = midY - fn(t)*(plotH*0.42);
+      const x = xOf(t, tMax);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(marginL, midY); ctx.lineTo(W-marginR, midY); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.font = '10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('time', (marginL+W-marginR)/2, H-10);
+
+    drawCurve(undamped, 'rgba(255,255,255,0.35)', 1.3, true);
+
+    const level = typeSelect.value;
+    let fn, color;
+    if(level==='light'){ fn=light; color='#9fe3d4'; }
+    else if(level==='critical'){ fn=critical; color='#e77fa3'; }
+    else { fn=heavy; color='#f2c14e'; }
+    drawCurve(fn, color, 2.6, false);
+  }
+  typeSelect.addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

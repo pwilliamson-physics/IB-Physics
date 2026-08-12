@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Velocity Change in Waves Workbook",
+  "schemaVersion": 1,
+  "description": "IB Physics workbook: Velocity Change in Waves (Topic C.3) — wavefronts & rays, boundary behaviour (reflection/transmission/refraction), wavefront-ray diagrams, refractive index, Snell's law, critical angle and total internal reflection — in the shared house style, with two interactive canvas simulations.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocity Change in Waves — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-row select{width:100%; padding:0.3rem; border-radius:6px; border:1px solid rgba(255,255,255,0.3); background:#16283c; color:#fff; font-size:0.85rem;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-readout.alert{background:rgba(217,131,36,0.28); border:1px solid var(--amber); font-weight:700;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Velocity Change in Waves</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Velocity Change in Waves</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Wavefronts and rays (recap)</a>
+    <a href="#s2">2. Reflection, transmission, refraction</a>
+    <a href="#s3">3. Why does refraction happen?</a>
+    <a href="#s4">4. Diagrams showing refraction</a>
+    <a href="#s5">5. Refractive index</a>
+    <a href="#s6">6. Snell's law</a>
+    <a href="#s7">7. Critical angle and T.I.R.</a>
+    <a href="#s8">8. Applications</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Velocity Change in Waves</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">A straw in a glass of water looks broken. A road shimmers like a lake on a hot day. A diamond sparkles far more than a piece of glass cut to the same shape. All three are the same phenomenon: a wave changing speed as it crosses into a new medium. This workbook picks up where <em>Wave Nature</em> left off — having covered reflection there, we now look at what happens when a wave is transmitted across a boundary and changes speed: refraction, Snell's law, and the striking special case of total internal reflection that makes optical fibres possible.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Describe waves travelling in two and three dimensions using wavefronts and rays.</li>
+          <li>Explain wave behaviour at a boundary between two media in terms of reflection, transmission and refraction.</li>
+          <li>Draw and interpret wavefront-ray diagrams showing refraction.</li>
+          <li>Define refractive index and apply Snell's law to find angles, speeds and refractive indices.</li>
+          <li>Derive and calculate the critical angle for a boundary between two media.</li>
+          <li>Explain total internal reflection and identify the conditions needed for it to occur.</li>
+          <li>Describe real-world applications of refraction and total internal reflection, such as optical fibres.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Wavefronts and rays — a quick recap</h2>
+      <p>The <em>Wave Nature</em> workbook introduced two complementary ways to draw a wave spreading out in two or three dimensions: <strong>wavefronts</strong> (lines joining points that are oscillating in phase, one wavelength apart) and <strong>rays</strong> (lines showing the direction of energy transfer, always perpendicular to the wavefronts). Every diagram in this workbook uses both together, so it's worth having the definitions fresh before we go any further.</p>
+
+      <div class="keybox">
+        <strong>Recap.</strong>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem;">
+          <li><strong>Wavefront</strong> — a line joining neighbouring points of a wave moving in phase (e.g. joining all the crests). Successive wavefronts are one wavelength apart.</li>
+          <li><strong>Ray</strong> — a line showing the direction of wave travel, always perpendicular to the wavefronts it crosses.</li>
+          <li>A distant source produces (almost) <strong>parallel</strong> wavefronts and rays — a good approximation for most of the diagrams in this workbook, where we treat a beam of light or a set of water waves as a bundle of parallel rays striking a flat boundary.</li>
+        </ul>
+      </div>
+
+      <p>What's new in this workbook is what happens to those wavefronts and rays when they reach a boundary between two different media — the subject of every section from here on.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>State the geometric relationship between a ray and the wavefronts it crosses.</strong>
+        <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">They are always perpendicular (at right angles) to each other.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>A beam of parallel light rays from a distant lamp is modelled as a set of parallel wavefronts.</strong> Explain why this is a reasonable approximation even though a lamp is, technically, a point source producing spherical wavefronts.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">If the lamp is far enough away compared with the size of the region being illuminated, the small patch of a huge spherical wavefront reaching that region is, for all practical purposes, flat — so it can be treated as a set of parallel wavefronts with parallel rays.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Wave behaviour at boundaries: reflection, transmission and refraction</h2>
+      <p>When a wave reaches a boundary between two different media, up to three things can happen to its energy: some of it can be <strong>reflected</strong> back into the first medium, some can be <strong>transmitted</strong> into the second medium, and — for light in particular — some can be <strong>absorbed</strong> (converted into internal energy of the medium) or <strong>scattered</strong> (redirected in random, irregular directions). Usually all of these happen at once, in different proportions.</p>
+
+      <div class="keybox"><strong>Reflection</strong> was covered in full in the <em>Wave Nature</em> workbook: some wave energy returns into the original medium, obeying the law of reflection (angle of incidence = angle of reflection). We won't repeat that here — this workbook is mainly about what happens to the wave energy that carries on.</div>
+
+      <p><strong>Transmission</strong> is the passage of a wave through a medium (and onward, out the other side) without being absorbed or scattered. A medium that transmits light well, so that we can see clearly through it, is described as <strong>transparent</strong>; a medium that does not transmit light is <strong>opaque</strong>.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 640 190" width="640" height="190" xmlns="http://www.w3.org/2000/svg">
+          <rect x="320" y="20" width="300" height="150" fill="#eaf3fb" stroke="#c7ddef"/>
+          <text x="160" y="18" text-anchor="middle" font-size="11" fill="#4a5568">medium 1</text>
+          <text x="470" y="18" text-anchor="middle" font-size="11" fill="#4a5568">medium 2</text>
+          <line x1="320" y1="20" x2="320" y2="170" stroke="#22305a" stroke-width="2.5"/>
+
+          <line x1="20" y1="55" x2="620" y2="55" stroke="#1f7a6c" stroke-width="2.2" marker-end="url(#arT)"/>
+          <text x="30" y="48" font-size="10" fill="#1f7a6c">transmission</text>
+
+          <line x1="20" y1="105" x2="320" y2="105" stroke="#a33d5b" stroke-width="2.2"/>
+          <line x1="330" y1="107" x2="345" y2="103" stroke="#a33d5b" stroke-width="2"/>
+          <line x1="350" y1="105" x2="365" y2="107" stroke="#a33d5b" stroke-width="2"/>
+          <line x1="370" y1="102" x2="383" y2="106" stroke="#a33d5b" stroke-width="2"/>
+          <circle cx="392" cy="104" r="1.6" fill="#a33d5b"/><circle cx="402" cy="106" r="1.3" fill="#a33d5b"/><circle cx="411" cy="103" r="1" fill="#a33d5b"/>
+          <text x="30" y="98" font-size="10" fill="#a33d5b">absorption</text>
+
+          <line x1="20" y1="150" x2="320" y2="150" stroke="#c1791f" stroke-width="2.2" marker-end="url(#arT)"/>
+          <line x1="320" y1="150" x2="360" y2="115" stroke="#c1791f" stroke-width="1.6" marker-end="url(#arT)"/>
+          <line x1="320" y1="150" x2="365" y2="150" stroke="#c1791f" stroke-width="1.6" marker-end="url(#arT)"/>
+          <line x1="320" y1="150" x2="355" y2="175" stroke="#c1791f" stroke-width="1.6" marker-end="url(#arT)"/>
+          <text x="30" y="143" font-size="10" fill="#c1791f">scattering</text>
+          <defs><marker id="arT" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="context-stroke"/></marker></defs>
+        </svg>
+        <figcaption>Fig. 2.1 A wave crossing a boundary is, in general, partly transmitted, partly absorbed and partly scattered — the exact proportions depend on the wave and the two media.</figcaption>
+      </figure>
+
+      <p>When a wave <em>is</em> transmitted across a boundary at an angle, it usually also changes speed — and a change of speed at an angle produces a change of direction, called <strong>refraction</strong>. That's the focus of the rest of this workbook.</p>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">3</span><strong>Classify each situation below as mainly an example of reflection, transmission, absorption, or refraction:</strong> (a) sunlight passing through a clean window into a room, (b) a mirror forming your image, (c) a black car bonnet becoming hot in sunlight, (d) a straw appearing bent where it enters a glass of water.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">a) transmission; b) reflection; c) absorption (the dark surface absorbs light and converts it to internal/thermal energy); d) refraction.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">4</span><strong>Explain, using the correct term, why frosted (translucent) glass lets light through but you cannot see a clear image through it.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">The rough surface scatters the transmitted light in many different directions rather than transmitting it in an orderly, parallel way, so light still gets through (it isn't opaque) but no clear image can form.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Why does refraction happen?</h2>
+      <p>The speed of a wave depends only on the medium it is travelling through — never on the wave's frequency or amplitude. So whenever a wave crosses into a new medium, its speed changes to whatever value that new medium supports. If the wave arrives at the boundary <em>along the normal</em> (perpendicular to the boundary), this change of speed happens to the whole wavefront at once, and there is no change of direction — just a change of wavelength (see Section 4). But if the wave arrives at an <em>angle</em>, something more interesting happens.</p>
+
+      <div class="stretch-box">
+        <span class="tag">A useful analogy</span>
+        <p style="margin:0;">Picture a car being driven from a smooth road onto a muddy field, at an angle rather than straight on. The wheel that reaches the mud first is slowed down by the extra friction while the other front wheel is still on the road, moving at full speed. That mismatch swings the car's direction of travel — it turns towards the mud. Drive back out onto the road at an angle and the reverse happens: the wheel that reaches the road first speeds up while the other is still in the mud, swinging the car the other way. A wavefront crossing a boundary at an angle behaves the same way: whichever part of the wavefront reaches the boundary first changes speed first, and the mismatch bends the whole wavefront's direction of travel.</p>
+      </div>
+
+      <div class="keybox">
+        <strong>The rule.</strong>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem;">
+          <li>Entering a medium where the wave travels <strong>more slowly</strong> → refracts <strong>towards</strong> the normal.</li>
+          <li>Entering a medium where the wave travels <strong>faster</strong> → refracts <strong>away from</strong> the normal.</li>
+        </ul>
+        The greater the change in speed, the greater the change in direction.
+      </div>
+
+      <p>What about wavelength? The frequency of a wave is fixed by its source and cannot change just because the wave enters a new medium — but the speed can. Since v = ƒλ, if v changes while ƒ stays fixed, λ <em>must</em> change too, in direct proportion to v:</p>
+      <div class="eqn">slower medium → shorter λ &nbsp;&nbsp;&nbsp; faster medium → longer λ &nbsp;&nbsp;&nbsp; (ƒ unchanged throughout)</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">5</span><strong>Water waves travel more slowly in shallow water than in deep water.</strong> A set of parallel water waves approaches a beach at an angle, so that the shallow water is reached first at one end of each wavefront. Using the car-and-mud analogy, predict whether the waves bend towards or away from the normal as they slow down, and explain why.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">They bend towards the normal. The part of each wavefront that reaches the shallow water first slows down first, while the rest of the wavefront (still in deep water) keeps moving at full speed — exactly like the car's front wheel that reaches the mud first — and this mismatch swings the wavefront's direction towards the normal.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>A wave travels from medium A into medium B, and its wavelength decreases.</strong> State, with a reason, whether the wave speeds up or slows down, and whether it bends towards or away from the normal (assuming it isn't travelling along the normal).
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">It slows down: since ƒ is unchanged and v = ƒλ, a decrease in λ means v must also decrease. Slowing down means it refracts towards the normal.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">7</span><strong>Explain why a wave that meets a boundary exactly along the normal (at 0° to the normal) does not change direction, even though its speed changes.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">The whole wavefront is parallel to the boundary and reaches it at exactly the same instant, so every part of it changes speed at the same time — there's no mismatch between one part of the wavefront and another to bend the direction of travel, so only the wavelength changes, not the direction.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Wavefront-ray diagrams showing refraction</h2>
+      <p>Combining a ray (showing direction) with its wavefronts (showing wavelength) on the same diagram captures everything about refraction in one picture. In both diagrams below, notice that the wavefronts stay continuous across the boundary — the same number arrive as leave, each second, since frequency doesn't change — they simply change spacing and direction.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 640 300" width="640" height="300" xmlns="http://www.w3.org/2000/svg">
+          <text x="320" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Entering a slower (denser) medium</text>
+          <text x="320" y="40" text-anchor="middle" font-size="11" fill="#22305a">Ray bends towards the normal (θ₂ &lt; θ₁); wavefronts move closer together (shorter λ)</text>
+          <line x1="40" y1="165" x2="600" y2="165" stroke="#22305a" stroke-width="2.2"/>
+          <line x1="320" y1="55" x2="320" y2="275" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="332" y="63" font-size="10" fill="#4a5568">normal</text>
+          <text x="70" y="100" font-size="10" fill="#4a5568">less dense, faster</text>
+          <text x="464" y="245" font-size="10" fill="#4a5568">more dense, slower</text>
+
+          <line x1="248.0" y1="79.2" x2="320" y2="165" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#ar41)"/>
+          <line x1="320" y1="165" x2="368.0" y2="266.2" stroke="#1f7a6c" stroke-width="2.2" marker-end="url(#ar41)"/>
+          <defs><marker id="ar41" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="context-stroke"/></marker></defs>
+
+          <g stroke="#a33d5b" stroke-width="1.8">
+            <line x1="268.3" y1="123.6" x2="288.2" y2="106.9"/>
+            <line x1="246.4" y1="97.5" x2="266.3" y2="80.8"/>
+          </g>
+          <g stroke="#1f7a6c" stroke-width="1.8">
+            <line x1="336.1" y1="229.3" x2="359.6" y2="218.1"/>
+            <line x1="346.0" y1="250.1" x2="369.5" y2="238.9"/>
+          </g>
+
+          <path d="M 320 135 A 30 30 0 0 0 300.7 142.0" fill="none" stroke="#a33d5b" stroke-width="1.5"/>
+          <text x="304.6" y="122.7" text-anchor="middle" font-size="11" fill="#a33d5b">θ₁</text>
+          <path d="M 320 195 A 30 30 0 0 1 332.9 192.1" fill="none" stroke="#1f7a6c" stroke-width="1.5"/>
+          <text x="329.9" y="208.9" text-anchor="middle" font-size="11" fill="#1f7a6c">θ₂</text>
+        </svg>
+        <figcaption>Fig. 4.1 Entering a medium where the wave travels more slowly: the ray bends towards the normal (θ₂ &lt; θ₁) and the wavefronts move closer together (shorter λ).</figcaption>
+      </figure>
+
+      <figure class="wide">
+        <svg viewBox="0 0 640 300" width="640" height="300" xmlns="http://www.w3.org/2000/svg">
+          <text x="320" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#22305a">Entering a faster (less dense) medium</text>
+          <text x="320" y="40" text-anchor="middle" font-size="11" fill="#22305a">Ray bends away from the normal (θ₂ &gt; θ₁); wavefronts spread further apart (longer λ)</text>
+          <line x1="40" y1="165" x2="600" y2="165" stroke="#22305a" stroke-width="2.2"/>
+          <line x1="320" y1="55" x2="320" y2="275" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="332" y="63" font-size="10" fill="#4a5568">normal</text>
+          <text x="70" y="100" font-size="10" fill="#4a5568">more dense, slower</text>
+          <text x="464" y="245" font-size="10" fill="#4a5568">less dense, faster</text>
+
+          <line x1="272.0" y1="63.8" x2="320" y2="165" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#ar42)"/>
+          <line x1="320" y1="165" x2="392.0" y2="250.8" stroke="#1f7a6c" stroke-width="2.2" marker-end="url(#ar42)"/>
+          <defs><marker id="ar42" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="context-stroke"/></marker></defs>
+
+          <g stroke="#a33d5b" stroke-width="1.8">
+            <line x1="280.4" y1="111.9" x2="303.9" y2="100.7"/>
+            <line x1="270.5" y1="91.1" x2="294.0" y2="79.9"/>
+          </g>
+          <g stroke="#1f7a6c" stroke-width="1.8">
+            <line x1="351.8" y1="223.1" x2="371.7" y2="206.4"/>
+            <line x1="373.7" y1="249.2" x2="393.6" y2="232.5"/>
+          </g>
+
+          <path d="M 320 135 A 30 30 0 0 0 307.1 137.9" fill="none" stroke="#a33d5b" stroke-width="1.5"/>
+          <text x="310.1" y="121.1" text-anchor="middle" font-size="11" fill="#a33d5b">θ₁</text>
+          <path d="M 320 195 A 30 30 0 0 1 339.3 188.0" fill="none" stroke="#1f7a6c" stroke-width="1.5"/>
+          <text x="335.4" y="207.3" text-anchor="middle" font-size="11" fill="#1f7a6c">θ₂</text>
+        </svg>
+        <figcaption>Fig. 4.2 Entering a medium where the wave travels faster: the ray bends away from the normal (θ₂ &gt; θ₁) and the wavefronts spread further apart (longer λ). This is exactly the reverse of Fig. 4.1 — refraction is reversible.</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Reversibility:</b> a ray following any refracted path can be reversed exactly — a ray travelling backwards along the path shown in Fig. 4.2 would retrace the path shown in Fig. 4.1. This is why the angles in Fig. 4.1 and Fig. 4.2 are mirror images of each other.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">8</span><strong>In Fig. 4.1, explain what would happen to θ₂ if the speed difference between the two media were much larger (i.e. the second medium was even slower).</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">θ₂ would be even smaller — a bigger change in speed produces a bigger change in direction, so the refracted ray would bend closer to the normal.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Refractive index</h2>
+      <p>To compare how strongly different materials refract light, physicists use the <strong>refractive index</strong>, n — a ratio of the speed of light in a vacuum (or, for practical purposes, air) to its speed in the medium.</p>
+      <div class="eqn">refractive index, <b>n = c / v</b></div>
+      <div class="keybox"><strong>Key idea.</strong> Refractive index is a ratio of two speeds, so it has <strong>no unit</strong>. A higher n means light travels more slowly in that medium (and refracts more strongly), so denser, more strongly-refracting materials have larger values of n. n can never be less than 1, since nothing travels faster than light in a vacuum.</div>
+
+      <table class="eqtable">
+        <tr><th>Medium</th><th>Typical speed of light / 10⁸ m s⁻¹</th><th>Refractive index, n</th></tr>
+        <tr><td>Vacuum</td><td>3.00</td><td>1.00 (exactly)</td></tr>
+        <tr><td>Air</td><td>3.00</td><td>≈ 1.00</td></tr>
+        <tr><td>Ice</td><td>2.29</td><td>1.31</td></tr>
+        <tr><td>Water</td><td>2.26</td><td>1.33</td></tr>
+        <tr><td>Glass (typical)</td><td>2.00</td><td>1.50</td></tr>
+        <tr><td>Diamond</td><td>1.24</td><td>2.42</td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>Light travels through a certain silica optical fibre at 2.08 × 10⁸ m s⁻¹. Calculate the refractive index of this silica.</p>
+        <p><strong>Answer:</strong><br>
+        n = c/v = (3.00×10⁸)/(2.08×10⁸) = 1.44</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">9</span><strong>The refractive index of a certain type of crown glass is 1.52. Calculate the speed of light in this glass.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">v = c/n = (3.00×10⁸)/1.52 = 1.97×10⁸ m s⁻¹.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">10</span><strong>Explain why it is impossible for any transparent medium to have a refractive index less than 1.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">n = c/v, and nothing can travel faster than light in a vacuum, so v ≤ c for light in any medium. This means c/v ≥ 1 always, so n can never be less than 1.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Snell's law</h2>
+      <p>Refractive index tells us how much a medium slows light down, but to actually predict the angle a ray bends through, we need Snell's law — named after the Dutch scientist Willebrord Snellius. It connects the angles either side of a boundary to the refractive indices (or, equivalently, the wave speeds) of the two media.</p>
+
+      <div class="eqn"><b>Snell's law:</b> &nbsp; n₁ sin θ₁ = n₂ sin θ₂ &nbsp;&nbsp; (equivalently: n₁/n₂ = sin θ₂ / sin θ₁ = v₂ / v₁)</div>
+      <p style="font-size:0.92rem; color:#5b6b78;">Here θ₁ and θ₂ are always measured between the ray and the normal — never from the boundary surface itself — and subscripts 1 and 2 refer to the medium the ray is travelling <em>in</em>, before and after the boundary.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>A ray of light in air (n = 1.00) strikes a rectangular glass block at an angle of incidence of 55°. Inside the glass, the angle of refraction is measured to be 33°. Determine (a) the refractive index of the glass, and (b) the speed of light inside the glass.</p>
+        <p><strong>Answer:</strong><br>
+        a) n₁ sinθ₁ = n₂ sinθ₂ &nbsp;⟹&nbsp; n₂ = (n₁ sinθ₁)/sinθ₂ = (1.00 × sin55°)/sin33° = 0.819/0.545 = 1.50<br>
+        b) v = c/n = (3.00×10⁸)/1.50 = 2.00×10⁸ m s⁻¹</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.2 — optical fibres</span>
+        <p>A silica optical fibre has a refractive index of 1.44. A ray of light in air strikes the flat end of the fibre at an angle of incidence of 22.0° to the normal. Calculate the angle of refraction inside the fibre.</p>
+        <p><strong>Answer:</strong><br>
+        n₁ sinθ₁ = n₂ sinθ₂ &nbsp;⟹&nbsp; 1.00 × sin22.0° = 1.44 × sinθ₂<br>
+        sinθ₂ = 0.3746/1.44 = 0.2602 &nbsp;⟹&nbsp; θ₂ = 15.1°</p>
+      </div>
+
+      <h3>Live simulation: explore Snell's law</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="snellCanvas" width="460" height="300"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Snell's law explorer</h4>
+            <div class="sim-row">
+              <label for="n1Select">Medium 1 (where the incident ray travels)</label>
+              <select id="n1Select">
+                <option value="1.00">Air (n = 1.00)</option>
+                <option value="1.33" selected>Water (n = 1.33)</option>
+                <option value="1.50">Glass (n = 1.50)</option>
+                <option value="2.42">Diamond (n = 2.42)</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="n2Select">Medium 2 (where the refracted ray travels)</label>
+              <select id="n2Select">
+                <option value="1.00">Air (n = 1.00)</option>
+                <option value="1.33">Water (n = 1.33)</option>
+                <option value="1.50" selected>Glass (n = 1.50)</option>
+                <option value="2.42">Diamond (n = 2.42)</option>
+              </select>
+            </div>
+            <div class="sim-row">
+              <label for="incAngleSlider">Angle of incidence = <span id="incAngleReadout">35</span>°</label>
+              <input type="range" id="incAngleSlider" min="1" max="89" step="1" value="35">
+            </div>
+            <div class="sim-readout" id="snellReadout" style="line-height:1.6;">…</div>
+          </div>
+        </div>
+        <figcaption>Fig. 6.1 Choose any two media and drag the angle slider. The dashed line shows the (always-present) partially reflected ray; the solid ray shows refraction — or, if the angle exceeds the critical angle, total internal reflection (see Section 7).</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">11</span><strong>Optical fibres are generally made from silica, with a refractive index of about 1.44.</strong> If the angle of incidence on the flat end of a fibre (in air) is 30.0°, calculate the angle of refraction inside the fibre.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">sinθ₂ = (1.00 × sin30.0°)/1.44 = 0.500/1.44 = 0.347 &nbsp;⟹&nbsp; θ₂ = 20.3°.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">12</span><strong>A ray of light travelling in water (n = 1.33) strikes a boundary with a plastic block at an angle of incidence of 40°, and refracts at 31° inside the plastic.</strong> Calculate the refractive index of the plastic.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">n₂ = (n₁ sinθ₁)/sinθ₂ = (1.33 × sin40°)/sin31° = 0.855/0.515 = 1.66.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">13</span><strong>A ray of light travels from glass (n = 1.52) into air. Inside the glass it makes an angle of 20.0° with the normal.</strong> Calculate the angle it makes with the normal once it emerges into the air.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">sinθ₂ = (n₁ sinθ₁)/n₂ = (1.52 × sin20.0°)/1.00 = 0.520 &nbsp;⟹&nbsp; θ₂ = 31.3°.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">14</span><strong>Using the simulation above, set medium 1 to Diamond and medium 2 to Air, and drag the angle slider upward from a small angle.</strong> Describe what you observe happening to the refracted ray as the angle increases, and note (roughly) the angle at which it disappears.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">As the angle increases, the refracted ray bends further and further away from the normal (since diamond → air is a slower-to-faster transition) until, at around 24-25°, it disappears entirely and only the reflected ray remains — this is total internal reflection, the subject of Section 7.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Critical angle and total internal reflection</h2>
+      <p>Section 6's simulation hinted at something dramatic: when a ray travels from a denser medium into a less dense one (n₁ &gt; n₂), increasing the angle of incidence bends the refracted ray further and further from the normal — until, at a certain angle, the refracted ray would have to leave at exactly 90°, skimming along the boundary itself. This special angle is called the <strong>critical angle</strong>, θc.</p>
+
+      <div class="keybox"><strong>Total internal reflection (T.I.R.).</strong> For any angle of incidence <em>greater</em> than the critical angle, refraction becomes impossible — <strong>all</strong> of the wave's energy is reflected back into the denser medium, obeying the ordinary law of reflection. This can only happen when a wave meets a boundary with a medium of <strong>lower</strong> refractive index (i.e. one in which it would travel faster).</div>
+
+      <p>We can derive θc directly from Snell's law. At the critical angle, θ₁ = θc and θ₂ = 90° exactly, so sinθ₂ = 1:</p>
+      <div class="eqn">n₁ sinθc = n₂ sin90° = n₂ &nbsp;&nbsp;⟹&nbsp;&nbsp; <b>sin θc = n₂ / n₁</b></div>
+      <p>Most commonly, medium 2 is air (n₂ ≈ 1.00), which simplifies this to:</p>
+      <div class="eqn">sin θc = 1 / n<sub>medium</sub></div>
+
+      <figure>
+        <svg viewBox="0 0 440 240" width="440" height="240" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="130" x2="380" y2="130" stroke="#22305a" stroke-width="2.5"/>
+          <text x="386" y="134" font-size="10" fill="#22305a">boundary</text>
+          <text x="40" y="80" font-size="10" fill="#4a5568">medium 2 (less dense, faster)</text>
+          <text x="40" y="215" font-size="10" fill="#4a5568">medium 1 (more dense, slower)</text>
+          <line x1="210" y1="60" x2="210" y2="200" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="216" y="70" font-size="10" fill="#4a5568">normal</text>
+
+          <line x1="146.4" y1="200.6" x2="210" y2="130" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#arC)"/>
+          <text x="120" y="205" font-size="10" fill="#a33d5b">incident ray</text>
+          <line x1="210" y1="130" x2="305.0" y2="130" stroke="#1f7a6c" stroke-width="2.2" marker-end="url(#arC)"/>
+          <text x="280" y="122" font-size="10" fill="#1f7a6c">refracted at 90°</text>
+          <line x1="210" y1="130" x2="273.6" y2="200.6" stroke="#a33d5b" stroke-width="1.8" stroke-dasharray="5 3" marker-end="url(#arC)"/>
+          <text x="255" y="200" font-size="10" fill="#a33d5b">partial reflection</text>
+          <defs><marker id="arC" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="context-stroke"/></marker></defs>
+
+          <path d="M 210 158 A 28 28 0 0 1 191.3 150.8" fill="none" stroke="#c1791f" stroke-width="1.6"/>
+          <text x="194" y="171" text-anchor="middle" font-size="12" fill="#c1791f">θc</text>
+        </svg>
+        <figcaption>Fig. 7.1 At exactly the critical angle θc, the refracted ray grazes along the boundary at 90°. (Some light is always partially reflected too — shown dashed.)</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>Determine the critical angle for a boundary between ice (n = 1.31) and water (n = 1.33), for light travelling from the ice into the water.</p>
+        <p><strong>Answer:</strong><br>
+        Light must be going from the <em>denser</em> medium (higher n) into the less dense one for T.I.R. to be possible — here that means water (n = 1.33) is medium 1, ice (n = 1.31) is medium 2:<br>
+        sinθc = n₂/n₁ = 1.31/1.33 = 0.985 &nbsp;⟹&nbsp; θc = 80.1°</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.2</span>
+        <p>Glycerine has a refractive index of 1.47. Determine the critical angle for light travelling from glycerine into air.</p>
+        <p><strong>Answer:</strong><br>
+        sinθc = 1/n = 1/1.47 = 0.680 &nbsp;⟹&nbsp; θc = 42.9°</p>
+      </div>
+
+      <h3>Live simulation: find the critical angle</h3>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="tirCanvas" width="460" height="300"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Critical angle &amp; T.I.R.</h4>
+            <div class="sim-row">
+              <label for="n1TirSlider">Denser medium, n₁ = <span id="n1TirReadout">1.50</span> (medium 2 is air, n₂ = 1.00)</label>
+              <input type="range" id="n1TirSlider" min="1.2" max="2.4" step="0.01" value="1.50">
+            </div>
+            <div class="sim-row">
+              <label for="tirAngleSlider">Angle of incidence = <span id="tirAngleReadout">30</span>°</label>
+              <input type="range" id="tirAngleSlider" min="1" max="89" step="1" value="30">
+            </div>
+            <div class="sim-readout" id="tirReadout" style="line-height:1.6;">…</div>
+          </div>
+        </div>
+        <figcaption>Fig. 7.2 Critical angle, θc = sin⁻¹(1/n₁), marked with a dotted reference line. Slide the angle past θc to trigger total internal reflection live.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">15</span><strong>Calculate the critical angle for a boundary between diamond (n = 2.42) and air.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">sinθc = 1/2.42 = 0.413 &nbsp;⟹&nbsp; θc = 24.4°.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">16</span><strong>An optical fibre core has a refractive index of 1.48, surrounded by a cladding layer with refractive index 1.46.</strong> Calculate the critical angle at the core-cladding boundary, and state why the cladding must have a lower refractive index than the core.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">sinθc = n₂/n₁ = 1.46/1.48 = 0.986 &nbsp;⟹&nbsp; θc = 80.6°. The cladding must have a lower refractive index than the core, because total internal reflection is only possible when a wave meets a boundary with a medium of lower refractive index — if the cladding had an equal or higher index, light could escape from the core instead of being trapped.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">17</span><strong>State the two conditions that must both be true for total internal reflection to occur at a boundary.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">(1) The wave must be travelling in the optically denser medium, meeting a boundary with a medium of lower refractive index (one it would travel faster in); and (2) the angle of incidence must be greater than the critical angle for that boundary.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">18</span><strong>Using the simulation above, set n₁ = 2.00.</strong> Read off the critical angle, then check it by calculating sinθc = 1/n₁ yourself.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">sinθc = 1/2.00 = 0.500 &nbsp;⟹&nbsp; θc = 30.0° — this should match the simulation's marked critical angle.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Applications: optical fibres and refraction in everyday life</h2>
+      <p>Total internal reflection isn't just a textbook curiosity — it is the working principle behind one of the most important pieces of modern infrastructure: the optical fibre.</p>
+
+      <p>An optical fibre is a very thin, flexible strand of extremely pure glass, made of two layers: a central <strong>core</strong> with a slightly higher refractive index, surrounded by a <strong>cladding</strong> layer with a slightly lower refractive index. Light entering the end of the core strikes the core-cladding boundary at an angle greater than the critical angle every time, so it is totally internally reflected over and over, "bouncing" its way along the fibre — even around gentle bends — without escaping and with very little loss of energy.</p>
+
+      <figure>
+        <svg viewBox="0 0 420 130" width="420" height="130" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="35" width="400" height="60" fill="#eaf3fb" stroke="#c7ddef"/>
+          <text x="20" y="30" font-size="10" fill="#4a5568">cladding (lower n)</text>
+          <rect x="10" y="55" width="400" height="20" fill="#173a5e"/>
+          <text x="20" y="125" font-size="10" fill="#4a5568">core (higher n) — light totally internally reflects along its length</text>
+          <polyline points="15,60 60,70 105,60 150,70 195,60 240,70 285,60 330,70 375,60 405,68" fill="none" stroke="#d98324" stroke-width="2" marker-end="url(#arF)"/>
+          <defs><marker id="arF" markerWidth="8" markerHeight="8" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#d98324"/></marker></defs>
+        </svg>
+        <figcaption>Fig. 8.1 Light travelling along an optical fibre core by repeated total internal reflection off the core-cladding boundary.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 8.1 — optical fibres in the real world</span>
+        <p>A trans-Atlantic optical fibre cable runs approximately 5570 km from London to New York. If light travels through the fibre's silica core (n = 1.44) essentially in a straight line, estimate how long it takes a signal to travel the length of the cable.</p>
+        <p><strong>Answer:</strong><br>
+        v = c/n = (3.00×10⁸)/1.44 = 2.08×10⁸ m s⁻¹<br>
+        t = distance/v = (5.57×10⁶)/(2.08×10⁸) = 0.0268 s ≈ 27 ms</p>
+      </div>
+
+      <p>Total internal reflection is also used in <strong>endoscopes</strong> — thin bundles of optical fibres used in medicine to see inside the body. One bundle carries light in to illuminate the area; a second bundle, with a lens at each end, carries a focused image back out, all via T.I.R., without needing any mirrors or lenses along the flexible length of the instrument.</p>
+
+      <div class="stretch-box">
+        <span class="tag">Refraction in nature</span>
+        <p style="margin:0;">Archer fish spit jets of water to knock insects off overhanging branches — and to do it accurately, they have to unconsciously "correct" for the way refraction shifts the apparent position of a target seen from underwater looking up into the air. Bears fishing for salmon face the reverse problem: a fish seen from above the water's surface is not actually where it appears to be, because the light from the fish has refracted on its way to the bear's eyes. On hot days, refraction through layers of air at different temperatures can bend light from the sky enough to create the shimmering "puddle" mirages seen above hot roads.</p>
+      </div>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Bending Light</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Explore refraction, reflection, and total internal reflection interactively across a range of materials, and see the ray, wavefront, and "prism break-up" views.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
+        <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">19</span><strong>A shorter optical fibre link, 850 km long, uses the same silica core (n = 1.44).</strong> Estimate how long a signal takes to travel its length.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">v = c/n = 2.08×10⁸ m s⁻¹ (as in Worked example 8.1); t = (8.50×10⁵)/(2.08×10⁸) = 4.09×10⁻³ s ≈ 4.1 ms.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>Explain, using the idea of total internal reflection, why an optical fibre can carry light around a gentle bend without the light escaping.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">As long as the bend isn't too sharp, light travelling down the core still strikes the core-cladding boundary at an angle greater than the critical angle at every bounce, so it continues to be totally internally reflected and stays trapped inside the core, following the fibre's shape.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>Explain why a fish, seen by a bear looking down into a clear stream from above, is not actually located exactly where it appears to be.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">Light from the fish refracts (bends away from the normal) as it leaves the water and enters the air, before reaching the bear's eyes. The bear's brain interprets light as having travelled in a straight line, so the fish appears to be along the extended straight-line path of the refracted ray — which is not where the fish actually is underwater.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Wavefront</dt><dd>A line joining neighbouring points of a wave oscillating in phase; successive wavefronts are one wavelength apart.</dd>
+        <dt>Ray</dt><dd>A line showing the direction of wave travel, always perpendicular to the wavefronts.</dd>
+        <dt>Transmission</dt><dd>The passage of a wave through a medium without being absorbed or scattered.</dd>
+        <dt>Transparent / opaque</dt><dd>Describes a medium that does / does not transmit light clearly.</dd>
+        <dt>Absorption</dt><dd>Conversion of wave energy into internal (thermal) energy of a medium.</dd>
+        <dt>Scattering</dt><dd>Redirection of wave energy in many different, irregular directions.</dd>
+        <dt>Refraction</dt><dd>A change of direction that occurs when a wave changes speed at an angle to a boundary.</dd>
+        <dt>Normal</dt><dd>An imaginary line perpendicular to a surface at the point where a ray meets it.</dd>
+        <dt>Refractive index, n</dt><dd>The ratio of the speed of light in vacuum (or air) to its speed in a given medium; n = c/v.</dd>
+        <dt>Snell's law</dt><dd>n₁ sinθ₁ = n₂ sinθ₂ = the relationship connecting the angles either side of a boundary to the refractive indices (or speeds) of the two media.</dd>
+        <dt>Critical angle, θc</dt><dd>The angle of incidence, in the denser of two media, at which the angle of refraction is exactly 90°; sinθc = n₂/n₁.</dd>
+        <dt>Total internal reflection</dt><dd>Complete reflection of a wave's energy at a boundary, occurring when the angle of incidence in the denser medium exceeds the critical angle.</dd>
+        <dt>Optically dense</dt><dd>Describes a medium in which light travels more slowly than in another medium being compared with it.</dd>
+        <dt>Optical fibre</dt><dd>A thin, flexible glass fibre that transmits light along its length by total internal reflection.</dd>
+        <dt>Core / cladding</dt><dd>The central, higher-refractive-index part of an optical fibre / the surrounding, lower-refractive-index layer that keeps light trapped inside by T.I.R.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Velocity Change in Waves Workbook · Companion resources: <em>Wave Nature</em>, <em>Interference</em>, and <em>Standing Waves</em>.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Fig 6.1: Snell's law explorer ================= */
+(function(){
+  const canvas = document.getElementById('snellCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const px = W/2, py = H/2;
+  const rayLen = 120;
+
+  const n1Select = document.getElementById('n1Select');
+  const n2Select = document.getElementById('n2Select');
+  const angleSlider = document.getElementById('incAngleSlider');
+  const angleReadout = document.getElementById('incAngleReadout');
+  const readout = document.getElementById('snellReadout');
+
+  function drawArrow(x1,y1,x2,y2,color){
+    ctx.strokeStyle = color; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    const ang = Math.atan2(y2-y1,x2-x1);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2-9*Math.cos(ang-0.4), y2-9*Math.sin(ang-0.4));
+    ctx.lineTo(x2-9*Math.cos(ang+0.4), y2-9*Math.sin(ang+0.4));
+    ctx.closePath(); ctx.fill();
+  }
+
+  function draw(){
+    const n1 = parseFloat(n1Select.value);
+    const n2 = parseFloat(n2Select.value);
+    const theta1Deg = parseFloat(angleSlider.value);
+    angleReadout.textContent = theta1Deg;
+    const theta1 = theta1Deg * Math.PI/180;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#eaf3fb'; ctx.fillRect(0,0,W,py+40);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,py+40,W,H-py-40);
+    ctx.strokeStyle = '#173a5e'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(20,py+40); ctx.lineTo(W-20,py+40); ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(23,58,94,0.4)'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(px, 30); ctx.lineTo(px, H-20); ctx.stroke();
+    ctx.setLineDash([]);
+
+    const boundaryY = py+40;
+    // incident ray
+    const ix = px - rayLen*Math.sin(theta1), iy = boundaryY - rayLen*Math.cos(theta1);
+    drawArrow(ix, iy, px, boundaryY, '#a33d5b');
+
+    // always-present partial reflection (dashed, amber)
+    const rx = px + rayLen*0.55*Math.sin(theta1), ry = boundaryY - rayLen*0.55*Math.cos(theta1);
+    ctx.setLineDash([5,4]);
+    drawArrow(px, boundaryY, rx, ry, '#d98324');
+    ctx.setLineDash([]);
+
+    const sinTheta2 = (n1/n2) * Math.sin(theta1);
+    let statusHTML;
+    if(sinTheta2 > 1){
+      // total internal reflection: no refracted ray, emphasize reflected ray
+      const rx2 = px + rayLen*Math.sin(theta1), ry2 = boundaryY - rayLen*Math.cos(theta1);
+      ctx.setLineDash([]);
+      drawArrow(px, boundaryY, rx2, ry2, '#5fd0c0');
+      statusHTML = 'n₁ = ' + n1.toFixed(2) + ', n₂ = ' + n2.toFixed(2) + '<br>θ₁ = ' + theta1Deg + '°<br><strong style="color:#ffb27a;">Total internal reflection — no refracted ray!</strong>';
+      readout.classList.add('alert');
+    } else {
+      const theta2 = Math.asin(sinTheta2);
+      const fx = px + rayLen*Math.sin(theta2), fy = boundaryY + rayLen*Math.cos(theta2);
+      drawArrow(px, boundaryY, fx, fy, '#5fd0c0');
+      statusHTML = 'n₁ = ' + n1.toFixed(2) + ', n₂ = ' + n2.toFixed(2) + '<br>θ₁ = ' + theta1Deg + '°<br>θ₂ = ' + (theta2*180/Math.PI).toFixed(1) + '°';
+      readout.classList.remove('alert');
+    }
+    readout.innerHTML = statusHTML;
+
+    ctx.fillStyle = '#173a5e'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('medium 1', 25, 25);
+    ctx.fillStyle = '#dceaf0';
+    ctx.fillText('medium 2', 25, H-10);
+  }
+
+  [n1Select, n2Select, angleSlider].forEach(function(el){ el.addEventListener('input', draw); });
+  draw();
+})();
+
+/* ================= Fig 7.2: critical angle / TIR explorer ================= */
+(function(){
+  const canvas = document.getElementById('tirCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const px = W/2, py = H/2;
+  const rayLen = 120;
+
+  const n1Slider = document.getElementById('n1TirSlider');
+  const n1Readout = document.getElementById('n1TirReadout');
+  const angleSlider = document.getElementById('tirAngleSlider');
+  const angleReadout = document.getElementById('tirAngleReadout');
+  const readout = document.getElementById('tirReadout');
+
+  function drawArrow(x1,y1,x2,y2,color,dashed){
+    ctx.strokeStyle = color;
+    ctx.setLineDash(dashed ? [5,4] : []);
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.setLineDash([]);
+    const ang = Math.atan2(y2-y1,x2-x1);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2-9*Math.cos(ang-0.4), y2-9*Math.sin(ang-0.4));
+    ctx.lineTo(x2-9*Math.cos(ang+0.4), y2-9*Math.sin(ang+0.4));
+    ctx.closePath(); ctx.fill();
+  }
+
+  function draw(){
+    const n1 = parseFloat(n1Slider.value);
+    n1Readout.textContent = n1.toFixed(2);
+    const thetaDeg = parseFloat(angleSlider.value);
+    angleReadout.textContent = thetaDeg;
+    const theta1 = thetaDeg * Math.PI/180;
+    const thetac = Math.asin(1/n1);
+    const thetacDeg = thetac * 180/Math.PI;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30'; ctx.fillRect(0,0,W,py+40);
+    ctx.fillStyle = '#173a5e'; ctx.fillRect(0,py+40,W,H-py-40);
+    ctx.strokeStyle = '#cfe3ee'; ctx.lineWidth = 2.5;
+    const boundaryY = py+40;
+    ctx.beginPath(); ctx.moveTo(20,boundaryY); ctx.lineTo(W-20,boundaryY); ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(px, 20); ctx.lineTo(px, H-20); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // reference: critical-angle refracted ray, grazing at 90 degrees (dotted guide)
+    const cx = px + rayLen, cy = boundaryY;
+    ctx.strokeStyle = 'rgba(217,131,36,0.55)'; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(px, boundaryY); ctx.lineTo(cx, cy); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#d98324'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('θc = ' + thetacDeg.toFixed(1) + '° (grazing ray)', cx-95, cy-8);
+
+    // incident ray, from below (denser medium)
+    const ix = px - rayLen*Math.sin(theta1), iy = boundaryY + rayLen*Math.cos(theta1);
+    drawArrow(ix, iy, px, boundaryY, '#e08a8a', false);
+
+    let stateHTML;
+    if(thetaDeg >= thetacDeg){
+      // TIR: only reflected ray, back into denser medium
+      const rx = px + rayLen*Math.sin(theta1), ry = boundaryY + rayLen*Math.cos(theta1);
+      drawArrow(px, boundaryY, rx, ry, '#ff8a5c', false);
+      stateHTML = 'θ₁ = ' + thetaDeg + '° &nbsp;&gt;&nbsp; θc = ' + thetacDeg.toFixed(1) + '°<br><strong style="color:#ffcf8a;">TOTAL INTERNAL REFLECTION</strong>';
+      readout.classList.add('alert');
+    } else {
+      const sinTheta2 = n1 * Math.sin(theta1); // n2 = 1 (air)
+      const theta2 = Math.asin(Math.min(sinTheta2,1));
+      const fx = px + rayLen*Math.sin(theta2), fy = boundaryY - rayLen*Math.cos(theta2);
+      drawArrow(px, boundaryY, fx, fy, '#5fd0c0', false);
+      // faint partial reflection too, for realism
+      const rx = px + rayLen*0.5*Math.sin(theta1), ry = boundaryY + rayLen*0.5*Math.cos(theta1);
+      drawArrow(px, boundaryY, rx, ry, 'rgba(224,138,138,0.5)', true);
+      stateHTML = 'θ₁ = ' + thetaDeg + '° &nbsp;&lt;&nbsp; θc = ' + thetacDeg.toFixed(1) + '°<br>θ₂ = ' + (theta2*180/Math.PI).toFixed(1) + '° &nbsp;<strong style="color:#9fe3d4;">REFRACTING</strong>';
+      readout.classList.remove('alert');
+    }
+    readout.innerHTML = stateHTML;
+
+    ctx.fillStyle = '#dceaf0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('air (n₂ = 1.00)', 25, 22);
+    ctx.fillStyle = '#cfe3ee';
+    ctx.fillText('denser medium, n₁ = ' + n1.toFixed(2), 25, H-10);
+  }
+
+  [n1Slider, angleSlider].forEach(function(el){ el.addEventListener('input', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>
