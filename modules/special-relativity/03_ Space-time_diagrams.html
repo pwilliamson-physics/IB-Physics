@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space-Time Diagrams — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .eqn .cond{display:block; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:0.76rem; color:#5b6b78; margin-top:0.4rem;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .example .step{margin:0.35rem 0;}
+  .example .blank{background:#fff3c4; border-radius:4px; padding:0.05rem 0.5rem; font-weight:600;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+  .answer-panel .ans-tag{display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.03em; color:#3f9a5c; text-transform:uppercase; margin-bottom:0.3rem;}
+
+  .hint-btn{background:none; border:none; color:#a3821f; font-size:0.82rem; cursor:pointer; text-decoration:underline; padding:0.3rem 0 0 0; display:block;}
+  .hint{display:none; font-size:0.86rem; color:#6a5a1a; background:#fff9e6; border:1px dashed #e3cf7a; border-radius:6px; padding:0.55rem 0.8rem; margin:0.4rem 0 0 0;}
+  .hint.open{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:340px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin:0.6rem 0.4rem 0 0.4rem; font-size:0.92rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30; max-width:100%; height:auto;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-readout div{margin:0.15rem 0;}
+  .sim-readout .val{font-weight:700; color:#fff;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn, .hint-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+    .hint{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Space-Time Diagrams — Student Workbook</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Space-Time Diagrams</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Recap: the postulates, and the aether</a>
+    <a href="#s2">2. The space-time interval</a>
+    <a href="#s3">3. Space-time diagrams and world lines</a>
+    <a href="#s4">4. Comparing frames on a diagram</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Space-Time Diagrams</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">
+        In the last workbook you met the postulates of special relativity, the Lorentz transformation
+        equations, time dilation, length contraction and the relativity of simultaneity. Each of those
+        ideas can feel like a separate, slightly strange fact to memorise. This workbook introduces a
+        single tool — the space-time diagram — that lets you <em>see</em> all of them as consequences of
+        one simple geometric picture.
+      </p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>state Einstein's two postulates of special relativity</li>
+          <li>explain that the space-time interval, Δs, between two events is an invariant quantity — the
+          same for every inertial observer</li>
+          <li>use a space-time diagram to show how two events can be simultaneous for one observer but not
+          for another</li>
+          <li>read and construct simple space-time diagrams, including the world line of a moving object</li>
+          <li>use the relationship tan θ = v/c to connect the angle of a world line to the speed it represents</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Recap: the postulates, and the aether</h2>
+
+      <p>
+        Special relativity rests on two postulates, both introduced in the previous workbook.
+      </p>
+
+      <div class="keybox">
+        <strong>Einstein's postulates of special relativity:</strong>
+        <ol style="margin:0.4rem 0 0 0; padding-left:1.2rem;">
+          <li>The laws of physics are the same in all inertial reference frames.</li>
+          <li>The speed of light in a vacuum is measured to be the same by all observers in inertial
+          reference frames, regardless of the motion of the light source or the observer.</li>
+        </ol>
+      </div>
+
+      <p>
+        Before 1905, physicists assumed that light, like sound or water waves, needed a medium to travel
+        through. This hypothetical medium was called the <b>aether</b>, and it was assumed to fill all of
+        space. If the aether existed, then the Earth's motion through it should make light travel at
+        slightly different speeds depending on its direction — just as a swimmer moves faster swimming
+        with a current than against it.
+      </p>
+
+      <p>
+        In 1887, Albert Michelson and Edward Morley built an extremely sensitive instrument (an
+        interferometer) to detect this expected difference by splitting a light beam in two, sending the
+        halves along perpendicular paths, and recombining them to look for a shift in their interference
+        pattern as the apparatus was rotated. They found no difference at all, however the apparatus was
+        oriented. This null result is one of the most famous "failed" experiments in the history of
+        science, because it was the failure itself that pointed towards something new: there is no aether,
+        and the speed of light truly is constant for every observer, exactly as postulate 2 states.
+      </p>
+
+      <div class="sim-launch">
+        <p>Explore a simulation of the Michelson–Morley experiment. Try rotating the apparatus and
+        changing the simulated "aether wind" speed, and see how the two light paths compete.</p>
+        <a class="launch-btn" href="https://galileoandeinstein.phys.virginia.edu/more_stuff/Applets/MichelsonMorley/michelsonmorley.html" target="_blank" rel="noopener">Launch the Michelson–Morley simulation ↗</a>
+        <p class="credit">Simulation hosted by the University of Virginia (galileoandeinstein.phys.virginia.edu).</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>State Einstein's two postulates of special relativity.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">
+          <span class="ans-tag">Model answer</span>
+          1. The laws of physics are the same in every inertial reference frame. 2. The speed of light in a
+          vacuum is measured as the same by every observer in an inertial reference frame, no matter how the
+          light source or the observer are moving.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>Explain what the Michelson–Morley experiment was designed to
+        detect, and why its null result was significant.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Think about what result the experimenters expected to see if the aether existed, and compare it with what they actually observed.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">
+          <span class="ans-tag">Model answer</span>
+          It was designed to detect a difference in the speed of light travelling in different directions,
+          which would be expected if the Earth were moving through a stationary aether. No such difference
+          was ever detected, whatever the orientation of the apparatus. This null result showed that there
+          is no aether, and supported the idea that the speed of light is constant for all observers,
+          regardless of their motion — exactly as Einstein's second postulate states.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. The space-time interval</h2>
+
+      <p>
+        In Newtonian physics, both distances and time intervals are invariant — every observer, however
+        they are moving, agrees on how far apart two points are and how much time has passed between two
+        events. You already know that special relativity breaks both of these assumptions: observers
+        disagree about distances (length contraction) and about time intervals (time dilation). If space
+        and time are no longer individually reliable, is there anything that <em>all</em> inertial observers
+        can still agree on?
+      </p>
+
+      <div class="keybox">
+        <strong>Space-time.</strong> In relativity, space and time are joined into a single four-dimensional
+        (x, y, z, t) concept called space-time. Although individual observers disagree about spatial and
+        temporal separations, they always agree on a particular combination of the two: the
+        <b>space-time interval</b>, Δs.
+      </div>
+
+      <p>
+        Restricting the motion to the x-direction only (as we will throughout this workbook), the
+        space-time interval between two events is defined by:
+      </p>
+
+      <div class="eqn">
+        (Δs)² = (cΔt)² − (Δx)²
+        <span class="cond">where Δt is the time interval and Δx is the distance between the two events, measured by a given observer</span>
+      </div>
+
+      <div class="keybox">
+        <strong>Invariant quantity.</strong> Different inertial observers may measure different values of
+        Δt and Δx for the same pair of events — but every inertial observer calculates the <em>same</em>
+        value of (Δs)². The space-time interval is invariant.
+      </div>
+
+      <p>
+        This is a genuinely new kind of conservation law. It tells us that although the Lorentz
+        transformation mixes space and time together in a way that depends on the observer's velocity,
+        it does so in a very particular, constrained way — one that always leaves (Δs)² unchanged.
+      </p>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>A single laser pulse triggers two flashes as it travels along a vacuum tube. The two flashes are
+        45.0 m apart, and light takes exactly 1.50 × 10⁻⁷ s to travel this distance. Calculate the
+        space-time interval squared, (Δs)², between the two flashes.</p>
+        <p class="step">(Δs)² = (cΔt)² − (Δx)²</p>
+        <p class="step">(Δs)² = (3.00 × 10⁸ × 1.50 × 10⁻⁷)² − 45.0²</p>
+        <p class="step">(Δs)² = 45.0² − 45.0² = <span class="blank">complete this step yourself</span></p>
+        <p>Two events connected by a beam of light always have a space-time interval of exactly zero — this
+        will become an important idea when we draw space-time diagrams.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.2 — checking that Δs really is invariant</span>
+        <p>In frame S, an event occurs at x = 1200 m and t = 3.00 × 10⁻⁶ s (measured from a shared origin
+        event at x = 0, t = 0). Frame S′ moves at v = 0.60c relative to S. Show that the space-time
+        interval calculated from the S-coordinates of the event matches the space-time interval calculated
+        from its S′-coordinates.</p>
+        <p class="step">γ = 1 / √(1 − 0.60²) = 1 / √0.64 = 1.25</p>
+        <p class="step">cΔt = 3.00 × 10⁸ × 3.00 × 10⁻⁶ = 900 m</p>
+        <p class="step">x′ = γ(x − vt) = 1.25 × (1200 − 0.60 × 900) = 1.25 × 660 = 825 m</p>
+        <p class="step">ct′ = γ(ct − vx/c) = 1.25 × (900 − 0.60 × 1200) = 1.25 × 180 = 225 m</p>
+        <p class="step">Using S: (Δs)² = (cΔt)² − x² = 900² − 1200² = −630 000 m²</p>
+        <p class="step">Using S′: (Δs)² = (ct′)² − (x′)² = 225² − 825² = <span class="blank">complete this step yourself, and confirm it matches the value found using S</span></p>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        The sign of (Δs)² tells you something physical about the two events. If (Δs)² is positive, a clock
+        carried at a constant velocity between the two events would measure a real, "proper" time interval
+        between them — the events are <b>timelike separated</b>, and one could, in principle, cause the
+        other. If (Δs)² is zero, the events could be connected by a beam of light, as in Worked example 2.1.
+        If (Δs)² is negative, no signal — not even light — could travel between the two events; they are
+        <b>spacelike separated</b>, and neither could possibly have caused the other.
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>State what is meant by saying that the space-time interval is an
+        invariant quantity.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">
+          <span class="ans-tag">Model answer</span>
+          It means that although different inertial observers may measure different time intervals, Δt, and
+          different distances, Δx, between the same pair of events, they will all calculate exactly the same
+          value of (Δs)² = (cΔt)² − (Δx)² for those two events.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>A rocket fires a signal to a space station 240 m away. The
+        signal takes exactly 8.00 × 10⁻⁷ s to arrive. Calculate the space-time interval squared, (Δs)²,
+        between the signal being sent and received, and explain what your answer tells you about the
+        signal.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Compare c × Δt with Δx before you decide what your numerical answer means.</div>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">
+          <span class="ans-tag">Model answer</span>
+          (Δs)² = (cΔt)² − (Δx)² = (3.00 × 10⁸ × 8.00 × 10⁻⁷)² − 240² = 240² − 240² = 0. A space-time
+          interval of zero means the two events could be — and in this case are — connected by something
+          travelling at exactly the speed of light.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>Two events occur 500 m apart, with a time interval of
+        3.00 × 10⁻⁶ s between them, as measured by observer A. Calculate (Δs)² for these two events, and
+        state whether it would be possible for a single object to be present at both events.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">
+          <span class="ans-tag">Model answer</span>
+          cΔt = 3.00 × 10⁸ × 3.00 × 10⁻⁶ = 900 m. (Δs)² = 900² − 500² = 810 000 − 250 000 = 560 000 m², which
+          is positive. Since (Δs)² &gt; 0, the events are timelike separated: an object travelling slower
+          than c could be present at both, so a single object being present at both events is possible.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>Explain, without doing any further calculation, why observer B —
+        moving relative to observer A — would calculate a different Δx and a different Δt for the two
+        events in question 5, but would still calculate (Δs)² = 560 000 m².</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">
+          <span class="ans-tag">Model answer</span>
+          Observer B is in a different inertial reference frame, so the Lorentz transformation equations
+          mean B will measure different individual values of Δx and Δt to observer A. However, the
+          space-time interval, (Δs)², is an invariant quantity — every inertial observer, whatever their
+          velocity, calculates the same value of (Δs)² for a given pair of events.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Space-time diagrams and world lines</h2>
+
+      <p>
+        Space-time diagrams give us a way to see relativity happening, rather than just calculating it.
+        A space-time diagram plots an observer's position, x, on the horizontal axis and <em>ct</em> (the
+        speed of light multiplied by time) on the vertical axis, rather than plain time. Using ct instead
+        of t means that both axes are measured in the same units — metres — and, as you will see, it makes
+        the geometry of the diagram much easier to interpret.
+      </p>
+
+      <div class="keybox">
+        <strong>Events and world lines.</strong> A single, instantaneous incident is called an
+        <b>event</b>, and is plotted as a single point on a space-time diagram. An object moving through
+        space and time traces out a whole sequence of events, one after another — joined together, these
+        form a continuous line called the object's <b>world line</b>.
+      </div>
+
+      <p>
+        A stationary object (one whose x-coordinate never changes) has a vertical world line, since it
+        moves through time but not through space. A moving object has a tilted world line: the faster it
+        travels, the more the world line leans away from the vertical.
+      </p>
+
+      <figure>
+        <svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig31title">
+          <title id="fig31title">A space-time diagram showing four world lines at different angles to the ct-axis, with the region beyond the light line shaded as impossible</title>
+          <line x1="60" y1="230" x2="60" y2="20" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="60" y1="230" x2="440" y2="230" stroke="#173a5e" stroke-width="1.5"/>
+          <text x="46" y="24" font-size="13" fill="#173a5e" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="end">ct</text>
+          <text x="430" y="248" font-size="13" fill="#173a5e" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="end">x</text>
+
+          <line x1="60" y1="230" x2="60.0" y2="40.0" stroke="#3a4753" stroke-width="2"/>
+          <line x1="60" y1="230" x2="125.0" y2="51.5" stroke="#0a5b62" stroke-width="2"/>
+          <line x1="60" y1="230" x2="194.4" y2="95.6" stroke="#d98324" stroke-width="2" stroke-dasharray="6 4"/>
+
+          <path d="M 60,190 A 40,40 0 0 1 73.68,192.41" fill="none" stroke="#6b4c9a" stroke-width="1.5"/>
+          <text x="70" y="178" font-size="12" fill="#6b4c9a" font-family="Segoe UI, sans-serif" font-style="italic" text-anchor="middle">θ</text>
+
+          <text x="66" y="36" font-size="11.5" fill="#3a4753" font-family="Segoe UI, sans-serif" text-anchor="start">1 (stationary, v = 0)</text>
+          <text x="129" y="48" font-size="11.5" fill="#0a5b62" font-family="Segoe UI, sans-serif" text-anchor="start">2</text>
+          <text x="198" y="93" font-size="11.5" fill="#a3621b" font-family="Segoe UI, sans-serif" text-anchor="start" font-weight="700">3 (light, v = c)</text>
+        </svg>
+        <figcaption>Fig. 3.1 World line 1 represents a stationary object; world line 2 represents a moving
+        object, at angle θ to the ct-axis; line 3, at exactly 45°, represents light. No world line can lean
+        further from the vertical than line 3, since that would require travelling faster than light.</figcaption>
+      </figure>
+
+      <p>
+        The steeper a world line (the closer it is to the ct-axis), the slower the object is travelling.
+        Since the gradient of a world line is ct/x = c/v, and since the angle, θ, between a world line and
+        the ct-axis satisfies tan θ = x/(ct), a short rearrangement gives a very useful relationship:
+      </p>
+
+      <div class="eqn">
+        tan θ = v/c
+        <span class="cond">where θ is the angle between an object's world line and the ct-axis, and v is the object's speed</span>
+      </div>
+
+      <p>
+        Because no object can travel faster than light, no world line can ever make an angle greater than
+        45° with the ct-axis — the light line (line 3 in Figure 3.1) marks the absolute limit.
+      </p>
+
+      <div class="stretch-box">
+        <span class="tag">Worth remembering</span>
+        The two 45° light lines through any event (one leaning left, one leaning right) mark out that
+        event's <b>light cone</b> — the boundary of every other event it could possibly influence, or be
+        influenced by. Any event whose world line would have to lean beyond 45° to reach it is causally
+        disconnected: nothing that happens there could ever affect, or be affected by, the event at the
+        origin.
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>A world line makes an angle of 28.0° with the ct-axis. Calculate the speed of the object, as a
+        fraction of c.</p>
+        <p class="step">tan θ = v/c</p>
+        <p class="step">v = c × tan 28.0°</p>
+        <p class="step">v = c × 0.532 = <span class="blank">complete this step yourself</span></p>
+      </div>
+
+      <h3>Live simulation: tilting the axes</h3>
+      <p>
+        A space-time diagram becomes really powerful once you add a <em>second</em> observer's axes to the
+        same diagram. It turns out that a moving observer's own x′- and ct′-axes are not perpendicular —
+        they are both tilted towards the 45° light line, symmetrically, by the same angle θ = tan⁻¹(v/c).
+        Use the simulation below to see this for yourself, and to see how a single, fixed event is
+        described by different coordinates in the two frames.
+      </p>
+
+      <div class="sim-wrap">
+        <div class="sim-canvas-box"><canvas id="mkCanvas" width="460" height="330" aria-label="A space-time diagram showing the fixed S axes, the tilting S-prime axes, the 45 degree light line, and a fixed event whose S and S-prime coordinates are read out"></canvas></div>
+        <div class="sim-controls">
+          <h4>Simulation — tilting the S′ axes</h4>
+          <div class="sim-row">
+            <label for="mkVelocity">Relative velocity, v = <span id="mkVelocityVal">0.50</span>c</label>
+            <input type="range" id="mkVelocity" min="0.02" max="0.95" step="0.01" value="0.50">
+          </div>
+          <div class="sim-readout">
+            <div>θ = tan⁻¹(v/c) = <span class="val" id="mkTheta">26.6</span>°</div>
+            <div>tan θ = v/c = <span class="val" id="mkTanTheta">0.50</span></div>
+            <div>γ = <span class="val" id="mkGamma">1.15</span></div>
+            <div style="margin-top:0.4rem;">Event E, in S: x = 2.00, ct = 1.00</div>
+            <div>Event E, in S′: x′ = <span class="val" id="mkXPrime">1.73</span>, ct′ = <span class="val" id="mkCtPrime">0.00</span></div>
+            <div style="margin-top:0.4rem;">(Δs)² using S: <span class="val" id="mkDs2S">−3.00</span></div>
+            <div>(Δs)² using S′: <span class="val" id="mkDs2Sp">−3.00</span></div>
+          </div>
+          <div class="sim-btns">
+            <button class="alt" onclick="mkReset()">Reset</button>
+          </div>
+        </div>
+      </div>
+      <p class="sim-print-note">Interactive simulation — open the online version of this workbook to use it.</p>
+      <figcaption style="text-align:center; margin-top:0.7rem; margin-bottom:1rem;">Fig. 3.2 The black axes belong to observer S; the teal axes belong to observer S′, moving at velocity v
+      relative to S. Both tilt towards the amber 45° light line as v increases. The white dot marks a
+      single fixed event; its coordinates change between frames, but its (Δs)² does not.</figcaption>
+
+      <p>
+        Notice two things as you move the slider. First, the x′- and ct′-axes always stay symmetrical about
+        the 45° light line — this is exactly what guarantees that every inertial observer agrees on the
+        speed of light. Second, the event itself does not move on the page: only the axes move around it.
+        Reading off different coordinates for the same fixed point is exactly what it means for two
+        observers to disagree about x and t, while the space-time interval, calculated in the readout
+        panel, stays the same in both frames.
+      </p>
+
+      <div class="stretch-box">
+        <span class="tag">Explore further</span>
+        <p>Paul's class has also used the following interactive space-time diagram tools. Explore them
+        alongside the simulation above.</p>
+        <p style="text-align:center; margin-top:0.8rem;">
+          <a class="launch-btn" style="display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700; padding:0.55rem 1.1rem; border-radius:8px; margin:0.3rem; font-size:0.88rem;" href="https://javalab.org/en/spacetime_en/" target="_blank" rel="noopener">Javalab: Minkowski Spacetime ↗</a>
+          <a class="launch-btn" style="display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700; padding:0.55rem 1.1rem; border-radius:8px; margin:0.3rem; font-size:0.88rem;" href="http://www.trell.org/div/minkowski.html" target="_blank" rel="noopener">Interactive Minkowski diagram ↗</a>
+          <a class="launch-btn" style="display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700; padding:0.55rem 1.1rem; border-radius:8px; margin:0.3rem; font-size:0.88rem;" href="https://sciencesims.com/sims/minkowski/" target="_blank" rel="noopener">ScienceSims: Minkowski diagram ↗</a>
+        </p>
+        <p class="credit">Simulations by Javalab, trell.org and ScienceSims respectively.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>Explain what is meant by an object's world line on a space-time
+        diagram.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">
+          <span class="ans-tag">Model answer</span>
+          A world line is the path traced out on a space-time diagram by a series of events representing an
+          object's position at successive times — in effect, a graph of the object's position through
+          space-time.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>Using Figure 3.1, state which of world lines 1 and 2 represents
+        the faster-moving object, and explain how you can tell without being given any numerical
+        values.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">
+          <span class="ans-tag">Model answer</span>
+          World line 2 represents the faster-moving object. It makes a larger angle, θ, with the ct-axis
+          than world line 1 (which is vertical, since it represents a stationary object with θ = 0°), and a
+          larger angle means a larger value of tan θ = v/c, and therefore a greater speed.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>An object travels at a constant speed of 0.65c. Calculate the
+        angle its world line makes with the ct-axis.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">You will need to use tan⁻¹, the inverse tangent function, on your calculator.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">
+          <span class="ans-tag">Model answer</span>
+          θ = tan⁻¹(v/c) = tan⁻¹(0.65) = 33.0°.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>Explain why no world line on a space-time diagram can make an
+        angle of more than 45° with the ct-axis.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">
+          <span class="ans-tag">Model answer</span>
+          An angle of 45° corresponds to tan θ = 1, so v = c: this is the world line of light itself. Since
+          no object with mass can travel at or beyond the speed of light, no world line can lean any further
+          from the ct-axis than this.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>Using the simulation in Figure 3.2, describe what happens to
+        the angle θ, and to the tilt of both the x′- and ct′-axes, as the relative velocity v is increased
+        towards c. Explain why the axes can never quite reach the light line.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">
+          <span class="ans-tag">Model answer</span>
+          As v increases towards c, θ increases towards 45°, and both the x′- and ct′-axes tilt further
+          towards the 45° light line, squeezing the angle between them and the light line ever smaller. The
+          axes can never actually reach the light line, because that would require v = c, and no inertial
+          observer with mass can travel at the speed of light.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Comparing frames on a diagram</h2>
+
+      <p>
+        In the previous workbook you saw, using a train and two lightning strikes, that two events which
+        are simultaneous for one observer may not be simultaneous for another. Space-time diagrams let us
+        see exactly why this happens, using nothing more than the tilted axes from Section 3.
+      </p>
+
+      <div class="keybox">
+        <strong>Reading simultaneity from a diagram.</strong> Events that share the same ct-coordinate are
+        simultaneous for observer S: on the diagram, they lie on a horizontal line. Events that share the
+        same ct′-coordinate are simultaneous for observer S′: on the diagram, they lie on a line
+        <em>parallel to the x′-axis</em> — which, since the x′-axis is tilted, is not horizontal at all.
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fig41title">
+          <title id="fig41title">A space-time diagram showing two events simultaneous for observer S but not for observer S-prime</title>
+          <line x1="60" y1="230" x2="60" y2="20" stroke="#173a5e" stroke-width="1.5"/>
+          <line x1="60" y1="230" x2="440" y2="230" stroke="#173a5e" stroke-width="1.5"/>
+          <text x="46" y="24" font-size="13" fill="#173a5e" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="end">ct</text>
+          <text x="430" y="248" font-size="13" fill="#173a5e" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="end">x</text>
+
+          <line x1="60" y1="230" x2="360.0" y2="80.0" stroke="#0e7c86" stroke-width="2"/>
+          <line x1="60" y1="230" x2="160.0" y2="30.0" stroke="#0e7c86" stroke-width="2"/>
+          <text x="364" y="78" font-size="12.5" fill="#0a5b62" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="start">x′</text>
+          <text x="164" y="28" font-size="12.5" fill="#0a5b62" font-family="Segoe UI, sans-serif" font-weight="700" text-anchor="start">ct′</text>
+
+          <line x1="155.0" y1="82.5" x2="111.7" y2="104.2" stroke="#8b98a3" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <line x1="295.0" y1="82.5" x2="65.0" y2="197.5" stroke="#8b98a3" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+          <line x1="60" y1="90" x2="280" y2="90" stroke="#3a4753" stroke-width="1.3" stroke-dasharray="2 3"/>
+          <text x="210" y="80" font-size="10.5" fill="#3a4753" font-family="Segoe UI, sans-serif" text-anchor="middle">simultaneous in S</text>
+
+          <circle cx="140" cy="90" r="4.5" fill="#d98324"/>
+          <text x="140" y="78" font-size="12" fill="#a3621b" font-family="Segoe UI, sans-serif" text-anchor="middle" font-weight="700">P</text>
+          <circle cx="280" cy="90" r="4.5" fill="#d98324"/>
+          <text x="280" y="78" font-size="12" fill="#a3621b" font-family="Segoe UI, sans-serif" text-anchor="middle" font-weight="700">Q</text>
+
+          <circle cx="126.7" cy="96.7" r="3" fill="#8b98a3"/>
+          <circle cx="80.0" cy="190.0" r="3" fill="#8b98a3"/>
+        </svg>
+        <figcaption>Fig. 4.1 Events P and Q share the same ct-coordinate, so they are simultaneous for S
+        (dotted horizontal line). The dashed grey lines, each parallel to the x′-axis, meet the ct′-axis at
+        clearly different heights — so P and Q are <em>not</em> simultaneous for S′.</figcaption>
+      </figure>
+
+      <p>
+        Figure 4.1 uses a relative velocity of v = 0.50c. Events P and Q happen at different places but at
+        the same ct, so a horizontal line joins them — they are simultaneous for observer S. To find out
+        whether S′ agrees, we draw a line through each event parallel to the x′-axis (since it is <em>this</em>
+        line, not a horizontal one, that marks "simultaneous for S′") and see where each meets the ct′-axis.
+        The two dashed lines cross the ct′-axis at very different heights, showing that S′ does not agree —
+        for S′, event Q happens at an earlier ct′ than event P.
+      </p>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>Two events, P and Q, are simultaneous according to observer S. Explain, using ideas from a
+        space-time diagram like Figure 4.1, whether observer S′ — moving relative to S — will also record P
+        and Q as simultaneous.</p>
+        <p><strong>Answer:</strong> Events simultaneous for S lie on a horizontal line on the diagram (equal
+        ct). Events simultaneous for S′ lie on a line parallel to the tilted x′-axis (equal ct′). Because
+        the x′-axis is not horizontal, a horizontal line through P and Q will only also be a line of
+        constant ct′ if P and Q occur at exactly the <span class="blank">complete this step yourself — think about what special condition on their positions would be needed</span>.</p>
+      </div>
+
+      <div class="keybox">
+        <strong>The one exception.</strong> If two events happen at the same place <em>and</em> the same
+        time — that is, they are really the same event — then every observer, in every frame, agrees they
+        are simultaneous. Disagreement about simultaneity only ever arises for events that are separated in
+        space.
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>State how you would identify, on a space-time diagram, a pair
+        of events that are simultaneous for observer S.</strong>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">
+          <span class="ans-tag">Model answer</span>
+          The two events would lie on the same horizontal line on the diagram — that is, they would have
+          the same ct-coordinate.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>Explain why a line of constant ct′ is not drawn horizontally on
+        a space-time diagram that also shows the S axes.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Think about the direction of the x′-axis itself, since a line of constant ct′ must run parallel to it.</div>
+        <textarea class="answer-lines" rows="3" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">
+          <span class="ans-tag">Model answer</span>
+          A line of constant ct′ must run parallel to the x′-axis, since every point along the x′-axis
+          itself has ct′ = 0. Because the x′-axis is tilted at angle θ to the ordinary x-axis (rather than
+          lying along it), lines of constant ct′ are tilted too, not horizontal.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>Using Figure 4.1, state which event — P or Q — occurs first
+        according to observer S′, and justify your answer using the diagram.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">
+          <span class="ans-tag">Model answer</span>
+          Event Q occurs first according to S′. The dashed line parallel to the x′-axis through Q meets the
+          ct′-axis lower down (at a smaller ct′) than the dashed line through P, so Q has the smaller ct′
+          value and therefore happens earlier in S′.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>Explain why two inertial observers always agree on the order of
+        two events if those events are timelike separated (that is, if a signal travelling slower than c
+        could travel from one to the other), but may disagree on the order of two events that are spacelike
+        separated.</strong>
+        <button class="hint-btn" onclick="toggleHint(this)">Need a hint?</button>
+        <div class="hint">Think about how far a world line would have to tilt to swap the order of two timelike-separated events, and compare this with the 45° speed limit from Section 3.</div>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">
+          <span class="ans-tag">Model answer</span>
+          For timelike-separated events, swapping their order on any observer's diagram would require a
+          line joining them to tilt beyond 45° from the vertical, which would mean travelling faster than
+          light — impossible for any inertial observer, so all observers agree on the order. Spacelike
+          separated events, by contrast, are joined by a line that is already tilted more than 45° from the
+          vertical (closer to horizontal), so a modest tilt of the axes between different observers can move
+          this line from sloping one way to sloping the other, reversing which event appears to happen
+          first.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>A student says: "Since observers disagree about which of two
+        events happened first, one of them must simply be wrong." Explain why this statement is incorrect,
+        using an idea from Section 4.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">
+          <span class="ans-tag">Model answer</span>
+          The statement is incorrect because both observers are correctly applying the laws of physics
+          within their own, equally valid, inertial reference frame (postulate 1). The disagreement over the
+          order of spacelike-separated events is a genuine, physical feature of space-time, not a mistake by
+          either observer — special relativity predicts this disagreement, and it is exactly what
+          experiments confirm.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Aether</dt><dd>A hypothetical medium, once thought to fill all of space and carry light waves; shown not to exist by the Michelson–Morley experiment.</dd>
+        <dt>Event</dt><dd>A single, instantaneous incident that occurs at a specific point in space and a specific time.</dd>
+        <dt>Space-time</dt><dd>The combination of space and time into a single four-dimensional (x, y, z, t) concept.</dd>
+        <dt>Space-time interval, Δs</dt><dd>An invariant quantity combining a time interval and a distance between two events: (Δs)² = (cΔt)² − (Δx)².</dd>
+        <dt>Space-time diagram</dt><dd>A graph of position (x) against ct, used to visualise events, world lines and the relationships between inertial reference frames.</dd>
+        <dt>World line</dt><dd>The path traced on a space-time diagram by an object's position at successive times.</dd>
+        <dt>Timelike / spacelike separation</dt><dd>Two events are timelike separated if (Δs)² &gt; 0 (a slower-than-light signal could connect them); spacelike separated if (Δs)² &lt; 0 (no signal could connect them).</dd>
+        <dt>Light cone</dt><dd>The set of world lines at exactly 45° through a given event, marking the boundary of every other event it could possibly influence or be influenced by.</dd>
+      </dl>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+function toggleHint(btn){
+  var h = btn.nextElementSibling;
+  if(h && h.classList.contains('hint')){ h.classList.toggle('open'); }
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Simulation: tilting Minkowski axes ================= */
+(function(){
+  var canvas = document.getElementById('mkCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+
+  var vSlider = document.getElementById('mkVelocity');
+  var vVal = document.getElementById('mkVelocityVal');
+  var thetaOut = document.getElementById('mkTheta');
+  var tanThetaOut = document.getElementById('mkTanTheta');
+  var gammaOut = document.getElementById('mkGamma');
+  var xPrimeOut = document.getElementById('mkXPrime');
+  var ctPrimeOut = document.getElementById('mkCtPrime');
+  var ds2SOut = document.getElementById('mkDs2S');
+  var ds2SpOut = document.getElementById('mkDs2Sp');
+
+  var ox = 70, oy = 290;
+  var U = 45; /* pixels per unit */
+  var Ex = 2.0, Ect = 1.0; /* fixed event, in units, in frame S */
+
+  function gammaOf(v){ return 1/Math.sqrt(1-v*v); }
+
+  function toPx(x, ct){ return {x: ox + x*U, y: oy - ct*U}; }
+
+  function draw(){
+    var v = parseFloat(vSlider.value);
+    var theta = Math.atan(v);
+    var gamma = gammaOf(v);
+    var tanT = Math.tan(theta), cotT = 1/tanT;
+
+    /* Lorentz-transformed coordinates of the fixed event (c = 1, v in units of c) */
+    var xP = gamma*(Ex - v*Ect);
+    var ctP = gamma*(Ect - v*Ex);
+    var ds2S = Ect*Ect - Ex*Ex;
+    var ds2Sp = ctP*ctP - xP*xP;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    /* S axes */
+    ctx.strokeStyle = '#8fa6b8'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(ox,20); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(450,oy); ctx.stroke();
+    ctx.fillStyle = '#c8d6e0'; ctx.font = '12px Segoe UI, sans-serif';
+    ctx.textAlign = 'right'; ctx.fillText('ct', ox-6, 30);
+    ctx.textAlign = 'right'; ctx.fillText('x', 448, oy-8);
+
+    /* light line at 45 degrees */
+    ctx.strokeStyle = 'rgba(217,131,36,0.85)'; ctx.lineWidth = 1.5; ctx.setLineDash([6,4]);
+    var lightEnd = toPx(6.0, 6.0);
+    ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(lightEnd.x, lightEnd.y); ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* S' axes (teal) */
+    ctx.strokeStyle = '#2fb5c2'; ctx.lineWidth = 2;
+    var xpEnd = {x: ox + 400*Math.cos(theta), y: oy - 400*Math.sin(theta)};
+    var ctpEnd = {x: ox + 280*Math.sin(theta), y: oy - 280*Math.cos(theta)};
+    ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(xpEnd.x, xpEnd.y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(ctpEnd.x, ctpEnd.y); ctx.stroke();
+    ctx.fillStyle = '#8fe3ea'; ctx.font = '12px Segoe UI, sans-serif';
+    ctx.textAlign = 'left'; ctx.fillText("x'", Math.min(xpEnd.x,418)+6, xpEnd.y+3);
+    ctx.textAlign = 'left'; ctx.fillText("ct'", ctpEnd.x+6, Math.max(ctpEnd.y,26));
+
+    /* guide lines from the event, parallel to each S' axis, back to the other S' axis */
+    var denom1 = (cotT - tanT);
+    var denom2 = (tanT - cotT);
+    if(Math.abs(denom1) > 1e-6){
+      var gx1 = (Ect - tanT*Ex) / denom1;
+      var gct1 = cotT*gx1;
+      var p1 = toPx(Ex + (Ex-gx1)*0.25, Ect + (Ect-gct1)*0.25);
+      var p2 = toPx(gx1 - (Ex-gx1)*0.15, gct1 - (Ect-gct1)*0.15);
+      ctx.strokeStyle = 'rgba(220,234,240,0.55)'; ctx.lineWidth = 1.2; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    if(Math.abs(denom2) > 1e-6){
+      var gx2 = (Ect - cotT*Ex) / denom2;
+      var gct2 = tanT*gx2;
+      var q1 = toPx(Ex + (Ex-gx2)*0.25, Ect + (Ect-gct2)*0.25);
+      var q2 = toPx(gx2 - (Ex-gx2)*0.15, gct2 - (Ect-gct2)*0.15);
+      ctx.strokeStyle = 'rgba(220,234,240,0.55)'; ctx.lineWidth = 1.2; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.moveTo(q1.x,q1.y); ctx.lineTo(q2.x,q2.y); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* the fixed event itself */
+    var epx = toPx(Ex, Ect);
+    ctx.beginPath(); ctx.arc(epx.x, epx.y, 6, 0, Math.PI*2);
+    ctx.fillStyle = '#ffffff'; ctx.fill();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = '#173a5e'; ctx.stroke();
+    ctx.fillStyle = '#ffffff'; ctx.font = '12px Segoe UI, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('E', epx.x+9, epx.y-6);
+
+    /* angle arc at the origin */
+    ctx.strokeStyle = 'rgba(217,131,36,0.9)'; ctx.lineWidth = 1.3;
+    ctx.beginPath(); ctx.arc(ox, oy, 34, -Math.PI/2, -Math.PI/2+theta, false); ctx.stroke();
+
+    thetaOut.textContent = (theta*180/Math.PI).toFixed(1);
+    tanThetaOut.textContent = v.toFixed(2);
+    gammaOut.textContent = gamma.toFixed(2);
+    xPrimeOut.textContent = xP.toFixed(2);
+    ctPrimeOut.textContent = ctP.toFixed(2);
+    ds2SOut.textContent = ds2S.toFixed(2);
+    ds2SpOut.textContent = ds2Sp.toFixed(2);
+    vVal.textContent = v.toFixed(2);
+  }
+
+  vSlider.addEventListener('input', draw);
+
+  window.mkReset = function(){
+    vSlider.value = 0.50;
+    draw();
+  };
+
+  draw();
+})();
+</script>
+</body>
+</html>
