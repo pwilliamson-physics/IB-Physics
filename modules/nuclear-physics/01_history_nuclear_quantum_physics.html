@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The History of Nuclear &amp; Quantum Physics — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px;}
+  .layout{display:flex; min-height:100vh;}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .fab{position:fixed; right:1.6rem; bottom:1.6rem; background:var(--amber); color:#fff; border:none; border-radius:50px; padding:0.85rem 1.4rem; font-size:0.98rem; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.25); cursor:pointer; z-index:100;}
+  .fab:hover{background:#c0721c;}
+  .toolbar{position:fixed; right:1.6rem; bottom:5.3rem; z-index:100; display:flex; flex-direction:column; gap:0.5rem;}
+  .toolbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.55rem 1.1rem; font-size:0.82rem; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.12);}
+  .toolbar button:hover{background:var(--soft-blue);}
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  @media print{
+    nav.sidebar, .fab, .toolbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>The History of Nuclear &amp; Quantum Physics</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. The nucleus</a>
+    <a href="#s2">2. Nuclear notation</a>
+    <a href="#s3">3. Nuclear radius &amp; density</a>
+    <a href="#s4">4. The strong nuclear force</a>
+    <a href="#s5">5. Spectra &amp; energy levels</a>
+    <a href="#s6">6. Photons &amp; transitions</a>
+    <a href="#s7">7. The Bohr model<span class="tag">HL</span></a>
+    <a href="#s8">8. Photoelectric effect</a>
+    <a href="#s9">9. Einstein's equation</a>
+    <a href="#s10">10. Compton scattering</a>
+    <a href="#s11">11. Wave nature of matter</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>The History of Nuclear &amp; Quantum Physics</h1>
+      <p class="sub">Student Workbook — IB Physics Topics E.1 &amp; E.2</p>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">This workbook tells the story of two of the biggest revolutions in twentieth-century physics: the discovery that atoms have a tiny, dense <strong>nucleus</strong>, and the discovery that light and matter are neither purely particles nor purely waves, but something stranger — both at once. Work through it in order; each section builds on the one before it.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>Explain how the Geiger–Marsden–Rutherford scattering experiment provided evidence for a small, dense, positively charged nucleus, and use nuclear notation (Z, A, X) to describe nuclides and isotopes.</li>
+          <li>Calculate nuclear radius, density and the distance of closest approach, and explain how deviations from Rutherford scattering give evidence for the strong nuclear force.</li>
+          <li>Explain how emission and absorption spectra give evidence for discrete atomic energy levels, and apply E = hf to photon emission and absorption, including the Bohr model of hydrogen (HL).</li>
+          <li>Explain how the photoelectric effect, Compton scattering and electron diffraction provide evidence for wave–particle duality, and apply Einstein's photoelectric equation, the Compton wavelength shift, and the de Broglie wavelength.</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. The nucleus: the Geiger–Marsden–Rutherford experiment</h2>
+      <p>By 1904, physicists knew that atoms contained tiny, negatively charged <strong>electrons</strong> — J. J. Thomson had found them using cathode rays. But since atoms are electrically neutral overall, there had to be positive charge somewhere too. Thomson's best guess was the <strong>"plum pudding" model</strong>: a blob of spread-out positive charge with electrons dotted through it, like fruit suspended in a pudding.</p>
+
+      <figure>
+        <svg viewBox="0 0 620 220" width="620" height="220" xmlns="http://www.w3.org/2000/svg">
+          <text x="150" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#4a5568" font-family="Georgia,serif">plum-pudding model</text>
+          <circle cx="150" cy="115" r="70" fill="#f4dde5" stroke="#a33d5b" stroke-width="2"/>
+          <g fill="#22305a">
+            <circle cx="120" cy="90" r="6"/><circle cx="175" cy="80" r="6"/><circle cx="150" cy="130" r="6"/>
+            <circle cx="185" cy="140" r="6"/><circle cx="115" cy="145" r="6"/><circle cx="160" cy="110" r="6"/>
+          </g>
+          <text x="150" y="205" text-anchor="middle" font-size="11" fill="#4a5568">positive "pudding" + scattered electrons (–)</text>
+
+          <line x1="255" x2="330" y1="115" y2="115" stroke="#c1791f" stroke-width="3" marker-end="url(#arrow)"/>
+          <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c1791f"/></marker></defs>
+          <text x="292" y="102" text-anchor="middle" font-size="11" fill="#c1791f">1909 experiment</text>
+
+          <text x="460" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#4a5568" font-family="Georgia,serif">nuclear model</text>
+          <circle cx="460" cy="115" r="70" fill="#eef1f8" stroke="#22305a" stroke-width="2"/>
+          <circle cx="460" cy="115" r="7" fill="#c1791f"/>
+          <ellipse cx="460" cy="115" rx="55" ry="20" fill="none" stroke="#1f7a6c" stroke-width="1.4" stroke-dasharray="3 3" transform="rotate(20 460 115)"/>
+          <circle cx="505" cy="102" r="4" fill="#22305a"/>
+          <ellipse cx="460" cy="115" rx="60" ry="30" fill="none" stroke="#1f7a6c" stroke-width="1.4" stroke-dasharray="3 3" transform="rotate(-35 460 115)"/>
+          <circle cx="405" cy="132" r="4" fill="#22305a"/>
+          <text x="460" y="205" text-anchor="middle" font-size="11" fill="#4a5568">tiny dense (+) nucleus + orbiting electrons</text>
+        </svg>
+        <figcaption>Fig. 1.1 Two competing models of the atom, before and after 1909.</figcaption>
+      </figure>
+
+      <p>In 1909, at Rutherford's laboratory in Manchester, two of his students, <strong>Hans Geiger</strong> and <strong>Ernest Marsden</strong>, fired a narrow beam of fast, positively charged <strong>alpha particles</strong> at an extremely thin sheet of gold foil (only a few hundred atoms thick). A screen coated in zinc sulfide, which produces a tiny flash of light whenever an alpha particle hits it, was used to detect the particles after they had passed through — or bounced off — the foil.</p>
+
+      <figure>
+        <svg viewBox="0 0 640 200" width="640" height="200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="90" width="60" height="26" fill="#c1791f" rx="4"/>
+          <text x="50" y="107" text-anchor="middle" font-size="10" fill="#fff">α source</text>
+          <line x1="80" x2="240" y1="103" y2="103" stroke="#22305a" stroke-width="2"/>
+          <line x1="240" y1="40" x2="240" y2="166" stroke="#4a5568" stroke-width="6"/>
+          <text x="240" y="30" text-anchor="middle" font-size="10" fill="#4a5568">thin gold foil</text>
+          <g stroke="#1f7a6c" stroke-width="1.6" fill="none">
+            <path d="M240,103 L470,60"/>
+            <path d="M240,103 L470,103"/>
+            <path d="M240,103 L470,146"/>
+            <path d="M240,103 L360,20"/>
+            <path d="M240,103 Q 260,103 150,60"/>
+          </g>
+          <path d="M240,103 C 260,120 260,150 130,150" stroke="#a33d5b" stroke-width="1.8" fill="none" stroke-dasharray="4 2"/>
+          <text x="130" y="165" font-size="10" fill="#a33d5b">~1 in 8000 bounce back &gt;90°</text>
+          <path d="M470,60 A 220 220 0 0 1 470 146" fill="none" stroke="#dfd8c6" stroke-width="14" opacity="0.5"/>
+          <text x="630" y="80" text-anchor="end" font-size="10" fill="#4a5568">zinc sulfide</text>
+          <text x="630" y="93" text-anchor="end" font-size="10" fill="#4a5568">detector screen</text>
+        </svg>
+        <figcaption>Fig. 1.2 The alpha-particle scattering apparatus (plan view).</figcaption>
+      </figure>
+
+      <div class="stretch-box">
+        <span class="tag">In their own words</span>
+        <p style="margin:0;">Rutherford later described the large-angle results as <em>"quite the most incredible event that has ever happened to me... It was almost as incredible as if you fired a 15-inch shell at a piece of tissue paper and it came back and hit you."</em></p>
+      </div>
+
+      <p>The results were:</p>
+      <ul>
+        <li>The overwhelming majority of alpha particles passed straight through the foil with little or no deflection — exactly as expected if the atom is mostly empty space.</li>
+        <li>A small fraction were deflected through moderate angles (more than about 10°).</li>
+        <li>An extremely small fraction — roughly 1 in 8000 — were deflected through more than 90°, and a few came almost straight back the way they came.</li>
+      </ul>
+
+      <div class="keybox"><strong>Rutherford's interpretation.</strong> Because most alpha particles passed straight through, most of the atom must be empty space. Because a few bounced back almost the way they came, there had to be something extremely small, extremely dense, and positively charged at the centre of the atom, able to repel a fast-moving positive alpha particle head-on. Rutherford called this the <strong>nucleus</strong>.</div>
+
+      <p>This was a genuine paradigm shift: the plum-pudding model was replaced by the <strong>nuclear model</strong>, in which almost all the mass and all the positive charge of an atom is concentrated in a nucleus roughly 10⁴–10⁵ times smaller than the atom itself, with electrons occupying the mostly-empty space around it.</p>
+
+      <div class="sim-embed">
+        <p class="instructions">Fire alpha particles at a plum-pudding atom and then at a nuclear atom, and see the difference in scattering pattern for yourself.</p>
+        <p style="text-align:center; margin:0.8rem 0;"><a class="reveal-btn" style="text-decoration:none; display:inline-block; padding:0.55rem 1.3rem; font-size:0.92rem;" href="https://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html" target="_blank" rel="noopener">Open the PhET simulation ↗</a></p>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation: <em>Rutherford Scattering</em>, PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>Using the PhET simulation above, switch between the "Plum Pudding Atom" and "Rutherford Atom" screens.</strong> Describe one difference you observe in how the alpha particles scatter.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">This is a descriptive, simulation-based question (compare the scattering patterns you observe) — check your wording against the description of the experiment in this section and with your teacher.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>In your own words (fewer than 100 words), explain why Rutherford concluded that atoms contain a small, positively charged, dense nucleus.</strong> Do not use a diagram.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">This is a descriptive question (explain in your own words) — check your wording against the description of the experiment in this section and with your teacher.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>Suggest what would have happened in the Geiger–Marsden experiment if neutrons had been used instead of alpha particles.</strong> Explain your answer.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">Neutrons carry no charge, so they would not be repelled electrically by the nucleus at all — almost none would be deflected by more than a small angle from occasional direct nuclear ("strong-force") collisions, so the large-angle scattering pattern that revealed the nucleus's charge and size would not appear in the same way.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Nuclear notation and isotopes</h2>
+      <p>After Rutherford's discovery, it became clear that the nucleus itself is made of two kinds of particle: positively charged <strong>protons</strong> and uncharged <strong>neutrons</strong>, together called <strong>nucleons</strong>. Every atom of a given element has the same number of protons, but the number of neutrons can vary.</p>
+
+      <table class="eqtable">
+        <tr><th>Particle</th><th>Relative mass</th><th>Relative charge</th><th>Location</th></tr>
+        <tr><td>proton</td><td>1</td><td>+1</td><td>nucleus</td></tr>
+        <tr><td>neutron</td><td>1</td><td>0</td><td>nucleus</td></tr>
+        <tr><td>electron</td><td>1/1840</td><td>−1</td><td>surrounding the nucleus</td></tr>
+      </table>
+
+      <div class="keybox">
+        <strong>Key definitions.</strong>
+        <ul style="margin:0.4rem 0 0; padding-left:1.2rem;">
+          <li><strong>Proton number, Z</strong> — the number of protons in the nucleus. This determines which element the atom is.</li>
+          <li><strong>Nucleon number, A</strong> — the total number of protons and neutrons (also called the mass number).</li>
+          <li><strong>Neutron number, N</strong> — the number of neutrons, where N = A − Z.</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 300 140" width="300" height="140" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="83" font-size="60" font-family="Georgia,serif" fill="#22305a" font-weight="bold">X</text>
+          <text x="70" y="35" font-size="20" fill="#a33d5b" font-family="Georgia,serif">A</text>
+          <text x="70" y="95" font-size="20" fill="#1f7a6c" font-family="Georgia,serif">Z</text>
+          <line x1="60" y1="45" x2="95" y2="45" stroke="#a33d5b" stroke-width="1"/>
+          <text x="180" y="35" font-size="11" fill="#a33d5b">nucleon number</text>
+          <text x="180" y="95" font-size="11" fill="#1f7a6c">proton number</text>
+          <text x="180" y="62" font-size="11" fill="#4a5568">element symbol</text>
+        </svg>
+        <figcaption>Fig. 2.1 Standard nuclide notation: <sup>A</sup><sub>Z</sub>X.</figcaption>
+      </figure>
+
+      <p>Two or more atoms of the <strong>same element</strong> (same Z) with <strong>different</strong> nucleon numbers A are called <strong>isotopes</strong>. They have identical chemical properties but different masses. For example, the three isotopes of hydrogen are:</p>
+      <div class="eqn"><sup>1</sup><sub>1</sub>H (hydrogen, no neutrons) &nbsp;·&nbsp; <sup>2</sup><sub>1</sub>H (deuterium, 1 neutron) &nbsp;·&nbsp; <sup>3</sup><sub>1</sub>H (tritium, 2 neutrons)</div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p><strong>A particular element has proton number 19.</strong></p>
+        <ol type="a">
+          <li>Identify the element.</li>
+          <li>Its most common isotope has a nucleon number of 39. State the number of protons, neutrons and electrons in a neutral atom of this isotope.</li>
+          <li>Write the full nuclide symbol for this isotope.</li>
+        </ol>
+        <p><strong>Answer:</strong><br>
+        a) Potassium (K).<br>
+        b) 19 protons, 20 neutrons (39 − 19), 19 electrons (the atom is neutral).<br>
+        c) <sup>39</sup><sub>19</sub>K</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">4</span><strong>Consider a neutral atom.</strong>
+        <ol type="a" style="margin:0.5rem 0 0;">
+          <li>What do you get when you change the number of protons in an atom?</li>
+          <li>What do you get when you change the number of neutrons in an atom?</li>
+          <li>What do you get when you change the number of electrons in an atom?</li>
+        </ol>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">a) a different element — changing the number of protons (Z) changes which element it is; b) a different isotope of the same element — changing the number of neutrons keeps Z (and so the element) the same, but changes the nucleon number A and the mass; c) an ion — changing the number of electrons means the atom is no longer electrically neutral, so it becomes a charged ion (positive if electrons are removed, negative if electrons are added).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">5</span><strong>Chlorine, Cl, has proton number 17.</strong> Its two most common isotopes are chlorine-35 and chlorine-37. Write the full nuclide symbol for each, and state the number of neutrons in each.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5"><sup>35</sup><sub>17</sub>Cl (18 neutrons); <sup>37</sup><sub>17</sub>Cl (20 neutrons).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>An ion is formed from a nitrogen atom (Z = 7, A = 14) by removing three electrons.</strong> State the number of protons, neutrons and electrons in this ion, and its overall charge.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">7 protons, 7 neutrons, 4 electrons; overall charge = +3.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. How big is a nucleus? Radius, density, and closest approach</h2>
+      <p>The Geiger–Marsden results can be analysed quantitatively using <strong>conservation of energy</strong>. As an alpha particle travels directly towards a nucleus, it slows down as its kinetic energy is converted into electric potential energy. At the instant it is momentarily at rest — the <strong>distance of closest approach</strong>, <em>r</em> — all of its initial kinetic energy has been transferred. This gives a maximum possible radius of a nucleus:</p>
+
+      <div class="eqn">initial kinetic energy of alpha particle = electric potential energy at closest approach<br><b>E<sub>k</sub> = k·q₁q₂ / r</b></div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>An alpha particle (charge +2e) with kinetic energy 6.4 MeV is fired head-on at a gold nucleus (charge +79e). Determine the closest distance it can approach the nucleus.</p>
+        <p><strong>Answer:</strong><br>
+        E<sub>k</sub> = k q₁q₂ / r, so r = k q₁q₂ / E<sub>k</sub><br>
+        r = (8.99 × 10⁹) × (2 × 1.60 × 10⁻¹⁹) × (79 × 1.60 × 10⁻¹⁹) / (6.4 × 10⁶ × 1.60 × 10⁻¹⁹)<br>
+        r ≈ 3.6 × 10⁻¹⁴ m</p>
+      </div>
+
+      <p>Because the alpha particle in this calculation gets so close without deviating from the inverse-square law, this method gives an <em>upper limit</em> for the nuclear radius (the real gold nucleus turns out to be a little smaller).</p>
+
+      <p>A separate line of evidence — probing nuclei with high-energy electrons instead of alpha particles — leads to an empirical rule connecting the radius R of a nucleus to its nucleon number A:</p>
+
+      <div class="eqn"><b>R = R₀A<sup>1/3</sup></b> &nbsp; where R₀ = 1.20 × 10⁻¹⁵ m (the "Fermi radius")</div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.2 (HL)</span>
+        <p>Show that the radius of a lead-206 nucleus (<sup>206</sup><sub>82</sub>Pb) is about 7.1 × 10⁻¹⁵ m, and use it to estimate the nuclear density.</p>
+        <p><strong>Answer:</strong><br>
+        R = R₀A<sup>1/3</sup> = (1.20 × 10⁻¹⁵) × 206<sup>1/3</sup> = 7.1 × 10⁻¹⁵ m ✓<br><br>
+        ρ = m/V ≈ Au / (4/3 πR³) = (206 × 1.661 × 10⁻²⁷) / (4/3 π (7.1 × 10⁻¹⁵)³) ≈ 2.3 × 10¹⁷ kg m⁻³</p>
+      </div>
+
+      <div class="keybox"><strong>Why this matters: nuclear density is (almost) constant.</strong> Because both mass and volume scale with A (mass ∝ A, and V ∝ R³ ∝ A), the A cancels out of the density calculation. Every nucleus — hydrogen or uranium — has approximately the same density, about 2–3 × 10¹⁷ kg m⁻³. This is roughly 10¹⁴ times the density of everyday solids, and is comparable only to the density of a neutron star.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">7</span><strong>Estimate the radius of an oxygen-16 nucleus (<sup>16</sup><sub>8</sub>O).</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">R = (1.20×10⁻¹⁵)(16)<sup>1/3</sup> ≈ 3.0×10⁻¹⁵ m.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">8</span><strong>A gold nucleus has a measured radius of 6.98 × 10⁻¹⁵ m.</strong> Using R = R₀A<sup>1/3</sup>, show this is consistent with A = 197.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">A<sup>1/3</sup> = 6.98×10⁻¹⁵/1.20×10⁻¹⁵ = 5.82 ⟹ A ≈ 197 ✓ (matches gold).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">9</span><strong>An alpha particle of kinetic energy 4.0 MeV is fired head-on at a copper nucleus (Z = 29).</strong> Calculate the closest distance of approach.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">r = kq₁q₂/E<sub>k</sub> ≈ 2.1×10⁻¹⁴ m.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">10</span><strong>Explain why nuclear densities are all approximately equal, regardless of the size of the nucleus.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">Mass ∝ A and volume ∝ R³ ∝ A, so A cancels in ρ = m/V — density is independent of nucleon number and (almost) the same for every nucleus.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. When Coulomb's law breaks down: the strong nuclear force</h2>
+      <p>Rutherford's calculations assumed that the only force acting between the alpha particle and the nucleus is the repulsive electric (Coulomb) force. This assumption matches experimental scattering angles extremely well — <em>provided the alpha particles do not have too much energy</em>.</p>
+      <p>If alpha particles of increasingly high energy are used, they can get close enough to the nucleons that a second, much stronger, but extremely short-range force starts to act: the <strong>strong nuclear force</strong>. Once this happens, the scattering pattern no longer matches the simple inverse-square-law prediction — this deviation from "Rutherford scattering" is itself evidence for the strong force.</p>
+
+            <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box">
+            <canvas id="forceCanvas" width="460" height="320"></canvas>
+          </div>
+          <div class="sim-controls">
+            <h4>Combined nuclear force vs. separation</h4>
+            <div class="sim-row">
+              <label for="distSlider">Separation, r = <span id="distReadout">1.50</span> fm</label>
+              <input type="range" id="distSlider" min="0.55" max="4.5" step="0.05" value="1.5">
+            </div>
+            <div class="sim-readout" id="forceReadout" style="line-height:1.6;">
+              Coulomb force: <span id="fcReadout">…</span><br>
+              Strong force: <span id="fsReadout">…</span><br>
+              <strong>Net force: <span id="netReadout">…</span></strong>
+            </div>
+            <div class="sim-btns">
+              <button onclick="resetForceSim()">Reset</button>
+            </div>
+            <p style="font-size:0.8rem; color:#5b6b78; margin:0.7rem 0 0;">Positive = repulsive (pushing the alpha particle away); negative = attractive (pulling it in). Dashed lines show the two individual contributions; the solid line is their sum, the <em>net</em> force actually felt by the particle. This is an illustrative model of the correct qualitative shape, not an exact nuclear force law.</p>
+          </div>
+        </div>
+        <figcaption>Fig. 4.1 The Coulomb force (dashed, always repulsive, 1/r²) and the strong nuclear force (dashed, repulsive at extremely short range, attractive at intermediate range, negligible beyond ~4 fm) combine to give the net force (solid) on an alpha particle approaching a nucleus. Drag the slider to see how the balance shifts with distance.</figcaption>
+      </figure>
+
+      <div class="keybox"><strong>Key idea.</strong> A very energetic alpha particle can get close enough to a nucleus to feel the attractive strong nuclear force as well as the repulsive electric force. When this happens, the scattering can no longer be explained by Coulomb's law alone — this is the experimental signature that the strong force exists.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">11</span><strong>Explain why deviations from the Rutherford scattering pattern only appear at high alpha-particle energies, not low energies.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">Only high-energy alpha particles get close enough to a nucleus (small distance of closest approach) to enter the very short range (≲ 3×10⁻¹⁵ m) over which the strong force acts; low-energy particles never get that close, so Coulomb's law alone still fits.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">12</span><strong>Suggest why the strong nuclear force must be short-range, given that ordinary atoms (with nuclei made of many protons) do not collapse or fly apart.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">Because the strong force is short-range, each nucleon effectively only interacts with its near neighbours rather than every other nucleon in the nucleus — this stops nuclei from either collapsing (it turns repulsive at extremely short range) or growing without limit, and it has no effect at all at atomic/molecular distances.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Evidence for energy levels: emission and absorption spectra</h2>
+      <p>The simple picture of electrons orbiting a nucleus (rather like planets orbiting a star) turns out to be seriously incomplete. Orbiting satellites can have <em>any</em> orbital energy — a continuous range. Electrons in atoms cannot: they can only exist with certain very precise, separated (discrete) energies, called <strong>atomic energy levels</strong>. The lowest of these is the <strong>ground state</strong>.</p>
+
+      <p>The evidence for this comes from studying the light that atoms give out or take in.</p>
+      <ul>
+        <li>When a gas is <strong>excited</strong> (heated, or given energy by an electric current), it emits light only at certain specific frequencies. Viewed through a prism or diffraction grating, this appears as a series of bright, separate lines on a dark background: an <strong>emission spectrum</strong>.</li>
+        <li>When white light (a continuous spectrum) is passed through a cool gas, the gas absorbs light at exactly those same frequencies. This produces dark lines on an otherwise continuous, bright spectrum: an <strong>absorption spectrum</strong>.</li>
+      </ul>
+
+      <div class="keybox"><strong>Key idea.</strong> Every line in an emission or absorption spectrum corresponds to an electron transition between two discrete energy levels. Since <strong>different elements have different sets of energy levels</strong>, every element produces its own unique "fingerprint" of spectral lines. This is why spectra can be used to identify the chemical composition of a distant star, a nebula, or an unknown sample in a lab.</div>
+
+      <h3>Live simulation: build your own line spectrum</h3>
+      <div class="sim-embed">
+        <p class="instructions">This tool (Foothill College AstroSims) lets you add individual coloured emission lines onto a continuous spectrum and see the resulting pattern, just as astronomers use spectrometers to read the chemical fingerprint of starlight.</p>
+        <iframe class="sim-frame" src="https://foothillastrosims.github.io/Spectroscopy-Demonstrator/" style="height:640px;" loading="lazy" title="Spectroscopy Demonstrator simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation: Foothill College AstroSims — Spectroscopy Demonstrator (opens the full version in a new tab).</p>
+      </div>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Explore real spectra — atomic-spectra.net</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Browse the real emission-line spectrum of any element in the periodic table.</p>
+        <a class="launch-btn" href="https://atomic-spectra.net/spectrum.php" target="_blank" rel="noopener">Open atomic-spectra.net ↗</a>
+        <p class="credit">External resource: atomic-spectra.net. Opens in a new tab.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">13</span><strong>Using the AstroSims tool above (or atomic-spectra.net), compare the emission spectra of hydrogen and helium.</strong> Sketch or describe two differences.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">This is a descriptive, simulation-based question — see the key idea box in this section for the underlying physics; check your specific comparison with your teacher.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">14</span><strong>Explain how an astronomer could use the absorption spectrum of a star to determine which elements are present in its outer atmosphere.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">This is a descriptive question — see the key idea box in this section, which explains why each element's absorption lines act as a unique fingerprint; check your wording with your teacher.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">15</span><strong>Explain why the existence of line spectra (rather than continuous, "rainbow" spectra) is evidence that atomic energy levels are discrete rather than continuous.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">Discrete spectral lines correspond to discrete photon frequencies (E = hf); since only specific frequencies appear, only specific energy differences — and therefore only discrete energy levels — can exist within the atom.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Photons and atomic transitions</h2>
+      <p>When an electron in an atom drops from a higher energy level to a lower one, the atom emits a single "packet" of electromagnetic energy called a <strong>photon</strong>. Conversely, an atom can absorb a photon and jump from a lower level to a higher one — but <em>only</em> if the photon carries exactly the right amount of energy to bridge the gap between the two levels.</p>
+
+      <div class="eqn">energy of one photon: &nbsp; <b>E = hf</b> &nbsp; (h = Planck's constant = 6.63 × 10⁻³⁴ J s)</div>
+
+      <p>Because atomic energy levels are discrete, the differences between them are also discrete — so only certain photon energies (and therefore only certain frequencies, since E = hf) can be emitted or absorbed by a given atom. This is exactly why line spectra exist.</p>
+
+      <p>Physically, each energy level corresponds to an electron occupying one of the atom's circular "shells" around the nucleus (this is the Bohr model — see Section 7). But the emission/absorption diagrams used throughout this topic, like Fig. 6.2 below, draw each level as a flat horizontal line rather than a circle — and the line spectra you explored in Section 5 are themselves just another picture of the very same spacing. Fig. 6.1 shows how all three pictures (shells → flat lines → spectral lines) are connected.</p>
+
+      <figure>
+        <svg viewBox="0 0 560 270" width="560" height="270" xmlns="http://www.w3.org/2000/svg">
+          <text x="150" y="14" text-anchor="middle" font-size="11" font-weight="bold" fill="#22305a">electron shells around the nucleus</text>
+          <circle cx="150" cy="150" r="20" fill="none" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="55" fill="none" stroke="#a33d5b" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="80" fill="none" stroke="#1f7a6c" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="100" fill="none" stroke="#c1791f" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="5" fill="#22305a" stroke="#fff" stroke-width="1"/>
+          <text x="150" y="171" text-anchor="middle" font-size="9.5" fill="#22305a">nucleus</text>
+          <text x="150" y="122" text-anchor="middle" font-size="9.5" fill="#4a5568">n=1</text>
+          <text x="105" y="105" text-anchor="end" font-size="9.5" fill="#a33d5b">n=2</text>
+          <text x="64" y="153" text-anchor="end" font-size="9.5" fill="#1f7a6c">n=3</text>
+          <text x="73" y="227" text-anchor="end" font-size="9.5" fill="#c1791f">n=4</text>
+          <rect x="156" y="44" width="8" height="93" fill="#c1791f" opacity="0.15"/>
+          <circle cx="160" cy="133" r="4.5" fill="#4a5568" stroke="#fff" stroke-width="1"/>
+          <circle cx="160" cy="96" r="4.5" fill="#a33d5b" stroke="#fff" stroke-width="1"/>
+          <circle cx="160" cy="71" r="4.5" fill="#1f7a6c" stroke="#fff" stroke-width="1"/>
+          <circle cx="160" cy="51" r="4.5" fill="#c1791f" stroke="#fff" stroke-width="1"/>
+          <path d="M160,133 L280,133" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M160,96 L280,96" fill="none" stroke="#a33d5b" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M160,71 L280,71" fill="none" stroke="#1f7a6c" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M160,51 L280,51" fill="none" stroke="#c1791f" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="280" y1="133" x2="540" y2="133" stroke="#4a5568" stroke-width="2.5"/>
+          <line x1="280" y1="96" x2="540" y2="96" stroke="#a33d5b" stroke-width="2.5"/>
+          <line x1="280" y1="71" x2="540" y2="71" stroke="#1f7a6c" stroke-width="2.5"/>
+          <line x1="280" y1="51" x2="540" y2="51" stroke="#c1791f" stroke-width="2.5"/>
+        </svg>
+        <figcaption>Fig. 6.1 The circular electron shells are then shown as a horizontal "sliver" to save space and make the model as clear as possible.</figcaption>
+      </figure>
+
+      <figure>
+        <svg viewBox="0 0 400 210" width="400" height="210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowOrange" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#c1791f"/></marker>
+            <marker id="arrowTeal" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f7a6c"/></marker>
+            <marker id="arrowRose" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#a33d5b"/></marker>
+            <marker id="arrowGrey" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4a5568"/></marker>
+          </defs>
+          <line x1="40" y1="25" x2="300" y2="25" stroke="#22305a" stroke-width="2"/><text x="308" y="29" font-size="11" fill="#22305a">E₄</text>
+          <line x1="40" y1="50" x2="300" y2="50" stroke="#22305a" stroke-width="2"/><text x="308" y="54" font-size="11" fill="#22305a">E₃</text>
+          <line x1="40" y1="95" x2="300" y2="95" stroke="#22305a" stroke-width="2"/><text x="308" y="99" font-size="11" fill="#22305a">E₂</text>
+          <line x1="40" y1="185" x2="300" y2="185" stroke="#22305a" stroke-width="2.5"/><text x="308" y="189" font-size="11" fill="#22305a">E₁ (ground)</text>
+          <line x1="90" x2="90" y1="25" y2="185" stroke="#c1791f" stroke-width="2" marker-end="url(#arrowOrange)"/>
+          <line x1="150" x2="150" y1="50" y2="185" stroke="#1f7a6c" stroke-width="2" marker-end="url(#arrowTeal)"/>
+          <line x1="210" x2="210" y1="95" y2="185" stroke="#a33d5b" stroke-width="2" marker-end="url(#arrowRose)"/>
+          <line x1="270" x2="270" y1="185" y2="25" stroke="#4a5568" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
+          <text x="270" y="15" text-anchor="middle" font-size="10" fill="#4a5568">absorption</text>
+        </svg>
+        <figcaption>Fig. 6.2 Emission transitions (downward, coloured) release photons of different energies; absorption (upward, dashed) requires a photon of exactly the right energy. Notice the gaps between levels shrink higher up, as in a real atom (E ∝ −1/n²).</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>An electron in an atom drops from an energy level of −1.20 × 10⁻¹⁸ J to a level of −3.06 × 10⁻¹⁸ J. Calculate the frequency of the photon emitted, and state the part of the electromagnetic spectrum it belongs to.</p>
+        <p><strong>Answer:</strong><br>
+        ΔE = (−1.20 × 10⁻¹⁸) − (−3.06 × 10⁻¹⁸) = 1.86 × 10⁻¹⁸ J<br>
+        E = hf &nbsp;⟹&nbsp; f = E/h = (1.86 × 10⁻¹⁸)/(6.63 × 10⁻³⁴) = 2.81 × 10¹⁵ Hz<br>
+        This frequency lies in the <strong>ultraviolet</strong> part of the spectrum.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">16</span><strong>A photon of frequency 5.0 × 10¹⁴ Hz is absorbed by an atom.</strong> Calculate the energy gained by the atom, in both joules and electronvolts.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">E = hf = 3.32×10⁻¹⁹ J = 2.07 eV.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">17</span><strong>An atom has just four energy levels.</strong> State the maximum possible number of different spectral lines (transitions) it could produce.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">6 possible transitions (4 choose 2).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">18</span><strong>Explain why a photon can only be absorbed by a particular atom if its energy exactly matches the gap between two of that atom's energy levels — rather than being absorbed partially.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Because atomic energy levels are discrete, an electron can only ever be in one exact level or another — there is no "in-between" state to absorb partial energy into, so the photon energy must exactly bridge two allowed levels.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. The Bohr model of the hydrogen atom<span style="display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; margin-left:0.5rem; vertical-align:middle;">HL</span></h2>
+      <p>In 1913, the Danish physicist <strong>Niels Bohr</strong> proposed a bold new rule for the hydrogen atom: an electron can only orbit the nucleus in certain allowed orbits, and while it stays in one of these orbits, it does <em>not</em> radiate energy (even though classical physics said an accelerating charge always should). Bohr justified this by proposing that the electron's <strong>angular momentum</strong> is quantized — it can only take specific values:</p>
+
+      <div class="eqn"><b>mvr = nh / 2π</b> &nbsp; (n = 1, 2, 3, ... — the "principal quantum number")</div>
+
+      <p>Combining this quantization rule with Coulomb's law and circular motion allows the energy of each allowed orbit (n = 1, 2, 3, ...) to be calculated. Remarkably, the result matches the hydrogen line spectrum almost perfectly:</p>
+
+      <div class="eqn">energy levels of hydrogen: &nbsp; <b>E = −13.6 / n² &nbsp;(eV)</b></div>
+
+      <figure>
+        <svg viewBox="0 0 480 255" width="480" height="255" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="12" x2="300" y2="12" stroke="#22305a" stroke-width="1.6" stroke-dasharray="2 2"/><text x="308" y="16" font-size="12" fill="#22305a">n=∞, 0 eV</text>
+          <line x1="30" y1="22" x2="300" y2="22" stroke="#22305a" stroke-width="1.6"/><text x="308" y="26" font-size="12" fill="#22305a">n=4, −0.85 eV</text>
+          <line x1="30" y1="40" x2="300" y2="40" stroke="#22305a" stroke-width="1.6"/><text x="308" y="44" font-size="12" fill="#22305a">n=3, −1.51 eV</text>
+          <line x1="30" y1="85" x2="300" y2="85" stroke="#22305a" stroke-width="1.6"/><text x="308" y="89" font-size="12" fill="#22305a">n=2, −3.40 eV</text>
+          <line x1="30" y1="235" x2="300" y2="235" stroke="#22305a" stroke-width="2.4"/><text x="308" y="239" font-size="12" fill="#22305a">n=1, −13.6 eV</text>
+        </svg>
+        <figcaption>Fig. 7.1 Energy levels of hydrogen. The gaps between levels shrink rapidly as n increases (E = −13.6/n² eV), converging on the ionisation limit at n = ∞.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>Calculate the energy of the n = 4 level of hydrogen, in eV and in joules. Hence calculate the frequency of the photon emitted when an electron falls from n = 4 to n = 2.</p>
+        <p><strong>Answer:</strong><br>
+        E₄ = −13.6/4² = −0.850 eV = −0.850 × 1.60 × 10⁻¹⁹ = −1.36 × 10⁻¹⁹ J<br>
+        E₂ = −13.6/2² = −3.40 eV<br>
+        ΔE = (−0.850) − (−3.40) = 2.55 eV = 4.08 × 10⁻¹⁹ J<br>
+        f = ΔE/h = (4.08 × 10⁻¹⁹)/(6.63 × 10⁻³⁴) = 6.15 × 10¹⁴ Hz &nbsp;(visible light)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.2</span>
+        <p>Calculate the angular momentum of an electron in the n = 2 orbit of hydrogen.</p>
+        <p><strong>Answer:</strong><br>
+        L = nh/2π = (2 × 6.63 × 10⁻³⁴)/(2π) = 2.11 × 10⁻³⁴ kg m² s⁻¹</p>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Why the Bohr model matters — and where it fails</span>
+        <p style="margin:0;">Bohr's model was the first to correctly predict the numerical energy levels of hydrogen from a quantization rule, rather than just fitting a curve to data. But it only works well for hydrogen (and other one-electron ions); it fails for atoms with more than one electron, and it does not explain <em>why</em> angular momentum should be quantized. That deeper explanation had to wait for the discovery of the wave nature of matter — the subject of Section 11.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">19</span><strong>Calculate the energy (in eV) of the n = 5 level of hydrogen.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">E₅ = −13.6/25 = −0.544 eV.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>Determine the frequency of the photon emitted when an electron in a hydrogen atom falls from n = 3 to the ground state (n = 1).</strong> State which part of the electromagnetic spectrum this photon belongs to.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">ΔE = 13.6 − 1.51 = 12.1 eV ⟹ f ≈ 2.92×10¹⁵ Hz (ultraviolet — part of the Lyman series).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>Calculate the ionisation energy of a hydrogen atom that is already in its n = 2 state</strong> (i.e. the energy needed to remove the electron completely, starting from n = 2 rather than the ground state).
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">Ionisation energy from n = 2 is 3.40 eV (= 0 − (−3.40 eV)).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">22</span><strong>Determine the angular momentum of an electron in the n = 3 orbit of hydrogen,</strong> (a) in terms of h/π and (b) in SI units.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">a) L = 3h/2π = 1.5(h/π); b) L = 3.17×10⁻³⁴ kg m² s⁻¹.</div>
+      </div>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Build an Atom</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Not required, but useful for visualising how electrons are organised into shells around a nucleus, and how this connects to isotope and ion notation from Section 2.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
+        <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. The photoelectric effect</h2>
+      <p>By the late 1800s, light was firmly believed to be a wave. But in 1887, Heinrich Hertz noticed something odd: shining ultraviolet light onto a clean metal surface could cause it to emit electrons — the <strong>photoelectric effect</strong>, and the ejected electrons are called <strong>photoelectrons</strong>.</p>
+      <p>Careful experiments revealed three observations that a wave model of light simply could not explain:</p>
+      <ol>
+        <li>There is <strong>no time delay</strong> — photoelectrons are emitted the instant light hits the surface, however dim the light.</li>
+        <li>For a given metal, photoelectrons are only emitted if the light's frequency is above a certain minimum value, the <strong>threshold frequency</strong>, <em>f</em>₀ — no matter how intense the light is below that frequency.</li>
+        <li>Increasing the <strong>intensity</strong> of light above the threshold frequency increases the <em>number</em> of photoelectrons per second, but not their individual maximum kinetic energy.</li>
+      </ol>
+
+      <div class="keybox"><strong>Einstein's explanation (1905).</strong> Einstein proposed that light itself is quantized into individual <strong>photons</strong>, each carrying energy E = hf. A single photon transfers <em>all</em> of its energy to a single electron, instantaneously — which explains why there is no time delay, and why the effect depends on frequency (the energy per photon) rather than intensity (the number of photons per second).</div>
+
+      <p>Play with the live simulation below: it models a beam of monochromatic light photons hitting a metal cathode, releasing photoelectrons that travel towards a collector plate.</p>
+
+      <div class="sim-embed">
+        <p class="instructions">Try changing only the wavelength slider first, then only the metal, then only the intensity — notice which sliders change whether electrons are emitted at all, and which just change how many.</p>
+              <div class="sim-embed">
+        <p class="instructions">Simulation by <a href="https://www.drjonesphysics.com/pe-effect" target="_blank" rel="noopener">Dr Dan Jones (drjonesphysics.com)</a>. Try changing only the wavelength slider first, then only the metal, then only the intensity — notice which sliders change whether electrons are emitted at all, and which just change how many.</p>
+<div id="pe-embed-root">
+        <style>
+          #pe-sim-wrapper {
+              width: 100%;
+              aspect-ratio: 16 / 10;
+              min-height: 560px;
+              max-height: 95vh;
+              background-color: #f0f2f5;
+              color: #212529;
+              font-family: 'Segoe UI', Arial, sans-serif;
+              display: flex;
+              flex-direction: column;
+              border-top: 2px solid #0056b3;
+              overflow: hidden;
+              box-sizing: border-box;
+          }
+          #pe-sim-wrapper #controls {
+              background-color: #ffffff;
+              padding: 12px 20px;
+              display: flex;
+              flex-wrap: wrap;
+              gap: 12px;
+              align-items: center;
+              justify-content: space-between;
+              border-bottom: 3px solid #0056b3;
+          }
+          #pe-sim-wrapper .control-group {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              flex: 1;
+              min-width: 120px;
+          }
+          #pe-sim-wrapper label {
+              font-size: 11px;
+              font-weight: 800;
+              color: #495057;
+              text-transform: uppercase;
+          }
+          #pe-sim-wrapper input[type="range"] {
+              width: 100%;
+              cursor: pointer;
+              accent-color: #0056b3;
+          }
+          #pe-sim-wrapper select {
+              padding: 6px;
+              background: #fff;
+              color: #212529;
+              border: 2px solid #dee2e6;
+              border-radius: 6px;
+              font-size: 13px;
+              font-weight: 600;
+          }
+          #pe-sim-wrapper .value-display {
+              font-size: 13px;
+              color: #0056b3;
+              font-weight: bold;
+          }
+          #pe-sim-wrapper #canvas-container {
+              flex-grow: 1;
+              position: relative;
+              width: 100%;
+              height: 100%;
+              background: #05050a;
+              overflow: hidden;
+          }
+          #pe-sim-wrapper canvas {
+              display: block;
+              width: 100%;
+              height: 100%;
+          }
+          #pe-sim-wrapper .overlay-box {
+              position: absolute;
+              background: rgba(255, 255, 255, 0.98);
+              padding: 12px;
+              border-radius: 8px;
+              border: 1px solid #ced4da;
+              pointer-events: none;
+              box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+              color: #212529;
+          }
+          #pe-sim-wrapper #math-box { top: 15px; right: 15px; border-right: 6px solid #d63384; min-width: 250px; }
+          #pe-sim-wrapper #ammeter-box { top: 15px; left: 15px; border-bottom: 6px solid #ffc107; text-align: center; min-width: 140px; }
+          #pe-sim-wrapper #status-panel { bottom: 15px; left: 15px; border-left: 6px solid #198754; min-width: 200px; }
+          @media (max-width: 560px) {
+              #pe-sim-wrapper { min-height: 520px; }
+              #pe-sim-wrapper .overlay-box { padding: 5px 7px; max-width: 44vw; box-sizing: border-box; }
+              #pe-sim-wrapper #math-box { top: 8px; right: 8px; min-width: 0; width: 44vw; font-size: 9px; }
+              #pe-sim-wrapper #ammeter-box { top: 8px; left: 8px; min-width: 0; width: 30vw; font-size: 9px; }
+              #pe-sim-wrapper #status-panel { bottom: 8px; left: 8px; min-width: 0; width: 40vw; font-size: 9px; }
+              #pe-sim-wrapper #current-readout { font-size: 12px; }
+              #pe-sim-wrapper .box-title { font-size: 8px; margin-bottom: 3px; padding-bottom: 1px; white-space: normal; }
+              #pe-sim-wrapper .math-line { font-size: 9px; flex-direction: column; margin-bottom: 4px; gap: 0; }
+              #pe-sim-wrapper .math-line span:first-child { font-size: 8px; color: #6c757d; }
+              #pe-sim-wrapper #controls { padding: 8px 10px; gap: 8px; }
+              #pe-sim-wrapper .control-group { min-width: 46%; }
+          }
+          #pe-sim-wrapper .box-title {
+              margin: 0 0 6px 0;
+              font-size: 12px;
+              font-weight: bold;
+              text-transform: uppercase;
+              color: #6c757d;
+              border-bottom: 1px solid #eee;
+              padding-bottom: 3px;
+          }
+          #pe-sim-wrapper .math-line { display: flex; justify-content: space-between; margin: 2px 0; font-size: 13px; }
+          #pe-sim-wrapper .math-val { font-family: 'Courier New', monospace; font-weight: bold; }
+          #pe-sim-wrapper #current-readout { font-size: 24px; font-family: 'Courier New', monospace; color: #d63384; font-weight: bold; }
+        </style>
+        <div id="pe-sim-wrapper">
+          <div id="controls">
+              <div class="control-group">
+                  <label>Units</label>
+                  <select id="unitSelect">
+                      <option value="eV">electronvolts (eV)</option>
+                      <option value="J">Joules (J)</option>
+                  </select>
+              </div>
+              <div class="control-group">
+                  <label>Cathode Metal</label>
+                  <select id="metalSelect">
+                      <option value="2.28">Sodium (Na)</option>
+                      <option value="2.30">Potassium (K)</option>
+                      <option value="4.10">Lead (Pb)</option>
+                      <option value="4.30">Zinc (Zn)</option>
+                      <option value="5.10">Gold (Au)</option>
+                  </select>
+              </div>
+              <div class="control-group">
+                  <label>Wavelength (<span class="value-display" id="wlDisplay">700</span> nm)</label>
+                  <input type="range" id="wavelengthRange" min="150" max="750" value="400">
+              </div>
+              <div class="control-group">
+                  <label>Intensity (<span class="value-display" id="intDisplay">50</span>%)</label>
+                  <input type="range" id="intensityRange" min="0" max="100" value="50">
+              </div>
+              <div class="control-group">
+                  <label>Stopping Voltage (<span class="value-display" id="voltDisplay">0.0</span> V)</label>
+                  <input type="range" id="voltageRange" min="0" max="1" step="0.05" value="0">
+              </div>
+              <div class="control-group" style="min-width: 90px;">
+                  <label>Calculations</label>
+                  <select id="mathToggle">
+                      <option value="block">Show</option>
+                      <option value="none">Hide</option>
+                  </select>
+              </div>
+              <div class="control-group" style="min-width: 90px;">
+                  <label>Ammeter</label>
+                  <select id="ammeterToggle">
+                      <option value="block">Show</option>
+                      <option value="none">Hide</option>
+                  </select>
+              </div>
+          </div>
+          <div id="canvas-container">
+              <canvas id="simCanvas" width="1296" height="584"></canvas>
+              <div class="overlay-box" id="ammeter-box">
+                  <p class="box-title">Digital Ammeter</p>
+                  <div id="current-readout">0.000 nA</div>
+              </div>
+              <div class="overlay-box" id="status-panel">
+                  <p class="box-title">Lab Observation</p>
+                  <div id="emissionStatus"><span style="color:#dc3545">Wavelength too long (f &lt; f₀)</span></div>
+              </div>
+              <div class="overlay-box" id="math-box">
+                  <p class="box-title">Calculations</p>
+                  <div class="math-line"><span>Photon Energy (hf):</span> <span class="math-val" id="m-energy">1.77 eV</span></div>
+                  <div class="math-line"><span>Work Function (Φ):</span> <span class="math-val" id="m-wf">2.28 eV</span></div>
+                  <hr style="border:0; border-top:1px solid #eee; margin:6px 0;">
+                  <div class="math-line"><span>Max KE (hf - Φ):</span> <span class="math-val" id="m-ke" style="color:#d63384;">0.00 eV</span></div>
+                  <div class="math-line"><span>Stopping Potential (V<sub>s</sub>):</span> <span class="math-val" id="m-vstop" style="color:#0056b3;">0.00 V</span></div>
+              </div>
+          </div>
+        </div>
+        <script>
+        (function(){
+            const canvas = document.getElementById('simCanvas');
+            const ctx = canvas.getContext('2d');
+            const container = document.getElementById('canvas-container');
+
+            const unitSelect = document.getElementById('unitSelect');
+            const metalSelect = document.getElementById('metalSelect');
+            const wavelengthRange = document.getElementById('wavelengthRange');
+            const intensityRange = document.getElementById('intensityRange');
+            const voltageRange = document.getElementById('voltageRange');
+            const mathToggle = document.getElementById('mathToggle');
+            const ammeterToggle = document.getElementById('ammeterToggle');
+
+            const wlDisplay = document.getElementById('wlDisplay');
+            const intDisplay = document.getElementById('intDisplay');
+            const voltDisplay = document.getElementById('voltDisplay');
+            const currentReadout = document.getElementById('current-readout');
+            const emissionStatus = document.getElementById('emissionStatus');
+
+            const mEnergy = document.getElementById('m-energy');
+            const mWf = document.getElementById('m-wf');
+            const mKe = document.getElementById('m-ke');
+            const mVstop = document.getElementById('m-vstop');
+
+            const mathBox = document.getElementById('math-box');
+            const ammeterBox = document.getElementById('ammeter-box');
+
+            const hc_eV = 1240;
+            const e_charge = 1.602e-19;
+
+            let currentUnit = "eV";
+            let workFunction_eV = parseFloat(metalSelect.value);
+            let wavelength = parseInt(wavelengthRange.value);
+            let intensity = parseInt(intensityRange.value);
+            let stoppingVoltage = parseFloat(voltageRange.value);
+            let arrivalsBuffer = [];
+
+            let photons = [];
+            let electrons = [];
+
+            function formatValue(val) {
+                if (currentUnit === "eV") return val.toFixed(2) + " eV";
+                return (val * e_charge).toExponential(3) + " J";
+            }
+
+            function updateCalculations() {
+                const photonEnergy_eV = hc_eV / wavelength;
+                const maxKE_eV = Math.max(0, photonEnergy_eV - workFunction_eV);
+
+                let newMax = Math.ceil(maxKE_eV + 1);
+                if (voltageRange.max != newMax) {
+                    voltageRange.max = newMax;
+                }
+
+                mEnergy.innerText = formatValue(photonEnergy_eV);
+                mWf.innerText = formatValue(workFunction_eV);
+                mKe.innerText = formatValue(maxKE_eV);
+                mVstop.innerText = maxKE_eV.toFixed(2) + " V";
+
+                if (photonEnergy_eV > workFunction_eV) {
+                    if (stoppingVoltage >= maxKE_eV - 0.01) {
+                        emissionStatus.innerHTML = `<span style="color:#d63384">V ≥ Max KE: Current Blocked</span>`;
+                    } else {
+                        emissionStatus.innerHTML = `<span style="color:#198754">Current Detected</span>`;
+                    }
+                } else {
+                    emissionStatus.innerHTML = `<span style="color:#dc3545">Wavelength too long (f &lt; f₀)</span>`;
+                }
+            }
+
+            function resizeCanvas() {
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function wavelengthToColour(wl) {
+                if (wl < 380) return '#bf00ff';
+                let R, G, B;
+                if (wl >= 380 && wl < 440) { R = -(wl - 440) / (440 - 380); G = 0; B = 1; }
+                else if (wl >= 440 && wl < 490) { R = 0; G = (wl - 440) / (490 - 440); B = 1; }
+                else if (wl >= 490 && wl < 510) { R = 0; G = 1; B = -(wl - 510) / (510 - 490); }
+                else if (wl >= 510 && wl < 580) { R = (wl - 510) / (580 - 510); G = 1; B = 0; }
+                else if (wl >= 580 && wl < 645) { R = 1; G = -(wl - 645) / (645 - 580); B = 0; }
+                else if (wl >= 645 && wl <= 750) { R = 1; G = 0; B = 0; }
+                else { R = 0; G = 0; B = 0; }
+                return `rgb(${Math.round(R * 255)}, ${Math.round(G * 255)}, ${Math.round(B * 255)})`;
+            }
+
+            unitSelect.addEventListener('change', (e) => { currentUnit = e.target.value; updateCalculations(); });
+            metalSelect.addEventListener('change', (e) => { workFunction_eV = parseFloat(e.target.value); updateCalculations(); });
+            wavelengthRange.addEventListener('input', (e) => { wavelength = parseInt(e.target.value); wlDisplay.innerText = wavelength; updateCalculations(); });
+            intensityRange.addEventListener('input', (e) => { intensity = parseInt(e.target.value); intDisplay.innerText = intensity; });
+            voltageRange.addEventListener('input', (e) => { stoppingVoltage = parseFloat(e.target.value); voltDisplay.innerText = stoppingVoltage.toFixed(2); updateCalculations(); });
+
+            mathToggle.addEventListener('change', (e) => { mathBox.style.display = e.target.value; });
+            ammeterToggle.addEventListener('change', (e) => { ammeterBox.style.display = e.target.value; });
+
+            class Photon {
+                constructor() {
+                    this.x = canvas.width / 2 + (Math.random() - 0.5) * 160;
+                    this.y = -30;
+                    this.speed = 6;
+                    this.colour = wavelengthToColour(wavelength);
+                    this.active = true;
+                    this.energy_eV = hc_eV / wavelength;
+                }
+                update() {
+                    this.y += this.speed;
+                    if (this.y > canvas.height - 60) {
+                        this.active = false;
+                        if (this.energy_eV > workFunction_eV && Math.random() < (intensity/100)) {
+                            electrons.push(new Electron(this.x, canvas.height - 60, this.energy_eV - workFunction_eV));
+                        }
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.strokeStyle = this.colour;
+                    ctx.lineWidth = 3;
+                    for (let i = 0; i < 12; i++) {
+                        let py = this.y - i * 3;
+                        let px = this.x + Math.sin(py * 0.3) * 6;
+                        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                    }
+                    ctx.stroke();
+                }
+            }
+
+            class Electron {
+                constructor(x, y, kineticEnergy_eV) {
+                    this.x = x;
+                    this.y = y;
+                    this.ke = kineticEnergy_eV;
+                    this.v_scale = 4.5;
+                    this.vy = -this.v_scale * Math.sqrt(this.ke);
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.active = true;
+                    this.plateDist = canvas.height - 120;
+                }
+                update() {
+                    let a_stop = ( (this.v_scale * Math.sqrt(this.ke))**2 ) / (2 * this.plateDist);
+                    let actual_a = a_stop * (stoppingVoltage / this.ke);
+
+                    this.vy += actual_a;
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.y <= 60) {
+                        this.active = false;
+                        arrivalsBuffer.push(Date.now());
+                    }
+                    if (this.y >= canvas.height - 60 && this.vy > 0) {
+                        this.active = false;
+                    }
+                    if (this.x < 10 || this.x > canvas.width - 10) this.active = false;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 4.5, 0, Math.PI * 2);
+                    ctx.fillStyle = '#0dcaf0';
+                    ctx.fill();
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(this.x - 2, this.y); ctx.lineTo(this.x + 2, this.y);
+                    ctx.strokeStyle = '#000'; ctx.stroke();
+                }
+            }
+
+            function updateAmmeter() {
+                const now = Date.now();
+                arrivalsBuffer = arrivalsBuffer.filter(t => now - t < 1000);
+                let current = arrivalsBuffer.length * 0.042;
+                currentReadout.innerText = current.toFixed(3) + " nA";
+            }
+
+            let frameCount = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#adb5bd';
+                ctx.fillRect(60, 45, canvas.width - 120, 15);
+                ctx.fillStyle = '#495057';
+                ctx.font = 'bold 11px Arial';
+                ctx.fillText('COLLECTOR ANODE (- Potential)', canvas.width / 2 - 80, 40);
+
+                ctx.fillStyle = '#5a6268';
+                ctx.fillRect(60, canvas.height - 60, canvas.width - 120, 25);
+                ctx.fillStyle = '#fff';
+                ctx.fillText(`${metalSelect.options[metalSelect.selectedIndex].text} CATHODE`, canvas.width / 2 - 50, canvas.height - 43);
+
+                frameCount++;
+                if (Math.random() < (intensity / 100) && frameCount % 4 === 0) {
+                    photons.push(new Photon());
+                }
+
+                photons = photons.filter(p => p.active);
+                photons.forEach(p => { p.update(); p.draw(); });
+
+                electrons = electrons.filter(e => e.active);
+                electrons.forEach(e => { e.update(); e.draw(); });
+
+                updateAmmeter();
+                requestAnimationFrame(animate);
+            }
+
+            updateCalculations();
+            animate();
+        })();
+        </script>
+      </div>
+        <p class="sim-embed-credit">Interactive simulation modelled on Dr Dan Jones's photoelectric effect demonstration — <a href="https://www.drjonesphysics.com/pe-effect" target="_blank" rel="noopener">drjonesphysics.com/pe-effect</a>.</p>
+      </div>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by Dr Dan Jones (drjonesphysics.com).</p>
+      </div>
+
+      <h3>Simulation tasks</h3>
+      <div class="question">
+        <span class="qnum">23</span><strong>Select Sodium as the cathode metal.</strong> Slowly increase the wavelength slider from 150 nm upwards. Record the wavelength at which photoelectrons stop being emitted (use the "Lab Observation" panel).
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">Sodium's threshold wavelength is λ₀ = hc/Φ ≈ 544 nm — emission should stop close to this value.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">24</span><strong>With the wavelength fixed at a value that does produce photoelectrons, turn the intensity slider down to 0% and then up to 100%.</strong> Describe what changes on the canvas, and what does not change.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">The rate of photon/electron arrivals (and hence the ammeter current) increases, but the maximum kinetic energy (and stopping voltage) of each electron is unchanged.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">25</span><strong>Switch the cathode metal to Gold (a much larger work function) without changing the wavelength.</strong> What happens, and why?
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">Gold's work function (5.10 eV) is much larger than sodium's (2.28 eV); if the photon energy is now below 5.10 eV, no photoelectrons are emitted at all, however intense the light.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">26</span><strong>The threshold frequency of zinc is 1.04 × 10¹⁵ Hz.</strong> Calculate the corresponding threshold wavelength, and state whether visible light (400–700 nm) could ever release photoelectrons from zinc.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">λ₀ = c/f₀ ≈ 289 nm (UV) — shorter than the whole visible range (400–700 nm), so visible light can never release photoelectrons from zinc.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 9 ================= -->
+    <section class="topic" id="s9">
+      <h2>9. Einstein's photoelectric equation</h2>
+      <p>Different electrons within the same metal surface need different amounts of energy to escape, depending on how tightly bound they are. But there is a well-defined <em>minimum</em> amount of energy needed to free the most loosely-bound electron from the surface of a given metal — this is called the <strong>work function</strong>, Φ.</p>
+      <p>The photoelectric effect is really just a statement of <strong>conservation of energy</strong>. A single photon hands over <em>all</em> of its energy to a single electron, and that energy has to go somewhere: some of it is "spent" doing the minimum amount of work needed to free the electron from the metal — the work function, Φ (the photoelectric-effect equivalent of the ionisation energy of an atom) — and whatever is left over becomes the electron's kinetic energy:</p>
+
+      <div class="eqn">energy of photon &nbsp;=&nbsp; work function (ionisation energy) &nbsp;+&nbsp; kinetic energy of electron</div>
+
+      <p>For the most loosely-bound electrons, this uses up the smallest possible share of the photon's energy on escaping, leaving the largest possible share as kinetic energy — so this gives the <em>maximum possible</em> kinetic energy of a photoelectron:</p>
+
+      <div class="eqn"><b>hf = Φ + E<sub>max</sub></b> &nbsp;&nbsp;⟺&nbsp;&nbsp; <b>E<sub>max</sub> = hf − Φ</b></div>
+
+      <ul>
+        <li>If hf &lt; Φ: no photoelectrons are emitted, regardless of intensity.</li>
+        <li>If hf = Φ: this defines the threshold frequency, f₀ = Φ/h, with photoelectrons emitted with zero kinetic energy.</li>
+        <li>If hf &gt; Φ: photoelectrons are emitted with a range of kinetic energies, up to the maximum E<sub>max</sub>.</li>
+      </ul>
+
+      <p>This can be tested experimentally by measuring the <strong>stopping voltage</strong>, V<sub>s</sub> — the minimum reverse potential difference needed to just stop the fastest photoelectrons from reaching a collector. Since work done = charge × p.d., E<sub>max</sub> = eV<sub>s</sub>, so a graph of stopping voltage against frequency should be a straight line:</p>
+
+      <div class="eqn">eV<sub>s</sub> = hf − Φ &nbsp;&nbsp;⟺&nbsp;&nbsp; V<sub>s</sub> = (h/e)f − Φ/e</div>
+
+      <div class="keybox"><strong>Reading the graph.</strong> On a graph of V<sub>s</sub> (or E<sub>max</sub> in eV) against frequency: the <strong>gradient</strong> gives Planck's constant, h (divided by e, if plotting V<sub>s</sub>); the <strong>x-intercept</strong> gives the threshold frequency, f₀; and the <strong>y-intercept</strong> gives −Φ/e.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 9.1</span>
+        <p>Radiation of wavelength 4.20 × 10⁻⁷ m is incident on a metal surface with a work function of 1.90 eV.</p>
+        <ol type="a">
+          <li>Calculate the energy of one photon of this radiation, in eV.</li>
+          <li>Determine whether the photoelectric effect occurs.</li>
+          <li>Calculate the maximum kinetic energy of the emitted photoelectrons, in eV and in joules.</li>
+          <li>Calculate the stopping voltage needed to stop these photoelectrons.</li>
+        </ol>
+        <p><strong>Answer:</strong><br>
+        a) f = c/λ = (3.00×10⁸)/(4.20×10⁻⁷) = 7.14×10¹⁴ Hz; E = hf = (6.63×10⁻³⁴)(7.14×10¹⁴) = 4.73×10⁻¹⁹ J = 2.96 eV<br>
+        b) Yes — photon energy (2.96 eV) &gt; work function (1.90 eV).<br>
+        c) E<sub>max</sub> = hf − Φ = 2.96 − 1.90 = 1.06 eV = 1.70×10⁻¹⁹ J<br>
+        d) V<sub>s</sub> = E<sub>max</sub>/e = 1.06 V</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">27</span><strong>The threshold frequency of a metal is 5.5 × 10¹⁴ Hz.</strong> Calculate its work function in eV.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
+        <div class="answer-panel" id="q27">Φ = hf₀ ≈ 2.28 eV.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">28</span><strong>Light of frequency 9.0 × 10¹⁴ Hz produces photoelectrons with a maximum kinetic energy of 1.75 eV from a certain metal.</strong> Calculate the work function of the metal and its threshold frequency.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
+        <div class="answer-panel" id="q28">Φ = hf − E<sub>max</sub> ≈ 1.98 eV; f₀ = Φ/h ≈ 4.78×10¹⁴ Hz.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">29</span><strong>Sketch a fully labelled graph of E<sub>max</sub> against frequency for a metal, showing clearly where h, f₀ and Φ can be read from the graph.</strong> (Describe your sketch in words if you cannot draw here.)
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q29')">Show answer</button>
+        <div class="answer-panel" id="q29">Straight line, gradient = h (or h/e for a V<sub>s</sub>–f graph), x-intercept = f₀, y-intercept = −Φ (or −Φ/e).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">30</span><strong>Explain why increasing the intensity of light incident on a metal surface increases the photoelectric current but not the maximum kinetic energy of the photoelectrons.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q30')">Show answer</button>
+        <div class="answer-panel" id="q30">More intensity means more photons per second (more photoelectrons per second, higher current), but each photon still carries the same energy hf, so E<sub>max</sub> = hf − Φ is unchanged.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 10 ================= -->
+    <section class="topic" id="s10">
+      <h2>10. Compton scattering</h2>
+      <p>The photoelectric effect was strong, but not universally convincing, evidence for photons — sceptics could still try to patch up the wave theory. In 1923, <strong>Arthur Compton</strong> provided much more direct evidence by firing high-frequency X-rays at a block of graphite and measuring the X-rays that scattered off the loosely-bound outer electrons in the carbon atoms.</p>
+      <p>A wave theory of light predicts that scattered radiation should keep the <em>same</em> wavelength as the incident radiation. Compton found instead that the scattered X-rays had a <strong>longer</strong> wavelength (lower energy) than the incident X-rays — and that the size of this shift depended on the scattering angle, θ, but not on the wavelength or intensity of the incident beam.</p>
+
+      <div class="keybox"><strong>Why this proves light is particle-like.</strong> Compton explained his results by treating the interaction as a "collision" between a particle photon (with momentum p = h/λ) and an individual electron, obeying conservation of momentum and energy — exactly like two billiard balls colliding. Since the photon transfers some of its energy (and momentum) to the electron, the scattered photon must have <em>lower</em> energy, and therefore a <em>longer</em> wavelength than before. This only makes sense if light is made of particle-like photons.</div>
+
+      <figure>
+        <svg viewBox="0 0 440 235" width="440" height="235" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="cmptArrowIn" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#22305a"/></marker>
+            <marker id="cmptArrowOut" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f7a6c"/></marker>
+            <marker id="cmptArrowE" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#a33d5b"/></marker>
+          </defs>
+          <line x1="140" y1="140" x2="410" y2="140" stroke="#c9c2ab" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="20" y1="140" x2="140" y2="140" stroke="#22305a" stroke-width="2.2" stroke-dasharray="2 3" marker-end="url(#cmptArrowIn)"/>
+          <text x="18" y="126" font-size="11" fill="#22305a">incoming photon, λ<tspan dy="3" font-size="8">i</tspan></text>
+          <line x1="140" y1="140" x2="287" y2="37" stroke="#1f7a6c" stroke-width="2.2" stroke-dasharray="7 4" marker-end="url(#cmptArrowOut)"/>
+          <text x="292" y="33" font-size="11" fill="#1f7a6c">scattered photon, λ<tspan dy="3" font-size="8">f</tspan><tspan dy="-3"> &gt; λ</tspan><tspan dy="3" font-size="8">i</tspan></text>
+          <path d="M180,140 A40,40 0 0 0 173,117" fill="none" stroke="#4a5568" stroke-width="1.2"/>
+          <text x="188" y="130" font-size="11" fill="#4a5568">θ</text>
+          <circle cx="140" cy="140" r="5" fill="#a33d5b" stroke="#fff" stroke-width="1"/>
+          <text x="60" y="160" font-size="10" fill="#a33d5b">electron (at rest)</text>
+          <line x1="140" y1="140" x2="280" y2="210" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#cmptArrowE)"/>
+          <text x="248" y="223" font-size="11" fill="#a33d5b">recoiling electron</text>
+        </svg>
+        <figcaption>Fig. 10.1 Compton scattering: an incoming X-ray photon transfers some of its energy and momentum to an electron. The scattered photon emerges at angle θ with a longer wavelength (lower energy) than it arrived with; the electron recoils.</figcaption>
+      </figure>
+
+      <div class="keybox">
+        <strong>Conservation of momentum.</strong>
+        <div class="eqn">momentum of initial photon &nbsp;=&nbsp; momentum of electron &nbsp;+&nbsp; momentum of final photon</div>
+        <p style="margin:0 0 10px;"><b>p<sub>i</sub> = p<sub>e</sub> + p<sub>f</sub></b> &nbsp; <span style="font-size:13px; color:#5b6b78; font-weight:400;">(a vector equation — the electron and the scattered photon fly off in different directions, so their momenta add like vectors, not like plain numbers)</span></p>
+        <p style="margin:0;">Before the collision, the electron is at rest, so it has zero momentum — all of the momentum belongs to the incoming photon. After the collision, the electron is recoiling, so it now has some momentum of its own. That momentum cannot come from nowhere: it has been transferred directly from the photon. Since total momentum is conserved, whatever momentum the electron gains, the photon must lose. A photon's momentum is p = h/λ, so if the photon's momentum <em>decreases</em>, its wavelength λ must <em>increase</em>. This is why the scattered photon always comes out with a longer wavelength than it went in with — not because of an equation to memorise, but because the electron had to get its momentum from somewhere, and the photon is the only place it could have come from.</p>
+      </div>
+
+      <div class="eqn">shift in wavelength: &nbsp; <b>λ<sub>f</sub> − λ<sub>i</sub> = Δλ = (h / m<sub>e</sub>c)(1 − cos θ)</b></div>
+      <p style="font-size:13.5px; color:#5b6b78; margin-top:-6px;">where θ is the scattering angle and h/(m<sub>e</sub>c) = 2.426 × 10⁻¹² m is called the Compton wavelength.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 10.1</span>
+        <p>X-rays of wavelength 1.00 × 10⁻¹⁰ m are Compton-scattered through an angle of 60°. Calculate the wavelength of the scattered X-rays.</p>
+        <p><strong>Answer:</strong><br>
+        Δλ = (2.426×10⁻¹²)(1 − cos 60°) = (2.426×10⁻¹²)(0.500) = 1.213×10⁻¹² m<br>
+        λ<sub>f</sub> = λ<sub>i</sub> + Δλ = (1.00×10⁻¹⁰) + (1.213×10⁻¹²) = 1.012×10⁻¹⁰ m</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">31</span><strong>Calculate the change in wavelength for X-rays Compton-scattered through an angle of 90°.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q31')">Show answer</button>
+        <div class="answer-panel" id="q31">Δλ = (2.426×10⁻¹²)(1 − cos 90°) = 2.43×10⁻¹² m.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">32</span><strong>At what scattering angle is the wavelength shift (a) a maximum, and (b) zero?</strong> Explain both answers physically.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q32')">Show answer</button>
+        <div class="answer-panel" id="q32">Maximum shift at θ = 180° (photon bounces straight back, transferring the most momentum); zero shift at θ = 0° (photon continues undeviated, no momentum transferred).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">33</span><strong>Explain why Compton scattering is considered stronger evidence for the particle nature of light than the photoelectric effect.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q33')">Show answer</button>
+        <div class="answer-panel" id="q33">Compton scattering can only be explained by treating light as particles colliding with electrons and obeying conservation of momentum and energy — a wave model predicts no wavelength shift at all, so the shift is direct, quantitative, and inescapable evidence, whereas photoelectric-effect observations were initially argued about for longer.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">34</span><strong>State two reasons why Compton scattering is not observed with visible light.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q34')">Show answer</button>
+        <div class="answer-panel" id="q34">(1) the wavelength shift is a fixed ~2.4×10⁻¹² m regardless of incident wavelength — utterly negligible compared to a visible wavelength of ~5×10⁻⁷ m; (2) visible photons have energies comparable to the binding energy of outer electrons, so those electrons cannot be treated as free, stationary particles as the simple Compton model requires.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 11 ================= -->
+    <section class="topic" id="s11">
+      <h2>11. The wave nature of matter</h2>
+      <p>The photoelectric effect and Compton scattering both show that light — long thought to be a wave — sometimes behaves like a stream of particles. In 1924, the French physicist <strong>Louis de Broglie</strong> asked the reverse question: could matter, long thought to be made of particles, sometimes behave like a wave?</p>
+
+      <div class="eqn">de Broglie wavelength of a moving particle: &nbsp; <b>λ = h / p</b> &nbsp; (p = momentum = mv)</div>
+
+      <p>This bold hypothesis was confirmed in 1927 by the <strong>Davisson–Germer experiment</strong>: a beam of electrons fired at a nickel crystal produced a diffraction pattern, just like X-rays diffracting from the regularly-spaced atoms in a crystal lattice. Diffraction — constructive and destructive interference spreading a wave out around obstacles — is a behaviour unique to waves, so this was direct evidence that electrons have wave-like properties.</p>
+
+      <div class="keybox"><strong>Wave–particle duality.</strong> Put together, the photoelectric effect, Compton scattering, and electron diffraction show that <strong>all</strong> particles have wave-like properties, and <strong>all</strong> electromagnetic waves have particle-like (photon) properties. Neither the "pure wave" nor "pure particle" picture is complete on its own — this is <strong>wave–particle duality</strong>. In practice, the wave nature of matter is only noticeable for objects with extremely small momentum (because h is so tiny): it is significant for electrons, but utterly undetectable for a thrown ball or a moving car.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 11.1</span>
+        <p>Electrons are accelerated from rest through a potential difference of 3.0 kV.</p>
+        <ol type="a">
+          <li>Calculate the kinetic energy gained, in joules.</li>
+          <li>Calculate the speed of the electrons.</li>
+          <li>Calculate their de Broglie wavelength.</li>
+        </ol>
+        <p><strong>Answer:</strong><br>
+        a) E<sub>k</sub> = qV = (1.60×10⁻¹⁹)(3000) = 4.80×10⁻¹⁶ J<br>
+        b) E<sub>k</sub> = ½mv² &nbsp;⟹&nbsp; v = √(2E<sub>k</sub>/m) = √(2×4.80×10⁻¹⁶ / 9.11×10⁻³¹) = 3.25×10⁷ m s⁻¹<br>
+        c) p = mv = (9.11×10⁻³¹)(3.25×10⁷) = 2.96×10⁻²³ kg m s⁻¹<br>
+        &nbsp;&nbsp;&nbsp;λ = h/p = (6.63×10⁻³⁴)/(2.96×10⁻²³) = 2.24×10⁻¹¹ m</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">35</span><strong>A proton has a de Broglie wavelength of 1.2 × 10⁻¹³ m.</strong> Calculate its momentum, and hence its speed (assume non-relativistic motion).
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q35')">Show answer</button>
+        <div class="answer-panel" id="q35">p = h/λ ≈ 5.53×10⁻²¹ kg m s⁻¹; v = p/m ≈ 3.3×10⁶ m s⁻¹.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">36</span><strong>A proton and an electron travel at the same speed.</strong> Which one has the longer de Broglie wavelength? Explain your answer.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q36')">Show answer</button>
+        <div class="answer-panel" id="q36">The electron — since λ = h/(mv), a smaller mass at the same speed gives a larger wavelength.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">37</span><strong>A tennis ball of mass 0.058 kg travels at 25 m s⁻¹.</strong> Estimate its de Broglie wavelength and explain why the wave nature of the ball is never observed.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q37')">Show answer</button>
+        <div class="answer-panel" id="q37">λ ≈ 4.6×10⁻³⁴ m — many orders of magnitude smaller than any aperture or obstacle that could diffract it, so no wave effects can ever be observed.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">38</span><strong>Outline how the Davisson–Germer experiment provided evidence for de Broglie's hypothesis.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q38')">Show answer</button>
+        <div class="answer-panel" id="q38">Electrons fired at a nickel crystal produced a diffraction pattern (constructive/destructive interference) matching the wavelength de Broglie predicted — diffraction is a wave-only phenomenon, so this confirmed matter has wave properties.</div>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Looking back: two theories for the same thing</span>
+        <p style="margin:0;">By the late 1920s, physics had accepted a paradox: light behaves as a wave in diffraction and interference, and as a particle in the photoelectric effect and Compton scattering. As Einstein himself put it, we need <em>"two theories... [which] together describe the phenomena of light."</em> This same wave–particle duality applies to matter — and it is one of the central, still slightly unsettling, ideas at the heart of modern quantum mechanics.</p>
+      </div>
+
+      <h3>Timeline: from plum pudding to wave–particle duality</h3>
+      <table class="eqtable">
+        <tr><th>Year</th><th>Discovery</th><th>What it showed</th></tr>
+        <tr><td>1897</td><td>J. J. Thomson discovers the electron</td><td>Atoms are divisible; leads to the "plum pudding" model</td></tr>
+        <tr><td>1909</td><td>Geiger–Marsden–Rutherford scattering experiment</td><td>Atoms have a tiny, dense, positively charged nucleus</td></tr>
+        <tr><td>1900–1905</td><td>Planck's quantum hypothesis; Einstein's photon model</td><td>Light delivers energy in discrete quanta, E = hf</td></tr>
+        <tr><td>1913</td><td>Bohr model of hydrogen</td><td>Electron energy levels and angular momentum are quantized</td></tr>
+        <tr><td>1923</td><td>Compton scattering</td><td>Photons carry momentum and scatter like particles</td></tr>
+        <tr><td>1924</td><td>de Broglie's hypothesis</td><td>Matter should have wave-like properties, λ = h/p</td></tr>
+        <tr><td>1927</td><td>Davisson–Germer electron diffraction</td><td>Electrons diffract — confirming wave–particle duality</td></tr>
+      </table>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Nucleon</dt><dd>A proton or a neutron; the particles that make up an atomic nucleus.</dd>
+        <dt>Nuclide</dt><dd>A specific type of nucleus, defined by its proton number Z and nucleon number A, written as <sup>A</sup><sub>Z</sub>X.</dd>
+        <dt>Isotope</dt><dd>One of two or more atoms of the same element (same Z) with different numbers of neutrons (different A).</dd>
+        <dt>Strong nuclear force</dt><dd>The short-range force that binds nucleons together in the nucleus, strong enough to overcome electrostatic repulsion between protons but negligible beyond about 3 × 10⁻¹⁵ m.</dd>
+        <dt>Distance of closest approach</dt><dd>The minimum separation reached by a charged particle fired directly at a nucleus, found by equating its initial kinetic energy to the electric potential energy at that separation.</dd>
+        <dt>Photoelectric effect</dt><dd>The emission of electrons from a metal surface when light of sufficiently high frequency is incident on it.</dd>
+        <dt>Work function, Φ</dt><dd>The minimum energy needed to remove the most loosely bound electron from the surface of a particular metal.</dd>
+        <dt>Threshold frequency, f₀</dt><dd>The minimum frequency of incident light that can just cause photoelectric emission from a given metal, f₀ = Φ/h.</dd>
+        <dt>Compton scattering</dt><dd>The scattering of a photon off a free (or loosely bound) electron, in which the photon loses energy and momentum and its wavelength increases.</dd>
+        <dt>De Broglie wavelength</dt><dd>The wavelength λ = h/p associated with any moving particle of momentum p, responsible for wave-like behaviour such as diffraction.</dd>
+        <dt>Energy level</dt><dd>One of the discrete, allowed values of energy that an electron bound in an atom may have.</dd>
+        <dt>Ground state</dt><dd>The lowest-energy, most stable energy level available to an electron in an atom.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">The History of Nuclear &amp; Quantum Physics Workbook · Companion resources: <em>Radioactivity &amp; Half-Life</em> and <em>Binding Energy &amp; Nuclear Stability</em>.</footer>
+  </main>
+</div>
+
+<div class="toolbar no-print">
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <div id="saveStatus" style="font-size:0.72rem; color:#5b6b78; text-align:center; background:#fff; border:1px solid var(--border); border-radius:50px; padding:0.35rem 0.8rem;">Answers are not saved automatically — print or copy your work before closing this tab</div>
+</div>
+<button class="fab no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+
+/* ---------- Figure 4.1: combined Coulomb + strong nuclear force simulation ---------- */
+(function(){
+  const canvas = document.getElementById('forceCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const margin = {left:50, right:20, top:15, bottom:40};
+  const plotW = W - margin.left - margin.right;
+  const plotH = H - margin.top - margin.bottom;
+  const R_MIN = 0.55, R_MAX = 4.5;
+  const F_MIN = -4, F_MAX = 25;
+
+  // Illustrative model constants (relative units, r in femtometres) — chosen to show
+  // the correct qualitative shape (repulsive core, attractive well, rapid falloff for
+  // the strong force; always-repulsive 1/r^2 for Coulomb), not an exact nuclear force law.
+  const a = 1.5, D = 3.0, r0 = 1.0, kC = 2.0;
+
+  function strongForce(r){
+    const x = a * (r - r0);
+    return 2 * a * D * (Math.exp(-2*x) - Math.exp(-x));
+  }
+  function coulombForce(r){
+    return kC / (r*r);
+  }
+
+  function toX(r){ return margin.left + (r - R_MIN) / (R_MAX - R_MIN) * plotW; }
+  function toY(f){ return margin.top + (F_MAX - f) / (F_MAX - F_MIN) * plotH; }
+
+  function drawCurve(fn, color, dashed){
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = dashed ? 2 : 2.6;
+    ctx.setLineDash(dashed ? [6,4] : []);
+    let first = true;
+    for(let r = R_MIN; r <= R_MAX + 1e-9; r += 0.02){
+      const f = Math.max(F_MIN - 2, Math.min(F_MAX + 2, fn(r)));
+      const x = toX(r), y = toY(f);
+      if(first){ ctx.moveTo(x,y); first = false; } else { ctx.lineTo(x,y); }
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function draw(rNow){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0,0,W,H);
+
+    // gridlines + axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+    ctx.lineWidth = 1;
+    for(let r = 1; r <= 4; r++){
+      const x = toX(r);
+      ctx.beginPath(); ctx.moveTo(x, margin.top); ctx.lineTo(x, margin.top+plotH); ctx.stroke();
+    }
+    // zero-force reference line
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+    ctx.beginPath(); ctx.moveTo(margin.left, toY(0)); ctx.lineTo(margin.left+plotW, toY(0)); ctx.stroke();
+
+    // axes
+    ctx.strokeStyle = '#cfe3ee';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(margin.left, margin.top); ctx.lineTo(margin.left, margin.top+plotH);
+    ctx.lineTo(margin.left+plotW, margin.top+plotH);
+    ctx.stroke();
+
+    ctx.fillStyle = '#dceaf0';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    for(let r = 1; r <= 4; r++){
+      ctx.fillText(r + ' fm', toX(r), margin.top + plotH + 16);
+    }
+    ctx.textAlign = 'right';
+    ctx.fillText('repulsive', margin.left - 6, toY(F_MAX*0.6));
+    ctx.fillText('attractive', margin.left - 6, toY(F_MIN*0.5));
+    ctx.save();
+    ctx.translate(14, margin.top + plotH/2);
+    ctx.rotate(-Math.PI/2);
+    ctx.textAlign = 'center';
+    ctx.fillText('force on alpha particle', 0, 0);
+    ctx.restore();
+
+    drawCurve(coulombForce, '#e08a8a', true);
+    drawCurve(strongForce, '#5fd0c0', true);
+    drawCurve(r => coulombForce(r) + strongForce(r), '#ffffff', false);
+
+    // legend
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#e08a8a'; ctx.fillText('- - - Coulomb force', margin.left+6, margin.top+14);
+    ctx.fillStyle = '#5fd0c0'; ctx.fillText('- - - Strong nuclear force', margin.left+6, margin.top+28);
+    ctx.fillStyle = '#ffffff'; ctx.fillText('— Net force', margin.left+6, margin.top+42);
+
+    // marker at current r
+    const fc = coulombForce(rNow), fs = strongForce(rNow), net = fc + fs;
+    const mx = toX(rNow);
+    ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(mx, margin.top); ctx.lineTo(mx, margin.top+plotH); ctx.stroke();
+    ctx.setLineDash([]);
+    function dot(f, color){
+      const y = toY(Math.max(F_MIN-2, Math.min(F_MAX+2, f)));
+      ctx.beginPath(); ctx.arc(mx, y, 4, 0, 2*Math.PI); ctx.fillStyle = color; ctx.fill();
+    }
+    dot(fc, '#e08a8a'); dot(fs, '#5fd0c0'); dot(net, '#ffffff');
+
+    document.getElementById('fcReadout').textContent = fc.toFixed(2) + ' (relative units)';
+    document.getElementById('fsReadout').textContent = fs.toFixed(2) + ' (relative units)';
+    document.getElementById('netReadout').textContent = net.toFixed(2) + ' (relative units), ' + (net > 0 ? 'net repulsive' : 'net attractive');
+  }
+
+  const slider = document.getElementById('distSlider');
+  const readout = document.getElementById('distReadout');
+  function update(){
+    const r = parseFloat(slider.value);
+    readout.textContent = r.toFixed(2);
+    draw(r);
+  }
+  slider.addEventListener('input', update);
+  window.resetForceSim = function(){ slider.value = '1.5'; update(); };
+  update();
+})();
+
+</script>
+</body>
+</html>
