@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Harmonic Motion — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem; margin-right:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+  .hint-btn{background:transparent; border:1px solid var(--amber); color:var(--amber); border-radius:6px; padding:0.32rem 0.75rem; font-size:0.8rem; cursor:pointer; margin-top:0.5rem; margin-right:0.5rem;}
+  .hint-btn:hover{background:var(--soft-amber);}
+  .hint-panel{display:none; background:var(--soft-amber); border:1px dashed var(--amber); border-radius:6px; padding:0.6rem 0.9rem; margin-top:0.5rem; font-size:0.88rem;}
+  .hint-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn, .hint-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel, .hint-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Simple Harmonic Motion</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Simple Harmonic Motion</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Conditions for SHM</a>
+    <a href="#s2">2. Describing SHM</a>
+    <a href="#s3">3. Mass&ndash;spring systems</a>
+    <a href="#s4">4. The simple pendulum</a>
+    <a href="#s5">5. Energy changes during SHM</a>
+    <a href="#s6">6. Phase angle</a>
+    <a href="#s7">7. Solving SHM problems</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Simple Harmonic Motion</h1>
+      <p class="sub">A swinging pendulum, a bouncing car suspension, a plucked guitar string, a vibrating atom — all of these are oscillations, and the simplest, most useful model for describing them is simple harmonic motion (SHM). This workbook builds SHM from the ground up: what conditions produce it, how to describe it mathematically, and how energy moves back and forth as it happens. Along the way you will meet the same angular frequency, &omega;, that you used to describe circular motion in the Gravitation and circular motion workbook — it turns out oscillations and circles are two views of exactly the same mathematics.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>state the conditions that lead to simple harmonic motion and use the defining equation a = &minus;&omega;&sup2;x</li>
+          <li>describe an oscillation using time period T, frequency f, angular frequency &omega;, amplitude, equilibrium position and displacement, and use T = 1/f = 2&pi;/&omega;</li>
+          <li>use the time period of a mass&ndash;spring system, T = 2&pi;&radic;(m/k)</li>
+          <li>use the time period of a simple pendulum, T = 2&pi;&radic;(l/g)</li>
+          <li>describe, qualitatively, the energy changes that occur during one cycle of an oscillation</li>
+          <li>describe an oscillator using phase angle, &phi;</li>
+          <li>solve problems using the full set of SHM equations listed in the data booklet</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <section class="topic" id="s1">
+      <h2>1. Conditions for simple harmonic motion</h2>
+      <p>An <strong>oscillation</strong> is a repeated, back-and-forth movement about a fixed central point. Planets orbiting, hearts beating, guitar strings vibrating, atoms jiggling in a solid — oscillations are everywhere in physics. <strong>Simple harmonic motion (SHM)</strong> is an idealised model of oscillation: no energy is lost, so the amplitude and time period stay constant forever. Very few real oscillators are perfect examples of SHM, but many are good approximations, which is why the model is so useful.</p>
+
+      <h3>The restoring force</h3>
+      <p>An oscillator has an <strong>equilibrium position</strong>: the point where the resultant force on it is zero, and where it would stay at rest if undisturbed. If the oscillator is displaced away from equilibrium, a <strong>restoring force</strong> pulls (or pushes) it back. This restoring force is what makes oscillation possible at all — without it, a displaced object would simply stay displaced.</p>
+
+      <p>For a mass on a spring, the restoring force follows Hooke's law:</p>
+      <div class="eqn">F = &minus;kx</div>
+      <p>The minus sign is essential: it shows that the force, and therefore the acceleration, always acts in the <em>opposite</em> direction to the displacement, x, always pushing or pulling the mass back towards equilibrium, never away from it.</p>
+
+      <h3>Live simulation: force and displacement in a spring</h3>
+      <p>Stretch or compress the spring and watch how the restoring force changes. Check that the force is always directed back towards the natural length, and that doubling the displacement doubles the force.</p>
+      <div class="sim-embed">
+        <p class="instructions">Drag the mass to stretch or compress the spring, and read off the applied force and displacement. Try the "Energy" and "Lab" tabs too, once you have explored the basic spring.</p>
+        <iframe class="sim-frame" src="https://phet.colorado.edu/sims/html/hookes-law/latest/hookes-law_all.html" loading="lazy" title="PhET Hooke's Law simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://phet.colorado.edu/en/simulation/hookes-law" target="_blank" rel="noopener">PhET Interactive Simulations, University of Colorado Boulder</a>.</p>
+      </div>
+
+      <h3>From force to acceleration</h3>
+      <p>A restoring force proportional to displacement is the key condition for SHM:</p>
+      <div class="keybox"><strong>Key idea.</strong> Simple harmonic motion occurs whenever the restoring force (and so the acceleration) on an object is <em>proportional</em> to its displacement from equilibrium, and always acts in the <em>opposite</em> direction to that displacement.</div>
+
+      <p>Since F = ma, and mass m is constant, a force proportional to &minus;x means the acceleration is also proportional to &minus;x:</p>
+      <div class="eqn">a &prop; &minus;x</div>
+      <p>To turn this into an equation we need a constant of proportionality. That constant turns out to be &omega;&sup2; (you will meet &omega;, the <strong>angular frequency</strong>, properly in the next section) — giving the <strong>defining equation of SHM</strong>:</p>
+      <div class="eqn">defining equation of SHM, a = &minus;&omega;&sup2;x</div>
+
+      <figure>
+        <svg viewBox="0 0 360 260" width="360" height="260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mAx1" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+          <line x1="30" y1="130" x2="335" y2="130" stroke="#173a5e" stroke-width="1.4" marker-end="url(#mAx1)"/>
+          <line x1="180" y1="240" x2="180" y2="15" stroke="#173a5e" stroke-width="1.4" marker-end="url(#mAx1)"/>
+          <line x1="60" y1="40" x2="60" y2="130" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="60" y1="40" x2="180" y2="40" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="300" y1="220" x2="300" y2="130" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="300" y1="220" x2="180" y2="220" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="60" y1="40" x2="300" y2="220" stroke="#d98324" stroke-width="2.2"/>
+          <text x="345" y="134" font-size="12" fill="#173a5e">x</text>
+          <text x="186" y="22" font-size="12" fill="#173a5e">a</text>
+          <text x="300" y="146" font-size="11" fill="#3a4753" text-anchor="middle">x&#8320;</text>
+          <text x="60" y="146" font-size="11" fill="#3a4753" text-anchor="middle">&minus;x&#8320;</text>
+          <text x="170" y="44" font-size="11" fill="#3a4753" text-anchor="end">a<tspan font-size="8" baseline-shift="sub">max</tspan></text>
+          <text x="170" y="224" font-size="11" fill="#3a4753" text-anchor="end">&minus;a<tspan font-size="8" baseline-shift="sub">max</tspan></text>
+        </svg>
+        <figcaption>Fig. 1.1 Acceleration&ndash;displacement graph for SHM. The straight line through the origin, with a negative gradient of &minus;&omega;&sup2;, shows a &prop; &minus;x: the further the object is displaced, the greater its acceleration back towards equilibrium.</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Why the model applies so widely:</b> Many very different physical systems — springs, pendulums, vibrating molecules, alternating current — all obey a <span style="font-size:1.35em; font-weight:600; vertical-align:-0.05em;">&prop;</span> &minus;x for small displacements, even though the actual restoring forces involved look completely different. This is why the single SHM model is worth studying in such detail: understanding it once means understanding the mathematics behind a huge range of real oscillators.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>A mass oscillates horizontally between two springs with an angular frequency of 8.8 rad s<sup>&minus;1</sup>. Calculate its acceleration when its displacement is 1.0 cm to the right of equilibrium.</p>
+        <p><strong>Working:</strong></p>
+        <p>a = &minus;&omega;&sup2;x = &minus;(8.8)&sup2; &times; (+0.010) ... (complete the calculation, in m s<sup>&minus;2</sup>, and state its direction)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">1</span><strong>State the two conditions that must both be true of the resultant force (or acceleration) on an object for it to undergo simple harmonic motion.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">The force (and so acceleration) must be proportional to the displacement from equilibrium, and it must always act in the opposite direction to that displacement (i.e. always directed back towards equilibrium).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">2</span><strong>A student says: "A ball rolling at constant speed in a straight line has zero resultant force, so it must be in equilibrium and therefore undergoing SHM." Explain the error in this statement.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h2')">Show hint</button>
+        <div class="hint-panel" id="h2">Being <em>in</em> equilibrium (resultant force zero) is different from <em>oscillating about</em> an equilibrium position. SHM requires the object to move away from and then be pulled back towards a fixed central point.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">Equilibrium (zero resultant force) is a necessary feature of the <em>central point</em> of an SHM oscillator, but the ball is not oscillating — it is not repeatedly displaced from and restored to a fixed point. SHM requires a restoring force that appears specifically when the object is displaced from equilibrium; the ball experiences no such force at all, so it is not oscillating and is not an example of SHM.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">3</span><strong>An oscillator has a defining equation a = &minus;(4.0)x, where a is in m s<sup>&minus;2</sup> and x is in m. Determine its angular frequency, and calculate its acceleration at a displacement of 0.25 m.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h3')">Show hint</button>
+        <div class="hint-panel" id="h3">Compare the given equation directly with a = &minus;&omega;&sup2;x to identify &omega;&sup2; first.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">Comparing with a = &minus;&omega;&sup2;x: &omega;&sup2; = 4.0, so &omega; = 2.0 rad s<sup>&minus;1</sup>. Then a = &minus;(4.0) &times; (0.25) ... (complete the calculation, in m s<sup>&minus;2</sup>)</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s2">
+      <h2>2. Describing SHM</h2>
+      <p>To describe any particular SHM oscillator precisely, physicists use a small, standard set of quantities. Most of these — time period, frequency and angular frequency — should already be familiar from your work on circular motion.</p>
+
+      <div class="keyword"><b>Displacement, x:</b> the distance of the oscillator from its equilibrium position, in a specified direction, at a given instant. Displacement is a vector and varies continuously as the oscillator moves.</div>
+      <div class="keyword"><b>Amplitude, x&#8320;:</b> the <em>maximum</em> displacement of the oscillator from equilibrium. Unlike displacement, amplitude is a single fixed value for a given oscillation (assuming no energy loss).</div>
+      <div class="keyword"><b>Equilibrium position:</b> the position at which the resultant force on the oscillator is zero — the central point about which it oscillates.</div>
+      <div class="keyword"><b>Time period, T:</b> the time taken for one complete oscillation (cycle). Unit: s.</div>
+      <div class="keyword"><b>Frequency, f:</b> the number of complete oscillations per unit time. Unit: hertz, Hz (1 Hz = 1 oscillation per second).</div>
+      <div class="keyword"><b>Angular frequency, &omega;:</b> a way of describing oscillation frequency in radians per second, borrowed directly from circular motion (see the Gravitation and circular motion workbook). Unit: rad s<sup>&minus;1</sup>.</div>
+
+      <p>Frequency and time period carry exactly the same information, just expressed differently — we simply use whichever is more convenient:</p>
+      <div class="eqn">time period, T = 1/f = 2&pi;/&omega;</div>
+
+      <figure>
+        <svg viewBox="0 0 420 210" width="420" height="210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mAx2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+            <marker id="mDbl" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5b6b78"/></marker>
+            <marker id="mDblR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#5b6b78"/></marker>
+          </defs>
+          <line x1="20" y1="100" x2="410" y2="100" stroke="#173a5e" stroke-width="1.3" marker-end="url(#mAx2)"/>
+          <line x1="30" y1="185" x2="30" y2="15" stroke="#173a5e" stroke-width="1.3" marker-end="url(#mAx2)"/>
+          <line x1="30" y1="40" x2="400" y2="40" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="30" y1="160" x2="400" y2="160" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M30.0,100.0 L31.9,95.8 L35.6,87.6 L39.3,79.6 L43.0,72.0 L46.7,64.9 L50.5,58.5 L54.2,52.9 L57.9,48.2 L61.6,44.5 L65.3,41.9 L69.0,40.4 L72.8,40.0 L76.5,40.8 L80.2,42.8 L83.9,45.8 L87.6,49.9 L91.4,54.9 L95.1,60.9 L98.8,67.5 L102.5,74.8 L106.2,82.6 L109.9,90.8 L113.7,99.1 L117.4,107.4 L121.1,115.5 L124.8,123.4 L128.5,130.8 L132.3,137.7 L136.0,143.8 L139.7,149.0 L143.4,153.4 L147.1,156.6 L150.9,158.8 L154.6,159.9 L158.3,159.8 L162.0,158.6 L165.7,156.2 L169.4,152.7 L173.2,148.3 L176.9,142.9 L180.6,136.6 L184.3,129.7 L188.0,122.2 L191.8,114.3 L195.5,106.1 L199.2,97.7 L202.9,89.4 L206.6,81.4 L210.4,73.7 L214.1,66.4 L217.8,59.9 L221.5,54.1 L225.2,49.2 L228.9,45.3 L232.7,42.4 L236.4,40.6 L240.1,40.0 L243.8,40.5 L247.5,42.2 L251.3,45.0 L255.0,48.9 L258.7,53.7 L262.4,59.5 L266.1,66.0 L269.8,73.1 L273.6,80.8 L277.3,88.9 L281.0,97.2 L284.7,105.5 L288.4,113.7 L292.2,121.7 L295.9,129.2 L299.6,136.2 L303.3,142.5 L307.0,147.9 L310.8,152.5 L314.5,156.0 L318.2,158.4 L321.9,159.8 L325.6,159.9 L329.3,158.9 L333.1,156.8 L336.8,153.6 L340.5,149.4 L344.2,144.2 L347.9,138.1 L351.7,131.3 L355.4,123.9 L359.1,116.1 L362.8,107.9 L366.5,99.6 L370.3,91.3 L374.0,83.2 L377.7,75.4 L381.4,68.0 L385.1,61.3 L388.8,55.3 L392.6,50.2 L396.3,46.1 L400.0,42.9" fill="none" stroke="#0e7c86" stroke-width="2"/>
+          <line x1="30" y1="185" x2="198" y2="185" stroke="#5b6b78" stroke-width="1.1" marker-start="url(#mDbl)" marker-end="url(#mDblR)"/>
+          <text x="114" y="200" font-size="12" fill="#5b6b78" text-anchor="middle">period, T</text>
+          <text x="412" y="104" font-size="12" fill="#173a5e">t</text>
+          <text x="36" y="20" font-size="12" fill="#173a5e">x</text>
+          <text x="16" y="44" font-size="11" fill="#3a4753" text-anchor="end">x&#8320;</text>
+          <text x="12" y="164" font-size="11" fill="#3a4753" text-anchor="end">&minus;x&#8320;</text>
+        </svg>
+        <figcaption>Fig. 2.1 A displacement&ndash;time graph for SHM is sinusoidal. The amplitude, x&#8320;, is the maximum height of the curve above (or below) the equilibrium line; the period, T, is the time for one complete cycle.</figcaption>
+      </figure>
+
+      <h3>Live simulation: SHM and circular motion</h3>
+      <p>This applet shows the same connection you met in the Gravitation and circular motion workbook: a point moving at constant speed around a circle, and its shadow oscillating back and forth along a diameter with SHM. Change the frequency and amplitude, and watch how the displacement&ndash;time graph responds.</p>
+      <div class="sim-embed">
+        <p class="instructions">Press start, then try the "Show Vertical" and "Show Horizontal" options to see both projections of the circular motion. Adjust the frequency and amplitude sliders and watch how the graph changes.</p>
+        <iframe class="sim-frame" style="height:680px;" src="https://www.geogebra.org/material/iframe/id/dugsxctj/width/900/height/680/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" loading="lazy" title="GeoGebra: uniform circular motion and SHM"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">GeoGebra applet "C1. UCM &amp; SHM" by Learn IB Physics, via <a href="https://www.geogebra.org/m/dugsxctj" target="_blank" rel="noopener">geogebra.org</a>.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>A mass oscillates between two identical springs. The distance between its two extreme positions is 18 cm, and it completes one full oscillation every 1.5 s.</p>
+        <p><strong>Working:</strong></p>
+        <p><em>Amplitude:</em> the distance between the extremes is <em>twice</em> the amplitude, so x&#8320; = 18/2 = 9 cm.</p>
+        <p><em>Frequency:</em> f = 1/T = 1/1.5 ... (complete the calculation, in Hz)</p>
+        <p><em>Angular frequency:</em> &omega; = 2&pi;f ... (use your answer above to complete this, in rad s<sup>&minus;1</sup>)</p>
+      </div>
+
+      <div class="stretch-box"><span class="tag">Common mistake</span> The amplitude of an oscillation is <strong>not</strong> the distance between its two extreme positions — that distance equals <em>twice</em> the amplitude. A single movement from one extreme to the other is also <strong>not</strong> a complete oscillation — it is only half of one.</div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">4</span><strong>A loudspeaker cone vibrates with a frequency of 250 Hz. Calculate its time period and its angular frequency.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">T = 1/f = 1/250 ... (complete the calculation, in s). &omega; = 2&pi;f = 2&pi; &times; 250 ... (complete the calculation, in rad s<sup>&minus;1</sup>)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">5</span><strong>An oscillator has an angular frequency of 12.0 rad s<sup>&minus;1</sup>. Calculate its time period and frequency.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h5')">Show hint</button>
+        <div class="hint-panel" id="h5">Rearrange T = 2&pi;/&omega; first, then use f = 1/T (or f = &omega;/2&pi; directly).</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">T = 2&pi;/&omega; = 2&pi;/12.0 ... (complete the calculation, in s). f = 1/T (use your answer above to complete this, in Hz)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">6</span><strong>State what is meant by the <em>equilibrium position</em> of an oscillator, and explain why the resultant force there must be zero.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">The equilibrium position is the central point about which the oscillator moves, where it would remain at rest if left undisturbed. If the resultant force there were not zero, the object would accelerate away from that point rather than staying there, so by definition the resultant force at equilibrium must be zero.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s3">
+      <h2>3. Time period of a mass&ndash;spring system</h2>
+      <p>You have already met the equation that defines SHM, a = &minus;&omega;&sup2;x, and the restoring force behind it, Hooke's law, F = &minus;kx. Combining these two equations lets us predict exactly how quickly a mass on a spring will oscillate &mdash; without needing to measure it directly.</p>
+
+      <h3>Deriving the equation</h3>
+      <div class="keybox">
+        <strong>Your task</strong>
+        <p>Starting with Hooke's law, F = &minus;kx, and incorporating Newton's second law, the defining equation of SHM, and the equation relating time period to angular frequency, derive the expression for the time period of a mass&ndash;spring system:</p>
+        <p style="text-align:center; font-size:1.08rem;">T = 2&pi;&radic;(m/k)</p>
+        <p>Use the space below (or your notebook) to show every step of your working.</p>
+        <textarea class="answer-lines" rows="6" placeholder="Show your derivation here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('deriv3')">Show full derivation</button>
+        <div class="answer-panel" id="deriv3">
+          <ol>
+            <li>For a mass on a spring, the restoring force follows Hooke's law: F = &minus;kx</li>
+            <li>Newton's second law gives F = ma, so: ma = &minus;kx</li>
+            <li>For any object undergoing SHM, a = &minus;&omega;&sup2;x</li>
+            <li>Substituting this expression for a into the line above: m(&minus;&omega;&sup2;x) = &minus;kx</li>
+            <li>The factor of x and the minus sign cancel from both sides, leaving: m&omega;&sup2; = k, so &omega;&sup2; = k/m</li>
+            <li>Since T = 2&pi;/&omega;, substituting &omega; = &radic;(k/m) gives the time period of a mass&ndash;spring system: T = 2&pi;&radic;(m/k)</li>
+          </ol>
+        </div>
+      </div>
+      <div class="eqn">T = 2&pi;&radic;(m/k)</div>
+
+      <div class="keyword"><b>Notice:</b> a <em>bigger mass</em> gives a <em>bigger</em> time period &mdash; a heavier object oscillates more slowly. A <em>bigger spring constant</em> (a stiffer spring) gives a <em>smaller</em> time period &mdash; a stiffer spring oscillates faster. Neither the amplitude nor g appears in the equation at all: for an ideal spring, the time period of a mass&ndash;spring system does not depend on how far you pull it before releasing it.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>A trolley of mass 0.40 kg is attached to a horizontal spring of spring constant 25 N m<sup>&minus;1</sup> and set oscillating. Calculate the time period of the oscillation.</p>
+        <p><strong>Working:</strong></p>
+        <p>T = 2&pi;&radic;(m/k) = 2&pi;&radic;(0.40/25) ... (complete the calculation, in s)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.2</span>
+        <p>A mass of 150 g hangs from a vertical spring and, when disturbed, oscillates with a time period of 0.55 s. Calculate the spring constant of the spring.</p>
+        <p><strong>Working:</strong></p>
+        <p>Start from T = 2&pi;&radic;(m/k) and rearrange to make k the subject: square both sides, T&sup2; = 4&pi;&sup2;m/k, so k = 4&pi;&sup2;m/T&sup2;.</p>
+        <p>k = 4&pi;&sup2; &times; 0.150 / 0.55&sup2; ... (complete the calculation, in N m<sup>&minus;1</sup>, remembering to convert the mass to kg first)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">7</span><strong>A block of mass 0.25 kg is attached to a spring of spring constant 40 N m<sup>&minus;1</sup> and oscillates horizontally on a frictionless surface. Calculate the angular frequency and the time period of the oscillation.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">&omega; = &radic;(k/m) = &radic;(40/0.25) ... (complete the calculation, in rad s<sup>&minus;1</sup>). T = 2&pi;/&omega; (use your answer above to complete this, in s) &mdash; or equivalently T = 2&pi;&radic;(m/k) = 2&pi;&radic;(0.25/40).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">8</span><strong>A student keeps the same spring but doubles the mass attached to it. State and explain what happens to the time period of the oscillation.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h8')">Show hint</button>
+        <div class="hint-panel" id="h8">Look at how m appears in T = 2&pi;&radic;(m/k) &mdash; it is under a square root, not in direct proportion.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">Because m is under a square root in T = 2&pi;&radic;(m/k), doubling m does not double T. Instead, T increases by a factor of &radic;2 &asymp; 1.41, so the oscillation becomes slower, but only by about 41%, not 100%.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">9</span><strong>To find the spring constant of a spring experimentally, a student measures the time period T for several different masses m and plots a graph of T&sup2; on the y-axis against m on the x-axis. Show that this graph should be a straight line through the origin, and find an expression for its gradient in terms of k.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h9')">Show hint</button>
+        <div class="hint-panel" id="h9">Start from T = 2&pi;&radic;(m/k) and square both sides so that T&sup2; is written as (something) &times; m.</div>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">Squaring T = 2&pi;&radic;(m/k) gives T&sup2; = (4&pi;&sup2;/k)&nbsp;m. This has the form y = (gradient)&nbsp;x + 0 with y = T&sup2; and x = m, so a graph of T&sup2; against m is indeed a straight line through the origin, with gradient 4&pi;&sup2;/k. Once the gradient is measured from the graph, k can be found from k = 4&pi;&sup2;/gradient.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s4">
+      <h2>4. The simple pendulum</h2>
+      <p>A simple pendulum &mdash; a small bob on a light string, swinging through small angles &mdash; is another classic example of SHM. The restoring force here is a component of gravity rather than a spring, but the same defining equation, a = &minus;&omega;&sup2;x, still applies.</p>
+
+      <h3>Deriving the equation</h3>
+      <div class="keybox">
+        <strong>Deriving the time period of a simple pendulum</strong>
+        <ol>
+          <li>For a pendulum of length L displaced through a small angle &theta;, the restoring force is the component of gravity along the direction of motion: F = &minus;mg&nbsp;sin&theta;</li>
+          <li>Newton's second law gives F = ma, so: ma = &minus;mg&nbsp;sin&theta;</li>
+          <li>For a <em>small</em> angle (measured in radians), sin&theta; &asymp; &theta;, so: ma = &minus;mg&theta;</li>
+          <li>The angle &theta; and the arc-length displacement x are related by &theta; = x/L, so: ma = &minus;mg(x/L)</li>
+          <li>Dividing both sides by m: a = &minus;(g/L)x</li>
+          <li>Comparing this with the defining equation of SHM, a = &minus;&omega;&sup2;x, shows that &omega;&sup2; = g/L</li>
+          <li>Since T = 2&pi;/&omega;, substituting &omega; = &radic;(g/L) gives the time period of a simple pendulum:</li>
+        </ol>
+      </div>
+      <div class="eqn">T = 2&pi;&radic;(l/g)</div>
+
+      <div class="keyword"><b>Small-angle approximation:</b> the derivation above only works because sin&theta; &asymp; &theta; when &theta; is small (roughly less than about 10&deg;, measured in radians). Swing a pendulum through a large angle and its motion is still periodic, but it is no longer simple harmonic, and this equation for T no longer applies accurately.</div>
+
+      <div class="keyword"><b>Notice:</b> just as with the mass&ndash;spring system, the mass of the bob does not appear anywhere in T = 2&pi;&radic;(l/g). A heavy bob and a light bob on strings of the same length, swinging through small angles, have the same time period.</div>
+
+      <h3>Live simulation: the pendulum lab</h3>
+      <div class="sim-embed">
+        <p class="instructions">Set a single pendulum swinging with a small angle and use the built-in stopwatch and ruler to test how the time period depends on length, mass, and amplitude. Try changing one variable at a time.</p>
+        <iframe class="sim-frame" src="https://phet.colorado.edu/sims/html/pendulum-lab/latest/pendulum-lab_en.html" loading="lazy" title="PhET Pendulum Lab simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://phet.colorado.edu/en/simulation/pendulum-lab" target="_blank" rel="noopener">PhET Interactive Simulations, University of Colorado Boulder</a>.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A simple pendulum on the Earth's surface (g = 9.81 m s<sup>&minus;2</sup>) has a length of 0.80 m. Calculate its time period.</p>
+        <p><strong>Working:</strong></p>
+        <p>T = 2&pi;&radic;(l/g) = 2&pi;&radic;(0.80/9.81) ... (complete the calculation, in s)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.2</span>
+        <p>The same pendulum is taken to the Moon, where g<sub>Moon</sub> = 1.62 m s<sup>&minus;2</sup>. Without recalculating T from scratch, find the ratio T<sub>Moon</sub> / T<sub>Earth</sub>.</p>
+        <p><strong>Working:</strong></p>
+        <p>Since T &prop; 1/&radic;g at constant length, T<sub>Moon</sub> / T<sub>Earth</sub> = &radic;(g<sub>Earth</sub> / g<sub>Moon</sub>) = &radic;(9.81/1.62) ... (complete the calculation &mdash; and state whether the pendulum swings faster or slower on the Moon)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">10</span><strong>A simple pendulum has a time period of 1.8 s on Earth. Calculate its length.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h10')">Show hint</button>
+        <div class="hint-panel" id="h10">Rearrange T = 2&pi;&radic;(l/g) to make l the subject before substituting numbers.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">Rearranging T = 2&pi;&radic;(l/g): T&sup2; = 4&pi;&sup2;l/g, so l = gT&sup2;/4&pi;&sup2; = 9.81 &times; 1.8&sup2; / 4&pi;&sup2; ... (complete the calculation, in m)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">11</span><strong>Explain why a pendulum clock loses time if its bob is accidentally set swinging through a much larger angle than usual, even though its length has not changed.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">The equation T = 2&pi;&radic;(l/g) relies on the small-angle approximation sin&theta; &asymp; &theta;. At a large swing angle this approximation breaks down, the motion is no longer simple harmonic, and the true time period becomes slightly longer than the small-angle formula predicts &mdash; so a clock calibrated for small swings runs slow.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">12</span><strong>Two simple pendulums, X and Y, are the same length, but bob X has twice the mass of bob Y. Compare their time periods, and explain your reasoning.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h12')">Show hint</button>
+        <div class="hint-panel" id="h12">Look for mass in the equation T = 2&pi;&radic;(l/g) &mdash; is it there at all?</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">The two pendulums have the same time period. Mass does not appear in T = 2&pi;&radic;(l/g), because although a heavier bob needs a larger force to accelerate it (F = ma), gravity also pulls on it proportionally harder (F = mg&nbsp;sin&theta;) &mdash; the mass cancels out of the equation of motion entirely.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s5">
+      <h2>5. Energy changes during SHM</h2>
+      <p>As an oscillator moves through one cycle, energy is continuously exchanged between two forms: potential energy (elastic, for a spring, or gravitational, for a pendulum) and kinetic energy. Provided there is no friction or air resistance, the <em>total</em> energy of the oscillator stays constant throughout.</p>
+
+      <div class="keyword"><b>At the extremes (x = &plusmn;x&#8320;):</b> the oscillator is momentarily at rest (v = 0), so all of its energy is potential energy. Kinetic energy is zero here.</div>
+      <div class="keyword"><b>At equilibrium (x = 0):</b> the oscillator is moving at its maximum speed, so all of its energy is kinetic energy. Potential energy is zero here (measured relative to the equilibrium position).</div>
+      <div class="keyword"><b>In between:</b> the oscillator has some of each — as it moves away from equilibrium, kinetic energy is continuously transferred to potential energy, and as it moves back towards equilibrium, that potential energy is transferred back to kinetic energy.</div>
+
+      <figure>
+        <svg viewBox="0 0 380 250" width="380" height="250" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mAx3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+          <line x1="30" y1="210" x2="358" y2="210" stroke="#173a5e" stroke-width="1.4" marker-end="url(#mAx3)"/>
+          <line x1="195" y1="232" x2="195" y2="15" stroke="#173a5e" stroke-width="1.4" marker-end="url(#mAx3)"/>
+          <line x1="70" y1="210" x2="70" y2="40" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="320" y1="210" x2="320" y2="40" stroke="#b9c6d3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="55" y1="40" x2="340" y2="40" stroke="#5b6b78" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <polyline points="70.0,40.0 76.2,56.6 82.5,72.3 88.8,87.2 95.0,101.2 101.2,114.4 107.5,126.7 113.8,138.2 120.0,148.8 126.2,158.6 132.5,167.5 138.8,175.6 145.0,182.8 151.2,189.2 157.5,194.7 163.8,199.4 170.0,203.2 176.2,206.2 182.5,208.3 188.8,209.6 195.0,210.0 201.2,209.6 207.5,208.3 213.8,206.2 220.0,203.2 226.2,199.4 232.5,194.7 238.8,189.2 245.0,182.8 251.3,175.6 257.5,167.5 263.8,158.6 270.0,148.8 276.2,138.2 282.5,126.7 288.8,114.4 295.0,101.2 301.2,87.2 307.5,72.3 313.8,56.6 320.0,40.0" fill="none" stroke="#0e7c86" stroke-width="2.2"/>
+          <polyline points="70.0,210.0 76.2,193.4 82.5,177.7 88.8,162.8 95.0,148.8 101.2,135.6 107.5,123.3 113.8,111.8 120.0,101.2 126.2,91.4 132.5,82.5 138.8,74.4 145.0,67.2 151.2,60.8 157.5,55.3 163.8,50.6 170.0,46.8 176.2,43.8 182.5,41.7 188.8,40.4 195.0,40.0 201.2,40.4 207.5,41.7 213.8,43.8 220.0,46.8 226.2,50.6 232.5,55.3 238.8,60.8 245.0,67.2 251.3,74.4 257.5,82.5 263.8,91.4 270.0,101.2 276.2,111.8 282.5,123.3 288.8,135.6 295.0,148.8 301.2,162.8 307.5,177.7 313.8,193.4 320.0,210.0" fill="none" stroke="#d98324" stroke-width="2.2"/>
+          <text x="365" y="214" font-size="12" fill="#173a5e">x</text>
+          <text x="128" y="20" font-size="12" fill="#173a5e">energy</text>
+          <text x="70" y="224" font-size="11" fill="#3a4753" text-anchor="middle">&minus;x&#8320;</text>
+          <text x="320" y="224" font-size="11" fill="#3a4753" text-anchor="middle">x&#8320;</text>
+          <text x="333" y="33" font-size="11" fill="#5b6b78" text-anchor="end">E<tspan font-size="8" baseline-shift="sub">T</tspan></text>
+          <text x="266" y="172" font-size="11" fill="#0e7c86" text-anchor="start">E<tspan font-size="8" baseline-shift="sub">P</tspan></text>
+          <text x="130" y="70" font-size="11" fill="#d98324" text-anchor="end">E<tspan font-size="8" baseline-shift="sub">K</tspan></text>
+        </svg>
+        <figcaption>Fig. 5.1 Energy&ndash;displacement graph for an undamped SHM oscillator. Potential energy E<sub>P</sub> (teal) is zero at equilibrium and maximum at the extremes; kinetic energy E<sub>K</sub> (amber) is maximum at equilibrium and zero at the extremes. Their sum, the total energy E<sub>T</sub> (dashed line), stays constant throughout the cycle.</figcaption>
+      </figure>
+
+      <h3>Live simulation: mass on a spring</h3>
+      <div class="sim-embed">
+        <p class="instructions">Set the spring oscillating and watch the potential, kinetic and total energy bars change as the mass moves. Pause at the extremes and at equilibrium to check your answers to the questions below.</p>
+        <iframe class="sim-frame" style="height:760px;" src="https://ophysics.com/w1.html" loading="lazy" title="oPhysics: mass on a spring simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://ophysics.com/w1.html" target="_blank" rel="noopener">oPhysics.com (Tom Walsh)</a>.</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A mass oscillates on a spring with SHM. State the type(s) of energy it possesses (i) at maximum displacement, (ii) at equilibrium, and (iii) at a point in between.</p>
+        <p><strong>Working:</strong></p>
+        <p>(i) At maximum displacement the mass is momentarily at rest, so it has only potential energy (elastic potential energy stored in the spring).</p>
+        <p>(ii) At equilibrium the mass is moving at its maximum speed and the spring is at its natural length, so it has only kinetic energy.</p>
+        <p>(iii) In between, the mass has both potential and kinetic energy, with their sum always equal to the total energy of the system.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">13</span><strong>Describe how the kinetic energy and the potential energy of an oscillator change as it moves from its equilibrium position to its maximum displacement.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">As the oscillator moves from equilibrium to maximum displacement, its speed continuously decreases, so its kinetic energy continuously decreases from a maximum to zero. At the same time its potential energy continuously increases from zero to a maximum, as work is done against the restoring force.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">14</span><strong>Using Fig. 5.1, explain why the total energy line E<sub>T</sub> is horizontal (constant) even though E<sub>P</sub> and E<sub>K</sub> both vary with displacement.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h14')">Show hint</button>
+        <div class="hint-panel" id="h14">Think about what physical principle must hold if there is no friction or air resistance acting on the oscillator.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">By conservation of energy, in the absence of friction or air resistance no energy is lost from the system, only transferred between potential and kinetic forms. At every displacement, E<sub>P</sub> + E<sub>K</sub> must add up to the same fixed total, E<sub>T</sub>, so the graph of E<sub>T</sub> against x is a horizontal line.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">15</span><strong>A pendulum bob undergoing SHM passes through a point that is exactly halfway between equilibrium and its maximum displacement. Is its kinetic energy at this point exactly half of its maximum kinetic energy? Explain your reasoning, referring to the shape of the graph in Fig. 5.1.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h15')">Show hint</button>
+        <div class="hint-panel" id="h15">Look carefully at the curves in Fig. 5.1 &mdash; are they straight lines or curves? What does that tell you about proportionality?</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">No. The E<sub>K</sub> and E<sub>P</sub> curves in Fig. 5.1 are parabolas, not straight lines, so energy does not vary in direct proportion to displacement. At the halfway point the bob still has most of its speed (and so most of its kinetic energy), because the potential energy curve rises slowly near equilibrium and only rises steeply near the extremes &mdash; so the kinetic energy at the halfway point is considerably more than half of its maximum value.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s6">
+      <h2>6. Phase angle</h2>
+      <p>Two oscillators can have exactly the same amplitude and angular frequency, yet be at different points in their cycle at the same instant &mdash; one might be at its maximum displacement while the other is passing through equilibrium, for example. The quantity that describes this difference is called the <strong>phase angle</strong>.</p>
+
+      <div class="keyword"><b>Phase angle, &phi;:</b> a measure, in radians, of how far through a cycle one oscillator is compared with a reference oscillator (or compared with the point where its displacement would otherwise have been zero and increasing). One full cycle corresponds to a phase angle of 2&pi; rad.</div>
+
+      <p>If a reference oscillator has displacement x = x&#8320; sin(&omega;t), then a second oscillator with the same amplitude and angular frequency, but shifted in time, has displacement:</p>
+      <div class="eqn">x = x&#8320; sin(&omega;t + &phi;)</div>
+      <p>A positive phase angle means the oscillator <strong>leads</strong> the reference &mdash; it reaches every point in its cycle <em>earlier</em> in time. A negative phase angle means it <strong>lags</strong> the reference &mdash; it reaches every point <em>later</em>.</p>
+
+      <figure>
+        <svg viewBox="0 0 420 210" width="420" height="210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mAx4" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+          <line x1="20" y1="100" x2="410" y2="100" stroke="#173a5e" stroke-width="1.3" marker-end="url(#mAx4)"/>
+          <line x1="30" y1="185" x2="30" y2="15" stroke="#173a5e" stroke-width="1.3" marker-end="url(#mAx4)"/>
+          <path d="M30.0,100.0 L34.2,90.7 L38.3,81.6 L42.5,73.0 L46.6,65.0 L50.8,57.9 L54.9,51.8 L59.1,46.8 L63.3,43.2 L67.4,40.9 L71.6,40.0 L75.7,40.6 L79.9,42.6 L84.0,46.0 L88.2,50.7 L92.4,56.6 L96.5,63.5 L100.7,71.3 L104.8,79.8 L109.0,88.8 L113.1,98.1 L117.3,107.4 L121.5,116.5 L125.6,125.3 L129.8,133.4 L133.9,140.7 L138.1,147.0 L142.2,152.2 L146.4,156.2 L150.6,158.8 L154.7,159.9 L158.9,159.7 L163.0,157.9 L167.2,154.8 L171.3,150.4 L175.5,144.7 L179.7,138.0 L183.8,130.3 L188.0,122.0 L192.1,113.1 L196.3,103.8 L200.4,94.5 L204.6,85.3 L208.8,76.5 L212.9,68.2 L217.1,60.7 L221.2,54.2 L225.4,48.7 L229.6,44.5 L233.7,41.7 L237.9,40.2 L242.0,40.2 L246.2,41.6 L250.3,44.4 L254.5,48.6 L258.7,54.0 L262.8,60.5 L267.0,68.0 L271.1,76.3 L275.3,85.1 L279.4,94.3 L283.6,103.6 L287.8,112.8 L291.9,121.7 L296.1,130.1 L300.2,137.8 L304.4,144.6 L308.5,150.2 L312.7,154.7 L316.9,157.9 L321.0,159.6 L325.2,159.9 L329.3,158.8 L333.5,156.3 L337.6,152.4 L341.8,147.2 L346.0,140.9 L350.1,133.6 L354.3,125.5 L358.4,116.8 L362.6,107.6 L366.7,98.3 L370.9,89.1 L375.1,80.1 L379.2,71.5 L383.4,63.7 L387.5,56.7 L391.7,50.8 L395.8,46.1 L400.0,42.7" fill="none" stroke="#0e7c86" stroke-width="2.2"/>
+          <path d="M30.0,48.0 L34.2,44.0 L38.3,41.4 L42.5,40.1 L46.6,40.3 L50.8,41.9 L54.9,45.0 L59.1,49.3 L63.3,54.9 L67.4,61.6 L71.6,69.2 L75.7,77.5 L79.9,86.4 L84.0,95.6 L88.2,104.9 L92.4,114.1 L96.5,123.0 L100.7,131.3 L104.8,138.8 L109.0,145.5 L113.1,151.0 L117.3,155.3 L121.5,158.2 L125.6,159.8 L129.8,159.9 L133.9,158.5 L138.1,155.8 L142.2,151.7 L146.4,146.3 L150.6,139.9 L154.7,132.5 L158.9,124.2 L163.0,115.5 L167.2,106.3 L171.3,97.0 L175.5,87.7 L179.7,78.8 L183.8,70.4 L188.0,62.6 L192.1,55.8 L196.3,50.1 L200.4,45.5 L204.6,42.3 L208.8,40.4 L212.9,40.0 L217.1,41.1 L221.2,43.5 L225.4,47.4 L229.6,52.5 L233.7,58.7 L237.9,66.0 L242.0,74.0 L246.2,82.7 L250.3,91.8 L254.5,101.1 L258.7,110.4 L262.8,119.4 L267.0,128.0 L271.1,135.9 L275.3,142.9 L279.4,148.9 L283.6,153.7 L287.8,157.2 L291.9,159.3 L296.1,160.0 L300.2,159.3 L304.4,157.1 L308.5,153.5 L312.7,148.7 L316.9,142.7 L321.0,135.6 L325.2,127.7 L329.3,119.1 L333.5,110.1 L337.6,100.8 L341.8,91.5 L346.0,82.4 L350.1,73.7 L354.3,65.7 L358.4,58.5 L362.6,52.3 L366.7,47.2 L370.9,43.4 L375.1,41.0 L379.2,40.0 L383.4,40.5 L387.5,42.4 L391.7,45.6 L395.8,50.2 L400.0,56.0" fill="none" stroke="#d98324" stroke-width="2.2"/>
+          <line x1="44" y1="24" x2="72" y2="24" stroke="#5b6b78" stroke-width="1.1" marker-start="url(#mDbl)" marker-end="url(#mDblR)"/>
+          <text x="58" y="14" font-size="10.5" fill="#5b6b78" text-anchor="middle">&phi;</text>
+          <text x="412" y="104" font-size="12" fill="#173a5e">t</text>
+          <text x="36" y="20" font-size="12" fill="#173a5e">x</text>
+          <text x="404" y="46" font-size="12" fill="#0e7c86" text-anchor="end">A</text>
+          <text x="404" y="60" font-size="12" fill="#d98324" text-anchor="end">B</text>
+        </svg>
+        <figcaption>Fig. 6.1 Displacement&ndash;time graphs for two oscillators with the same amplitude and angular frequency, but different phase. Oscillator B (amber) reaches each point in its cycle earlier than oscillator A (teal) &mdash; it has a positive phase angle &phi; relative to A, marked as the small horizontal gap between their peaks.</figcaption>
+      </figure>
+
+      <h3>Live simulation: phase angle explorer</h3>
+      <div class="sim-wrap">
+        <div class="sim-canvas-box"><canvas id="phaseCanvas" width="320" height="220"></canvas></div>
+        <div class="sim-controls">
+          <h4>Phase angle explorer</h4>
+          <div class="sim-row"><label for="phaseSlider">Phase angle of B relative to A, &phi; = <span id="phaseVal">0.00</span> rad (<span id="phaseDegVal">0</span>&deg;)</label><input type="range" id="phaseSlider" min="0" max="6.28" step="0.01" value="0"></div>
+          <div class="sim-readout" id="phaseReadout">x<sub>A</sub> = x&#8320; sin(&omega;t)<br>x<sub>B</sub> = x&#8320; sin(&omega;t + &phi;)</div>
+          <div class="sim-btns"><button onclick="phaseTogglePlay()">Play / pause</button><button class="alt" onclick="phaseReset()">Reset &phi; to 0</button></div>
+        </div>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>Oscillator A has displacement x<sub>A</sub> = x&#8320; sin(&omega;t). Oscillator B has the same amplitude and angular frequency, but reaches its maximum displacement exactly one-sixth of a period <em>before</em> oscillator A does. Determine the phase angle of B relative to A, in radians.</p>
+        <p><strong>Working:</strong></p>
+        <p>One full cycle corresponds to a phase angle of 2&pi; rad, so one-sixth of a period corresponds to a phase angle of (1/6) &times; 2&pi; = &pi;/3 rad.</p>
+        <p>Because B reaches each point in its cycle <em>earlier</em> than A, it leads A, so its phase angle is positive: &phi; = +&pi;/3 rad ... (convert to a decimal, to 2 s.f., if required)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">16</span><strong>Two identical oscillators, P and Q, have the same amplitude and angular frequency. Q reaches every point in its cycle exactly a quarter of a period <em>after</em> P does. State the phase angle of Q relative to P, in radians, and state whether Q leads or lags P.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h16')">Show hint</button>
+        <div class="hint-panel" id="h16">A quarter of a period is a quarter of a full cycle. Convert that fraction of a cycle into radians using 2&pi; rad = one full cycle, then decide on the sign.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">A quarter of a period corresponds to a phase angle of (1/4) &times; 2&pi; = &pi;/2 rad. Because Q reaches each point <em>later</em> than P, Q lags P, so its phase angle relative to P is negative: &phi; = &minus;&pi;/2 rad.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">17</span><strong>Using Fig. 6.1, describe how you could estimate the phase angle &phi; between oscillators A and B directly from the graph.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">Measure the horizontal (time) gap between two corresponding points on the two curves, such as their peaks. Express this gap as a fraction of the time period T (the horizontal distance for one complete cycle of either curve), then multiply that fraction by 2&pi; rad to convert it into a phase angle.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">18</span><strong>State what is meant by two oscillators being <em>in phase</em>, and what is meant by two oscillators being <em>in antiphase</em>. Give one real example of two objects that could reasonably be described as oscillating in antiphase.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h18')">Show hint</button>
+        <div class="hint-panel" id="h18">Antiphase means the phase difference is exactly half a cycle. Think of two objects that always move in exactly opposite directions to each other.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Two oscillators are <em>in phase</em> when their phase difference is zero (or a whole number of cycles, 2&pi; rad) &mdash; they reach maximum displacement, equilibrium, and minimum displacement at exactly the same times. They are <em>in antiphase</em> when their phase difference is exactly half a cycle (&pi; rad) &mdash; one is at its positive maximum exactly when the other is at its negative maximum. Example: two pistons in a horizontally-opposed ("boxer") engine, or two ends of a simple seesaw, moving in exactly opposite directions at every instant.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="s7">
+      <h2>7. Solving problems with SHM data-booklet equations</h2>
+      <p>You now have all the equations needed to fully describe and solve problems on any SHM oscillator. Two further equations complete the set: one connecting velocity directly to displacement (without needing time), and a trio of energy equations built from the ones you met qualitatively in Section 5. All of these appear in the physics data booklet, so you do not need to memorise them &mdash; but you do need to know when and how to use each one.</p>
+
+      <table class="eqtable">
+        <tr><th>Quantity</th><th>Equation</th><th>Notes</th></tr>
+        <tr><td>Displacement</td><td>x = x&#8320; sin(&omega;t + &phi;)</td><td>&phi; = 0 if the oscillator starts at x = 0 moving in the positive direction</td></tr>
+        <tr><td>Velocity (vs. time)</td><td>v = &omega;x&#8320; cos(&omega;t + &phi;)</td><td>found by differentiating x with respect to t</td></tr>
+        <tr><td>Velocity (vs. displacement)</td><td>v = &plusmn;&omega;&radic;(x&#8320;&sup2; &minus; x&sup2;)</td><td>useful when time is not known or not needed; &plusmn; because the oscillator passes through each x twice per cycle, moving in opposite directions</td></tr>
+        <tr><td>Acceleration</td><td>a = &minus;&omega;&sup2;x</td><td>the defining equation of SHM (Section 1)</td></tr>
+        <tr><td>Total energy</td><td>E<sub>T</sub> = &frac12;m&omega;&sup2;x&#8320;&sup2;</td><td>constant throughout the cycle</td></tr>
+        <tr><td>Potential energy</td><td>E<sub>P</sub> = &frac12;m&omega;&sup2;x&sup2;</td><td>maximum at x = &plusmn;x&#8320;, zero at x = 0</td></tr>
+        <tr><td>Kinetic energy</td><td>E<sub>K</sub> = E<sub>T</sub> &minus; E<sub>P</sub><br>E<sub>K</sub> = &frac12;m&omega;&sup2;(x&#8320;&sup2; &minus; x&sup2;)</td><td>maximum at x = 0, zero at x = &plusmn;x&#8320;</td></tr>
+      </table>
+
+      <div class="keyword"><b>Maximum speed:</b> setting x = 0 in v = &plusmn;&omega;&radic;(x&#8320;&sup2; &minus; x&sup2;) gives the maximum speed of any SHM oscillator: v<sub>max</sub> = &omega;x&#8320;. This is the speed as the oscillator passes through equilibrium.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>An oscillator has amplitude 0.15 m and angular frequency 4.0 rad s<sup>&minus;1</sup>, and starts at x = 0 moving in the positive direction. Calculate its displacement and velocity at t = 0.30 s.</p>
+        <p><strong>Working:</strong></p>
+        <p>Since the oscillator starts at x = 0 moving in the positive direction, &phi; = 0, so x = x&#8320; sin(&omega;t) = 0.15 &times; sin(4.0 &times; 0.30) ... (complete the calculation, in m, with the angle in radians)</p>
+        <p>v = &omega;x&#8320; cos(&omega;t) = 4.0 &times; 0.15 &times; cos(4.0 &times; 0.30) ... (complete the calculation, in m s<sup>&minus;1</sup>)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.2</span>
+        <p>A mass of 0.20 kg oscillates with SHM with amplitude 0.080 m and angular frequency 6.0 rad s<sup>&minus;1</sup>. Calculate the total energy of the oscillation, and the kinetic energy when its displacement is 0.050 m.</p>
+        <p><strong>Working:</strong></p>
+        <p>E<sub>T</sub> = &frac12;m&omega;&sup2;x&#8320;&sup2; = &frac12; &times; 0.20 &times; 6.0&sup2; &times; 0.080&sup2; ... (complete the calculation, in J)</p>
+        <p>E<sub>P</sub> at x = 0.050 m: E<sub>P</sub> = &frac12;m&omega;&sup2;x&sup2; = &frac12; &times; 0.20 &times; 6.0&sup2; &times; 0.050&sup2; ... (complete the calculation, in J)</p>
+        <p>E<sub>K</sub> = E<sub>T</sub> &minus; E<sub>P</sub> (use your two answers above to complete this, in J)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">19</span><strong>An oscillator has amplitude 0.24 m and angular frequency 3.5 rad s<sup>&minus;1</sup>. Calculate its maximum speed.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">v<sub>max</sub> = &omega;x&#8320; = 3.5 &times; 0.24 ... (complete the calculation, in m s<sup>&minus;1</sup>)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>An oscillator has amplitude 0.10 m and angular frequency 2.0 rad s<sup>&minus;1</sup>. Calculate its speed when its displacement is 0.060 m.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h20')">Show hint</button>
+        <div class="hint-panel" id="h20">Use v = &plusmn;&omega;&radic;(x&#8320;&sup2; &minus; x&sup2;) &mdash; you are given x directly, so there is no need to work through t.</div>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">v = &plusmn;&omega;&radic;(x&#8320;&sup2; &minus; x&sup2;) = &plusmn;2.0 &times; &radic;(0.10&sup2; &minus; 0.060&sup2;) ... (complete the calculation, in m s<sup>&minus;1</sup>)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>A mass of 0.50 kg on a spring has amplitude 0.12 m and time period 0.80 s. Calculate the angular frequency, then the total energy of the oscillation.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h21')">Show hint</button>
+        <div class="hint-panel" id="h21">Find &omega; from T first (&omega; = 2&pi;/T), then substitute it into the total energy equation.</div>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">&omega; = 2&pi;/T = 2&pi;/0.80 ... (complete the calculation, in rad s<sup>&minus;1</sup>). E<sub>T</sub> = &frac12;m&omega;&sup2;x&#8320;&sup2; = &frac12; &times; 0.50 &times; &omega;&sup2; &times; 0.12&sup2; (use your value of &omega; to complete this, in J)</div>
+      </div>
+      <div class="question">
+        <span class="qnum">22</span><strong>An oscillator has amplitude x&#8320; and you are told its kinetic energy equals its potential energy at some instant. Show that this occurs when x = x&#8320;/&radic;2.</strong>
+        <button class="hint-btn no-print" onclick="toggleHint('h22')">Show hint</button>
+        <div class="hint-panel" id="h22">Set E<sub>K</sub> = E<sub>P</sub> using the equations E<sub>K</sub> = &frac12;m&omega;&sup2;(x&#8320;&sup2; &minus; x&sup2;) and E<sub>P</sub> = &frac12;m&omega;&sup2;x&sup2;, then cancel the common factors before rearranging for x.</div>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">Setting E<sub>K</sub> = E<sub>P</sub>: &frac12;m&omega;&sup2;(x&#8320;&sup2; &minus; x&sup2;) = &frac12;m&omega;&sup2;x&sup2;. The common factor &frac12;m&omega;&sup2; cancels from both sides, leaving x&#8320;&sup2; &minus; x&sup2; = x&sup2;, so x&#8320;&sup2; = 2x&sup2;, giving x&sup2; = x&#8320;&sup2;/2 and therefore x = x&#8320;/&radic;2, as required.</div>
+      </div>
+    </section>
+
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Oscillation</dt><dd>one complete repetition of a periodic to-and-fro motion about a central point.</dd>
+        <dt>Simple harmonic motion (SHM)</dt><dd>oscillation in which the acceleration is proportional to the displacement from equilibrium and always directed towards it: a = &minus;&omega;&sup2;x.</dd>
+        <dt>Restoring force</dt><dd>the resultant force on an oscillator that always acts to push or pull it back towards its equilibrium position.</dd>
+        <dt>Equilibrium position</dt><dd>the central position about which an oscillator moves, where the resultant force on it is zero.</dd>
+        <dt>Displacement, x</dt><dd>the distance (and direction) of an oscillator from its equilibrium position at a given instant.</dd>
+        <dt>Amplitude, x&#8320;</dt><dd>the maximum displacement of an oscillator from its equilibrium position.</dd>
+        <dt>Time period, T</dt><dd>the time taken for one complete oscillation.</dd>
+        <dt>Frequency, f</dt><dd>the number of complete oscillations per unit time, measured in hertz (Hz).</dd>
+        <dt>Angular frequency, &omega;</dt><dd>oscillation frequency expressed in radians per second; &omega; = 2&pi;f = 2&pi;/T.</dd>
+        <dt>Phase angle, &phi;</dt><dd>a measure, in radians, of how far through its cycle one oscillator is compared with a reference oscillator of the same amplitude and frequency.</dd>
+        <dt>In phase</dt><dd>describes two oscillators with a phase difference of zero (or a whole number of cycles) &mdash; they reach corresponding points in their cycles at exactly the same times.</dd>
+        <dt>Antiphase</dt><dd>describes two oscillators with a phase difference of exactly half a cycle (&pi; rad) &mdash; one is at its positive maximum exactly when the other is at its negative maximum.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Simple Harmonic Motion Workbook · Part of the Mechanics workbook set. Companion resources: <em>05 Gravitation and circular motion</em>.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function toggleHint(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Per-simulation draw-loop scripts ================= */
+
+/* ---------- Section 6: phase angle explorer ---------- */
+(function(){
+  const canvas = document.getElementById('phaseCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const slider = document.getElementById('phaseSlider');
+  const phaseValEl = document.getElementById('phaseVal');
+  const phaseDegEl = document.getElementById('phaseDegVal');
+  const W = canvas.width, H = canvas.height;
+
+  const originX = 34, axisY = H/2, amp = 62, Tpx = 130; // pixel period on screen
+  const T_SECONDS = 3; // real-time seconds for one on-screen period
+
+  let phi = 0;
+  let running = true;
+  let elapsed = 0;
+  let lastTs = null;
+
+  function updateReadout(){
+    phaseValEl.textContent = phi.toFixed(2);
+    phaseDegEl.textContent = Math.round(phi * 180 / Math.PI);
+  }
+
+  slider.addEventListener('input', function(){
+    phi = parseFloat(slider.value);
+    updateReadout();
+  });
+
+  window.phaseTogglePlay = function(){ running = !running; };
+  window.phaseReset = function(){ phi = 0; slider.value = 0; updateReadout(); };
+
+  function yFor(xPix, phaseShift){
+    return axisY - amp * Math.sin(2 * Math.PI * (xPix - originX) / Tpx + phaseShift);
+  }
+
+  function draw(ts){
+    if(lastTs === null) lastTs = ts;
+    const dt = (ts - lastTs) / 1000;
+    lastTs = ts;
+    if(running) elapsed += dt;
+
+    ctx.fillStyle = '#0f1f30';
+    ctx.fillRect(0, 0, W, H);
+
+    // axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(originX, 10); ctx.lineTo(originX, H - 10);
+    ctx.moveTo(originX, axisY); ctx.lineTo(W - 8, axisY);
+    ctx.stroke();
+
+    // curve A (teal, phase 0) and curve B (amber, phase phi)
+    function drawCurve(colour, shift){
+      ctx.strokeStyle = colour;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for(let xPix = originX; xPix <= W - 8; xPix += 2){
+        const yPix = yFor(xPix, shift);
+        if(xPix === originX) ctx.moveTo(xPix, yPix); else ctx.lineTo(xPix, yPix);
+      }
+      ctx.stroke();
+    }
+    drawCurve('#3fb8c4', 0);
+    drawCurve('#e8a13f', phi);
+
+    // moving marker showing "now" sweeping across the window, looping every 2 on-screen periods
+    const windowSeconds = 2 * T_SECONDS;
+    const tMod = elapsed % windowSeconds;
+    const markerX = originX + (tMod / windowSeconds) * (W - 8 - originX);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(markerX, 10); ctx.lineTo(markerX, H - 10);
+    ctx.stroke();
+
+    const yA = yFor(markerX, 0);
+    const yB = yFor(markerX, phi);
+    ctx.fillStyle = '#3fb8c4';
+    ctx.beginPath(); ctx.arc(markerX, yA, 4.5, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#e8a13f';
+    ctx.beginPath(); ctx.arc(markerX, yB, 4.5, 0, 2 * Math.PI); ctx.fill();
+
+    // edge-anchored labels
+    ctx.font = '12px -apple-system, Arial, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#3fb8c4';
+    ctx.fillText('A', originX + 4, 22);
+    ctx.fillStyle = '#e8a13f';
+    ctx.fillText('B', originX + 4, 36);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.fillText('t', W - 8, axisY - 6);
+
+    requestAnimationFrame(draw);
+  }
+
+  updateReadout();
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

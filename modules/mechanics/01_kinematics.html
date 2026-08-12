@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinematics — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem; line-height:1.6;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Kinematics</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Kinematics</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Position, distance and displacement</a>
+    <a href="#s2">2. Speed and velocity</a>
+    <a href="#s3">3. Acceleration</a>
+    <a href="#s4">4. Motion graphs</a>
+    <a href="#s5">5. The equations of motion (SUVAT)</a>
+    <a href="#s6">6. Vertical motion under gravity</a>
+    <a href="#s7">7. Projectile motion</a>
+    <a href="#s8">8. Fluid resistance and projectiles</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Kinematics</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Kinematics is the study of how things move, without worrying yet about what causes that movement. In this workbook you will learn how to describe motion precisely using position, distance, displacement, speed, velocity and acceleration; how to read and interpret motion graphs; how to use the equations of motion to solve problems involving uniform acceleration; and how to apply all of this to projectiles moving through the air. These ideas are the foundation for the rest of IB Mechanics, so it is worth taking your time over them.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>describe the motion of an object using position, displacement, velocity and acceleration</li>
+          <li>explain the difference between distance and displacement, and between speed and velocity</li>
+          <li>explain the difference between instantaneous and average values, and determine them from data or graphs</li>
+          <li>use displacement–time, velocity–time and acceleration–time graphs to describe motion, including finding gradients and areas</li>
+          <li>use the equations of motion (SUVAT) to solve problems involving uniformly accelerated motion</li>
+          <li>describe motion with uniform and non-uniform acceleration</li>
+          <li>solve problems on projectiles launched horizontally or at an angle, by resolving the motion into horizontal and vertical components</li>
+          <li>describe qualitatively how fluid (air) resistance changes a projectile's trajectory, time of flight, velocity, acceleration, range and terminal speed</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Position, distance and displacement</h2>
+      <p>To describe exactly where an object is, we need to state its <strong>position</strong> — its location compared with some fixed reference point. As an object moves, its position changes, and there are two different ways to describe how far it has moved: distance and displacement.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Distance is the total length of the path travelled, whichever way the object turns along the way. Displacement is the straight-line distance from the starting point to the finishing point, measured in a stated direction.</div>
+
+      <figure>
+        <svg viewBox="0 0 480 220" width="480" height="220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowhead1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0a5b62"/></marker>
+          </defs>
+          <ellipse cx="210" cy="110" rx="150" ry="60" fill="none" stroke="#173a5e" stroke-width="4"/>
+          <path d="M 69,89.5 Q 76.2,78.6 113.6,64" fill="none" stroke="#0a5b62" stroke-width="2.5" marker-end="url(#arrowhead1)"/>
+          <circle cx="360" cy="110" r="6" fill="#d98324"/>
+          <line x1="366" y1="105" x2="380" y2="90" stroke="#5b6b78" stroke-width="1.2"/>
+          <text x="384" y="87" font-size="13" text-anchor="start" fill="#1f2933" font-weight="600">Start / finish</text>
+          <text x="30" y="205" font-size="13.5" fill="#1f2933" text-anchor="start">Distance travelled (1 lap) &#8776; 400 m</text>
+          <text x="450" y="205" font-size="13.5" fill="#1f2933" text-anchor="end">Displacement = 0 m</text>
+        </svg>
+        <figcaption>Fig. 1.1 A runner completing one lap of a running track finishes at the same point where they started. The distance travelled is about 400 m, but the displacement — the straight line from start to finish — is zero.</figcaption>
+      </figure>
+
+      <div class="keyword"><b>Scalar and vector:</b> a <b>scalar</b> quantity has only a size (magnitude) — for example distance, speed and mass. A <b>vector</b> quantity has both a size and a direction — for example displacement, velocity and acceleration. Distance is a scalar; displacement is a vector.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>A hiker walks 300 m due east, then turns and walks 400 m due north. Calculate (a) the total distance she has walked, and (b) the magnitude of her displacement from her starting point.</p>
+        <p><strong>Answer:</strong><br>
+        (a) distance = 300 + 400 (add the two legs of the journey, since distance does not care about direction)<br>
+        (b) the two legs are at right angles, so use Pythagoras&rsquo; theorem on the straight-line path from start to finish:<br>
+        displacement = &radic;(300&sup2; + 400&sup2;)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>A cyclist rides 3 laps of a circular track and ends up back at her starting point. State her total distance travelled and her displacement, explaining your reasoning.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">Distance travelled = 3 &times; (circumference of the track), since distance adds up the whole path length regardless of direction. Displacement = 0, because she finishes at exactly the same position from which she started — the straight-line distance between her start and finish points is zero, even though she has clearly moved.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>A delivery drone flies 120 m due north, then 90 m due east, to reach a warehouse. Calculate (a) the total distance flown, and (b) the magnitude of its displacement from the start.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">(a) distance = 120 + 90 (the two legs simply add up)<br>
+        (b) the two legs are at right angles to each other, so: displacement = &radic;(120&sup2; + 90&sup2;)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>Explain, using an example of your own, why an object's displacement can be zero even though the distance it has travelled is not zero.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">Displacement only depends on the start and end positions — it is the straight-line distance between them, in a stated direction. If an object returns to exactly where it started (for example, walking to a shop and back home, or a pendulum swinging back to its lowest point), its displacement is zero even though it has clearly travelled some distance getting there, since distance keeps adding up the whole path length travelled.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Speed and velocity</h2>
+      <p><strong>Velocity</strong> is the rate of change of position — in other words, how quickly (and in which direction) an object's displacement is changing. <strong>Speed</strong> is calculated in exactly the same way but tells us only how quickly distance is being covered, with no direction attached.</p>
+
+      <div class="eqn">speed, v = distance travelled &divide; time taken</div>
+      <div class="eqn">velocity, v = displacement &divide; time taken = &Delta;s &divide; &Delta;t &nbsp; (SI unit: m s<sup>&minus;1</sup>)</div>
+
+      <div class="keybox"><strong>Key idea.</strong> Speed is a scalar (size only); velocity is a vector (size and direction). Both are measured in the same SI unit, metres per second (m s<sup>&minus;1</sup>), and are given the same symbol, <em>v</em>, which can cause confusion — so it is best to be clear in words which one you mean.</div>
+
+      <div class="keyword"><b>Instantaneous</b> value: the value of a quantity at one particular moment — for example, the speed shown on a car's speedometer right now. <b>Average</b> value: the overall value calculated over an interval of time — for example, total distance divided by total time for an entire journey. An instantaneous value can be measured over a very short time interval (for example, using a light gate), during which the speed is assumed not to change.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>A ferry crosses a strait of width 32 km in a time of 1 hour 15 minutes, travelling in a straight line. Calculate (a) its average speed in km h<sup>&minus;1</sup>, and (b) its average velocity in m s<sup>&minus;1</sup>.</p>
+        <p><strong>Answer:</strong><br>
+        (a) 1 hour 15 minutes = 1.25 h, so average speed = 32 &divide; 1.25 (km h<sup>&minus;1</sup>)<br>
+        (b) convert to SI units first: 32 km = 32 000 m, and 1.25 h = 1.25 &times; 3600 s, so average velocity = 32 000 &divide; (1.25 &times; 3600)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>Explain the difference between the average velocity of a car during a journey and its instantaneous velocity. Describe one way you could measure the instantaneous speed of a moving trolley in a school laboratory.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">Average velocity is the total displacement of the whole journey divided by the total time taken — it says nothing about how the velocity varied along the way. Instantaneous velocity is the velocity at one specific moment (for example, what the speedometer reads right now, together with the direction of travel at that instant). In the laboratory, instantaneous speed can be measured using a light gate: a card of known length attached to the trolley interrupts a light beam, and dividing the length of the card by the (short) time it takes to pass through the gate gives a close approximation to the instantaneous speed at that point.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>A sprinter runs 100 m in 10.5 s along a straight track. Calculate her average speed. A light gate part-way through the race measures her instantaneous speed as 9.8 m s<sup>&minus;1</sup>. Explain why this value is different from your calculated average.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">average speed = 100 &divide; 10.5<br>
+        The instantaneous value is different because it is measured at one specific point in the race, whereas the average is calculated over the whole 100 m. A sprinter is not moving at constant speed throughout: she accelerates out of the blocks, so her speed part-way through the race (once she is up to near top speed) can be higher than her speed averaged over the whole run, which includes the slower start.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>A satellite moves at a constant speed around a circular orbit. Explain why its velocity is not constant, even though its speed does not change.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">Velocity is a vector, so it has both a size (speed) and a direction. As the satellite moves around the circle, its direction of travel is constantly changing (it is always directed along a tangent to the circular path), even though its speed stays the same. Because the direction changes, the velocity is changing, even though the speed is not.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Acceleration</h2>
+      <p><strong>Acceleration</strong> is the rate of change of velocity. Any change in speed, direction, or both, counts as an acceleration — so an object slowing down, speeding up, or simply turning a corner at constant speed is all accelerating.</p>
+
+      <div class="eqn">acceleration, a = &Delta;v &divide; &Delta;t = (v &minus; u) &divide; t &nbsp; (SI unit: m s<sup>&minus;2</sup>)</div>
+
+      <div class="keybox"><strong>Key idea.</strong> Here <em>u</em> is the velocity at the start of the time interval being considered, and <em>v</em> is the velocity at the end of it — they are not necessarily the very beginning and end of the whole motion. In everyday speech, a reducing speed is often called a <strong>deceleration</strong>.</div>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span><strong>Watch the sign.</strong> A negative acceleration does not always mean an object is slowing down — it depends entirely on which direction has been chosen as positive. If an object's displacement and velocity are both negative (it is moving in the negative direction), a negative acceleration actually means it is <em>speeding up</em>, because its velocity is becoming more negative.</div>
+
+      <p>An acceleration can be <strong>uniform</strong> (constant — the velocity changes by equal amounts in equal times) or <strong>non-uniform</strong> (changing — the rate at which the velocity changes is itself varying). A car pulling away from traffic lights, for example, rarely has a perfectly uniform acceleration: as its speed builds up, resistive forces increase and the driving force available often falls, so the acceleration itself tends to decrease.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>A skateboarder speeds up from 2.0 m s<sup>&minus;1</sup> to 6.5 m s<sup>&minus;1</sup> in 3.0 s while going down a ramp. Calculate her average acceleration.</p>
+        <p><strong>Answer:</strong><br>
+        a = (v &minus; u) &divide; t = (6.5 &minus; 2.0) &divide; 3.0</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>A cyclist travelling at 5.0 m s<sup>&minus;1</sup> brakes and comes to rest in 2.5 s. Calculate his average acceleration. What is the significance of the sign of your answer?</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">a = (v &minus; u) &divide; t = (0 &minus; 5.0) &divide; 2.5<br>
+        The negative sign shows that the acceleration is in the opposite direction to the cyclist's velocity — that is, it is a deceleration, slowing him down.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>A car accelerates away from traffic lights. Explain why the acceleration of a real car is unlikely to stay uniform for the whole time it is speeding up.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">This describes non-uniform acceleration. As the car's speed increases, resistive forces such as air resistance increase, which reduces the net forward force available to accelerate the car. Real engines also tend to produce less driving force at higher speeds. Both effects mean the rate at which velocity increases — the acceleration — is unlikely to stay constant, and typically decreases as the car speeds up.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>A particle moving along a straight line has a velocity of &minus;4.0 m s<sup>&minus;1</sup> at one instant and &minus;7.0 m s<sup>&minus;1</sup> three seconds later. Calculate its acceleration, and state whether the particle is speeding up or slowing down.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">a = (v &minus; u) &divide; t = (&minus;7.0 &minus; [&minus;4.0]) &divide; 3.0<br>
+        The particle's speed has increased from 4.0 m s<sup>&minus;1</sup> to 7.0 m s<sup>&minus;1</sup>, so it is speeding up, even though the acceleration works out negative — because the velocity itself is negative (in the negative direction), a negative acceleration makes it more negative, which means going faster in that direction (as in the "worth remembering" box above).</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Motion graphs</h2>
+      <p>Graphs let us see the whole story of a motion at a glance, in a way that a written description often cannot. For any new type of graph, it helps to ask yourself two questions: <em>what does the gradient represent, and what does the area underneath represent?</em></p>
+
+      <table class="eqtable">
+        <tr><th>Graph</th><th>Gradient represents</th><th>Area under the graph represents</th></tr>
+        <tr><td>displacement&ndash;time</td><td>velocity</td><td>&mdash;</td></tr>
+        <tr><td>velocity&ndash;time</td><td>acceleration</td><td>change in displacement</td></tr>
+        <tr><td>acceleration&ndash;time</td><td>&mdash;</td><td>change in velocity</td></tr>
+      </table>
+
+      <div class="keybox"><strong>Key idea.</strong> A <em>straight</em> line on a displacement&ndash;time graph means constant velocity; a <em>straight</em> line on a velocity&ndash;time graph means uniform (constant) acceleration. A <em>curved</em> line on either graph means the gradient is changing — that is, a changing velocity or a non-uniform acceleration. The gradient at any single point (found by drawing a tangent to a curve) gives the instantaneous value at that moment.</div>
+
+      <figure class="wide">
+        <svg viewBox="0 0 480 230" width="480" height="230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ax4" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5b6b78"/></marker>
+          </defs>
+          <!-- shaded area under line -->
+          <polygon points="110,200 110,161 360,57 360,200" fill="#eaf3fb" stroke="none"/>
+          <!-- axes -->
+          <line x1="60" y1="200" x2="450" y2="200" stroke="#5b6b78" stroke-width="1.5" marker-end="url(#ax4)"/>
+          <line x1="60" y1="200" x2="60" y2="25" stroke="#5b6b78" stroke-width="1.5" marker-end="url(#ax4)"/>
+          <text x="30" y="40" font-size="14" fill="#1f2933">v / m s<tspan baseline-shift="super" font-size="9">&minus;1</tspan></text>
+          <text x="440" y="218" font-size="14" fill="#1f2933" text-anchor="end">t / s</text>
+          <!-- guide dashed lines -->
+          <line x1="110" y1="161" x2="110" y2="200" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="360" y1="57" x2="360" y2="200" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="60" y1="161" x2="110" y2="161" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="60" y1="57" x2="360" y2="57" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <text x="48" y="165" font-size="12.5" fill="#3a4753" text-anchor="end">3</text>
+          <text x="48" y="61" font-size="12.5" fill="#3a4753" text-anchor="end">11</text>
+          <text x="110" y="216" font-size="12.5" fill="#3a4753" text-anchor="middle">1</text>
+          <text x="360" y="216" font-size="12.5" fill="#3a4753" text-anchor="middle">6</text>
+          <!-- gradient construction -->
+          <line x1="110" y1="161" x2="360" y2="161" stroke="#173a5e" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <line x1="360" y1="161" x2="360" y2="57" stroke="#173a5e" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="235" y="178" font-size="13" fill="#173a5e" text-anchor="middle">&Delta;t</text>
+          <text x="368" y="112" font-size="13" fill="#173a5e" text-anchor="start">&Delta;v</text>
+          <!-- data line -->
+          <line x1="110" y1="161" x2="360" y2="57" stroke="#0e7c86" stroke-width="3"/>
+          <circle cx="110" cy="161" r="4" fill="#0a5b62"/>
+          <circle cx="360" cy="57" r="4" fill="#0a5b62"/>
+          <text x="180" y="190" font-size="12.5" fill="#0a5b62" text-anchor="middle">area = change in displacement</text>
+        </svg>
+        <figcaption>Fig. 4.1 The gradient of a velocity&ndash;time graph equals the acceleration (&Delta;v &divide; &Delta;t); the shaded area underneath equals the change in displacement over that time interval.</figcaption>
+      </figure>
+
+      <h3>Live simulation: motion grapher</h3>
+      <p>Use the sliders to choose an initial velocity <em>u</em> and a constant acceleration <em>a</em> for a particle moving along a straight track. Before you press play, try to predict what the velocity&ndash;time graph will look like — then press play and check.</p>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="graphCanvas" width="460" height="300"></canvas></div>
+          <div class="sim-controls">
+            <h4>Motion grapher</h4>
+            <div class="sim-row"><label for="uSlider">Initial velocity, u = <span id="uVal">2.0</span> m s<sup>&minus;1</sup></label><input type="range" id="uSlider" min="-10" max="10" step="0.5" value="2"></div>
+            <div class="sim-row"><label for="aSlider">Acceleration, a = <span id="aVal">1.5</span> m s<sup>&minus;2</sup></label><input type="range" id="aSlider" min="-4" max="4" step="0.5" value="1.5"></div>
+            <div class="sim-readout" id="graphReadout">t = 0.0 s<br>s = 0.0 m<br>v = 2.0 m s&minus;1</div>
+            <div class="sim-btns">
+              <button id="graphPlay">Play</button>
+              <button class="alt" id="graphReset">Reset</button>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 4.2 The dot moves along the track according to s = ut + &frac12;at&sup2;, while its velocity v = u + at is traced out live on the graph below.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>An object accelerates uniformly from 4.0 m s<sup>&minus;1</sup> to 10.0 m s<sup>&minus;1</sup> over 3.0 s, and then travels at a constant 10.0 m s<sup>&minus;1</sup> for a further 5.0 s. (a) Calculate its acceleration during the first 3.0 s. (b) Calculate its total displacement over the whole 8.0 s, using the area under a velocity&ndash;time graph.</p>
+        <p><strong>Answer:</strong><br>
+        (a) a = (v &minus; u) &divide; t = (10.0 &minus; 4.0) &divide; 3.0<br>
+        (b) area of the first (accelerating) section = &frac12;(4.0 + 10.0) &times; 3.0<br>
+        area of the second (constant velocity) section = 10.0 &times; 5.0<br>
+        total displacement = (area of first section) + (area of second section)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>Using Figure 4.1, state the acceleration of the object shown, and calculate its displacement between t = 1 s and t = 6 s.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">acceleration = &Delta;v &divide; &Delta;t = (11 &minus; 3) &divide; (6 &minus; 1)<br>
+        displacement = area under the line = &frac12;(3 + 11) &times; (6 &minus; 1)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>Describe what the displacement&ndash;time graph would look like for an object moving with (a) a constant velocity, and (b) a constant, uniform acceleration starting from rest.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">(a) A straight, sloped line — the displacement increases (or decreases) by equal amounts in equal time intervals, giving a constant gradient equal to the velocity.<br>
+        (b) A curve that starts flat (zero gradient, since it starts from rest) and gets steeper and steeper as time goes on, since the gradient of the graph — the velocity — is continuously increasing.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>Set u = 0 m s<sup>&minus;1</sup> and a = 2.0 m s<sup>&minus;2</sup> in the simulation above. Predict the shape of the velocity&ndash;time graph before pressing play, then run it to check. Describe what you notice about the gradient of the graph.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">The velocity&ndash;time graph should be a straight line starting at v = 0 and sloping upwards, since the acceleration is constant (uniform). The gradient of the line is constant and equal to 2.0 m s<sup>&minus;2</sup>, matching the acceleration you set — this is exactly what "the gradient of a velocity&ndash;time graph equals the acceleration" means in practice.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. The equations of motion (SUVAT)</h2>
+      <p>When an object moves with <strong>uniform</strong> (constant) acceleration in a straight line, its motion can be fully described using just five quantities, often remembered by the letters <strong>SUVAT</strong>:</p>
+
+      <table class="eqtable">
+        <tr><th>Symbol</th><th>Quantity</th></tr>
+        <tr><td><em>s</em></td><td>displacement</td></tr>
+        <tr><td><em>u</em></td><td>initial velocity (at the start of time <em>t</em>)</td></tr>
+        <tr><td><em>v</em></td><td>final velocity (at the end of time <em>t</em>)</td></tr>
+        <tr><td><em>a</em></td><td>acceleration (constant)</td></tr>
+        <tr><td><em>t</em></td><td>time taken</td></tr>
+      </table>
+
+      <div class="keybox"><strong>Key idea.</strong> If you know any three of these five quantities, the other two can always be calculated using the equations below.</div>
+
+      <div class="eqn">v = u + at</div>
+      <div class="eqn">s = &frac12;(u + v)t</div>
+      <div class="eqn">s = ut + &frac12;at&sup2;</div>
+      <div class="eqn">v&sup2; = u&sup2; + 2as</div>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span><strong>Uniform acceleration only.</strong> These four equations only apply when the acceleration is constant. If the acceleration is non-uniform (changing), you cannot use SUVAT — instead you need to analyse the motion using graphs, as in Section 4.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>An electric scooter accelerates from rest at a constant 2.4 m s<sup>&minus;2</sup>. Calculate (a) its speed after 4.0 s, and (b) the distance it covers in this time.</p>
+        <p><strong>Answer:</strong><br>
+        (a) v = u + at = 0 + (2.4 &times; 4.0)<br>
+        (b) s = ut + &frac12;at&sup2; = (0 &times; 4.0) + (&frac12; &times; 2.4 &times; 4.0&sup2;)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>A skier starts from rest and accelerates uniformly down a slope at 1.8 m s<sup>&minus;2</sup>. Calculate her speed after she has travelled 40 m.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">v&sup2; = u&sup2; + 2as = 0&sup2; + (2 &times; 1.8 &times; 40)<br>
+        v = &radic;(that value)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>A train travelling at 32 m s<sup>&minus;1</sup> brakes and decelerates uniformly, stopping after 320 m. Calculate its deceleration.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">v&sup2; = u&sup2; + 2as, rearranged: a = (v&sup2; &minus; u&sup2;) &divide; 2s = (0&sup2; &minus; 32&sup2;) &divide; (2 &times; 320)<br>
+        (the negative answer confirms this is a deceleration)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>A ball rolling along a smooth horizontal table decelerates uniformly from 1.2 m s<sup>&minus;1</sup> to 0.4 m s<sup>&minus;1</sup> over a distance of 2.0 m. Calculate the time this takes.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">s = &frac12;(u + v)t, rearranged: t = 2s &divide; (u + v) = (2 &times; 2.0) &divide; (1.2 + 0.4)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>A particle moving in a straight line has an initial velocity of 5.0 m s<sup>&minus;1</sup> and a constant acceleration of &minus;1.25 m s<sup>&minus;2</sup>. Calculate how far it travels before it (momentarily) comes to rest, and explain what happens to the particle after this point.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">v&sup2; = u&sup2; + 2as, with v = 0 at the moment it comes to rest, rearranged: s = &minus;u&sup2; &divide; 2a = &minus;(5.0&sup2;) &divide; (2 &times; [&minus;1.25])<br>
+        After this instant, since the acceleration is still &minus;1.25 m s<sup>&minus;2</sup> and is unchanged, the particle will begin to speed up again but now moving in the negative direction — that is, it reverses and travels back the way it came.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Vertical motion under gravity</h2>
+      <p>All of the SUVAT equations apply just as well to an object moving vertically, provided we treat the pull of gravity as a constant, uniform acceleration. Close to the Earth's surface, and ignoring air resistance, every object falls with the same acceleration, <strong>g = 9.8 m s<sup>&minus;2</sup></strong>. Motion through the air under gravity alone, with no air resistance, is called <strong>free fall</strong>.</p>
+
+      <div class="keybox"><strong>Key idea: choose and label a positive direction and stick to it.</strong> Because displacement, velocity and acceleration are all vectors, you must decide which direction is positive before you start a problem — usually "upwards is positive". With this choice, the acceleration due to gravity is always <em>negative</em> (g = &minus;9.8 m s<sup>&minus;2</sup>), because gravity always pulls downwards — whatever direction the object happens to be moving in at that instant. An object moving upwards is decelerating; the same object, once it starts falling, is accelerating (its velocity becomes ever more negative).</div>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>A stone is dropped from rest from a bridge 19.6 m above a river. Taking g = 9.8 m s<sup>&minus;2</sup> and downwards as positive, calculate (a) the time it takes to reach the water, and (b) its velocity as it hits the water.</p>
+        <p><strong>Answer:</strong><br>
+        (a) s = ut + &frac12;at&sup2;, with u = 0: 19.6 = 0 + (&frac12; &times; 9.8 &times; t&sup2;), rearranged: t = &radic;(19.6 &divide; [&frac12; &times; 9.8])<br>
+        (b) v = u + at = 0 + (9.8 &times; your value of t from part (a))</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>A ball is thrown vertically upwards with a speed of 14 m s<sup>&minus;1</sup>. Taking upwards as positive (so g = &minus;9.8 m s<sup>&minus;2</sup>), calculate the maximum height it reaches.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">At maximum height, v = 0. v&sup2; = u&sup2; + 2as, rearranged: s = &minus;u&sup2; &divide; 2a = &minus;(14&sup2;) &divide; (2 &times; [&minus;9.8])</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>For the same ball as in Question 17, calculate the total time it is in the air before it returns to the point from which it was released.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">When it returns to the starting point, s = 0. Using v = u + at with v = &minus;14 (the ball returns with the same speed, now moving downwards): &minus;14 = 14 + (&minus;9.8)t, rearranged: t = (14 &minus; [&minus;14]) &divide; 9.8 = 28 &divide; 9.8<br>
+        (Use the exact value from your working, not a rounded one, if you calculated this a different way.)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">19</span><strong>A ball is thrown vertically upwards. State the value of its velocity and the value of its acceleration at the very top of its flight, explaining why these are not both zero.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">At the top of its flight, the ball's velocity is momentarily zero (it has stopped moving upwards but has not yet started moving downwards). However, its acceleration is still 9.8 m s<sup>&minus;2</sup> downwards at that instant, because gravity is still acting on it — gravity does not switch off just because the velocity happens to be zero. This is exactly why the ball does not stay at the top: the acceleration immediately starts to pull its velocity negative again, and it falls.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Projectile motion</h2>
+      <p>A <strong>projectile</strong> is any object that has been launched into the air (thrown, kicked, fired, or hit) and then moves only under the effect of gravity — and air resistance, if it is significant. A projectile has no ability to power or steer itself once it is in the air.</p>
+
+      <p>A projectile moves in two dimensions at once, but because gravity only acts vertically, we can treat the horizontal motion and the vertical motion completely separately, applying the SUVAT equations to each in turn.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Horizontally, there is no acceleration (assuming no air resistance), so the horizontal velocity stays constant throughout the flight. Vertically, the acceleration is g downwards, exactly as for an object in free fall. The horizontal and vertical components of a projectile's motion are independent of one another — what happens in one direction does not affect the other.</div>
+
+      <p>If a projectile is launched with an initial speed <em>u</em> at an angle &theta; above the horizontal, its initial velocity must be resolved into horizontal and vertical components before you can apply SUVAT to each direction separately.</p>
+
+      <figure>
+        <svg viewBox="0 0 260 210" width="260" height="210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="ax7" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/></marker>
+            <marker id="ax7t" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0e7c86"/></marker>
+          </defs>
+          <line x1="40" y1="190" x2="235" y2="190" stroke="#b9c6d3" stroke-width="1.5"/>
+          <!-- horizontal component -->
+          <line x1="70" y1="190" x2="192.9" y2="190" stroke="#0e7c86" stroke-width="3" marker-end="url(#ax7t)"/>
+          <text x="131" y="207" font-size="13" fill="#0a5b62" text-anchor="middle">u cos&theta;</text>
+          <!-- vertical component (dashed construction) -->
+          <line x1="192.9" y1="190" x2="192.9" y2="104" stroke="#0e7c86" stroke-width="3" stroke-dasharray="5 3" marker-end="url(#ax7t)"/>
+          <text x="200" y="150" font-size="13" fill="#0a5b62" text-anchor="start">u sin&theta;</text>
+          <!-- main vector -->
+          <line x1="70" y1="190" x2="192.9" y2="104" stroke="#173a5e" stroke-width="3.5" marker-end="url(#ax7)"/>
+          <text x="185" y="90" font-size="14" fill="#173a5e" text-anchor="start" font-weight="600">u</text>
+          <!-- angle arc -->
+          <path d="M104,190 Q106.2,178.6 97.9,170.5" fill="none" stroke="#d98324" stroke-width="2"/>
+          <text x="117.7" y="179" font-size="13" fill="#d98324" text-anchor="middle">&theta;</text>
+          <circle cx="70" cy="190" r="3.5" fill="#173a5e"/>
+        </svg>
+        <figcaption>Fig. 7.1 Resolving an initial velocity <em>u</em> into horizontal and vertical components.</figcaption>
+      </figure>
+
+      <div class="eqn">u<sub>H</sub> = u cos&theta; &nbsp;&nbsp;&nbsp; u<sub>V</sub> = u sin&theta;</div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>A stunt rider leaves a horizontal ramp travelling at 18 m s<sup>&minus;1</sup> and lands on ground 5.0 m below the level of the ramp. Ignoring air resistance, calculate (a) the time she is in the air, and (b) the horizontal distance she travels before landing.</p>
+        <p><strong>Answer:</strong><br>
+        (a) consider the vertical motion only, taking downwards as positive: u<sub>V</sub> = 0 (no vertical velocity at take-off, since the ramp is horizontal), s = ut + &frac12;at&sup2;: 5.0 = 0 + (&frac12; &times; 9.8 &times; t&sup2;), rearranged: t = &radic;(5.0 &divide; [&frac12; &times; 9.8])<br>
+        (b) the horizontal velocity stays constant throughout (no horizontal acceleration): horizontal distance = 18 &times; (your value of t from part (a))</p>
+      </div>
+
+      <h3>Live simulation: projectile motion</h3>
+      <p>Choose a launch speed and angle, then press Launch to fire the projectile (no air resistance). The time of flight, range and maximum height update automatically as you move the sliders.</p>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="projCanvas" width="460" height="300"></canvas></div>
+          <div class="sim-controls">
+            <h4>Projectile simulator</h4>
+            <div class="sim-row"><label for="speedSlider">Launch speed = <span id="speedVal">20</span> m s<sup>&minus;1</sup></label><input type="range" id="speedSlider" min="5" max="40" step="1" value="20"></div>
+            <div class="sim-row"><label for="angleSlider">Launch angle = <span id="angleVal">40</span>&deg;</label><input type="range" id="angleSlider" min="10" max="80" step="1" value="40"></div>
+            <div class="sim-readout" id="projReadout">Time of flight: &ndash;<br>Range: &ndash;<br>Max height: &ndash;</div>
+            <div class="sim-btns">
+              <button id="projLaunch">Launch</button>
+              <button class="alt" id="projReset">Reset</button>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 7.2 A projectile launched with no air resistance follows a parabolic trajectory.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">20</span><strong>A ball rolls off a table 0.90 m high with a horizontal speed of 2.4 m s<sup>&minus;1</sup>. Ignoring air resistance, calculate (a) the time it takes to reach the floor, and (b) the horizontal distance from the table at which it lands.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">(a) vertical motion, downwards positive, u = 0: s = ut + &frac12;at&sup2;: 0.90 = 0 + (&frac12; &times; 9.8 &times; t&sup2;), rearranged: t = &radic;(0.90 &divide; [&frac12; &times; 9.8])<br>
+        (b) horizontal distance = 2.4 &times; (your value of t from part (a))</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">21</span><strong>A footballer kicks a ball with a speed of 18 m s<sup>&minus;1</sup> at 40&deg; above the horizontal. Calculate the vertical and horizontal components of its initial velocity.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">u<sub>V</sub> = u sin&theta; = 18 &times; sin 40&deg;<br>
+        u<sub>H</sub> = u cos&theta; = 18 &times; cos 40&deg;</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">22</span><strong>Explain why, in the absence of air resistance, the horizontal component of a projectile's velocity stays constant during its flight, while the vertical component does not.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">With no air resistance, the only force acting on the projectile is gravity, and gravity acts entirely vertically (downwards). There is no horizontal force, so there is no horizontal acceleration, which means the horizontal component of velocity does not change. Vertically, however, gravity provides a constant downward acceleration, so the vertical component of velocity is continually changing — decreasing as the projectile rises, reaching zero at the top, then increasing (downwards) as it falls.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Fluid resistance and projectiles</h2>
+      <p>So far we have ignored air resistance completely. In reality, any object moving through air experiences a resistive force opposing its motion, sometimes called <strong>drag</strong>. Because gases and liquids can both flow, forces like this are described generally as <strong>fluid resistance</strong>. This section looks — qualitatively, without calculation — at how fluid resistance changes the motion of a projectile.</p>
+
+      <div class="keyword"><b>Terminal speed:</b> the maximum, constant speed reached by an object falling through a fluid, once the fluid resistance acting on it has increased enough to balance the pulling force of gravity — at this point the resultant force, and so the acceleration, has fallen to zero.</div>
+
+      <p>Because drag always opposes the direction of motion, its effect on a projectile's vertical acceleration is different depending on whether the object is rising or falling:</p>
+      <div class="keybox">
+        While the projectile is still <strong>rising</strong>, drag acts downwards — the same direction as gravity — so the object decelerates <em>faster</em> than g.<br>
+        While the projectile is <strong>falling</strong>, drag acts upwards — opposing gravity — so the object accelerates <em>more slowly</em> than g, and may eventually reach terminal speed if it falls far enough.
+      </div>
+
+      <p>Because the horizontal velocity is no longer constant either (drag reduces it steadily throughout the flight), the whole trajectory changes shape.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Fluid resistance reduces the range of a projectile, and its trajectory is no longer a symmetrical parabola — it becomes steeper on the way down than on the way up, because the projectile has lost horizontal speed by the time it starts to fall. Fluid resistance also generally reduces the time of flight compared with the no-resistance case.</div>
+
+      <figure>
+        <svg viewBox="0 0 480 240" width="480" height="240" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="220" x2="450" y2="220" stroke="#173a5e" stroke-width="2.5"/>
+          <path d="M60.0,220.0 L77.2,190.5 L94.4,163.9 L111.3,140.7 L128.5,120.1 L145.7,102.3 L162.9,87.6 L180.1,75.8 L197.0,67.1 L214.2,61.2 L231.4,58.3 L248.6,58.3 L265.8,61.3 L283.0,67.2 L299.8,75.9 L317.0,87.8 L334.2,102.6 L351.4,120.3 L368.6,141.0 L385.5,164.3 L402.7,190.8 L419.7,220.0" fill="none" stroke="#b9c6d3" stroke-width="2.5" stroke-dasharray="7 5"/>
+          <path d="M60.0,220.0 L74.7,194.6 L88.5,173.0 L101.9,154.0 L114.8,138.0 L127.0,125.2 L138.8,114.8 L150.2,107.1 L160.8,102.0 L171.2,99.2 L181.2,98.7 L190.6,100.4 L199.7,104.2 L208.5,110.1 L216.7,117.8 L224.8,127.5 L232.5,139.0 L239.7,151.9 L246.8,166.7 L253.6,183.1 L260.0,200.7 L266.2,220.0" fill="none" stroke="#0e7c86" stroke-width="3"/>
+          <circle cx="60" cy="220" r="5" fill="#d98324"/>
+          <line x1="30" y1="14" x2="48" y2="14" stroke="#b9c6d3" stroke-width="2.5" stroke-dasharray="7 5"/>
+          <text x="54" y="18" font-size="13" fill="#5b6b78" text-anchor="start">without air resistance</text>
+          <line x1="30" y1="32" x2="48" y2="32" stroke="#0e7c86" stroke-width="3"/>
+          <text x="54" y="36" font-size="13" fill="#0a5b62" text-anchor="start">with air resistance</text>
+        </svg>
+        <figcaption>Fig. 8.1 Air resistance reduces the range of a projectile and makes its trajectory steeper on the way down than on the way up.</figcaption>
+      </figure>
+
+      <h3>Explore the simulation</h3>
+      <p>This simulation lets you fire different objects and switch air resistance on or off. First, launch an object with air resistance off and note the range. Then launch the same object, at the same speed and angle, with air resistance switched on, and compare the range, the shape of the path, and how the horizontal speed changes during flight.</p>
+      <div class="sim-embed">
+        <p class="instructions">Try comparing a dense, heavy object (for example a cannonball) with a light, large one (for example a tennis ball) — which one is affected more by air resistance, and why?</p>
+        <iframe class="sim-frame" src="https://phet.colorado.edu/sims/html/projectile-motion/latest/projectile-motion_en.html" loading="lazy" title="PhET Projectile Motion simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://phet.colorado.edu/en/simulations/projectile-motion" target="_blank" rel="noopener">PhET Interactive Simulations, University of Colorado Boulder</a>.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">23</span><strong>Explain why a projectile's trajectory affected by air resistance is not a symmetrical parabola.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">Without air resistance, the horizontal velocity stays constant throughout, which is what makes the parabola symmetrical about its highest point. With air resistance, drag steadily reduces the horizontal velocity throughout the flight, so the projectile covers less horizontal distance on the way down than it did on the way up in the same amount of time. This makes the descending part of the path steeper and shorter than the ascending part, so the curve is no longer symmetrical.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">24</span><strong>A skydiver jumps from a high-altitude balloon. Describe how her vertical acceleration changes from the moment she jumps until she reaches terminal speed.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">At the instant she jumps, her speed is zero, so there is no air resistance yet, and her acceleration is close to g (9.8 m s<sup>&minus;2</sup>) downwards. As she speeds up, the air resistance acting on her increases, which reduces her acceleration below g. As her speed keeps increasing, the air resistance keeps growing, so her acceleration keeps falling — until the air resistance becomes equal in size to her weight. At that point the resultant force on her is zero, so her acceleration becomes zero, and she continues falling at a constant terminal speed.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">25</span><strong>Using the simulation above, compare the range of a projectile launched at 45&deg; with and without air resistance switched on (keeping the launch speed and angle the same in both cases). State what you notice, and suggest one reason why real thrown or fired objects do not travel as far as the idealised equations of motion from Section 7 would predict.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">You should notice that the range with air resistance switched on is smaller than the range without it, for the same launch speed and angle. This is because the equations used in Section 7 assume there is no fluid resistance at all, whereas real projectiles moving through real air always experience some drag, which removes energy from the projectile and steadily reduces its horizontal velocity throughout the flight — so it lands closer to the launch point than the "ideal", air-resistance-free calculation predicts.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Position</dt><dd>The location of an object compared with a fixed reference point.</dd>
+        <dt>Distance</dt><dd>The total length of a specified path travelled, with no regard to direction. A scalar quantity.</dd>
+        <dt>Displacement</dt><dd>The straight-line distance from a fixed reference point to an object's position, in a stated direction. A vector quantity.</dd>
+        <dt>Speed</dt><dd>Distance travelled divided by time taken. A scalar quantity.</dd>
+        <dt>Velocity</dt><dd>The rate of change of position; displacement divided by time taken. A vector quantity.</dd>
+        <dt>Acceleration</dt><dd>The rate of change of velocity. "Deceleration" is sometimes used to describe a negative acceleration, but the term is unnecessary.</dd>
+        <dt>Uniform and non-uniform acceleration</dt><dd>Uniform acceleration stays constant over time; non-uniform acceleration changes over time.</dd>
+        <dt>Equations of motion (SUVAT)</dt><dd>The four equations linking displacement, initial velocity, final velocity, acceleration and time, used to solve problems with uniformly accelerated motion.</dd>
+        <dt>Free fall</dt><dd>Motion through the air under the effect of gravity alone, with no air resistance.</dd>
+        <dt>Acceleration of free fall, g</dt><dd>The acceleration of an object falling freely near the Earth's surface; g = 9.8 m s<sup>&minus;2</sup>.</dd>
+        <dt>Trajectory</dt><dd>The path followed by a projectile.</dd>
+        <dt>Range</dt><dd>The horizontal distance travelled by a projectile before it lands.</dd>
+        <dt>Fluid resistance / drag</dt><dd>A resistive force that opposes the motion of an object through a gas or liquid.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Kinematics Workbook &middot; Companion resources: <em>Forces and Momentum</em>, <em>Work, Energy and Power</em>.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Sim 1: Motion grapher (Section 4) ================= */
+(function(){
+  const canvas = document.getElementById('graphCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const uSlider = document.getElementById('uSlider');
+  const aSlider = document.getElementById('aSlider');
+  const uVal = document.getElementById('uVal');
+  const aVal = document.getElementById('aVal');
+  const readout = document.getElementById('graphReadout');
+  const playBtn = document.getElementById('graphPlay');
+  const resetBtn = document.getElementById('graphReset');
+
+  let u = parseFloat(uSlider.value);
+  let a = parseFloat(aSlider.value);
+  let t = 0;
+  let running = false;
+  let lastTS = null;
+  const TMAX = 10;
+
+  /* track: displacement range -50..50 m maps to canvas x 50..410 */
+  const trackY = 55;
+  function trackX(s){
+    const x = 230 + s * 3.6;
+    return Math.max(50, Math.min(410, x));
+  }
+
+  /* v-t graph: t 0..10 s maps to x 60..430; v axis rescales to fit u and the final velocity */
+  const gx0 = 60, gx1 = 430, gy0 = 116, gy1 = 284, gyMid = 200;
+  const NICE_V_STEPS = [4, 6, 8, 10, 12, 16, 20, 24, 30, 40, 50, 60];
+  let vMax = 12;
+  function computeVMax(){
+    const raw = Math.max(Math.abs(u), Math.abs(u + a * TMAX));
+    for(const n of NICE_V_STEPS){ if(raw * 1.15 <= n) return n; }
+    return NICE_V_STEPS[NICE_V_STEPS.length - 1];
+  }
+  function graphX(tt){ return gx0 + (tt / TMAX) * (gx1 - gx0); }
+  function graphY(v){
+    const halfH = (gy1 - gy0) / 2;
+    const y = gyMid - v * (halfH / vMax);
+    return Math.max(gy0, Math.min(gy1, y));
+  }
+
+  function currentS(){ return u * t + 0.5 * a * t * t; }
+  function currentV(){ return u + a * t; }
+
+  function updateReadout(){
+    readout.innerHTML = 't = ' + t.toFixed(1) + ' s<br>' +
+      's = ' + currentS().toFixed(1) + ' m<br>' +
+      'v = ' + currentV().toFixed(1) + ' m s⁻¹';
+  }
+
+  function drawTrack(){
+    ctx.strokeStyle = '#3a5878';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(50, trackY);
+    ctx.lineTo(410, trackY);
+    ctx.stroke();
+    /* centre tick */
+    ctx.strokeStyle = '#5b7691';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(230, trackY - 8);
+    ctx.lineTo(230, trackY + 8);
+    ctx.stroke();
+    ctx.fillStyle = '#9fb6cc';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('-50 m', 50, trackY + 22);
+    ctx.textAlign = 'right';
+    ctx.fillText('+50 m', 410, trackY + 22);
+    ctx.textAlign = 'center';
+    ctx.fillText('0', 230, trackY + 22);
+
+    const dotX = trackX(currentS());
+    ctx.fillStyle = '#d98324';
+    ctx.beginPath();
+    ctx.arc(dotX, trackY, 7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawGraph(){
+    /* gridlines */
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.lineWidth = 1;
+    for(let tt = 0; tt <= TMAX; tt += 2){
+      ctx.beginPath();
+      ctx.moveTo(graphX(tt), gy0);
+      ctx.lineTo(graphX(tt), gy1);
+      ctx.stroke();
+    }
+    const vTicks = [-vMax, -vMax / 2, 0, vMax / 2, vMax];
+    vTicks.forEach(function(v){
+      ctx.beginPath();
+      ctx.moveTo(gx0, graphY(v));
+      ctx.lineTo(gx1, graphY(v));
+      ctx.stroke();
+    });
+    /* axes */
+    ctx.strokeStyle = '#dceaf0';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(gx0, gyMid);
+    ctx.lineTo(gx1, gyMid);
+    ctx.moveTo(gx0, gy0);
+    ctx.lineTo(gx0, gy1);
+    ctx.stroke();
+
+    ctx.fillStyle = '#dceaf0';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('v (m/s)', gx0, gy0 - 6);
+    for(let tt = 0; tt <= TMAX; tt += 2){
+      ctx.textAlign = 'center';
+      ctx.fillText(String(tt), graphX(tt), gyMid + 16);
+    }
+    ctx.textAlign = 'right';
+    ctx.fillText('t (s)', gx1, gyMid + 32);
+    ctx.textAlign = 'right';
+    vTicks.forEach(function(v){
+      ctx.fillText(String(Math.round(v * 10) / 10), gx0 - 6, graphY(v) + 4);
+    });
+
+    /* traced line: v(t) is linear, so just draw the segment from (0,u) to (t,v) */
+    ctx.strokeStyle = '#0e7c86';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(graphX(0), graphY(u));
+    ctx.lineTo(graphX(t), graphY(currentV()));
+    ctx.stroke();
+
+    ctx.fillStyle = '#d98324';
+    ctx.beginPath();
+    ctx.arc(graphX(t), graphY(currentV()), 5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawTrack();
+    drawGraph();
+  }
+
+  function reset(){
+    t = 0;
+    running = false;
+    lastTS = null;
+    vMax = computeVMax();
+    playBtn.textContent = 'Play';
+    updateReadout();
+    draw();
+  }
+
+  function loop(ts){
+    if(!running) return;
+    if(lastTS === null) lastTS = ts;
+    const dt = (ts - lastTS) / 1000;
+    lastTS = ts;
+    t += dt;
+    if(t >= TMAX){
+      t = TMAX;
+      running = false;
+      playBtn.textContent = 'Play';
+    }
+    updateReadout();
+    draw();
+    if(running) requestAnimationFrame(loop);
+  }
+
+  uSlider.addEventListener('input', function(){
+    u = parseFloat(uSlider.value);
+    uVal.textContent = u.toFixed(1);
+    reset();
+  });
+  aSlider.addEventListener('input', function(){
+    a = parseFloat(aSlider.value);
+    aVal.textContent = a.toFixed(1);
+    reset();
+  });
+  playBtn.addEventListener('click', function(){
+    if(running){
+      running = false;
+      playBtn.textContent = 'Play';
+    } else {
+      if(t >= TMAX) t = 0;
+      running = true;
+      lastTS = null;
+      playBtn.textContent = 'Pause';
+      requestAnimationFrame(loop);
+    }
+  });
+  resetBtn.addEventListener('click', reset);
+
+  reset();
+})();
+
+/* ================= Sim 2: Projectile simulator (Section 7) ================= */
+(function(){
+  const canvas = document.getElementById('projCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const speedSlider = document.getElementById('speedSlider');
+  const angleSlider = document.getElementById('angleSlider');
+  const speedVal = document.getElementById('speedVal');
+  const angleVal = document.getElementById('angleVal');
+  const readout = document.getElementById('projReadout');
+  const launchBtn = document.getElementById('projLaunch');
+  const resetBtn = document.getElementById('projReset');
+
+  const g = 9.8;
+  let speed = parseFloat(speedSlider.value);
+  let angleDeg = parseFloat(angleSlider.value);
+  let t = 0;
+  let running = false;
+  let lastTS = null;
+
+  const groundY = 260;
+  const originX = 40;
+  const plotW = 400;
+  const plotH = 220;
+
+  function physics(){
+    const theta = angleDeg * Math.PI / 180;
+    const vx = speed * Math.cos(theta);
+    const vy = speed * Math.sin(theta);
+    const T = (2 * vy) / g;
+    const R = vx * T;
+    const H = (vy * vy) / (2 * g);
+    return { vx: vx, vy: vy, T: T, R: R, H: H };
+  }
+
+  function scaleFactor(p){
+    const sx = p.R > 0 ? plotW / p.R : 8;
+    const sy = p.H > 0 ? plotH / p.H : 8;
+    return Math.max(2, Math.min(sx, sy, 12));
+  }
+
+  function updateReadout(p){
+    readout.innerHTML = 'Time of flight: ' + p.T.toFixed(2) + ' s<br>' +
+      'Range: ' + p.R.toFixed(1) + ' m<br>' +
+      'Max height: ' + p.H.toFixed(1) + ' m';
+  }
+
+  function drawScene(p, scale){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    /* ground */
+    ctx.strokeStyle = '#3a5878';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(0, groundY);
+    ctx.lineTo(canvas.width, groundY);
+    ctx.stroke();
+
+    /* dashed ideal trajectory preview */
+    ctx.strokeStyle = 'rgba(220,234,240,0.35)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 5]);
+    ctx.beginPath();
+    const steps = 60;
+    for(let i = 0; i <= steps; i++){
+      const tt = (p.T * i) / steps;
+      const x = originX + p.vx * tt * scale;
+      const y = groundY - (p.vy * tt - 0.5 * g * tt * tt) * scale;
+      if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* launch point */
+    ctx.fillStyle = '#d98324';
+    ctx.beginPath();
+    ctx.arc(originX, groundY, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* current projectile position */
+    const tc = Math.min(t, p.T);
+    const px = originX + p.vx * tc * scale;
+    const py = groundY - (p.vy * tc - 0.5 * g * tc * tc) * scale;
+    ctx.fillStyle = '#0e7c86';
+    ctx.beginPath();
+    ctx.arc(px, py, 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* labels, edge-anchored */
+    ctx.fillStyle = '#dceaf0';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('launch', originX, groundY + 18);
+    ctx.textAlign = 'right';
+    ctx.fillText('range ≈ ' + p.R.toFixed(0) + ' m', canvas.width - 6, groundY + 18);
+  }
+
+  function reset(){
+    t = 0;
+    running = false;
+    lastTS = null;
+    launchBtn.textContent = 'Launch';
+    const p = physics();
+    updateReadout(p);
+    drawScene(p, scaleFactor(p));
+  }
+
+  function loop(ts){
+    if(!running) return;
+    if(lastTS === null) lastTS = ts;
+    const dt = (ts - lastTS) / 1000;
+    lastTS = ts;
+    t += dt;
+    const p = physics();
+    if(t >= p.T){
+      t = p.T;
+      running = false;
+      launchBtn.textContent = 'Launch';
+    }
+    drawScene(p, scaleFactor(p));
+    if(running) requestAnimationFrame(loop);
+  }
+
+  speedSlider.addEventListener('input', function(){
+    speed = parseFloat(speedSlider.value);
+    speedVal.textContent = speed.toFixed(0);
+    reset();
+  });
+  angleSlider.addEventListener('input', function(){
+    angleDeg = parseFloat(angleSlider.value);
+    angleVal.textContent = angleDeg.toFixed(0);
+    reset();
+  });
+  launchBtn.addEventListener('click', function(){
+    const p = physics();
+    if(running){
+      running = false;
+      launchBtn.textContent = 'Launch';
+      return;
+    }
+    if(t >= p.T) t = 0;
+    running = true;
+    lastTS = null;
+    launchBtn.textContent = 'Pause';
+    requestAnimationFrame(loop);
+  });
+  resetBtn.addEventListener('click', reset);
+
+  reset();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work, Energy and Power — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:760px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem; line-height:1.6;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+  .sim-wrap.stacked{flex-direction:column; align-items:center;}
+  .sim-wrap.stacked .sim-canvas-box{margin:0 auto;}
+  .sim-wrap.stacked .sim-controls{width:100%; max-width:480px; flex:none;}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Work, Energy &amp; Power</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Work, Energy and Power</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Work done by a force</a>
+    <a href="#s2">2. Energy and its conservation</a>
+    <a href="#s3">3. Kinetic and gravitational potential energy</a>
+    <a href="#s4">4. Hooke's law and elastic potential energy</a>
+    <a href="#s5">5. Conservation of mechanical energy</a>
+    <a href="#s6">6. Sankey diagrams</a>
+    <a href="#s7">7. Power</a>
+    <a href="#s8">8. Efficiency</a>
+    <a href="#s9">9. Energy density</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Work, Energy and Power</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Work and energy give physics its 'accounting system' — a way of tracking how much a force can achieve, and how that capability moves between kinetic, gravitational and elastic stores as a system changes. In this workbook you will calculate work done by forces at an angle, connect work to energy transfer, use Sankey diagrams to visualise where energy goes, apply the conservation of mechanical energy to falling and sliding objects, meet Hooke's law and elastic potential energy, and use power and efficiency to compare how quickly — and how well — that energy is put to use.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>calculate the work done by a constant force, including when it acts at an angle to the displacement, W = Fs cos&theta;</li>
+          <li>explain work done as a transfer of energy, and represent energy transfers on a Sankey diagram</li>
+          <li>calculate kinetic energy, gravitational potential energy and elastic potential energy, and identify mechanical energy as their sum</li>
+          <li>state and apply Hooke's law and derive elastic potential energy from a force&ndash;extension graph</li>
+          <li>apply the conservation of mechanical energy to systems with negligible friction, and explain what happens when friction is present</li>
+          <li>calculate power as the rate of energy transfer, P = E/t = Fv, and efficiency as a ratio of useful to total energy (or power)</li>
+          <li>use the energy density of fuels to compare how much energy a given volume of fuel can release</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1: WORK ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Work done by a force</h2>
+      <p>In physics, <strong>work</strong> has a much more precise meaning than in everyday language. A force does work on an object whenever it moves the object in the direction the force acts. A weightlifter holding a barbell motionless above their head is applying a large force, but because nothing is moving, no <em>mechanical</em> work is being done on the barbell at that instant.</p>
+
+      <div class="eqn">work done, W = Fs &nbsp; (when F acts in the direction of motion)</div>
+
+      <div class="keyword"><b>Joule, J:</b> the SI unit of work and energy. One joule is the work done when a force of 1 N moves its point of application by a distance of 1 m. Work done is a <strong>scalar</strong> quantity — it has no direction.</div>
+
+      <p>A force often acts at an angle to the direction an object moves. In that case, only the <strong>component of the force along the direction of displacement</strong> contributes to the work done — the component perpendicular to the motion does no work at all.</p>
+
+      <figure>
+        <svg viewBox="0 0 500 200" width="500" height="200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mA1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/></marker>
+            <marker id="mA2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0a5b62"/></marker>
+            <marker id="mA3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#a5570f"/></marker>
+          </defs>
+          <line x1="40" y1="150" x2="420" y2="150" stroke="#b9c6d3" stroke-width="1.5"/>
+          <rect x="40" y="128" width="46" height="30" rx="4" fill="#eaf3fb" stroke="#173a5e" stroke-width="2"/>
+          <line x1="63" y1="143" x2="220" y2="70" stroke="#173a5e" stroke-width="2.4" marker-end="url(#mA1)"/>
+          <text x="225" y="66" font-size="13" fill="#173a5e" text-anchor="start">force, F</text>
+          <path d="M 103,143 A 40,40 0 0 0 99.3,126.1" fill="none" stroke="#5b6b78" stroke-width="1.3"/>
+          <text x="108" y="139" font-size="12" fill="#3a4753" text-anchor="start">&theta;</text>
+          <line x1="63" y1="143" x2="240" y2="143" stroke="#0a5b62" stroke-width="2.4" stroke-dasharray="5 3" marker-end="url(#mA2)"/>
+          <text x="245" y="147" font-size="12.5" fill="#0a5b62" text-anchor="start">F cos&theta; (does work)</text>
+          <line x1="330" y1="128" x2="330" y2="70" stroke="#a5570f" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#mA3)"/>
+          <text x="336" y="92" font-size="12.5" fill="#a5570f" text-anchor="start">F sin&theta;</text>
+          <text x="336" y="108" font-size="11.5" fill="#a5570f" text-anchor="start">(no work — &perp;</text>
+          <text x="336" y="122" font-size="11.5" fill="#a5570f" text-anchor="start">to motion)</text>
+          <line x1="63" y1="175" x2="420" y2="175" stroke="#3a4753" stroke-width="1.5" marker-end="url(#mA1)"/>
+          <text x="240" y="192" font-size="12.5" fill="#3a4753" text-anchor="middle">displacement, s</text>
+        </svg>
+        <figcaption>Fig. 1.1 A force F acting at angle &theta; to the displacement, s. Only the component F cos&theta;, along the direction of motion, does work; the perpendicular component F sin&theta; does none.</figcaption>
+      </figure>
+
+      <div class="eqn">work done, W = Fs cos&theta;</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>A dog pulls a load with a force of 250 N at an angle of 10&deg; to the horizontal. Calculate the work done, in kJ, by the dog in moving the load horizontally by 15 m.</p>
+        <p><strong>Answer:</strong><br>
+        W = Fs cos&theta; = 250 &times; 15 &times; cos10&deg;</p>
+      </div>
+
+      <div class="keybox"><strong>Work done by a varying force.</strong> The equation W = Fs cos&theta; assumes a constant force. When a force varies — for example while stretching a rubber band — the work done is equal to the <strong>area under a force&ndash;distance graph</strong>, found by counting squares or, for simple shapes, using the area of a triangle or trapezium.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.2</span>
+        <p>A force increases steadily from 0 N to 60 N as it stretches a rubber band by 0.40 m. Estimate the work done on the band.</p>
+        <p><strong>Answer:</strong><br>
+        The force&ndash;extension graph is a straight line through the origin, so the area under it is a triangle.<br>
+        W = &frac12; &times; base &times; height = &frac12; &times; 0.40 &times; 60</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>A weightlifter holds a barbell stationary above her head for several seconds. Explain why no mechanical work is being done on the barbell during this time, even though a large force is being applied.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">Work is only done on an object while it is being displaced in the direction of the applied force. Because the barbell is stationary (its displacement is zero while held still), no work is being done on it at that moment, regardless of how large the supporting force is. (Work is, however, still being done inside the weightlifter's muscles, as chemical energy is used to maintain tension.)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>A man pulls a crate with a horizontal force of 150 N and moves it along a horizontal floor by 5.0 m. Calculate the work he has done.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">W = Fs = 150 &times; 5.0</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>A gardener pushes a lawnmower at a constant speed with a force of 70 N at an angle of 40&deg; to the ground. Calculate the work done in moving the lawnmower a distance of 12 m.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">W = Fs cos&theta; = 70 &times; 12 &times; cos40&deg;</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>A satellite moves in a circular orbit around the Earth at constant speed. Explain why the Earth's gravitational force on the satellite does no work on it, even though the force is not zero.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">In a circular orbit, the gravitational force on the satellite always points towards the centre of the orbit, which is perpendicular to the satellite's velocity (and therefore its displacement) at every instant. Since &theta; = 90&deg; and cos90&deg; = 0, the component of the force along the direction of motion is zero, so W = Fs cos&theta; = 0 however large F or s is.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: ENERGY AND ITS CONSERVATION ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Energy and its conservation</h2>
+      <p>Why can't someone push a loaded trolley along a flat road forever? Eventually they run out of <strong>energy</strong> — which suggests a useful definition: energy is the capacity, or ability, to do work. Whenever work is done on an object, energy is transferred to it from whatever supplied the force.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> When work is done, energy is transferred from a source to the object. Work done by a force is equivalent to a transfer of energy — the two describe the same physical process.</div>
+
+      <p>Energy exists in many forms. Some of the most important for mechanics are <strong>kinetic energy</strong> (of moving objects), <strong>gravitational potential energy</strong> (stored because of position in a gravitational field) and <strong>elastic potential energy</strong> (stored in a stretched or compressed material). Together, these three make up an object's <strong>mechanical energy</strong>.</p>
+
+      <div class="keyword"><b>Mechanical energy:</b> the sum of an object's kinetic energy, gravitational potential energy and elastic potential energy — the energy a macroscopic object or system has that is able to do useful work.</div>
+
+      <p>Other, non-mechanical forms include chemical energy (stored in bonds), internal energy (the random kinetic and potential energy of particles within a substance), electrical energy, radiation energy, and nuclear energy. Whatever the form, one principle always holds:</p>
+
+      <div class="keybox"><strong>Principle of conservation of energy.</strong> The total energy of an isolated system is constant. Energy cannot be created or destroyed — only transferred from one form to another, or from one object to another.</div>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span><strong>"Lost" energy isn't destroyed.</strong> A bouncing ball rises a little less with every bounce, and it's tempting to say it has "lost" energy. In fact, the total energy is unchanged — some of the ball's mechanical energy has been transferred to internal energy in the ball and the ground (making them very slightly warmer) and to sound. Energy transferred to the surroundings in this uncontrolled way is called <strong>dissipated</strong> (or degraded) energy: it still exists, but it can no longer be recovered to do useful work.</div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>State the principle of conservation of energy, and explain the difference between saying energy has been "destroyed" and saying it has been "dissipated".</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">The principle of conservation of energy states that the total energy of an isolated system is constant — energy cannot be created or destroyed, only transferred between forms. "Destroyed" would mean the energy no longer exists anywhere, which never happens. "Dissipated" means the energy has been transferred to a form (usually internal energy in the surroundings, or sound) that has spread out and can no longer be usefully recovered — the energy still exists, but not in a useful, concentrated form any more.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>State the main energy transfer that takes place when: (a) a battery-powered toy car moves across the floor, (b) an electric kettle heats water, (c) a person climbs a flight of stairs.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">(a) chemical energy (in the battery) to kinetic energy (of the car), with some to internal energy and sound. (b) electrical energy to internal (thermal) energy of the water. (c) chemical energy (from food, in the person's body) to gravitational potential energy, with some to internal energy.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>A ball is dropped and allowed to bounce several times on a hard floor. Explain why the height reached after each bounce is lower than the height it fell from.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">At each bounce, some of the ball's mechanical energy (kinetic energy just before impact) is dissipated — transferred to internal energy in the ball and floor, and to sound — rather than being fully returned as kinetic energy on the way back up. With less mechanical energy available after each bounce, the ball can only reach a smaller maximum height before falling again.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: KE AND GPE ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Kinetic and gravitational potential energy</h2>
+      <p><strong>Kinetic energy</strong> is the energy a mass has because it is moving. Using the equations of motion for a mass accelerated from rest by a constant force, it can be shown that:</p>
+
+      <div class="eqn">kinetic energy, E<sub>k</sub> = &frac12;mv&sup2;</div>
+
+      <div class="keybox"><strong>Key idea.</strong> Kinetic energy is a <strong>scalar</strong> — even though it is calculated from velocity, the v&sup2; term means direction drops out. E<sub>k</sub> can also be written as p&sup2;/2m, in terms of momentum p, which is useful when comparing kinetic energy and momentum together.</div>
+
+      <p><strong>Gravitational potential energy</strong> is the energy an object has because of its position in a gravitational field. Close to the Earth's surface, where the gravitational field strength g can be treated as constant, raising an object a height &Delta;h requires a force equal to its weight, mg, so the object gains:</p>
+
+      <div class="eqn">change in GPE, &Delta;E<sub>p</sub> = mg&Delta;h</div>
+
+      <div class="keybox"><strong>Key idea.</strong> GPE is always calculated as a <em>change</em>, &Delta;E<sub>p</sub>, relative to some reference height that you choose (often the ground, or a table top). For this reason it is really a work done equation (force &times; distance). The equation &Delta;E<sub>p</sub> = mg&Delta;h also only applies when g can be treated as constant, which fails for very large changes in height (such as a satellite launch).</div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.1</span>
+        <p>Calculate the kinetic energy, in kJ, of a 60 kg sprinter running at 10 m s<sup>&minus;1</sup>.</p>
+        <p><strong>Answer:</strong><br>
+        E<sub>k</sub> = &frac12;mv&sup2; = &frac12; &times; 60 &times; 10&sup2;</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 3.2</span>
+        <p>A 1.2 kg box is raised from the floor to a table top 0.85 m higher. Calculate the gravitational potential energy transferred.</p>
+        <p><strong>Answer:</strong><br>
+        &Delta;E<sub>p</sub> = mg&Delta;h = 1.2 &times; 9.8 &times; 0.85</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>Calculate the kinetic energy, in MJ, of an articulated lorry of mass 40 000 kg travelling at 30 m s<sup>&minus;1</sup>.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">E<sub>k</sub> = &frac12;mv&sup2; = &frac12; &times; 40 000 &times; 30&sup2;</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>A cable car rises a vertical height of 700 m. Calculate the gravitational potential energy gained by a cabin of total mass 1800 kg during the journey.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">&Delta;E<sub>p</sub> = mg&Delta;h = 1800 &times; 9.8 &times; 700</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>A rocket launches a satellite to a height of 400 km above the Earth's surface. Explain why the equation &Delta;E<sub>p</sub> = mg&Delta;h, using g = 9.8 N kg<sup>&minus;1</sup>, cannot be used to accurately calculate the gravitational potential energy gained by the satellite.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">The equation &Delta;E<sub>p</sub> = mg&Delta;h assumes that g stays constant over the height change involved. This is a reasonable approximation for everyday heights, but 400 km is a large fraction of the Earth's radius, and the gravitational field strength decreases noticeably over that distance (g is smaller at 400 km altitude than at the surface). Using a single, surface value of g throughout would overestimate the true energy gained.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: HOOKE'S LAW AND EPE ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Hooke's law and elastic potential energy</h2>
+      <p>A spring, or any elastic material, is a store of <strong>elastic potential energy</strong> when it is stretched or compressed away from its natural shape. Whenever a material is deformed like this, it exerts an <strong>elastic restoring force</strong> — a contact force that pulls or pushes back towards the material’s original shape. In the 17th century, the scientist Robert Hooke investigated how the size of this restoring force depends on the size of the deformation, and found a simple relationship that now carries his name.</p>
+
+      <div class="keybox"><strong>Hooke's law.</strong> Provided a spring or elastic material is not stretched beyond its elastic limit, the restoring force is directly proportional to the extension (or compression): F<sub>H</sub> = &minus;k&Delta;x, where k is the <strong>spring constant</strong> (unit: N m<sup>&minus;1</sup>) and &Delta;x is the extension. A larger k means a stiffer spring.</div>
+
+      <div class="keyword"><b>Elastic and plastic behaviour:</b> a deformation is <strong>elastic</strong> if the material returns to its original shape once the force is removed — this is the regime Hooke's law describes. Beyond a material's <strong>elastic limit</strong>, the deformation becomes <strong>plastic</strong>: some of it is permanent, F<sub>H</sub> = k&Delta;x no longer holds, and a force–extension graph is no longer a straight line through the origin.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A spring is 0.38 m long. When it is pulled by a force of 2.0 N, it stretches to 0.42 m. Assuming the spring behaves elastically, calculate its spring constant.</p>
+        <p><strong>Answer:</strong><br>
+        extension, &Delta;x = 0.42 &minus; 0.38 = 0.04 m<br>
+        F<sub>H</sub> = k&Delta;x, so k = F<sub>H</sub> &divide; &Delta;x = 2.0 &divide; 0.04</p>
+      </div>
+
+      <h3>Live simulation: springs and an elastic band</h3>
+      <p>Use the apparatus below to load a steel spring (singly, or in series/parallel) or an elastic band with masses, and watch the force&ndash;extension graph build up. Springs obey Hooke's law up to a limit, beyond which they deform permanently (plastically); an elastic band shows a curved, non-Hookean force&ndash;extension relationship, and will eventually snap. Try loading and then unloading to see the difference between elastic and plastic behaviour.</p>
+      <div class="sim-embed">
+        <p class="instructions">Add or remove 100 g masses, switch between a steel spring (single, series or parallel) and an elastic band, and press "New Run" to start a fresh loading line while keeping previous runs faintly visible for comparison.</p>
+        <iframe class="sim-frame" src="data:text/html;base64,PGh0bWwgbGFuZz0iZW4iPgo8aGVhZD4KICAgIDxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KICAgIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KICAgIDx0aXRsZT5TcHJpbmdzIGFuZCBFbGFzdGljIEJhbmQgYXBwPC90aXRsZT4KICAgIDxzdHlsZT4KICAgICAgICAqIHsgYm94LXNpemluZzogYm9yZGVyLWJveDsgfQogICAgICAgIGJvZHkgeyBmb250LWZhbWlseTogJ1NlZ29lIFVJJywgVGFob21hLCBHZW5ldmEsIFZlcmRhbmEsIHNhbnMtc2VyaWY7IGJhY2tncm91bmQ6ICNmMGYyZjU7IGRpc3BsYXk6IGZsZXg7IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IGFsaWduLWl0ZW1zOiBjZW50ZXI7IHBhZGRpbmc6IDhweDsgY29sb3I6ICMzMzM7IG1hcmdpbjogMDsgfQogICAgICAgIC5jb250YWluZXIgeyBkaXNwbGF5OiBmbGV4OyBmbGV4LXdyYXA6IHdyYXA7IGdhcDogMTJweDsgYmFja2dyb3VuZDogd2hpdGU7IHBhZGRpbmc6IDEwcHg7IGJvcmRlci1yYWRpdXM6IDEycHg7IGJveC1zaGFkb3c6IDAgNHB4IDIwcHggcmdiYSgwLDAsMCwwLjA4KTsgbWF4LXdpZHRoOiAxMzAwcHg7IHdpZHRoOiAxMDAlOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgfQoKICAgICAgICAuc2V0dXAgeyB3aWR0aDogMzAwcHg7IGZsZXgtc2hyaW5rOiAwOyBoZWlnaHQ6IDU4MHB4OyBib3JkZXItcmlnaHQ6IDJweCBzb2xpZCAjZWVlOyBwb3NpdGlvbjogcmVsYXRpdmU7IGRpc3BsYXk6IGZsZXg7IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IGFsaWduLWl0ZW1zOiBjZW50ZXI7IG92ZXJmbG93OiBoaWRkZW47IGJhY2tncm91bmQ6ICNmZmY7IH0KICAgICAgICAucmV0b3J0LXN0YW5kIHsgd2lkdGg6IDEycHg7IGhlaWdodDogNTIwcHg7IGJhY2tncm91bmQ6ICMzMzM7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgbGVmdDogNDBweDsgYm90dG9tOiAwOyB9CiAgICAgICAgLmJhc2UgeyB3aWR0aDogMTQwcHg7IGhlaWdodDogMThweDsgYmFja2dyb3VuZDogIzMzMzsgcG9zaXRpb246IGFic29sdXRlOyBsZWZ0OiAtMTQwcHg7IGJvdHRvbTogMDsgfQogICAgICAgIC5jbGFtcCB7IHdpZHRoOiAxMTBweDsgaGVpZ2h0OiAxMnB4OyBiYWNrZ3JvdW5kOiAjNTU1OyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDQwcHg7IHRvcDogNjBweDsgYm9yZGVyLXJhZGl1czogMCA1cHggNXB4IDA7IHotaW5kZXg6IDEwOyB9CiAgICAgICAgCiAgICAgICAgLyogQWRqdXN0ZWQgbGVmdCBmcm9tIDEzMHB4IHRvIDk1cHggdG8gbW92ZSBpdCBjbG9zZXIgdG8gdGhlIGNsYW1wIHN0YW5kICovCiAgICAgICAgI2FwcGFyYXR1cy1tb3VudCB7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgbGVmdDogOTVweDsgdG9wOiA0OHB4OyBkaXNwbGF5OiBmbGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBhbGlnbi1pdGVtczogY2VudGVyOyB6LWluZGV4OiA0OyB3aWR0aDogMTAwcHg7IH0KICAgICAgICAKICAgICAgICAuc3ByaW5nLWJvZHkgeyB3aWR0aDogMjBweDsgdHJhbnNpdGlvbjogaGVpZ2h0IDAuNHMgZWFzZS1vdXQ7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbjogLTJweCAwOyBiYWNrZ3JvdW5kOiByZXBlYXRpbmctbGluZWFyLWdyYWRpZW50KDBkZWcsICM3ZjhjOGQsICM3ZjhjOGQgMnB4LCB0cmFuc3BhcmVudCAycHgsIHRyYW5zcGFyZW50IDEwcHgpOyBib3JkZXItbGVmdDogM3B4IHNvbGlkICMyYzNlNTA7IGJvcmRlci1yaWdodDogM3B4IHNvbGlkICMyYzNlNTA7IH0KICAgICAgICAubG9vcCB7IHdpZHRoOiAxOHB4OyBoZWlnaHQ6IDE4cHg7IGJvcmRlcjogM3B4IHNvbGlkICMyYzNlNTA7IGJvcmRlci1yYWRpdXM6IDUwJTsgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZsZXgtc2hyaW5rOiAwOyB9CiAgICAgICAgLmRvd2VsIHsgd2lkdGg6IDc1cHg7IGhlaWdodDogMTBweDsgYmFja2dyb3VuZDogI2JlOWI3YjsgYm9yZGVyOiAxcHggc29saWQgIzhkNmU2MzsgYm9yZGVyLXJhZGl1czogMnB4OyBwb3NpdGlvbjogcmVsYXRpdmU7IHotaW5kZXg6IDY7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogY2VudGVyOyB9CiAgICAgICAgLmV5ZS1ob29rIHsgd2lkdGg6IDEwcHg7IGhlaWdodDogMTRweDsgYm9yZGVyOiAycHggc29saWQgIzU1NTsgYm9yZGVyLXJhZGl1czogNTAlOyBwb3NpdGlvbjogYWJzb2x1dGU7IGJhY2tncm91bmQ6IHRyYW5zcGFyZW50OyB9CiAgICAgICAgLmV5ZS1ob29rLmJvdHRvbSB7IGJvdHRvbTogLTE0cHg7IH0KICAgICAgICAKICAgICAgICAuYmFuZCB7IGJhY2tncm91bmQ6ICNlNjdlMjI7IGJvcmRlci1yYWRpdXM6IDJweDsgd2lkdGg6IDhweDsgdHJhbnNpdGlvbjogaGVpZ2h0IDAuNHMgZWFzZS1vdXQsIHRyYW5zZm9ybSAwLjNzOyBwb3NpdGlvbjogcmVsYXRpdmU7IH0KICAgICAgICAuYmFuZC5zbmFwcGVkLXRvcCB7IGhlaWdodDogMjBweCAhaW1wb3J0YW50OyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTEwcHgpIHJvdGF0ZSgtMTVkZWcpOyBib3JkZXItYm90dG9tOiAycHggZGFzaGVkICNkMzU0MDA7IH0KICAgICAgICAuYmFuZC5zbmFwcGVkLWJvdHRvbSB7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgyMHB4KSByb3RhdGUoMTVkZWcpOyBib3JkZXItdG9wOiAycHggZGFzaGVkICNkMzU0MDA7IH0KCiAgICAgICAgI2hhbmdlciB7IHdpZHRoOiAzcHg7IGhlaWdodDogMTQwcHg7IGJhY2tncm91bmQ6ICM0NDQ7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgYm9yZGVyLXJhZGl1czogMCAwIDRweCA0cHg7IHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjZzIGN1YmljLWJlemllcigwLjUsIDAsIDEsIDEpLCBvcGFjaXR5IDAuNHM7IHotaW5kZXg6IDExOyB0cmFuc2Zvcm0tb3JpZ2luOiB0b3AgY2VudGVyOyB9CiAgICAgICAgI2hhbmdlcjo6YmVmb3JlIHsgY29udGVudDogJyc7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgdG9wOiAtMTBweDsgbGVmdDogLTRweDsgd2lkdGg6IDEwcHg7IGhlaWdodDogMTBweDsgYm9yZGVyOiAycHggc29saWQgIzQ0NDsgYm9yZGVyLXJhZGl1czogNTAlIDUwJSAwIDA7IGJvcmRlci1ib3R0b206IG5vbmU7IH0KICAgICAgICAjaGFuZ2VyOjphZnRlciB7IGNvbnRlbnQ6ICcnOyBwb3NpdGlvbjogYWJzb2x1dGU7IGJvdHRvbTogMDsgbGVmdDogLTEycHg7IHdpZHRoOiAyNHB4OyBoZWlnaHQ6IDRweDsgYmFja2dyb3VuZDogIzQ0NDsgYm9yZGVyLXJhZGl1czogMnB4OyB9CiAgICAgICAgLmhhbmdlci1mYWxsaW5nIHsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDYwMHB4KSByb3RhdGUoMjVkZWcpICFpbXBvcnRhbnQ7IG9wYWNpdHk6IDA7IH0KICAgICAgICAKICAgICAgICAubWFzcy1waWVjZSB7IHdpZHRoOiA0MHB4OyBoZWlnaHQ6IDEwcHg7IGJhY2tncm91bmQ6ICMzNDQ5NWU7IGNvbG9yOiB3aGl0ZTsgYm9yZGVyLXJhZGl1czogMnB4OyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgZm9udC1zaXplOiA4cHg7IGZvbnQtd2VpZ2h0OiBib2xkOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IC0xOXB4OyBib3JkZXI6IDFweCBzb2xpZCAjMWEyNTJmOyB9CgogICAgICAgIC5jb250cm9scyB7IGZsZXg6IDEgMSAyODBweDsgZGlzcGxheTogZmxleDsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgZ2FwOiAxMnB4OyBtaW4td2lkdGg6IDI2MHB4OyBtYXgtd2lkdGg6IDEwMCU7IH0KICAgICAgICAucGFuZWwtcm93IHsgZGlzcGxheTogZmxleDsgZmxleC13cmFwOiB3cmFwOyBnYXA6IDE1cHg7IH0KICAgICAgICAuY29uZmlnLXBhbmVsIHsgYmFja2dyb3VuZDogI2Y4ZjlmYTsgcGFkZGluZzogMTJweDsgYm9yZGVyLXJhZGl1czogOHB4OyBib3JkZXI6IDFweCBzb2xpZCAjZGRkOyB3aWR0aDogMTYwcHg7IGZsZXgtc2hyaW5rOiAwOyB9CiAgICAgICAgLnJhZGlvLW9wdCB7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW4tYm90dG9tOiA4cHg7IGZvbnQtc2l6ZTogMC44MmVtOyBjdXJzb3I6IHBvaW50ZXI7IH0KICAgICAgICAuYnV0dG9uLWdyaWQgeyBkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmciAxZnI7IGdhcDogOHB4OyBmbGV4OiAxIDEgMTYwcHg7IG1pbi13aWR0aDogMTYwcHg7IH0KICAgICAgICAuYnRuIHsgcGFkZGluZzogMTBweDsgY3Vyc29yOiBwb2ludGVyOyBib3JkZXI6IG5vbmU7IGJvcmRlci1yYWRpdXM6IDZweDsgZm9udC13ZWlnaHQ6IGJvbGQ7IHRyYW5zaXRpb246IDAuMnM7IGZvbnQtc2l6ZTogMC44NWVtOyB9CiAgICAgICAgLmJ0bi1hZGQgeyBiYWNrZ3JvdW5kOiAjMmVjYzcxOyBjb2xvcjogd2hpdGU7IH0KICAgICAgICAuYnRuLXJlbSB7IGJhY2tncm91bmQ6ICNmMWM0MGY7IGNvbG9yOiAjMmMzZTUwOyB9CiAgICAgICAgLmJ0bi1zYXZlIHsgYmFja2dyb3VuZDogIzM0NDk1ZTsgY29sb3I6IHdoaXRlOyB9CiAgICAgICAgLmJ0bi1yZXNldCB7IGJhY2tncm91bmQ6ICNlNjdlMjI7IGNvbG9yOiB3aGl0ZTsgfQogICAgICAgIC5idG4tY2xlYXIgeyBiYWNrZ3JvdW5kOiAjZTc0YzNjOyBjb2xvcjogd2hpdGU7IGdyaWQtY29sdW1uOiBzcGFuIDI7IH0KCiAgICAgICAgI2dyYXBoIHsgd2lkdGg6IDEwMCU7IGhlaWdodDogMzIwcHg7IG1hcmdpbi10b3A6IDEwcHg7IGJvcmRlcjogMXB4IHNvbGlkICNlZWU7IH0KICAgICAgICAuc3RhdHVzLWJhciB7IGJhY2tncm91bmQ6ICNmOWY5Zjk7IHBhZGRpbmc6IDhweDsgYm9yZGVyLXJhZGl1czogNnB4OyBmb250LXNpemU6IDAuOGVtOyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDsgYm9yZGVyOiAxcHggc29saWQgI2RkZDsgfQogICAgICAgIC5kYXRhLXRhYmxlLWNvbnRhaW5lciB7IG1heC1oZWlnaHQ6IDEyMHB4OyBvdmVyZmxvdy15OiBhdXRvOyBib3JkZXI6IDFweCBzb2xpZCAjZWVlOyB9CiAgICAgICAgdGFibGUgeyB3aWR0aDogMTAwJTsgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTsgZm9udC1zaXplOiAwLjhlbTsgfQogICAgICAgIHRoLCB0ZCB7IHBhZGRpbmc6IDRweDsgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlZWU7IHRleHQtYWxpZ246IGNlbnRlcjsgfQogICAgICAgIHRoIHsgYmFja2dyb3VuZDogI2Y0ZjdmNjsgcG9zaXRpb246IHN0aWNreTsgdG9wOiAwOyB9CiAgICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgoKPGgyIHN0eWxlPSJtYXJnaW4tYm90dG9tOiAxNXB4OyI+U3ByaW5ncyBhbmQgRWxhc3RpYyBCYW5kIGFwcDwvaDI+Cgo8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgPGRpdiBjbGFzcz0ic2V0dXAiIGlkPSJzZXR1cC1hcmVhIj4KICAgICAgICA8ZGl2IGNsYXNzPSJyZXRvcnQtc3RhbmQiPjxkaXYgY2xhc3M9ImJhc2UiPjwvZGl2PjwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9ImNsYW1wIj48L2Rpdj4KICAgICAgICA8ZGl2IGlkPSJhcHBhcmF0dXMtbW91bnQiPjwvZGl2PgogICAgPC9kaXY+CgogICAgPGRpdiBjbGFzcz0iY29udHJvbHMiPgogICAgICAgIDxkaXYgY2xhc3M9InBhbmVsLXJvdyI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbmZpZy1wYW5lbCI+CiAgICAgICAgICAgICAgICA8c3Ryb25nPk1hdGVyaWFsPC9zdHJvbmc+PGhyPgogICAgICAgICAgICAgICAgPHNlbGVjdCBpZD0ibWF0ZXJpYWwiIG9uY2hhbmdlPSJ0b2dnbGVPcHRpb25zKCk7IHNvZnRSZXNldCgpOyIgc3R5bGU9IndpZHRoOjEwMCU7IG1hcmdpbi1ib3R0b206IDEwcHg7Ij4KICAgICAgICAgICAgICAgICAgICA8b3B0aW9uIHZhbHVlPSJzcHJpbmciPlN0ZWVsIFNwcmluZzwvb3B0aW9uPgogICAgICAgICAgICAgICAgICAgIDxvcHRpb24gdmFsdWU9ImJhbmQiPkVsYXN0aWMgQmFuZDwvb3B0aW9uPgogICAgICAgICAgICAgICAgPC9zZWxlY3Q+CgogICAgICAgICAgICAgICAgPGRpdiBpZD0ic3ByaW5nLW9wdGlvbnMiPgogICAgICAgICAgICAgICAgICAgIDxzdHJvbmc+Q29uZmlnPC9zdHJvbmc+PGhyPgogICAgICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzcz0icmFkaW8tb3B0Ij48aW5wdXQgdHlwZT0icmFkaW8iIG5hbWU9ImNvbmZpZyIgdmFsdWU9InNpbmdsZSIgY2hlY2tlZCBvbmNoYW5nZT0ic29mdFJlc2V0KCkiPiBTaW5nbGUgU3ByaW5nPC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3M9InJhZGlvLW9wdCI+PGlucHV0IHR5cGU9InJhZGlvIiBuYW1lPSJjb25maWciIHZhbHVlPSJzZXJpZXMiIG9uY2hhbmdlPSJzb2Z0UmVzZXQoKSI+IDIgaW4gU2VyaWVzPC9sYWJlbD4KICAgICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3M9InJhZGlvLW9wdCI+PGlucHV0IHR5cGU9InJhZGlvIiBuYW1lPSJjb25maWciIHZhbHVlPSJwYXJhbGxlbCIgb25jaGFuZ2U9InNvZnRSZXNldCgpIj4gMiBpbiBQYXJhbGxlbDwvbGFiZWw+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPC9kaXY+CgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJidXR0b24tZ3JpZCI+CiAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLWFkZCIgb25jbGljaz0iY2hhbmdlTWFzcygxMDApIj4rIDEwMGc8L2J1dHRvbj4KICAgICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9ImJ0biBidG4tcmVtIiBvbmNsaWNrPSJjaGFuZ2VNYXNzKC0xMDApIj4tIDEwMGc8L2J1dHRvbj4KICAgICAgICAgICAgICAgIDxidXR0b24gY2xhc3M9ImJ0biBidG4tc2F2ZSIgb25jbGljaz0iZG93bmxvYWRDU1YoKSI+RG93bmxvYWQgQ1NWPC9idXR0b24+CiAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLXJlc2V0IiBvbmNsaWNrPSJzb2Z0UmVzZXQoKSI+TmV3IFJ1biAoU2F2ZSBQcmV2KTwvYnV0dG9uPgogICAgICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi1jbGVhciIgb25jbGljaz0iY2xlYXJHcmFwaCgpIj5SRVNFVCBBTEwgREFUQTwvYnV0dG9uPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0ic3RhdHVzLWJhciI+CiAgICAgICAgICAgIDxzcGFuPjxzdHJvbmc+TWFzczo8L3N0cm9uZz4gPHNwYW4gaWQ9Im0tdmFsIj4wPC9zcGFuPmc8L3NwYW4+CiAgICAgICAgICAgIDxzcGFuPjxzdHJvbmc+RXh0ZW5zaW9uOjwvc3Ryb25nPiA8c3BhbiBpZD0iZXh0LXZhbCI+MC4wPC9zcGFuPm1tPC9zcGFuPgogICAgICAgICAgICA8c3Bhbj48c3Ryb25nPlBlcm1hbmVudDo8L3N0cm9uZz4gPHNwYW4gaWQ9InBlcm0tdmFsIj4wLjA8L3NwYW4+bW08L3NwYW4+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxjYW52YXMgaWQ9ImdyYXBoIj48L2NhbnZhcz4KCiAgICAgICAgPGRpdiBjbGFzcz0iZGF0YS10YWJsZS1jb250YWluZXIiPgogICAgICAgICAgICA8dGFibGU+CiAgICAgICAgICAgICAgICA8dGhlYWQ+PHRyPjx0aD5NYXNzIChnKTwvdGg+PHRoPkZvcmNlIChOKTwvdGg+PHRoPkV4dCAobW0pPC90aD48L3RyPjwvdGhlYWQ+CiAgICAgICAgICAgICAgICA8dGJvZHkgaWQ9ImxlZGdlci1ib2R5Ij48L3Rib2R5PgogICAgICAgICAgICA8L3RhYmxlPgogICAgICAgIDwvZGl2PgogICAgPC9kaXY+CjwvZGl2PgoKPHNjcmlwdD4KICAgIGxldCBjdXJyZW50TWFzcyA9IDAsIG1heFJlYWNoZWRNYXNzID0gMCwgcGVybWFuZW50U3RyZXRjaCA9IDA7CiAgICBsZXQgbG9hZGluZ0RhdGEgPSB7IHg6IFswXSwgeTogWzBdLCBtOiBbMF0gfTsKICAgIGxldCB1bmxvYWRpbmdEYXRhID0geyB4OiBbXSwgeTogW10sIG06IFtdIH07CiAgICBsZXQgaGlzdG9yeVRyYWNlcyA9IFtdOyAKICAgIGxldCBpc1NuYXBwZWQgPSBmYWxzZSwgaXNVbmxvYWRpbmdNb2RlID0gZmFsc2U7CiAgICBjb25zdCBnID0gOS44MSwgYmFzZUxlbiA9IDEwMDsKICAgIAogICAgbGV0IGxhc3RDb25maWdOYW1lID0gIlNpbmdsZSBTcHJpbmciOwogICAgY29uc3QgY29uZmlnTmFtZXMgPSB7CiAgICAgICAgJ3NpbmdsZSc6ICdTaW5nbGUgU3ByaW5nJywKICAgICAgICAnc2VyaWVzJzogJzIgaW4gU2VyaWVzJywKICAgICAgICAncGFyYWxsZWwnOiAnMiBpbiBQYXJhbGxlbCcsCiAgICAgICAgJ2JhbmQnOiAnRWxhc3RpYyBCYW5kJwogICAgfTsKCiAgICB3aW5kb3cub25sb2FkID0gKCkgPT4geyB1cGRhdGVVSSgwKTsgdXBkYXRlR3JhcGgoKTsgdG9nZ2xlT3B0aW9ucygpOyB9OwoKICAgIGZ1bmN0aW9uIHRvZ2dsZU9wdGlvbnMoKSB7CiAgICAgICAgY29uc3QgbWF0ZXJpYWwgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbWF0ZXJpYWwnKS52YWx1ZTsKICAgICAgICBjb25zdCBvcHRpb25zRGl2ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3NwcmluZy1vcHRpb25zJyk7CiAgICAgICAgb3B0aW9uc0Rpdi5zdHlsZS5kaXNwbGF5ID0gKG1hdGVyaWFsID09PSAnYmFuZCcpID8gJ25vbmUnIDogJ2Jsb2NrJzsKICAgIH0KCiAgICBmdW5jdGlvbiBnZXRFeHRlbnNpb25BbmRQbGFzdGljaXR5KG0sIHR5cGUsIHVubG9hZGluZywgY29uZmlnKSB7CiAgICAgICAgbGV0IGtfZmFjdG9yID0gKGNvbmZpZyA9PT0gJ3NlcmllcycpID8gMi4wIDogKGNvbmZpZyA9PT0gJ3BhcmFsbGVsJyA/IDAuNSA6IDEuMCk7CiAgICAgICAgCiAgICAgICAgaWYgKHR5cGUgPT09ICdzcHJpbmcnKSB7CiAgICAgICAgICAgIGxldCBsaW1pdCA9IChjb25maWcgPT09ICdwYXJhbGxlbCcpID8gOTk5OSA6IDgwMDsgCiAgICAgICAgICAgIGxldCBwUmF0ZSA9IChjb25maWcgPT09ICdzZXJpZXMnKSA/IDAuMjYgOiAwLjEzOwogICAgICAgICAgICBpZiAobWF4UmVhY2hlZE1hc3MgPiBsaW1pdCkgcGVybWFuZW50U3RyZXRjaCA9IChtYXhSZWFjaGVkTWFzcyAtIGxpbWl0KSAqIHBSYXRlOwogICAgICAgICAgICAKICAgICAgICAgICAgaWYgKCF1bmxvYWRpbmcpIHsKICAgICAgICAgICAgICAgIHJldHVybiAobSA8PSBsaW1pdCkgPyBtICogMC4xMiAqIGtfZmFjdG9yIDogKGxpbWl0ICogMC4xMiAqIGtfZmFjdG9yKSArICgobSAtIGxpbWl0KSAqIDAuMjUgKiBrX2ZhY3Rvcik7CiAgICAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAgICBsZXQgcGVha0V4dCA9IChtYXhSZWFjaGVkTWFzcyA8PSBsaW1pdCkgPyBtYXhSZWFjaGVkTWFzcyAqIDAuMTIgKiBrX2ZhY3RvciA6IChsaW1pdCAqIDAuMTIgKiBrX2ZhY3RvcikgKyAoKG1heFJlYWNoZWRNYXNzIC0gbGltaXQpICogMC4yNSAqIGtfZmFjdG9yKTsKICAgICAgICAgICAgICAgIHJldHVybiBNYXRoLm1heChwZXJtYW5lbnRTdHJldGNoLCBwZWFrRXh0IC0gKG1heFJlYWNoZWRNYXNzIC0gbSkgKiAwLjEyICoga19mYWN0b3IpOwogICAgICAgICAgICB9CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgaWYgKG1heFJlYWNoZWRNYXNzID4gNjAwKSBwZXJtYW5lbnRTdHJldGNoID0gKG1heFJlYWNoZWRNYXNzIC0gNjAwKSAqIDAuMDM7CgogICAgICAgICAgICBpZiAoIXVubG9hZGluZykgewogICAgICAgICAgICAgICAgcmV0dXJuIDQwICogTWF0aC5sb2cxMCgobSAvIDM1KSArIDEpOwogICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgbGV0IHBlYWtMb2FkaW5nRXh0ID0gNDAgKiBNYXRoLmxvZzEwKChtYXhSZWFjaGVkTWFzcyAvIDM1KSArIDEpOwogICAgICAgICAgICAgICAgbGV0IHVubG9hZGluZ0N1cnZlQXRQZWFrID0gNTIgKiBNYXRoLmxvZzEwKChtYXhSZWFjaGVkTWFzcyAvIDM1KSArIDEpOwogICAgICAgICAgICAgICAgbGV0IHNoaWZ0ID0gcGVha0xvYWRpbmdFeHQgLSB1bmxvYWRpbmdDdXJ2ZUF0UGVhazsKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgbGV0IGN1cnJlbnRVbmxvYWRpbmcgPSA1MiAqIE1hdGgubG9nMTAoKG0gLyAzNSkgKyAxKSArIHNoaWZ0OwogICAgICAgICAgICAgICAgcmV0dXJuIE1hdGgubWF4KHBlcm1hbmVudFN0cmV0Y2gsIGN1cnJlbnRVbmxvYWRpbmcpOwogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQoKICAgIGZ1bmN0aW9uIGNoYW5nZU1hc3MoYW1vdW50KSB7CiAgICAgICAgaWYgKGlzU25hcHBlZCkgcmV0dXJuOwogICAgICAgIGNvbnN0IHR5cGUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbWF0ZXJpYWwnKS52YWx1ZTsKICAgICAgICBjb25zdCBjb25maWcgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdpbnB1dFtuYW1lPSJjb25maWciXTpjaGVja2VkJykudmFsdWU7CiAgICAgICAgY29uc3QgbmV4dE1hc3MgPSBjdXJyZW50TWFzcyArIGFtb3VudDsKICAgICAgICAKICAgICAgICBpZiAobmV4dE1hc3MgPiAxMjAwIHx8IG5leHRNYXNzIDwgMCkgcmV0dXJuOwoKICAgICAgICBpZiAodHlwZSA9PT0gJ2JhbmQnICYmIG5leHRNYXNzID4gMTEwMCAmJiBhbW91bnQgPiAwKSB7CiAgICAgICAgICAgIHRyaWdnZXJTbmFwKCk7CiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB9CgogICAgICAgIGxhc3RDb25maWdOYW1lID0gKHR5cGUgPT09ICdzcHJpbmcnKSA/IGNvbmZpZ05hbWVzW2NvbmZpZ10gOiBjb25maWdOYW1lc1snYmFuZCddOwoKICAgICAgICBpZiAoYW1vdW50IDwgMCkgaXNVbmxvYWRpbmdNb2RlID0gdHJ1ZTsKICAgICAgICBpZiAoYW1vdW50ID4gMCAmJiBuZXh0TWFzcyA+PSBtYXhSZWFjaGVkTWFzcykgaXNVbmxvYWRpbmdNb2RlID0gZmFsc2U7CiAgICAgICAgaWYgKG5leHRNYXNzID4gbWF4UmVhY2hlZE1hc3MpIG1heFJlYWNoZWRNYXNzID0gbmV4dE1hc3M7CgogICAgICAgIGNvbnN0IGFjdHVhbEV4dCA9IGdldEV4dGVuc2lvbkFuZFBsYXN0aWNpdHkobmV4dE1hc3MsIHR5cGUsIGlzVW5sb2FkaW5nTW9kZSwgY29uZmlnKTsKICAgICAgICBjb25zdCBmb3JjZSA9IChuZXh0TWFzcyAvIDEwMDApICogZzsKCiAgICAgICAgaWYgKCFpc1VubG9hZGluZ01vZGUpIHsKICAgICAgICAgICAgbG9hZGluZ0RhdGEueC5wdXNoKHBhcnNlRmxvYXQoYWN0dWFsRXh0LnRvRml4ZWQoMSkpKTsKICAgICAgICAgICAgbG9hZGluZ0RhdGEueS5wdXNoKHBhcnNlRmxvYXQoZm9yY2UudG9GaXhlZCgyKSkpOwogICAgICAgICAgICBsb2FkaW5nRGF0YS5tLnB1c2gobmV4dE1hc3MpOwogICAgICAgICAgICB1bmxvYWRpbmdEYXRhID0geyB4OiBbXSwgeTogW10sIG06IFtdIH07CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgaWYgKHVubG9hZGluZ0RhdGEueC5sZW5ndGggPT09IDApIHsKICAgICAgICAgICAgICAgIHVubG9hZGluZ0RhdGEueC5wdXNoKGxvYWRpbmdEYXRhLnhbbG9hZGluZ0RhdGEueC5sZW5ndGggLSAxXSk7CiAgICAgICAgICAgICAgICB1bmxvYWRpbmdEYXRhLnkucHVzaChsb2FkaW5nRGF0YS55W2xvYWRpbmdEYXRhLnkubGVuZ3RoIC0gMV0pOwogICAgICAgICAgICAgICAgdW5sb2FkaW5nRGF0YS5tLnB1c2gobG9hZGluZ0RhdGEubVtsb2FkaW5nRGF0YS5tLmxlbmd0aCAtIDFdKTsKICAgICAgICAgICAgfQogICAgICAgICAgICB1bmxvYWRpbmdEYXRhLngucHVzaChwYXJzZUZsb2F0KGFjdHVhbEV4dC50b0ZpeGVkKDEpKSk7CiAgICAgICAgICAgIHVubG9hZGluZ0RhdGEueS5wdXNoKHBhcnNlRmxvYXQoZm9yY2UudG9GaXhlZCgyKSkpOwogICAgICAgICAgICB1bmxvYWRpbmdEYXRhLm0ucHVzaChuZXh0TWFzcyk7CiAgICAgICAgfQoKICAgICAgICBjdXJyZW50TWFzcyA9IG5leHRNYXNzOwogICAgICAgIGFwcGVuZFRvVGFibGUobmV4dE1hc3MsIGZvcmNlLCBhY3R1YWxFeHQpOwogICAgICAgIHVwZGF0ZVVJKGFjdHVhbEV4dCk7CiAgICAgICAgdXBkYXRlR3JhcGgoKTsKICAgIH0KCiAgICAvKiBMaWdodHdlaWdodCwgZGVwZW5kZW5jeS1mcmVlIGNhbnZhcyBjaGFydCAocmVwbGFjZXMgdGhlIG9yaWdpbmFsIFBsb3RseS5qcwogICAgICAgY2FsbCBzbyB0aGlzIHdpZGdldCBoYXMgbm8gZXh0ZXJuYWwgbmV0d29yayBkZXBlbmRlbmN5IG9uY2UgZW1iZWRkZWQpLiAqLwogICAgZnVuY3Rpb24gbmljZVN0ZXAocmFuZ2UpIHsKICAgICAgICBpZiAocmFuZ2UgPD0gMCkgcmV0dXJuIDE7CiAgICAgICAgY29uc3Qgcm91Z2ggPSByYW5nZSAvIDU7CiAgICAgICAgY29uc3QgbWFnID0gTWF0aC5wb3coMTAsIE1hdGguZmxvb3IoTWF0aC5sb2cxMChyb3VnaCkpKTsKICAgICAgICBjb25zdCBub3JtID0gcm91Z2ggLyBtYWc7CiAgICAgICAgbGV0IHN0ZXA7CiAgICAgICAgaWYgKG5vcm0gPCAxLjUpIHN0ZXAgPSAxOyBlbHNlIGlmIChub3JtIDwgMy41KSBzdGVwID0gMjsgZWxzZSBpZiAobm9ybSA8IDcuNSkgc3RlcCA9IDU7IGVsc2Ugc3RlcCA9IDEwOwogICAgICAgIHJldHVybiBzdGVwICogbWFnOwogICAgfQoKICAgIGZ1bmN0aW9uIHVwZGF0ZUdyYXBoKCkgewogICAgICAgIGNvbnN0IHR5cGUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbWF0ZXJpYWwnKS52YWx1ZTsKICAgICAgICBjb25zdCBjb25maWcgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdpbnB1dFtuYW1lPSJjb25maWciXTpjaGVja2VkJykudmFsdWU7CiAgICAgICAgY29uc3QgYWN0aXZlTGFiZWwgPSB0eXBlID09PSAnc3ByaW5nJyA/IGNvbmZpZ05hbWVzW2NvbmZpZ10gOiBjb25maWdOYW1lc1snYmFuZCddOwoKICAgICAgICBjb25zdCBjYW52YXMgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZ3JhcGgnKTsKICAgICAgICBjb25zdCBjc3NXID0gY2FudmFzLmNsaWVudFdpZHRoIHx8IDUwMCwgY3NzSCA9IDMyMDsKICAgICAgICBjb25zdCBkcHIgPSB3aW5kb3cuZGV2aWNlUGl4ZWxSYXRpbyB8fCAxOwogICAgICAgIGNhbnZhcy53aWR0aCA9IGNzc1cgKiBkcHI7IGNhbnZhcy5oZWlnaHQgPSBjc3NIICogZHByOwogICAgICAgIGNhbnZhcy5zdHlsZS53aWR0aCA9IGNzc1cgKyAncHgnOyBjYW52YXMuc3R5bGUuaGVpZ2h0ID0gY3NzSCArICdweCc7CiAgICAgICAgY29uc3QgY3R4ID0gY2FudmFzLmdldENvbnRleHQoJzJkJyk7CiAgICAgICAgY3R4LnNldFRyYW5zZm9ybShkcHIsIDAsIDAsIGRwciwgMCwgMCk7CiAgICAgICAgY3R4LmNsZWFyUmVjdCgwLCAwLCBjc3NXLCBjc3NIKTsKCiAgICAgICAgY29uc3QgdHJhY2VzID0gaGlzdG9yeVRyYWNlcy5tYXAodCA9PiAoeyB4OiB0LngsIHk6IHQueSwgY29sb3I6ICdyZ2JhKDEyMCwxMzAsMTQwLDAuNDUpJywgd2lkdGg6IDEuMiwgZGFzaGVkOiAvVW5sb2FkaW5nLy50ZXN0KHQubmFtZSksIG1hcmtlcnM6IGZhbHNlIH0pKTsKICAgICAgICB0cmFjZXMucHVzaCh7IHg6IGxvYWRpbmdEYXRhLngsIHk6IGxvYWRpbmdEYXRhLnksIGNvbG9yOiAnIzM0OThkYicsIHdpZHRoOiAzLCBkYXNoZWQ6IGZhbHNlLCBtYXJrZXJzOiB0cnVlIH0pOwogICAgICAgIGlmICh1bmxvYWRpbmdEYXRhLngubGVuZ3RoID4gMCkgewogICAgICAgICAgICB0cmFjZXMucHVzaCh7IHg6IHVubG9hZGluZ0RhdGEueCwgeTogdW5sb2FkaW5nRGF0YS55LCBjb2xvcjogJyNlNzRjM2MnLCB3aWR0aDogMiwgZGFzaGVkOiB0cnVlLCBtYXJrZXJzOiB0cnVlIH0pOwogICAgICAgIH0KCiAgICAgICAgbGV0IG1heFggPSAxMCwgbWF4WSA9IDE7CiAgICAgICAgdHJhY2VzLmZvckVhY2godCA9PiB7IHQueC5mb3JFYWNoKHYgPT4geyBpZiAodiA+IG1heFgpIG1heFggPSB2OyB9KTsgdC55LmZvckVhY2godiA9PiB7IGlmICh2ID4gbWF4WSkgbWF4WSA9IHY7IH0pOyB9KTsKICAgICAgICBtYXhYICo9IDEuMTsgbWF4WSAqPSAxLjE1OwoKICAgICAgICBjb25zdCBwYWRMID0gNDYsIHBhZFIgPSAxNCwgcGFkVCA9IDMwLCBwYWRCID0gMzQ7CiAgICAgICAgY29uc3QgcGxvdFcgPSBjc3NXIC0gcGFkTCAtIHBhZFIsIHBsb3RIID0gY3NzSCAtIHBhZFQgLSBwYWRCOwogICAgICAgIGNvbnN0IHhTY2FsZSA9IHYgPT4gcGFkTCArICh2IC8gbWF4WCkgKiBwbG90VzsKICAgICAgICBjb25zdCB5U2NhbGUgPSB2ID0+IHBhZFQgKyBwbG90SCAtICh2IC8gbWF4WSkgKiBwbG90SDsKCiAgICAgICAgY3R4LmZpbGxTdHlsZSA9ICcjMWYyOTMzJzsgY3R4LmZvbnQgPSAnYm9sZCAxM3B4IHNhbnMtc2VyaWYnOyBjdHgudGV4dEFsaWduID0gJ2NlbnRlcic7CiAgICAgICAgY3R4LmZpbGxUZXh0KCdGb3JjZSAoTikgdnMgRXh0ZW5zaW9uIChtbSknLCBjc3NXIC8gMiwgMTgpOwoKICAgICAgICBjdHguc3Ryb2tlU3R5bGUgPSAnI2U1ZTllYyc7IGN0eC5saW5lV2lkdGggPSAxOyBjdHguZm9udCA9ICcxMC41cHggc2Fucy1zZXJpZic7IGN0eC5maWxsU3R5bGUgPSAnIzViNmI3OCc7CiAgICAgICAgY29uc3QgeFN0ZXAgPSBuaWNlU3RlcChtYXhYKSwgeVN0ZXAgPSBuaWNlU3RlcChtYXhZKTsKICAgICAgICBjdHgudGV4dEFsaWduID0gJ2NlbnRlcic7CiAgICAgICAgZm9yIChsZXQgdiA9IDA7IHYgPD0gbWF4WDsgdiArPSB4U3RlcCkgewogICAgICAgICAgICBjb25zdCBweCA9IHhTY2FsZSh2KTsKICAgICAgICAgICAgY3R4LmJlZ2luUGF0aCgpOyBjdHgubW92ZVRvKHB4LCBwYWRUKTsgY3R4LmxpbmVUbyhweCwgcGFkVCArIHBsb3RIKTsgY3R4LnN0cm9rZSgpOwogICAgICAgICAgICBjdHguZmlsbFRleHQodi50b0ZpeGVkKHYgPCAxID8gMSA6IDApLCBweCwgcGFkVCArIHBsb3RIICsgMTQpOwogICAgICAgIH0KICAgICAgICBjdHgudGV4dEFsaWduID0gJ3JpZ2h0JzsKICAgICAgICBmb3IgKGxldCB2ID0gMDsgdiA8PSBtYXhZOyB2ICs9IHlTdGVwKSB7CiAgICAgICAgICAgIGNvbnN0IHB5ID0geVNjYWxlKHYpOwogICAgICAgICAgICBjdHguYmVnaW5QYXRoKCk7IGN0eC5tb3ZlVG8ocGFkTCwgcHkpOyBjdHgubGluZVRvKHBhZEwgKyBwbG90VywgcHkpOyBjdHguc3Ryb2tlKCk7CiAgICAgICAgICAgIGN0eC5maWxsVGV4dCh2LnRvRml4ZWQodiA8IDEgPyAyIDogMSksIHBhZEwgLSA2LCBweSArIDMuNSk7CiAgICAgICAgfQoKICAgICAgICBjdHguc3Ryb2tlU3R5bGUgPSAnIzhhOTdhMSc7IGN0eC5saW5lV2lkdGggPSAxLjQ7CiAgICAgICAgY3R4LmJlZ2luUGF0aCgpOyBjdHgubW92ZVRvKHBhZEwsIHBhZFQpOyBjdHgubGluZVRvKHBhZEwsIHBhZFQgKyBwbG90SCk7IGN0eC5saW5lVG8ocGFkTCArIHBsb3RXLCBwYWRUICsgcGxvdEgpOyBjdHguc3Ryb2tlKCk7CgogICAgICAgIGN0eC5zYXZlKCk7CiAgICAgICAgY3R4LnRyYW5zbGF0ZSgxMiwgcGFkVCArIHBsb3RIIC8gMik7IGN0eC5yb3RhdGUoLU1hdGguUEkgLyAyKTsKICAgICAgICBjdHgudGV4dEFsaWduID0gJ2NlbnRlcic7IGN0eC5maWxsU3R5bGUgPSAnIzNhNDc1Myc7IGN0eC5mb250ID0gJzExcHggc2Fucy1zZXJpZic7CiAgICAgICAgY3R4LmZpbGxUZXh0KCdGb3JjZSAoTiknLCAwLCAwKTsKICAgICAgICBjdHgucmVzdG9yZSgpOwogICAgICAgIGN0eC50ZXh0QWxpZ24gPSAnY2VudGVyJzsgY3R4LmZpbGxUZXh0KCdFeHRlbnNpb24gKG1tKScsIHBhZEwgKyBwbG90VyAvIDIsIGNzc0ggLSA2KTsKCiAgICAgICAgdHJhY2VzLmZvckVhY2godCA9PiB7CiAgICAgICAgICAgIGlmICh0LngubGVuZ3RoIDwgMSkgcmV0dXJuOwogICAgICAgICAgICBjdHguc3Ryb2tlU3R5bGUgPSB0LmNvbG9yOyBjdHgubGluZVdpZHRoID0gdC53aWR0aDsKICAgICAgICAgICAgY3R4LnNldExpbmVEYXNoKHQuZGFzaGVkID8gWzUsIDRdIDogW10pOwogICAgICAgICAgICBjdHguYmVnaW5QYXRoKCk7CiAgICAgICAgICAgIHQueC5mb3JFYWNoKCh2LCBpKSA9PiB7CiAgICAgICAgICAgICAgICBjb25zdCBweCA9IHhTY2FsZSh2KSwgcHkgPSB5U2NhbGUodC55W2ldKTsKICAgICAgICAgICAgICAgIGlmIChpID09PSAwKSBjdHgubW92ZVRvKHB4LCBweSk7IGVsc2UgY3R4LmxpbmVUbyhweCwgcHkpOwogICAgICAgICAgICB9KTsKICAgICAgICAgICAgY3R4LnN0cm9rZSgpOwogICAgICAgICAgICBjdHguc2V0TGluZURhc2goW10pOwogICAgICAgICAgICBpZiAodC5tYXJrZXJzKSB7CiAgICAgICAgICAgICAgICBjdHguZmlsbFN0eWxlID0gdC5jb2xvcjsKICAgICAgICAgICAgICAgIHQueC5mb3JFYWNoKCh2LCBpKSA9PiB7CiAgICAgICAgICAgICAgICAgICAgY3R4LmJlZ2luUGF0aCgpOyBjdHguYXJjKHhTY2FsZSh2KSwgeVNjYWxlKHQueVtpXSksIDMsIDAsIE1hdGguUEkgKiAyKTsgY3R4LmZpbGwoKTsKICAgICAgICAgICAgICAgIH0pOwogICAgICAgICAgICB9CiAgICAgICAgfSk7CgogICAgICAgIGN0eC5maWxsU3R5bGUgPSAnIzM0OThkYic7IGN0eC5maWxsUmVjdChwYWRMICsgNCwgcGFkVCArIDIsIDEwLCAxMCk7CiAgICAgICAgY3R4LmZpbGxTdHlsZSA9ICcjMWYyOTMzJzsgY3R4LmZvbnQgPSAnMTAuNXB4IHNhbnMtc2VyaWYnOyBjdHgudGV4dEFsaWduID0gJ2xlZnQnOwogICAgICAgIGN0eC5maWxsVGV4dChhY3RpdmVMYWJlbCwgcGFkTCArIDE4LCBwYWRUICsgMTEpOwogICAgICAgIGlmICh1bmxvYWRpbmdEYXRhLngubGVuZ3RoID4gMCkgewogICAgICAgICAgICBjdHguZmlsbFN0eWxlID0gJyNlNzRjM2MnOyBjdHguZmlsbFJlY3QocGFkTCArIDQsIHBhZFQgKyAxNiwgMTAsIDEwKTsKICAgICAgICAgICAgY3R4LmZpbGxTdHlsZSA9ICcjMWYyOTMzJzsgY3R4LmZpbGxUZXh0KCdVbmxvYWRpbmcnLCBwYWRMICsgMTgsIHBhZFQgKyAyNSk7CiAgICAgICAgfQogICAgfQogICAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ3Jlc2l6ZScsIHVwZGF0ZUdyYXBoKTsKCiAgICBmdW5jdGlvbiBzb2Z0UmVzZXQoKSB7CiAgICAgICAgaWYgKGxvYWRpbmdEYXRhLngubGVuZ3RoID4gMSkgewogICAgICAgICAgICBjb25zdCBydW5JRCA9IGhpc3RvcnlUcmFjZXMubGVuZ3RoICsgMTsKICAgICAgICAgICAgY29uc3QgZmluYWxUcmFjZU5hbWUgPSBsYXN0Q29uZmlnTmFtZSArICIgKFJ1biAiICsgcnVuSUQgKyAiKSI7CiAgICAgICAgICAgIAogICAgICAgICAgICBoaXN0b3J5VHJhY2VzLnB1c2goewogICAgICAgICAgICAgICAgeDogWy4uLmxvYWRpbmdEYXRhLnhdLCB5OiBbLi4ubG9hZGluZ0RhdGEueV0sCiAgICAgICAgICAgICAgICBtb2RlOiAnbGluZXMnLCBuYW1lOiBmaW5hbFRyYWNlTmFtZSwgbGluZTogeyB3aWR0aDogMS41LCBvcGFjaXR5OiAwLjUgfQogICAgICAgICAgICB9KTsKCiAgICAgICAgICAgIGlmICh1bmxvYWRpbmdEYXRhLngubGVuZ3RoID4gMSkgewogICAgICAgICAgICAgICAgaGlzdG9yeVRyYWNlcy5wdXNoKHsKICAgICAgICAgICAgICAgICAgICB4OiBbLi4udW5sb2FkaW5nRGF0YS54XSwgeTogWy4uLnVubG9hZGluZ0RhdGEueV0sCiAgICAgICAgICAgICAgICAgICAgbW9kZTogJ2xpbmVzJywgbmFtZTogZmluYWxUcmFjZU5hbWUgKyAnIChVbmxvYWRpbmcpJywgbGluZTogeyB3aWR0aDogMS4yLCBkYXNoOiAnZG90Jywgb3BhY2l0eTogMC40IH0KICAgICAgICAgICAgICAgIH0pOwogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIAogICAgICAgIGN1cnJlbnRNYXNzID0gMDsgbWF4UmVhY2hlZE1hc3MgPSAwOyBwZXJtYW5lbnRTdHJldGNoID0gMDsKICAgICAgICBsb2FkaW5nRGF0YSA9IHsgeDogWzBdLCB5OiBbMF0sIG06IFswXSB9OwogICAgICAgIHVubG9hZGluZ0RhdGEgPSB7IHg6IFtdLCB5OiBbXSwgbTogW10gfTsKICAgICAgICBpc1NuYXBwZWQgPSBmYWxzZTsgaXNVbmxvYWRpbmdNb2RlID0gZmFsc2U7CiAgICAgICAgCiAgICAgICAgY29uc3QgdHlwZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdtYXRlcmlhbCcpLnZhbHVlOwogICAgICAgIGNvbnN0IGNvbmZpZyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ2lucHV0W25hbWU9ImNvbmZpZyJdOmNoZWNrZWQnKS52YWx1ZTsKICAgICAgICBsYXN0Q29uZmlnTmFtZSA9ICh0eXBlID09PSAnc3ByaW5nJykgPyBjb25maWdOYW1lc1tjb25maWddIDogY29uZmlnTmFtZXNbJ2JhbmQnXTsKCiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2xlZGdlci1ib2R5JykuaW5uZXJIVE1MID0gJyc7CiAgICAgICAgdXBkYXRlVUkoMCk7IAogICAgICAgIHVwZGF0ZUdyYXBoKCk7CiAgICB9CgogICAgZnVuY3Rpb24gY2xlYXJHcmFwaCgpIHsgaGlzdG9yeVRyYWNlcyA9IFtdOyBzb2Z0UmVzZXQoKTsgfQoKICAgIGZ1bmN0aW9uIHRyaWdnZXJTbmFwKCkgewogICAgICAgIGlzU25hcHBlZCA9IHRydWU7CiAgICAgICAgY29uc3QgdG9wUGFydCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5iYW5kJyk7CiAgICAgICAgaWYodG9wUGFydCkgdG9wUGFydC5jbGFzc0xpc3QuYWRkKCdzbmFwcGVkLXRvcCcpOwogICAgICAgIAogICAgICAgIGNvbnN0IGhhbmdlciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdoYW5nZXInKTsKICAgICAgICBpZihoYW5nZXIpIHsKICAgICAgICAgICAgY29uc3QgYm90dG9tUGFydCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgICAgICAgICBib3R0b21QYXJ0LmNsYXNzTmFtZSA9ICdiYW5kIHNuYXBwZWQtYm90dG9tJzsKICAgICAgICAgICAgYm90dG9tUGFydC5zdHlsZS5oZWlnaHQgPSAnNDBweCc7CiAgICAgICAgICAgIGJvdHRvbVBhcnQuc3R5bGUucG9zaXRpb24gPSAnYWJzb2x1dGUnOwogICAgICAgICAgICBib3R0b21QYXJ0LnN0eWxlLnRvcCA9ICctNDBweCc7CiAgICAgICAgICAgIGJvdHRvbVBhcnQuc3R5bGUubGVmdCA9ICctM3B4JzsKICAgICAgICAgICAgaGFuZ2VyLmFwcGVuZENoaWxkKGJvdHRvbVBhcnQpOwogICAgICAgICAgICBzZXRUaW1lb3V0KCgpID0+IGhhbmdlci5jbGFzc0xpc3QuYWRkKCdoYW5nZXItZmFsbGluZycpLCA1MCk7CiAgICAgICAgfQogICAgfQoKICAgIGZ1bmN0aW9uIHVwZGF0ZVVJKGV4dCkgewogICAgICAgIGNvbnN0IHR5cGUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbWF0ZXJpYWwnKS52YWx1ZTsKICAgICAgICBjb25zdCBjb25maWcgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdpbnB1dFtuYW1lPSJjb25maWciXTpjaGVja2VkJykudmFsdWU7CiAgICAgICAgY29uc3QgbW91bnQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYXBwYXJhdHVzLW1vdW50Jyk7CiAgICAgICAgbW91bnQuaW5uZXJIVE1MID0gJyc7CgogICAgICAgIGlmICh0eXBlID09PSAnYmFuZCcpIHsKICAgICAgICAgICAgbW91bnQuaW5uZXJIVE1MID0gYDxkaXYgY2xhc3M9Imxvb3AiIHN0eWxlPSJiYWNrZ3JvdW5kOiM1NTU7IGhlaWdodDoxMnB4OyB3aWR0aDoxMnB4OyBib3JkZXI6bm9uZTsgbWFyZ2luLWJvdHRvbTotNnB4OyI+PC9kaXY+PGRpdiBjbGFzcz0iYmFuZCIgc3R5bGU9ImhlaWdodDoke2Jhc2VMZW4gKyBleHR9cHgiPjwvZGl2PjxkaXYgaWQ9ImhhbmdlciIgc3R5bGU9InRvcDokezYgKyBiYXNlTGVuICsgZXh0fXB4OyBsZWZ0OjQ2cHg7Ij48ZGl2IGlkPSJtYXNzLXNsb3RzIj48L2Rpdj48L2Rpdj5gOwogICAgICAgIH0gZWxzZSBpZiAoY29uZmlnID09PSAnc2luZ2xlJykgewogICAgICAgICAgICBtb3VudC5pbm5lckhUTUwgPSBgPGRpdiBjbGFzcz0ibG9vcCI+PC9kaXY+PGRpdiBjbGFzcz0ic3ByaW5nLWJvZHkiIHN0eWxlPSJoZWlnaHQ6JHtiYXNlTGVuICsgZXh0fXB4Ij48L2Rpdj48ZGl2IGNsYXNzPSJsb29wIiBzdHlsZT0icG9zaXRpb246cmVsYXRpdmU7Ij48ZGl2IGlkPSJoYW5nZXIiIHN0eWxlPSJ0b3A6MTRweDsgbGVmdDo0cHg7Ij48ZGl2IGlkPSJtYXNzLXNsb3RzIj48L2Rpdj48L2Rpdj48L2Rpdj5gOwogICAgICAgIH0gZWxzZSBpZiAoY29uZmlnID09PSAnc2VyaWVzJykgewogICAgICAgICAgICBjb25zdCBoID0gKGJhc2VMZW4gKyBleHQpIC8gMjsKICAgICAgICAgICAgbW91bnQuaW5uZXJIVE1MID0gYDxkaXYgY2xhc3M9Imxvb3AiPjwvZGl2PjxkaXYgY2xhc3M9InNwcmluZy1ib2R5IiBzdHlsZT0iaGVpZ2h0OiR7aH1weCI+PC9kaXY+PGRpdiBjbGFzcz0ibG9vcCI+PC9kaXY+PGRpdiBjbGFzcz0ic3ByaW5nLWJvZHkiIHN0eWxlPSJoZWlnaHQ6JHtofXB4Ij48L2Rpdj48ZGl2IGNsYXNzPSJsb29wIiBzdHlsZT0icG9zaXRpb246cmVsYXRpdmU7Ij48ZGl2IGlkPSJoYW5nZXIiIHN0eWxlPSJ0b3A6MTRweDsgbGVmdDo0cHg7Ij48ZGl2IGlkPSJtYXNzLXNsb3RzIj48L2Rpdj48L2Rpdj48L2Rpdj5gOwogICAgICAgIH0gZWxzZSBpZiAoY29uZmlnID09PSAncGFyYWxsZWwnKSB7CiAgICAgICAgICAgIC8vIERvd2VsIHRvcCBob29rIHJlbW92ZWQKICAgICAgICAgICAgbW91bnQuaW5uZXJIVE1MID0gYDxkaXYgY2xhc3M9ImRvd2VsIiBzdHlsZT0ibWFyZ2luLXRvcDoxMHB4OyI+PC9kaXY+PGRpdiBjbGFzcz0ic3ByaW5nLXNldCIgc3R5bGU9ImdhcDozMHB4OyBkaXNwbGF5OmZsZXg7Ij48ZGl2IGNsYXNzPSJzcHJpbmctY29sdW1uIj48ZGl2IGNsYXNzPSJsb29wIj48L2Rpdj48ZGl2IGNsYXNzPSJzcHJpbmctYm9keSIgc3R5bGU9ImhlaWdodDoke2Jhc2VMZW4gKyBleHR9cHgiPjwvZGl2PjxkaXYgY2xhc3M9Imxvb3AiPjwvZGl2PjwvZGl2PjxkaXYgY2xhc3M9InNwcmluZy1jb2x1bW4iPjxkaXYgY2xhc3M9Imxvb3AiPjwvZGl2PjxkaXYgY2xhc3M9InNwcmluZy1ib2R5IiBzdHlsZT0iaGVpZ2h0OiR7YmFzZUxlbiArIGV4dH1weCI+PC9kaXY+PGRpdiBjbGFzcz0ibG9vcCI+PC9kaXY+PC9kaXY+PC9kaXY+PGRpdiBjbGFzcz0iZG93ZWwiPjxkaXYgY2xhc3M9ImV5ZS1ob29rIGJvdHRvbSI+PC9kaXY+PGRpdiBpZD0iaGFuZ2VyIiBzdHlsZT0idG9wOjIwcHg7IGxlZnQ6MzZweDsiPjxkaXYgaWQ9Im1hc3Mtc2xvdHMiPjwvZGl2PjwvZGl2PjwvZGl2PmA7CiAgICAgICAgfQoKICAgICAgICBjb25zdCBzbG90cyA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdtYXNzLXNsb3RzJyk7CiAgICAgICAgaWYoc2xvdHMpIHsKICAgICAgICAgICAgZm9yKGxldCBpPTA7IGkgPCBjdXJyZW50TWFzcy8xMDA7IGkrKykgewogICAgICAgICAgICAgICAgY29uc3QgbSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpOwogICAgICAgICAgICAgICAgbS5jbGFzc05hbWUgPSAnbWFzcy1waWVjZSc7IG0uc3R5bGUuYm90dG9tID0gKDQgKyAoaSAqIDgpKSArICdweCc7CiAgICAgICAgICAgICAgICBtLmlubmVyVGV4dCA9ICcxMDBnJzsgc2xvdHMuYXBwZW5kQ2hpbGQobSk7CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ20tdmFsJykuaW5uZXJUZXh0ID0gY3VycmVudE1hc3M7CiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2V4dC12YWwnKS5pbm5lclRleHQgPSBleHQudG9GaXhlZCgxKTsKICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncGVybS12YWwnKS5pbm5lclRleHQgPSBwZXJtYW5lbnRTdHJldGNoLnRvRml4ZWQoMSk7CiAgICB9CgogICAgZnVuY3Rpb24gYXBwZW5kVG9UYWJsZShtLCBmLCBlKSB7CiAgICAgICAgY29uc3QgYm9keSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsZWRnZXItYm9keScpOwogICAgICAgIGNvbnN0IHJvdyA9IGJvZHkuaW5zZXJ0Um93KDApOwogICAgICAgIHJvdy5pbm5lckhUTUwgPSBgPHRkPiR7bX08L3RkPjx0ZD4ke2YudG9GaXhlZCgyKX08L3RkPjx0ZD4ke2UudG9GaXhlZCgxKX08L3RkPmA7CiAgICB9CgogICAgZnVuY3Rpb24gZG93bmxvYWRDU1YoKSB7CiAgICAgICAgbGV0IGNzdiA9ICJSdW4sTWFzcyhnKSxGb3JjZShOKSxFeHRlbnNpb24obW0pXG4iOwogICAgICAgIGhpc3RvcnlUcmFjZXMuZm9yRWFjaCh0ID0+IHsKICAgICAgICAgICAgdC54LmZvckVhY2goKHgsIGkpID0+IGNzdiArPSBgJHt0Lm5hbWV9LE4vQSwke3QueVtpXX0sJHt4fVxuYCk7CiAgICAgICAgfSk7CiAgICAgICAgY29uc3QgYmxvYiA9IG5ldyBCbG9iKFtjc3ZdLCB7IHR5cGU6ICd0ZXh0L2NzdicgfSk7CiAgICAgICAgY29uc3QgdXJsID0gd2luZG93LlVSTC5jcmVhdGVPYmplY3RVUkwoYmxvYik7CiAgICAgICAgY29uc3QgYSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2EnKTsKICAgICAgICBhLmhyZWYgPSB1cmw7IGEuZG93bmxvYWQgPSAnZGF0YS5jc3YnOyBhLmNsaWNrKCk7CiAgICB9Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4K" loading="lazy" title="Springs and an Elastic Band simulator"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://sites.google.com/view/hookean-physics/springs-and-an-elastic-band" target="_blank" rel="noopener">Dr Dan Jones, Hookean Physics</a> (graph redrawn locally so the simulation runs without an internet connection).</p>
+      </div>
+
+      <p>When a spring is stretched from zero extension, the force needed grows steadily from 0 up to its final value F<sub>H</sub>, so the <em>average</em> force used is &frac12;F<sub>H</sub>. Using work done = average force &times; distance:</p>
+
+      <figure>
+        <svg viewBox="-25 0 425 235" width="425" height="235" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mG1" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5b6b78"/></marker>
+          </defs>
+          <line x1="55" y1="185" x2="370" y2="185" stroke="#5b6b78" stroke-width="1.5" marker-end="url(#mG1)"/>
+          <line x1="55" y1="185" x2="55" y2="20" stroke="#5b6b78" stroke-width="1.5" marker-end="url(#mG1)"/>
+          <text x="48" y="16" font-size="13" fill="#1f2933" text-anchor="end">force</text>
+          <text x="358" y="222" font-size="13" fill="#1f2933" text-anchor="end">extension</text>
+          <polygon points="55,185 330,45 330,185" fill="#eaf3fb" stroke="none"/>
+          <line x1="55" y1="185" x2="330" y2="45" stroke="#0e7c86" stroke-width="3"/>
+          <text x="235" y="150" font-size="13" fill="#0a5b62" text-anchor="middle">area = work done = E<tspan font-size="9" baseline-shift="sub">H</tspan></text>
+          <text x="330" y="200" font-size="12" fill="#3a4753" text-anchor="middle">&Delta;x</text>
+          <text x="45" y="49" font-size="12" fill="#3a4753" text-anchor="end">F<tspan font-size="9" baseline-shift="sub">H</tspan></text>
+        </svg>
+        <figcaption>Fig. 4.1 A force&ndash;extension graph for a spring obeying Hooke's law. The area of the shaded triangle — &frac12; &times; F&#8320; &times; &Delta;x — equals the work done stretching the spring, which is stored as elastic potential energy.</figcaption>
+      </figure>
+
+      <div class="eqn">elastic potential energy, E<sub>H</sub> = &frac12;F<sub>H</sub>&Delta;x</div>
+
+      <div class="eqn">elastic potential energy, E<sub>H</sub> = &frac12;k&Delta;x&sup2;</div>
+
+      <div class="keybox"><strong>Key idea.</strong> Elastic potential energy E<sub>H</sub> is a work-done relationship (force &times; distance is the area under the line). There is no need for a minus sign in E<sub>H</sub> = &frac12;k&Delta;x&sup2; — unlike force, work done (and therefore stored energy) is not a vector, so it is always positive for a deformation in either direction.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 4.2</span>
+        <p>A spring has a spring constant of 384 N m<sup>&minus;1</sup> and is stretched by 2.0 cm. Calculate the elastic potential energy stored in the spring, assuming it obeys Hooke's law.</p>
+        <p><strong>Answer:</strong><br>
+        E<sub>H</sub> = &frac12;k&Delta;x&sup2; = &frac12; &times; 384 &times; 0.020&sup2;</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>A spring is 15 cm long and has a spring constant of 50 N m<sup>&minus;1</sup>. When a force is hung from the end, the spring stretches to 20 cm long. Determine the force that was added.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">extension, &Delta;x = 0.20 &minus; 0.15 = 0.05 m<br>
+        F<sub>H</sub> = k&Delta;x = 50 &times; 0.05</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>Calculate the elastic potential energy stored in an elastic cord with a spring constant of 525 N m<sup>&minus;1</sup> that has been stretched by 15 cm.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">E<sub>H</sub> = &frac12;k&Delta;x&sup2; = &frac12; &times; 525 &times; 0.15&sup2;</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>Using the simulator, load the steel spring and the elastic band in turn, up to a similar extension. Describe one difference between the shapes of their force&ndash;extension graphs, and state what this tells you about whether each obeys Hooke's law.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">The steel spring's force&ndash;extension line is straight, showing that force is directly proportional to extension — it obeys Hooke's law (until it is overloaded and starts to deform permanently, seen as a change in gradient and a gap opening up between the loading and unloading lines). The elastic band's line is curved rather than straight, showing that its force is not directly proportional to its extension — an elastic band does not obey Hooke's law.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>A catapult has a spring constant of 100 N m<sup>&minus;1</sup> and has been stretched to hold an elastic potential energy store of 12.5 J. Calculate how far it has been stretched.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">E<sub>H</sub> = &frac12;k&Delta;x&sup2;<br>
+        12.5 = &frac12; &times; 100 &times; &Delta;x&sup2;<br>
+        &Delta;x&sup2; = (2 &times; 12.5) &divide; 100<br>
+        &Delta;x = &radic;[(2 &times; 12.5) &divide; 100]</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: CONSERVATION OF MECHANICAL ENERGY ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Conservation of mechanical energy</h2>
+      <p>Applying the principle of conservation of energy specifically to mechanical energy gives a very useful result:</p>
+
+      <div class="keybox"><strong>Conservation of mechanical energy.</strong> In the absence of frictional or other resistive forces, the total mechanical energy of a system is conserved: kinetic energy + gravitational potential energy + elastic potential energy = constant.</div>
+
+      <p>If mechanical energy is conserved, then <strong>work is simply the amount of energy transformed between the different mechanical forms</strong> — kinetic, gravitational potential and elastic potential — as the system changes. Nothing is gained or lost overall; energy just moves between these three stores.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A ball is thrown upwards with a speed of 18 m s<sup>&minus;1</sup>. Assuming air resistance is negligible, calculate the maximum height it reaches.</p>
+        <p><strong>Answer:</strong><br>
+        At maximum height, all of the ball's initial kinetic energy has been transformed to gravitational potential energy:<br>
+        &frac12;mu&sup2; = mg&Delta;h, so &Delta;h = u&sup2; &divide; (2g) = 18&sup2; &divide; (2 &times; 9.8)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 5.2</span>
+        <p>A 4.7 kg box slides down a frictionless slope of vertical height 0.80 m, starting from rest. Calculate the speed of the box at the bottom of the slope.</p>
+        <p><strong>Answer:</strong><br>
+        Loss in GPE = gain in KE:<br>
+        mg&Delta;h = &frac12;mv&sup2;<br>
+        v = &radic;(2g&Delta;h) = &radic;(2 &times; 9.8 &times; 0.80)</p>
+      </div>
+
+      <h3>Live simulation: energy conservation in a valley</h3>
+      <p>Set a release height and a mass, then press play to watch a block slide down into a smooth valley and back up the other side. The bar chart shows kinetic energy, gravitational potential energy and total mechanical energy as the block moves. Switch on friction to see what happens to the total when energy is dissipated.</p>
+      <figure class="wide">
+        <div class="sim-wrap stacked">
+          <div class="sim-canvas-box"><canvas id="valleyCanvas" width="480" height="300"></canvas></div>
+          <div class="sim-controls">
+            <div class="sim-row"><label for="heightSlider">Release height, as % of maximum = <span id="heightVal">80</span>%</label><input type="range" id="heightSlider" min="10" max="100" step="5" value="80"></div>
+            <div class="sim-row"><label for="massSlider3">Mass = <span id="massVal3">1.0</span> kg</label><input type="range" id="massSlider3" min="0.2" max="3" step="0.1" value="1.0"></div>
+            <div class="sim-btns">
+              <button id="frictionBtn">Switch friction on</button>
+              <button id="valleyPlayBtn">Play</button>
+              <button class="alt" id="valleyResetBtn">Reset</button>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 5.1 A block released from rest slides through a frictionless (or, with friction switched on, a lossy) valley. With no friction, total mechanical energy stays constant as it is exchanged between kinetic and gravitational potential energy.</figcaption>
+      </figure>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span><strong>Real slopes have friction.</strong> A real block sliding down a real slope will arrive slower than the frictionless prediction, because some mechanical energy is dissipated as internal energy (and a little sound) at the sliding surfaces. The conservation of mechanical energy equation still gives a very useful <em>ideal</em> prediction, and the gap between the ideal and measured speeds tells you how much energy was dissipated.</div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>A ball is thrown upwards with a speed of 23 m s<sup>&minus;1</sup>. Calculate the maximum height it can reach, assuming air resistance is negligible.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">u&sup2; = 2g&Delta;h<br>
+        &Delta;h = u&sup2; &divide; (2g) = 23&sup2; &divide; (2 &times; 9.8)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>A skateboarder of mass 55 kg, starting from rest, rolls down a smooth ramp of vertical height 1.6 m. Assuming resistive forces are negligible, calculate her speed at the bottom.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">mg&Delta;h = &frac12;mv&sup2;<br>
+        v = &radic;(2g&Delta;h) = &radic;(2 &times; 9.8 &times; 1.6)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>Using the simulator with friction switched off, release the block and describe what happens to the kinetic energy and gravitational potential energy readouts as it swings from side to side. Use the readout to confirm that the total mechanical energy is conserved.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">As the block descends, its gravitational potential energy decreases while its kinetic energy increases by the same amount; at the bottom of the valley, GPE is at a minimum and KE is at a maximum. As the block rises up the far side, kinetic energy decreases back to zero while gravitational potential energy increases again, reaching (almost) the same height as the release point. Throughout the motion, the total mechanical energy readout (KE + GPE) stays constant, confirming that mechanical energy is conserved when there is no friction.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>Switch friction on in the simulator and release the block again. Explain what you observe happening to the maximum height reached on each successive swing, and where the missing mechanical energy has gone.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">With friction switched on, the block reaches a lower height on each successive swing — the total mechanical energy readout decreases over time rather than staying constant. This is because friction is a resistive (non-conservative) force: it dissipates some mechanical energy into internal energy (and a small amount of sound) at the surface with every pass through the valley, so it is not available to be converted back into kinetic or gravitational potential energy.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: SANKEY DIAGRAMS ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Sankey diagrams</h2>
+      <p>A <strong>Sankey diagram</strong> is a flow diagram used to visualise energy transfers: the width of each arrow is proportional to the amount of energy (or power) it represents. They are named after Captain Matthew Henry Sankey, who in 1898 first published a diagram of this kind, comparing the energy flow in a real steam engine with an ideal one.</p>
+
+      <figure>
+        <svg viewBox="0 0 500 175" width="500" height="175" xmlns="http://www.w3.org/2000/svg">
+          <text x="60" y="16" font-size="12" fill="#3a4753" text-anchor="start">total electrical</text>
+          <text x="60" y="28" font-size="12" fill="#3a4753" text-anchor="start">energy input</text>
+          <text x="60" y="44" font-size="12.5" fill="#173a5e" text-anchor="start" font-weight="600">100 J</text>
+          <rect x="60" y="70" width="20" height="80" fill="#f2b28c"/>
+          <rect x="80" y="70" width="330" height="4" fill="#0a5b62"/>
+          <polygon points="410,70 434,72 410,74" fill="#0a5b62"/>
+          <text x="140" y="60" font-size="12.5" fill="#0a5b62" text-anchor="start" font-weight="600">5 J useful light energy</text>
+          <rect x="80" y="74" width="135" height="76" fill="#a5570f"/>
+          <polygon points="215,74 248,112 215,150" fill="#a5570f"/>
+          <text x="147" y="108" font-size="13" fill="#fff" text-anchor="middle" font-weight="600">95 J</text>
+          <text x="147" y="126" font-size="11.5" fill="#fff" text-anchor="middle">dissipated as heat</text>
+        </svg>
+        <figcaption>Fig. 6.1 A simple Sankey diagram for a lamp: of 100 J of electrical energy supplied, only 5 J leaves as useful light energy — the remaining 95 J is dissipated as heat. The height of the input bar and the thickness of each horizontal arrow are both proportional to the amount of energy they carry, so the two arrows' thicknesses add up to the height of the input bar.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 6.1</span>
+        <p>An electric kettle has a power rating of 2000 W and is switched on for 90 s. During this time, 20 kJ of energy is dissipated to the surroundings by the kettle. Determine the total energy supplied, and the useful energy transferred to the water, ready to draw a Sankey diagram for this transfer.</p>
+        <p><strong>Answer:</strong><br>
+        total energy supplied = power &times; time = 2000 &times; 90 = 180 000 J = 180 kJ<br>
+        useful energy to heat the water = total &minus; dissipated = 180 &minus; 20</p>
+      </div>
+
+      <h3>Live simulation: build a Sankey diagram</h3>
+      <p>Set a total input energy and a useful-output percentage, and watch the Sankey diagram redraw to scale. This is the same idea used in Section 8 to picture efficiency.</p>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="sankeyCanvas" width="480" height="260"></canvas></div>
+          <div class="sim-controls">
+            <h4>Sankey diagram builder</h4>
+            <div class="sim-row"><label for="totalSlider">Total input energy = <span id="totalVal">200</span> J</label><input type="range" id="totalSlider" min="50" max="500" step="10" value="200"></div>
+            <div class="sim-row"><label for="usefulSlider">Useful output = <span id="usefulVal">60</span>%</label><input type="range" id="usefulSlider" min="0" max="100" step="5" value="60"></div>
+            <div class="sim-readout" id="sankeyReadout">useful energy: 120 J &nbsp;|&nbsp; wasted energy: 80 J</div>
+          </div>
+        </div>
+        <figcaption>Fig. 6.2 An interactive Sankey diagram. The height of the input bar scales with total input energy; the useful and wasted arrows' thicknesses scale with their share of that energy, and always add up to the bar's height.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">19</span><strong>In a petrol-powered car, 35% of the chemical energy in the fuel is transferred to kinetic energy of the car. Heating the exhaust gases accounts for 15% of the energy from the fuel, and the remainder is dissipated in the engine, gearbox and wheels. For 1000 J of chemical energy supplied by the fuel, calculate the energy transferred to (a) kinetic energy of the car, (b) heating the exhaust gases, (c) the engine, gearbox and wheels.</strong>
+        <textarea class="answer-lines" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">(a) 35% of 1000 J = 0.35 &times; 1000<br>
+        (b) 15% of 1000 J = 0.15 &times; 1000<br>
+        (c) remainder = 1000 &minus; (answer a) &minus; (answer b), i.e. (100 &minus; 35 &minus; 15)% of 1000 J = 0.50 &times; 1000</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">20</span><strong>Using the simulator, set the total input energy to 300 J and the useful output to 25%. State the useful energy and wasted energy shown by the readout, and describe how the shape of the diagram has changed compared with a high useful-output percentage.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">useful energy = 25% of 300 J = 75 J; wasted energy = 300 &minus; 75 = 225 J. With a low useful-output percentage, the arrow continuing to the right (useful output) is narrow, while the arrow branching downward (wasted energy) is wide — the opposite of what is seen at a high useful-output percentage, where the rightward arrow is wide and the downward branch is narrow.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">21</span><strong>Explain what determines the width of each arrow in a Sankey diagram, and why the combined width of all the arrows leaving a Sankey diagram must always equal the width of the arrow entering it.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">The width of each arrow is proportional to the amount of energy (or power) that it represents. The combined width leaving must equal the width entering because of the principle of conservation of energy — none of the input energy can disappear, so the useful and wasted (dissipated) outputs must together account for all of it.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7: POWER ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Power</h2>
+      <p><strong>Power</strong> is the rate at which work is done, or equivalently, the rate at which energy is transferred. If the same amount of useful work is done by two machines (or two people), the one that does it in less time is more powerful.</p>
+
+      <div class="eqn">power, P = E &divide; t = W &divide; t &nbsp; (SI unit: watt, W; 1 W = 1 J s<sup>&minus;1</sup>)</div>
+
+      <p>Combining P = W &divide; t with W = Fs gives a second useful form. Since s &divide; t is speed, v:</p>
+
+      <div class="eqn">power needed to maintain a constant velocity, P = Fv</div>
+
+      <div class="keybox"><strong>Key idea.</strong> P = Fv applies when a resultant forward force F is needed to maintain a constant speed v against a resistive force of the same magnitude — for example, a car's engine working against air resistance and friction.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.1</span>
+        <p>Calculate the average power output of a 65 kg climber moving up a height of 40 m in 3.0 minutes.</p>
+        <p><strong>Answer:</strong><br>
+        P = &Delta;W &divide; &Delta;t = mg&Delta;h &divide; &Delta;t = (65 &times; 9.8 &times; 40) &divide; (3.0 &times; 60)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 7.2</span>
+        <p>A car maintains a constant speed of 25 m s<sup>&minus;1</sup> against a constant resistive force of 2300 N. Calculate the power needed to maintain this speed.</p>
+        <p><strong>Answer:</strong><br>
+        P = Fv = 2300 &times; 25</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">22</span><strong>Explain why two people who lift identical boxes to the same height, but in different times, have done the same amount of work but not the same amount of power.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">Work done depends only on the force and the distance moved (W = Fs), which are the same for both people since the boxes and heights are identical — so both people do the same amount of work. Power is the <em>rate</em> at which that work is done, P = W &divide; t. Since the two people take different times, the one who lifts the box in less time has a greater power output, even though the work done is the same.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">23</span><strong>A 1600 kg car accelerates from rest to 25 m s<sup>&minus;1</sup> in 12.0 s. Calculate the average power needed to produce this change in kinetic energy.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">P = &Delta;W &divide; &Delta;t = kinetic energy gained &divide; time taken = (&frac12; &times; 1600 &times; 25&sup2;) &divide; 12.0</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">24</span><strong>A small boat is powered by an outboard motor with a maximum output power of 40 kW. At its greatest speed of 14 m s<sup>&minus;1</sup>, determine the magnitude of the forward force provided by the motor.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">P = Fv<br>
+        40 000 = F &times; 14<br>
+        F = 40 000 &divide; 14</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8: EFFICIENCY ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Efficiency</h2>
+      <p>No real energy transfer is completely useful — some energy is always dissipated. A process that produces a greater useful output for a given input is described as more <strong>efficient</strong>.</p>
+
+      <div class="eqn">efficiency, &eta; = useful energy output &divide; total energy input = E<sub>output</sub> &divide; E<sub>input</sub></div>
+
+      <div class="keybox"><strong>Key idea.</strong> Dividing both energies by the same time interval gives an equivalent power form: &eta; = P<sub>output</sub> &divide; P<sub>input</sub>. Because it is a ratio of two energies (or powers) with the same unit, efficiency has <strong>no unit</strong>, and is often expressed as a percentage. Because of the conservation of energy, efficiency can never reach or exceed 1 (100%).</div>
+
+      <div class="example">
+        <span class="tag">Worked example 8.1</span>
+        <p>Electrical power is supplied to a small motor at a rate of 0.72 W. In 2.46 s, the motor raises a mass through 1.12 m, transferring 0.27 J of gravitational potential energy to it. Determine the efficiency of the motor.</p>
+        <p><strong>Answer:</strong><br>
+        useful energy output = 0.27 J<br>
+        total energy input = P &times; t = 0.72 &times; 2.46<br>
+        &eta; = E<sub>output</sub> &divide; E<sub>input</sub> = 0.27 &divide; (0.72 &times; 2.46)</p>
+      </div>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span><strong>Efficiency isn't fixed.</strong> The efficiency of a machine or engine usually changes with how it is being used — a car, for example, typically has its highest efficiency at a particular cruising speed (often around 100 km h<sup>&minus;1</sup>), and becomes less efficient if driven faster or slower.</div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">25</span><strong>A natural gas power station has a power output of 540 MW and an efficiency of 48%. Calculate the total input power required.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">&eta; = P<sub>output</sub> &divide; P<sub>input</sub><br>
+        0.48 = 540 &divide; P<sub>input</sub><br>
+        P<sub>input</sub> = 540 &divide; 0.48</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">26</span><strong>Use the principle of conservation of energy to explain why no machine can ever be 100% efficient.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">Conservation of energy means the total energy output of a machine (useful output plus dissipated energy) must exactly equal the total energy input — energy cannot appear from nowhere or vanish. In every real macroscopic process, some energy is inevitably dissipated (for example through friction, air resistance, or heating), so the useful output is always less than the total input, making &eta; = E<sub>output</sub> &divide; E<sub>input</sub> always less than 1 (100%).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">27</span><strong>Using your answer to Question 19 (energy transfers in a petrol car), calculate the efficiency of the car as a percentage.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
+        <div class="answer-panel" id="q27">The useful output of a car is the kinetic energy it gains, which was 35% of the input energy.<br>
+        &eta; = E<sub>output</sub> &divide; E<sub>input</sub> = 350 &divide; 1000 = 0.35 = 35%</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 9: ENERGY DENSITY ================= -->
+    <section class="topic" id="s9">
+      <h2>9. Energy density</h2>
+      <p>One advantage of liquid fossil fuels is how much energy can be released from a small volume of them. The <strong>energy density</strong> of a fuel is the amount of energy that can be transferred from each cubic metre of it.</p>
+
+      <div class="keybox"><strong>Energy density</strong> is the amount of energy that can be transferred from each unit volume of a fuel. SI unit: J m<sup>&minus;3</sup> (commonly quoted in MJ m<sup>&minus;3</sup>).</div>
+
+      <table class="eqtable">
+        <tr><th>Fuel</th><th>Energy density / MJ m<sup>&minus;3</sup></th></tr>
+        <tr><td>Ethanol</td><td>24 000</td></tr>
+        <tr><td>Petrol (gasoline)</td><td>36 000</td></tr>
+        <tr><td>Diesel</td><td>38 000</td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example 9.1</span>
+        <p>Estimate the energy released by completely burning 0.50 m&sup3; of diesel.</p>
+        <p><strong>Answer:</strong><br>
+        energy = energy density &times; volume = 38 000 &times; 0.50 (MJ)</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">28</span><strong>Energy density is the amount of energy produced when 1 m&sup3; of a liquid fuel is completely burned. The table above gives energy density values for ethanol, diesel and petrol. (a) Using the table, state which of the three fuels releases the most energy per m&sup3; burned. (b) A car's fuel tank has a fixed volume. Using your answer to (a), explain which of the three fuels would let the car travel furthest on one full tank, assuming the engine's efficiency is the same whichever fuel is used. (c) Each of these three fuels also has a different mass density (in kg m<sup>&minus;3</sup>). Explain whether you need to know these mass density values to answer part (b), and why the energy density given in the table is already the quantity that matters for a fixed-volume tank. (d) A friend argues that, because diesel has the highest energy density, a diesel engine must be more efficient than a petrol engine. Use the definition of efficiency from Section 8 to explain why this reasoning is incorrect.</strong>
+        <textarea class="answer-lines" rows="9" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
+        <div class="answer-panel" id="q28">(a) Diesel releases the most energy per m&sup3; (38 000 MJ m<sup>&minus;3</sup>), followed by petrol (36 000 MJ m<sup>&minus;3</sup>), then ethanol (24 000 MJ m<sup>&minus;3</sup>).<br>
+        (b) Since the tank volume is the same for all three fuels, and diesel releases the most chemical energy per m&sup3;, a full tank of diesel would supply the most total chemical energy. With the same engine efficiency, more useful (kinetic) energy would be available, so the car could travel furthest on diesel.<br>
+        (c) No extra information about mass density is needed. Energy density (MJ per m&sup3;) is already defined <em>per unit volume</em>, so it automatically takes into account how much mass of fuel fits into that volume (a denser fuel packing more mass, and therefore more chemical energy, into the same space) — comparing energy density values directly answers the question for a tank of fixed volume, without needing to consider mass density separately.<br>
+        (d) Energy density describes how much chemical energy is stored in the fuel itself, before any of it is used. Efficiency, &eta; = E<sub>output</sub> &divide; E<sub>input</sub>, describes how much of whatever chemical energy is supplied to an engine is actually converted to useful kinetic energy, rather than being dissipated. A fuel can store more energy per m&sup3; without the engine that burns it being any better at converting that energy usefully — the two quantities describe different stages of the energy transfer, so a higher energy density does not imply a higher efficiency.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Work, W</dt><dd>The transfer of energy that occurs when an object is moved by a force; W = Fs cos&theta;, measured in joules.</dd>
+        <dt>Joule, J</dt><dd>The SI unit of work and energy; 1 J is the work done when a 1 N force moves its point of application by 1 m.</dd>
+        <dt>Energy</dt><dd>The capacity to do work.</dd>
+        <dt>Principle of conservation of energy</dt><dd>The total energy of an isolated system is constant; energy cannot be created or destroyed, only transferred between forms.</dd>
+        <dt>Mechanical energy</dt><dd>The sum of an object's kinetic energy, gravitational potential energy and elastic potential energy.</dd>
+        <dt>Kinetic energy, E<sub>k</sub></dt><dd>The energy a mass has because of its motion, E<sub>k</sub> = &frac12;mv&sup2;.</dd>
+        <dt>Gravitational potential energy, E<sub>p</sub></dt><dd>The energy an object has because of its position in a gravitational field; close to the Earth's surface, &Delta;E<sub>p</sub> = mg&Delta;h.</dd>
+        <dt>Hooke's law</dt><dd>The restoring force of a spring or elastic material is directly proportional to its extension (or compression), F<sub>H</sub> = &minus;k&Delta;x, provided the elastic limit is not exceeded.</dd>
+        <dt>Elastic potential energy, E<sub>H</sub></dt><dd>The energy stored in a deformed elastic material or spring, E<sub>H</sub> = &frac12;k&Delta;x&sup2;.</dd>
+        <dt>Dissipated (degraded) energy</dt><dd>Energy that has spread out into the surroundings, usually as internal energy or sound, and can no longer be recovered to do useful work.</dd>
+        <dt>Sankey diagram</dt><dd>A flow diagram representing energy transfers, in which the width of each arrow is proportional to the amount of energy (or power) it represents.</dd>
+        <dt>Power, P</dt><dd>The rate of doing work, or the rate of energy transfer, P = E &divide; t = Fv, measured in watts.</dd>
+        <dt>Efficiency, &eta;</dt><dd>The ratio of useful energy (or power) output to total energy (or power) input; always less than 1 (100%).</dd>
+        <dt>Energy density</dt><dd>The amount of energy that can be transferred from each unit volume of a fuel, measured in J m<sup>&minus;3</sup>.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Work, Energy and Power Workbook &middot; Companion resources: <em>Kinematics</em>, <em>Forces</em>, <em>Conservation of Momentum</em>, with further Mechanics workbooks to follow.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Fig 5.1: energy conservation valley simulator ================= */
+(function(){
+  const canvas = document.getElementById('valleyCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const heightSlider = document.getElementById('heightSlider');
+  const massSlider = document.getElementById('massSlider3');
+  const heightVal = document.getElementById('heightVal');
+  const massVal = document.getElementById('massVal3');
+  const frictionBtn = document.getElementById('frictionBtn');
+  const playBtn = document.getElementById('valleyPlayBtn');
+  const resetBtn = document.getElementById('valleyResetBtn');
+
+  const g = 9.8;
+  const trackLeft = 40, trackRight = 330, trackTop = 40, trackBottom = 230;
+  const hMaxPx = trackBottom - trackTop; /* pixel height of the valley wall */
+  const pxPerMetre = 60; /* scale for converting real height (m) to pixels for physics */
+  const hMaxReal = hMaxPx / pxPerMetre; /* real depth of the valley, in metres */
+  const trackWidthReal = (trackRight - trackLeft) / pxPerMetre; /* real track width, in metres */
+  const frictionK = 0.35; /* velocity-proportional friction coefficient (s^-1) */
+
+  function heightAt(xFrac){
+    /* xFrac in [0,1] across the track; parabola, 0 at centre (xFrac=0.5), 1 at edges */
+    const u = (xFrac - 0.5) * 2;
+    return u * u; /* 0..1 */
+  }
+
+  function slopeAt(xFrac){
+    /* d(height in metres)/d(xReal in metres) — used to find the gravity component along the track */
+    const dhReal_dxFrac = 8 * (xFrac - 0.5) * hMaxReal;
+    return dhReal_dxFrac / trackWidthReal;
+  }
+
+  let playing = false;
+  let x = 0.02; /* fraction along track, start near left edge */
+  let v = 0; /* real velocity along the track, m/s (+ve = moving right) */
+  let releaseFracHeight = 0.8;
+  let frictionOn = false;
+  let lastT = null;
+  let elapsed = 0;
+  let E0 = 0;
+
+  function setup(){
+    releaseFracHeight = parseFloat(heightSlider.value) / 100;
+    x = 0.5 - releaseFracHeight * 0.5;
+    if (x < 0.02) x = 0.02;
+    v = 0;
+    elapsed = 0;
+    const m = parseFloat(massSlider.value);
+    const hReal = releaseFracHeight * hMaxReal;
+    E0 = m * g * hReal;
+    draw(0, E0, E0, E0);
+  }
+
+  function draw(ke, gpe, total, totalStart){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    /* track */
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = 3;
+    ctx.beginPath();
+    for(let i = 0; i <= 100; i++){
+      const xf = i / 100;
+      const px = trackLeft + xf * (trackRight - trackLeft);
+      const py = trackBottom - heightAt(xf) * hMaxPx;
+      if(i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    /* block */
+    const px = trackLeft + x * (trackRight - trackLeft);
+    const py = trackBottom - heightAt(x) * hMaxPx;
+    const m = parseFloat(massSlider.value);
+    const hw = 10 + m * 4;
+    ctx.fillStyle = '#eaf3fb'; ctx.strokeStyle = '#4fc3d0'; ctx.lineWidth = 2.5;
+    ctx.fillRect(px - hw, py - hw * 2, hw * 2, hw * 2);
+    ctx.strokeRect(px - hw, py - hw * 2, hw * 2, hw * 2);
+
+    /* energy bar chart */
+    const barX = [385, 420, 455], barLabels = ['KE', 'GPE', 'Tot'], barW = 26;
+    const barBase = 20, barMaxH = 170;
+    const scaleE = totalStart > 0 ? barMaxH / totalStart : 0;
+    const vals = [ke, gpe, total];
+    ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    for(let i = 0; i < 3; i++){
+      const bx = barX[i];
+      const bh = Math.max(0, Math.min(barMaxH, vals[i] * scaleE));
+      ctx.fillStyle = i === 0 ? '#0e7c86' : (i === 1 ? '#d98324' : '#8a97a1');
+      ctx.fillRect(bx - barW / 2, barBase + (barMaxH - bh), barW, bh);
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.strokeRect(bx - barW / 2, barBase, barW, barMaxH);
+      ctx.fillStyle = '#dceaf0';
+      ctx.fillText(barLabels[i], bx, barBase + barMaxH + 16);
+    }
+  }
+
+  function frame(t){
+    if(!playing) return;
+    if(lastT === null) lastT = t;
+    let dt = (t - lastT) / 1000;
+    if(dt > 0.04) dt = 0.04;
+    lastT = t;
+    elapsed += dt;
+
+    const m = parseFloat(massSlider.value);
+
+    /* Integrate the block's motion directly from the gravity component along the
+       track (plus a velocity-proportional friction term), using several small
+       substeps for a numerically stable, energy-consistent result — this avoids
+       ever having to back-solve velocity from an energy balance, so KE, GPE and
+       the total always agree exactly and the block can never "freeze" partway
+       down the slope. */
+    const substeps = 8;
+    const subDt = dt / substeps;
+    for(let i = 0; i < substeps; i++){
+      const aGrav = -g * slopeAt(x);
+      const aFric = frictionOn ? -frictionK * v : 0;
+      v += (aGrav + aFric) * subDt;
+      x += (v * subDt) / trackWidthReal;
+      if(x < 0.01){ x = 0.01; v = Math.max(0, v); }
+      if(x > 0.99){ x = 0.99; v = Math.min(0, v); }
+    }
+
+    const hReal = heightAt(x) * hMaxReal;
+    const ke = 0.5 * m * v * v;
+    const gpe = m * g * hReal;
+    const total = ke + gpe;
+
+    draw(ke, gpe, total, E0);
+
+    if(elapsed < 30) requestAnimationFrame(frame);
+    else playing = false;
+  }
+
+  heightSlider.addEventListener('input', function(){
+    heightVal.textContent = heightSlider.value;
+    if(!playing) setup();
+  });
+  massSlider.addEventListener('input', function(){
+    massVal.textContent = parseFloat(massSlider.value).toFixed(1);
+    if(!playing) setup();
+  });
+  frictionBtn.addEventListener('click', function(){
+    frictionOn = !frictionOn;
+    frictionBtn.textContent = frictionOn ? 'Switch friction off' : 'Switch friction on';
+  });
+  playBtn.addEventListener('click', function(){
+    setup();
+    playing = true; lastT = null;
+    requestAnimationFrame(frame);
+  });
+  resetBtn.addEventListener('click', function(){
+    playing = false;
+    setup();
+  });
+
+  setup();
+})();
+
+/* ================= Fig 6.2: Sankey diagram builder ================= */
+(function(){
+  const canvas = document.getElementById('sankeyCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const totalSlider = document.getElementById('totalSlider');
+  const usefulSlider = document.getElementById('usefulSlider');
+  const totalVal = document.getElementById('totalVal');
+  const usefulVal = document.getElementById('usefulVal');
+  const readout = document.getElementById('sankeyReadout');
+
+  function draw(){
+    const total = parseFloat(totalSlider.value);
+    const pct = parseFloat(usefulSlider.value) / 100;
+    const useful = total * pct;
+    const wasted = total - useful;
+
+    totalVal.textContent = total;
+    usefulVal.textContent = (pct * 100).toFixed(0);
+    readout.innerHTML = 'useful energy: ' + useful.toFixed(0) + ' J &nbsp;|&nbsp; wasted energy: ' + wasted.toFixed(0) + ' J';
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const scale = 160 / 500; /* px per joule, matches slider max of 500 J */
+    const totalH = total * scale;
+    const usefulH = useful * scale;
+    const wastedH = wasted * scale;
+
+    const yMid = 140, x0 = 60, x1 = 90;
+    const barTop = yMid - totalH / 2;
+    const usefulEndX = 430, wastedEndX = 230;
+
+    /* input bar: its height represents the total input energy */
+    ctx.fillStyle = '#f2b28c';
+    ctx.fillRect(x0, barTop, x1 - x0, totalH);
+
+    /* useful arrow: horizontal, thickness represents the useful energy */
+    if(usefulH > 0.4){
+      ctx.fillStyle = '#0a5b62';
+      ctx.fillRect(x1, barTop, usefulEndX - x1 - 20, usefulH);
+      ctx.beginPath();
+      ctx.moveTo(usefulEndX - 20, barTop - 3);
+      ctx.lineTo(usefulEndX, barTop + usefulH / 2);
+      ctx.lineTo(usefulEndX - 20, barTop + usefulH + 3);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    /* wasted arrow: horizontal, stacked below the useful arrow, thickness represents the wasted energy */
+    if(wastedH > 0.4){
+      const wTop = barTop + usefulH;
+      ctx.fillStyle = '#a5570f';
+      ctx.fillRect(x1, wTop, wastedEndX - x1 - 20, wastedH);
+      ctx.beginPath();
+      ctx.moveTo(wastedEndX - 20, wTop - 3);
+      ctx.lineTo(wastedEndX, wTop + wastedH / 2);
+      ctx.lineTo(wastedEndX - 20, wTop + wastedH + 3);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    ctx.fillStyle = '#dceaf0'; ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('input: ' + total.toFixed(0) + ' J', x0, barTop - 10);
+    if(usefulH > 0.4){
+      ctx.fillStyle = '#7fe0d8';
+      ctx.fillText('useful: ' + useful.toFixed(0) + ' J', 190, barTop - 10);
+    }
+    if(wastedH > 24){
+      ctx.fillStyle = '#fff'; ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('wasted: ' + wasted.toFixed(0) + ' J', x1 + (wastedEndX - x1) / 2, barTop + usefulH + wastedH / 2 + 4);
+    } else if(wastedH > 0.4){
+      ctx.fillStyle = '#fbd8bb'; ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText('wasted: ' + wasted.toFixed(0) + ' J', x1, barTop + usefulH + wastedH + 14);
+    }
+  }
+
+  totalSlider.addEventListener('input', draw);
+  usefulSlider.addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

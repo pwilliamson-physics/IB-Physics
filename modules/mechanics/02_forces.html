@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forces — Student Workbook</title>
+<style>
+  :root{
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
+  nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
+  .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
+  .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
+  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
+  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
+  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
+  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
+  .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
+
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
+
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
+
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
+  .answer-lines{
+    display:block; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
+    background-color:transparent;
+    min-height:5.1em; margin:0.6rem 0 0.2rem 0;
+    border:1px solid transparent; border-radius:6px;
+    outline:none; resize:none; overflow:hidden;
+    font:inherit; color:inherit; line-height:1.7em;
+    padding:0.05em 0.4em 0 0.2em;
+  }
+  .answer-lines:focus{
+    border:1px solid var(--teal); background-color:#fbfdff;
+    box-shadow:0 0 0 3px rgba(14,124,134,0.12);
+  }
+  .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
+  .answer-lines.short{min-height:1.7em;}
+  .answer-lines.long{min-height:8.5em;}
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
+  .reveal-btn:hover{background:var(--teal-dark);}
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
+  .answer-panel.shown{display:block;}
+
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
+  figure svg{max-width:100%; height:auto; max-height:320px;}
+  figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
+
+  table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
+  table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
+  table.eqtable th{background:var(--soft-blue); color:var(--navy);}
+
+  dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
+  dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
+
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem; line-height:1.6;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
+  @media print{
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
+    .layout{display:block;}
+    main{max-width:100%; padding:0; margin:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
+    section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
+    .cover{page-break-after:always; border-radius:0;}
+    .answer-panel{display:none !important;}
+    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
+    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
+    .name-box .fill::placeholder{color:transparent;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
+    .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print">
+  <span class="topbar-title">Forces</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="layout">
+  <nav class="sidebar no-print">
+    <h1>Forces</h1>
+    <a href="#cover">Cover &amp; goals</a>
+    <a href="#s1">1. Forces as interactions</a>
+    <a href="#s2">2. Newton's three laws of motion</a>
+    <a href="#s3">3. Free-body diagrams</a>
+    <a href="#s4">4. Resultant force and equilibrium</a>
+    <a href="#s5">5. Contact forces I: normal force and friction</a>
+    <a href="#s6">6. Contact forces II: drag and buoyancy</a>
+    <a href="#s7">7. Field forces</a>
+    <a href="#sG">Glossary</a>
+  </nav>
+
+  <main>
+    <section class="cover" id="cover">
+      <h1>Forces</h1>
+      <p style="margin:0.9rem 0 0 0; max-width:640px; font-size:0.98rem; color:#dceaf0;">Having described motion in the Kinematics workbook, we now turn to what <em>causes</em> it. A force is a push or a pull between two objects, and every force is the result of an interaction. In this workbook you will learn Newton's three laws of motion, how to draw and analyse free-body diagrams, how to find the resultant of several forces, and the nature of the main contact and field forces you will meet throughout IB Mechanics.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <ul>
+          <li>explain that a force is an interaction between two bodies, and state Newton's three laws of motion</li>
+          <li>draw and interpret free-body diagrams for objects in a range of situations</li>
+          <li>analyse a free-body diagram to find the resultant force acting on a system, including resolving forces into components</li>
+          <li>explain the condition for equilibrium and apply it to simple systems</li>
+          <li>describe the nature and use of the contact forces: normal force, friction, viscous drag and buoyancy</li>
+          <li>describe the nature and use of the field forces: gravitational, electric and magnetic force</li>
+        </ul>
+      </div>
+      <div class="name-box">
+        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1 ================= -->
+    <section class="topic" id="s1">
+      <h2>1. Forces as interactions</h2>
+      <p>A <strong>force</strong> is a push or a pull that one object exerts on another. Forces are measured in <strong>newtons (N)</strong>, and — like displacement, velocity and acceleration — a force is a <strong>vector</strong>: it has both a size and a direction.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> A force never exists on its own. It is always the result of an <em>interaction</em> between two objects, so whenever you identify a force you should be able to say which object it acts <em>on</em>, and which object is causing it.</div>
+
+      <p>A force can change an object's velocity (speed it up, slow it down, or change its direction), or change its shape. Forces are usually grouped into two families, both covered later in this workbook: <strong>contact forces</strong>, which need the two objects to be touching (such as friction or the normal force), and <strong>field forces</strong>, which act between objects even when they are not touching (such as gravity).</p>
+
+      <h3>Weight and mass</h3>
+      <p><strong>Mass</strong> is a measure of the amount of matter in an object; it is a scalar, measured in kilograms, and does not change if the object is moved somewhere else. <strong>Weight</strong> is the force of gravity acting on an object's mass. It is a vector, measured in newtons, and depends on the local <strong>gravitational field strength</strong>, <em>g</em>.</p>
+
+      <div class="eqn">weight, F<sub>g</sub> = mg &nbsp; (SI unit: N)</div>
+
+      <div class="keyword"><b>Gravitational field strength, g:</b> the force of gravity acting on each kilogram of mass at a particular location, measured in N kg<sup>&minus;1</sup>. Near the Earth's surface, g = 9.8 N kg<sup>&minus;1</sup>, which has exactly the same numerical value as the acceleration of free fall, 9.8 m s<sup>&minus;2</sup>.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 1.1</span>
+        <p>An astronaut has a mass of 85 kg. Calculate her weight (a) on the Earth's surface, where g = 9.8 N kg<sup>&minus;1</sup>, and (b) on the Moon's surface, where g = 1.6 N kg<sup>&minus;1</sup>.</p>
+        <p><strong>Answer:</strong><br>
+        (a) F<sub>g</sub> = mg = 85 &times; 9.8<br>
+        (b) F<sub>g</sub> = mg = 85 &times; 1.6<br>
+        Notice that her mass, 85 kg, is exactly the same in both parts — only her weight changes, because g is different on the Moon.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">1</span><strong>Explain the difference between mass and weight, making clear which is a vector and which is a scalar.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
+        <div class="answer-panel" id="q1">Mass is a scalar measuring the amount of matter in an object, in kilograms; it stays the same wherever the object is. Weight is a vector — the force of gravity acting on that mass, F<sub>g</sub> = mg, measured in newtons; it depends on the local gravitational field strength, so the same object has a different weight on the Moon or on Mars than it does on Earth, even though its mass is unchanged.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">2</span><strong>A rover has a mass of 190 kg. Calculate its weight on the surface of Mars, where the gravitational field strength is 3.7 N kg<sup>&minus;1</sup>.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
+        <div class="answer-panel" id="q2">F<sub>g</sub> = mg = 190 &times; 3.7</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">3</span><strong>Explain what would happen to an astronaut's weight, and to her mass, if she travelled to a point in deep space, far from every planet and star.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
+        <div class="answer-panel" id="q3">Her mass would stay exactly the same, since mass does not depend on location. Her weight, however, would fall to zero, because far from any planet or star the gravitational field strength is essentially zero, and F<sub>g</sub> = mg = m &times; 0 = 0. She would still have exactly the same amount of matter (mass) as before, but gravity would no longer be pulling on it.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2 ================= -->
+    <section class="topic" id="s2">
+      <h2>2. Newton's three laws of motion</h2>
+      <p>Isaac Newton summarised the relationship between force and motion in three laws. Together they explain almost everything about how and why objects move the way they do.</p>
+
+      <h3>Newton's first law</h3>
+      <div class="keybox"><strong>Newton's first law.</strong> An object stays at rest, or moving with constant velocity, unless a resultant (non-zero) force acts on it.</div>
+      <p>An object obeying this law is said to be in <strong>equilibrium</strong>. This includes an object at rest (a book resting on a table) and an object moving at a constant velocity in a straight line (a car cruising at a steady speed, where the forward driving force exactly balances the resistive forces acting backwards).</p>
+
+      <h3>Newton's second law</h3>
+      <div class="keybox"><strong>Newton's second law.</strong> The resultant force acting on an object is equal to its mass multiplied by its acceleration.</div>
+      <div class="eqn">resultant force, F = ma &nbsp; (SI unit: N = kg m s<sup>&minus;2</sup>)</div>
+      <div class="keyword"><b>Newton (unit):</b> one newton is defined as the resultant force needed to give a mass of 1 kg an acceleration of 1 m s<sup>&minus;2</sup>.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 2.1</span>
+        <p>A car of mass 1450 kg has a resultant forward force of 3800 N acting on it, starting from rest. Calculate (a) its acceleration, and (b) the distance it covers in the first 4.0 s (use the SUVAT equations from the Kinematics workbook).</p>
+        <p><strong>Answer:</strong><br>
+        (a) F = ma, rearranged: a = F &divide; m = 3800 &divide; 1450<br>
+        (b) s = ut + &frac12;at&sup2;, with u = 0: s = &frac12; &times; a &times; 4.0&sup2;, using your value of a from part (a)</p>
+      </div>
+
+      <h3>Newton's third law</h3>
+      <div class="keybox"><strong>Newton's third law.</strong> Whenever object A exerts a force on object B, object B exerts an equal and opposite force on object A.</div>
+      <p>These two forces are called a <strong>third-law pair</strong>. A third-law pair always: (i) involves the <em>same type</em> of force, (ii) acts along the <em>same line</em>, (iii) is <em>equal in size</em> and <em>opposite in direction</em>, and — most importantly — (iv) acts on <em>two different objects</em>, never on the same object.</p>
+
+      <figure class="wide">
+        <svg viewBox="0 0 460 260" width="460" height="260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="afA" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0a5b62"/></marker>
+            <marker id="afB" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#d98324"/></marker>
+          </defs>
+          <!-- panel A: forces on the SAME object -->
+          <line x1="20" y1="150" x2="205" y2="150" stroke="#5b6b78" stroke-width="2"/>
+          <rect x="75" y="110" width="70" height="40" fill="#eaf3fb" stroke="#173a5e" stroke-width="2"/>
+          <text x="110" y="134" font-size="12" fill="#173a5e" text-anchor="middle">book</text>
+          <line x1="110" y1="130" x2="110" y2="192" stroke="#0a5b62" stroke-width="2.5" marker-end="url(#afA)"/>
+          <text x="110" y="207" font-size="12.5" fill="#0a5b62" text-anchor="middle">W (weight, on book)</text>
+          <line x1="110" y1="130" x2="110" y2="78" stroke="#0a5b62" stroke-width="2.5" marker-end="url(#afA)"/>
+          <text x="110" y="65" font-size="12.5" fill="#0a5b62" text-anchor="middle">N (table on book)</text>
+          <text x="112" y="235" font-size="12" fill="#1f2933" text-anchor="middle">Same object — equal &amp; opposite,</text>
+          <text x="112" y="250" font-size="12" fill="#1f2933" text-anchor="middle">but NOT a third-law pair</text>
+          <!-- panel B: the actual third-law pair, on TWO different objects -->
+          <line x1="255" y1="150" x2="440" y2="150" stroke="#5b6b78" stroke-width="2"/>
+          <rect x="300" y="110" width="70" height="40" fill="#fdf1e2" stroke="#d98324" stroke-width="2"/>
+          <text x="335" y="134" font-size="12" fill="#a5570f" text-anchor="middle">book</text>
+          <line x1="320" y1="150" x2="320" y2="100" stroke="#0a5b62" stroke-width="2.5" marker-end="url(#afA)"/>
+          <text x="320" y="88" font-size="12.5" fill="#0a5b62" text-anchor="middle">table on book</text>
+          <line x1="352" y1="150" x2="352" y2="200" stroke="#d98324" stroke-width="2.5" marker-end="url(#afB)"/>
+          <text x="352" y="215" font-size="12.5" fill="#a5570f" text-anchor="middle">book on table</text>
+          <text x="347" y="235" font-size="12" fill="#1f2933" text-anchor="middle">Same interaction, different objects —</text>
+          <text x="347" y="250" font-size="12" fill="#1f2933" text-anchor="middle">this IS the third-law pair</text>
+        </svg>
+        <figcaption>Fig. 2.1 A common mistake is to treat the weight and normal force on the same book (left) as a third-law pair. They are not — they act on the same object. The true third-law pair (right) is "book pushes down on table" and "table pushes up on book": the same interaction, viewed from each of the two objects involved.</figcaption>
+      </figure>
+
+      <div class="stretch-box"><span class="tag">Common mistake</span><strong>Weight and normal force are usually not a third-law pair.</strong> They often look like one (equal size, opposite direction) but they act on the <em>same</em> object and are usually <em>different types</em> of force (one gravitational, one a contact force). A genuine third-law pair is only ever found by looking at what force <em>A</em> exerts on <em>B</em>, and what <em>B</em> exerts back on <em>A</em>.</div>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">4</span><strong>A skydiver falls at a constant (terminal) velocity. Use Newton's first law to explain what this tells you about the forces acting on her.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q4')">Show answer</button>
+        <div class="answer-panel" id="q4">Since her velocity is constant, Newton's first law tells us the resultant force acting on her must be zero — she is in equilibrium. This means her weight (acting downwards) must be exactly balanced by the air resistance acting on her (acting upwards), even though both forces are individually non-zero.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">5</span><strong>A resultant force of 640 N acts on a shopping trolley of mass 40 kg. Calculate its acceleration.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q5')">Show answer</button>
+        <div class="answer-panel" id="q5">F = ma, rearranged: a = F &divide; m = 640 &divide; 40</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">6</span><strong>A swimmer pushes backwards against the water with her arms and moves forwards through the pool. Use Newton's third law to explain why this happens.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
+        <div class="answer-panel" id="q6">The swimmer exerts a backward force on the water (swimmer on water). By Newton's third law, the water must exert an equal and opposite force on the swimmer — a forward force (water on swimmer). This third-law pair acts on two different objects (the water and the swimmer), so it is the force from the water on the swimmer that actually pushes her forwards through the pool.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">7</span><strong>Using Fig. 2.1, explain why the weight of the book and the normal force from the table on the book are not a third-law pair, even though they are equal in size and opposite in direction.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q7')">Show answer</button>
+        <div class="answer-panel" id="q7">Both the weight and the normal force act on the same object — the book. A genuine third-law pair must act on two different objects. The weight is also a gravitational force (Earth pulling on the book), whereas the normal force is a contact force (table pushing on the book) — different types of force. The actual third-law pair here is the book pushing down on the table, and the table pushing up on the book, which involves the same contact interaction seen from each of the two objects.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3 ================= -->
+    <section class="topic" id="s3">
+      <h2>3. Free-body diagrams</h2>
+      <p>A <strong>free-body diagram</strong> shows every force acting <em>on</em> a single object, drawn as arrows from a single point representing that object — usually treated as a "point particle" for simplicity. It shows only the forces acting on that one object; forces that object exerts on anything else are never included.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> To draw a free-body diagram: (1) identify the single object you are considering, (2) list every force acting <em>on</em> it (weight is almost always present; contact forces appear wherever it touches something; field forces appear if it sits in a field), (3) draw each force as an arrow from the object's point, roughly in proportion to its size, and label each one clearly.</div>
+
+      <figure>
+        <img src="data:image/png;base64,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" alt="Free-body diagram of a block on a rough inclined plane, showing the normal force N, the weight resolved into components mg sin alpha and mg cos alpha, and friction at its maximum static value mu_s N" style="max-width:100%; height:auto;">
+        <figcaption>Fig. 3.1 Free-body diagram of a block on a rough inclined plane, just before it starts to slide. Here the weight has already been resolved into two components: mg sin&alpha; acting down the slope and mg cos&alpha; acting into the surface (&alpha; is the same angle called &theta; elsewhere in this workbook). The normal force, N, acts perpendicular to the surface, and friction is shown at its maximum static value, &mu;<sub>s</sub>N — you will meet this notation in Section 5. Diagram by P. Williamson (Wikimedia Commons).</figcaption>
+      </figure>
+
+      <p>Free-body diagrams work the same way for any object — a book on a table (weight and normal force only), a pendulum bob swinging on a string (weight and tension), the Moon orbiting the Earth (gravitational force only, since nothing is touching it), or a box being pulled at a constant speed across the floor (weight, normal force, tension in the pulling rope, and friction).</p>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">8</span><strong>List the forces acting on a book resting on a horizontal table. State which of these are contact forces and which are field forces.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q8')">Show answer</button>
+        <div class="answer-panel" id="q8">Two forces act on the book: its weight (a field force — the gravitational force of the Earth acting on it, no contact needed) and the normal force from the table (a contact force — it only exists because the book and table are touching).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">9</span><strong>A skydiver is falling at her terminal (constant) velocity. List the forces acting on her and state how their sizes compare.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9')">Show answer</button>
+        <div class="answer-panel" id="q9">Two forces act on her: her weight, acting downwards, and air resistance (a form of viscous drag), acting upwards. Since she is moving at a constant velocity, she is in equilibrium (Newton's first law), so these two forces must be equal in size and opposite in direction — they cancel out to give a zero resultant force.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">10</span><strong>Using Fig. 3.1, list the forces and force components shown, and state which are contact forces and which are field forces.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
+        <div class="answer-panel" id="q10">The normal force, N, and the friction force, &mu;<sub>s</sub>N, are both contact forces, since they only exist because the block is touching the surface of the incline. The remaining two arrows, mg sin&alpha; and mg cos&alpha;, are not separate forces — they are the two components of a single field force, the block's weight (gravitational), resolved parallel and perpendicular to the slope.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4 ================= -->
+    <section class="topic" id="s4">
+      <h2>4. Resultant force and equilibrium</h2>
+      <p>When several forces act on an object at once, they combine to give a single overall force called the <strong>resultant force</strong> — the vector sum of all the individual forces. Because forces are vectors, they must be added using vector addition, not simple arithmetic, unless they happen to act along the same line.</p>
+
+      <figure>
+        <svg viewBox="0 0 320 240" width="320" height="240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="afD" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0a5b62"/></marker>
+            <marker id="afE" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#a5570f"/></marker>
+            <marker id="afF" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#173a5e"/></marker>
+          </defs>
+          <line x1="70" y1="210" x2="230" y2="210" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M 100,210 A 30,30 0 0 0 97.6,198.2" fill="none" stroke="#5b6b78" stroke-width="1.2"/>
+          <text x="96" y="221" font-size="11.5" fill="#3a4753" text-anchor="middle">23&deg;</text>
+          <line x1="70" y1="210" x2="190" y2="210" stroke="#0e7c86" stroke-width="3" marker-end="url(#afD)"/>
+          <text x="158" y="198" font-size="13" fill="#0a5b62" text-anchor="middle">A = 40 N</text>
+          <line x1="190" y1="210" x2="241.6" y2="136.3" stroke="#d98324" stroke-width="3" marker-end="url(#afE)"/>
+          <text x="238" y="168" font-size="13" fill="#a5570f" text-anchor="start">B = 30 N</text>
+          <line x1="70" y1="210" x2="241.6" y2="136.3" stroke="#173a5e" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#afF)"/>
+          <text x="240" y="122" font-size="13" fill="#173a5e" text-anchor="start">R (resultant)</text>
+          <circle cx="70" cy="210" r="3" fill="#1f2933"/>
+        </svg>
+        <figcaption>Fig. 4.1 Adding forces A and B "tip-to-tail" gives the resultant force, R, drawn from the start of A to the end of B. Here R &asymp; 62 N, at about 23&deg; above the horizontal.</figcaption>
+      </figure>
+
+      <div class="keybox"><strong>Key idea.</strong> An object is in <strong>equilibrium</strong> when the resultant force acting on it is zero — this is exactly the condition described by Newton's first law. Equilibrium does not mean no forces are acting; it means they all cancel out.</div>
+
+      <p>Forces that act at an angle are often easier to deal with by <strong>resolving</strong> them into two perpendicular components — typically horizontal and vertical, or (for an object on a slope) parallel and perpendicular to the slope. A force F at an angle &theta; to a chosen direction has components F&nbsp;cos&theta; along that direction and F&nbsp;sin&theta; perpendicular to it.</p>
+
+      <div class="example">
+        <span class="tag">Worked example 4.1</span>
+        <p>A box of weight 250 N rests on a slope inclined at 30&deg; to the horizontal (as in Fig. 3.1). Calculate the components of its weight (a) parallel to the slope, and (b) perpendicular to the slope.</p>
+        <p><strong>Answer:</strong><br>
+        (a) component parallel to the slope = W sin&theta; = 250 &times; sin 30&deg;<br>
+        (b) component perpendicular to the slope = W cos&theta; = 250 &times; cos 30&deg;</p>
+      </div>
+
+      <h3>Live simulation: resultant force builder</h3>
+      <p>Force A always points horizontally. Use the sliders to change the size of A and the size and angle of force B, and watch the resultant, R, update. Try the "show equilibrant" button to see the single extra force that would be needed to bring the object into equilibrium.</p>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="vecCanvas" width="460" height="300"></canvas></div>
+          <div class="sim-controls">
+            <h4>Resultant force builder</h4>
+            <div class="sim-row"><label for="magASlider">Force A = <span id="magAVal">40</span> N (horizontal)</label><input type="range" id="magASlider" min="0" max="60" step="5" value="40"></div>
+            <div class="sim-row"><label for="magBSlider">Force B = <span id="magBVal">30</span> N</label><input type="range" id="magBSlider" min="0" max="60" step="5" value="30"></div>
+            <div class="sim-row"><label for="angBSlider">Angle of B = <span id="angBVal">55</span>&deg; above horizontal</label><input type="range" id="angBSlider" min="0" max="180" step="5" value="55"></div>
+            <div class="sim-readout" id="vecReadout">Resultant, R = 0.0 N</div>
+            <div class="sim-btns">
+              <button id="eqBtn">Show equilibrant</button>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 4.2 Building a resultant force from two component forces, A and B.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">11</span><strong>Two forces act on a ring: 30 N pulling due north and 40 N pulling due east. Calculate the magnitude of the resultant force.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q11')">Show answer</button>
+        <div class="answer-panel" id="q11">Since the two forces are at right angles, use Pythagoras' theorem: R = &radic;(30&sup2; + 40&sup2;)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">12</span><strong>A force of 18 N acts at 40&deg; above the horizontal. Calculate its horizontal and vertical components.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">horizontal component = F cos&theta; = 18 &times; cos 40&deg;<br>
+        vertical component = F sin&theta; = 18 &times; sin 40&deg;</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">13</span><strong>In the simulation above, set force B to the same size as force A (for example, both 40 N) and its angle to 180&deg;. Describe the resultant force, and state what this tells you about the object's motion.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">With B equal in size to A but pointing in exactly the opposite direction, the resultant force falls to zero — the two forces cancel each other out. By Newton's first law, this means the object is in equilibrium: it stays at rest, or continues to move with whatever constant velocity it already had.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">14</span><strong>A crate of weight 180 N sits on a slope inclined at 25&deg; to the horizontal. Calculate the component of its weight acting parallel to the slope (this is the component that friction must balance to keep the crate in equilibrium).</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">component parallel to the slope = W sin&theta; = 180 &times; sin 25&deg;</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5 ================= -->
+    <section class="topic" id="s5">
+      <h2>5. Contact forces I: normal force and friction</h2>
+      <p>Contact forces only exist where two objects are touching. This section covers the <strong>normal force</strong> and <strong>friction</strong> — two contact forces you will meet in almost every mechanics problem.</p>
+
+      <h3>Normal force</h3>
+      <div class="keyword"><b>Normal force, N:</b> the component of the contact force between two surfaces that acts <em>perpendicular</em> to those surfaces. It adjusts automatically to prevent the two surfaces passing through each other.</div>
+      <p>The word "normal" here means perpendicular, not "usual" — the normal force is always at right angles to the surface, whatever angle that surface happens to be at.</p>
+
+      <h3>Friction</h3>
+      <p><strong>Friction</strong> is the component of the contact force that acts <em>parallel</em> to the surfaces, opposing relative sliding motion (or the tendency to slide) between them. There are two cases:</p>
+
+      <div class="eqn">static friction: f &le; &mu;<sub>s</sub>N &nbsp;&nbsp;&nbsp; dynamic (kinetic) friction: f = &mu;<sub>d</sub>N</div>
+
+      <div class="keybox"><strong>Key idea.</strong> While an object stays still, <strong>static</strong> friction adjusts itself to exactly match whatever force is trying to move it, up to a maximum value of &mu;<sub>s</sub>N. Once the applied force exceeds this maximum, the object starts to slide, and <strong>dynamic</strong> friction takes over — it stays roughly constant, at &mu;<sub>d</sub>N, and is normally somewhat smaller than the maximum static value.</div>
+
+      <figure>
+        <svg viewBox="0 0 460 230" width="460" height="230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="afG" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5b6b78"/></marker>
+          </defs>
+          <line x1="60" y1="200" x2="430" y2="200" stroke="#5b6b78" stroke-width="1.5" marker-end="url(#afG)"/>
+          <line x1="60" y1="200" x2="60" y2="30" stroke="#5b6b78" stroke-width="1.5" marker-end="url(#afG)"/>
+          <text x="30" y="38" font-size="13.5" fill="#1f2933">f / N</text>
+          <text x="418" y="218" font-size="13.5" fill="#1f2933" text-anchor="end">applied force, F / N</text>
+          <line x1="60" y1="90" x2="170" y2="90" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="60" y1="120" x2="170" y2="120" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <line x1="170" y1="90" x2="170" y2="120" stroke="#b9c6d3" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <text x="48" y="94" font-size="12.5" fill="#3a4753" text-anchor="end">&mu;<tspan font-size="9" baseline-shift="sub">s</tspan>N</text>
+          <text x="48" y="124" font-size="12.5" fill="#3a4753" text-anchor="end">&mu;<tspan font-size="9" baseline-shift="sub">d</tspan>N</text>
+          <line x1="60" y1="200" x2="170" y2="90" stroke="#0e7c86" stroke-width="3"/>
+          <line x1="170" y1="120" x2="410" y2="120" stroke="#d98324" stroke-width="3"/>
+          <circle cx="170" cy="90" r="4" fill="#0a5b62"/>
+          <text x="95" y="185" font-size="12.5" fill="#0a5b62" text-anchor="start">static (f = F)</text>
+          <text x="290" y="105" font-size="12.5" fill="#a5570f" text-anchor="middle">dynamic (f = &mu;<tspan font-size="9" baseline-shift="sub">d</tspan>N)</text>
+        </svg>
+        <figcaption>Fig. 5.1 As the applied force increases, static friction rises to match it exactly, up to a maximum of &mu;<sub>s</sub>N. Beyond this point the object slides and friction drops to the roughly constant dynamic value, &mu;<sub>d</sub>N.</figcaption>
+      </figure>
+
+      <div class="stretch-box"><span class="tag">Worth remembering</span><strong>Friction does not depend on surface area.</strong> The coefficient of friction (&mu;<sub>s</sub> or &mu;<sub>d</sub>) depends only on the nature of the two surfaces in contact — how rough or smooth they are — and not on how large the contact area is.</div>
+
+      <table class="eqtable">
+        <tr><th>Surfaces</th><th>Typical &mu;<sub>s</sub></th></tr>
+        <tr><td>rubber tyre on dry road</td><td>0.8</td></tr>
+        <tr><td>steel on steel</td><td>0.8</td></tr>
+        <tr><td>glass on metal</td><td>0.6</td></tr>
+        <tr><td>waxed wood on wet snow</td><td>0.1</td></tr>
+      </table>
+
+      <div class="example">
+        <span class="tag">Worked example 5.1</span>
+        <p>A football of mass 1.5 kg sits on grass, where &mu;<sub>s</sub> = 0.7 and &mu;<sub>d</sub> = 0.3. A player kicks it, giving a horizontal force of 16 N for a brief instant. Show that the ball starts to slide, and calculate its acceleration once it does.</p>
+        <p><strong>Answer:</strong><br>
+        normal force, N = weight = mg = 1.5 &times; 9.8<br>
+        maximum static friction, f<sub>max</sub> = &mu;<sub>s</sub>N = 0.7 &times; (1.5 &times; 9.8)<br>
+        since the applied force (16 N) is greater than f<sub>max</sub>, the ball starts to slide, so friction becomes dynamic: f = &mu;<sub>d</sub>N = 0.3 &times; (1.5 &times; 9.8)<br>
+        resultant force = applied force &minus; f<br>
+        acceleration, a = resultant force &divide; mass</p>
+      </div>
+
+      <h3>Live simulation: friction explorer</h3>
+      <p>Drag the applied force slider from zero upwards and watch how the friction force responds. Notice how friction matches the applied force exactly while the block stays still, then settles to a lower, constant value once it starts to slide.</p>
+      <figure class="wide">
+        <div class="sim-wrap">
+          <div class="sim-canvas-box"><canvas id="frictionCanvas" width="460" height="200"></canvas></div>
+          <div class="sim-controls">
+            <h4>Friction explorer</h4>
+            <div class="sim-row"><label for="massSlider">Mass = <span id="massVal">2.0</span> kg</label><input type="range" id="massSlider" min="1" max="5" step="0.5" value="2"></div>
+            <div class="sim-row"><label for="appliedSlider">Applied force, F = <span id="appliedVal">0</span> N</label><input type="range" id="appliedSlider" min="0" max="40" step="1" value="0"></div>
+            <div class="sim-readout" id="frictionReadout">&mu;<sub>s</sub> = 0.6, &mu;<sub>d</sub> = 0.4<br>state: static</div>
+            <div class="sim-btns">
+              <button class="alt" id="frictionReset">Reset block</button>
+            </div>
+          </div>
+        </div>
+        <figcaption>Fig. 5.2 A block on a rough surface. Friction self-adjusts to match the applied force while the block is static, up to a maximum of &mu;<sub>s</sub>N; once it slides, friction drops to &mu;<sub>d</sub>N and the block accelerates.</figcaption>
+      </figure>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">15</span><strong>Explain the difference between static and dynamic (kinetic) friction.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">Static friction acts when there is no relative sliding between the two surfaces; it adjusts itself to exactly match the force trying to cause motion, up to a maximum value of &mu;<sub>s</sub>N. Dynamic (kinetic) friction acts once the surfaces are actually sliding past each other; it has a roughly constant value of &mu;<sub>d</sub>N, which is normally somewhat smaller than the maximum static value.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">16</span><strong>A crate of mass 12 kg rests on a floor where &mu;<sub>s</sub> = 0.45. Calculate the maximum static friction force before the crate begins to slide.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">normal force, N = mg = 12 &times; 9.8<br>
+        f<sub>max</sub> = &mu;<sub>s</sub>N = 0.45 &times; (12 &times; 9.8)</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">17</span><strong>Using Fig. 5.1, describe what happens to the friction force as the applied force is increased from zero, right up to the point where the object begins to slide, and beyond.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">At first, the friction force rises to match the applied force exactly (f = F), keeping the object in equilibrium, up to a maximum value of &mu;<sub>s</sub>N. Once the applied force exceeds this maximum, the object begins to slide, and the friction force drops to the roughly constant dynamic value, &mu;<sub>d</sub>N, which stays approximately the same even as the applied force is increased further.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">18</span><strong>Why will an object at rest, when a pushing force increases to just above the maximum static friction, always accelerate?</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">Once the pushing force rises just above the maximum static friction, &mu;<sub>s</sub>N, the object starts to slide, so friction immediately drops to the lower dynamic value, &mu;<sub>d</sub>N (since &mu;<sub>d</sub> is normally smaller than &mu;<sub>s</sub>). At that instant the pushing force is still just above &mu;<sub>s</sub>N, which is itself above &mu;<sub>d</sub>N, so the pushing force now exceeds the (now smaller) friction force by a clear margin. This leaves a non-zero resultant force acting on the object, so by Newton's second law it must accelerate — it can never simply move off at a new constant velocity, because the sudden drop in friction always leaves an unbalanced resultant at the moment sliding begins.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">19</span><strong>A student says that a wide car tyre grips the road better than a narrow one because it has a larger contact area with the road. Explain why this reasoning is not correct in terms of the coefficient of friction.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">The coefficient of friction depends only on the nature of the two surfaces in contact (how rough or smooth the tyre and road are), not on the size of the contact area. A wider tyre does not, by itself, increase the maximum friction force available, since f<sub>max</sub> = &mu;<sub>s</sub>N depends on the normal force and the coefficient of friction, not the contact area.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Contact forces II: drag and buoyancy</h2>
+
+      <h3>Viscous drag</h3>
+      <p><strong>Viscous drag</strong> is the resistive force a fluid (liquid or gas) exerts on an object moving through it, opposing the object's motion. For a small sphere moving slowly through a fluid, it is given by <strong>Stokes' law</strong>:</p>
+      <div class="eqn">F<sub>d</sub> = 6&pi;&eta;rv</div>
+      <p>where &eta; is the fluid's <strong>viscosity</strong> (unit Pa s), <em>r</em> is the sphere's radius, and <em>v</em> is its speed. A more viscous fluid produces a larger drag force at the same speed.</p>
+
+      <table class="eqtable">
+        <tr><th>Fluid</th><th>Viscosity, &eta; / Pa s</th></tr>
+        <tr><td>heavy oil</td><td>0.7</td></tr>
+        <tr><td>light oil</td><td>0.1</td></tr>
+        <tr><td>water</td><td>1 &times; 10<sup>&minus;3</sup></td></tr>
+        <tr><td>air</td><td>1.8 &times; 10<sup>&minus;5</sup></td></tr>
+      </table>
+
+      <div class="keyword"><b>Terminal velocity:</b> as a falling object speeds up, drag increases (since drag depends on speed). Eventually drag becomes large enough to balance the object's weight (and any buoyancy force), so the resultant force falls to zero and the object continues at a constant, maximum speed — its terminal velocity.</div>
+
+      <h3>Buoyancy</h3>
+      <p>Any object in a fluid experiences an upward <strong>buoyancy force</strong> (upthrust), because the pressure of the fluid pushing up on the bottom of the object is greater than the pressure pushing down on its top. This is described by <strong>Archimedes' principle</strong>:</p>
+      <div class="eqn">F<sub>b</sub> = &rho;Vg</div>
+      <p>where &rho; is the density of the fluid, and <em>V</em> is the volume of fluid displaced by the object (which equals the object's submerged volume). In words: the buoyant force equals the weight of fluid displaced.</p>
+
+      <figure>
+        <svg viewBox="0 0 400 220" width="400" height="220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="afI" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0a5b62"/></marker>
+            <marker id="afJ" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#a5570f"/></marker>
+          </defs>
+          <rect x="20" y="110" width="360" height="95" fill="#dceaf5"/>
+          <line x1="20" y1="110" x2="380" y2="110" stroke="#0a5b62" stroke-width="1.5"/>
+          <text x="30" y="195" font-size="12.5" fill="#0a5b62">water</text>
+          <rect x="150" y="80" width="100" height="70" fill="#fdf1e2" stroke="#a5570f" stroke-width="2"/>
+          <text x="200" y="102" font-size="12.5" fill="#a5570f" text-anchor="middle">block</text>
+          <line x1="200" y1="115" x2="200" y2="180" stroke="#0a5b62" stroke-width="2.5" marker-end="url(#afI)"/>
+          <text x="210" y="160" font-size="13" fill="#0a5b62" text-anchor="start">W = mg</text>
+          <line x1="200" y1="115" x2="200" y2="55" stroke="#a5570f" stroke-width="2.5" marker-end="url(#afJ)"/>
+          <text x="210" y="70" font-size="13" fill="#a5570f" text-anchor="start">F<tspan font-size="9" baseline-shift="sub">b</tspan> (buoyancy)</text>
+        </svg>
+        <figcaption>Fig. 6.1 A floating block: the buoyant force, F<sub>b</sub>, equals the weight of water displaced by the submerged part of the block. The block floats in equilibrium when F<sub>b</sub> = W.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 6.2</span>
+        <p>A block of wood has a volume of 34 cm<sup>3</sup> (34 &times; 10<sup>&minus;6</sup> m<sup>3</sup>) and a mass of 29 g (0.029 kg). The density of water is 1000 kg m<sup>&minus;3</sup>. Calculate (a) the block's weight, and (b) the maximum possible buoyant force on it (if it were fully submerged). Use your answers to explain whether the block floats or sinks.</p>
+        <p><strong>Answer:</strong><br>
+        (a) W = mg = 0.029 &times; 9.8<br>
+        (b) F<sub>b(max)</sub> = &rho;Vg = 1000 &times; (34 &times; 10<sup>&minus;6</sup>) &times; 9.8<br>
+        Since F<sub>b(max)</sub> (part b) is greater than W (part a), the block can displace enough water to balance its weight before it is fully submerged, so it floats, sitting only partly under the water.</p>
+      </div>
+
+      <div class="sim-embed">
+        <p class="instructions">Explore how the density of an object compared with the density of the fluid it is placed in determines whether it floats or sinks, and how the buoyant force changes as more of the object becomes submerged.</p>
+        <iframe class="sim-frame" src="https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_en.html" loading="lazy" title="PhET Buoyancy simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation by <a href="https://phet.colorado.edu" target="_blank" rel="noopener">PhET Interactive Simulations, University of Colorado Boulder</a>, licensed under CC-BY 4.0.</p>
+      </div>
+      <p style="text-align:center; font-size:0.85rem; color:#5b6b78; margin-top:0.3rem;">Fig. 6.2 PhET Buoyancy simulation.</p>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">20</span><strong>An object of volume 60 cm<sup>3</sup> (60 &times; 10<sup>&minus;6</sup> m<sup>3</sup>) is fully submerged in water of density 1000 kg m<sup>&minus;3</sup>. Calculate the buoyant force acting on it.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">F<sub>b</sub> = &rho;Vg = 1000 &times; (60 &times; 10<sup>&minus;6</sup>) &times; 9.8</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">21</span><strong>Two identical steel ball bearings are dropped, one into light oil and one into heavy oil. Explain, in terms of viscous drag, why the ball reaches a lower terminal velocity in the heavy oil.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">Heavy oil has a much larger viscosity, &eta;, than light oil. Since the drag force F<sub>d</sub> = 6&pi;&eta;rv is directly proportional to viscosity, the ball in heavy oil experiences a larger drag force at any given speed. This means the drag force builds up to balance the ball's weight at a lower speed in heavy oil than in light oil, so its terminal velocity — reached once drag balances weight — is lower.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Field forces</h2>
+      <p>Unlike contact forces, <strong>field forces</strong> act between objects even when they are not touching — they act "at a distance", through a field that surrounds the object producing the force.</p>
+
+      <div class="keybox"><strong>Key idea.</strong> Contact forces need the two objects to be physically touching (friction, normal force, tension, drag, buoyancy). Field forces do not — they act through a field that extends through space around the object producing it (gravitational, electric and magnetic force).</div>
+
+      <h3>Gravitational force</h3>
+      <p>Every object with mass creates a gravitational field around it, and exerts a gravitational (attractive) force on every other mass within that field. Near the Earth's surface, this is simply the weight of an object, F<sub>g</sub> = mg, which you met in Section 1.</p>
+
+      <h3>Electric force</h3>
+      <p>Any charged object creates an electric field around it, which exerts a force on other charged objects within that field. Like charges repel each other; unlike charges attract. You will study the electric force in detail, including how to calculate it, later in the course.</p>
+
+      <h3>Magnetic force</h3>
+      <p>Magnets, and electric currents, create a magnetic field around them, which exerts a force on other magnets, magnetic materials, or moving charges within that field. Like the electric force, you will meet the details of the magnetic force in a later topic.</p>
+
+      <table class="eqtable">
+        <tr><th>Contact forces (need touching)</th><th>Field forces (act at a distance)</th></tr>
+        <tr><td>normal force, friction, viscous drag, buoyancy</td><td>gravitational, electric, magnetic</td></tr>
+      </table>
+
+      <h3>Check your understanding</h3>
+
+      <div class="question">
+        <span class="qnum">22</span><strong>Classify each of the following as a contact force or a field force: (a) tension in a rope, (b) the attraction between a charged balloon and a wall, (c) friction between a tyre and the road, (d) the pull between two bar magnets.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">(a) tension — contact force. (b) attraction between a charged balloon and a wall — field force (electric). (c) friction — contact force. (d) pull between two magnets — field force (magnetic).</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">23</span><strong>Two students sitting near each other in class exert a gravitational force on one another, yet neither of them notices it. Explain why, comparing this force with the weight each student experiences due to the Earth.</strong>
+        <textarea class="answer-lines" rows="5" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">Every mass does produce a gravitational field and attracts every other mass, so the students do exert a tiny gravitational force on each other. However, this force depends on the masses involved, and a person's mass is minute compared with the Earth's enormous mass. The gravitational force between the two students is therefore far too small to notice, while the gravitational force from the whole Earth (their weight) is large enough to feel clearly.</div>
+      </div>
+
+      <div class="question">
+        <span class="qnum">24</span><strong>State which field force is most likely responsible for each situation: (a) a compass needle turning to point near a wire carrying a current, (b) an apple falling from a tree.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">(a) the magnetic force — a current-carrying wire produces a magnetic field, which exerts a force on the compass needle. (b) the gravitational force — the Earth's gravitational field pulls the apple downwards.</div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSARY ================= -->
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
+      <dl class="glossary">
+        <dt>Force</dt><dd>A push or a pull that one object exerts on another; a vector, measured in newtons (N), and always the result of an interaction between two bodies.</dd>
+        <dt>Mass and weight</dt><dd>Mass is the amount of matter in an object (a scalar, in kg, unchanged by location). Weight is the gravitational force acting on that mass, F<sub>g</sub> = mg (a vector, in N), which does depend on location.</dd>
+        <dt>Gravitational field strength, g</dt><dd>The gravitational force acting on each kilogram of mass at a location, in N kg<sup>&minus;1</sup>; near the Earth's surface, g = 9.8 N kg<sup>&minus;1</sup>.</dd>
+        <dt>Equilibrium</dt><dd>The state of an object when the resultant force acting on it is zero, so (by Newton's first law) it stays at rest or moves with constant velocity.</dd>
+        <dt>Newton's third-law pair</dt><dd>Two forces of the same type, equal in size, opposite in direction, acting along the same line, on two different objects — never on the same object.</dd>
+        <dt>Free-body diagram</dt><dd>A diagram showing every force acting on a single object, drawn as labelled arrows from a point representing that object.</dd>
+        <dt>Resultant force</dt><dd>The single overall force equivalent to all the individual forces acting on an object, found by adding them as vectors.</dd>
+        <dt>Normal force</dt><dd>The component of the contact force between two surfaces that acts perpendicular to those surfaces.</dd>
+        <dt>Friction</dt><dd>The component of the contact force that opposes relative sliding between two surfaces. Static friction (f &le; &mu;<sub>s</sub>N) adjusts to match the applied force up to a maximum before sliding begins; dynamic friction (f = &mu;<sub>d</sub>N) acts once sliding starts, and is roughly constant.</dd>
+        <dt>Viscous drag</dt><dd>The resistive force a fluid exerts on an object moving through it, opposing its motion; for a small sphere, given by Stokes' law, F<sub>d</sub> = 6&pi;&eta;rv.</dd>
+        <dt>Terminal velocity</dt><dd>The constant, maximum speed reached by an object falling through a fluid, once the drag force (and any buoyancy) has increased enough to balance its weight.</dd>
+        <dt>Buoyancy</dt><dd>The upward force exerted by a fluid on an object within it, equal to the weight of fluid displaced (Archimedes' principle), F<sub>b</sub> = &rho;Vg.</dd>
+        <dt>Contact force and field force</dt><dd>A contact force (e.g. normal force, friction) only exists where two objects are touching. A field force (e.g. gravitational, electric, magnetic) acts between objects at a distance, through a field.</dd>
+      </dl>
+    </section>
+
+    <footer class="page no-print">Forces Workbook · Companion resources: <em>Kinematics</em>, with further Mechanics workbooks (including dynamics problems and momentum) to follow.</footer>
+  </main>
+</div>
+
+<script>
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- fill in online: autosize ---------- */
+let fillableEls = [];
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
+  fillableEls.forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ autosize(el); });
+  });
+}
+
+function clearMyAnswers(){
+  if(!confirm('Clear everything you have typed in this workbook? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
+    el.value = '';
+    autosize(el);
+  });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+document.addEventListener('DOMContentLoaded', initFillables);
+
+/* ================= Fig 4.2: resultant force builder ================= */
+(function(){
+  const canvas = document.getElementById('vecCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const magASlider = document.getElementById('magASlider');
+  const magBSlider = document.getElementById('magBSlider');
+  const angBSlider = document.getElementById('angBSlider');
+  const magAVal = document.getElementById('magAVal');
+  const magBVal = document.getElementById('magBVal');
+  const angBVal = document.getElementById('angBVal');
+  const readout = document.getElementById('vecReadout');
+  const eqBtn = document.getElementById('eqBtn');
+  let showEq = false;
+  const ox = 130, oy = 220, scale = 3.4;
+
+  function arrow(x0,y0,x1,y1,color,width){
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = width || 3;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+    const ang = Math.atan2(y1-y0, x1-x0);
+    const hl = 10;
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-hl*Math.cos(ang-0.4), y1-hl*Math.sin(ang-0.4));
+    ctx.lineTo(x1-hl*Math.cos(ang+0.4), y1-hl*Math.sin(ang+0.4));
+    ctx.closePath(); ctx.fill();
+  }
+
+  function draw(){
+    const magA = parseFloat(magASlider.value);
+    const magB = parseFloat(magBSlider.value);
+    const angB = parseFloat(angBSlider.value);
+    magAVal.textContent = magA.toFixed(0);
+    magBVal.textContent = magB.toFixed(0);
+    angBVal.textContent = angB.toFixed(0);
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(20,oy); ctx.lineTo(440,oy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox,20); ctx.lineTo(ox,290); ctx.stroke();
+
+    const angBrad = angB * Math.PI/180;
+    const Ax = magA, Ay = 0;
+    const Bx = magB*Math.cos(angBrad), By = -magB*Math.sin(angBrad);
+    const Rx = Ax+Bx, Ry = Ay+By;
+
+    const Aend = [ox+Ax*scale, oy+Ay*scale];
+    const Bend = [Aend[0]+Bx*scale, Aend[1]+By*scale];
+    const Rend = [ox+Rx*scale, oy+Ry*scale];
+
+    if(magA > 0) arrow(ox, oy, Aend[0], Aend[1], '#4fc3d0', 4);
+    if(magB > 0) arrow(Aend[0], Aend[1], Bend[0], Bend[1], '#f0a94e', 4);
+    const Rmag = Math.hypot(Rx,Ry);
+    if(Rmag > 0.01) arrow(ox, oy, Rend[0], Rend[1], '#ffffff', 3);
+
+    ctx.font = '13px sans-serif';
+    if(magA > 0){ ctx.fillStyle = '#4fc3d0'; ctx.textAlign = 'center'; ctx.fillText('A', (ox+Aend[0])/2, oy-10); }
+    if(magB > 0){
+      const bmx = (Aend[0]+Bend[0])/2, bmy = (Aend[1]+Bend[1])/2;
+      const bdx = Bend[0]-Aend[0], bdy = Bend[1]-Aend[1];
+      const blen = Math.hypot(bdx,bdy) || 1;
+      const boxOff = 14;
+      const offx = -bdy/blen*boxOff, offy = bdx/blen*boxOff;
+      ctx.fillStyle = '#f0a94e'; ctx.textAlign = 'center';
+      ctx.fillText('B', bmx + offx, bmy + offy);
+    }
+    if(Rmag > 0.01){ ctx.fillStyle = '#ffffff'; ctx.textAlign = (Rend[0] >= ox ? 'left':'right'); ctx.fillText('R', Rend[0] + (Rend[0]>=ox?8:-8), Rend[1]-6); }
+
+    let Rang = Math.atan2(-Ry, Rx) * 180/Math.PI;
+    if(Rang < 0) Rang += 360;
+
+    if(showEq && Rmag > 0.01){
+      const Eend = [ox-Rx*scale, oy-Ry*scale];
+      ctx.setLineDash([6,4]);
+      arrow(Rend[0], Rend[1], ox, oy, 'rgba(255,255,255,0.55)', 2.5);
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.textAlign = 'center';
+      ctx.fillText('equilibrant', (Rend[0]+ox)/2, (Rend[1]+oy)/2 - 8);
+    }
+
+    readout.innerHTML = 'A = ' + magA.toFixed(0) + ' N (horizontal)<br>' +
+      'B = ' + magB.toFixed(0) + ' N at ' + angB.toFixed(0) + '&deg;<br>' +
+      'Resultant, R = ' + Rmag.toFixed(1) + ' N at ' + Rang.toFixed(1) + '&deg; above the horizontal';
+  }
+
+  magASlider.addEventListener('input', draw);
+  magBSlider.addEventListener('input', draw);
+  angBSlider.addEventListener('input', draw);
+  eqBtn.addEventListener('click', function(){
+    showEq = !showEq;
+    eqBtn.textContent = showEq ? 'Hide equilibrant' : 'Show equilibrant';
+    draw();
+  });
+  draw();
+})();
+
+/* ================= Fig 5.2: friction explorer ================= */
+(function(){
+  const canvas = document.getElementById('frictionCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const massSlider = document.getElementById('massSlider');
+  const appliedSlider = document.getElementById('appliedSlider');
+  const massVal = document.getElementById('massVal');
+  const appliedVal = document.getElementById('appliedVal');
+  const readout = document.getElementById('frictionReadout');
+  const resetBtn = document.getElementById('frictionReset');
+  const mus = 0.6, mud = 0.4, g = 9.8;
+  const startX = 90;
+  let blockX = startX;
+  let v = 0;
+  let lastT = null;
+
+  function state(){
+    const mass = parseFloat(massSlider.value);
+    const F = parseFloat(appliedSlider.value);
+    const N = mass * g;
+    const fMax = mus * N;
+    const sliding = F > fMax;
+    const f = sliding ? mud * N : F;
+    return { mass, F, N, fMax, f, sliding };
+  }
+
+  function drawArrow(x0,y0,x1,y1,color){
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3.5;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+    const ang = Math.atan2(y1-y0, x1-x0), hl = 9;
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-hl*Math.cos(ang-0.4), y1-hl*Math.sin(ang-0.4));
+    ctx.lineTo(x1-hl*Math.cos(ang+0.4), y1-hl*Math.sin(ang+0.4));
+    ctx.closePath(); ctx.fill();
+  }
+
+  function frame(t){
+    if(lastT === null) lastT = t;
+    let dt = (t - lastT) / 1000;
+    if(dt > 0.05) dt = 0.05;
+    lastT = t;
+
+    const s = state();
+    const groundY = 110;
+    const maxX = 300;
+
+    if(s.sliding && blockX < maxX){
+      const a = (s.F - s.f) / s.mass;
+      v += a * dt;
+      blockX += v * dt * 12;
+      if(blockX > maxX){ blockX = maxX; v = 0; }
+    } else if(!s.sliding){
+      blockX = startX; v = 0;
+    }
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(20, groundY+30); ctx.lineTo(440, groundY+30); ctx.stroke();
+
+    ctx.fillStyle = '#eaf3fb'; ctx.strokeStyle = '#4fc3d0'; ctx.lineWidth = 2;
+    ctx.fillRect(blockX-30, groundY-30, 60, 60);
+    ctx.strokeRect(blockX-30, groundY-30, 60, 60);
+
+    const Flen = Math.min(s.F * 2.2, 70);
+    const flen = Math.min(s.f * 2.2, 70);
+    if(s.F > 0) drawArrow(blockX+30, groundY, blockX+30+Flen, groundY, '#f0a94e');
+    if(s.f > 0) drawArrow(blockX-30, groundY, blockX-30-flen, groundY, '#4fc3d0');
+
+    ctx.font = '12.5px sans-serif'; ctx.textAlign = 'left';
+    if(s.F > 0){ ctx.fillStyle = '#f0a94e'; ctx.fillText('F', blockX+34+Flen, groundY-8); }
+    if(s.f > 0){ ctx.fillStyle = '#4fc3d0'; ctx.textAlign='right'; ctx.fillText('f', blockX-34-flen, groundY-8); }
+
+    massVal.textContent = s.mass.toFixed(1);
+    appliedVal.textContent = s.F.toFixed(0);
+    readout.innerHTML = '&mu;<sub>s</sub> = ' + mus.toFixed(1) + ', &mu;<sub>d</sub> = ' + mud.toFixed(1) + '<br>' +
+      'max static friction = ' + s.fMax.toFixed(1) + ' N<br>' +
+      'friction now = ' + s.f.toFixed(1) + ' N<br>' +
+      'state: ' + (s.sliding ? 'sliding' : 'static');
+
+    requestAnimationFrame(frame);
+  }
+
+  massSlider.addEventListener('input', function(){ if(!state().sliding){ blockX = startX; v = 0; } });
+  appliedSlider.addEventListener('input', function(){});
+  resetBtn.addEventListener('click', function(){ blockX = startX; v = 0; appliedSlider.value = 0; });
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
