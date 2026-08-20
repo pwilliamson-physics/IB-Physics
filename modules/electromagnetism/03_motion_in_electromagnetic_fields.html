@@ -17,6 +17,8 @@
     --line:#b9c6d3;
     --ink:#1f2933;
     --border:#d7e0e8;
+    --purple:#6b4c9a;
+    --soft-purple:#f1ebf9;
   }
   *{box-sizing:border-box;}
   body{
@@ -26,11 +28,12 @@
     background:#f7f9fb;
     line-height:1.55;
     font-size:16.5px;
+    padding-top:56px;
   }
-  .layout{display:flex; min-height:100vh;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
   nav.sidebar{
     width:250px; flex-shrink:0; background:var(--navy); color:#fff;
-    padding:1.25rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto;
+    padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;
   }
   nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
   nav.sidebar a{
@@ -48,7 +51,6 @@
     color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;
   }
   .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
-  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
   .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
   .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
   .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
@@ -95,6 +97,9 @@
     font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px;
     margin-bottom:0.5rem; text-transform:uppercase;
   }
+  .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
+  .stretch-box strong{color:var(--purple);}
 
   .question{
     background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
@@ -168,11 +173,10 @@
   .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
   .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
 
-  .sim-embed{
-    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
-    padding:1.2rem 1.4rem; margin:1.1rem 0;
-  }
-  .sim-embed p.instructions{margin:0 0 0.6rem 0;}
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
   .sim-print-note{display:none;}
 
   table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
@@ -182,28 +186,27 @@
   dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
   dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
 
-  .fab{
-    position:fixed; right:1.6rem; bottom:1.6rem; background:var(--amber); color:#fff;
-    border:none; border-radius:50px; padding:0.85rem 1.4rem; font-size:0.98rem;
-    font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.25); cursor:pointer; z-index:100;
-  }
-  .fab:hover{background:#c0721c;}
-  .toolbar{
-    position:fixed; right:1.6rem; bottom:5.3rem; z-index:100; display:flex; flex-direction:column; gap:0.5rem;
-  }
-  .toolbar button{
-    background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px;
-    padding:0.55rem 1.1rem; font-size:0.82rem; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.12);
-  }
-  .toolbar button:hover{background:var(--soft-blue);}
-
   footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
 
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+  }
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 820px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+
   @media print{
-    nav.sidebar, .fab, .toolbar, .reveal-btn{display:none !important;}
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
     .layout{display:block;}
     main{max-width:100%; padding:0; margin:0;}
-    body{background:#fff; font-size:11.5pt;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
     section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
     .cover{page-break-after:always; border-radius:0;}
     .answer-panel{display:none !important;}
@@ -222,6 +225,14 @@
 </style>
 </head>
 <body>
+<div class="topbar no-print">
+  <span class="topbar-title">Motion in Electromagnetic Fields</span>
+  <button onclick="revealAll()">Show all answers</button>
+  <button onclick="hideAll()">Hide all answers</button>
+  <button onclick="clearMyAnswers()">Clear my answers</button>
+  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
 <div class="layout">
   <nav class="sidebar no-print">
     <h1>Motion in Electromagnetic Fields</h1>
@@ -240,17 +251,15 @@
   <main>
     <section class="cover" id="cover">
       <h1>Motion in Electromagnetic Fields</h1>
-      <p class="sub">Student Workbook — Unit D.3</p>
       <div class="goals" style="margin-top:1.3rem; background:rgba(255,255,255,0.12); border-left-color:#fff; color:#fff;">
-        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
+        <strong style="color:#fff;">Understandings:</strong>
         <ul>
-          <li>Explain the difference between conventional current and the actual flow of electrons.</li>
-          <li>Describe and calculate the parabolic motion of a charged particle in a uniform electric field.</li>
-          <li>Describe and calculate the circular (or helical) motion of a charged particle in a uniform magnetic field, using F = qvB sinθ and r = mv/qB.</li>
-          <li>Predict the direction of the magnetic force on a moving charge using Fleming's left-hand rule.</li>
-          <li>Describe the motion of a charged particle in perpendicular (crossed) electric and magnetic fields, including the velocity selector condition.</li>
-          <li>Calculate the force on a current-carrying conductor in a magnetic field, F = BIL sinθ.</li>
-          <li>Calculate the force per unit length between two parallel current-carrying wires.</li>
+          <li>The motion of a charged particle in a uniform electric field.</li>
+          <li>The motion of a charged particle in a uniform magnetic field.</li>
+          <li>The motion of a charged particle in perpendicularly orientated uniform electric and magnetic fields.</li>
+          <li>The magnitude and direction of the force on a charge moving in a magnetic field, as given by F = qvB sin θ.</li>
+          <li>The magnitude and direction of the force on a current-carrying conductor in a magnetic field, as given by F = BIL sin θ.</li>
+          <li>The force per unit length between parallel wires.</li>
         </ul>
       </div>
       <div class="name-box">
@@ -1326,14 +1335,6 @@
   </main>
 </div>
 
-<div class="toolbar no-print">
-  <button onclick="revealAll()">Show all answers</button>
-  <button onclick="hideAll()">Hide all answers</button>
-  <button onclick="clearMyAnswers()">Clear my answers</button>
-  <div id="saveStatus" style="font-size:0.72rem; color:#5b6b78; text-align:center; background:#fff; border:1px solid var(--border); border-radius:50px; padding:0.35rem 0.8rem;">Answers save automatically in this browser</div>
-</div>
-<button class="fab no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
-
 <script>
 var PATHQUIZ_CORRECT = {'p1':'A', 'p2':'B', 'p3':'B', 'p4':'A', 'p5':'A', 'p6':'C', 'p7':'C', 'p8':'A', 'p9':'B', 'p10':'C'};
 
@@ -1378,19 +1379,8 @@ function hideAll(){
   document.body.classList.remove('answers-visible');
 }
 
-/* ---------- fill in online: autosize + autosave ---------- */
-var STORAGE_PREFIX = 'ib-d3-workbook3-emfields-v1-';
+/* ---------- fill in online: autosize ---------- */
 var fillableEls = [];
-
-function storageAvailable(){
-  try{
-    var k = '__test__' + STORAGE_PREFIX;
-    localStorage.setItem(k, '1');
-    localStorage.removeItem(k);
-    return true;
-  } catch(e){ return false; }
-}
-var canStore = storageAvailable();
 
 function autosize(el){
   if(el.tagName !== 'TEXTAREA') return;
@@ -1400,25 +1390,10 @@ function autosize(el){
 
 function initFillables(){
   fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
-  fillableEls.forEach(function(el, i){
-    var key = STORAGE_PREFIX + i;
-    el.dataset.storeKey = key;
-    if(canStore){
-      var saved = localStorage.getItem(key);
-      if(saved !== null){ el.value = saved; }
-    }
+  fillableEls.forEach(function(el){
     autosize(el);
-    el.addEventListener('input', function(){
-      autosize(el);
-      if(canStore){
-        try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){}
-      }
-    });
+    el.addEventListener('input', function(){ autosize(el); });
   });
-  if(!canStore){
-    var status = document.getElementById('saveStatus');
-    if(status) status.textContent = 'Autosave unavailable here \u2014 print/export before closing this tab';
-  }
 }
 
 function clearMyAnswers(){
@@ -1426,7 +1401,6 @@ function clearMyAnswers(){
   fillableEls.forEach(function(el){
     el.value = '';
     autosize(el);
-    if(canStore){ try{ localStorage.removeItem(el.dataset.storeKey); } catch(e){} }
   });
 }
 
