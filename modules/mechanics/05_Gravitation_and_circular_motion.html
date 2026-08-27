@@ -915,15 +915,20 @@ document.addEventListener('DOMContentLoaded', initFillables);
     ctx.fillStyle = '#d98324';
     ctx.beginPath(); ctx.arc(clampedX, planetY, 6, 0, 2*Math.PI); ctx.fill();
 
-    /* force arrow, scaled for visibility (not to exact scale) */
-    const arrowLen = Math.max(40/rOverR, 6);
+    /* force arrow, scaled for visibility (not to exact scale). Length follows the
+       same inverse-square law as g itself (arrowLen = planetR / r&sup2;), so it is at
+       its longest — exactly reaching the planet's centre — at r = 1, and shrinks
+       monotonically from there; it can never overshoot past the centre. */
+    let arrowLen = planetR / (rOverR*rOverR);
+    let arrowTipX = clampedX - arrowLen;
+    arrowTipX = Math.max(arrowTipX, planetX); /* defensive: never let the arrow overshoot past the planet's centre */
     ctx.strokeStyle = '#d98324';
     ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(clampedX, planetY); ctx.lineTo(clampedX-arrowLen, planetY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(clampedX, planetY); ctx.lineTo(arrowTipX, planetY); ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(clampedX-arrowLen, planetY);
-    ctx.lineTo(clampedX-arrowLen+7, planetY-4);
-    ctx.lineTo(clampedX-arrowLen+7, planetY+4);
+    ctx.moveTo(arrowTipX, planetY);
+    ctx.lineTo(arrowTipX+7, planetY-4);
+    ctx.lineTo(arrowTipX+7, planetY+4);
     ctx.closePath(); ctx.fill();
 
     ctx.fillStyle = '#dceaf0';
