@@ -79,16 +79,18 @@
   .topbar{
     position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
     background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+    display:flex; align-items:center; gap:0.6rem; padding:0 1rem;
   }
-  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar-actions{
+    display:flex; align-items:center; gap:0.6rem; overflow-x:auto;
+    flex:1 1 auto; min-width:0; height:100%; padding-right:0.4rem;
+  }
   .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
   .topbar button:hover{background:var(--soft-blue);}
-  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600; flex-shrink:0;}
   .topbar button.primary:hover{background:#c0721c;}
   .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
   @media (max-width: 900px){ .topbar .save-status{display:none;} }
-  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
   footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
 
   /* ---------- custom-canvas simulation (dark card, matches house style) ---------- */
@@ -138,15 +140,16 @@
 </head>
 <body>
 <div class="topbar no-print">
-  <span class="topbar-title">Millikan's Oil-Drop Experiment</span>
-  <button onclick="revealAll()">Show all answers</button>
-  <button onclick="hideAll()">Hide all answers</button>
-  <button onclick="clearMyAnswers()">Clear my answers</button>
-  <button onclick="saveAnswersToFile()">💾 Save answers</button>
-  <button onclick="triggerLoadAnswers()">📂 Load answers</button>
-  <input type="file" id="loadFileInput" accept="application/json" style="display:none" onchange="handleLoadFile(event)">
-  <button id="btnLinkFile" style="display:none;" onclick="linkSaveFile()">🔗 Link a save file</button>
-  <span class="save-status" id="saveStatus">Checking autosave…</span>
+  <div class="topbar-actions">
+    <button onclick="revealAll()">Show all answers</button>
+    <button onclick="hideAll()">Hide all answers</button>
+    <button onclick="clearMyAnswers()">Clear my answers</button>
+    <button onclick="saveAnswersToFile()">💾 Save answers</button>
+    <button onclick="triggerLoadAnswers()">📂 Load answers</button>
+    <input type="file" id="loadFileInput" accept="application/json" style="display:none" onchange="handleLoadFile(event)">
+    <button id="btnLinkFile" style="display:none;" onclick="linkSaveFile()">🔗 Link a save file</button>
+    <span class="save-status" id="saveStatus">Checking autosave…</span>
+  </div>
   <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
 </div>
 <div class="layout">
@@ -368,7 +371,7 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">2</span><strong>Copy your ten (or more) values of q from the table in Section 4 into the space below, in units of 10⁻¹⁹ C.</strong> Round each one to the nearest whole number, then find the largest number that divides all of them. This is your simulated estimate of e, in units of 10⁻¹⁹ C.
+        <span class="qnum">2</span><strong>Copy your ten (or more) values of q from the table in Section 4 into the space below, in units of 10⁻¹⁹ C.</strong> Find the largest number that divides exactly into <em>all</em> of them. Unlike the marble-bag puzzle, this number will not itself be a whole number — each q is a whole number of electrons multiplied by e, and e is not a whole number of these units. This number is your simulated estimate of e, in units of 10⁻¹⁹ C.
         <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
       </div>
 
