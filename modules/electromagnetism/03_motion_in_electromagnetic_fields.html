@@ -45,7 +45,7 @@
     display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem;
     padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;
   }
-  main{flex:1; max-width:900px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
   .cover{
     background:linear-gradient(135deg,var(--navy),var(--teal-dark));
     color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;
@@ -139,7 +139,8 @@
   }
   .answer-panel.shown{display:block;}
 
-  figure{margin:1.2rem auto; text-align:center; max-width:520px;}
+  figure{margin:1.2rem auto; text-align:center; max-width:560px;}
+  figure.wide{max-width:none;}
   figure svg{max-width:100%; height:auto; max-height:320px;}
   figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
 
@@ -179,6 +180,22 @@
   .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
   .sim-print-note{display:none;}
 
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
+
   table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
   table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
   table.eqtable th{background:var(--soft-blue); color:var(--navy);}
@@ -188,19 +205,26 @@
 
   footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
 
+  /* ---------- permanent top bar ----------
+     No title in the bar (the sidebar already names the workbook) — this keeps
+     the print button pinned on the right and always visible. The action
+     buttons sit in their own horizontally-scrollable strip so a long row
+     never pushes Print off-screen on a narrow window. */
   .topbar{
     position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
     background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    display:flex; align-items:center; gap:0.6rem; padding:0 1.4rem; overflow-x:auto;
+    display:flex; align-items:center; gap:0.6rem; padding:0 1rem;
   }
-  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; margin-right:auto; white-space:nowrap;}
+  .topbar-actions{
+    display:flex; align-items:center; gap:0.6rem; overflow-x:auto;
+    flex:1 1 auto; min-width:0; height:100%; padding-right:0.4rem;
+  }
   .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
   .topbar button:hover{background:var(--soft-blue);}
-  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600;}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600; flex-shrink:0;}
   .topbar button.primary:hover{background:#c0721c;}
   .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
-  @media (max-width: 820px){ .topbar .save-status{display:none;} }
-  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
+  @media (max-width: 900px){ .topbar .save-status{display:none;} }
 
   @media print{
     nav.sidebar, .topbar, .reveal-btn{display:none !important;}
@@ -219,18 +243,24 @@
     .name-box .fill::placeholder{color:transparent;}
     .pathquiz{page-break-inside:avoid;}
     .pathquiz-feedback{display:none !important;}
-    .sim-frame, .sim-embed-credit, .sim-embed p.instructions{display:none !important;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
     .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
   }
 </style>
 </head>
 <body>
 <div class="topbar no-print">
-  <span class="topbar-title">Motion in Electromagnetic Fields</span>
-  <button onclick="revealAll()">Show all answers</button>
-  <button onclick="hideAll()">Hide all answers</button>
-  <button onclick="clearMyAnswers()">Clear my answers</button>
-  <span class="save-status">Answers are not saved automatically — print or copy your work before closing this tab</span>
+  <div class="topbar-actions">
+    <button onclick="revealAll()">Show all answers</button>
+    <button onclick="hideAll()">Hide all answers</button>
+    <button onclick="clearMyAnswers()">Clear my answers</button>
+    <button onclick="saveAnswersToFile()">💾 Save answers</button>
+    <button onclick="triggerLoadAnswers()">📂 Load answers</button>
+    <input type="file" id="loadFileInput" accept="application/json" style="display:none" onchange="handleLoadFile(event)">
+    <button id="btnLinkFile" style="display:none;" onclick="linkSaveFile()">🔗 Link a save file</button>
+    <span class="save-status" id="saveStatus">Checking autosave…</span>
+  </div>
   <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
 </div>
 <div class="layout">
@@ -264,7 +294,7 @@
       </div>
       <div class="name-box">
         <label>Name</label>
-        <input class="fill" placeholder="Type your name…">
+        <input class="fill" id="studentName" placeholder="Type your name…">
       </div>
       <p class="meta">This workbook builds directly on <em>Electric &amp; Magnetic Fields</em> (Workbook 1) and <em>Millikan's Oil-Drop Experiment</em> (Workbook 2). It covers IB DP Physics Topic D.3: Motion in electromagnetic fields.</p>
     </section>
@@ -1379,8 +1409,50 @@ function hideAll(){
   document.body.classList.remove('answers-visible');
 }
 
-/* ---------- fill in online: autosize ---------- */
-var fillableEls = [];
+/* ================= Answer persistence =================
+   Set WORKBOOK_ID below to a short unique slug for this workbook (its
+   filename without .html is fine, e.g. '01_methods_of_heating'). It keys
+   localStorage, the downloaded save-file's name, and the linked-file handle,
+   so several workbooks opened in the same browser never collide or overwrite
+   each other's saved answers.
+
+   Three layers, most to least robust against a student's browser data being
+   cleared (private browsing, "clear website data", the workbook file being
+   re-downloaded to a new location and so treated by the browser as a fresh
+   origin with nothing saved, etc.) — this replaces the old "no localStorage"
+   rule after real classroom data loss on students' Macs:
+     1. A linked save file on disk (Chrome/Edge only, File System Access API)
+        — writes straight to a real file on every change. Survives anything
+        that only clears browser storage, because the data never lived there.
+     2. localStorage — automatic in every browser, but lives inside this
+        page's own browser storage and can be cleared along with it.
+     3. Manual Save/Load-to-file buttons — identical in every browser
+        (Safari, Chrome, Firefox), no special permissions required. This is
+        the one to tell students to actually rely on as their backup.
+
+   Copy this whole block verbatim into a new workbook and change only
+   WORKBOOK_ID. If the workbook ALSO has a simulation results table whose
+   recorded rows should survive a reload (not just the text answers), extend
+   buildPayload(), clearMyAnswers(), handleLoadFile() and the DOMContentLoaded
+   handler the same way 02_millikan_experiment.html does: keep the row data
+   (not the rendered HTML) in a plain array, persist that array alongside the
+   answers under its own STORAGE_PREFIX-based key, and re-run the table's
+   row-builder function against it on load. That file is the reference
+   implementation for the simulation-table extension.
+   ======================================================= */
+const WORKBOOK_ID = '03_motion_in_electromagnetic_fields';
+const STORAGE_PREFIX = 'ib-workbook-' + WORKBOOK_ID + '-v1-';
+let fillableEls = [];
+
+function storageAvailable(){
+  try{
+    const k = '__test__' + STORAGE_PREFIX;
+    localStorage.setItem(k, '1');
+    localStorage.removeItem(k);
+    return true;
+  } catch(e){ return false; }
+}
+const canStore = storageAvailable();
 
 function autosize(el){
   if(el.tagName !== 'TEXTAREA') return;
@@ -1390,10 +1462,40 @@ function autosize(el){
 
 function initFillables(){
   fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
-  fillableEls.forEach(function(el){
+  fillableEls.forEach(function(el, i){
+    const key = STORAGE_PREFIX + i;
+    el.dataset.storeKey = key;
+    if(canStore){
+      const saved = localStorage.getItem(key);
+      if(saved !== null){ el.value = saved; }
+    }
     autosize(el);
-    el.addEventListener('input', function(){ autosize(el); });
+    el.addEventListener('input', function(){
+      autosize(el);
+      if(canStore){
+        try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){}
+      }
+      scheduleFileWrite();
+    });
   });
+}
+
+function getAnswersArray(){ return fillableEls.map(function(el){ return el.value; }); }
+function applyAnswersArray(arr){
+  fillableEls.forEach(function(el, i){
+    if(arr && arr[i] !== undefined){ el.value = arr[i]; autosize(el); }
+  });
+}
+
+function buildPayload(){
+  return {
+    workbook: WORKBOOK_ID,
+    savedAt: new Date().toISOString(),
+    studentName: document.getElementById('studentName') ? document.getElementById('studentName').value : '',
+    answers: getAnswersArray()
+    /* If this workbook has a simulation results table, add its state here
+       too, e.g.: , trialCount: trialCount, trialsData: trialsData */
+  };
 }
 
 function clearMyAnswers(){
@@ -1401,14 +1503,164 @@ function clearMyAnswers(){
   fillableEls.forEach(function(el){
     el.value = '';
     autosize(el);
+    if(canStore){ try{ localStorage.removeItem(el.dataset.storeKey); } catch(e){} }
   });
+  /* If this workbook has a simulation results table, also reset it here,
+     e.g.: trialsData = []; trialCount = 0; document.getElementById('dataBody').innerHTML = '';
+     and remove its localStorage key(s). */
+  scheduleFileWrite();
+}
+
+/* ---------- manual save-to-file / load-from-file (works in every browser) ---------- */
+function downloadJSON(obj, filename){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+
+function saveAnswersToFile(){
+  const name = (document.getElementById('studentName').value || '').trim();
+  const safe = name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'my';
+  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers-' + safe + '.json');
+}
+
+function triggerLoadAnswers(){ document.getElementById('loadFileInput').click(); }
+
+function handleLoadFile(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    try{
+      const data = JSON.parse(reader.result);
+      applyAnswersArray(data.answers || []);
+      /* If this workbook has a simulation results table, restore its state
+         here too (trialsData/trialCount, then rebuild the table rows),
+         before persisting locally and alerting the student. */
+      if(canStore){
+        fillableEls.forEach(function(el){ try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){} });
+      }
+      alert('Loaded your saved answers from "' + file.name + '".');
+    } catch(e){
+      alert('Sorry, that file could not be read as a saved-answers file.');
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+/* ---------- linked save file (Chrome/Edge — File System Access API) ---------- */
+let fileHandle = null;
+let pendingHandle = null;
+const fsaSupported = ('showSaveFilePicker' in window);
+let fileWriteTimer = null;
+
+function idbOpen(){
+  return new Promise(function(resolve, reject){
+    const rq = indexedDB.open('ib-workbook-fs', 1);
+    rq.onupgradeneeded = function(){ if(!rq.result.objectStoreNames.contains('handles')) rq.result.createObjectStore('handles'); };
+    rq.onsuccess = function(){ resolve(rq.result); };
+    rq.onerror = function(){ reject(rq.error); };
+  });
+}
+function idbGetHandle(){
+  return idbOpen().then(function(db){
+    return new Promise(function(resolve){
+      const tx = db.transaction('handles', 'readonly');
+      const rq = tx.objectStore('handles').get(WORKBOOK_ID);
+      rq.onsuccess = function(){ resolve(rq.result || null); };
+      rq.onerror = function(){ resolve(null); };
+    });
+  }).catch(function(){ return null; });
+}
+function idbSetHandle(handle){
+  return idbOpen().then(function(db){
+    const tx = db.transaction('handles', 'readwrite');
+    tx.objectStore('handles').put(handle, WORKBOOK_ID);
+  }).catch(function(){});
+}
+
+function updateLinkButton(){
+  const btn = document.getElementById('btnLinkFile');
+  if(!btn) return;
+  btn.textContent = fileHandle ? '🔗 Save file linked' : (pendingHandle ? '🔗 Reconnect save file' : '🔗 Link a save file');
+}
+
+function updateSaveStatus(){
+  const status = document.getElementById('saveStatus');
+  if(!status) return;
+  if(fileHandle){
+    status.textContent = 'Autosaving to your linked file on this computer';
+  } else if(canStore){
+    status.textContent = 'Autosaving in this browser — click 💾 Save often as a backup';
+  } else {
+    status.textContent = 'Autosave unavailable here — use 💾 Save / 📂 Load to keep your work';
+  }
+}
+
+function tryRestoreLinkedFile(){
+  if(!fsaSupported) return Promise.resolve();
+  return idbGetHandle().then(function(handle){
+    if(!handle) return;
+    return handle.queryPermission({mode:'readwrite'}).then(function(perm){
+      if(perm === 'granted'){ fileHandle = handle; } else { pendingHandle = handle; }
+    }).catch(function(){});
+  }).then(function(){
+    updateLinkButton();
+    updateSaveStatus();
+  });
+}
+
+function linkSaveFile(){
+  if(!fsaSupported) return;
+  const proceed = pendingHandle
+    ? pendingHandle.requestPermission({mode:'readwrite'}).then(function(req){
+        if(req === 'granted'){ fileHandle = pendingHandle; pendingHandle = null; }
+      })
+    : window.showSaveFilePicker({
+        suggestedName: WORKBOOK_ID + '-answers.json',
+        types: [{ description: 'Workbook answers', accept: {'application/json': ['.json']} }]
+      }).then(function(handle){
+        fileHandle = handle;
+        return idbSetHandle(handle);
+      });
+  proceed.then(function(){
+    updateLinkButton();
+    updateSaveStatus();
+    return writeToLinkedFile();
+  }).catch(function(){ /* user cancelled the picker — nothing to do */ });
+}
+
+function scheduleFileWrite(){
+  if(!fileHandle) return;
+  clearTimeout(fileWriteTimer);
+  fileWriteTimer = setTimeout(writeToLinkedFile, 800);
+}
+
+function writeToLinkedFile(){
+  if(!fileHandle) return Promise.resolve();
+  return fileHandle.createWritable().then(function(writable){
+    return writable.write(JSON.stringify(buildPayload(), null, 2)).then(function(){
+      return writable.close();
+    });
+  }).catch(function(e){ console.warn('Could not write to linked save file', e); });
 }
 
 window.addEventListener('beforeprint', function(){
   fillableEls.forEach(autosize);
 });
 
-document.addEventListener('DOMContentLoaded', initFillables);
+document.addEventListener('DOMContentLoaded', function(){
+  initFillables();
+  if(fsaSupported){
+    document.getElementById('btnLinkFile').style.display = '';
+    tryRestoreLinkedFile();
+  }
+  updateSaveStatus();
+});
 </script>
 </body>
 </html>
