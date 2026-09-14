@@ -28,11 +28,12 @@
     background:#f7f9fb;
     line-height:1.55;
     font-size:16.5px;
+    padding-top:56px;
   }
-  .layout{display:flex; min-height:100vh;}
+  .layout{display:flex; min-height:calc(100vh - 56px);}
   nav.sidebar{
     width:250px; flex-shrink:0; background:var(--navy); color:#fff;
-    padding:1.25rem 1rem; position:sticky; top:0; height:100vh; overflow-y:auto;
+    padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;
   }
   nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
   nav.sidebar a{
@@ -154,44 +155,60 @@
   .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
   .sim-print-note{display:none;}
 
-  .fab{
-    position:fixed; right:1.6rem; bottom:1.6rem; background:var(--amber); color:#fff;
-    border:none; border-radius:50px; padding:0.85rem 1.4rem; font-size:0.98rem;
-    font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.25); cursor:pointer; z-index:100;
-  }
-  .fab:hover{background:#c0721c;}
-  .toolbar{
-    position:fixed; right:1.6rem; bottom:5.3rem; z-index:100; display:flex; flex-direction:column; gap:0.5rem;
-  }
-  .toolbar button{
-    background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px;
-    padding:0.55rem 1.1rem; font-size:0.82rem; cursor:pointer; box-shadow:0 3px 8px rgba(0,0,0,0.12);
-  }
-  .toolbar button:hover{background:var(--soft-blue);}
-
   footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
 
+  /* ---------- permanent top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1rem;
+  }
+  .topbar-actions{
+    display:flex; align-items:center; gap:0.6rem; overflow-x:auto;
+    flex:1 1 auto; min-width:0; height:100%; padding-right:0.4rem;
+  }
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600; flex-shrink:0;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 900px){ .topbar .save-status{display:none;} }
+
   @media print{
-    nav.sidebar, .fab, .toolbar, .reveal-btn{display:none !important;}
+    nav.sidebar, .topbar, .reveal-btn{display:none !important;}
     .layout{display:block;}
     main{max-width:100%; padding:0; margin:0;}
-    body{background:#fff; font-size:11.5pt;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
     section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
     .cover{page-break-after:always; border-radius:0;}
-    .answer-panel{display:none !important;}
-    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    /* Answer panels always print/PDF-export shown, regardless of the on-screen Show/Hide toggle. */
+    .answer-panel{display:block !important; border-style:solid;}
     a{color:inherit; text-decoration:none;}
     .page-break{page-break-before:always;}
     .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
     .answer-lines::placeholder{color:transparent;}
     .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
     .name-box .fill::placeholder{color:transparent;}
-    .sim-frame, .sim-embed-credit{display:none !important;}
+    .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
     .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
+    .sim-launch{display:none !important;}
   }
 </style>
 </head>
 <body>
+<div class="topbar no-print">
+  <div class="topbar-actions">
+    <button onclick="revealAll()">Show all answers</button>
+    <button onclick="hideAll()">Hide all answers</button>
+    <button onclick="clearMyAnswers()">Clear my answers</button>
+    <button onclick="saveAnswersToFile()">💾 Save answers</button>
+    <button onclick="triggerLoadAnswers()">📂 Load answers</button>
+    <input type="file" id="loadFileInput" accept="application/json" style="display:none" onchange="handleLoadFile(event)">
+    <button id="btnLinkFile" style="display:none;" onclick="linkSaveFile()">🔗 Link a save file</button>
+    <span class="save-status" id="saveStatus">Checking autosave…</span>
+  </div>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
 <div class="layout">
   <nav class="sidebar no-print">
     <h1>Radioactivity &amp; Half-Life</h1>
@@ -210,7 +227,6 @@
   <main>
     <section class="cover" id="cover">
       <h1>Radioactivity &amp; Half-Life</h1>
-      <p class="sub">Student Workbook</p>
       <div class="goals" style="margin-top:1.3rem; background:rgba(255,255,255,0.12); border-left-color:#fff; color:#fff;">
         <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
         <ul>
@@ -3189,13 +3205,6 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
   </main>
 </div>
 
-<div class="toolbar no-print">
-  <button onclick="revealAll()">Show all answers</button>
-  <button onclick="hideAll()">Hide all answers</button>
-  <button onclick="clearMyAnswers()">Clear my answers</button>
-</div>
-<button class="fab no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
-
 <script>
 /* ---------- text answer toggles ---------- */
 function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
@@ -3208,8 +3217,25 @@ function hideAll(){
   document.body.classList.remove('answers-visible');
 }
 
-/* ---------- fill-in fields: autosize ---------- */
-var fillableEls = [];
+/* ================= Answer persistence =================
+   Three layers, most to least robust against a student's browser data being
+   cleared: (1) a linked save file on disk (Chrome/Edge, File System Access
+   API), (2) localStorage keyed by WORKBOOK_ID, (3) manual Save/Load-to-file
+   buttons that work identically in every browser. See STYLE_GUIDE.md.
+   ======================================================= */
+const WORKBOOK_ID = '02_radioactivity_and_halflife';
+const STORAGE_PREFIX = 'ib-workbook-' + WORKBOOK_ID + '-v1-';
+let fillableEls = [];
+
+function storageAvailable(){
+  try{
+    const k = '__test__' + STORAGE_PREFIX;
+    localStorage.setItem(k, '1');
+    localStorage.removeItem(k);
+    return true;
+  } catch(e){ return false; }
+}
+const canStore = storageAvailable();
 
 function autosize(el){
   if(el.tagName !== 'TEXTAREA') return;
@@ -3219,10 +3245,38 @@ function autosize(el){
 
 function initFillables(){
   fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill'));
-  fillableEls.forEach(function(el){
+  fillableEls.forEach(function(el, i){
+    const key = STORAGE_PREFIX + i;
+    el.dataset.storeKey = key;
+    if(canStore){
+      const saved = localStorage.getItem(key);
+      if(saved !== null){ el.value = saved; }
+    }
     autosize(el);
-    el.addEventListener('input', function(){ autosize(el); });
+    el.addEventListener('input', function(){
+      autosize(el);
+      if(canStore){
+        try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){}
+      }
+      scheduleFileWrite();
+    });
   });
+}
+
+function getAnswersArray(){ return fillableEls.map(function(el){ return el.value; }); }
+function applyAnswersArray(arr){
+  fillableEls.forEach(function(el, i){
+    if(arr && arr[i] !== undefined){ el.value = arr[i]; autosize(el); }
+  });
+}
+
+function buildPayload(){
+  return {
+    workbook: WORKBOOK_ID,
+    savedAt: new Date().toISOString(),
+    studentName: document.getElementById('studentName') ? document.getElementById('studentName').value : '',
+    answers: getAnswersArray()
+  };
 }
 
 function clearMyAnswers(){
@@ -3230,14 +3284,158 @@ function clearMyAnswers(){
   fillableEls.forEach(function(el){
     el.value = '';
     autosize(el);
+    if(canStore){ try{ localStorage.removeItem(el.dataset.storeKey); } catch(e){} }
   });
+  scheduleFileWrite();
+}
+
+/* ---------- manual save-to-file / load-from-file (works in every browser) ---------- */
+function downloadJSON(obj, filename){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+
+function saveAnswersToFile(){
+  const name = (document.getElementById('studentName').value || '').trim();
+  const safe = name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'my';
+  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers-' + safe + '.json');
+}
+
+function triggerLoadAnswers(){ document.getElementById('loadFileInput').click(); }
+
+function handleLoadFile(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    try{
+      const data = JSON.parse(reader.result);
+      applyAnswersArray(data.answers || []);
+      if(canStore){
+        fillableEls.forEach(function(el){ try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){} });
+      }
+      alert('Loaded your saved answers from "' + file.name + '".');
+    } catch(e){
+      alert('Sorry, that file could not be read as a saved-answers file.');
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+/* ---------- linked save file (Chrome/Edge — File System Access API) ---------- */
+let fileHandle = null;
+let pendingHandle = null;
+const fsaSupported = ('showSaveFilePicker' in window);
+let fileWriteTimer = null;
+
+function idbOpen(){
+  return new Promise(function(resolve, reject){
+    const rq = indexedDB.open('ib-workbook-fs', 1);
+    rq.onupgradeneeded = function(){ if(!rq.result.objectStoreNames.contains('handles')) rq.result.createObjectStore('handles'); };
+    rq.onsuccess = function(){ resolve(rq.result); };
+    rq.onerror = function(){ reject(rq.error); };
+  });
+}
+function idbGetHandle(){
+  return idbOpen().then(function(db){
+    return new Promise(function(resolve){
+      const tx = db.transaction('handles', 'readonly');
+      const rq = tx.objectStore('handles').get(WORKBOOK_ID);
+      rq.onsuccess = function(){ resolve(rq.result || null); };
+      rq.onerror = function(){ resolve(null); };
+    });
+  }).catch(function(){ return null; });
+}
+function idbSetHandle(handle){
+  return idbOpen().then(function(db){
+    const tx = db.transaction('handles', 'readwrite');
+    tx.objectStore('handles').put(handle, WORKBOOK_ID);
+  }).catch(function(){});
+}
+
+function updateLinkButton(){
+  const btn = document.getElementById('btnLinkFile');
+  if(!btn) return;
+  btn.textContent = fileHandle ? '🔗 Save file linked' : (pendingHandle ? '🔗 Reconnect save file' : '🔗 Link a save file');
+}
+
+function updateSaveStatus(){
+  const status = document.getElementById('saveStatus');
+  if(!status) return;
+  if(fileHandle){
+    status.textContent = 'Autosaving to your linked file on this computer';
+  } else if(canStore){
+    status.textContent = 'Autosaving in this browser — click 💾 Save often as a backup';
+  } else {
+    status.textContent = 'Autosave unavailable here — use 💾 Save / 📂 Load to keep your work';
+  }
+}
+
+function tryRestoreLinkedFile(){
+  if(!fsaSupported) return Promise.resolve();
+  return idbGetHandle().then(function(handle){
+    if(!handle) return;
+    return handle.queryPermission({mode:'readwrite'}).then(function(perm){
+      if(perm === 'granted'){ fileHandle = handle; } else { pendingHandle = handle; }
+    }).catch(function(){});
+  }).then(function(){
+    updateLinkButton();
+    updateSaveStatus();
+  });
+}
+
+function linkSaveFile(){
+  if(!fsaSupported) return;
+  const proceed = pendingHandle
+    ? pendingHandle.requestPermission({mode:'readwrite'}).then(function(req){
+        if(req === 'granted'){ fileHandle = pendingHandle; pendingHandle = null; }
+      })
+    : window.showSaveFilePicker({
+        suggestedName: WORKBOOK_ID + '-answers.json',
+        types: [{ description: 'Workbook answers', accept: {'application/json': ['.json']} }]
+      }).then(function(handle){
+        fileHandle = handle;
+        return idbSetHandle(handle);
+      });
+  proceed.then(function(){
+    updateLinkButton();
+    updateSaveStatus();
+    return writeToLinkedFile();
+  }).catch(function(){ /* user cancelled the picker — nothing to do */ });
+}
+
+function scheduleFileWrite(){
+  if(!fileHandle) return;
+  clearTimeout(fileWriteTimer);
+  fileWriteTimer = setTimeout(writeToLinkedFile, 800);
+}
+
+function writeToLinkedFile(){
+  if(!fileHandle) return Promise.resolve();
+  return fileHandle.createWritable().then(function(writable){
+    return writable.write(JSON.stringify(buildPayload(), null, 2)).then(function(){
+      return writable.close();
+    });
+  }).catch(function(e){ console.warn('Could not write to linked save file', e); });
 }
 
 window.addEventListener('beforeprint', function(){
   fillableEls.forEach(autosize);
 });
 
-document.addEventListener('DOMContentLoaded', initFillables);
+document.addEventListener('DOMContentLoaded', function(){
+  initFillables();
+  if(fsaSupported){
+    document.getElementById('btnLinkFile').style.display = '';
+    tryRestoreLinkedFile();
+  }
+  updateSaveStatus();
+});
 
 </script>
 </body>
