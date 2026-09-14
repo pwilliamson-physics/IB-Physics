@@ -20,22 +20,26 @@
   h1,h2,h3,h4{font-family:"Segoe UI", Helvetica, Arial, sans-serif; color:var(--navy); line-height:1.25;}
   a{color:var(--teal-dark);}
 
-  /* ===== Top bar ===== */
+  /* ---------- sticky top action bar: full save/load/link-file persistence engine
+     (updated 2026-09-14 to match template.html's canonical v2 scaffold — replaces the
+     previous show/hide/clear-only bar; see topbar-component.md) ---------- */
   .topbar{
-    position:fixed; top:0; left:0; right:0; height:56px; background:var(--navy); color:#fff;
-    display:flex; align-items:center; gap:14px; padding:0 18px; z-index:200;
-    box-shadow:0 2px 6px rgba(0,0,0,0.18); font-size:0.92rem;
+    position:fixed; top:0; left:0; right:0; height:56px; z-index:200;
+    background:#fff; border-bottom:1px solid var(--border); box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex; align-items:center; gap:0.6rem; padding:0 1rem;
   }
-  .topbar .tb-title{font-weight:600; margin-right:auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .topbar button{
-    font-family:inherit; font-size:0.85rem; border:1px solid rgba(255,255,255,0.4); background:transparent;
-    color:#fff; padding:7px 12px; border-radius:6px; cursor:pointer; white-space:nowrap;
+  .topbar-actions{
+    display:flex; align-items:center; gap:0.6rem; overflow-x:auto;
+    flex:1 1 auto; min-width:0; height:100%; padding-right:0.4rem;
   }
-  .topbar button:hover{background:rgba(255,255,255,0.12);}
-  .topbar button.primary{background:var(--amber); border-color:var(--amber); color:#fff; font-weight:600;}
-  .topbar button.primary:hover{background:#c1751f;}
-  .save-note{font-size:0.78rem; color:#cfe0ee; max-width:230px; display:none;}
-  @media (min-width:900px){.save-note{display:block;}}
+  .topbar .topbar-title{font-weight:700; color:var(--navy); font-size:0.92rem; white-space:nowrap; flex-shrink:0; margin-right:0.4rem;}
+  .topbar button{background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:50px; padding:0.5rem 1rem; font-size:0.82rem; cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .topbar button:hover{background:var(--soft-blue);}
+  .topbar button.primary{background:var(--amber); color:#fff; border-color:var(--amber); font-weight:600; flex-shrink:0;}
+  .topbar button.primary:hover{background:#c0721c;}
+  .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
+  @media (max-width: 900px){ .topbar .save-status{display:none;} }
+  @media (max-width: 620px){ .topbar .topbar-title{display:none;} }
 
   /* ===== Layout ===== */
   .layout{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
@@ -195,24 +199,35 @@
   @media print{
     .topbar, nav.sidebar, .reveal-btn, .hint-btn, .sim-controls, .sim-canvas-box{display:none !important;}
     .sim-print-note{display:block !important; font-style:italic; color:#52606d; padding:10px; border:1px dashed var(--border); border-radius:6px;}
-    body{padding-top:0;}
+    body{background:#fff; font-size:11.5pt; padding-top:0;}
     .layout{display:block;}
-    section.topic{padding:14px 4px; border-bottom:1px solid #ccc;}
-    .answer-panel{display:none;}
+    main{max-width:100%; padding:0; margin:0;}
+    section.topic{padding:14px 4px; border-bottom:1px solid #ccc; page-break-inside:avoid;}
+    .answer-panel{display:none !important;}
     body.answers-visible .answer-panel{display:block !important;}
-    .cover{background:var(--navy) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    .cover{page-break-after:always; border-radius:0; background:var(--navy) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    a{color:inherit; text-decoration:none;}
+    .page-break{page-break-before:always;}
+    .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
+    .answer-lines::placeholder{color:transparent;}
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <span class="tb-title">Galilean Relativity — Student Workbook</span>
-  <button onclick="revealAll()">Show all answers</button>
-  <button onclick="hideAll()">Hide all answers</button>
-  <button onclick="clearMyAnswers()">Clear answers</button>
-  <span class="save-note">Answers are not saved automatically — print or copy your work before closing this tab.</span>
-  <button class="primary" onclick="window.print()">Print</button>
+<div class="topbar no-print">
+  <div class="topbar-actions">
+    <span class="topbar-title">Galilean Relativity</span>
+    <button onclick="revealAll()">Show all answers</button>
+    <button onclick="hideAll()">Hide all answers</button>
+    <button onclick="clearMyAnswers()">Clear my answers</button>
+    <button onclick="saveAnswersToFile()">💾 Save answers</button>
+    <button onclick="triggerLoadAnswers()">📂 Load answers</button>
+    <input type="file" id="loadFileInput" accept="application/json" style="display:none" onchange="handleLoadFile(event)">
+    <button id="btnLinkFile" style="display:none;" onclick="linkSaveFile()">🔗 Link a save file</button>
+    <span class="save-status" id="saveStatus">Checking autosave…</span>
+  </div>
+  <button class="primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
 </div>
 
 <div class="layout">
@@ -812,56 +827,257 @@
 </div>
 
 <script>
-/* ===================== Self-marking / topbar controls ===================== */
-function toggleAnswer(id){
-  var el = document.getElementById(id);
-  var btn = el.previousElementSibling.querySelector ? null : null;
-  el.classList.toggle('open');
-  var actionsRow = el.previousElementSibling;
-  var button = actionsRow.querySelector('.reveal-btn');
-  if(button){
-    button.textContent = el.classList.contains('open') ? 'Hide answer' : 'Show answer';
-  }
-}
+/* ================= Sticky top bar: reveal/hide + answer persistence =================
+   Three layers, most to least robust against a student's browser data being cleared
+   (private browsing, "clear website data", a swipe/gesture that closes the tab, or the
+   file being re-downloaded to a new location):
+     1. A linked save file on disk (Chrome/Edge only, via the File System Access API) —
+        writes straight to a real file every time an answer changes. Survives anything
+        that only clears browser storage, because the data never lived there.
+     2. localStorage — automatic, works in every browser, but lives inside the
+        browser's own storage for this page and can be cleared along with it.
+     3. Manual Save/Load-to-file buttons — work identically in every browser with no
+        special permissions; the recommended backup.
+   See the project's topbar-component.md for the full write-up of this engine. Ported
+   verbatim from template.html except for two selectors kept as this worksheet's own
+   markup already had them (rather than rewriting the HTML/CSS to match template):
+   answer panels toggle the 'open' class (not 'shown'), and the name field is
+   #student-name (not #studentName).
+   ======================================================================================= */
+
+// --- CUSTOMISE PER WORKSHEET: must be unique per file or saved answers/linked-file
+// handles collide with other worksheets in the same browser ---
+const STORAGE_PREFIX = 'ib-galilean-relativity-v1-';
+const WORKBOOK_ID    = 'galilean-relativity';
+// -----------------------------------------------------------------------------------
+
+const TRIALS_DB_NAME = STORAGE_PREFIX + 'linked-file';  // IndexedDB store for the linked-file handle
+let fillableEls = [];
+
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('open'); }
 function toggleHint(id){
-  var el = document.getElementById(id);
-  el.classList.toggle('open');
+  document.getElementById(id).classList.toggle('open');
 }
 function revealAll(){
-  document.querySelectorAll('.answer-panel').forEach(function(el){
-    el.classList.add('open');
-    var actionsRow = el.previousElementSibling;
-    var button = actionsRow ? actionsRow.querySelector('.reveal-btn') : null;
-    if(button) button.textContent = 'Hide answer';
-  });
+  document.querySelectorAll('.answer-panel, .solution').forEach(function(el){ el.classList.add('open'); });
   document.body.classList.add('answers-visible');
 }
 function hideAll(){
-  document.querySelectorAll('.answer-panel').forEach(function(el){
-    el.classList.remove('open');
-    var actionsRow = el.previousElementSibling;
-    var button = actionsRow ? actionsRow.querySelector('.reveal-btn') : null;
-    if(button) button.textContent = 'Show answer';
-  });
+  document.querySelectorAll('.answer-panel, .solution').forEach(function(el){ el.classList.remove('open'); });
   document.body.classList.remove('answers-visible');
 }
+
+function storageAvailable(){
+  try{
+    const k = '__test__' + STORAGE_PREFIX;
+    localStorage.setItem(k, '1');
+    localStorage.removeItem(k);
+    return true;
+  } catch(e){ return false; }
+}
+const canStore = storageAvailable();
+
+function autosize(el){
+  if(el.tagName !== 'TEXTAREA') return;
+  el.style.height = 'auto';
+  el.style.height = Math.max(el.scrollHeight, el.offsetHeight) + 'px';
+}
+
+function initFillables(){
+  // CUSTOMISE: broadened to this worksheet's own name-field markup (a bare <input>
+  // inside .name-box, not a .fill-classed one).
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box input'));
+  fillableEls.forEach(function(el, i){
+    const key = STORAGE_PREFIX + i;
+    el.dataset.storeKey = key;
+    if(canStore){
+      const saved = localStorage.getItem(key);
+      if(saved !== null){ el.value = saved; }
+    }
+    autosize(el);
+    el.addEventListener('input', function(){
+      autosize(el);
+      if(canStore){
+        try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){}
+      }
+      scheduleFileWrite();
+    });
+  });
+}
+
+function getAnswersArray(){ return fillableEls.map(function(el){ return el.value; }); }
+function applyAnswersArray(arr){
+  fillableEls.forEach(function(el, i){
+    if(arr && arr[i] !== undefined){ el.value = arr[i]; autosize(el); }
+  });
+}
+
+function buildPayload(){
+  const nameEl = document.getElementById('student-name');
+  const payload = {
+    workbook: WORKBOOK_ID,
+    savedAt: new Date().toISOString(),
+    studentName: nameEl ? nameEl.value : '',
+    answers: getAnswersArray()
+  };
+  if(typeof getExtraState === 'function') Object.assign(payload, getExtraState());
+  return payload;
+}
+
 function clearMyAnswers(){
-  document.querySelectorAll('textarea.answer-lines').forEach(function(el){
+  if(!confirm('Clear everything you have typed? This cannot be undone.')) return;
+  fillableEls.forEach(function(el){
     el.value = '';
     autosize(el);
+    if(canStore){ try{ localStorage.removeItem(el.dataset.storeKey); } catch(e){} }
+  });
+  if(typeof applyExtraState === 'function') applyExtraState({});
+  scheduleFileWrite();
+}
+
+/* ---------- manual save-to-file / load-from-file (works in every browser) ---------- */
+function downloadJSON(obj, filename){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+
+function saveAnswersToFile(){
+  const nameEl = document.getElementById('student-name');
+  const name = (nameEl ? nameEl.value : '').trim();
+  const safe = name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'my';
+  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers-' + safe + '.json');
+}
+
+function triggerLoadAnswers(){ document.getElementById('loadFileInput').click(); }
+
+function handleLoadFile(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(){
+    try{
+      const data = JSON.parse(reader.result);
+      applyAnswersArray(data.answers || []);
+      if(typeof applyExtraState === 'function') applyExtraState(data);
+      if(canStore){
+        fillableEls.forEach(function(el){ try{ localStorage.setItem(el.dataset.storeKey, el.value); } catch(e){} });
+      }
+      alert('Loaded your saved answers from "' + file.name + '".');
+    } catch(e){
+      alert('Sorry, that file could not be read as a saved-answers file.');
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+/* ---------- linked save file (Chrome/Edge — File System Access API) ---------- */
+let fileHandle = null;
+let pendingHandle = null;
+const fsaSupported = ('showSaveFilePicker' in window);
+let fileWriteTimer = null;
+
+function idbOpen(){
+  return new Promise(function(resolve, reject){
+    const rq = indexedDB.open(TRIALS_DB_NAME, 1);
+    rq.onupgradeneeded = function(){ if(!rq.result.objectStoreNames.contains('handles')) rq.result.createObjectStore('handles'); };
+    rq.onsuccess = function(){ resolve(rq.result); };
+    rq.onerror = function(){ reject(rq.error); };
   });
 }
-function autosize(el){
-  el.style.height = 'auto';
-  el.style.height = Math.max(54, el.scrollHeight) + 'px';
+function idbGetHandle(){
+  return idbOpen().then(function(db){
+    return new Promise(function(resolve){
+      const tx = db.transaction('handles', 'readonly');
+      const rq = tx.objectStore('handles').get('fileHandle');
+      rq.onsuccess = function(){ resolve(rq.result || null); };
+      rq.onerror = function(){ resolve(null); };
+    });
+  }).catch(function(){ return null; });
 }
-function initFillables(){
-  document.querySelectorAll('textarea.answer-lines').forEach(function(el){
-    autosize(el);
-    el.addEventListener('input', function(){ autosize(el); });
+function idbSetHandle(handle){
+  return idbOpen().then(function(db){
+    const tx = db.transaction('handles', 'readwrite');
+    tx.objectStore('handles').put(handle, 'fileHandle');
+  }).catch(function(){});
+}
+
+function updateLinkButton(){
+  const btn = document.getElementById('btnLinkFile');
+  if(!btn) return;
+  btn.textContent = fileHandle ? '🔗 Save file linked' : (pendingHandle ? '🔗 Reconnect save file' : '🔗 Link a save file');
+}
+
+function updateSaveStatus(){
+  const status = document.getElementById('saveStatus');
+  if(!status) return;
+  if(fileHandle){
+    status.textContent = 'Autosaving to your linked file';
+  } else if(canStore){
+    status.textContent = 'Autosaving in this browser — click 💾 Save often as a backup';
+  } else {
+    status.textContent = 'Autosave unavailable here — use 💾 Save / 📂 Load to keep your work';
+  }
+}
+
+function tryRestoreLinkedFile(){
+  if(!fsaSupported) return Promise.resolve();
+  return idbGetHandle().then(function(handle){
+    if(!handle) return;
+    return handle.queryPermission({mode:'readwrite'}).then(function(perm){
+      if(perm === 'granted'){ fileHandle = handle; } else { pendingHandle = handle; }
+    }).catch(function(){});
+  }).then(function(){
+    updateLinkButton();
+    updateSaveStatus();
   });
 }
-/* highlight active sidebar link on scroll */
+
+function linkSaveFile(){
+  if(!fsaSupported) return;
+  const proceed = pendingHandle
+    ? pendingHandle.requestPermission({mode:'readwrite'}).then(function(req){
+        if(req === 'granted'){ fileHandle = pendingHandle; pendingHandle = null; }
+      })
+    : window.showSaveFilePicker({
+        suggestedName: WORKBOOK_ID + '-answers.json',
+        types: [{ description: 'Workbook answers', accept: {'application/json': ['.json']} }]
+      }).then(function(handle){
+        fileHandle = handle;
+        return idbSetHandle(handle);
+      });
+  proceed.then(function(){
+    updateLinkButton();
+    updateSaveStatus();
+    return writeToLinkedFile();
+  }).catch(function(){ /* user cancelled the picker — nothing to do */ });
+}
+
+function scheduleFileWrite(){
+  if(!fileHandle) return;
+  clearTimeout(fileWriteTimer);
+  fileWriteTimer = setTimeout(writeToLinkedFile, 800);
+}
+
+function writeToLinkedFile(){
+  if(!fileHandle) return Promise.resolve();
+  return fileHandle.createWritable().then(function(writable){
+    return writable.write(JSON.stringify(buildPayload(), null, 2)).then(function(){
+      return writable.close();
+    });
+  }).catch(function(e){ console.warn('Could not write to linked save file', e); });
+}
+
+window.addEventListener('beforeprint', function(){
+  fillableEls.forEach(autosize);
+});
+
+/* highlight active sidebar link on scroll — kept from this worksheet's own scaffold,
+   not part of the shared template engine */
 function initSidebarHighlight(){
   var links = Array.prototype.slice.call(document.querySelectorAll('nav.sidebar a'));
   var sections = links.map(function(l){ return document.querySelector(l.getAttribute('href')); });
@@ -876,8 +1092,19 @@ function initSidebarHighlight(){
   window.addEventListener('scroll', onScroll);
   onScroll();
 }
-initFillables();
-initSidebarHighlight();
+
+document.addEventListener('DOMContentLoaded', function(){
+  initFillables();
+  initSidebarHighlight();
+  if(fsaSupported){
+    document.getElementById('btnLinkFile').style.display = '';
+    tryRestoreLinkedFile();
+  }
+  updateSaveStatus();
+});
+
+/* ================= Per-simulation draw-loop scripts (unchanged from before this
+   scaffold update — physics logic, canvas drawing and controls untouched) ================= */
 
 /* ===================== Simulation 1: Galilean reference frames ===================== */
 (function(){
