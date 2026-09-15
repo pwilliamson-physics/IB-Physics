@@ -1,115 +1,53 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Motion in Electromagnetic Fields — Student Workbook</title>
 <style>
   :root{
-    --navy:#173a5e;
-    --teal:#0e7c86;
-    --teal-dark:#0a5b62;
-    --amber:#d98324;
-    --soft-blue:#eaf3fb;
-    --soft-amber:#fdf1e2;
-    --soft-green:#eaf7ee;
-    --soft-grey:#f4f6f8;
-    --line:#b9c6d3;
-    --ink:#1f2933;
-    --border:#d7e0e8;
-    --purple:#6b4c9a;
-    --soft-purple:#f1ebf9;
+    --navy:#173a5e; --teal:#0e7c86; --teal-dark:#0a5b62; --amber:#d98324;
+    --soft-blue:#eaf3fb; --soft-amber:#fdf1e2; --soft-green:#eaf7ee; --soft-grey:#f4f6f8;
+    --line:#b9c6d3; --ink:#1f2933; --border:#d7e0e8;
+    --purple:#6b4c9a; --soft-purple:#f1ebf9;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);
-    background:#f7f9fb;
-    line-height:1.55;
-    font-size:16.5px;
-    padding-top:56px;
-  }
+  body{margin:0; font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f7f9fb; line-height:1.55; font-size:16.5px; padding-top:56px;}
   .layout{display:flex; min-height:calc(100vh - 56px);}
-  nav.sidebar{
-    width:250px; flex-shrink:0; background:var(--navy); color:#fff;
-    padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;
-  }
+  nav.sidebar{width:250px; flex-shrink:0; background:var(--navy); color:#fff; padding:1.25rem 1rem; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
   nav.sidebar h1{font-size:1.05rem; line-height:1.3; margin:0 0 1rem 0; color:#fff;}
-  nav.sidebar a{
-    display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem;
-    padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;
-  }
+  nav.sidebar a{display:block; color:#cfe3ee; text-decoration:none; font-size:0.88rem; padding:0.4rem 0.5rem; border-radius:6px; margin-bottom:0.15rem;}
   nav.sidebar a:hover{background:rgba(255,255,255,0.12); color:#fff;}
-  nav.sidebar .tag{
-    display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem;
-    padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;
-  }
+  nav.sidebar .tag{display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; padding:0.1rem 0.4rem; border-radius:4px; margin-left:0.3rem; vertical-align:middle;}
   main{flex:1; max-width:920px; margin:0 auto; padding:2rem 2.5rem 5rem 2.5rem;}
-  .cover{
-    background:linear-gradient(135deg,var(--navy),var(--teal-dark));
-    color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;
-  }
+  .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
   .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
+  .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
   .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
   .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
   .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
   .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
   .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
-
-  section.topic{
-    background:#fff; border:1px solid var(--border); border-radius:12px;
-    padding:1.8rem 2rem; margin-bottom:1.6rem;
-  }
-  section.topic h2{
-    color:var(--navy); font-size:1.4rem; margin-top:0;
-    border-bottom:3px solid var(--amber); padding-bottom:0.4rem;
-  }
-  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
-  .goals{
-    background:var(--soft-blue); border-left:4px solid var(--teal); border-radius:6px;
-    padding:0.9rem 1.1rem; font-size:0.92rem;
-  }
+  .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
   .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
 
-  .keybox{
-    background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px;
-    padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;
-  }
-  .keybox strong{color:var(--navy);}
-  .eqn{
-    background:#fff; border:1px solid #c7ddef; border-radius:6px;
-    padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center;
-    font-family:"Cambria Math",Cambria,Georgia,serif;
-  }
-  .keyword{
-    background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px;
-    padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;
-  }
-  .keyword b{color:var(--amber);}
+  section.topic{background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.8rem 2rem; margin-bottom:1.6rem;}
+  section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
+  section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
 
-  .example{
-    background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px;
-    padding:0.9rem 1.1rem; margin:1rem 0;
-  }
-  .example .tag{
-    display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem;
-    font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px;
-    margin-bottom:0.5rem; text-transform:uppercase;
-  }
+  .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
+  .keybox strong{color:var(--navy);}
+  .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
+  .keyword{background:var(--soft-amber); border-left:4px solid var(--amber); border-radius:6px; padding:0.7rem 1rem; margin:0.9rem 0; font-size:0.92rem;}
+  .keyword b{color:var(--amber);}
+  .example{background:var(--soft-green); border:1px solid #bfe3cc; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
+  .example .tag{display:inline-block; background:#3f9a5c; color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
   .stretch-box{background:var(--soft-purple); border:1px solid #d9c9ec; border-radius:8px; padding:0.9rem 1.1rem; margin:1rem 0;}
   .stretch-box .tag{display:inline-block; background:var(--purple); color:#fff; font-size:0.72rem; font-weight:600; letter-spacing:0.03em; padding:0.15rem 0.5rem; border-radius:4px; margin-bottom:0.5rem; text-transform:uppercase;}
   .stretch-box strong{color:var(--purple);}
 
-  .question{
-    background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
-    padding:1rem 1.2rem; margin:1.1rem 0;
-  }
-  .question .qnum{
-    display:inline-block; background:var(--navy); color:#fff; font-weight:700;
-    font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center;
-    border-radius:50%; margin-right:0.5rem;
-  }
+  .question{background:var(--soft-grey); border:1px solid var(--border); border-radius:8px; padding:1rem 1.2rem; margin:1.1rem 0;}
+  .question .qnum{display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center; border-radius:50%; margin-right:0.5rem;}
   .answer-lines{
     display:block; width:100%; box-sizing:border-box;
     background-image:repeating-linear-gradient(to bottom, transparent, transparent 1.65em, var(--line) 1.7em);
@@ -127,16 +65,9 @@
   .answer-lines::placeholder{color:#9aa8b4; font-style:italic;}
   .answer-lines.short{min-height:1.7em;}
   .answer-lines.long{min-height:8.5em;}
-
-  .reveal-btn{
-    background:var(--teal); color:#fff; border:none; border-radius:6px;
-    padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;
-  }
+  .reveal-btn{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.35rem 0.8rem; font-size:0.82rem; cursor:pointer; margin-top:0.5rem;}
   .reveal-btn:hover{background:var(--teal-dark);}
-  .answer-panel{
-    display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px;
-    padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;
-  }
+  .answer-panel{display:none; background:#fff; border:1px dashed #3f9a5c; border-radius:6px; padding:0.7rem 1rem; margin-top:0.6rem; font-size:0.92rem;}
   .answer-panel.shown{display:block;}
 
   figure{margin:1.2rem auto; text-align:center; max-width:560px;}
@@ -144,66 +75,12 @@
   figure svg{max-width:100%; height:auto; max-height:320px;}
   figcaption{font-size:0.85rem; color:#5b6b78; margin-top:0.4rem;}
 
-  /* ---------- predict-the-path quiz widget ---------- */
-  .pathquiz{
-    background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
-    padding:1rem 1.2rem; margin:1.3rem 0;
-  }
-  .pathquiz .qnum{
-    display:inline-block; background:var(--navy); color:#fff; font-weight:700;
-    font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center;
-    border-radius:50%; margin-bottom:0.5rem;
-  }
-  .pathquiz-figure{max-width:320px; margin:0.3rem auto 0.9rem auto;}
-  .pathquiz-prompt{margin:0 0 0.7rem 0; font-size:0.96rem;}
-  .pathquiz-options{display:flex; gap:1.3rem; flex-wrap:wrap; justify-content:center; margin:0.6rem 0;}
-  .pathquiz-options label{display:flex; align-items:center; gap:0.35rem; font-weight:600; cursor:pointer; font-size:0.95rem;}
-  .pathquiz-options input{width:16px; height:16px;}
-  .pathquiz-feedback{text-align:center; font-weight:600; margin-top:0.6rem; min-height:1.3em; font-size:0.92rem;}
-  .pathquiz-feedback.correct{color:#237a41;}
-  .pathquiz-feedback.incorrect{color:#a4222a;}
-
-  .sim-launch{
-    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
-    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
-  }
-  .sim-launch a.launch-btn{
-    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
-    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
-  }
-  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
-  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
-
-  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
-  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
-  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
-  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
-  .sim-print-note{display:none;}
-
-  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
-  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
-  .sim-canvas-box{flex:0 0 auto;}
-  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
-  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
-  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
-  .sim-row{margin-bottom:0.9rem;}
-  .sim-row label{display:block; margin-bottom:0.3rem;}
-  .sim-row input[type="range"]{width:100%;}
-  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
-  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
-  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
-  .sim-btns button:hover{background:var(--teal-dark);}
-  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
-  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
-
   table.eqtable{width:100%; border-collapse:collapse; font-size:0.92rem; margin-top:0.7rem;}
   table.eqtable th, table.eqtable td{border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left;}
   table.eqtable th{background:var(--soft-blue); color:var(--navy);}
 
   dl.glossary dt{font-weight:700; color:var(--navy); margin-top:0.7rem;}
   dl.glossary dd{margin-left:0; margin-bottom:0.2rem;}
-
-  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
 
   /* ---------- permanent top bar ----------
      No title in the bar (the sidebar already names the workbook) — this keeps
@@ -225,6 +102,41 @@
   .topbar button.primary:hover{background:#c0721c;}
   .topbar .save-status{font-size:0.72rem; color:#5b6b78; white-space:nowrap; flex-shrink:0;}
   @media (max-width: 900px){ .topbar .save-status{display:none;} }
+  footer.page{font-size:0.8rem; color:#7c8b98; text-align:center; margin-top:2rem;}
+
+  /* ---------- simulation embed conventions ---------- */
+  .sim-embed{background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0;}
+  .sim-embed p.instructions{margin:0 0 0.6rem 0; font-size:0.92rem; color:#3a4753;}
+  .sim-frame{width:100%; border:none; display:block; border-radius:8px; height:520px;}
+  .sim-embed-credit{text-align:center; font-size:0.82rem; color:#7c8b98; margin-top:0.6rem;}
+  .sim-print-note{display:none;}
+
+  .sim-launch{
+    background:linear-gradient(135deg,var(--soft-blue),#fff); border:1px solid #c7ddef; border-radius:10px;
+    padding:1.2rem 1.4rem; margin:1.1rem 0; text-align:center;
+  }
+  .sim-launch a.launch-btn{
+    display:inline-block; background:var(--teal); color:#fff; text-decoration:none; font-weight:700;
+    padding:0.65rem 1.4rem; border-radius:8px; margin-top:0.6rem; font-size:0.98rem;
+  }
+  .sim-launch a.launch-btn:hover{background:var(--teal-dark);}
+  .sim-launch p.credit{font-size:0.8rem; color:#5b6b78; margin-top:0.7rem;}
+
+  /* custom-canvas sim layout (wide figure: canvas + controls side by side) */
+  .sim-wrap{display:flex; gap:1.4rem; align-items:flex-start; flex-wrap:wrap; background:#0f1f30; border-radius:10px; padding:1.1rem; }
+  .sim-canvas-box{flex:0 0 auto;}
+  .sim-canvas-box canvas{display:block; border-radius:8px; background:#0f1f30;}
+  .sim-controls{flex:1 1 220px; min-width:220px; color:#dceaf0; font-size:0.9rem;}
+  .sim-controls h4{margin:0 0 0.6rem 0; color:#fff; font-size:0.95rem;}
+  .sim-row{margin-bottom:0.9rem;}
+  .sim-row label{display:block; margin-bottom:0.3rem;}
+  .sim-row input[type="range"]{width:100%;}
+  .sim-readout{background:rgba(255,255,255,0.08); border-radius:6px; padding:0.6rem 0.8rem; font-size:0.86rem;}
+  .sim-btns{margin-top:0.8rem; display:flex; gap:0.5rem; flex-wrap:wrap;}
+  .sim-btns button{background:var(--teal); color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.82rem; cursor:pointer;}
+  .sim-btns button:hover{background:var(--teal-dark);}
+  .sim-btns button.alt{background:transparent; border:1px solid rgba(255,255,255,0.4); color:#dceaf0;}
+  .sim-btns button.alt:hover{background:rgba(255,255,255,0.1);}
 
   @media print{
     nav.sidebar, .topbar, .reveal-btn{display:none !important;}
@@ -233,19 +145,42 @@
     body{background:#fff; font-size:11.5pt; padding-top:0;}
     section.topic{border:none; box-shadow:none; padding:0; margin:0 0 1.2rem 0; page-break-inside:avoid;}
     .cover{page-break-after:always; border-radius:0;}
-    .answer-panel{display:none !important;}
-    body.answers-visible .answer-panel{display:block !important; border-style:solid;}
+    /* Answer panels always print/PDF-export shown, regardless of the on-screen
+       Show/Hide toggle — a teacher printing a completed workbook to skim-mark
+       it shouldn't have to remember to click "Show all answers" first. */
+    .answer-panel{display:block !important; border-style:solid;}
     a{color:inherit; text-decoration:none;}
     .page-break{page-break-before:always;}
     .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
     .answer-lines::placeholder{color:transparent;}
     .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
     .name-box .fill::placeholder{color:transparent;}
-    .pathquiz{page-break-inside:avoid;}
-    .pathquiz-feedback{display:none !important;}
     .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
     .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
     .sim-launch{display:none !important;}
+  }
+
+  /* ---------- workbook-specific: Section 4 "predict the path" quiz widgets ---------- */
+  .pathquiz{
+    background:var(--soft-grey); border:1px solid var(--border); border-radius:8px;
+    padding:1rem 1.2rem; margin:1.3rem 0;
+  }
+  .pathquiz .qnum{
+    display:inline-block; background:var(--navy); color:#fff; font-weight:700;
+    font-size:0.82rem; width:1.9rem; height:1.9rem; line-height:1.9rem; text-align:center;
+    border-radius:50%; margin-bottom:0.5rem;
+  }
+  .pathquiz-figure{max-width:320px; margin:0.3rem auto 0.9rem auto;}
+  .pathquiz-prompt{margin:0 0 0.7rem 0; font-size:0.96rem;}
+  .pathquiz-options{display:flex; gap:1.3rem; flex-wrap:wrap; justify-content:center; margin:0.6rem 0;}
+  .pathquiz-options label{display:flex; align-items:center; gap:0.35rem; font-weight:600; cursor:pointer; font-size:0.95rem;}
+  .pathquiz-options input{width:16px; height:16px;}
+  .pathquiz-feedback{text-align:center; font-weight:600; margin-top:0.6rem; min-height:1.3em; font-size:0.92rem;}
+  .pathquiz-feedback.correct{color:#237a41;}
+  .pathquiz-feedback.incorrect{color:#a4222a;}
+  @media print{
+    .pathquiz{page-break-inside:avoid;}
+    .pathquiz-feedback{display:none !important;}
   }
 </style>
 </head>
@@ -275,14 +210,15 @@
     <a href="#s6">6. Force on a current-carrying conductor</a>
     <a href="#s7">7. Force between parallel wires</a>
     <a href="#s8">8. Equation summary</a>
-    <a href="#s9">9. Glossary</a>
+    <a href="#sG">Glossary</a>
   </nav>
 
   <main>
-    <section class="cover" id="cover">
+<section class="cover" id="cover">
       <h1>Motion in Electromagnetic Fields</h1>
-      <div class="goals" style="margin-top:1.3rem; background:rgba(255,255,255,0.12); border-left-color:#fff; color:#fff;">
-        <strong style="color:#fff;">Understandings:</strong>
+      <p class="meta" style="margin-top:0.9rem;">This workbook builds directly on <em>Electric &amp; Magnetic Fields</em> (Workbook 1) and <em>Millikan's Oil-Drop Experiment</em> (Workbook 2). It covers IB DP Physics Topic D.3: Motion in electromagnetic fields.</p>
+      <div class="goals" style="margin-top:1.3rem;">
+        <strong style="color:#fff;">By the end of this workbook you should be able to:</strong>
         <ul>
           <li>The motion of a charged particle in a uniform electric field.</li>
           <li>The motion of a charged particle in a uniform magnetic field.</li>
@@ -294,9 +230,8 @@
       </div>
       <div class="name-box">
         <label>Name</label>
-        <input class="fill" id="studentName" placeholder="Type your name…">
+        <input type="text" class="fill" id="studentName" autocomplete="name" placeholder="Type your name…">
       </div>
-      <p class="meta">This workbook builds directly on <em>Electric &amp; Magnetic Fields</em> (Workbook 1) and <em>Millikan's Oil-Drop Experiment</em> (Workbook 2). It covers IB DP Physics Topic D.3: Motion in electromagnetic fields.</p>
     </section>
 
     <!-- ================= SECTION 1 ================= -->
@@ -554,7 +489,7 @@
         </div>
         <button class="reveal-btn no-print" onclick="checkPathQuiz('p1')">Check answer</button>
         <div class="pathquiz-feedback" id="pq-p1-feedback"></div>
-        <div class="answer-panel" id="a10">Conventional current is opposite the electron’s motion, so the equivalent current points left. Applying Fleming’s left-hand rule (First finger = Field into the page, seCond finger = Current to the left) gives thuMb = force upward. The electron follows the circular arc A at constant speed, since the magnetic force is always perpendicular to the velocity.</div>
+        <div class="answer-panel" id="a10">Conventional current is opposite the electron’s motion, so the equivalent current points left. Applying Fleming’s left-hand rule (First finger = Field into the page, seCond finger = Current to the left) gives thuMb = force downward. The electron follows the circular arc B at constant speed, since the magnetic force is always perpendicular to the velocity.</div>
       </div>
       <div class="pathquiz">
         <span class="qnum">11</span>
@@ -574,7 +509,7 @@
         </div>
         <button class="reveal-btn no-print" onclick="checkPathQuiz('p2')">Check answer</button>
         <div class="pathquiz-feedback" id="pq-p2-feedback"></div>
-        <div class="answer-panel" id="a11">A proton’s charge is positive, so conventional current points the same way as its velocity — to the right. Fleming’s left-hand rule (Field into the page, Current to the right) gives a downward force, so the proton curves along path B: the mirror image of the electron’s path in Q10, because the charge sign is reversed.</div>
+        <div class="answer-panel" id="a11">A proton’s charge is positive, so conventional current points the same way as its velocity — to the right. Fleming’s left-hand rule (Field into the page, Current to the right) gives an upward force, so the proton curves along path A: the mirror image of the electron’s path in Q10, because the charge sign is reversed.</div>
       </div>
       <div class="pathquiz">
         <span class="qnum">12</span>
@@ -594,7 +529,7 @@
         </div>
         <button class="reveal-btn no-print" onclick="checkPathQuiz('p3')">Check answer</button>
         <div class="pathquiz-feedback" id="pq-p3-feedback"></div>
-        <div class="answer-panel" id="a12">Reversing the field direction reverses the force direction. Compared with Q10 (electron, field into the page → curved up), the field is now out of the page, so the curve flips to path B, downward.</div>
+        <div class="answer-panel" id="a12">Reversing the field direction reverses the force direction. Compared with Q10 (electron, field into the page → curved down), the field is now out of the page, so the curve flips to path A, upward.</div>
       </div>
       <div class="pathquiz">
         <span class="qnum">13</span>
@@ -605,7 +540,7 @@
   <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
   <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
   <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
-</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">α</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 28.7 100.1 L 33.4 100.3 L 38.1 100.6 L 42.8 101.0 L 47.4 101.6 L 52.1 102.3 L 56.7 103.2 L 61.3 104.1 L 65.8 105.2 L 70.4 106.4 L 74.9 107.8 L 79.3 109.3 L 83.8 110.9 L 88.1 112.6 L 92.5 114.4 L 96.7 116.3 L 101.0 118.4 L 105.1 120.6 L 109.2 122.9 L 113.2 125.3 L 117.2 127.8 L 121.1 130.5 L 124.9 133.2 L 128.7 136.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="142.6624508053619" cy="136.03817188685727" r="10" fill="#c0392b"/><text x="142.6624508053619" y="140.03817188685727" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 27.6 100.2 L 31.2 100.6 L 34.7 101.4 L 38.1 102.5 L 41.5 103.8 L 44.7 105.4 L 47.7 107.4 L 50.6 109.5 L 53.3 111.9 L 55.8 114.5 L 58.0 117.4 L 60.0 120.4 L 61.7 123.5 L 63.2 126.8 L 64.3 130.2 L 65.2 133.7 L 65.7 137.3 L 66.0 140.9 L 65.9 144.5 L 65.6 148.1 L 64.9 151.6 L 63.9 155.1 L 62.6 158.5 L 61.1 161.7" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="75.08379890007492" cy="161.71780563700742" r="10" fill="#0e7c86"/><text x="75.08379890007492" y="165.71780563700742" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻ (fast)</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 28.7 99.9 L 33.4 99.7 L 38.1 99.4 L 42.8 99.0 L 47.4 98.4 L 52.1 97.7 L 56.7 96.8 L 61.3 95.9 L 65.8 94.8 L 70.4 93.6 L 74.9 92.2 L 79.3 90.7 L 83.8 89.1 L 88.1 87.4 L 92.5 85.6 L 96.7 83.7 L 101.0 81.6 L 105.1 79.4 L 109.2 77.1 L 113.2 74.7 L 117.2 72.2 L 121.1 69.5 L 124.9 66.8 L 128.7 64.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="142.6624508053619" cy="63.96182811314273" r="10" fill="#c0392b"/><text x="142.6624508053619" y="67.96182811314273" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 27.6 99.8 L 31.2 99.4 L 34.7 98.6 L 38.1 97.5 L 41.5 96.2 L 44.7 94.6 L 47.7 92.6 L 50.6 90.5 L 53.3 88.1 L 55.8 85.5 L 58.0 82.6 L 60.0 79.6 L 61.7 76.5 L 63.2 73.2 L 64.3 69.8 L 65.2 66.3 L 65.7 62.7 L 66.0 59.1 L 65.9 55.5 L 65.6 51.9 L 64.9 48.4 L 63.9 44.9 L 62.6 41.5 L 61.1 38.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="75.08379890007492" cy="38.282194362992584" r="10" fill="#0e7c86"/><text x="75.08379890007492" y="42.282194362992584" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
         <p class="pathquiz-prompt">An alpha particle (charge +2e, mass ≈ 4u) and a proton (charge +e, mass 1u) enter the same magnetic field, into the page, with the same speed. Which path shows the alpha particle?</p>
         <div class="pathquiz-options">
           <label><input type="radio" name="pq-p4" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
@@ -625,7 +560,7 @@
   <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
   <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
   <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
-</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻ (fast)</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 28.7 99.9 L 33.4 99.7 L 38.1 99.4 L 42.8 99.0 L 47.4 98.4 L 52.1 97.7 L 56.7 96.8 L 61.3 95.9 L 65.8 94.8 L 70.4 93.6 L 74.9 92.2 L 79.3 90.7 L 83.8 89.1 L 88.1 87.4 L 92.5 85.6 L 96.7 83.7 L 101.0 81.6 L 105.1 79.4 L 109.2 77.1 L 113.2 74.7 L 117.2 72.2 L 121.1 69.5 L 124.9 66.8 L 128.7 64.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="142.6624508053619" cy="63.96182811314273" r="10" fill="#c0392b"/><text x="142.6624508053619" y="67.96182811314273" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 27.6 99.8 L 31.2 99.4 L 34.7 98.6 L 38.1 97.5 L 41.5 96.2 L 44.7 94.6 L 47.7 92.6 L 50.6 90.5 L 53.3 88.1 L 55.8 85.5 L 58.0 82.6 L 60.0 79.6 L 61.7 76.5 L 63.2 73.2 L 64.3 69.8 L 65.2 66.3 L 65.7 62.7 L 66.0 59.1 L 65.9 55.5 L 65.6 51.9 L 64.9 48.4 L 63.9 44.9 L 62.6 41.5 L 61.1 38.3" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="75.08379890007492" cy="38.282194362992584" r="10" fill="#0e7c86"/><text x="75.08379890007492" y="42.282194362992584" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+</defs><line x1="35" y1="35" x2="45" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="45" x2="45" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="75" x2="45" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="85" x2="45" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="115" x2="45" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="125" x2="45" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="155" x2="45" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="35" y1="165" x2="45" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="35" x2="85" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="45" x2="85" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="75" x2="85" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="85" x2="85" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="115" x2="85" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="125" x2="85" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="155" x2="85" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="75" y1="165" x2="85" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="35" x2="125" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="45" x2="125" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="75" x2="125" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="85" x2="125" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="115" x2="125" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="125" x2="125" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="155" x2="125" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="115" y1="165" x2="125" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="35" x2="165" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="45" x2="165" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="75" x2="165" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="85" x2="165" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="115" x2="165" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="125" x2="165" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="155" x2="165" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="155" y1="165" x2="165" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="35" x2="205" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="45" x2="205" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="75" x2="205" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="85" x2="205" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="115" x2="205" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="125" x2="205" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="155" x2="205" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="195" y1="165" x2="205" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="35" x2="245" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="45" x2="245" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="75" x2="245" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="85" x2="245" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="115" x2="245" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="125" x2="245" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="155" x2="245" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="235" y1="165" x2="245" y2="155" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="35" x2="285" y2="45" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="45" x2="285" y2="35" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="75" x2="285" y2="85" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="85" x2="285" y2="75" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="115" x2="285" y2="125" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="125" x2="285" y2="115" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="155" x2="285" y2="165" stroke="#5b6b78" stroke-width="1.4"/><line x1="275" y1="165" x2="285" y2="155" stroke="#5b6b78" stroke-width="1.4"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">α</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 28.7 100.1 L 33.4 100.3 L 38.1 100.6 L 42.8 101.0 L 47.4 101.6 L 52.1 102.3 L 56.7 103.2 L 61.3 104.1 L 65.8 105.2 L 70.4 106.4 L 74.9 107.8 L 79.3 109.3 L 83.8 110.9 L 88.1 112.6 L 92.5 114.4 L 96.7 116.3 L 101.0 118.4 L 105.1 120.6 L 109.2 122.9 L 113.2 125.3 L 117.2 127.8 L 121.1 130.5 L 124.9 133.2 L 128.7 136.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="142.6624508053619" cy="136.03817188685727" r="10" fill="#c0392b"/><text x="142.6624508053619" y="140.03817188685727" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 27.6 100.2 L 31.2 100.6 L 34.7 101.4 L 38.1 102.5 L 41.5 103.8 L 44.7 105.4 L 47.7 107.4 L 50.6 109.5 L 53.3 111.9 L 55.8 114.5 L 58.0 117.4 L 60.0 120.4 L 61.7 123.5 L 63.2 126.8 L 64.3 130.2 L 65.2 133.7 L 65.7 137.3 L 66.0 140.9 L 65.9 144.5 L 65.6 148.1 L 64.9 151.6 L 63.9 155.1 L 62.6 158.5 L 61.1 161.7" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="75.08379890007492" cy="161.71780563700742" r="10" fill="#0e7c86"/><text x="75.08379890007492" y="165.71780563700742" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
         <p class="pathquiz-prompt">Two identical electrons enter the same magnetic field (into the page); electron X moves twice as fast as electron Y. Which path is followed by the faster electron, X?</p>
         <div class="pathquiz-options">
           <label><input type="radio" name="pq-p5" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
@@ -685,7 +620,7 @@
   <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
   <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
   <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
-</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 34.8 98.7 L 45.7 94.8 L 56.5 88.4 L 67.3 79.3 L 78.2 67.7 L 89.0 53.5 L 99.8 36.7 L 110.7 17.4 L 121.5 -4.6 L 132.3 -29.1 L 143.2 -56.2 L 154.0 -85.9 L 164.8 -118.2 L 175.7 -153.0 L 186.5 -190.5 L 197.3 -230.5 L 208.2 -273.1 L 219.0 -318.3 L 229.8 -366.0 L 240.7 -416.4 L 251.5 -469.3 L 262.3 -524.8 L 273.2 -582.9 L 284.0 -643.6" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="288" cy="12" r="10" fill="#c0392b"/><text x="288" y="16" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 34.8 101.3 L 45.7 105.2 L 56.5 111.6 L 67.3 120.7 L 78.2 132.3 L 89.0 146.5 L 99.8 163.3 L 110.7 182.6 L 121.5 204.6 L 132.3 229.1 L 143.2 256.2 L 154.0 285.9 L 164.8 318.2 L 175.7 353.0 L 186.5 390.5 L 197.3 430.5 L 208.2 473.1 L 219.0 518.3 L 229.8 566.0 L 240.7 616.4 L 251.5 669.3 L 262.3 724.8 L 273.2 782.9 L 284.0 843.6" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="288" cy="188" r="10" fill="#0e7c86"/><text x="288" y="192" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">e⁻</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 34.8 99.8 L 45.7 99.4 L 56.5 98.6 L 67.3 97.6 L 78.2 96.2 L 89.0 94.5 L 99.8 92.5 L 110.7 90.2 L 121.5 87.6 L 132.3 84.7 L 143.2 81.5 L 154.0 78.0 L 164.8 74.2 L 175.7 70.1 L 186.5 65.6 L 197.3 60.9 L 208.2 55.8 L 219.0 50.5 L 229.8 44.8 L 240.7 38.9 L 251.5 32.6 L 262.3 26.1 L 273.2 19.2 L 284.0 12.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="284.0" cy="12.0" r="10" fill="#c0392b"/><text x="284.0" y="16.0" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 34.8 100.2 L 45.7 100.6 L 56.5 101.4 L 67.3 102.4 L 78.2 103.8 L 89.0 105.5 L 99.8 107.5 L 110.7 109.8 L 121.5 112.4 L 132.3 115.3 L 143.2 118.5 L 154.0 122.0 L 164.8 125.8 L 175.7 129.9 L 186.5 134.4 L 197.3 139.1 L 208.2 144.2 L 219.0 149.5 L 229.8 155.2 L 240.7 161.1 L 251.5 167.4 L 262.3 173.9 L 273.2 180.8 L 284.0 188.0" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="284.0" cy="188.0" r="10" fill="#0e7c86"/><text x="284.0" y="192.0" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
         <p class="pathquiz-prompt">An electron travels horizontally into a uniform electric field between two charged plates (top plate positive). Which path does it follow?</p>
         <div class="pathquiz-options">
           <label><input type="radio" name="pq-p8" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
@@ -705,7 +640,7 @@
   <marker id="arrowEndA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
   <marker id="arrowEndB" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#0e7c86"/></marker>
   <marker id="arrowEndC" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#b8860b"/></marker>
-</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">p⁺</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 34.8 98.7 L 45.7 94.8 L 56.5 88.4 L 67.3 79.3 L 78.2 67.7 L 89.0 53.5 L 99.8 36.7 L 110.7 17.4 L 121.5 -4.6 L 132.3 -29.1 L 143.2 -56.2 L 154.0 -85.9 L 164.8 -118.2 L 175.7 -153.0 L 186.5 -190.5 L 197.3 -230.5 L 208.2 -273.1 L 219.0 -318.3 L 229.8 -366.0 L 240.7 -416.4 L 251.5 -469.3 L 262.3 -524.8 L 273.2 -582.9 L 284.0 -643.6" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="288" cy="12" r="10" fill="#c0392b"/><text x="288" y="16" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 34.8 101.3 L 45.7 105.2 L 56.5 111.6 L 67.3 120.7 L 78.2 132.3 L 89.0 146.5 L 99.8 163.3 L 110.7 182.6 L 121.5 204.6 L 132.3 229.1 L 143.2 256.2 L 154.0 285.9 L 164.8 318.2 L 175.7 353.0 L 186.5 390.5 L 197.3 430.5 L 208.2 473.1 L 219.0 518.3 L 229.8 566.0 L 240.7 616.4 L 251.5 669.3 L 262.3 724.8 L 273.2 782.9 L 284.0 843.6" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="288" cy="188" r="10" fill="#0e7c86"/><text x="288" y="192" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
+</defs><rect x="20" y="18" width="260" height="10" fill="#c0392b" opacity="0.75"/><text x="8" y="27" font-size="13" fill="#c0392b">+</text><rect x="20" y="172" width="260" height="10" fill="#2f6fa8" opacity="0.75"/><text x="8" y="184" font-size="13" fill="#2f6fa8">-</text><line x1="55" y1="32" x2="55" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="100" y1="32" x2="100" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="145" y1="32" x2="145" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="190" y1="32" x2="190" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><line x1="235" y1="32" x2="235" y2="165" stroke="#5b6b78" stroke-width="1.4" marker-end="url(#fieldArrowV)"/><circle cx="24" cy="100" r="7" fill="#173a5e"/><text x="24" y="87" font-size="12" font-weight="700" text-anchor="middle" fill="#173a5e">p⁺</text><line x1="24" y1="100" x2="40" y2="100" stroke="#173a5e" stroke-width="2" marker-end="url(#vArrow)"/><path d="M 24.0 100.0 L 34.8 99.8 L 45.7 99.4 L 56.5 98.6 L 67.3 97.6 L 78.2 96.2 L 89.0 94.5 L 99.8 92.5 L 110.7 90.2 L 121.5 87.6 L 132.3 84.7 L 143.2 81.5 L 154.0 78.0 L 164.8 74.2 L 175.7 70.1 L 186.5 65.6 L 197.3 60.9 L 208.2 55.8 L 219.0 50.5 L 229.8 44.8 L 240.7 38.9 L 251.5 32.6 L 262.3 26.1 L 273.2 19.2 L 284.0 12.0" stroke="#c0392b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndA)"/><circle cx="284.0" cy="12.0" r="10" fill="#c0392b"/><text x="284.0" y="16.0" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">A</text><path d="M 24.0 100.0 L 34.8 100.2 L 45.7 100.6 L 56.5 101.4 L 67.3 102.4 L 78.2 103.8 L 89.0 105.5 L 99.8 107.5 L 110.7 109.8 L 121.5 112.4 L 132.3 115.3 L 143.2 118.5 L 154.0 122.0 L 164.8 125.8 L 175.7 129.9 L 186.5 134.4 L 197.3 139.1 L 208.2 144.2 L 219.0 149.5 L 229.8 155.2 L 240.7 161.1 L 251.5 167.4 L 262.3 173.9 L 273.2 180.8 L 284.0 188.0" stroke="#0e7c86" stroke-width="2.6" fill="none" marker-end="url(#arrowEndB)"/><circle cx="284.0" cy="188.0" r="10" fill="#0e7c86"/><text x="284.0" y="192.0" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">B</text><path d="M 24.0 100.0 L 154.0 100.0 L 284.0 100.0" stroke="#b8860b" stroke-width="2.6" fill="none" marker-end="url(#arrowEndC)"/><circle cx="288" cy="100" r="10" fill="#b8860b"/><text x="288" y="104" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">C</text></svg></div>
         <p class="pathquiz-prompt">A proton travels horizontally into the same field (top plate positive). Which path does it follow?</p>
         <div class="pathquiz-options">
           <label><input type="radio" name="pq-p9" value="A"> Path <span style="color:#c0392b;font-weight:800;">A</span></label>
@@ -1348,8 +1283,8 @@
     </section>
 
     <!-- ================= SECTION 9 ================= -->
-    <section class="topic" id="s9">
-      <h2>9. Glossary</h2>
+    <section class="topic" id="sG">
+      <h2>Glossary</h2>
       <dl class="glossary">
         <dt>Conventional current</dt><dd>The direction that positive charge flows (or would flow); by convention, from + to − around a circuit. Fleming's left-hand rule and F = BILsinθ are always defined using this direction.</dd>
         <dt>Electron flow</dt><dd>The actual physical direction free electrons drift in a conductor — opposite to conventional current.</dd>
@@ -1366,24 +1301,27 @@
 </div>
 
 <script>
-var PATHQUIZ_CORRECT = {'p1':'A', 'p2':'B', 'p3':'B', 'p4':'A', 'p5':'A', 'p6':'C', 'p7':'C', 'p8':'A', 'p9':'B', 'p10':'C'};
+/* ---------- text answer toggles ---------- */
+function toggleAnswer(id){ document.getElementById(id).classList.toggle('shown'); }
+function revealAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
+  document.body.classList.add('answers-visible');
+}
+function hideAll(){
+  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
+  document.body.classList.remove('answers-visible');
+}
+
+/* ---------- Section 4: "predict the path" quiz ---------- */
+var PATHQUIZ_CORRECT = {'p1':'B', 'p2':'A', 'p3':'A', 'p4':'A', 'p5':'A', 'p6':'C', 'p7':'C', 'p8':'A', 'p9':'B', 'p10':'C'};
 
 function checkPathQuiz(id){
   var correct = PATHQUIZ_CORRECT[id];
   var selected = document.querySelector('input[name="pq-' + id + '"]:checked');
   var feedback = document.getElementById('pq-' + id + '-feedback');
-  if(!selected){
-    feedback.textContent = 'Select a path first.';
-    feedback.className = 'pathquiz-feedback incorrect';
-    return;
-  }
-  if(selected.value === correct){
-    feedback.textContent = 'Correct! See the explanation below.';
-    feedback.className = 'pathquiz-feedback correct';
-  } else {
-    feedback.textContent = 'Not quite \u2014 the correct answer is path ' + correct + '. See the explanation below.';
-    feedback.className = 'pathquiz-feedback incorrect';
-  }
+  if(!selected){ feedback.textContent = 'Select a path first.'; feedback.className = 'pathquiz-feedback incorrect'; return; }
+  if(selected.value === correct){ feedback.textContent = 'Correct! See the explanation below.'; feedback.className = 'pathquiz-feedback correct'; }
+  else { feedback.textContent = 'Not quite — the correct answer is path ' + correct + '. See the explanation below.'; feedback.className = 'pathquiz-feedback incorrect'; }
   var panel = pathQuizExplanationPanel(id);
   if(panel) panel.classList.add('shown');
 }
@@ -1393,20 +1331,6 @@ function pathQuizExplanationPanel(id){
   if(!input) return null;
   var container = input.closest('.pathquiz');
   return container ? container.querySelector('.answer-panel') : null;
-}
-
-function toggleAnswer(id){
-  var el = document.getElementById(id);
-  el.classList.toggle('shown');
-}
-
-function revealAll(){
-  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.add('shown'); });
-  document.body.classList.add('answers-visible');
-}
-function hideAll(){
-  document.querySelectorAll('.answer-panel').forEach(function(el){ el.classList.remove('shown'); });
-  document.body.classList.remove('answers-visible');
 }
 
 /* ================= Answer persistence =================
@@ -1655,12 +1579,28 @@ window.addEventListener('beforeprint', function(){
 
 document.addEventListener('DOMContentLoaded', function(){
   initFillables();
+  /* If this workbook has a simulation results table, also restore its saved
+     trialsData/trialCount from localStorage and rebuild its rows here,
+     before the fsaSupported check below. */
   if(fsaSupported){
     document.getElementById('btnLinkFile').style.display = '';
     tryRestoreLinkedFile();
   }
   updateSaveStatus();
 });
+
+/* ================= Per-simulation draw-loop scripts go here =================
+   One IIFE per canvas sim, e.g.:
+   (function(){
+     const canvas = document.getElementById('[id]Canvas');
+     if(!canvas) return;
+     const ctx = canvas.getContext('2d');
+     ... draw(); requestAnimationFrame(draw) loop ...
+     Watch for -Infinity sentinels used as "hasn't happened yet" markers — comparing/incrementing
+     them before the first real event can freeze the page. Use edge-anchored textAlign
+     ('left'/'right') for canvas labels near the left/right edge, not 'center'.
+   })();
+================================================================================= */
 </script>
 </body>
 </html>
