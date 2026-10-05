@@ -24,10 +24,6 @@
   .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
   .cover p.sub{margin:0; font-size:1.05rem; color:#dceaf0;}
   .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
-  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
-  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
-  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
-  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
   .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
   .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
 
@@ -137,8 +133,6 @@
     .page-break{page-break-before:always;}
     .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
     .answer-lines::placeholder{color:transparent;}
-    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
-    .name-box .fill::placeholder{color:transparent;}
     .sim-frame, .sim-embed-credit, .sim-embed p.instructions, .sim-wrap{display:none !important;}
     .sim-print-note{display:block !important; text-align:center; font-size:0.85rem; color:#5b6b78; padding:0.9rem; border:1px dashed #b9c6d3; border-radius:8px; margin:0.6rem 0;}
     .sim-launch{display:none !important;}
@@ -167,13 +161,13 @@
     <a href="#s2">2. Nuclear notation</a>
     <a href="#s3">3. Nuclear radius &amp; density</a>
     <a href="#s4">4. The strong nuclear force</a>
-    <a href="#s5">5. Spectra &amp; energy levels</a>
-    <a href="#s6">6. Photons &amp; transitions</a>
-    <a href="#s7">7. The Bohr model</a>
-    <a href="#s8">8. Photoelectric effect</a>
-    <a href="#s9">9. Einstein's equation</a>
-    <a href="#s10">10. Compton scattering</a>
-    <a href="#s11">11. Wave nature of matter</a>
+    <a href="#s5">5. Photoelectric effect</a>
+    <a href="#s6">6. Einstein's equation</a>
+    <a href="#s7">7. Spectra &amp; energy levels</a>
+    <a href="#s8">8. Photons &amp; transitions</a>
+    <a href="#s9">9. The Bohr model</a>
+    <a href="#s10">10. Wave nature of matter</a>
+    <a href="#s11">11. Compton scattering</a>
     <a href="#sG">Glossary</a>
   </nav>
 
@@ -189,9 +183,6 @@
           <li>Explain how emission and absorption spectra give evidence for discrete atomic energy levels, and apply E = hf to photon emission and absorption, including the Bohr model of hydrogen (HL).</li>
           <li>Explain how the photoelectric effect, Compton scattering and electron diffraction provide evidence for wave–particle duality, and apply Einstein's photoelectric equation, the Compton wavelength shift, and the de Broglie wavelength.</li>
         </ul>
-      </div>
-      <div class="name-box">
-        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
       </div>
     </section>
 
@@ -240,10 +231,10 @@
             <path d="M240,103 L470,103"/>
             <path d="M240,103 L470,146"/>
             <path d="M240,103 L360,20"/>
-            <path d="M240,103 Q 260,103 150,60"/>
           </g>
-          <path d="M240,103 C 260,120 260,150 130,150" stroke="#a33d5b" stroke-width="1.8" fill="none" stroke-dasharray="4 2"/>
-          <text x="130" y="165" font-size="10" fill="#a33d5b">~1 in 8000 bounce back &gt;90°</text>
+          <defs><marker id="arrowBounce" markerWidth="8" markerHeight="8" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#a33d5b"/></marker></defs>
+          <path d="M240,103 C 200,112 150,125 95,138" stroke="#a33d5b" stroke-width="1.8" fill="none" stroke-dasharray="4 2" marker-end="url(#arrowBounce)"/>
+          <text x="15" y="175" font-size="10" fill="#a33d5b">~1 in 8000 bounce back &gt;90°</text>
           <path d="M470,60 A 220 220 0 0 1 470 146" fill="none" stroke="#dfd8c6" stroke-width="14" opacity="0.5"/>
           <text x="630" y="80" text-anchor="end" font-size="10" fill="#4a5568">zinc sulfide</text>
           <text x="630" y="93" text-anchor="end" font-size="10" fill="#4a5568">detector screen</text>
@@ -480,220 +471,7 @@
 
     <!-- ================= SECTION 5 ================= -->
     <section class="topic" id="s5">
-      <h2>5. Evidence for energy levels: emission and absorption spectra</h2>
-      <p>The simple picture of electrons orbiting a nucleus (rather like planets orbiting a star) turns out to be seriously incomplete. Orbiting satellites can have <em>any</em> orbital energy — a continuous range. Electrons in atoms cannot: they can only exist with certain very precise, separated (discrete) energies, called <strong>atomic energy levels</strong>. The lowest of these is the <strong>ground state</strong>.</p>
-
-      <p>The evidence for this comes from studying the light that atoms give out or take in.</p>
-      <ul>
-        <li>When a gas is <strong>excited</strong> (heated, or given energy by an electric current), it emits light only at certain specific frequencies. Viewed through a prism or diffraction grating, this appears as a series of bright, separate lines on a dark background: an <strong>emission spectrum</strong>.</li>
-        <li>When white light (a continuous spectrum) is passed through a cool gas, the gas absorbs light at exactly those same frequencies. This produces dark lines on an otherwise continuous, bright spectrum: an <strong>absorption spectrum</strong>.</li>
-      </ul>
-
-      <div class="keybox"><strong>Key idea.</strong> Every line in an emission or absorption spectrum corresponds to an electron transition between two discrete energy levels. Since <strong>different elements have different sets of energy levels</strong>, every element produces its own unique "fingerprint" of spectral lines. This is why spectra can be used to identify the chemical composition of a distant star, a nebula, or an unknown sample in a lab.</div>
-
-      <h3>Live simulation: build your own line spectrum</h3>
-      <div class="sim-embed">
-        <p class="instructions">This tool (Foothill College AstroSims) lets you add individual coloured emission lines onto a continuous spectrum and see the resulting pattern, just as astronomers use spectrometers to read the chemical fingerprint of starlight.</p>
-        <iframe class="sim-frame" src="https://foothillastrosims.github.io/Spectroscopy-Demonstrator/" style="height:640px;" loading="lazy" title="Spectroscopy Demonstrator simulation"></iframe>
-        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
-        <p class="sim-embed-credit">Simulation: Foothill College AstroSims — Spectroscopy Demonstrator (opens the full version in a new tab).</p>
-      </div>
-
-      <div class="sim-launch">
-        <p style="margin:0; font-weight:700; color:var(--navy);">Explore real spectra — atomic-spectra.net</p>
-        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Browse the real emission-line spectrum of any element in the periodic table.</p>
-        <a class="launch-btn" href="https://atomic-spectra.net/spectrum.php" target="_blank" rel="noopener">Open atomic-spectra.net ↗</a>
-        <p class="credit">External resource: atomic-spectra.net. Opens in a new tab.</p>
-      </div>
-
-      <h3>Check your understanding</h3>
-      <div class="question">
-        <span class="qnum">12</span><strong>Using the AstroSims tool above (or atomic-spectra.net), compare the emission spectra of hydrogen and helium.</strong> Describe two differences.
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
-        <div class="answer-panel" id="q12">This is a descriptive, simulation-based question — see the key idea box in this section for the underlying physics; check your specific comparison with your teacher.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">13</span><strong>Explain how an astronomer could use the absorption spectrum of a star to determine which elements are present in its outer atmosphere.</strong>
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
-        <div class="answer-panel" id="q13">This is a descriptive question — see the key idea box in this section, which explains why each element's absorption lines act as a unique fingerprint; check your wording with your teacher.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">14</span><strong>Explain why the existence of line spectra (rather than continuous, "rainbow" spectra) is evidence that atomic energy levels are discrete rather than continuous.</strong>
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
-        <div class="answer-panel" id="q14">Discrete spectral lines correspond to discrete photon frequencies (E = hf); since only specific frequencies appear, only specific energy differences — and therefore only discrete energy levels — can exist within the atom.</div>
-      </div>
-    </section>
-
-    <!-- ================= SECTION 6 ================= -->
-    <section class="topic" id="s6">
-      <h2>6. Photons and atomic transitions</h2>
-      <p>When an electron in an atom drops from a higher energy level to a lower one, the atom emits a single "packet" of electromagnetic energy called a <strong>photon</strong>. Conversely, an atom can absorb a photon and jump from a lower level to a higher one — but <em>only</em> if the photon carries exactly the right amount of energy to bridge the gap between the two levels.</p>
-
-      <div class="eqn">energy of one photon: &nbsp; <b>E = hf</b> &nbsp; (h = Planck's constant = 6.63 × 10⁻³⁴ J s)</div>
-
-      <p>Because atomic energy levels are discrete, the differences between them are also discrete — so only certain photon energies (and therefore only certain frequencies, since E = hf) can be emitted or absorbed by a given atom. This is exactly why line spectra exist.</p>
-
-      <p>Physically, each energy level corresponds to an electron occupying one of the atom's circular "shells" around the nucleus (this is the Bohr model — see Section 7). But the emission/absorption diagrams used throughout this topic, like Fig. 6.2 below, draw each level as a flat horizontal line rather than a circle — and the line spectra you explored in Section 5 are themselves just another picture of the very same spacing. Fig. 6.1 shows how all three pictures (shells → flat lines → spectral lines) are connected.</p>
-
-      <figure>
-        <svg viewBox="0 0 560 270" width="560" height="270" xmlns="http://www.w3.org/2000/svg">
-          <text x="150" y="14" text-anchor="middle" font-size="11" font-weight="bold" fill="#22305a">electron shells around the nucleus</text>
-          <circle cx="150" cy="150" r="20" fill="none" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="2 2"/>
-          <circle cx="150" cy="150" r="55" fill="none" stroke="#a33d5b" stroke-width="1.3" stroke-dasharray="2 2"/>
-          <circle cx="150" cy="150" r="80" fill="none" stroke="#1f7a6c" stroke-width="1.3" stroke-dasharray="2 2"/>
-          <circle cx="150" cy="150" r="100" fill="none" stroke="#c1791f" stroke-width="1.3" stroke-dasharray="2 2"/>
-          <circle cx="150" cy="150" r="5" fill="#22305a" stroke="#fff" stroke-width="1"/>
-          <text x="150" y="171" text-anchor="middle" font-size="9.5" fill="#22305a">nucleus</text>
-          <text x="150" y="122" text-anchor="middle" font-size="9.5" fill="#4a5568">n=1</text>
-          <text x="105" y="105" text-anchor="end" font-size="9.5" fill="#a33d5b">n=2</text>
-          <text x="64" y="153" text-anchor="end" font-size="9.5" fill="#1f7a6c">n=3</text>
-          <text x="73" y="227" text-anchor="end" font-size="9.5" fill="#c1791f">n=4</text>
-          <rect x="156" y="44" width="8" height="93" fill="#c1791f" opacity="0.15"/>
-          <circle cx="160" cy="133" r="4.5" fill="#4a5568" stroke="#fff" stroke-width="1"/>
-          <circle cx="160" cy="96" r="4.5" fill="#a33d5b" stroke="#fff" stroke-width="1"/>
-          <circle cx="160" cy="71" r="4.5" fill="#1f7a6c" stroke="#fff" stroke-width="1"/>
-          <circle cx="160" cy="51" r="4.5" fill="#c1791f" stroke="#fff" stroke-width="1"/>
-          <path d="M160,133 L280,133" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
-          <path d="M160,96 L280,96" fill="none" stroke="#a33d5b" stroke-width="1" stroke-dasharray="3 3"/>
-          <path d="M160,71 L280,71" fill="none" stroke="#1f7a6c" stroke-width="1" stroke-dasharray="3 3"/>
-          <path d="M160,51 L280,51" fill="none" stroke="#c1791f" stroke-width="1" stroke-dasharray="3 3"/>
-          <line x1="280" y1="133" x2="540" y2="133" stroke="#4a5568" stroke-width="2.5"/>
-          <line x1="280" y1="96" x2="540" y2="96" stroke="#a33d5b" stroke-width="2.5"/>
-          <line x1="280" y1="71" x2="540" y2="71" stroke="#1f7a6c" stroke-width="2.5"/>
-          <line x1="280" y1="51" x2="540" y2="51" stroke="#c1791f" stroke-width="2.5"/>
-        </svg>
-        <figcaption>Fig. 6.1 The circular electron shells are then shown as a horizontal "sliver" to save space and make the model as clear as possible.</figcaption>
-      </figure>
-
-      <figure>
-        <svg viewBox="0 0 400 210" width="400" height="210" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arrowOrange" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#c1791f"/></marker>
-            <marker id="arrowTeal" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f7a6c"/></marker>
-            <marker id="arrowRose" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#a33d5b"/></marker>
-            <marker id="arrowGrey" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4a5568"/></marker>
-          </defs>
-          <line x1="40" y1="25" x2="300" y2="25" stroke="#22305a" stroke-width="2"/><text x="308" y="29" font-size="11" fill="#22305a">E₄</text>
-          <line x1="40" y1="50" x2="300" y2="50" stroke="#22305a" stroke-width="2"/><text x="308" y="54" font-size="11" fill="#22305a">E₃</text>
-          <line x1="40" y1="95" x2="300" y2="95" stroke="#22305a" stroke-width="2"/><text x="308" y="99" font-size="11" fill="#22305a">E₂</text>
-          <line x1="40" y1="185" x2="300" y2="185" stroke="#22305a" stroke-width="2.5"/><text x="308" y="189" font-size="11" fill="#22305a">E₁ (ground)</text>
-          <line x1="90" x2="90" y1="25" y2="185" stroke="#c1791f" stroke-width="2" marker-end="url(#arrowOrange)"/>
-          <line x1="150" x2="150" y1="50" y2="185" stroke="#1f7a6c" stroke-width="2" marker-end="url(#arrowTeal)"/>
-          <line x1="210" x2="210" y1="95" y2="185" stroke="#a33d5b" stroke-width="2" marker-end="url(#arrowRose)"/>
-          <line x1="270" x2="270" y1="185" y2="25" stroke="#4a5568" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
-          <text x="270" y="15" text-anchor="middle" font-size="10" fill="#4a5568">absorption</text>
-        </svg>
-        <figcaption>Fig. 6.2 Emission transitions (downward, coloured) release photons of different energies; absorption (upward, dashed) requires a photon of exactly the right energy. Notice the gaps between levels shrink higher up, as in a real atom (E ∝ −1/n²).</figcaption>
-      </figure>
-
-      <div class="example">
-        <span class="tag">Worked example 6.1</span>
-        <p>An electron in an atom drops from an energy level of −1.20 × 10⁻¹⁸ J to a level of −3.06 × 10⁻¹⁸ J. Calculate the frequency of the photon emitted, and state the part of the electromagnetic spectrum it belongs to.</p>
-        <p><strong>Answer:</strong><br>
-        ΔE = (−1.20 × 10⁻¹⁸) − (−3.06 × 10⁻¹⁸) = 1.86 × 10⁻¹⁸ J<br>
-        E = hf &nbsp;⟹&nbsp; f = E/h = (1.86 × 10⁻¹⁸)/(6.63 × 10⁻³⁴) = 2.81 × 10¹⁵ Hz<br>
-        This frequency lies in the <strong>ultraviolet</strong> part of the spectrum.</p>
-      </div>
-
-      <h3>Check your understanding</h3>
-      <div class="question">
-        <span class="qnum">15</span><strong>A photon of frequency 5.0 × 10¹⁴ Hz is absorbed by an atom.</strong> Calculate the energy gained by the atom, in both joules and electronvolts.
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
-        <div class="answer-panel" id="q15">E = hf = 3.32×10⁻¹⁹ J = 2.07 eV.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">16</span><strong>An atom has just four energy levels.</strong> State the maximum possible number of different spectral lines (transitions) it could produce.
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
-        <div class="answer-panel" id="q16">6 possible transitions (4 choose 2).</div>
-      </div>
-      <div class="question">
-        <span class="qnum">17</span><strong>Explain why a photon can only be absorbed by a particular atom if its energy exactly matches the gap between two of that atom's energy levels — rather than being absorbed partially.</strong>
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
-        <div class="answer-panel" id="q17">Because atomic energy levels are discrete, an electron can only ever be in one exact level or another — there is no "in-between" state to absorb partial energy into, so the photon energy must exactly bridge two allowed levels.</div>
-      </div>
-    </section>
-
-    <!-- ================= SECTION 7 ================= -->
-    <section class="topic" id="s7">
-      <h2>7. The Bohr model of the hydrogen atom<span style="display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; margin-left:0.5rem; vertical-align:middle;">HL</span></h2>
-      <p>In 1913, the Danish physicist <strong>Niels Bohr</strong> proposed a bold new rule for the hydrogen atom: an electron can only orbit the nucleus in certain allowed orbits, and while it stays in one of these orbits, it does <em>not</em> radiate energy (even though classical physics said an accelerating charge always should). Bohr justified this by proposing that the electron's <strong>angular momentum</strong> is quantized — it can only take specific values:</p>
-
-      <div class="eqn"><b>mvr = nh / 2π</b> &nbsp; (n = 1, 2, 3, ... — the "principal quantum number")</div>
-
-      <p>Combining this quantization rule with Coulomb's law and circular motion allows the energy of each allowed orbit (n = 1, 2, 3, ...) to be calculated. Remarkably, the result matches the hydrogen line spectrum almost perfectly:</p>
-
-      <div class="eqn">energy levels of hydrogen: &nbsp; <b>E = −13.6 / n² &nbsp;(eV)</b></div>
-
-      <figure>
-        <svg viewBox="0 0 480 255" width="480" height="255" xmlns="http://www.w3.org/2000/svg">
-          <line x1="30" y1="12" x2="300" y2="12" stroke="#22305a" stroke-width="1.6" stroke-dasharray="2 2"/><text x="308" y="16" font-size="12" fill="#22305a">n=∞, 0 eV</text>
-          <line x1="30" y1="22" x2="300" y2="22" stroke="#22305a" stroke-width="1.6"/><text x="308" y="26" font-size="12" fill="#22305a">n=4, −0.85 eV</text>
-          <line x1="30" y1="40" x2="300" y2="40" stroke="#22305a" stroke-width="1.6"/><text x="308" y="44" font-size="12" fill="#22305a">n=3, −1.51 eV</text>
-          <line x1="30" y1="85" x2="300" y2="85" stroke="#22305a" stroke-width="1.6"/><text x="308" y="89" font-size="12" fill="#22305a">n=2, −3.40 eV</text>
-          <line x1="30" y1="235" x2="300" y2="235" stroke="#22305a" stroke-width="2.4"/><text x="308" y="239" font-size="12" fill="#22305a">n=1, −13.6 eV</text>
-        </svg>
-        <figcaption>Fig. 7.1 Energy levels of hydrogen. The gaps between levels shrink rapidly as n increases (E = −13.6/n² eV), converging on the ionisation limit at n = ∞.</figcaption>
-      </figure>
-
-      <div class="example">
-        <span class="tag">Worked example 7.1</span>
-        <p>Calculate the energy of the n = 4 level of hydrogen, in eV and in joules. Hence calculate the frequency of the photon emitted when an electron falls from n = 4 to n = 2.</p>
-        <p><strong>Answer:</strong><br>
-        E₄ = −13.6/4² = −0.850 eV = −0.850 × 1.60 × 10⁻¹⁹ = −1.36 × 10⁻¹⁹ J<br>
-        E₂ = −13.6/2² = −3.40 eV<br>
-        ΔE = (−0.850) − (−3.40) = 2.55 eV = 4.08 × 10⁻¹⁹ J<br>
-        f = ΔE/h = (4.08 × 10⁻¹⁹)/(6.63 × 10⁻³⁴) = 6.15 × 10¹⁴ Hz &nbsp;(visible light)</p>
-      </div>
-
-      <div class="example">
-        <span class="tag">Worked example 7.2</span>
-        <p>Calculate the angular momentum of an electron in the n = 2 orbit of hydrogen.</p>
-        <p><strong>Answer:</strong><br>
-        L = nh/2π = (2 × 6.63 × 10⁻³⁴)/(2π) = 2.11 × 10⁻³⁴ kg m² s⁻¹</p>
-      </div>
-
-      <div class="stretch-box">
-        <span class="tag">Why the Bohr model matters — and where it fails</span>
-        <p style="margin:0;">Bohr's model was the first to correctly predict the numerical energy levels of hydrogen from a quantization rule, rather than just fitting a curve to data. But it only works well for hydrogen (and other one-electron ions); it fails for atoms with more than one electron, and it does not explain <em>why</em> angular momentum should be quantized. That deeper explanation had to wait for the discovery of the wave nature of matter — the subject of Section 11.</p>
-      </div>
-
-      <h3>Check your understanding</h3>
-      <div class="question">
-        <span class="qnum">18</span><strong>Calculate the energy (in eV) of the n = 5 level of hydrogen.</strong>
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
-        <div class="answer-panel" id="q18">E₅ = −13.6/25 = −0.544 eV.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">19</span><strong>Determine the frequency of the photon emitted when an electron in a hydrogen atom falls from n = 3 to the ground state (n = 1).</strong> State which part of the electromagnetic spectrum this photon belongs to.
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
-        <div class="answer-panel" id="q19">ΔE = 13.6 − 1.51 = 12.1 eV ⟹ f ≈ 2.92×10¹⁵ Hz (ultraviolet).</div>
-      </div>
-      <div class="question">
-        <span class="qnum">20</span><strong>Calculate the ionisation energy of a hydrogen atom that is already in its n = 2 state</strong> (i.e. the energy needed to remove the electron completely, starting from n = 2 rather than the ground state).
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
-        <div class="answer-panel" id="q20">Ionisation energy from n = 2 is 3.40 eV (= 0 − (−3.40 eV)).</div>
-      </div>
-
-      <div class="sim-launch">
-        <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Build an Atom</p>
-        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Not required, but useful for visualising how electrons are organised into shells around a nucleus, and how this connects to isotope and ion notation from Section 2.</p>
-        <a class="launch-btn" href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
-        <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
-      </div>
-    </section>
-
-    <!-- ================= SECTION 8 ================= -->
-    <section class="topic" id="s8">
-      <h2>8. The photoelectric effect</h2>
+      <h2>5. The photoelectric effect</h2>
       <p>By the late 1800s, light was firmly believed to be a wave. But in 1887, Heinrich Hertz noticed something odd: shining ultraviolet light onto a clean metal surface could cause it to emit electrons — the <strong>photoelectric effect</strong>, and the ejected electrons are called <strong>photoelectrons</strong>.</p>
       <p>Careful experiments revealed three observations that a wave model of light simply could not explain:</p>
       <ol>
@@ -1109,34 +887,34 @@
 
       <h3>Simulation tasks</h3>
       <div class="question">
-        <span class="qnum">21</span><strong>Select Sodium as the cathode metal.</strong> Slowly increase the wavelength slider from 150 nm upwards. Record the wavelength at which photoelectrons stop being emitted (use the "Lab Observation" panel).
+        <span class="qnum">12</span><strong>Select Sodium as the cathode metal.</strong> Slowly increase the wavelength slider from 150 nm upwards. Record the wavelength at which photoelectrons stop being emitted (use the "Lab Observation" panel).
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
-        <div class="answer-panel" id="q21">Sodium's threshold wavelength is λ₀ = hc/Φ ≈ 544 nm — emission should stop close to this value.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
+        <div class="answer-panel" id="q12">Sodium's threshold wavelength is λ₀ = hc/Φ ≈ 544 nm — emission should stop close to this value.</div>
       </div>
       <div class="question">
-        <span class="qnum">22</span><strong>With the wavelength fixed at a value that does produce photoelectrons, turn the intensity slider down to 0% and then up to 100%.</strong> Describe what changes on the canvas, and what does not change.
+        <span class="qnum">13</span><strong>With the wavelength fixed at a value that does produce photoelectrons, turn the intensity slider down to 0% and then up to 100%.</strong> Describe what changes on the canvas, and what does not change.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
-        <div class="answer-panel" id="q22">The rate of photon/electron arrivals (and hence the ammeter current) increases, but the maximum kinetic energy (and stopping voltage) of each electron is unchanged.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q13')">Show answer</button>
+        <div class="answer-panel" id="q13">The rate of photon/electron arrivals (and hence the ammeter current) increases, but the maximum kinetic energy (and stopping voltage) of each electron is unchanged.</div>
       </div>
       <div class="question">
-        <span class="qnum">23</span><strong>Switch the cathode metal to Gold (a much larger work function) without changing the wavelength.</strong> What happens, and why?
+        <span class="qnum">14</span><strong>Switch the cathode metal to Gold (a much larger work function) without changing the wavelength.</strong> What happens, and why?
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
-        <div class="answer-panel" id="q23">Gold's work function (5.10 eV) is much larger than sodium's (2.28 eV); if the photon energy is now below 5.10 eV, no photoelectrons are emitted at all, however intense the light.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q14')">Show answer</button>
+        <div class="answer-panel" id="q14">Gold's work function (5.10 eV) is much larger than sodium's (2.28 eV); if the photon energy is now below 5.10 eV, no photoelectrons are emitted at all, however intense the light.</div>
       </div>
       <div class="question">
-        <span class="qnum">24</span><strong>The threshold frequency of zinc is 1.04 × 10¹⁵ Hz.</strong> Calculate the corresponding threshold wavelength, and state whether visible light (400–700 nm) could ever release photoelectrons from zinc.
+        <span class="qnum">15</span><strong>The threshold frequency of zinc is 1.04 × 10¹⁵ Hz.</strong> Calculate the corresponding threshold wavelength, and state whether visible light (400–700 nm) could ever release photoelectrons from zinc.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
-        <div class="answer-panel" id="q24">λ₀ = c/f₀ ≈ 289 nm (UV) — shorter than the whole visible range (400–700 nm), so visible light can never release photoelectrons from zinc.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
+        <div class="answer-panel" id="q15">λ₀ = c/f₀ ≈ 289 nm (UV) — shorter than the whole visible range (400–700 nm), so visible light can never release photoelectrons from zinc.</div>
       </div>
     </section>
 
-    <!-- ================= SECTION 9 ================= -->
-    <section class="topic" id="s9">
-      <h2>9. Einstein's photoelectric equation</h2>
+    <!-- ================= SECTION 6 ================= -->
+    <section class="topic" id="s6">
+      <h2>6. Einstein's photoelectric equation</h2>
       <p>Different electrons within the same metal surface need different amounts of energy to escape, depending on how tightly bound they are. But there is a well-defined <em>minimum</em> amount of energy needed to free the most loosely-bound electron from the surface of a given metal — this is called the <strong>work function</strong>, Φ.</p>
       <p>The photoelectric effect is really just a statement of <strong>conservation of energy</strong>. A single photon hands over <em>all</em> of its energy to a single electron, and that energy has to go somewhere: some of it is "spent" doing the minimum amount of work needed to free the electron from the metal — the work function, Φ (the photoelectric-effect equivalent of the ionisation energy of an atom) — and whatever is left over becomes the electron's kinetic energy:</p>
 
@@ -1154,12 +932,13 @@
 
       <p>This can be tested experimentally by measuring the <strong>stopping voltage</strong>, V<sub>s</sub> — the minimum reverse potential difference needed to just stop the fastest photoelectrons from reaching a collector. Since work done = charge × p.d., E<sub>max</sub> = eV<sub>s</sub>, so a graph of stopping voltage against frequency should be a straight line:</p>
 
-      <div class="eqn">eV<sub>s</sub> = hf − Φ &nbsp;&nbsp;⟺&nbsp;&nbsp; V<sub>s</sub> = (h/e)f − Φ/e</div>
+      <div class="eqn">eV<sub>s</sub> = hf − Φ</div>
+      <div class="eqn">V<sub>s</sub> = (h/e)f − Φ/e</div>
 
       <div class="keybox"><strong>Reading the graph.</strong> On a graph of V<sub>s</sub> (or E<sub>max</sub> in eV) against frequency: the <strong>gradient</strong> gives Planck's constant, h (divided by e, if plotting V<sub>s</sub>); the <strong>x-intercept</strong> gives the threshold frequency, f₀; and the <strong>y-intercept</strong> gives −Φ/e.</div>
 
       <div class="example">
-        <span class="tag">Worked example 9.1</span>
+        <span class="tag">Worked example 6.1</span>
         <p>Radiation of wavelength 4.20 × 10⁻⁷ m is incident on a metal surface with a work function of 1.90 eV.</p>
         <ol type="a">
           <li>Calculate the energy of one photon of this radiation, in eV.</li>
@@ -1176,29 +955,295 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">25</span><strong>The threshold frequency of a metal is 5.5 × 10¹⁴ Hz.</strong> Calculate its work function in eV.
+        <span class="qnum">16</span><strong>The threshold frequency of a metal is 5.5 × 10¹⁴ Hz.</strong> Calculate its work function in eV.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
-        <div class="answer-panel" id="q25">Φ = hf₀ ≈ 2.28 eV.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q16')">Show answer</button>
+        <div class="answer-panel" id="q16">Φ = hf₀ ≈ 2.28 eV.</div>
       </div>
       <div class="question">
-        <span class="qnum">26</span><strong>Light of frequency 9.0 × 10¹⁴ Hz produces photoelectrons with a maximum kinetic energy of 1.75 eV from a certain metal.</strong> Calculate the work function of the metal and its threshold frequency.
+        <span class="qnum">17</span><strong>Light of frequency 9.0 × 10¹⁴ Hz produces photoelectrons with a maximum kinetic energy of 1.75 eV from a certain metal.</strong> Calculate the work function of the metal and its threshold frequency.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
-        <div class="answer-panel" id="q26">Φ = hf − E<sub>max</sub> ≈ 1.98 eV; f₀ = Φ/h ≈ 4.78×10¹⁴ Hz.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q17')">Show answer</button>
+        <div class="answer-panel" id="q17">Φ = hf − E<sub>max</sub> ≈ 1.98 eV; f₀ = Φ/h ≈ 4.78×10¹⁴ Hz.</div>
       </div>
       
       <div class="question">
-        <span class="qnum">27</span><strong>Explain why increasing the intensity of light incident on a metal surface increases the photoelectric current but not the maximum kinetic energy of the photoelectrons.</strong>
+        <span class="qnum">18</span><strong>Explain why increasing the intensity of light incident on a metal surface increases the photoelectric current but not the maximum kinetic energy of the photoelectrons.</strong>
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q18')">Show answer</button>
+        <div class="answer-panel" id="q18">More intensity means more photons per second (more photoelectrons per second, higher current), but each photon still carries the same energy hf, so E<sub>max</sub> = hf − Φ is unchanged.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7 ================= -->
+    <section class="topic" id="s7">
+      <h2>7. Evidence for energy levels: emission and absorption spectra</h2>
+      <p>The simple picture of electrons orbiting a nucleus (rather like planets orbiting a star) turns out to be seriously incomplete. Orbiting satellites can have <em>any</em> orbital energy — a continuous range. Electrons in atoms cannot: they can only exist with certain very precise, separated (discrete) energies, called <strong>atomic energy levels</strong>. The lowest of these is the <strong>ground state</strong>.</p>
+
+      <p>The evidence for this comes from studying the light that atoms give out or take in.</p>
+      <ul>
+        <li>When a gas is <strong>excited</strong> (heated, or given energy by an electric current), it emits light only at certain specific frequencies. Viewed through a prism or diffraction grating, this appears as a series of bright, separate lines on a dark background: an <strong>emission spectrum</strong>.</li>
+        <li>When white light (a continuous spectrum) is passed through a cool gas, the gas absorbs light at exactly those same frequencies. This produces dark lines on an otherwise continuous, bright spectrum: an <strong>absorption spectrum</strong>.</li>
+      </ul>
+
+      <div class="keybox"><strong>Key idea.</strong> Every line in an emission or absorption spectrum corresponds to an electron transition between two discrete energy levels. Since <strong>different elements have different sets of energy levels</strong>, every element produces its own unique "fingerprint" of spectral lines. This is why spectra can be used to identify the chemical composition of a distant star, a nebula, or an unknown sample in a lab.</div>
+
+      <h3>Live simulation: build your own line spectrum</h3>
+      <div class="sim-embed">
+        <p class="instructions">This tool (Foothill College AstroSims) lets you add individual coloured emission lines onto a continuous spectrum and see the resulting pattern, just as astronomers use spectrometers to read the chemical fingerprint of starlight.</p>
+        <iframe class="sim-frame" src="https://foothillastrosims.github.io/Spectroscopy-Demonstrator/" style="height:640px;" loading="lazy" title="Spectroscopy Demonstrator simulation"></iframe>
+        <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
+        <p class="sim-embed-credit">Simulation: Foothill College AstroSims — Spectroscopy Demonstrator (opens the full version in a new tab).</p>
+      </div>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Explore real spectra — atomic-spectra.net</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Browse the real emission-line spectrum of any element in the periodic table.</p>
+        <a class="launch-btn" href="https://atomic-spectra.net/spectrum.php" target="_blank" rel="noopener">Open atomic-spectra.net ↗</a>
+        <p class="credit">External resource: atomic-spectra.net. Opens in a new tab.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">19</span><strong>Using the AstroSims tool above (or atomic-spectra.net), compare the emission spectra of hydrogen and helium.</strong> Describe two differences.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
+        <div class="answer-panel" id="q19">This is a descriptive, simulation-based question — see the key idea box in this section for the underlying physics; check your specific comparison with your teacher.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">20</span><strong>Explain how an astronomer could use the absorption spectrum of a star to determine which elements are present in its outer atmosphere.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
+        <div class="answer-panel" id="q20">This is a descriptive question — see the key idea box in this section, which explains why each element's absorption lines act as a unique fingerprint; check your wording with your teacher.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">21</span><strong>Explain why the existence of line spectra (rather than continuous, "rainbow" spectra) is evidence that atomic energy levels are discrete rather than continuous.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q21')">Show answer</button>
+        <div class="answer-panel" id="q21">Discrete spectral lines correspond to discrete photon frequencies (E = hf); since only specific frequencies appear, only specific energy differences — and therefore only discrete energy levels — can exist within the atom.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8 ================= -->
+    <section class="topic" id="s8">
+      <h2>8. Photons and atomic transitions</h2>
+      <p>When an electron in an atom drops from a higher energy level to a lower one, the atom emits a single "packet" of electromagnetic energy called a <strong>photon</strong>. Conversely, an atom can absorb a photon and jump from a lower level to a higher one — but <em>only</em> if the photon carries exactly the right amount of energy to bridge the gap between the two levels.</p>
+
+      <div class="eqn">energy of one photon: &nbsp; <b>E = hf</b> &nbsp; (h = Planck's constant = 6.63 × 10⁻³⁴ J s)</div>
+
+      <p>Because atomic energy levels are discrete, the differences between them are also discrete — so only certain photon energies (and therefore only certain frequencies, since E = hf) can be emitted or absorbed by a given atom. This is exactly why line spectra exist.</p>
+
+      <p>Physically, each energy level corresponds to an electron occupying one of the atom's circular "shells" around the nucleus (this is the Bohr model — see Section 9). But the emission/absorption diagrams used throughout this topic, like Fig. 8.2 below, draw each level as a flat horizontal line rather than a circle — and the line spectra you explored in Section 7 are themselves just another picture of the very same spacing. Fig. 8.1 shows how all three pictures (shells → flat lines → spectral lines) are connected.</p>
+
+      <figure>
+        <svg viewBox="0 0 560 270" width="560" height="270" xmlns="http://www.w3.org/2000/svg">
+          <text x="150" y="14" text-anchor="middle" font-size="11" font-weight="bold" fill="#22305a">electron shells around the nucleus</text>
+          <circle cx="150" cy="150" r="20" fill="none" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="55" fill="none" stroke="#a33d5b" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="80" fill="none" stroke="#1f7a6c" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="100" fill="none" stroke="#c1791f" stroke-width="1.3" stroke-dasharray="2 2"/>
+          <circle cx="150" cy="150" r="5" fill="#22305a" stroke="#fff" stroke-width="1"/>
+          <text x="150" y="171" text-anchor="middle" font-size="9.5" fill="#22305a">nucleus</text>
+          <text x="150" y="122" text-anchor="middle" font-size="9.5" fill="#4a5568">n=1</text>
+          <text x="105" y="105" text-anchor="end" font-size="9.5" fill="#a33d5b">n=2</text>
+          <text x="64" y="153" text-anchor="end" font-size="9.5" fill="#1f7a6c">n=3</text>
+          <text x="73" y="227" text-anchor="end" font-size="9.5" fill="#c1791f">n=4</text>
+          <rect x="156" y="44" width="8" height="93" fill="#c1791f" opacity="0.15"/>
+          <circle cx="160" cy="133" r="4.5" fill="#4a5568" stroke="#fff" stroke-width="1"/>
+          <circle cx="160" cy="96" r="4.5" fill="#a33d5b" stroke="#fff" stroke-width="1"/>
+          <circle cx="160" cy="71" r="4.5" fill="#1f7a6c" stroke="#fff" stroke-width="1"/>
+          <circle cx="160" cy="51" r="4.5" fill="#c1791f" stroke="#fff" stroke-width="1"/>
+          <path d="M160,133 L280,133" fill="none" stroke="#4a5568" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M160,96 L280,96" fill="none" stroke="#a33d5b" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M160,71 L280,71" fill="none" stroke="#1f7a6c" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M160,51 L280,51" fill="none" stroke="#c1791f" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="280" y1="133" x2="540" y2="133" stroke="#4a5568" stroke-width="2.5"/>
+          <line x1="280" y1="96" x2="540" y2="96" stroke="#a33d5b" stroke-width="2.5"/>
+          <line x1="280" y1="71" x2="540" y2="71" stroke="#1f7a6c" stroke-width="2.5"/>
+          <line x1="280" y1="51" x2="540" y2="51" stroke="#c1791f" stroke-width="2.5"/>
+        </svg>
+        <figcaption>Fig. 8.1 The circular electron shells are then shown as a horizontal "sliver" to save space and make the model as clear as possible.</figcaption>
+      </figure>
+
+      <figure>
+        <svg viewBox="0 0 400 210" width="400" height="210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowOrange" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#c1791f"/></marker>
+            <marker id="arrowTeal" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f7a6c"/></marker>
+            <marker id="arrowRose" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#a33d5b"/></marker>
+            <marker id="arrowGrey" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4a5568"/></marker>
+          </defs>
+          <line x1="40" y1="25" x2="300" y2="25" stroke="#22305a" stroke-width="2"/><text x="308" y="29" font-size="11" fill="#22305a">E₄</text>
+          <line x1="40" y1="50" x2="300" y2="50" stroke="#22305a" stroke-width="2"/><text x="308" y="54" font-size="11" fill="#22305a">E₃</text>
+          <line x1="40" y1="95" x2="300" y2="95" stroke="#22305a" stroke-width="2"/><text x="308" y="99" font-size="11" fill="#22305a">E₂</text>
+          <line x1="40" y1="185" x2="300" y2="185" stroke="#22305a" stroke-width="2.5"/><text x="308" y="189" font-size="11" fill="#22305a">E₁ (ground)</text>
+          <line x1="90" x2="90" y1="25" y2="185" stroke="#c1791f" stroke-width="2" marker-end="url(#arrowOrange)"/>
+          <line x1="150" x2="150" y1="50" y2="185" stroke="#1f7a6c" stroke-width="2" marker-end="url(#arrowTeal)"/>
+          <line x1="210" x2="210" y1="95" y2="185" stroke="#a33d5b" stroke-width="2" marker-end="url(#arrowRose)"/>
+          <line x1="270" x2="270" y1="185" y2="25" stroke="#4a5568" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
+          <text x="270" y="15" text-anchor="middle" font-size="10" fill="#4a5568">absorption</text>
+        </svg>
+        <figcaption>Fig. 8.2 Emission transitions (downward, coloured) release photons of different energies; absorption (upward, dashed) requires a photon of exactly the right energy. Notice the gaps between levels shrink higher up, as in a real atom (E ∝ −1/n²).</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 8.1</span>
+        <p>An electron in an atom drops from an energy level of −1.20 × 10⁻¹⁸ J to a level of −3.06 × 10⁻¹⁸ J. Calculate the frequency of the photon emitted, and state the part of the electromagnetic spectrum it belongs to.</p>
+        <p><strong>Answer:</strong><br>
+        ΔE = (−1.20 × 10⁻¹⁸) − (−3.06 × 10⁻¹⁸) = 1.86 × 10⁻¹⁸ J<br>
+        E = hf &nbsp;⟹&nbsp; f = E/h = (1.86 × 10⁻¹⁸)/(6.63 × 10⁻³⁴) = 2.81 × 10¹⁵ Hz<br>
+        This frequency lies in the <strong>ultraviolet</strong> part of the spectrum.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">22</span><strong>A photon of frequency 5.0 × 10¹⁴ Hz is absorbed by an atom.</strong> Calculate the energy gained by the atom, in both joules and electronvolts.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q22')">Show answer</button>
+        <div class="answer-panel" id="q22">E = hf = 3.32×10⁻¹⁹ J = 2.07 eV.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">23</span><strong>An atom has just four energy levels.</strong> State the maximum possible number of different spectral lines (transitions) it could produce.
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q23')">Show answer</button>
+        <div class="answer-panel" id="q23">6 possible transitions (4 choose 2).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">24</span><strong>Explain why a photon can only be absorbed by a particular atom if its energy exactly matches the gap between two of that atom's energy levels — rather than being absorbed partially.</strong>
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
+        <div class="answer-panel" id="q24">Because atomic energy levels are discrete, an electron can only ever be in one exact level or another — there is no "in-between" state to absorb partial energy into, so the photon energy must exactly bridge two allowed levels.</div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 9 ================= -->
+    <section class="topic" id="s9">
+      <h2>9. The Bohr model of the hydrogen atom<span style="display:inline-block; background:var(--amber); color:#fff; font-size:0.68rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; margin-left:0.5rem; vertical-align:middle;">HL</span></h2>
+      <p>In 1913, the Danish physicist <strong>Niels Bohr</strong> proposed a bold new rule for the hydrogen atom: an electron can only orbit the nucleus in certain allowed orbits, and while it stays in one of these orbits, it does <em>not</em> radiate energy (even though classical physics said an accelerating charge always should). Bohr justified this by proposing that the electron's <strong>angular momentum</strong> is quantized — it can only take specific values:</p>
+
+      <div class="eqn"><b>mvr = nh / 2π</b> &nbsp; (n = 1, 2, 3, ... — the "principal quantum number")</div>
+
+      <p>Combining this quantization rule with Coulomb's law and circular motion allows the energy of each allowed orbit (n = 1, 2, 3, ...) to be calculated. Remarkably, the result matches the hydrogen line spectrum almost perfectly:</p>
+
+      <div class="eqn">energy levels of hydrogen: &nbsp; <b>E = −13.6 / n² &nbsp;(eV)</b></div>
+
+      <figure>
+        <svg viewBox="0 0 480 255" width="480" height="255" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="12" x2="300" y2="12" stroke="#22305a" stroke-width="1.6" stroke-dasharray="2 2"/><text x="308" y="16" font-size="12" fill="#22305a">n=∞, 0 eV</text>
+          <line x1="30" y1="22" x2="300" y2="22" stroke="#22305a" stroke-width="1.6"/><text x="308" y="26" font-size="12" fill="#22305a">n=4, −0.85 eV</text>
+          <line x1="30" y1="40" x2="300" y2="40" stroke="#22305a" stroke-width="1.6"/><text x="308" y="44" font-size="12" fill="#22305a">n=3, −1.51 eV</text>
+          <line x1="30" y1="85" x2="300" y2="85" stroke="#22305a" stroke-width="1.6"/><text x="308" y="89" font-size="12" fill="#22305a">n=2, −3.40 eV</text>
+          <line x1="30" y1="235" x2="300" y2="235" stroke="#22305a" stroke-width="2.4"/><text x="308" y="239" font-size="12" fill="#22305a">n=1, −13.6 eV</text>
+        </svg>
+        <figcaption>Fig. 9.1 Energy levels of hydrogen. The gaps between levels shrink rapidly as n increases (E = −13.6/n² eV), converging on the ionisation limit at n = ∞.</figcaption>
+      </figure>
+
+      <div class="example">
+        <span class="tag">Worked example 9.1</span>
+        <p>Calculate the energy of the n = 4 level of hydrogen, in eV and in joules. Hence calculate the frequency of the photon emitted when an electron falls from n = 4 to n = 2.</p>
+        <p><strong>Answer:</strong><br>
+        E₄ = −13.6/4² = −0.850 eV = −0.850 × 1.60 × 10⁻¹⁹ = −1.36 × 10⁻¹⁹ J<br>
+        E₂ = −13.6/2² = −3.40 eV<br>
+        ΔE = (−0.850) − (−3.40) = 2.55 eV = 4.08 × 10⁻¹⁹ J<br>
+        f = ΔE/h = (4.08 × 10⁻¹⁹)/(6.63 × 10⁻³⁴) = 6.15 × 10¹⁴ Hz &nbsp;(visible light)</p>
+      </div>
+
+      <div class="example">
+        <span class="tag">Worked example 9.2</span>
+        <p>Calculate the angular momentum of an electron in the n = 2 orbit of hydrogen.</p>
+        <p><strong>Answer:</strong><br>
+        L = nh/2π = (2 × 6.63 × 10⁻³⁴)/(2π) = 2.11 × 10⁻³⁴ kg m² s⁻¹</p>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Why the Bohr model matters — and where it fails</span>
+        <p style="margin:0;">Bohr's model was the first to correctly predict the numerical energy levels of hydrogen from a quantization rule, rather than just fitting a curve to data. But it only works well for hydrogen (and other one-electron ions); it fails for atoms with more than one electron, and it does not explain <em>why</em> angular momentum should be quantized. That deeper explanation had to wait for the discovery of the wave nature of matter — the subject of Section 10.</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">25</span><strong>Calculate the energy (in eV) of the n = 5 level of hydrogen.</strong>
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q25')">Show answer</button>
+        <div class="answer-panel" id="q25">E₅ = −13.6/25 = −0.544 eV.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">26</span><strong>Determine the frequency of the photon emitted when an electron in a hydrogen atom falls from n = 3 to the ground state (n = 1).</strong> State which part of the electromagnetic spectrum this photon belongs to.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q26')">Show answer</button>
+        <div class="answer-panel" id="q26">ΔE = 13.6 − 1.51 = 12.1 eV ⟹ f ≈ 2.92×10¹⁵ Hz (ultraviolet).</div>
+      </div>
+      <div class="question">
+        <span class="qnum">27</span><strong>Calculate the ionisation energy of a hydrogen atom that is already in its n = 2 state</strong> (i.e. the energy needed to remove the electron completely, starting from n = 2 rather than the ground state).
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q27')">Show answer</button>
-        <div class="answer-panel" id="q27">More intensity means more photons per second (more photoelectrons per second, higher current), but each photon still carries the same energy hf, so E<sub>max</sub> = hf − Φ is unchanged.</div>
+        <div class="answer-panel" id="q27">Ionisation energy from n = 2 is 3.40 eV (= 0 − (−3.40 eV)).</div>
+      </div>
+
+      <div class="sim-launch">
+        <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Build an Atom</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Not required, but useful for visualising how electrons are organised into shells around a nucleus, and how this connects to isotope and ion notation from Section 2.</p>
+        <a class="launch-btn" href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
+        <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
       </div>
     </section>
 
     <!-- ================= SECTION 10 ================= -->
     <section class="topic" id="s10">
-      <h2>10. Compton scattering</h2>
+      <h2>10. The wave nature of matter</h2>
+      <p>The photoelectric effect and Compton scattering both show that light — long thought to be a wave — sometimes behaves like a stream of particles. In 1924, the French physicist <strong>Louis de Broglie</strong> asked the reverse question: could matter, long thought to be made of particles, sometimes behave like a wave?</p>
+
+      <div class="eqn">de Broglie wavelength of a moving particle: &nbsp; <b>λ = h / p</b> &nbsp; (p = momentum = mv)</div>
+
+      <p>This bold hypothesis was confirmed in 1927 by the <strong>Davisson–Germer experiment</strong>: a beam of electrons fired at a nickel crystal produced a diffraction pattern, just like X-rays diffracting from the regularly-spaced atoms in a crystal lattice. Diffraction — constructive and destructive interference spreading a wave out around obstacles — is a behaviour unique to waves, so this was direct evidence that electrons have wave-like properties.</p>
+
+      <div class="keybox"><strong>Wave–particle duality.</strong> Put together, the photoelectric effect, Compton scattering, and electron diffraction show that <strong>all</strong> particles have wave-like properties, and <strong>all</strong> electromagnetic waves have particle-like (photon) properties. Neither the "pure wave" nor "pure particle" picture is complete on its own — this is <strong>wave–particle duality</strong>. In practice, the wave nature of matter is only noticeable for objects with extremely small momentum (because h is so tiny): it is significant for electrons, but utterly undetectable for a thrown ball or a moving car.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 10.1</span>
+        <p>Electrons are accelerated from rest through a potential difference of 3.0 kV.</p>
+        <ol type="a">
+          <li>Calculate the kinetic energy gained, in joules.</li>
+          <li>Calculate the speed of the electrons.</li>
+          <li>Calculate their de Broglie wavelength.</li>
+        </ol>
+        <p><strong>Answer:</strong><br>
+        a) E<sub>k</sub> = qV = (1.60×10⁻¹⁹)(3000) = 4.80×10⁻¹⁶ J<br>
+        b) E<sub>k</sub> = ½mv² &nbsp;⟹&nbsp; v = √(2E<sub>k</sub>/m) = √(2×4.80×10⁻¹⁶ / 9.11×10⁻³¹) = 3.25×10⁷ m s⁻¹<br>
+        c) p = mv = (9.11×10⁻³¹)(3.25×10⁷) = 2.96×10⁻²³ kg m s⁻¹<br>
+        &nbsp;&nbsp;&nbsp;λ = h/p = (6.63×10⁻³⁴)/(2.96×10⁻²³) = 2.24×10⁻¹¹ m</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">28</span><strong>A proton has a de Broglie wavelength of 1.2 × 10⁻¹³ m.</strong> Calculate its momentum, and hence its speed (assume non-relativistic motion).
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
+        <div class="answer-panel" id="q28">p = h/λ ≈ 5.53×10⁻²¹ kg m s⁻¹; v = p/m ≈ 3.3×10⁶ m s⁻¹.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">29</span><strong>A proton and an electron travel at the same speed.</strong> Which one has the longer de Broglie wavelength? Explain your answer.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q29')">Show answer</button>
+        <div class="answer-panel" id="q29">The electron — since λ = h/(mv), a smaller mass at the same speed gives a larger wavelength.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">30</span><strong>A tennis ball of mass 0.058 kg travels at 25 m s⁻¹.</strong> Estimate its de Broglie wavelength and explain why the wave nature of the ball is never observed.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q30')">Show answer</button>
+        <div class="answer-panel" id="q30">λ ≈ 4.6×10⁻³⁴ m — many orders of magnitude smaller than any aperture or obstacle that could diffract it, so no wave effects can ever be observed.</div>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Looking back: two theories for the same thing</span>
+        <p style="margin:0;">By the late 1920s, physics had accepted a paradox: light behaves as a wave in diffraction and interference, and as a particle in the photoelectric effect and Compton scattering. As Einstein himself put it, we need <em>"two theories... [which] together describe the phenomena of light."</em> This same wave–particle duality applies to matter — and it is one of the central, still slightly unsettling, ideas at the heart of modern quantum mechanics.</p>
+      </div>
+
+    </section>
+
+    <!-- ================= SECTION 11 ================= -->
+    <section class="topic" id="s11">
+      <h2>11. Compton scattering</h2>
       <p>The photoelectric effect was strong, but not universally convincing, evidence for photons — sceptics could still try to patch up the wave theory. In 1923, <strong>Arthur Compton</strong> provided much more direct evidence by firing high-frequency X-rays at a block of graphite and measuring the X-rays that scattered off the loosely-bound outer electrons in the carbon atoms.</p>
       <p>A wave theory of light predicts that scattered radiation should keep the <em>same</em> wavelength as the incident radiation. Compton found instead that the scattered X-rays had a <strong>longer</strong> wavelength (lower energy) than the incident X-rays — and that the size of this shift depended on the scattering angle, θ, but not on the wavelength or intensity of the incident beam.</p>
 
@@ -1223,7 +1268,7 @@
           <line x1="140" y1="140" x2="280" y2="210" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#cmptArrowE)"/>
           <text x="248" y="223" font-size="11" fill="#a33d5b">recoiling electron</text>
         </svg>
-        <figcaption>Fig. 10.1 Compton scattering: an incoming X-ray photon transfers some of its energy and momentum to an electron. The scattered photon emerges at angle θ with a longer wavelength (lower energy) than it arrived with; the electron recoils.</figcaption>
+        <figcaption>Fig. 11.1 Compton scattering: an incoming X-ray photon transfers some of its energy and momentum to an electron. The scattered photon emerges at angle θ with a longer wavelength (lower energy) than it arrived with; the electron recoils.</figcaption>
       </figure>
 
       <div class="keybox">
@@ -1237,7 +1282,7 @@
       <p style="font-size:13.5px; color:#5b6b78; margin-top:-6px;">where θ is the scattering angle and h/(m<sub>e</sub>c) = 2.426 × 10⁻¹² m is called the Compton wavelength.</p>
 
       <div class="example">
-        <span class="tag">Worked example 10.1</span>
+        <span class="tag">Worked example 11.1</span>
         <p>X-rays of wavelength 1.00 × 10⁻¹⁰ m are Compton-scattered through an angle of 60°. Calculate the wavelength of the scattered X-rays.</p>
         <p><strong>Answer:</strong><br>
         Δλ = (2.426×10⁻¹²)(1 − cos 60°) = (2.426×10⁻¹²)(0.500) = 1.213×10⁻¹² m<br>
@@ -1246,88 +1291,24 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">28</span><strong>Calculate the change in wavelength for X-rays Compton-scattered through an angle of 90°.</strong>
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
-        <div class="answer-panel" id="q28">Δλ = (2.426×10⁻¹²)(1 − cos 90°) = 2.43×10⁻¹² m.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">29</span><strong>At what scattering angle is the wavelength shift (a) a maximum, and (b) zero?</strong> Explain both answers physically.
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q29')">Show answer</button>
-        <div class="answer-panel" id="q29">Maximum shift at θ = 180° (photon bounces straight back, transferring the most momentum); zero shift at θ = 0° (photon continues undeviated, no momentum transferred).</div>
-      </div>
-      <div class="question">
-        <span class="qnum">30</span><strong>Explain why Compton scattering is considered stronger evidence for the particle nature of light than the photoelectric effect.</strong>
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q30')">Show answer</button>
-        <div class="answer-panel" id="q30">Compton scattering can only be explained by treating light as particles colliding with electrons and obeying conservation of momentum and energy — a wave model predicts no wavelength shift at all, so the shift is direct, quantitative, and inescapable evidence, whereas photoelectric-effect observations were initially argued about for longer.</div>
-      </div>
-      
-    </section>
-
-    <!-- ================= SECTION 11 ================= -->
-    <section class="topic" id="s11">
-      <h2>11. The wave nature of matter</h2>
-      <p>The photoelectric effect and Compton scattering both show that light — long thought to be a wave — sometimes behaves like a stream of particles. In 1924, the French physicist <strong>Louis de Broglie</strong> asked the reverse question: could matter, long thought to be made of particles, sometimes behave like a wave?</p>
-
-      <div class="eqn">de Broglie wavelength of a moving particle: &nbsp; <b>λ = h / p</b> &nbsp; (p = momentum = mv)</div>
-
-      <p>This bold hypothesis was confirmed in 1927 by the <strong>Davisson–Germer experiment</strong>: a beam of electrons fired at a nickel crystal produced a diffraction pattern, just like X-rays diffracting from the regularly-spaced atoms in a crystal lattice. Diffraction — constructive and destructive interference spreading a wave out around obstacles — is a behaviour unique to waves, so this was direct evidence that electrons have wave-like properties.</p>
-
-      <div class="keybox"><strong>Wave–particle duality.</strong> Put together, the photoelectric effect, Compton scattering, and electron diffraction show that <strong>all</strong> particles have wave-like properties, and <strong>all</strong> electromagnetic waves have particle-like (photon) properties. Neither the "pure wave" nor "pure particle" picture is complete on its own — this is <strong>wave–particle duality</strong>. In practice, the wave nature of matter is only noticeable for objects with extremely small momentum (because h is so tiny): it is significant for electrons, but utterly undetectable for a thrown ball or a moving car.</div>
-
-      <div class="example">
-        <span class="tag">Worked example 11.1</span>
-        <p>Electrons are accelerated from rest through a potential difference of 3.0 kV.</p>
-        <ol type="a">
-          <li>Calculate the kinetic energy gained, in joules.</li>
-          <li>Calculate the speed of the electrons.</li>
-          <li>Calculate their de Broglie wavelength.</li>
-        </ol>
-        <p><strong>Answer:</strong><br>
-        a) E<sub>k</sub> = qV = (1.60×10⁻¹⁹)(3000) = 4.80×10⁻¹⁶ J<br>
-        b) E<sub>k</sub> = ½mv² &nbsp;⟹&nbsp; v = √(2E<sub>k</sub>/m) = √(2×4.80×10⁻¹⁶ / 9.11×10⁻³¹) = 3.25×10⁷ m s⁻¹<br>
-        c) p = mv = (9.11×10⁻³¹)(3.25×10⁷) = 2.96×10⁻²³ kg m s⁻¹<br>
-        &nbsp;&nbsp;&nbsp;λ = h/p = (6.63×10⁻³⁴)/(2.96×10⁻²³) = 2.24×10⁻¹¹ m</p>
-      </div>
-
-      <h3>Check your understanding</h3>
-      <div class="question">
-        <span class="qnum">31</span><strong>A proton has a de Broglie wavelength of 1.2 × 10⁻¹³ m.</strong> Calculate its momentum, and hence its speed (assume non-relativistic motion).
+        <span class="qnum">31</span><strong>Calculate the change in wavelength for X-rays Compton-scattered through an angle of 90°.</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q31')">Show answer</button>
-        <div class="answer-panel" id="q31">p = h/λ ≈ 5.53×10⁻²¹ kg m s⁻¹; v = p/m ≈ 3.3×10⁶ m s⁻¹.</div>
+        <div class="answer-panel" id="q31">Δλ = (2.426×10⁻¹²)(1 − cos 90°) = 2.43×10⁻¹² m.</div>
       </div>
       <div class="question">
-        <span class="qnum">32</span><strong>A proton and an electron travel at the same speed.</strong> Which one has the longer de Broglie wavelength? Explain your answer.
+        <span class="qnum">32</span><strong>At what scattering angle is the wavelength shift (a) a maximum, and (b) zero?</strong> Explain both answers physically.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q32')">Show answer</button>
-        <div class="answer-panel" id="q32">The electron — since λ = h/(mv), a smaller mass at the same speed gives a larger wavelength.</div>
+        <div class="answer-panel" id="q32">Maximum shift at θ = 180° (photon bounces straight back, transferring the most momentum); zero shift at θ = 0° (photon continues undeviated, no momentum transferred).</div>
       </div>
       <div class="question">
-        <span class="qnum">33</span><strong>A tennis ball of mass 0.058 kg travels at 25 m s⁻¹.</strong> Estimate its de Broglie wavelength and explain why the wave nature of the ball is never observed.
+        <span class="qnum">33</span><strong>Explain why Compton scattering is considered stronger evidence for the particle nature of light than the photoelectric effect.</strong>
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q33')">Show answer</button>
-        <div class="answer-panel" id="q33">λ ≈ 4.6×10⁻³⁴ m — many orders of magnitude smaller than any aperture or obstacle that could diffract it, so no wave effects can ever be observed.</div>
+        <div class="answer-panel" id="q33">Compton scattering can only be explained by treating light as particles colliding with electrons and obeying conservation of momentum and energy — a wave model predicts no wavelength shift at all, so the shift is direct, quantitative, and inescapable evidence, whereas photoelectric-effect observations were initially argued about for longer.</div>
       </div>
-
-      <div class="stretch-box">
-        <span class="tag">Looking back: two theories for the same thing</span>
-        <p style="margin:0;">By the late 1920s, physics had accepted a paradox: light behaves as a wave in diffraction and interference, and as a particle in the photoelectric effect and Compton scattering. As Einstein himself put it, we need <em>"two theories... [which] together describe the phenomena of light."</em> This same wave–particle duality applies to matter — and it is one of the central, still slightly unsettling, ideas at the heart of modern quantum mechanics.</p>
-      </div>
-
-      <h3>Timeline: from plum pudding to wave–particle duality</h3>
-      <table class="eqtable">
-        <tr><th>Year</th><th>Discovery</th><th>What it showed</th></tr>
-        <tr><td>1897</td><td>J. J. Thomson discovers the electron</td><td>Atoms are divisible; leads to the "plum pudding" model</td></tr>
-        <tr><td>1909</td><td>Geiger–Marsden–Rutherford scattering experiment</td><td>Atoms have a tiny, dense, positively charged nucleus</td></tr>
-        <tr><td>1900–1905</td><td>Planck's quantum hypothesis; Einstein's photon model</td><td>Light delivers energy in discrete quanta, E = hf</td></tr>
-        <tr><td>1913</td><td>Bohr model of hydrogen</td><td>Electron energy levels and angular momentum are quantized</td></tr>
-        <tr><td>1923</td><td>Compton scattering</td><td>Photons carry momentum and scatter like particles</td></tr>
-        <tr><td>1924</td><td>de Broglie's hypothesis</td><td>Matter should have wave-like properties, λ = h/p</td></tr>
-        <tr><td>1927</td><td>Davisson–Germer electron diffraction</td><td>Electrons diffract — confirming wave–particle duality</td></tr>
-      </table>
+      
     </section>
 
     <!-- ================= GLOSSARY ================= -->
@@ -1392,7 +1373,7 @@ function autosize(el){
 }
 
 function initFillables(){
-  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .answer-box, .name-box .fill'));
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .answer-box'));
   fillableEls.forEach(function(el, i){
     const key = STORAGE_PREFIX + i;
     el.dataset.storeKey = key;
@@ -1422,7 +1403,6 @@ function buildPayload(){
   return {
     workbook: WORKBOOK_ID,
     savedAt: new Date().toISOString(),
-    studentName: document.getElementById('studentName') ? document.getElementById('studentName').value : '',
     answers: getAnswersArray()
   };
 }
@@ -1448,9 +1428,7 @@ function downloadJSON(obj, filename){
 }
 
 function saveAnswersToFile(){
-  const name = (document.getElementById('studentName').value || '').trim();
-  const safe = name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'my';
-  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers-' + safe + '.json');
+  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers.json');
 }
 
 function triggerLoadAnswers(){ document.getElementById('loadFileInput').click(); }
