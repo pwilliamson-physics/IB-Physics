@@ -22,10 +22,6 @@
   .cover{background:linear-gradient(135deg,var(--navy),var(--teal-dark)); color:#fff; border-radius:14px; padding:2.5rem 2.5rem; margin-bottom:2rem;}
   .cover h1{margin:0 0 0.4rem 0; font-size:1.9rem;}
   .cover .meta{margin-top:1.2rem; font-size:0.9rem; color:#cfe3ee;}
-  .name-box{margin-top:1.4rem; background:rgba(255,255,255,0.1); border:1px dashed rgba(255,255,255,0.5); border-radius:8px; padding:0.9rem 1.1rem;}
-  .name-box label{display:block; font-size:0.8rem; color:#dceaf0; margin-bottom:0.2rem;}
-  .name-box .fill{display:block; width:100%; border:none; border-bottom:1px solid #dceaf0; height:1.6rem; background:transparent; color:#fff; font-size:1rem; font-family:inherit; padding:0; outline:none;}
-  .name-box .fill::placeholder{color:rgba(255,255,255,0.5);}
   .goals{background:rgba(255,255,255,0.12); border-left:4px solid #fff; border-radius:6px; padding:0.9rem 1.1rem; font-size:0.92rem; color:#fff;}
   .goals ul{margin:0.4rem 0 0 0; padding-left:1.2rem;}
 
@@ -173,8 +169,6 @@
     a{color:inherit; text-decoration:none;}
     .answer-lines{border-color:transparent !important; box-shadow:none !important; color:#000;}
     .answer-lines::placeholder{color:transparent;}
-    .name-box .fill{color:#000; border-bottom-color:#5b6b78;}
-    .name-box .fill::placeholder{color:transparent;}
   }
 </style>
 </head>
@@ -219,9 +213,6 @@
           <li>Explain the greenhouse effect using both the resonance model and molecular energy levels, and name the four main greenhouse gases.</li>
           <li>Distinguish the natural greenhouse effect from the human-caused enhanced greenhouse effect.</li>
         </ul>
-      </div>
-      <div class="name-box">
-        <label>Name</label><input type="text" class="fill" id="studentName" autocomplete="name">
       </div>
     </section>
 
@@ -1444,7 +1435,7 @@ function autosize(el){
 }
 
 function initFillables(){
-  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, .name-box .fill, select.rating-select'));
+  fillableEls = Array.prototype.slice.call(document.querySelectorAll('.answer-lines, select.rating-select'));
   fillableEls.forEach(function(el, i){
     const key = STORAGE_PREFIX + i;
     el.dataset.storeKey = key;
@@ -1480,7 +1471,6 @@ function buildPayload(){
   return {
     workbook: WORKBOOK_ID,
     savedAt: new Date().toISOString(),
-    studentName: document.getElementById('studentName') ? document.getElementById('studentName').value : '',
     answers: getAnswersArray()
   };
 }
@@ -1506,9 +1496,7 @@ function downloadJSON(obj, filename){
 }
 
 function saveAnswersToFile(){
-  const name = (document.getElementById('studentName').value || '').trim();
-  const safe = name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'my';
-  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers-' + safe + '.json');
+  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers.json');
 }
 
 function triggerLoadAnswers(){ document.getElementById('loadFileInput').click(); }
