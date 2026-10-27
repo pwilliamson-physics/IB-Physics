@@ -269,15 +269,15 @@
 
       <div class="example">
         <span class="tag">Worked example 3.1</span>
-        <p>An oil drop of mass 2.4 × 10⁻¹⁴ kg is held stationary between plates 1.6 cm apart by a potential difference of 4900 V. Calculate the charge on the drop, and state how many excess or missing electrons this represents. (g = 9.81 m s⁻²)</p>
+        <p>An oil drop of mass 2.4 × 10⁻¹⁴ kg is held stationary between plates 1.6 cm apart by a potential difference of 4710 V. Calculate the charge on the drop, and state how many excess or missing electrons this represents. (g = 9.81 m s⁻²)</p>
         <p><strong>Answer:</strong><br>
-        q = mgd/V = (2.4×10⁻¹⁴ × 9.81 × 0.016) / 4900 = 7.69×10⁻¹⁹ C<br>
-        number of electrons = q/e = 7.69×10⁻¹⁹ / 1.60×10⁻¹⁹ ≈ <strong>5 electrons</strong></p>
+        q = mgd/V = (2.4×10⁻¹⁴ × 9.81 × 0.016) / 4710 = 8.00×10⁻¹⁹ C<br>
+        number of electrons = q/e = 8.00×10⁻¹⁹ / 1.60×10⁻¹⁹ = <strong>5 electrons</strong></p>
       </div>
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">1</span><strong>An oil drop of mass 3.6 × 10⁻¹⁴ kg is balanced by a p.d. of 8300 V across plates 2.0 cm apart.</strong> Calculate the charge on the drop and the number of electrons this represents.
+        <span class="qnum">1</span><strong>An oil drop of mass 3.6 × 10⁻¹⁴ kg is balanced by a p.d. of 8830 V across plates 2.0 cm apart.</strong> Calculate the charge on the drop and the number of electrons this represents.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('w1')">Show hint</button>
         <div class="answer-panel" id="w1"><b>Hint:</b> start from the balance condition mg = Vq/d, and rearrange to make q the subject before substituting any numbers in. Once you have a value for q in coulombs, divide by e = 1.60×10⁻¹⁹ C and round to the nearest whole number of electrons.</div>
@@ -371,7 +371,7 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">2</span><strong>Copy your ten (or more) values of q from the table in Section 4 into the space below, in units of 10⁻¹⁹ C.</strong> Find the largest number that divides exactly into <em>all</em> of them. Unlike the marble-bag puzzle, this number will not itself be a whole number — each q is a whole number of electrons multiplied by e, and e is not a whole number of these units. This number is your simulated estimate of e, in units of 10⁻¹⁹ C.
+        <span class="qnum">2</span><strong>Copy your ten (or more) values of q from the table in Section 4 into the space below, in units of 10⁻¹⁹ C.</strong> Find the largest number that divides exactly into <em>all</em> of them. Unlike the marble-bag puzzle, this number will not itself be a whole number — each q is a whole number of electrons multiplied by e, and e is not a whole number of these units. This number is your simulated estimate of e, in units of 10⁻¹⁹ C. Check: could every value also be a multiple of a <em>larger</em> number, such as 2e? Only a mix of different charges rules that out.
         <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
       </div>
 
@@ -395,7 +395,7 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">5</span><strong>This simulation ignores air resistance building up on the way to a steady speed, and evaporation of the oil drop over time.</strong> Suggest, for each of these two effects, whether it would make the measured charge come out too high, too low, or would not affect it, and explain your reasoning.
+        <span class="qnum">5</span><strong>This simulation assumes each drop reaches its steady (terminal) speed instantly, and that the oil does not evaporate during a measurement.</strong> Suggest, for each of these two effects, whether it would make the measured charge come out too high, too low, or would not affect it, and explain your reasoning.
         <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('w4')">Show answer</button>
         <div class="answer-panel" id="w4">If a drop evaporates during the measurement, its mass decreases, so the true balancing voltage needed also decreases over time — using an outdated (too large) mass value would make a calculated charge too high. Reaching a steady speed is a separate practical concern (needing the observer to wait for the drop to settle) rather than a source of systematic error in q itself, provided the observer waits long enough before taking a reading.</div>
@@ -444,7 +444,7 @@
       <h2>Glossary</h2>
       <dl class="glossary">
         <dt>Balanced (drop)</dt><dd>The state in which the upward electric force on a drop exactly equals its downward weight, so it stays stationary.</dd>
-        <dt>Elementary charge, e</dt><dd>The smallest possible unit of electric charge, 1.60 × 10⁻¹⁹ C.</dd>
+        <dt>Elementary charge, e</dt><dd>The smallest charge found on any isolated particle, 1.60 × 10⁻¹⁹ C. (Quarks carry ±e/3 or ±2e/3, but are never found on their own.)</dd>
         <dt>Quantised</dt><dd>Restricted to certain fixed values only — for charge, whole-number multiples of e.</dd>
         <dt>Terminal velocity</dt><dd>The constant speed reached by an object falling through a fluid, once resistive (drag) forces balance the driving force.</dd>
         <dt>Uniform electric field</dt><dd>A field with the same strength and direction everywhere, such as the field between two parallel charged plates.</dd>
@@ -484,7 +484,8 @@ function toggleHint(){ document.getElementById('hintBox').classList.toggle('show
         recommended backup: click "Save answers" before closing the tab, and
         "Load answers" to restore after reopening a fresh copy of the file.
    ======================================================= */
-const STORAGE_PREFIX = 'ib-d2-workbook2-millikan-fields-v1-';
+const WORKBOOK_ID = 'millikan-oil-drop-experiment'; // keys localStorage, save-file names, and the linked-file handle
+const STORAGE_PREFIX = 'ib-workbook-' + WORKBOOK_ID + '-v1-';
 const TRIALS_KEY = STORAGE_PREFIX + 'trials';
 const TRIALCOUNT_KEY = STORAGE_PREFIX + 'trialCount';
 let fillableEls = [];
@@ -534,7 +535,7 @@ function applyAnswersArray(arr){
 
 function buildPayload(){
   return {
-    workbook: 'millikan-oil-drop-experiment',
+    workbook: WORKBOOK_ID,
     savedAt: new Date().toISOString(),
     studentName: document.getElementById('studentName') ? document.getElementById('studentName').value : '',
     answers: getAnswersArray(),
@@ -574,7 +575,7 @@ function downloadJSON(obj, filename){
 function saveAnswersToFile(){
   const name = (document.getElementById('studentName').value || '').trim();
   const safe = name ? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'my';
-  downloadJSON(buildPayload(), 'millikan-answers-' + safe + '.json');
+  downloadJSON(buildPayload(), WORKBOOK_ID + '-answers-' + safe + '.json');
 }
 
 function triggerLoadAnswers(){ document.getElementById('loadFileInput').click(); }
@@ -614,7 +615,7 @@ let fileWriteTimer = null;
 
 function idbOpen(){
   return new Promise(function(resolve, reject){
-    const rq = indexedDB.open('millikan-workbook-fs', 1);
+    const rq = indexedDB.open('ib-workbook-fs', 1);
     rq.onupgradeneeded = function(){ if(!rq.result.objectStoreNames.contains('handles')) rq.result.createObjectStore('handles'); };
     rq.onsuccess = function(){ resolve(rq.result); };
     rq.onerror = function(){ reject(rq.error); };
@@ -624,7 +625,7 @@ function idbGetHandle(){
   return idbOpen().then(function(db){
     return new Promise(function(resolve){
       const tx = db.transaction('handles', 'readonly');
-      const rq = tx.objectStore('handles').get('fileHandle');
+      const rq = tx.objectStore('handles').get(WORKBOOK_ID);
       rq.onsuccess = function(){ resolve(rq.result || null); };
       rq.onerror = function(){ resolve(null); };
     });
@@ -633,7 +634,7 @@ function idbGetHandle(){
 function idbSetHandle(handle){
   return idbOpen().then(function(db){
     const tx = db.transaction('handles', 'readwrite');
-    tx.objectStore('handles').put(handle, 'fileHandle');
+    tx.objectStore('handles').put(handle, WORKBOOK_ID);
   }).catch(function(){});
 }
 
@@ -647,7 +648,7 @@ function updateSaveStatus(){
   const status = document.getElementById('saveStatus');
   if(!status) return;
   if(fileHandle){
-    status.textContent = 'Autosaving to your linked file on this Mac';
+    status.textContent = 'Autosaving to your linked file on this device';
   } else if(canStore){
     status.textContent = 'Autosaving in this browser — click 💾 Save often as a backup';
   } else {
@@ -675,7 +676,7 @@ function linkSaveFile(){
         if(req === 'granted'){ fileHandle = pendingHandle; pendingHandle = null; }
       })
     : window.showSaveFilePicker({
-        suggestedName: 'millikan-workbook-answers.json',
+        suggestedName: WORKBOOK_ID + '-answers.json',
         types: [{ description: 'Workbook answers', accept: {'application/json': ['.json']} }]
       }).then(function(handle){
         fileHandle = handle;
@@ -748,7 +749,7 @@ const e_charge = 1.60e-19;
 const b_drag = 6.0e-11;          // N s / m, tuned for a pleasant animation speed
 const vThreshold = 0.00006;      // m/s, "stable" threshold
 const stableTimeNeeded = 1.4;    // seconds
-const N_VALUES = [2, 4, 6];      // the only excess-electron counts a drop can carry — three quantisations, three lines
+const N_VALUES = [2, 3, 5];      // excess-electron counts a drop can carry. Their largest common factor is 1, so the data give e (with [2,4,6] they gave 2e)
 
 let drop = {};
 let running = false;
@@ -898,7 +899,8 @@ function lockReading(){
   if(document.getElementById('btnLock').disabled) return;
   trialCount++;
   const V = parseFloat(document.getElementById('voltSlider').value);
-  const trial = { trial: trialCount, m: drop.m, n: drop.n, V: V, q: drop.n * e_charge };
+  // q is calculated from the student's own balancing voltage (q = mgd/V), so it carries their small balancing error
+  const trial = { trial: trialCount, m: drop.m, n: drop.n, V: V, q: drop.m * g * d_m / V };
 
   trialsData.push(trial);
   appendRow(trial);
@@ -912,7 +914,7 @@ function lockReading(){
 }
 
 /* ---------- graphing ---------- */
-const chargePalette = {2:'#d94f4f', 4:'#3f9a5c', 6:'#2f6fa8'};
+const chargePalette = {2:'#d94f4f', 3:'#3f9a5c', 5:'#2f6fa8'};
 const minTrialsForGraph = 10;
 
 function showGraph(){
