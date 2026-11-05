@@ -267,10 +267,7 @@
 
   <section id="overview">
     <h2>🔭 Overview</h2>
-    <p class="section-kicker">What this project is, and why it's built this way</p>
     <div class="card">
-      <p>This is an individual, guided research task (roughly <b>one week</b> of lessons + independent work) for IB Physics students. It doesn't introduce new isolated facts — it takes understandings students already have <i>in pieces</i> (a thermal law here, a wave phenomenon there, a diagram they memorised for a test) and forces them to be <b>combined</b> to answer one real scientific question, in the way an actual astrophysicist has to.</p>
-      <p>The throughline is <b>photons in, physical story out</b>: every stage of the journey adds one more thing you can legitimately claim to know about a star, using only the light arriving from it. By the end, students aren't just able to state Wien's law or the Doppler effect — they can explain how those separate tools, used together, are literally how humanity knows the Universe is expanding, how stars live and die, and what that implies for where everything is heading.</p>
       <p>Two models run through the whole thing side by side:</p>
       <div class="grid-2">
         <div class="box" style="border-left:3px solid var(--accent-thermal);">
@@ -328,7 +325,7 @@
         <tr><td><b>Procyon B</b></td><td>The white dwarf companion of Procyon A</td><td><span class="pill">Advanced</span></td></tr>
         <tr><td><b>Van Maanen's Star</b></td><td>An isolated white dwarf, with no bright companion to compare it to</td><td><span class="pill">Advanced</span></td></tr>
       </table>
-      <p style="font-size:13.5px; color:var(--text-2); margin-top:10px;">Strongest extension: choose <b>Sirius A + Sirius B</b>, or <b>Procyon A + B</b>, as a pair — same distance, same age, but one is still fusing and one is a stellar corpse. Excellent material for the Stage 3–4 equilibrium/evolution argument. (Drawn from and extending your existing Star Cards 3.0 set — the rest of that set, including the ultra-cool dwarfs and brown dwarfs, works well as a further extension for students who want a harder challenge.)</p>
+      <p style="font-size:13.5px; color:var(--text-2); margin-top:10px;">Strongest extension: choose <b>Sirius A + Sirius B</b>, or <b>Procyon A + B</b>, as a pair — same distance, same age, but one is still fusing and one is a stellar corpse.</p>
     </div>
 
     <div class="card" style="margin-top:18px;">
@@ -338,7 +335,7 @@
         <li><b>Gaia Archive</b> (gea.esac.esa.int/archive) — search the same star by name to find its Gaia DR3 parallax and photometry independently. Comparing the two sources is genuine evaluation material for your write-up: do they agree, and if not, why might that be?</li>
       </ol>
       <div class="box" style="margin-top:4px;">
-        <h4>From magnitude to apparent brightness, b</h4>
+        <h4>From magnitude to apparent brightness, b - not needed for our course, but required to get the data for the project.</h4>
         <p style="margin:0 0 8px;">Archives report brightness as an apparent <i>magnitude</i>, not directly as b in W m⁻². Bridge the two using the Sun as your calibration star, since you already know its brightness (the solar constant) and its magnitude:</p>
         <span class="eq">b<sub>star</sub> = b<sub>☉</sub> × 10^(0.4 × (m<sub>☉</sub> − m<sub>star</sub>))</span>
         <p style="margin:8px 0 0;">using b<sub>☉</sub> = 1361 W m⁻² and m<sub>☉</sub> = −26.74. This comes directly from how the magnitude scale is defined (a ratio scale in steps of 10<sup>0.4</sup> ≈ 2.512 per magnitude) — it isn't a new law, just a translation between a more common way of recording the information and apparent brightness — both are ways of describing the same brightness.</p>
@@ -354,10 +351,8 @@
     <div class="stage" style="--stage-color:var(--accent-thermal);" data-num="1">
       <div class="stage-head">
         <h3>The Thermal Model — What colour tells you about temperature</h3>
-        <div class="meta">Suggested time: 1 lesson + homework</div>
       </div>
       <div class="stage-body">
-        <p>Every student is issued (or chooses, see Design Notes) a real star with a published spectrum and apparent brightness. The guiding question: <i>if all I have is a graph of intensity against wavelength, and a brightness measurement, what can I already say about this star?</i></p>
         <div class="pill-row">
           <span class="pill">Wien's law</span><span class="pill">Stefan–Boltzmann law</span><span class="pill">Apparent brightness</span><span class="pill">Luminosity</span><span class="pill">Inverse square law</span>
         </div>
@@ -532,14 +527,14 @@
         <span class="assess-badge" style="background:var(--accent-thermal); color:#1a0f00;">Option A</span>
         <h3>Data-Based Investigation Report</h3>
         <p style="font-size:14px; color:var(--text-1);">Students choose a real star from the shortlist (see <a href="#data" class="inline">Your Star &amp; Data</a>) and pull genuine data from SIMBAD and the Gaia Archive. They reconstruct T, L, R, distance and velocity as in the journey, then write a structured report culminating in a discussion linking their star's fate to the Universe's future.</p>
-        <p style="font-size:13.5px; color:var(--text-1);"><b>Assessed against:</b> the current DP Sciences IA criteria — Research Design, Data Analysis, Conclusion, Evaluation (6 marks each, 24 total) — applied here to this project rather than to the IA itself.</p>
+        <p style="font-size:13.5px; color:var(--text-1);"><b>Assessed against:</b> the current DP Sciences IA criteria.</p>
         <div class="assess-meta"><span>Most rigorous</span><span>Written report, ≤3000 words</span><span>~1 week to write up</span></div>
       </div>
       <div class="assess-card" style="border-color:var(--accent-evo);">
         <span class="assess-badge" style="background:var(--accent-evo); color:#160a2e;">Option B</span>
         <h3>Comparative Poster + Oral Defence</h3>
         <p style="font-size:14px; color:var(--text-1);">Students choose 3–4 stars spanning different HR-diagram stages, produce a poster or infographic comparing them, then face a short oral defence probing whether they actually understand the physics behind their claims, not just the numbers on the page.</p>
-        <p style="font-size:13.5px; color:var(--text-1);"><b>Assessed against:</b> Content &amp; Accuracy, Comparative Insight, Design &amp; Communication, Oral Defence (6 marks each, 24 total) — a poster/oral-adapted version of the same four skills.</p>
+        <p style="font-size:13.5px; color:var(--text-1);"><b>Assessed against:</b> Content &amp; Accuracy, Comparative Insight, Design &amp; Communication, Oral Defence.</p>
         <div class="assess-meta"><span>Most accessible</span><span>Visual + verbal</span><span>~8–10 min defence/student</span></div>
       </div>
       <div class="assess-card" style="border-color:var(--accent-wave);">
@@ -547,17 +542,13 @@
         <h3>Structured Exam-Style Paper</h3>
         <p style="font-size:14px; color:var(--text-1);">A standalone structured-question workbook, in the same numbered-question / command-term / mark-allocation style as your existing exam reviews, using given spectra/parallax/brightness data and finishing with a longer "discuss" question on implications for the Universe's future.</p>
         <p style="font-size:13.5px; color:var(--text-1);"><b>Why it works:</b> fastest and most consistent to mark at scale; doubles as direct, realistic exam preparation under timed conditions.</p>
-        <div class="assess-meta"><span>Most exam-like</span><span>Timed paper</span><span>60–75 min</span></div>
+        <div class="assess-meta"><span>Most exam-like</span><span>Timed paper</span></div>
       </div>
     </div>
   </section>
 
 
 </main>
-
-<footer>
-  Draft v1 · Built for IB Physics · Astrophysics — thermal &amp; wave models of stellar and cosmic evolution
-</footer>
 
 
 </body>
