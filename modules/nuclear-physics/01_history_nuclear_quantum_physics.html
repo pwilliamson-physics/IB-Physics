@@ -31,6 +31,8 @@
   section.topic h2{color:var(--navy); font-size:1.4rem; margin-top:0; border-bottom:3px solid var(--amber); padding-bottom:0.4rem;}
   section.topic h3{color:var(--teal-dark); font-size:1.08rem; margin-top:1.6rem;}
 
+  .nuc{display:inline-flex; flex-direction:column; align-items:flex-start; vertical-align:0.2em; line-height:1; font-size:0.7em; margin-right:0.05em;}
+  .nuc sup, .nuc sub{font-size:1em; vertical-align:baseline; line-height:1.05; position:static;}
   .keybox{background:var(--soft-blue); border:1px solid #c7ddef; border-radius:8px; padding:0.9rem 1.1rem; margin:0.9rem 0; font-size:0.98rem;}
   .keybox strong{color:var(--navy);}
   .eqn{background:#fff; border:1px solid #c7ddef; border-radius:6px; padding:0.6rem 1rem; margin:0.6rem 0; font-size:1.08rem; text-align:center; font-family:"Cambria Math",Cambria,Georgia,serif;}
@@ -166,8 +168,8 @@
     <a href="#s7">7. Spectra &amp; energy levels</a>
     <a href="#s8">8. Photons &amp; transitions</a>
     <a href="#s9">9. The Bohr model</a>
-    <a href="#s10">10. Wave nature of matter</a>
-    <a href="#s11">11. Compton scattering</a>
+    <a href="#s10">10. Compton scattering</a>
+    <a href="#s11">11. Wave nature of matter</a>
     <a href="#sG">Glossary</a>
   </nav>
 
@@ -205,7 +207,7 @@
           <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c1791f"/></marker></defs>
           <text x="292" y="102" text-anchor="middle" font-size="11" fill="#c1791f">1909 experiment</text>
 
-          <text x="460" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#4a5568" font-family="Georgia,serif">nuclear model</text>
+          <text x="460" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#4a5568" font-family="Georgia,serif">Rutherford's nuclear model (1911)</text>
           <circle cx="460" cy="115" r="70" fill="#eef1f8" stroke="#22305a" stroke-width="2"/>
           <circle cx="460" cy="115" r="7" fill="#c1791f"/>
           <ellipse cx="460" cy="115" rx="55" ry="20" fill="none" stroke="#1f7a6c" stroke-width="1.4" stroke-dasharray="3 3" transform="rotate(20 460 115)"/>
@@ -214,7 +216,7 @@
           <circle cx="405" cy="132" r="4" fill="#22305a"/>
           <text x="460" y="205" text-anchor="middle" font-size="11" fill="#4a5568">tiny dense (+) nucleus + orbiting electrons</text>
         </svg>
-        <figcaption>Fig. 1.1 Two competing models of the atom, before and after 1909.</figcaption>
+        <figcaption>Fig. 1.1 Two competing models of the atom, before and after 1909. Electrons are not really on fixed orbits; this is a historical model.</figcaption>
       </figure>
 
       <p>In 1909, at Rutherford's laboratory in Manchester, two of his students, <strong>Hans Geiger</strong> and <strong>Ernest Marsden</strong>, fired a narrow beam of fast, positively charged <strong>alpha particles</strong> at an extremely thin sheet of gold foil (only a few hundred atoms thick). A screen coated in zinc sulfide, which produces a tiny flash of light whenever an alpha particle hits it, was used to detect the particles after they had passed through — or bounced off — the foil.</p>
@@ -238,6 +240,8 @@
           <path d="M470,60 A 220 220 0 0 1 470 146" fill="none" stroke="#dfd8c6" stroke-width="14" opacity="0.5"/>
           <text x="630" y="80" text-anchor="end" font-size="10" fill="#4a5568">zinc sulfide</text>
           <text x="630" y="93" text-anchor="end" font-size="10" fill="#4a5568">detector screen</text>
+          <text x="630" y="160" text-anchor="end" font-size="10" font-style="italic" fill="#4a5568">detector moves around the foil</text>
+          <text x="630" y="173" text-anchor="end" font-size="10" font-style="italic" fill="#4a5568">to measure every angle</text>
         </svg>
         <figcaption>Fig. 1.2 The alpha-particle scattering apparatus (plan view).</figcaption>
       </figure>
@@ -270,13 +274,13 @@
         <span class="qnum">1</span><strong>Using the PhET simulation above, switch between the "Plum Pudding Atom" and "Rutherford Atom" screens.</strong> Describe one difference you observe in how the alpha particles scatter.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
-        <div class="answer-panel" id="q1">This is a descriptive, simulation-based question (compare the scattering patterns you observe) — check your wording against the description of the experiment in this section and with your teacher.</div>
+        <div class="answer-panel" id="q1">Plum pudding: every α goes through with only tiny deflections. Nuclear atom: most go straight through, but the few that pass close to the nucleus are deflected through large angles, and some come straight back.</div>
       </div>
       <div class="question">
         <span class="qnum">2</span><strong>In your own words (fewer than 100 words), explain why Rutherford concluded that atoms contain a small, positively charged, dense nucleus.</strong> Do not use a diagram.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q2')">Show answer</button>
-        <div class="answer-panel" id="q2">This is a descriptive question (explain in your own words) — check your wording against the description of the experiment in this section and with your teacher.</div>
+        <div class="answer-panel" id="q2">Most α pass straight through, so the atom is mostly empty space. A few turn through more than 90°, so there is a strong repulsion from concentrated positive charge. So few do this that the charge must fill a tiny volume. Turning back a fast, heavy α needs a large mass there, so the nucleus is dense.</div>
       </div>
       <div class="question">
         <span class="qnum">3</span><strong>Suggest what would have happened in the Geiger–Marsden experiment if neutrons had been used instead of alpha particles.</strong> Explain your answer.
@@ -310,18 +314,17 @@
       <figure>
         <svg viewBox="0 0 300 140" width="300" height="140" xmlns="http://www.w3.org/2000/svg">
           <text x="130" y="83" font-size="60" font-family="Georgia,serif" fill="#22305a" font-weight="bold">X</text>
-          <text x="70" y="35" font-size="20" fill="#a33d5b" font-family="Georgia,serif">A</text>
-          <text x="70" y="95" font-size="20" fill="#1f7a6c" font-family="Georgia,serif">Z</text>
-          <line x1="60" y1="45" x2="95" y2="45" stroke="#a33d5b" stroke-width="1"/>
-          <text x="180" y="35" font-size="11" fill="#a33d5b">nucleon number</text>
-          <text x="180" y="95" font-size="11" fill="#1f7a6c">proton number</text>
+          <text x="104" y="54" font-size="20" fill="#a33d5b" font-family="Georgia,serif">A</text>
+          <text x="104" y="84" font-size="20" fill="#1f7a6c" font-family="Georgia,serif">Z</text>
+          <text x="180" y="40" font-size="11" fill="#a33d5b">nucleon number</text>
+          <text x="180" y="88" font-size="11" fill="#1f7a6c">proton number</text>
           <text x="180" y="62" font-size="11" fill="#4a5568">element symbol</text>
         </svg>
-        <figcaption>Fig. 2.1 Standard nuclide notation: <sup>A</sup><sub>Z</sub>X.</figcaption>
+        <figcaption>Fig. 2.1 Standard nuclide notation: <span class="nuc"><sup>A</sup><sub>Z</sub></span>X.</figcaption>
       </figure>
 
       <p>Two or more atoms of the <strong>same element</strong> (same Z) with <strong>different</strong> nucleon numbers A are called <strong>isotopes</strong>. They have identical chemical properties but different masses. For example, the three isotopes of hydrogen are:</p>
-      <div class="eqn"><sup>1</sup><sub>1</sub>H (hydrogen, no neutrons) &nbsp;·&nbsp; <sup>2</sup><sub>1</sub>H (deuterium, 1 neutron) &nbsp;·&nbsp; <sup>3</sup><sub>1</sub>H (tritium, 2 neutrons)</div>
+      <div class="eqn"><span class="nuc"><sup>1</sup><sub>1</sub></span>H (hydrogen, no neutrons) &nbsp;·&nbsp; <span class="nuc"><sup>2</sup><sub>1</sub></span>H (deuterium, 1 neutron) &nbsp;·&nbsp; <span class="nuc"><sup>3</sup><sub>1</sub></span>H (tritium, 2 neutrons)</div>
 
       <div class="example">
         <span class="tag">Worked example 2.1</span>
@@ -334,7 +337,7 @@
         <p><strong>Answer:</strong><br>
         a) Potassium (K).<br>
         b) 19 protons, 20 neutrons (39 − 19), 19 electrons (the atom is neutral).<br>
-        c) <sup>39</sup><sub>19</sub>K</p>
+        c) <span class="nuc"><sup>39</sup><sub>19</sub></span>K</p>
       </div>
 
       <h3>Check your understanding</h3>
@@ -378,7 +381,7 @@
         r ≈ 3.6 × 10⁻¹⁴ m</p>
       </div>
 
-      <p>Because the alpha particle in this calculation gets so close without deviating from the inverse-square law, this method gives an <em>upper limit</em> for the nuclear radius (the real gold nucleus turns out to be a little smaller).</p>
+      <p>Because the alpha particle in this calculation gets so close without deviating from the inverse-square law, this method gives an <em>upper limit</em> for the nuclear radius (the real gold nucleus is much smaller: about 7 × 10⁻¹⁵ m, roughly five times smaller. The closest approach only gives an upper limit).</p>
 
       <p>A separate line of evidence — probing nuclei with high-energy electrons instead of alpha particles — leads to an empirical rule connecting the radius R of a nucleus to its nucleon number A:</p>
 
@@ -386,7 +389,7 @@
 
       <div class="example">
         <span class="tag">Worked example 3.2 (HL)</span>
-        <p>Show that the radius of a lead-206 nucleus (<sup>206</sup><sub>82</sub>Pb) is about 7.1 × 10⁻¹⁵ m, and use it to estimate the nuclear density.</p>
+        <p>Show that the radius of a lead-206 nucleus (<span class="nuc"><sup>206</sup><sub>82</sub></span>Pb) is about 7.1 × 10⁻¹⁵ m, and use it to estimate the nuclear density.</p>
         <p><strong>Answer:</strong><br>
         R = R₀A<sup>1/3</sup> = (1.20 × 10⁻¹⁵) × 206<sup>1/3</sup> = 7.1 × 10⁻¹⁵ m ✓<br><br>
         ρ = m/V ≈ Au / (4/3 πR³) = (206 × 1.661 × 10⁻²⁷) / (4/3 π (7.1 × 10⁻¹⁵)³) ≈ 2.3 × 10¹⁷ kg m⁻³</p>
@@ -396,7 +399,7 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">6</span><strong>Estimate the radius of an oxygen-16 nucleus (<sup>16</sup><sub>8</sub>O).</strong>
+        <span class="qnum">6</span><strong>Estimate the radius of an oxygen-16 nucleus (<span class="nuc"><sup>16</sup><sub>8</sub></span>O).</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q6')">Show answer</button>
         <div class="answer-panel" id="q6">R = (1.20×10⁻¹⁵)(16)<sup>1/3</sup> ≈ 3.0×10⁻¹⁵ m.</div>
@@ -446,11 +449,12 @@
             <div class="sim-btns">
               <button onclick="resetForceSim()">Reset</button>
             </div>
-            <p style="font-size:0.8rem; color:#5b6b78; margin:0.7rem 0 0;">Positive = repulsive (pushing the alpha particle away); negative = attractive (pulling it in). Dashed lines show the two individual contributions; the solid line is their sum, the <em>net</em> force actually felt by the particle. This is an illustrative model of the correct qualitative shape, not an exact nuclear force law.</p>
+            <p style="font-size:0.8rem; color:#5b6b78; margin:0.7rem 0 0;">Positive = repulsive (pushing the two protons apart); negative = attractive (pulling them together). Dashed lines show the two individual contributions; the solid line is their sum, the <em>net</em> force between them. This is an illustrative model of the correct qualitative shape, not an exact nuclear force law.</p>
           </div>
         </div>
-        <figcaption>Fig. 4.1 The Coulomb force (dashed, always repulsive, 1/r²) and the strong nuclear force (dashed, repulsive at extremely short range, attractive at intermediate range, negligible beyond ~4 fm) combine to give the net force (solid) on an alpha particle approaching a nucleus. Drag the slider to see how the balance shifts with distance.</figcaption>
+        <figcaption>Fig. 4.1 The Coulomb force (dashed, always repulsive, 1/r²) and the strong nuclear force (dashed, repulsive at extremely short range, attractive at intermediate range, negligible beyond about 3 × 10⁻¹⁵ m) combine to give the net force (solid) between two protons. Drag the slider to see how the balance shifts with distance.</figcaption>
       </figure>
+      <p>An α particle only feels the strong force once it reaches the nuclear surface: about 9 × 10⁻¹⁵ m from the centre of a gold nucleus.</p>
 
       <div class="keybox"><strong>Key idea.</strong> A very energetic alpha particle can get close enough to a nucleus to feel the attractive strong nuclear force as well as the repulsive electric force. When this happens, the scattering can no longer be explained by Coulomb's law alone — this is the experimental signature that the strong force exists.</div>
 
@@ -459,7 +463,7 @@
         <span class="qnum">10</span><strong>Explain why deviations from the Rutherford scattering pattern only appear at high alpha-particle energies, not low energies.</strong>
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q10')">Show answer</button>
-        <div class="answer-panel" id="q10">Only high-energy alpha particles get close enough to a nucleus (small distance of closest approach) to enter the very short range (≲ 3×10⁻¹⁵ m) over which the strong force acts; low-energy particles never get that close, so Coulomb's law alone still fits.</div>
+        <div class="answer-panel" id="q10">Only high-energy alpha particles get close enough to a nucleus (small distance of closest approach) to enter the very short range (negligible beyond about 3 × 10⁻¹⁵ m, so each nucleon feels only its nearest neighbours) over which the strong force acts; low-energy particles never get that close, so Coulomb's law alone still fits.</div>
       </div>
       <div class="question">
         <span class="qnum">11</span><strong>Suggest why the strong nuclear force must be short-range, given that ordinary atoms (with nuclei made of many protons) do not collapse or fly apart.</strong>
@@ -487,7 +491,6 @@
       <div class="sim-embed">
         <p class="instructions">Try changing only the wavelength slider first, then only the metal, then only the intensity — notice which sliders change whether electrons are emitted at all, and which just change how many.</p>
               <div class="sim-embed">
-        <p class="instructions">Simulation by <a href="https://www.drjonesphysics.com/pe-effect" target="_blank" rel="noopener">Dr Dan Jones (drjonesphysics.com)</a>. Try changing only the wavelength slider first, then only the metal, then only the intensity — notice which sliders change whether electrons are emitted at all, and which just change how many.</p>
 <div id="pe-embed-root">
         <style>
           #pe-sim-wrapper {
@@ -611,14 +614,14 @@
                   <label>Cathode Metal</label>
                   <select id="metalSelect">
                       <option value="2.28">Sodium (Na)</option>
-                      <option value="2.30">Potassium (K)</option>
+                      <option value="2.87">Calcium (Ca)</option>
                       <option value="4.10">Lead (Pb)</option>
                       <option value="4.30">Zinc (Zn)</option>
                       <option value="5.10">Gold (Au)</option>
                   </select>
               </div>
               <div class="control-group">
-                  <label>Wavelength (<span class="value-display" id="wlDisplay">700</span> nm)</label>
+                  <label>Wavelength (<span class="value-display" id="wlDisplay">400</span> nm)</label>
                   <input type="range" id="wavelengthRange" min="150" max="750" value="400">
               </div>
               <div class="control-group">
@@ -777,8 +780,8 @@
                     this.y += this.speed;
                     if (this.y > canvas.height - 60) {
                         this.active = false;
-                        if (this.energy_eV > workFunction_eV && Math.random() < (intensity/100)) {
-                            electrons.push(new Electron(this.x, canvas.height - 60, this.energy_eV - workFunction_eV));
+                        if (this.energy_eV > workFunction_eV && Math.random() < 0.5) {
+                            electrons.push(new Electron(this.x, canvas.height - 60, Math.max(0.02, (this.energy_eV - workFunction_eV) * Math.random())));
                         }
                     }
                 }
@@ -879,10 +882,10 @@
         })();
         </script>
       </div>
+        <p style="font-size:0.85rem; color:#4a5568; margin:0.6rem 0 0; text-align:center;"><strong>Note:</strong> The wavy lines show where photons arrive. A photon does not travel along a wiggly path.</p>
         <p class="sim-embed-credit">Interactive simulation modelled on Dr Dan Jones's photoelectric effect demonstration — <a href="https://www.drjonesphysics.com/pe-effect" target="_blank" rel="noopener">drjonesphysics.com/pe-effect</a>.</p>
       </div>
         <p class="sim-print-note">Interactive simulation — open the online version of this workbook to launch it.</p>
-        <p class="sim-embed-credit">Simulation by Dr Dan Jones (drjonesphysics.com).</p>
       </div>
 
       <h3>Simulation tasks</h3>
@@ -916,9 +919,11 @@
     <section class="topic" id="s6">
       <h2>6. Einstein's photoelectric equation</h2>
       <p>Different electrons within the same metal surface need different amounts of energy to escape, depending on how tightly bound they are. But there is a well-defined <em>minimum</em> amount of energy needed to free the most loosely-bound electron from the surface of a given metal — this is called the <strong>work function</strong>, Φ.</p>
-      <p>The photoelectric effect is really just a statement of <strong>conservation of energy</strong>. A single photon hands over <em>all</em> of its energy to a single electron, and that energy has to go somewhere: some of it is "spent" doing the minimum amount of work needed to free the electron from the metal — the work function, Φ (the photoelectric-effect equivalent of the ionisation energy of an atom) — and whatever is left over becomes the electron's kinetic energy:</p>
+      <p>The photoelectric effect is really just a statement of <strong>conservation of energy</strong>. A single photon hands over <em>all</em> of its energy to a single electron, and that energy has to go somewhere: some of it is "spent" doing the minimum amount of work needed to free the electron from the metal — the work function, Φ (the minimum energy needed to remove an electron from the surface of the metal) — and whatever is left over becomes the electron's kinetic energy:</p>
 
-      <div class="eqn">energy of photon &nbsp;=&nbsp; work function (ionisation energy) &nbsp;+&nbsp; kinetic energy of electron</div>
+      <div class="eqn">energy of photon &nbsp;=&nbsp; work function &nbsp;+&nbsp; kinetic energy of electron</div>
+
+      <div class="keybox"><strong>Not the same as ionisation.</strong> Photoelectrons are conduction electrons, shared by the whole metal. Freeing one takes about half the energy needed to ionise a single atom (sodium: Φ = 2.3 eV, ionisation energy 5.1 eV).</div>
 
       <p>For the most loosely-bound electrons, this uses up the smallest possible share of the photon's energy on escaping, leaving the largest possible share as kinetic energy — so this gives the <em>maximum possible</em> kinetic energy of a photoelectron:</p>
 
@@ -1008,13 +1013,13 @@
         <span class="qnum">19</span><strong>Using the AstroSims tool above (or atomic-spectra.net), compare the emission spectra of hydrogen and helium.</strong> Describe two differences.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q19')">Show answer</button>
-        <div class="answer-panel" id="q19">This is a descriptive, simulation-based question — see the key idea box in this section for the underlying physics; check your specific comparison with your teacher.</div>
+        <div class="answer-panel" id="q19">Hydrogen: four visible lines (656 nm red, 486 nm blue-green, 434 nm and 410 nm violet). Helium: more lines, including a bright yellow line at 587 nm. Different wavelengths and a different number of lines.</div>
       </div>
       <div class="question">
         <span class="qnum">20</span><strong>Explain how an astronomer could use the absorption spectrum of a star to determine which elements are present in its outer atmosphere.</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q20')">Show answer</button>
-        <div class="answer-panel" id="q20">This is a descriptive question — see the key idea box in this section, which explains why each element's absorption lines act as a unique fingerprint; check your wording with your teacher.</div>
+        <div class="answer-panel" id="q20">Measure the wavelengths of the dark lines and compare them with lab emission spectra of known elements. If an element's whole pattern of lines appears, that element is in the star's cooler outer layers, absorbing light from the hotter interior.</div>
       </div>
       <div class="question">
         <span class="qnum">21</span><strong>Explain why the existence of line spectra (rather than continuous, "rainbow" spectra) is evidence that atomic energy levels are discrete rather than continuous.</strong>
@@ -1033,11 +1038,11 @@
 
       <p>Because atomic energy levels are discrete, the differences between them are also discrete — so only certain photon energies (and therefore only certain frequencies, since E = hf) can be emitted or absorbed by a given atom. This is exactly why line spectra exist.</p>
 
-      <p>Physically, each energy level corresponds to an electron occupying one of the atom's circular "shells" around the nucleus (this is the Bohr model — see Section 9). But the emission/absorption diagrams used throughout this topic, like Fig. 8.2 below, draw each level as a flat horizontal line rather than a circle — and the line spectra you explored in Section 7 are themselves just another picture of the very same spacing. Fig. 8.1 shows how all three pictures (shells → flat lines → spectral lines) are connected.</p>
+      <p>An energy-level diagram shows energy only. The horizontal lines are not orbits or shells. Each spectral line comes from the gap between two levels.</p>
 
       <figure>
         <svg viewBox="0 0 560 270" width="560" height="270" xmlns="http://www.w3.org/2000/svg">
-          <text x="150" y="14" text-anchor="middle" font-size="11" font-weight="bold" fill="#22305a">electron shells around the nucleus</text>
+          <text x="150" y="14" text-anchor="middle" font-size="11" font-weight="bold" fill="#22305a">electron energy levels around the nucleus</text>
           <circle cx="150" cy="150" r="20" fill="none" stroke="#4a5568" stroke-width="1.3" stroke-dasharray="2 2"/>
           <circle cx="150" cy="150" r="55" fill="none" stroke="#a33d5b" stroke-width="1.3" stroke-dasharray="2 2"/>
           <circle cx="150" cy="150" r="80" fill="none" stroke="#1f7a6c" stroke-width="1.3" stroke-dasharray="2 2"/>
@@ -1062,7 +1067,7 @@
           <line x1="280" y1="71" x2="540" y2="71" stroke="#1f7a6c" stroke-width="2.5"/>
           <line x1="280" y1="51" x2="540" y2="51" stroke="#c1791f" stroke-width="2.5"/>
         </svg>
-        <figcaption>Fig. 8.1 The circular electron shells are then shown as a horizontal "sliver" to save space and make the model as clear as possible.</figcaption>
+        <figcaption>Fig. 8.1 The circular electron energy levels are then shown as a horizontal "sliver" to save space and make the model as clear as possible.</figcaption>
       </figure>
 
       <figure>
@@ -1071,19 +1076,20 @@
             <marker id="arrowOrange" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#c1791f"/></marker>
             <marker id="arrowTeal" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f7a6c"/></marker>
             <marker id="arrowRose" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#a33d5b"/></marker>
+            <marker id="arrowNavy" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#22305a"/></marker>
             <marker id="arrowGrey" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4a5568"/></marker>
           </defs>
           <line x1="40" y1="25" x2="300" y2="25" stroke="#22305a" stroke-width="2"/><text x="308" y="29" font-size="11" fill="#22305a">E₄</text>
           <line x1="40" y1="50" x2="300" y2="50" stroke="#22305a" stroke-width="2"/><text x="308" y="54" font-size="11" fill="#22305a">E₃</text>
           <line x1="40" y1="95" x2="300" y2="95" stroke="#22305a" stroke-width="2"/><text x="308" y="99" font-size="11" fill="#22305a">E₂</text>
           <line x1="40" y1="185" x2="300" y2="185" stroke="#22305a" stroke-width="2.5"/><text x="308" y="189" font-size="11" fill="#22305a">E₁ (ground)</text>
-          <line x1="90" x2="90" y1="25" y2="185" stroke="#c1791f" stroke-width="2" marker-end="url(#arrowOrange)"/>
-          <line x1="150" x2="150" y1="50" y2="185" stroke="#1f7a6c" stroke-width="2" marker-end="url(#arrowTeal)"/>
-          <line x1="210" x2="210" y1="95" y2="185" stroke="#a33d5b" stroke-width="2" marker-end="url(#arrowRose)"/>
+          <line x1="90" x2="90" y1="25" y2="185" stroke="#22305a" stroke-width="2" marker-end="url(#arrowNavy)"/>
+          <line x1="150" x2="150" y1="50" y2="185" stroke="#22305a" stroke-width="2" marker-end="url(#arrowNavy)"/>
+          <line x1="210" x2="210" y1="95" y2="185" stroke="#22305a" stroke-width="2" marker-end="url(#arrowNavy)"/>
           <line x1="270" x2="270" y1="185" y2="25" stroke="#4a5568" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
           <text x="270" y="15" text-anchor="middle" font-size="10" fill="#4a5568">absorption</text>
         </svg>
-        <figcaption>Fig. 8.2 Emission transitions (downward, coloured) release photons of different energies; absorption (upward, dashed) requires a photon of exactly the right energy. Notice the gaps between levels shrink higher up, as in a real atom (E ∝ −1/n²).</figcaption>
+        <figcaption>Fig. 8.2 Emission transitions (downward, solid) release photons of different energies; absorption (upward, dashed) requires a photon of exactly the right energy. Notice the gaps between levels shrink higher up, as in a real atom (E ∝ −1/n²).</figcaption>
       </figure>
 
       <div class="example">
@@ -1112,7 +1118,7 @@
         <span class="qnum">24</span><strong>Explain why a photon can only be absorbed by a particular atom if its energy exactly matches the gap between two of that atom's energy levels — rather than being absorbed partially.</strong>
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q24')">Show answer</button>
-        <div class="answer-panel" id="q24">Because atomic energy levels are discrete, an electron can only ever be in one exact level or another — there is no "in-between" state to absorb partial energy into, so the photon energy must exactly bridge two allowed levels.</div>
+        <div class="answer-panel" id="q24">Because atomic energy levels are discrete, an electron can only ever be in one exact level or another — there is no "in-between" state to absorb partial energy into, so the photon energy must exactly bridge two allowed levels. A colliding electron, unlike a photon, can give up only part of its energy (Franck–Hertz experiment).</div>
       </div>
     </section>
 
@@ -1122,6 +1128,15 @@
       <p>In 1913, the Danish physicist <strong>Niels Bohr</strong> proposed a bold new rule for the hydrogen atom: an electron can only orbit the nucleus in certain allowed orbits, and while it stays in one of these orbits, it does <em>not</em> radiate energy (even though classical physics said an accelerating charge always should). Bohr justified this by proposing that the electron's <strong>angular momentum</strong> is quantized — it can only take specific values:</p>
 
       <div class="eqn"><b>mvr = nh / 2π</b> &nbsp; (n = 1, 2, 3, ... — the "principal quantum number")</div>
+
+      <div class="keybox"><strong>Where does mvr = nh/2π come from?</strong> If the electron behaves as a wave (de Broglie — see Section 11), only orbits that fit a whole number of wavelengths can form a standing wave:
+        <div class="eqn">2πr = nλ &nbsp;&nbsp; with &nbsp;&nbsp; λ = h/mv &nbsp;&nbsp;⟹&nbsp;&nbsp; <b>mvr = nh/2π</b></div>
+        Combining this with the circular-motion condition for the electron, mv²/r = ke²/r², gives
+        <div class="eqn">r<sub>n</sub> = n² × 5.3 × 10⁻¹¹ m &nbsp;&nbsp;&nbsp; and &nbsp;&nbsp;&nbsp; E<sub>n</sub> = −13.6/n² eV</div>
+        <strong>Practice:</strong> find r₂ and r₃.
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q9bohr')">Show answer</button>
+        <div class="answer-panel" id="q9bohr">r₂ = 4 × 5.3 × 10⁻¹¹ = 2.1 × 10⁻¹⁰ m; r₃ = 9 × 5.3 × 10⁻¹¹ = 4.8 × 10⁻¹⁰ m.</div>
+      </div>
 
       <p>Combining this quantization rule with Coulomb's law and circular motion allows the energy of each allowed orbit (n = 1, 2, 3, ...) to be calculated. Remarkably, the result matches the hydrogen line spectrum almost perfectly:</p>
 
@@ -1157,7 +1172,7 @@
 
       <div class="stretch-box">
         <span class="tag">Why the Bohr model matters — and where it fails</span>
-        <p style="margin:0;">Bohr's model was the first to correctly predict the numerical energy levels of hydrogen from a quantization rule, rather than just fitting a curve to data. But it only works well for hydrogen (and other one-electron ions); it fails for atoms with more than one electron, and it does not explain <em>why</em> angular momentum should be quantized. That deeper explanation had to wait for the discovery of the wave nature of matter — the subject of Section 10.</p>
+        <p style="margin:0;">Bohr's model was the first to correctly predict the numerical energy levels of hydrogen from a quantization rule, rather than just fitting a curve to data. But it only works well for hydrogen (and other one-electron ions); it fails for atoms with more than one electron, and it does not explain <em>why</em> angular momentum should be quantized. That deeper explanation had to wait for the discovery of the wave nature of matter — the subject of Section 11.</p>
       </div>
 
       <h3>Check your understanding</h3>
@@ -1183,6 +1198,7 @@
       <div class="sim-launch">
         <p style="margin:0; font-weight:700; color:var(--navy);">Optional extra — PhET: Build an Atom</p>
         <p style="margin:0.4rem 0 0 0; font-size:0.92rem;">Not required, but useful for visualising how electrons are organised into shells around a nucleus, and how this connects to isotope and ion notation from Section 2.</p>
+        <p style="margin:0.4rem 0 0 0; font-size:0.88rem; color:#7a4a12;"><strong>Note:</strong> This simulation draws electrons in shells, which is a chemistry model. Energy levels are not shells (see §8).</p>
         <a class="launch-btn" href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html" target="_blank" rel="noopener">Open the simulation ↗</a>
         <p class="credit">Simulation: PhET Interactive Simulations, University of Colorado Boulder — phet.colorado.edu.</p>
       </div>
@@ -1190,60 +1206,7 @@
 
     <!-- ================= SECTION 10 ================= -->
     <section class="topic" id="s10">
-      <h2>10. The wave nature of matter</h2>
-      <p>The photoelectric effect and Compton scattering both show that light — long thought to be a wave — sometimes behaves like a stream of particles. In 1924, the French physicist <strong>Louis de Broglie</strong> asked the reverse question: could matter, long thought to be made of particles, sometimes behave like a wave?</p>
-
-      <div class="eqn">de Broglie wavelength of a moving particle: &nbsp; <b>λ = h / p</b> &nbsp; (p = momentum = mv)</div>
-
-      <p>This bold hypothesis was confirmed in 1927 by the <strong>Davisson–Germer experiment</strong>: a beam of electrons fired at a nickel crystal produced a diffraction pattern, just like X-rays diffracting from the regularly-spaced atoms in a crystal lattice. Diffraction — constructive and destructive interference spreading a wave out around obstacles — is a behaviour unique to waves, so this was direct evidence that electrons have wave-like properties.</p>
-
-      <div class="keybox"><strong>Wave–particle duality.</strong> Put together, the photoelectric effect, Compton scattering, and electron diffraction show that <strong>all</strong> particles have wave-like properties, and <strong>all</strong> electromagnetic waves have particle-like (photon) properties. Neither the "pure wave" nor "pure particle" picture is complete on its own — this is <strong>wave–particle duality</strong>. In practice, the wave nature of matter is only noticeable for objects with extremely small momentum (because h is so tiny): it is significant for electrons, but utterly undetectable for a thrown ball or a moving car.</div>
-
-      <div class="example">
-        <span class="tag">Worked example 10.1</span>
-        <p>Electrons are accelerated from rest through a potential difference of 3.0 kV.</p>
-        <ol type="a">
-          <li>Calculate the kinetic energy gained, in joules.</li>
-          <li>Calculate the speed of the electrons.</li>
-          <li>Calculate their de Broglie wavelength.</li>
-        </ol>
-        <p><strong>Answer:</strong><br>
-        a) E<sub>k</sub> = qV = (1.60×10⁻¹⁹)(3000) = 4.80×10⁻¹⁶ J<br>
-        b) E<sub>k</sub> = ½mv² &nbsp;⟹&nbsp; v = √(2E<sub>k</sub>/m) = √(2×4.80×10⁻¹⁶ / 9.11×10⁻³¹) = 3.25×10⁷ m s⁻¹<br>
-        c) p = mv = (9.11×10⁻³¹)(3.25×10⁷) = 2.96×10⁻²³ kg m s⁻¹<br>
-        &nbsp;&nbsp;&nbsp;λ = h/p = (6.63×10⁻³⁴)/(2.96×10⁻²³) = 2.24×10⁻¹¹ m</p>
-      </div>
-
-      <h3>Check your understanding</h3>
-      <div class="question">
-        <span class="qnum">28</span><strong>A proton has a de Broglie wavelength of 1.2 × 10⁻¹³ m.</strong> Calculate its momentum, and hence its speed (assume non-relativistic motion).
-        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
-        <div class="answer-panel" id="q28">p = h/λ ≈ 5.53×10⁻²¹ kg m s⁻¹; v = p/m ≈ 3.3×10⁶ m s⁻¹.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">29</span><strong>A proton and an electron travel at the same speed.</strong> Which one has the longer de Broglie wavelength? Explain your answer.
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q29')">Show answer</button>
-        <div class="answer-panel" id="q29">The electron — since λ = h/(mv), a smaller mass at the same speed gives a larger wavelength.</div>
-      </div>
-      <div class="question">
-        <span class="qnum">30</span><strong>A tennis ball of mass 0.058 kg travels at 25 m s⁻¹.</strong> Estimate its de Broglie wavelength and explain why the wave nature of the ball is never observed.
-        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q30')">Show answer</button>
-        <div class="answer-panel" id="q30">λ ≈ 4.6×10⁻³⁴ m — many orders of magnitude smaller than any aperture or obstacle that could diffract it, so no wave effects can ever be observed.</div>
-      </div>
-
-      <div class="stretch-box">
-        <span class="tag">Looking back: two theories for the same thing</span>
-        <p style="margin:0;">By the late 1920s, physics had accepted a paradox: light behaves as a wave in diffraction and interference, and as a particle in the photoelectric effect and Compton scattering. As Einstein himself put it, we need <em>"two theories... [which] together describe the phenomena of light."</em> This same wave–particle duality applies to matter — and it is one of the central, still slightly unsettling, ideas at the heart of modern quantum mechanics.</p>
-      </div>
-
-    </section>
-
-    <!-- ================= SECTION 11 ================= -->
-    <section class="topic" id="s11">
-      <h2>11. Compton scattering</h2>
+      <h2>10. Compton scattering</h2>
       <p>The photoelectric effect was strong, but not universally convincing, evidence for photons — sceptics could still try to patch up the wave theory. In 1923, <strong>Arthur Compton</strong> provided much more direct evidence by firing high-frequency X-rays at a block of graphite and measuring the X-rays that scattered off the loosely-bound outer electrons in the carbon atoms.</p>
       <p>A wave theory of light predicts that scattered radiation should keep the <em>same</em> wavelength as the incident radiation. Compton found instead that the scattered X-rays had a <strong>longer</strong> wavelength (lower energy) than the incident X-rays — and that the size of this shift depended on the scattering angle, θ, but not on the wavelength or intensity of the incident beam.</p>
 
@@ -1268,7 +1231,7 @@
           <line x1="140" y1="140" x2="280" y2="210" stroke="#a33d5b" stroke-width="2.2" marker-end="url(#cmptArrowE)"/>
           <text x="248" y="223" font-size="11" fill="#a33d5b">recoiling electron</text>
         </svg>
-        <figcaption>Fig. 11.1 Compton scattering: an incoming X-ray photon transfers some of its energy and momentum to an electron. The scattered photon emerges at angle θ with a longer wavelength (lower energy) than it arrived with; the electron recoils.</figcaption>
+        <figcaption>Fig. 10.1 Compton scattering: an incoming X-ray photon transfers some of its energy and momentum to an electron. The scattered photon emerges at angle θ with a longer wavelength (lower energy) than it arrived with; the electron recoils.</figcaption>
       </figure>
 
       <div class="keybox">
@@ -1282,7 +1245,7 @@
       <p style="font-size:13.5px; color:#5b6b78; margin-top:-6px;">where θ is the scattering angle and h/(m<sub>e</sub>c) = 2.426 × 10⁻¹² m is called the Compton wavelength.</p>
 
       <div class="example">
-        <span class="tag">Worked example 11.1</span>
+        <span class="tag">Worked example 10.1</span>
         <p>X-rays of wavelength 1.00 × 10⁻¹⁰ m are Compton-scattered through an angle of 60°. Calculate the wavelength of the scattered X-rays.</p>
         <p><strong>Answer:</strong><br>
         Δλ = (2.426×10⁻¹²)(1 − cos 60°) = (2.426×10⁻¹²)(0.500) = 1.213×10⁻¹² m<br>
@@ -1291,24 +1254,80 @@
 
       <h3>Check your understanding</h3>
       <div class="question">
-        <span class="qnum">31</span><strong>Calculate the change in wavelength for X-rays Compton-scattered through an angle of 90°.</strong>
+        <span class="qnum">28</span><strong>Calculate the change in wavelength for X-rays Compton-scattered through an angle of 90°.</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q31')">Show answer</button>
-        <div class="answer-panel" id="q31">Δλ = (2.426×10⁻¹²)(1 − cos 90°) = 2.43×10⁻¹² m.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q28')">Show answer</button>
+        <div class="answer-panel" id="q28">Δλ = (2.426×10⁻¹²)(1 − cos 90°) = 2.43×10⁻¹² m.</div>
       </div>
       <div class="question">
-        <span class="qnum">32</span><strong>At what scattering angle is the wavelength shift (a) a maximum, and (b) zero?</strong> Explain both answers physically.
+        <span class="qnum">29</span><strong>At what scattering angle is the wavelength shift (a) a maximum, and (b) zero?</strong> Explain both answers physically.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q32')">Show answer</button>
-        <div class="answer-panel" id="q32">Maximum shift at θ = 180° (photon bounces straight back, transferring the most momentum); zero shift at θ = 0° (photon continues undeviated, no momentum transferred).</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q29')">Show answer</button>
+        <div class="answer-panel" id="q29">Maximum shift at θ = 180° (photon bounces straight back, transferring the most momentum); zero shift at θ = 0° (photon continues undeviated, no momentum transferred).</div>
       </div>
       <div class="question">
-        <span class="qnum">33</span><strong>Explain why Compton scattering is considered stronger evidence for the particle nature of light than the photoelectric effect.</strong>
+        <span class="qnum">30</span><strong>Explain why Compton scattering is considered stronger evidence for the particle nature of light than the photoelectric effect.</strong>
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
-        <button class="reveal-btn no-print" onclick="toggleAnswer('q33')">Show answer</button>
-        <div class="answer-panel" id="q33">Compton scattering can only be explained by treating light as particles colliding with electrons and obeying conservation of momentum and energy — a wave model predicts no wavelength shift at all, so the shift is direct, quantitative, and inescapable evidence, whereas photoelectric-effect observations were initially argued about for longer.</div>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q30')">Show answer</button>
+        <div class="answer-panel" id="q30">Compton scattering can only be explained by treating light as particles colliding with electrons and obeying conservation of momentum and energy — a wave model predicts no wavelength shift at all, so the shift is direct, quantitative, and inescapable evidence, whereas photoelectric-effect observations were initially argued about for longer.</div>
       </div>
       
+    </section>
+
+    <!-- ================= SECTION 11 ================= -->
+    <section class="topic" id="s11">
+      <h2>11. The wave nature of matter</h2>
+      <p>The photoelectric effect and Compton scattering both show that light — long thought to be a wave — sometimes behaves like a stream of particles. In 1924, the French physicist <strong>Louis de Broglie</strong> asked the reverse question: could matter, long thought to be made of particles, sometimes behave like a wave?</p>
+
+      <div class="eqn">de Broglie wavelength of a moving particle: &nbsp; <b>λ = h / p</b> &nbsp; (p = momentum = mv)</div>
+
+      <p>This bold hypothesis was confirmed in 1927 by the <strong>Davisson–Germer experiment</strong>: a beam of electrons fired at a nickel crystal produced a diffraction pattern, just like X-rays diffracting from the regularly-spaced atoms in a crystal lattice. Diffraction — constructive and destructive interference spreading a wave out around obstacles — is a behaviour unique to waves, so this was direct evidence that electrons have wave-like properties.</p>
+
+      <div class="keybox"><strong>Wave–particle duality.</strong> Put together, the photoelectric effect, Compton scattering, and electron diffraction show that <strong>all</strong> particles have wave-like properties, and <strong>all</strong> electromagnetic waves have particle-like (photon) properties. Neither the "pure wave" nor "pure particle" picture is complete on its own — this is <strong>wave–particle duality</strong>. In practice, the wave nature of matter is only noticeable for objects with extremely small momentum (because h is so tiny): it is significant for electrons, but utterly undetectable for a thrown ball or a moving car.</div>
+
+      <div class="example">
+        <span class="tag">Worked example 11.1</span>
+        <p>Electrons are accelerated from rest through a potential difference of 3.0 kV.</p>
+        <ol type="a">
+          <li>Calculate the kinetic energy gained, in joules.</li>
+          <li>Calculate the speed of the electrons.</li>
+          <li>Calculate their de Broglie wavelength.</li>
+        </ol>
+        <p><strong>Answer:</strong><br>
+        a) E<sub>k</sub> = qV = (1.60×10⁻¹⁹)(3000) = 4.80×10⁻¹⁶ J<br>
+        b) E<sub>k</sub> = ½mv² &nbsp;⟹&nbsp; v = √(2E<sub>k</sub>/m) = √(2×4.80×10⁻¹⁶ / 9.11×10⁻³¹) = 3.25×10⁷ m s⁻¹<br>
+        c) p = mv = (9.11×10⁻³¹)(3.25×10⁷) = 2.96×10⁻²³ kg m s⁻¹<br>
+        &nbsp;&nbsp;&nbsp;λ = h/p = (6.63×10⁻³⁴)/(2.96×10⁻²³) = 2.24×10⁻¹¹ m</p>
+      </div>
+
+      <h3>Check your understanding</h3>
+      <div class="question">
+        <span class="qnum">31</span><strong>A proton has a de Broglie wavelength of 1.2 × 10⁻¹³ m.</strong> Calculate its momentum, and hence its speed (assume non-relativistic motion).
+        <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q31')">Show answer</button>
+        <div class="answer-panel" id="q31">p = h/λ ≈ 5.53×10⁻²¹ kg m s⁻¹; v = p/m ≈ 3.3×10⁶ m s⁻¹.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">32</span><strong>A proton and an electron travel at the same speed.</strong> Which one has the longer de Broglie wavelength? Explain your answer.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q32')">Show answer</button>
+        <div class="answer-panel" id="q32">The electron — since λ = h/(mv), a smaller mass at the same speed gives a larger wavelength.</div>
+      </div>
+      <div class="question">
+        <span class="qnum">33</span><strong>A tennis ball of mass 0.058 kg travels at 25 m s⁻¹.</strong> Estimate its de Broglie wavelength and explain why the wave nature of the ball is never observed.
+        <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
+        <button class="reveal-btn no-print" onclick="toggleAnswer('q33')">Show answer</button>
+        <div class="answer-panel" id="q33">λ ≈ 4.6×10⁻³⁴ m — many orders of magnitude smaller than any aperture or obstacle that could diffract it, so no wave effects can ever be observed.</div>
+      </div>
+
+      <div class="stretch-box">
+        <span class="tag">Looking back: two theories for the same thing</span>
+        <p style="margin:0 0 0.5rem;">By the late 1920s, physics had accepted a paradox: light behaves as a wave in diffraction and interference, and as a particle in the photoelectric effect and Compton scattering. As Einstein and Infeld wrote in <em>The Evolution of Physics</em> (1938):</p>
+        <blockquote style="margin:0.4rem 0 0.6rem 1rem; padding-left:0.8rem; border-left:3px solid #b9a3d6; font-style:italic;">"It seems as though we must use sometimes the one theory and sometimes the other, while at times we may use either… We have two contradictory pictures of reality; separately neither of them fully explains the phenomena of light, but together they do!"</blockquote>
+        <p style="margin:0 0 0.5rem;">This same wave–particle duality applies to matter — and it is one of the central, still slightly unsettling, ideas at the heart of modern quantum mechanics.</p>
+        <p style="margin:0;"><strong>Discuss:</strong> is light a wave sometimes and a particle at other times?</p>
+      </div>
+
     </section>
 
     <!-- ================= GLOSSARY ================= -->
@@ -1316,16 +1335,20 @@
       <h2>Glossary</h2>
       <dl class="glossary">
         <dt>Nucleon</dt><dd>A proton or a neutron; the particles that make up an atomic nucleus.</dd>
-        <dt>Nuclide</dt><dd>A specific type of nucleus, defined by its proton number Z and nucleon number A, written as <sup>A</sup><sub>Z</sub>X.</dd>
+        <dt>Nuclide</dt><dd>A specific type of nucleus, defined by its proton number Z and nucleon number A, written as <span class="nuc"><sup>A</sup><sub>Z</sub></span>X.</dd>
         <dt>Isotope</dt><dd>One of two or more atoms of the same element (same Z) with different numbers of neutrons (different A).</dd>
         <dt>Strong nuclear force</dt><dd>The short-range force that binds nucleons together in the nucleus, strong enough to overcome electrostatic repulsion between protons but negligible beyond about 3 × 10⁻¹⁵ m.</dd>
         <dt>Distance of closest approach</dt><dd>The minimum separation reached by a charged particle fired directly at a nucleus, found by equating its initial kinetic energy to the electric potential energy at that separation.</dd>
         <dt>Photoelectric effect</dt><dd>The emission of electrons from a metal surface when light of sufficiently high frequency is incident on it.</dd>
         <dt>Work function, Φ</dt><dd>The minimum energy needed to remove the most loosely bound electron from the surface of a particular metal.</dd>
         <dt>Threshold frequency, f₀</dt><dd>The minimum frequency of incident light that can just cause photoelectric emission from a given metal, f₀ = Φ/h.</dd>
+        <dt>Stopping voltage, V<sub>s</sub></dt><dd>The minimum reverse potential difference that just stops the fastest photoelectrons reaching the collector; eV<sub>s</sub> = E<sub>max</sub>.</dd>
         <dt>Compton scattering</dt><dd>The scattering of a photon off a free (or loosely bound) electron, in which the photon loses energy and momentum and its wavelength increases.</dd>
+        <dt>Compton wavelength</dt><dd>The constant h/(m<sub>e</sub>c) = 2.43 × 10⁻¹² m in the Compton shift formula; the wavelength shift for scattering through 90°.</dd>
         <dt>De Broglie wavelength</dt><dd>The wavelength λ = h/p associated with any moving particle of momentum p, responsible for wave-like behaviour such as diffraction.</dd>
         <dt>Energy level</dt><dd>One of the discrete, allowed values of energy that an electron bound in an atom may have.</dd>
+        <dt>Emission spectrum</dt><dd>Bright lines at particular wavelengths on a dark background, given out by an excited gas as electrons fall between energy levels.</dd>
+        <dt>Absorption spectrum</dt><dd>Dark lines at particular wavelengths on a continuous spectrum, where a cooler gas has absorbed photons that raise electrons to higher energy levels.</dd>
         <dt>Ground state</dt><dd>The lowest-energy, most stable energy level available to an electron in an atom.</dd>
       </dl>
     </section>
@@ -1569,7 +1592,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
-  const margin = {left:50, right:20, top:15, bottom:40};
+  const margin = {left:78, right:16, top:15, bottom:40};
   const plotW = W - margin.left - margin.right;
   const plotH = H - margin.top - margin.bottom;
   const R_MIN = 0.55, R_MAX = 4.5;
@@ -1634,16 +1657,17 @@ document.addEventListener('DOMContentLoaded', function(){
     ctx.font = '11px -apple-system, sans-serif';
     ctx.textAlign = 'center';
     for(let r = 1; r <= 4; r++){
-      ctx.fillText(r + ' fm', toX(r), margin.top + plotH + 16);
+      ctx.fillText(String(r), toX(r), margin.top + plotH + 16);
     }
+    ctx.fillText("separation of two nucleons' centres / fm", margin.left + plotW/2, margin.top + plotH + 32);
     ctx.textAlign = 'right';
     ctx.fillText('repulsive', margin.left - 6, toY(F_MAX*0.6));
     ctx.fillText('attractive', margin.left - 6, toY(F_MIN*0.5));
     ctx.save();
-    ctx.translate(14, margin.top + plotH/2);
+    ctx.translate(12, margin.top + plotH/2);
     ctx.rotate(-Math.PI/2);
     ctx.textAlign = 'center';
-    ctx.fillText('force on alpha particle', 0, 0);
+    ctx.fillText('force between two protons (schematic)', 0, 0);
     ctx.restore();
 
     drawCurve(coulombForce, '#e08a8a', true);

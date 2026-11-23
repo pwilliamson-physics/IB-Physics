@@ -245,7 +245,7 @@
     <!-- ================= SECTION 1 ================= -->
     <section class="topic" id="s1">
       <h2>1. What is radioactivity?</h2>
-      <p>The nucleus of an atom is normally left alone once it forms. But some nuclei are <strong>unstable</strong>: without any warning or external cause, they can spontaneously change, throwing out a particle and/or a high-energy photon. This process is called <strong>radioactivity</strong>, and when a nucleus does this we say it has <strong>decayed</strong> or <strong>transmuted</strong> — because emitting a charged particle changes the proton number, turning the atom into a different element entirely.</p>
+      <p>Most nuclei are stable and do not change. But some nuclei are <strong>unstable</strong>: without any warning or external cause, they can spontaneously change, throwing out a particle and/or a high-energy photon. This process is called <strong>radioactivity</strong>, and when a nucleus does this we say it has <strong>decayed</strong> or <strong>transmuted</strong> — because emitting a charged particle changes the proton number, turning the atom into a different element entirely.</p>
 
       <div class="stretch-box">
         <span class="tag">Historical note</span>
@@ -266,7 +266,7 @@
         <span class="qnum">1</span><strong>Explain, in your own words, the difference between "radioactive decay" and ordinary chemical or biological decay.</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q1')">Show answer</button>
-        <div class="answer-panel" id="q1">This is descriptive — check your wording against Section 1 and with your teacher.</div>
+        <div class="answer-panel" id="q1">Radioactive decay changes the nucleus, so the element changes. It is random and spontaneous, and is not affected by temperature or chemistry. Chemical and biological decay rearrange atoms and electrons; the nuclei are unchanged.</div>
       </div>
       <div class="question">
         <span class="qnum">2</span><strong>A nucleus of thorium-232 decays by emitting an alpha particle.</strong> Name the daughter product's element if the resulting proton number is 88. (You are not expected to memorise element names from proton numbers — look this one up.)
@@ -315,7 +315,7 @@
         <span class="qnum">3</span><strong>Give two reasons why it is preferable to work with larger count rates in a radioactivity experiment.</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q3')">Show answer</button>
-        <div class="answer-panel" id="q3">This is descriptive — see the key-box "Why bigger counts are more reliable".</div>
+        <div class="answer-panel" id="q3">1. Random variation is about √N, so the fractional uncertainty (1/√N) is smaller for large counts. 2. Background is a smaller share of the reading.</div>
       </div>
       <div class="question">
         <span class="qnum">4</span><strong>In 15 minutes, a count of 5486 was measured with the GM tube directed at a source. The background count rate at that location was 18 per minute.</strong> Calculate the count rate, in counts per second, due to the source alone.
@@ -1981,7 +1981,7 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
       <div class="keybox">
         <strong>Alpha (α) decay:</strong> An alpha particle is identical to a helium-4 nucleus: two protons and two neutrons bound tightly together, so it carries a nucleon number of 4 and a charge of +2. Emitting one removes 2 protons and 2 neutrons from the parent nucleus:
         <div class="eqn"><sup>A</sup><sub>Z</sub>X &nbsp;→&nbsp; <sup>A−4</sup><sub>Z−2</sub>Y &nbsp;+&nbsp; <sup>4</sup><sub>2</sub>α</div>
-        For example: <sup>226</sup><sub>88</sub>Ra → <sup>222</sup><sub>86</sub>Rn + <sup>4</sup><sub>2</sub>α. All alpha particles from a given radionuclide's decay are emitted with the same kinetic energy (radium-226's alpha particles all carry 4.7 MeV) — a fact that becomes important evidence for nuclear energy levels, as covered in the companion <em>Binding Energy &amp; Nuclear Stability</em> workbook.
+        For example: <sup>226</sup><sub>88</sub>Ra → <sup>222</sup><sub>86</sub>Rn + <sup>4</sup><sub>2</sub>α. Alpha particles from one radionuclide can have only a few discrete energies. Radium-226 emits α at 4.78 MeV (94 %) and 4.60 MeV (6 %); after the lower-energy one, the radon nucleus emits a 0.186 MeV γ. These discrete energies are evidence for nuclear energy levels.
       </div>
 
       <div class="keybox">
@@ -2006,7 +2006,7 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
 
       <div class="stretch-box">
         <span class="tag">Historical note</span>
-        <p><strong>Antimatter isn't just in the movies.</strong> A positron is real antimatter — the film <em>Angels &amp; Demons</em> famously (and dramatically) got the physics roughly right: when a particle meets its antiparticle, both are annihilated and their mass is converted entirely into energy. For an electron–positron pair (each with rest mass 9.11 × 10⁻³¹ kg), E = mc² gives about 1.64 × 10⁻¹³ J released as two gamma-ray photons — which is why beta-plus decay is always accompanied, sooner or later, by annihilation radiation once the positron meets an ordinary electron.</p>
+        <p><strong>Antimatter isn't just in the movies.</strong> A positron is real antimatter — the film <em>Angels &amp; Demons</em> famously (and dramatically) got the annihilation right, but not how antimatter is made or stored: when a particle meets its antiparticle, both are annihilated and their rest energy (mc²) is carried away by two γ photons. For an electron–positron pair (each with rest mass 9.11 × 10⁻³¹ kg), E = mc² gives about 1.64 × 10⁻¹³ J released as two gamma-ray photons — which is why beta-plus decay is always accompanied, sooner or later, by annihilation radiation once the positron meets an ordinary electron.</p>
       </div>
 
       <div class="example">
@@ -2052,9 +2052,9 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
         <tr><th>Property</th><th>Alpha (α)</th><th>Beta-minus (β⁻)</th><th>Gamma (γ)</th></tr>
         <tr><td>Relative charge</td><td>+2</td><td>−1</td><td>0</td></tr>
         <tr><td>Relative mass</td><td>4</td><td>1/1840</td><td>0</td></tr>
-        <tr><td>Ionizing ability</td><td>very high</td><td>low</td><td>very low</td></tr>
-        <tr><td>Typical range in air</td><td>≈ 4 cm</td><td>≈ 30 cm</td><td>barely absorbed</td></tr>
-        <tr><td>Stopped by</td><td>a sheet of paper</td><td>≈ 3 mm of aluminium</td><td>intensity halved by ≈ 2 cm of lead</td></tr>
+        <tr><td>Ionizing ability</td><td>very high</td><td>medium</td><td>very low</td></tr>
+        <tr><td>Typical range in air</td><td>≈ 4 cm</td><td>≈ 30 cm</td><td>barely absorbed (falls mainly by the inverse-square law)</td></tr>
+        <tr><td>Stopped by</td><td>a sheet of paper</td><td>≈ 3 mm of aluminium</td><td>typically 1–2 cm of lead halves it (depends on energy)</td></tr>
       </table>
 
       <figure>
@@ -2079,9 +2079,9 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
         <figcaption>Fig. 4.1 — Alpha particles are stopped by paper; beta particles need a few millimetres of aluminium; gamma rays are never fully absorbed, only progressively weakened by thick, dense shielding such as lead.</figcaption>
       </figure>
 
-      <div class="keybox"><strong>Why alpha is the least penetrating despite carrying the most energy:</strong> Alpha particles are heavy and carry a +2 charge, so they interact very strongly with the electrons in the atoms they pass. As a result, they lose their (typically large) kinetic energy very quickly, causing intense ionization over a very short distance. Beta particles are much lighter and carry only a −1 or +1 charge, so they generally cause less ionization per unit distance and can travel much farther. Gamma rays are uncharged photons, so they interact only occasionally with matter. Most pass straight through without interacting, making them the most penetrating and comparatively difficult to detect.</div>
+      <div class="keybox"><strong>Why alpha is the least penetrating despite its typically large kinetic energy:</strong> Alpha particles are heavy and carry a +2 charge, so they interact very strongly with the electrons in the atoms they pass. As a result, they lose their (typically large) kinetic energy very quickly, causing intense ionization over a very short distance. Beta particles are much lighter and carry only a −1 or +1 charge, so they generally cause less ionization per unit distance and can travel much farther. Gamma rays are uncharged photons, so they interact only occasionally with matter. Most pass straight through without interacting, making them the most penetrating and comparatively difficult to detect.</div>
 
-      <p>Because alpha and beta particles are charged, a beam of either can be deflected by electric or magnetic fields (gamma rays, having no charge, cannot). Alpha particles are deflected far less than beta particles in the same field, because they are much more massive and slower.</p>
+      <p>Because alpha and beta particles are charged, a beam of either can be deflected by electric or magnetic fields (gamma rays, having no charge, cannot). Alpha particles are deflected far less than beta particles in the same field, because they have much more momentum per unit charge (r = mv/qB).</p>
 
       <div class="question">
         <span class="qnum">10</span><strong>Explain why a source that only emits alpha radiation is considered low-risk outside the body, but a serious hazard if it gets inside the body (for example, by being inhaled or swallowed).</strong>
@@ -2096,21 +2096,21 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
         <div class="answer-panel" id="q11">gamma rays penetrate deep into (or all the way through) the body from outside, so external gamma sources can still damage internal organs, unlike alpha sources which cannot get in through skin.</div>
       </div>
       <div class="question">
-        <span class="qnum">12</span><strong>A beam containing alpha, beta and gamma radiation passes into a strong magnetic field directed into the page.</strong> Sketch what happens to each of the three components.
+        <span class="qnum">12</span><strong>A beam containing alpha, beta and gamma radiation, travelling left to right across the page, passes into a strong magnetic field directed into the page.</strong> Describe any deflection an observer would see.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q12')">Show answer</button>
-        <div class="answer-panel" id="q12">alpha particles curve one way (they are positive) with a large radius (heavy, fast); beta particles curve the opposite way with a smaller radius (light, negative); gamma rays travel straight through, undeflected (no charge).</div>
+        <div class="answer-panel" id="q12">Alpha particles (positive) curve upwards, towards the top of the page, but only slightly: a large radius, because they have much more momentum per unit charge. Beta-minus particles (negative) curve downwards, towards the bottom of the page, with a much smaller radius. Gamma rays (no charge) carry straight on, undeflected.</div>
       </div>
     </section>
 
     <!-- ================= SECTION 5 ================= -->
     <section class="topic" id="s5">
       <h2>5. Randomness, activity and half-life</h2>
-      <p>Nobody can predict when any one particular unstable nucleus will decay — each decay is <strong>random</strong> (no pattern) and <strong>spontaneous</strong> (no external cause or trigger). Yet, put a huge number of identical unstable nuclei together, and their overall behaviour becomes remarkably predictable — in exactly the way that a single coin toss is unpredictable, but the fraction of heads from a million tosses is not.</p>
+      <p>Nobody can predict when any one particular unstable nucleus will decay — each decay is <strong>random</strong> (no pattern) and <strong>spontaneous</strong> (no external cause or trigger). Yet, put a huge number of identical unstable nuclei together, and their overall behaviour becomes remarkably predictable — in exactly the way that a single coin toss is unpredictable, but the fraction of heads from a million tosses is not. Popcorn is a similar analogy: you can't tell which kernel will pop next. But popping depends on temperature, and radioactive decay does not.</p>
 
       <div class="keybox"><strong>Activity:</strong> The <strong>activity</strong>, A, of a radioactive source is the number of nuclei decaying every second. Its SI unit is the <strong>becquerel</strong>, Bq, where 1 Bq = one decay per second. A GM tube's count rate is not the same thing as activity (the tube cannot detect every single decay), but count rate is usually assumed to be proportional to activity.</div>
 
-      <p>The activity of every radioactive source falls over time, because as nuclei decay, fewer undecayed nuclei remain to produce further decays. The pattern this follows is an <strong>exponential decrease</strong>: in equal time intervals, the number of undecayed nuclei (and hence the activity) always falls by the <em>same fraction</em> — conventionally one half.</p>
+      <p>The activity of every radioactive source falls over time, because as nuclei decay, fewer undecayed nuclei remain to produce further decays. The pattern this follows is an <strong>exponential decrease</strong>: in equal time intervals, the number of undecayed nuclei (and hence the activity) always falls by the <em>same fraction</em>; the half-life is the interval in which that fraction is one half.</p>
 
       <figure>
         <svg viewBox="0 0 420 230" width="420" height="230" xmlns="http://www.w3.org/2000/svg">
@@ -2161,11 +2161,11 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
         <span class="qnum">15</span><strong>Explain, in terms of undecayed nuclei, why the activity of a source keeps decreasing even though the half-life itself stays constant.</strong>
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('q15')">Show answer</button>
-        <div class="answer-panel" id="q15">activity A = λN, and λ is constant, but N itself keeps falling as nuclei decay — so even though the half-life (which only depends on λ) never changes, the activity (which also depends on the ever-shrinking N) keeps decreasing.</div>
+        <div class="answer-panel" id="q15">Fewer undecayed nuclei remain, so fewer decay each second.</div>
       </div>
 
       <h3>Try it yourself: decay simulation</h3>
-      <p>The simulation below lets you watch a sample of radioactive nuclei decay in real time, one random event at a time, and compare the resulting curve of undecayed nuclei against the theoretical exponential prediction.</p>
+      <p>The simulation below lets you watch the activity fall exponentially, and compare the resulting curve of undecayed nuclei against the theoretical exponential prediction.</p>
       <div class="sim-embed sim-embed-wide">
         <p class="instructions">Choose an isotope and starting activity, then run the simulation and watch the activity fall away exponentially on the live graph.</p>
         <iframe class="sim-frame" title="Interactive isotope half-life decay simulation" id="decaySim2"
@@ -3029,9 +3029,9 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
       <p>Choosing a radionuclide for a real application means balancing its half-life, the type of radiation it emits, and the health risk involved. A few common examples:</p>
       <ul>
         <li><strong>Medical tracers</strong> — technetium-99m (half-life 6 hours, gamma emitter) is injected or swallowed and tracked through the body with a gamma camera. Its half-life is long enough to complete a scan but short enough to minimise the patient's radiation dose.</li>
-        <li><strong>Carbon dating</strong> — living organisms maintain a constant fraction of radioactive carbon-14 while alive; once they die, that fraction steadily decreases with carbon-14's 5700-year half-life, letting scientists estimate age from once-living material.</li>
+        <li><strong>Carbon dating</strong> — living organisms maintain a constant fraction of radioactive carbon-14 while alive; once they die, that fraction steadily decreases with carbon-14's 5730-year half-life, letting scientists estimate age from once-living material.</li>
         <li><strong>Smoke detectors</strong> — a tiny amount of americium-241 ionises air between two electrodes; smoke disrupts the current and triggers the alarm.</li>
-        <li><strong>Thickness control</strong> — a beta source and detector either side of a moving sheet of metal or plastic can monitor and automatically correct its thickness during manufacture.</li>
+        <li><strong>Thickness control</strong> — a beta source and detector either side of a moving sheet of metal or plastic can monitor and automatically correct its thickness during manufacture. β is used for thin sheets such as paper or foil; γ for thick steel.</li>
       </ul>
 
       <div class="question">
@@ -3131,16 +3131,17 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
           <defs><marker id="lnArrow" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4a5568"/></marker></defs>
           <line x1="55" y1="180" x2="380" y2="180" stroke="#4a5568" stroke-width="1.5" marker-end="url(#lnArrow)"/>
           <line x1="55" y1="180" x2="55" y2="20" stroke="#4a5568" stroke-width="1.5" marker-end="url(#lnArrow)"/>
-          <text x="15" y="30" font-size="10.5" fill="#4a5568">ln C</text>
+          <text x="62" y="24" font-size="10.5" fill="#4a5568">ln C</text>
           <text x="370" y="196" font-size="10.5" fill="#4a5568" text-anchor="end">time, t</text>
-          <text x="15" y="176" font-size="10.5" fill="#4a5568">ln C₀</text>
-          <circle cx="55" cy="170" r="3" fill="#22305a"/>
-          <line x1="55" y1="170" x2="340" y2="55" stroke="#a33d5b" stroke-width="2.2"/>
-          <circle cx="120" cy="146" r="3" fill="#1f7a6c"/>
-          <circle cx="190" cy="120" r="3" fill="#1f7a6c"/>
-          <circle cx="260" cy="95" r="3" fill="#1f7a6c"/>
-          <circle cx="330" cy="70" r="3" fill="#1f7a6c"/>
-          <text x="220" y="150" font-size="10" fill="#a33d5b">gradient = −λ</text>
+          <text x="48" y="44" font-size="10.5" fill="#4a5568" text-anchor="end">ln C₀</text>
+          <circle cx="55" cy="40" r="3" fill="#22305a"/>
+          <line x1="55" y1="40" x2="345" y2="160" stroke="#a33d5b" stroke-width="2.2"/>
+          <circle cx="100" cy="53" r="3" fill="#1f7a6c"/>
+          <circle cx="155" cy="87" r="3" fill="#1f7a6c"/>
+          <circle cx="210" cy="99" r="3" fill="#1f7a6c"/>
+          <circle cx="265" cy="132" r="3" fill="#1f7a6c"/>
+          <circle cx="320" cy="145" r="3" fill="#1f7a6c"/>
+          <text x="215" y="80" font-size="10" fill="#a33d5b">gradient = −λ</text>
         </svg>
         <figcaption>Fig. 8.1 — A graph of ln(count rate) against time gives a straight line of gradient −λ, since ln C = ln C₀ − λt. This is the standard experimental method for finding a decay constant.</figcaption>
       </figure>
@@ -3156,7 +3157,7 @@ goog.require(&quot;twig&quot;);goog.provide(&quot;twig.templates&quot;);goog.req
 
       <div class="example">
         <span class="tag">Worked example 8.2 — radiometric dating</span>
-        <p>Potassium-40 decays (eventually) to stable argon-40, with a half-life of 1.25 × 10⁹ years. A rock sample is found to contain potassium-40 and argon-40 (which was trapped in the rock as it formed) in the ratio 1 : 3. Estimate the age of the rock.</p>
+        <p>Potassium-40 decays (eventually) to stable argon-40, with a half-life of 1.25 × 10⁹ years. A rock sample is found to contain potassium-40 and argon-40 (a gas that escapes from molten rock, so all the argon now present is formed in the decay of potassium) in the ratio 1 : 3. Estimate the age of the rock.</p>
         <p><strong>Answer:</strong><br>
         Every argon-40 atom now present came from a potassium-40 atom that has since decayed, so the original number of potassium-40 atoms was 1 + 3 = 4 "parts". The fraction of potassium-40 remaining is 1/4 = (1/2)², i.e. exactly 2 half-lives have passed.<br>
         Age = 2 × (1.25 × 10⁹) = <strong>2.5 × 10⁹ years</strong></p>
