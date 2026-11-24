@@ -339,11 +339,15 @@
 
       <div id="graphSection" style="display:none; margin-top:1.2rem;">
         <h3>Mass vs balancing voltage</h3>
-        <p>Each point is one of your balanced trials. Points are colour-coded by how many excess electrons that drop turned out to carry — this graph simply visualises the pattern hiding in the q values already given for each row above.</p>
+        <p>Each point is one of your balanced trials. Look for a pattern in how the points are arranged. Once you have attempted Q2 in Section 5, the <b>Show charge groups</b> button colours each point by the number of excess electrons on that drop and draws a line for each group.</p>
         <figure class="wide">
           <canvas id="graphCanvas" width="640" height="420" style="max-width:100%; border:1px solid var(--border); border-radius:8px; background:#fff; display:block; margin:0 auto;"></canvas>
-          <figcaption>Fig. 4.2 Mass vs balancing voltage for your recorded trials, colour-coded by number of excess electrons.</figcaption>
+          <figcaption>Fig. 4.2 Mass vs balancing voltage for your recorded trials.</figcaption>
         </figure>
+        <div class="sim-btns" style="justify-content:center;">
+          <button id="btnGroups" disabled onclick="toggleGroups()" title="Attempt Q2 in Section 5 first">Show charge groups</button>
+        </div>
+        <p id="groupsNote" style="text-align:center; font-size:0.82rem; color:#5b6b78; margin:0.3rem 0 0 0;">Available once you have written something in Q2 (Section 5).</p>
 
         <div class="question" style="margin-top:1.1rem;">
           <span class="qnum">*</span><strong>Describe the pattern you can see in the graph, then explain it.</strong> Your points do not all lie on one single straight line — instead they sit on several separate straight lines, each of which passes through the origin. Using the balance equation mg = Vq/d, explain why points from drops with the <em>same</em> charge lie on the same line, and why there are different gradients seen.
@@ -372,7 +376,7 @@
       <h3>Check your understanding</h3>
       <div class="question">
         <span class="qnum">2</span><strong>Copy your ten (or more) values of q from the table in Section 4 into the space below, in units of 10⁻¹⁹ C.</strong> Find the largest number that divides exactly into <em>all</em> of them. Unlike the marble-bag puzzle, this number will not itself be a whole number — each q is a whole number of electrons multiplied by e, and e is not a whole number of these units. This number is your simulated estimate of e, in units of 10⁻¹⁹ C. Check: could every value also be a multiple of a <em>larger</em> number, such as 2e? Only a mix of different charges rules that out.
-        <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
+        <textarea id="q2Answer" class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
       </div>
 
       <div class="question">
@@ -427,7 +431,7 @@
         <p style="margin:0.5rem 0 0 0;">a) State the two forces acting on the drop when it is stationary, and their directions. <em>[2]</em><br>
         b) The drop carries a charge of 4 times the elementary charge. Calculate the mass of the drop. <em>[3]</em><br>
         c) The same drop is then observed with the p.d. switched off. Describe and explain its motion. <em>[2]</em><br>
-        d) A second, different drop is found to be balanced by a p.d. of exactly half that in part (a), with exactly the same mass as the first drop. Determine the charge on this second drop, as a multiple of e. <em>[2]</em></p>
+        d) A second, different drop is found to be balanced by a p.d. of 3060 V (half the p.d. in the question), with exactly the same mass as the first drop. Determine the charge on this second drop, as a multiple of e. <em>[2]</em></p>
         <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('w7')">Show answer</button>
         <div class="answer-panel" id="w7">
@@ -553,6 +557,7 @@ function clearMyAnswers(){
   });
   trialsData = [];
   trialCount = 0;
+  updateGroupsButton();
   document.getElementById('dataBody').innerHTML = '';
   document.getElementById('graphSection').style.display = 'none';
   document.getElementById('graphMsg').style.display = 'none';
@@ -588,6 +593,7 @@ function handleLoadFile(evt){
     try{
       const data = JSON.parse(reader.result);
       applyAnswersArray(data.answers || []);
+      updateGroupsButton();
       trialCount = data.trialCount || 0;
       trialsData = data.trialsData || [];
       document.getElementById('dataBody').innerHTML = '';
@@ -915,6 +921,27 @@ function lockReading(){
 
 /* ---------- graphing ---------- */
 const chargePalette = {2:'#d94f4f', 3:'#3f9a5c', 5:'#2f6fa8'};
+let showGroups = false; // charge groups stay hidden until Q2 has been attempted
+
+function updateGroupsButton(){
+  const btn = document.getElementById('btnGroups');
+  const q2 = document.getElementById('q2Answer');
+  if(!btn || !q2) return;
+  const ready = q2.value.trim().length > 0;
+  btn.disabled = !ready;
+  document.getElementById('groupsNote').style.display = ready ? 'none' : 'block';
+  if(!ready && showGroups){ showGroups = false; btn.textContent = 'Show charge groups'; if(document.getElementById('graphSection').style.display === 'block') drawGraph(); }
+}
+function toggleGroups(){
+  showGroups = !showGroups;
+  document.getElementById('btnGroups').textContent = showGroups ? 'Hide charge groups' : 'Show charge groups';
+  drawGraph();
+}
+document.addEventListener('DOMContentLoaded', function(){
+  const q2 = document.getElementById('q2Answer');
+  if(q2) q2.addEventListener('input', updateGroupsButton);
+  setTimeout(updateGroupsButton, 0);
+});
 const minTrialsForGraph = 10;
 
 function showGraph(){
@@ -986,7 +1013,7 @@ function drawGraph(){
 
   // reference line per distinct charge present: V = (g*d/(n*e)) * m
   const presentNs = [...new Set(trialsData.map(t => t.n))].sort((a, b) => a - b);
-  presentNs.forEach(n => {
+  if(showGroups) presentNs.forEach(n => {
     const slope = (g * d_m * 1e-14) / (n * e_charge); // V per unit of mScaled
     let mEnd = mAxisMax, vEnd = slope * mEnd;
     if(vEnd > vAxisMax){ vEnd = vAxisMax; mEnd = vAxisMax / slope; }
@@ -1000,7 +1027,7 @@ function drawGraph(){
   trialsData.forEach((t, i) => {
     const x = toX(t.m * 1e14), y = toY(t.V);
     ctx.beginPath();
-    ctx.fillStyle = chargePalette[t.n] || '#333';
+    ctx.fillStyle = showGroups ? (chargePalette[t.n] || '#333') : '#173a5e';
     ctx.arc(x, y, 5.5, 0, Math.PI * 2);
     ctx.fill();
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.2; ctx.stroke();

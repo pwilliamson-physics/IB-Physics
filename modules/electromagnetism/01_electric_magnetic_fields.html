@@ -340,7 +340,7 @@
       <h3>Quantisation of charge</h3>
       <p>Charge does not come in just any amount — it always comes in whole-number multiples of a smallest possible charge, called the <b>elementary charge</b>, <em>e</em>. Every proton carries charge +<em>e</em> and every electron carries charge −<em>e</em>.</p>
       <div class="eqn">e = 1.60 × 10<sup>−19</sup> C</div>
-      <p>This means any charge you measure — however it was produced — will always be a whole-number multiple of 1.60 × 10⁻¹⁹ C. This surprising fact was confirmed experimentally by Robert Millikan in 1909. <b>Workbook 2</b> in this pair is entirely devoted to that experiment, including a simulation you can run yourself, so we won't go into it further here.</p>
+      <p>This means any charge you measure — however it was produced — will always be a whole-number multiple of 1.60 × 10⁻¹⁹ C. This surprising fact was confirmed experimentally by Robert Millikan in 1909. <b>Workbook 2</b> in this series is entirely devoted to that experiment, including a simulation you can run yourself, so we won't go into it further here.</p>
 
       <div class="example">
         <span class="tag">Worked example 1.1</span>
@@ -352,7 +352,7 @@
         <span class="qnum">1</span><strong>A metal sphere P, carrying charge +3e, is held near an identical neutral sphere Q.</strong> State whether P and Q would attract, repel, or feel no force at this moment, and explain why.
         <textarea class="answer-lines short" rows="2" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a1')">Show answer</button>
-        <div class="answer-panel" id="a1">No overall force yet, because Q is neutral — it has no net charge for P's field to act on (although P's field can still induce a slight charge separation inside Q; that is covered in Section 2). Once Q becomes charged, the direction of the force depends on the sign it ends up with.</div>
+        <div class="answer-panel" id="a1">They attract. P's positive charge pulls electrons in Q towards the side nearest P, leaving Q's far side positive. The near side is closer, so the attraction is stronger than the repulsion: there is a net attractive force even though Q is neutral overall (see charging by induction, Section 2).</div>
       </div>
 
       <div class="question">
@@ -380,19 +380,19 @@
       <figure>
         <svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg">
           <rect x="30" y="60" width="140" height="18" rx="9" fill="#8aa8c8"/>
-          <text x="100" y="100" text-anchor="middle" font-size="12" fill="#173a5e">plastic rod</text>
-          <path d="M180 69 Q230 40 290 69" stroke="#173a5e" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+          <text x="100" y="100" text-anchor="middle" font-size="12" fill="#173a5e">polythene rod (becomes negative)</text>
+          <path d="M290 69 Q230 40 180 69" stroke="#173a5e" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
           <text x="235" y="35" text-anchor="middle" font-size="12" fill="#173a5e">electrons transfer</text>
           <ellipse cx="350" cy="69" rx="45" ry="24" fill="#e7d9b8"/>
-          <text x="350" y="100" text-anchor="middle" font-size="12" fill="#173a5e">cloth</text>
+          <text x="350" y="100" text-anchor="middle" font-size="12" fill="#173a5e">cloth (becomes positive)</text>
           <defs><marker id="arrow2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#173a5e"/></marker></defs>
         </svg>
-        <figcaption>Fig. 2.1 Friction transfers electrons from one insulator to another.</figcaption>
+        <figcaption>Fig. 2.1 Friction transfers electrons from one insulator to another: rubbing a polythene rod with a cloth moves electrons from the cloth to the rod.</figcaption>
       </figure>
       <div class="keybox">When friction occurs between two different insulating materials, electrons are transferred from the surface of one to the surface of the other.</div>
 
       <h3>Charging by contact</h3>
-      <p>If a charged object physically touches a neutral (or oppositely-charged) conductor, some charge flows between them until it is shared. The object that was charged keeps some of its original charge; the object it touched now carries charge of the <b>same sign</b>.</p>
+      <p>If a charged object physically touches a neutral (or oppositely-charged) conductor, charge flows between them until it is shared between them. Afterwards both objects carry charge of the <b>same sign</b> as their combined total.</p>
 
       <h3>Charging by induction</h3>
       <p>Induction charges an object <b>without contact</b>. A charged object is brought close to a neutral conductor. Electrons in the conductor are attracted or repelled, so they redistribute — one side becomes negative, the other positive — even though the conductor's overall charge is still zero. If the conductor is then earthed while the charged object is still nearby, electrons can flow to or from the ground, leaving the conductor with a net charge once the earth connection and the charged object are both removed.</p>
@@ -446,6 +446,8 @@
         <button class="reveal-btn no-print" onclick="toggleAnswer('a5')">Show answer</button>
         <div class="answer-panel" id="a5">As fuel and air flow past the aircraft's surfaces, friction transfers charge, so the aircraft can build up a large static charge. Without earthing, a spark could jump between the aircraft and the fuel truck as they reach different potentials, and this spark could ignite fuel vapour. The bonding cable keeps both at the same potential (0 V) so charge can drain away safely instead of sparking.</div>
       </div>
+
+      <div class="keyword"><b>Myth — "rubber tyres protect you from lightning":</b> a car protects you from lightning because of its metal shell, not its rubber tyres. The strike has just crossed about 1 km of air, so a few cm of rubber can't stop it. The metal shell conducts the charge round the outside to the ground, and the field inside is almost zero (a <b>Faraday cage</b>).</div>
 
       <div class="question">
         <span class="qnum">6</span><strong>A student rubs a balloon on a wool jumper. The balloon becomes negatively charged.</strong> State the sign of charge left on the jumper, and explain how you know, without measuring anything.
@@ -1274,12 +1276,15 @@
       <div class="keybox"><strong>Electric field strength, E,</strong> is the force per unit charge that a small positive test charge would feel at that point. SI unit: N C⁻¹ (equivalent to V m⁻¹).</div>
 
       <h3>Field lines</h3>
-      <p>Field lines are a way of drawing an electric field. Three rules always apply:</p>
+      <p>Field lines are a way of drawing an electric field. These rules always apply:</p>
       <div class="keybox">
         <ul style="margin:0; padding-left:1.2rem;">
           <li>Field lines point in the direction of the force on a <b>positive</b> test charge.</li>
           <li>Field lines never cross.</li>
           <li>The <b>closer together</b> the lines are, the <b>stronger</b> the field — field line density represents field strength.</li>
+          <li>Field lines start on <b>positive</b> charges and end on <b>negative</b> charges.</li>
+          <li>Field lines meet the surface of a conductor at <b>90°</b>.</li>
+          <li>A field line shows the direction of the <b>force</b>, not the path a charge follows: a charge released from rest does not follow a curved field line.</li>
         </ul>
       </div>
 
@@ -5001,12 +5006,12 @@ draw();
     <!-- ================= SECTION 6 ================= -->
     <section class="topic" id="s6">
       <h2>6. Magnetic field lines</h2>
-      <p>A magnetic field exists anywhere a magnetic force acts. Just like electric fields, we represent magnetic fields on paper using field lines — but the rules for drawing them are slightly different.</p>
+      <p>A magnetic field is a region where a magnetic force acts on <b>moving charges, currents or magnetic materials</b>. It exerts no force on a charge at rest. Just like electric fields, we represent magnetic fields on paper using field lines — but the rules for drawing them are slightly different.</p>
 
       <div class="keybox">
         <ul style="margin:0; padding-left:1.2rem;">
           <li>Magnetic field lines always form <b>closed loops</b> — they never simply start or stop.</li>
-          <li>Outside a magnet, field lines point from the <b>north pole</b> to the <b>south pole</b>.</li>
+          <li>Outside a magnet, field lines point from the <b>north pole</b> to the <b>south pole</b>. Inside the magnet the lines run from S to N, completing each loop.</li>
           <li>Like electric field lines, they never cross, and are closest together where the field is strongest.</li>
         </ul>
       </div>
@@ -5237,7 +5242,7 @@ draw();
             <text x="24" y="120" font-size="11" fill="#d94f4f">E = 0</text>
             <!-- E outside, inverse square -->
             <path d="M 60.0 15.0 L 64.7 31.2 L 69.4 44.2 L 74.2 54.7 L 78.9 63.5 L 83.6 70.8 L 88.3 76.9 L 93.1 82.2 L 97.8 86.7 L 102.5 90.6 L 107.2 94.0 L 111.9 97.0 L 116.7 99.6 L 121.4 101.9 L 126.1 104.0 L 130.8 105.8 L 135.6 107.5 L 140.3 109.0 L 145.0 110.3 L 149.7 111.5 L 154.4 112.6 L 159.2 113.7 L 163.9 114.6 L 168.6 115.4 L 173.3 116.2 L 178.1 116.9 L 182.8 117.6 L 187.5 118.2 L 192.2 118.8 L 196.9 119.3 L 201.7 119.8 L 206.4 120.3 L 211.1 120.7 L 215.8 121.1 L 220.6 121.5 L 225.3 121.8 L 230.0 122.2" fill="none" stroke="#d94f4f" stroke-width="2.2"/>
-            <text x="150" y="55" font-size="12" fill="#d94f4f">E = <tspan font-style="italic">q</tspan>/4π&#949;&#8320;<tspan font-size="9" dy="-4">r²</tspan></text>
+            <text x="150" y="55" font-size="12" fill="#d94f4f">E = k<tspan font-style="italic">Q</tspan>/<tspan font-style="italic">r</tspan>²</text>
           </g>
 
           <!-- V vs r graph -->
@@ -5253,7 +5258,7 @@ draw();
             <text x="24" y="22" font-size="11" fill="#2f6fa8">V constant</text>
             <!-- V outside, inverse -->
             <path d="M 60.0 30.0 L 64.7 37.3 L 69.4 43.6 L 74.2 49.1 L 78.9 53.9 L 83.6 58.2 L 88.3 62.1 L 93.1 65.5 L 97.8 68.6 L 102.5 71.5 L 107.2 74.0 L 111.9 76.4 L 116.7 78.6 L 121.4 80.6 L 126.1 82.4 L 130.8 84.1 L 135.6 85.7 L 140.3 87.2 L 145.0 88.6 L 149.7 89.9 L 154.4 91.2 L 159.2 92.3 L 163.9 93.4 L 168.6 94.4 L 173.3 95.4 L 178.1 96.3 L 182.8 97.2 L 187.5 98.0 L 192.2 98.8 L 196.9 99.5 L 201.7 100.2 L 206.4 100.9 L 211.1 101.6 L 215.8 102.2 L 220.6 102.8 L 225.3 103.4 L 230.0 103.9" fill="none" stroke="#2f6fa8" stroke-width="2.2"/>
-            <text x="150" y="70" font-size="12" fill="#2f6fa8">V = <tspan font-style="italic">q</tspan>/4π&#949;&#8320;<tspan font-size="9" dy="-4">r</tspan></text>
+            <text x="150" y="70" font-size="12" fill="#2f6fa8">V<tspan font-size="9" dy="3">e</tspan><tspan dy="-3"> = k</tspan><tspan font-style="italic">Q</tspan>/<tspan font-style="italic">r</tspan></text>
           </g>
 
           <defs>
@@ -5274,21 +5279,21 @@ draw();
         <p><strong>Answer:</strong><br>
         ΔV<sub>e</sub> = 15 − 40 = −25 V<br>
         W = qΔV<sub>e</sub> = (2.0×10⁻⁶)(−25) = <strong>−5.0 × 10⁻⁵ J</strong><br>
-        The negative sign shows that the electric field did negative work on the charge as it moved this way — so if nothing else acted on it, the charge would have to be pushed there by an external force; it would not accelerate there on its own (a positive charge moves naturally from high to low potential only if that direction also matches the field's force direction — check the full context of the question before concluding).</p>
+        This is the work an external force would do. It is negative, so the field itself does +5.0 × 10⁻⁵ J of work: a positive charge moves naturally from high to low potential. If released, it <strong>gains 5.0 × 10⁻⁵ J of kinetic energy</strong>.</p>
       </div>
 
       <div class="question">
-        <span class="qnum">20</span><strong>A potential-distance graph for a point charge shows that potential falls from +80 V at r = 2.0 cm to +20 V at r = 8.0 cm.</strong> Use the gradient of a straight line joining these two points to estimate the electric field strength over this interval.
+        <span class="qnum">20</span><strong>A potential-distance graph for a point charge shows that potential falls from +80 V at r = 2.0 cm to +20 V at r = 8.0 cm.</strong> Calculate the average potential gradient over this interval, and explain why the field strength at r = 2.0 cm is larger than this.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a20')">Show hint</button>
-        <div class="answer-panel" id="a20">Hint: use E = −ΔV/Δr. Work out ΔV (final potential minus initial potential) and Δr (final distance minus initial distance) between the two points, then substitute — don't drop the negative sign in the formula.</div>
+        <div class="answer-panel" id="a20">Hint: use E = −ΔV/Δr. Work out ΔV (final potential minus initial potential) and Δr (final distance minus initial distance) between the two points, then substitute — don't drop the negative sign in the formula.<br><b>Answer:</b> average gradient = (20 − 80)/(0.080 − 0.020) = −1.0 × 10³ V m⁻¹, so the average field is 1.0 × 10³ V m⁻¹, pointing outwards. The V–r graph is a curve, steeper close to the charge, so the field at 2.0 cm is larger (it is 4.0 × 10³ V m⁻¹ there, falling to 2.5 × 10² V m⁻¹ at 8.0 cm).</div>
       </div>
 
       <div class="question">
-        <span class="qnum">21</span><strong>A charge of −3.0 μC moves from a point at −10 V to a point at −55 V.</strong> Calculate the work done on the charge by the field.
+        <span class="qnum">21</span><strong>A charge of −3.0 μC moves from a point at −10 V to a point at −55 V.</strong> Calculate the work done in moving the charge (W = qΔV<sub>e</sub>).
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a21')">Show hint</button>
-        <div class="answer-panel" id="a21">Hint: find ΔV between the two points first (final potential minus initial potential), then substitute into W = qΔV<sub>e</sub>, keeping careful track of both negative signs.</div>
+        <div class="answer-panel" id="a21">Hint: find ΔV between the two points first (final potential minus initial potential), then substitute into W = qΔV<sub>e</sub>, keeping careful track of both negative signs.<br><b>Answer:</b> W = (−3.0 × 10⁻⁶)(−45) = +1.4 × 10⁻⁴ J. Work must be done to move a negative charge to a lower potential.</div>
       </div>
     </section>
 
@@ -5300,25 +5305,26 @@ draw();
       <div class="keybox"><strong>Equipotential surfaces are always perpendicular to electric field lines.</strong> No work is done moving a charge between two points on the same equipotential surface, because there is no potential difference between them.</div>
 
       <figure>
-        <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="150" cy="130" r="18" fill="#d94f4f"/><text x="150" y="136" text-anchor="middle" fill="#fff" font-size="15">+</text>
-          <circle cx="150" cy="130" r="45" fill="none" stroke="#5b6b78" stroke-dasharray="4 3"/>
-          <circle cx="150" cy="130" r="75" fill="none" stroke="#5b6b78" stroke-dasharray="4 3"/>
+        <svg viewBox="0 -22 300 282" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="130" r="14" fill="#d94f4f"/><text x="150" y="135" text-anchor="middle" fill="#fff" font-size="13">+</text>
+          <circle cx="150" cy="130" r="26.25" fill="none" stroke="#5b6b78" stroke-dasharray="4 3"/>
+          <circle cx="150" cy="130" r="35" fill="none" stroke="#5b6b78" stroke-dasharray="4 3"/>
+          <circle cx="150" cy="130" r="52.5" fill="none" stroke="#5b6b78" stroke-dasharray="4 3"/>
           <circle cx="150" cy="130" r="105" fill="none" stroke="#5b6b78" stroke-dasharray="4 3"/>
           <g stroke="#2f6fa8" stroke-width="1.6" marker-end="url(#arrow6)">
-            <line x1="150" y1="112" x2="150" y2="15"/>
-            <line x1="150" y1="148" x2="150" y2="245"/>
-            <line x1="132" y1="130" x2="35" y2="130"/>
-            <line x1="168" y1="130" x2="265" y2="130"/>
-            <line x1="137.3" y1="117.3" x2="70" y2="50"/>
-            <line x1="162.7" y1="117.3" x2="230" y2="50"/>
-            <line x1="137.3" y1="142.7" x2="70" y2="210"/>
-            <line x1="162.7" y1="142.7" x2="230" y2="210"/>
+            <line x1="150" y1="116" x2="150" y2="15"/>
+            <line x1="150" y1="144" x2="150" y2="245"/>
+            <line x1="136" y1="130" x2="35" y2="130"/>
+            <line x1="164" y1="130" x2="265" y2="130"/>
+            <line x1="140.1" y1="120.1" x2="70" y2="50"/>
+            <line x1="159.9" y1="120.1" x2="230" y2="50"/>
+            <line x1="140.1" y1="139.9" x2="70" y2="210"/>
+            <line x1="159.9" y1="139.9" x2="230" y2="210"/>
           </g>
-          <text x="150" y="30" text-anchor="middle" font-size="11" fill="#5b6b78">field lines (solid) ⟂ equipotentials (dashed)</text>
+          <text x="150" y="-8" text-anchor="middle" font-size="11" fill="#5b6b78">field lines (solid) ⟂ equipotentials (dashed)</text>
           <defs><marker id="arrow6" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#2f6fa8"/></marker></defs>
         </svg>
-        <figcaption>Fig. 10.1 Equipotential circles (dashed) are always at right angles to the radial field lines (solid) around a point charge.</figcaption>
+        <figcaption>Fig. 10.1 Equipotential circles (dashed) are always at right angles to the radial field lines (solid) around a point charge. The circles are drawn at equal steps of potential, so they get further apart where the field is weaker.</figcaption>
       </figure>
 
       <div class="question">
@@ -5369,7 +5375,7 @@ draw();
 
       <div class="question">
         <span class="qnum">25</span><strong>A student sets up two parallel plates 5.0 cm apart with a p.d. of 2500 V across them, in order to hold a charged dust particle stationary between the plates.</strong>
-        <p style="margin:0.3rem 0 0 0;">a) Calculate the electric field strength between the plates.<br>b) The particle has a mass of 8.0 × 10⁻¹⁵ kg. Calculate the charge on the particle needed for it to be held stationary. (g = 9.81 m s⁻²)<br>c) State how many excess or deficit electrons this corresponds to.</p>
+        <p style="margin:0.3rem 0 0 0;">a) Calculate the electric field strength between the plates.<br>b) The particle has a mass of 8.16 × 10⁻¹⁵ kg. Calculate the charge on the particle needed for it to be held stationary. (g = 9.81 m s⁻²)<br>c) State how many excess or deficit electrons this corresponds to.</p>
         <textarea class="answer-lines long" rows="7" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a25')">Show hint</button>
         <div class="answer-panel" id="a25">Hint: a) use E = V/d. b) at balance, the electric force equals the weight — set Eq = mg and rearrange to make q the subject. c) once you have q in coulombs, divide by e and round to the nearest whole number.</div>

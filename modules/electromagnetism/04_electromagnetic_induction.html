@@ -294,7 +294,7 @@
       <p>Whenever a conductor moves across a magnetic field, or a magnetic field moves across a conductor, an emf is induced. This is called <b>electromagnetic induction</b>. We start with the simplest case: a straight conductor moving perpendicularly through a uniform magnetic field.</p>
 
       <div class="keybox">
-        <strong>Electromagnetic induction</strong> is the process in which an emf is produced across a conductor that is experiencing a changing magnetic field. Reminder from Topic B.5: the <strong>electromotive force (emf)</strong> of any source is the energy transferred per unit charge passing through it.
+        <strong>Electromagnetic induction</strong> is the production of an emf when the magnetic flux linking a circuit changes, or when a conductor moves across magnetic field lines. Reminder from Topic B.5: the <strong>electromotive force (emf)</strong> of any source is the energy transferred per unit charge passing through it.
       </div>
 
       <h3>Why a moving conductor develops an emf</h3>
@@ -309,10 +309,10 @@
             <text x="40" y="135">×</text><text x="90" y="135">×</text><text x="140" y="135">×</text><text x="190" y="135">×</text><text x="240" y="135">×</text><text x="290" y="135">×</text>
           </g>
           <line x1="140" y1="20" x2="140" y2="145" stroke="#b8860b" stroke-width="5"/>
-          <circle cx="140" cy="35" r="3.5" fill="#a4222a"/>
-          <text x="120" y="30" font-size="12" font-weight="700" fill="#a4222a">−</text>
-          <circle cx="140" cy="128" r="3.5" fill="#2f6fa8"/>
-          <text x="120" y="140" font-size="12" font-weight="700" fill="#2f6fa8">+</text>
+          <circle cx="140" cy="35" r="3.5" fill="#2f6fa8"/>
+          <text x="120" y="30" font-size="12" font-weight="700" fill="#2f6fa8">+</text>
+          <circle cx="140" cy="128" r="3.5" fill="#a4222a"/>
+          <text x="120" y="140" font-size="12" font-weight="700" fill="#a4222a">−</text>
           <line x1="150" y1="118" x2="187" y2="118" stroke="#173a5e" stroke-width="2.4" marker-end="url(#mvArrow)"/>
           <text x="192" y="122" font-size="13" font-weight="700" fill="#173a5e">v</text>
           <text x="150" y="70" font-size="13" fill="#1f2933">L</text>
@@ -320,17 +320,16 @@
             <marker id="mvArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
           </defs>
         </svg>
-        <figcaption>Fig. 1.1 — A conductor of length L moves at speed v perpendicular to a uniform field (into the page). Free electrons are pushed towards one end, so that end becomes negative and the other becomes positive: an emf is induced across the ends.</figcaption>
+        <figcaption>Fig. 1.1 — A conductor of length L moves at speed v perpendicular to a uniform field (into the page). This can be treated as the movement of electrons, so the conventional current is to the left. The force is downwards, pushing the electrons that way, so that end becomes negative and the other becomes positive: an emf is induced across the ends.</figcaption>
       </figure>
 
       <h3>Deriving ε = BvL</h3>
       <p>The maximum induced potential difference occurs when the magnetic force on each free electron, F<sub>B</sub> = qvB, is balanced by the electric force from the charge separation itself, F<sub>E</sub> = Eq = (ε/L)q. Setting these equal:</p>
-      <div class="eqn">εq/L = qvB<br>ε = BvL</div>
+      <div class="eqn">εq/L = qvB, so</div>
+      <div class="eqn">ε = BvL</div>
 
       <div class="keybox">
-        The emf induced when a straight conductor moves perpendicularly across a uniform magnetic field:
-        <div class="eqn" style="margin-top:0.4rem;">ε = BvL</div>
-        where B is the field strength, v is the conductor's speed, and L is the length of the conductor inside the field.
+        The emf induced when a straight conductor moves perpendicularly across a uniform magnetic field is <strong>ε = BvL</strong>, where B is the field strength, v is the conductor's speed, and L is the length of the conductor inside the field.
       </div>
 
       <div class="keyword">
@@ -361,7 +360,7 @@
       </div>
 
       <div class="question">
-        <span class="qnum">3</span><strong>A coil of 40 turns, each of length 18 cm, moves perpendicularly across a uniform field of 2.6×10⁻³ T at 0.75 m s⁻¹.</strong> Calculate the induced emf.
+        <span class="qnum">3</span><strong>A coil of 40 turns, each of length 18 cm, moves perpendicularly across a uniform field of 2.6×10⁻³ T, with only one side of the coil inside the field, at 0.75 m s⁻¹.</strong> Calculate the induced emf.
         <textarea class="answer-lines" rows="4" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a3')">Show hint</button>
         <div class="answer-panel" id="a3">Hint: use ε = NBvL rather than ε = BvL, since there are 40 turns in series. You should get roughly 0.014 V.</div>
@@ -445,9 +444,9 @@
       <h2>3. Faraday's law of electromagnetic induction</h2>
       <p>Magnetic flux lets us write one general equation that predicts the induced emf in <em>any</em> situation — whatever is actually moving or changing.</p>
 
-      <div class="eqn">ε = N ΔΦ/Δt</div>
+      <div class="eqn">|ε| = N ΔΦ/Δt</div>
       <div class="keybox">
-        <strong>Faraday's law:</strong> if a coil of N turns experiences a change in magnetic flux ΔΦ in a time Δt, the induced emf is ε = NΔΦ/Δt. In words: <b>the induced emf equals the rate of change of magnetic flux linkage.</b> (Section 4 adds a direction to this equation, via Lenz's law.)
+        <strong>Faraday's law:</strong> if a coil of N turns experiences a change in magnetic flux ΔΦ in a time Δt, the size of the induced emf is |ε| = NΔΦ/Δt. In words: <b>the size of the induced emf equals the rate of change of magnetic flux linkage.</b> (The sign is added in Section 4, via Lenz's law.)
       </div>
 
       <p>Faraday's law applies to every method of induction — a conductor moving through a field, a field moving past a conductor, or a changing current inducing an emf in a nearby circuit. Let's see how it reduces to familiar equations in each case.</p>
@@ -493,10 +492,10 @@
       </div>
 
       <div class="question">
-        <span class="qnum">10</span><strong>A train travels at 42 m s⁻¹ through a region where the Earth's magnetic field is 46 μT, acting at 60° to the horizontal. An axle on the train has a length of 1.5 m.</strong> (a) Calculate the area swept out by the axle every second. (b) Determine the component of the field acting perpendicular to the axle's motion. (c) Calculate the magnitude of the induced emf across the axle.
+        <span class="qnum">10</span><strong>A train travels at 42 m s⁻¹ through a region where the Earth's magnetic field is 46 μT, acting at 60° to the horizontal. An axle on the train has a length of 1.5 m.</strong> (a) Calculate the area swept out by the axle every second. (b) Determine the component of the field perpendicular to the area swept out (the vertical component). (c) Calculate the magnitude of the induced emf across the axle.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a10')">Show hint</button>
-        <div class="answer-panel" id="a10">Hint: (a) area swept per second = speed × length = vL. (b) only the vertical component of the Earth's field induces an emf in a horizontal axle moving horizontally — use B sin60° (the vertical component) if 60° is measured from the horizontal. (c) then use ε = BvL with that perpendicular component.</div>
+        <div class="answer-panel" id="a10">Hint: (a) area swept per second = speed × length = vL. (b) only the vertical component of the Earth's field induces an emf in a horizontal axle moving horizontally — use B sin60° (the vertical component). (c) then use ε = BvL with that perpendicular component.</div>
       </div>
     </section>
 
@@ -514,15 +513,45 @@
       <p>If a current is generated by electromagnetic induction, energy must be transferred to that current from somewhere — energy cannot be created from nothing. That energy usually comes from the kinetic energy of whatever is moving (the conductor, or the magnet). For that energy to be transferred, the moving object must do work against an opposing force — so the induced current's magnetic effect must <em>oppose</em> the motion that created it, requiring a force (and therefore work) to keep the motion going.</p>
 
       <div class="keyword">
-        <b>If Lenz's law were reversed</b> (i.e. if the induced current assisted the motion instead), the moving object would speed up, generating an even larger current, which would speed it up further — energy would be created from nothing. This would violate the conservation of energy, so it cannot happen.
+        <b>If Lenz's law were reversed</b> (i.e. if the induced current assisted the motion instead), the moving object would speed up, generating an even larger current, which would speed it up further — energy would be created from nothing. This would violate the conservation of energy, so it cannot happen.<br><br>In an <b>open circuit</b> an emf is still induced, but no current flows, so there is no opposing force.
       </div>
 
-      <p>Consider a magnet approaching a coil (Topic D.4, Fig. D4.9): the induced current turns the coil into an electromagnet. By Lenz's law, the coil's near end must become the <em>same</em> pole as the approaching magnet, so that the two repel — opposing the magnet's approach. Work must be done to push the magnet closer, and that work is transferred to the induced current. If the magnet is instead pulled away, the induced current reverses, creating an attractive force that opposes the magnet leaving.</p>
+      <p>Consider a magnet approaching a coil (Fig. 4.1): the induced current turns the coil into an electromagnet. By Lenz's law, the coil's near end must become the <em>same</em> pole as the approaching magnet, so that the two repel — opposing the magnet's approach. Work must be done to push the magnet closer, and that work is transferred to the induced current. If the magnet is instead pulled away, the induced current reverses, creating an attractive force that opposes the magnet leaving.</p>
 
+      <figure>
+        <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="max-width:440px;">
+          <defs>
+            <marker id="lzF" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#c0392b"/></marker>
+            <marker id="lzV" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#173a5e"/></marker>
+          </defs>
+          <!-- Panel (a): approaching -->
+          <text x="100" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2933">(a) approaching</text>
+          <rect x="85" y="30" width="30" height="35" fill="#c0392b"/><text x="100" y="52" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">S</text>
+          <rect x="85" y="65" width="30" height="35" fill="#2f6fa8"/><text x="100" y="88" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">N</text>
+          <line x1="135" y1="45" x2="135" y2="85" stroke="#173a5e" stroke-width="2.4" marker-end="url(#lzV)"/><text x="141" y="70" font-size="12" font-weight="700" fill="#173a5e">v</text>
+          <line x1="65" y1="95" x2="65" y2="50" stroke="#c0392b" stroke-width="2.4" marker-end="url(#lzF)"/><text x="40" y="70" font-size="11" font-weight="700" fill="#c0392b">F</text>
+          <ellipse cx="100" cy="160" rx="55" ry="14" fill="none" stroke="#b8860b" stroke-width="4"/>
+          <text x="100" y="140" font-size="12" font-weight="700" text-anchor="middle" fill="#2f6fa8">N</text>
+          <text x="100" y="196" font-size="12" font-weight="700" text-anchor="middle" fill="#c0392b">S</text>
+          <text x="100" y="225" font-size="11" text-anchor="middle" fill="#1f2933">upper face N: repels the N pole</text>
+          <line x1="200" y1="10" x2="200" y2="240" stroke="#d7e0e8" stroke-width="1.5"/>
+          <!-- Panel (b): leaving, magnet has fallen through -->
+          <text x="300" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2933">(b) leaving (below the loop)</text>
+          <ellipse cx="300" cy="65" rx="55" ry="14" fill="none" stroke="#b8860b" stroke-width="4"/>
+          <text x="300" y="45" font-size="12" font-weight="700" text-anchor="middle" fill="#c0392b">S</text>
+          <text x="300" y="100" font-size="12" font-weight="700" text-anchor="middle" fill="#2f6fa8">N</text>
+          <rect x="285" y="130" width="30" height="35" fill="#c0392b"/><text x="300" y="152" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">S</text>
+          <rect x="285" y="165" width="30" height="35" fill="#2f6fa8"/><text x="300" y="188" font-size="12" font-weight="700" text-anchor="middle" fill="#fff">N</text>
+          <line x1="335" y1="145" x2="335" y2="185" stroke="#173a5e" stroke-width="2.4" marker-end="url(#lzV)"/><text x="341" y="170" font-size="12" font-weight="700" fill="#173a5e">v</text>
+          <line x1="265" y1="195" x2="265" y2="150" stroke="#c0392b" stroke-width="2.4" marker-end="url(#lzF)"/><text x="240" y="170" font-size="11" font-weight="700" fill="#c0392b">F</text>
+          <text x="300" y="225" font-size="11" text-anchor="middle" fill="#1f2933">lower face N: attracts the S end</text>
+        </svg>
+        <figcaption>Fig. 4.1 — A magnet falling, north pole down, through a conducting loop. (a) As it approaches, the induced current makes the loop's upper face a north pole, which repels the magnet. (b) After it has passed through, the induced current reverses: the loop's lower face becomes a north pole, which attracts the magnet's south (upper) end. In both cases the force F on the magnet is upward, opposing its motion.</figcaption>
+      </figure>
       <div class="example">
         <span class="tag">Worked example 4.1</span>
         <p>A bar magnet is dropped, north pole down, through a horizontal conducting loop. Describe, using Lenz's law, the direction of the force the loop exerts on the magnet as it approaches and as it leaves.</p>
-        <p><strong>Answer:</strong> As the magnet approaches, the loop's induced current makes its upper face a north pole, repelling the approaching north pole and opposing its fall. As the magnet moves away (below the loop), the induced current reverses, making the loop's lower face a south pole, which attracts the departing magnet — again opposing its motion. In both cases, the magnetic force does negative work on the falling magnet, so it falls more slowly than it would in free fall.</p>
+        <p><strong>Answer:</strong> As the magnet approaches, the loop's induced current makes its upper face a north pole, repelling the approaching north pole and opposing its fall. As the magnet moves away below the loop, its south pole (upper end) is nearest. The induced current reverses, making the loop's lower face a north pole, which attracts the magnet's south pole and again opposes its motion. In both cases, the magnetic force does negative work on the falling magnet, so it falls more slowly than it would in free fall.</p>
       </div>
 
       <h3>Eddy currents</h3>
@@ -589,6 +618,27 @@
       </figure>
 
       <p>Carbon "brushes" press against rotating "slip rings" to connect the spinning coil to the external circuit without the wires twisting. As the coil turns at constant angular speed in a uniform field, the emf induced varies smoothly between a maximum in one direction and the same maximum in the other — a sine wave.</p>
+      <figure>
+        <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;">
+          <line x1="40" y1="100" x2="350" y2="100" stroke="#1f2933" stroke-width="1.4"/>
+          <line x1="40" y1="30" x2="40" y2="170" stroke="#1f2933" stroke-width="1.4"/>
+          <text x="356" y="104" font-size="12" fill="#1f2933">t</text>
+          <line x1="115" y1="35" x2="115" y2="165" stroke="#b9c6d3" stroke-dasharray="4 3"/>
+          <line x1="190" y1="35" x2="190" y2="165" stroke="#b9c6d3" stroke-dasharray="4 3"/>
+          <line x1="265" y1="35" x2="265" y2="165" stroke="#b9c6d3" stroke-dasharray="4 3"/>
+          <path d="M 40.0 40.0 L 42.5 40.1 L 45.0 40.3 L 47.5 40.7 L 50.0 41.3 L 52.5 42.0 L 55.0 42.9 L 57.5 44.0 L 60.0 45.2 L 62.5 46.5 L 65.0 48.0 L 67.5 49.7 L 70.0 51.5 L 72.5 53.4 L 75.0 55.4 L 77.5 57.6 L 80.0 59.9 L 82.5 62.2 L 85.0 64.7 L 87.5 67.3 L 90.0 70.0 L 92.5 72.8 L 95.0 75.6 L 97.5 78.5 L 100.0 81.5 L 102.5 84.5 L 105.0 87.5 L 107.5 90.6 L 110.0 93.7 L 112.5 96.9 L 115.0 100.0 L 117.5 103.1 L 120.0 106.3 L 122.5 109.4 L 125.0 112.5 L 127.5 115.5 L 130.0 118.5 L 132.5 121.5 L 135.0 124.4 L 137.5 127.2 L 140.0 130.0 L 142.5 132.7 L 145.0 135.3 L 147.5 137.8 L 150.0 140.1 L 152.5 142.4 L 155.0 144.6 L 157.5 146.6 L 160.0 148.5 L 162.5 150.3 L 165.0 152.0 L 167.5 153.5 L 170.0 154.8 L 172.5 156.0 L 175.0 157.1 L 177.5 158.0 L 180.0 158.7 L 182.5 159.3 L 185.0 159.7 L 187.5 159.9 L 190.0 160.0 L 192.5 159.9 L 195.0 159.7 L 197.5 159.3 L 200.0 158.7 L 202.5 158.0 L 205.0 157.1 L 207.5 156.0 L 210.0 154.8 L 212.5 153.5 L 215.0 152.0 L 217.5 150.3 L 220.0 148.5 L 222.5 146.6 L 225.0 144.6 L 227.5 142.4 L 230.0 140.1 L 232.5 137.8 L 235.0 135.3 L 237.5 132.7 L 240.0 130.0 L 242.5 127.2 L 245.0 124.4 L 247.5 121.5 L 250.0 118.5 L 252.5 115.5 L 255.0 112.5 L 257.5 109.4 L 260.0 106.3 L 262.5 103.1 L 265.0 100.0 L 267.5 96.9 L 270.0 93.7 L 272.5 90.6 L 275.0 87.5 L 277.5 84.5 L 280.0 81.5 L 282.5 78.5 L 285.0 75.6 L 287.5 72.8 L 290.0 70.0 L 292.5 67.3 L 295.0 64.7 L 297.5 62.2 L 300.0 59.9 L 302.5 57.6 L 305.0 55.4 L 307.5 53.4 L 310.0 51.5 L 312.5 49.7 L 315.0 48.0 L 317.5 46.5 L 320.0 45.2 L 322.5 44.0 L 325.0 42.9 L 327.5 42.0 L 330.0 41.3 L 332.5 40.7 L 335.0 40.3 L 337.5 40.1 L 340.0 40.0" fill="none" stroke="#173a5e" stroke-width="2.6"/>
+          <path d="M 40.0 100.0 L 42.5 96.9 L 45.0 93.7 L 47.5 90.6 L 50.0 87.5 L 52.5 84.5 L 55.0 81.5 L 57.5 78.5 L 60.0 75.6 L 62.5 72.8 L 65.0 70.0 L 67.5 67.3 L 70.0 64.7 L 72.5 62.2 L 75.0 59.9 L 77.5 57.6 L 80.0 55.4 L 82.5 53.4 L 85.0 51.5 L 87.5 49.7 L 90.0 48.0 L 92.5 46.5 L 95.0 45.2 L 97.5 44.0 L 100.0 42.9 L 102.5 42.0 L 105.0 41.3 L 107.5 40.7 L 110.0 40.3 L 112.5 40.1 L 115.0 40.0 L 117.5 40.1 L 120.0 40.3 L 122.5 40.7 L 125.0 41.3 L 127.5 42.0 L 130.0 42.9 L 132.5 44.0 L 135.0 45.2 L 137.5 46.5 L 140.0 48.0 L 142.5 49.7 L 145.0 51.5 L 147.5 53.4 L 150.0 55.4 L 152.5 57.6 L 155.0 59.9 L 157.5 62.2 L 160.0 64.7 L 162.5 67.3 L 165.0 70.0 L 167.5 72.8 L 170.0 75.6 L 172.5 78.5 L 175.0 81.5 L 177.5 84.5 L 180.0 87.5 L 182.5 90.6 L 185.0 93.7 L 187.5 96.9 L 190.0 100.0 L 192.5 103.1 L 195.0 106.3 L 197.5 109.4 L 200.0 112.5 L 202.5 115.5 L 205.0 118.5 L 207.5 121.5 L 210.0 124.4 L 212.5 127.2 L 215.0 130.0 L 217.5 132.7 L 220.0 135.3 L 222.5 137.8 L 225.0 140.1 L 227.5 142.4 L 230.0 144.6 L 232.5 146.6 L 235.0 148.5 L 237.5 150.3 L 240.0 152.0 L 242.5 153.5 L 245.0 154.8 L 247.5 156.0 L 250.0 157.1 L 252.5 158.0 L 255.0 158.7 L 257.5 159.3 L 260.0 159.7 L 262.5 159.9 L 265.0 160.0 L 267.5 159.9 L 270.0 159.7 L 272.5 159.3 L 275.0 158.7 L 277.5 158.0 L 280.0 157.1 L 282.5 156.0 L 285.0 154.8 L 287.5 153.5 L 290.0 152.0 L 292.5 150.3 L 295.0 148.5 L 297.5 146.6 L 300.0 144.6 L 302.5 142.4 L 305.0 140.1 L 307.5 137.8 L 310.0 135.3 L 312.5 132.7 L 315.0 130.0 L 317.5 127.2 L 320.0 124.4 L 322.5 121.5 L 325.0 118.5 L 327.5 115.5 L 330.0 112.5 L 332.5 109.4 L 335.0 106.3 L 337.5 103.1 L 340.0 100.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-dasharray="7 4"/>
+          <text x="46" y="32" font-size="12" font-weight="700" fill="#173a5e">NΦ (flux linkage)</text>
+          <text x="215" y="32" font-size="12" font-weight="700" fill="#c0392b">ε (induced emf, dashed)</text>
+          <text x="40" y="186" font-size="11" text-anchor="middle" fill="#5b6b78">0</text>
+          <text x="115" y="186" font-size="11" text-anchor="middle" fill="#5b6b78">T/4</text>
+          <text x="190" y="186" font-size="11" text-anchor="middle" fill="#5b6b78">T/2</text>
+          <text x="265" y="186" font-size="11" text-anchor="middle" fill="#5b6b78">3T/4</text>
+          <text x="340" y="186" font-size="11" text-anchor="middle" fill="#5b6b78">T</text>
+          <text x="190" y="204" font-size="11" text-anchor="middle" fill="#5b6b78">coil plane perpendicular to B at t = 0, T/2, T &#183; parallel to B at T/4, 3T/4</text>
+        </svg>
+        <figcaption>Fig. 5.2 — Flux linkage NΦ = BAN cos ωt (solid) and induced emf ε = BANω sin ωt (dashed) for one rotation. The emf is greatest when the flux linkage is <em>zero</em> and changing fastest, and zero when the flux linkage is at its maximum. The emf follows the <em>gradient</em> of the flux-linkage graph, not its value.</figcaption>
+      </figure>
 
       <h3>The effect of changing the rotation frequency</h3>
       <p>If the coil rotates faster (a higher frequency, f), the magnetic flux through it changes more rapidly, so — by Faraday's law — a <em>larger</em> peak emf is induced, and the whole cycle repeats in a <em>shorter</em> time (period T = 1/f). Halving the frequency halves the rate of change of flux linkage and therefore halves the peak induced emf — while doubling the time period.</p>
@@ -632,7 +682,7 @@
         <span class="qnum">14</span><strong>A generator's coil rotates at 60 Hz and produces a peak emf of 170 V.</strong> (a) Calculate the period of the output. (b) Predict the new peak emf and period if the frequency is increased to 90 Hz.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a14')">Show hint</button>
-        <div class="answer-panel" id="a14">Hint: (a) T = 1/f. (b) peak emf scales in direct proportion to frequency, while the period scales inversely with frequency. You should find the period roughly halves-to-thirds and the peak emf increases to roughly 255 V.</div>
+        <div class="answer-panel" id="a14">Hint: (a) T = 1/f. (b) peak emf scales in direct proportion to frequency, while the period scales inversely with frequency. You should find the period falls to two-thirds (16.7 ms → 11.1 ms) and the peak emf rises to 255 V.</div>
       </div>
 
       <div class="question">
@@ -701,7 +751,7 @@
       <div class="eqn">ε&#8346; = N&#8346;(ΔΦ/Δt)<br>ε&#8347; = N&#8347;(ΔΦ/Δt)</div>
       <p>Dividing each equation by its own number of turns isolates the shared quantity, ΔΦ/Δt, which must therefore be the same for both:</p>
       <div class="eqn">ε&#8346;/N&#8346; = ΔΦ/Δt<br>ε&#8347;/N&#8347; = ΔΦ/Δt<br>so&nbsp; ε&#8346;/N&#8346; = ε&#8347;/N&#8347;</div>
-      <p>The primary and secondary coils are each just one part of a complete circuit, so it makes more sense to talk about the potential difference, V, across each coil rather than an "emf" belonging to neither circuit. Replacing ε with V:</p>
+      <p>For an ideal transformer, each coil's induced emf equals the p.d. across it, so we can write V for ε:</p>
       <div class="eqn">V&#8346;/N&#8346; = V&#8347;/N&#8347;</div>
       <p>which rearranges to the usual form of the transformer equation:</p>
       <div class="eqn">V&#8347; / V&#8346; = N&#8347; / N&#8346;</div>
@@ -719,7 +769,7 @@
       <h3>Try it yourself: the interactive transformer simulation</h3>
       <p>The simulation below lets you build your own transformer: set the number of turns on each coil, the primary voltage, and the efficiency, then read the secondary voltage straight off the output meter. Try predicting V&#8347; from V&#8346; &times; (N&#8347;/N&#8346;) before you change the sliders, then check your prediction against the simulation.</p>
       <div class="sim-embed">
-        <p class="instructions">Drag your mouse across the 3D transformer to rotate the view. Use the sliders to set N&#8346;, V&#8346; and N&#8347;, and watch V&#8347;&#8347; update in real time. Try switching to <strong>DC Mode</strong> and note what happens to the output &mdash; then switch off <strong>Laminated Core</strong> and watch the core glow red as eddy-current heating increases.</p>
+        <p class="instructions">Drag your mouse across the 3D transformer to rotate the view. Use the sliders to set N&#8346;, V&#8346; and N&#8347;, and watch V&#8347; update in real time. Try switching to <strong>DC Mode</strong> and note what happens to the output &mdash; then switch off <strong>Laminated Core</strong> and watch the core glow red as eddy-current heating increases.</p>
         <iframe class="sim-frame" srcdoc="<!DOCTYPE html>
 <html lang=&quot;en&quot;>
 <head>
@@ -983,14 +1033,14 @@
         <span class="qnum">17</span><strong>Using the simulation, set N&#8346; = 10, N&#8347; = 25 and V&#8346; = 12 V, with efficiency at 100% and the laminated core switched on.</strong> (a) Predict V&#8347; using V&#8347; = V&#8346; &times; (N&#8347;/N&#8346;). (b) Read off the simulation's actual output voltage. Explain any small difference between your prediction and the simulation's reading.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a17')">Show hint</button>
-        <div class="answer-panel" id="a17">Hint: your prediction should be V&#8347; = 12 &times; (25/10) = 30 V. Even at "100% efficiency" in the simulation, the reading may be a little different because the simulation still applies the efficiency slider value as a multiplying factor on top of the ideal turns-ratio calculation &mdash; check that the efficiency slider really is set fully across before comparing.</div>
+        <div class="answer-panel" id="a17">Hint: your prediction should be V&#8347; = 12 &times; (25/10) = 30 V. The efficiency slider starts at 98 %, which gives 29.4 V. Move it fully to 100 % and the reading is exactly 30 V.</div>
       </div>
 
       <div class="question">
         <span class="qnum">18</span><strong>With the same turns (N&#8346; = 10, N&#8347; = 25) and V&#8346; = 12 V, reduce the efficiency slider to around 50%, then switch the laminated core toggle off.</strong> (a) State what happens to the output voltage as efficiency decreases. (b) Explain, using ideas from Section 4, why switching off the laminated core makes the core visibly heat up in the simulation.
         <textarea class="answer-lines long" rows="6" placeholder="Type your answer here…"></textarea>
         <button class="reveal-btn no-print" onclick="toggleAnswer('a18')">Show answer</button>
-        <div class="answer-panel" id="a18">(a) The output voltage falls, since a lower efficiency means a smaller fraction of the ideal turns-ratio voltage is actually delivered to the secondary. (b) A solid (non-laminated) iron core provides a continuous conducting path for eddy currents to circulate within the core itself. By Lenz's law these eddy currents oppose the changing flux that induces them, and the electrical resistance of the iron dissipates their energy as heat (P = I&#178;R) &mdash; exactly the same eddy-current heating effect discussed for induction cookers in Section 4. Laminating the core breaks up these circulation paths, choking off the eddy currents and keeping the core cool.</div>
+        <div class="answer-panel" id="a18">(a) In the simulation V&#8347; falls. In a real transformer, losses mainly show up as heating of the core and windings and a lower output power; the voltage ratio still stays close to N&#8347;/N&#8346;. (b) A solid (non-laminated) iron core provides a continuous conducting path for eddy currents to circulate within the core itself. By Lenz's law these eddy currents oppose the changing flux that induces them, and the electrical resistance of the iron dissipates their energy as heat (P = I&#178;R) &mdash; exactly the same eddy-current heating effect discussed for induction cookers in Section 4. Laminating the core breaks up these circulation paths, choking off the eddy currents and keeping the core cool.</div>
       </div>
 
       <div class="question">
@@ -1022,7 +1072,7 @@
         <dt>Electromagnetic induction</dt><dd>The generation of an emf (and, in a closed circuit, a current) as a result of a changing magnetic flux linking a conductor or coil.</dd>
         <dt>Magnetic flux, &#934;</dt><dd>A measure of the total magnetic field passing through a given area, &#934; = BA cos&#952;, where &#952; is measured from the normal to the area. Measured in webers (Wb).</dd>
         <dt>Magnetic flux linkage</dt><dd>The total flux linking all N turns of a coil, N&#934;; this is the quantity that actually determines the induced emf for a multi-turn coil.</dd>
-        <dt>Faraday&#8217;s law of induction</dt><dd>The magnitude of the induced emf equals the rate of change of magnetic flux linkage: &#949; = &#8722;N&#916;&#934;/&#916;t. This single law explains motional emf, a coil moving in or out of a field, and mutual induction.</dd>
+        <dt>Faraday&#8217;s law of induction</dt><dd>The induced emf equals minus the rate of change of flux linkage, &#949; = &#8722;N&#916;&#934;/&#916;t. This single law explains motional emf, a coil moving in or out of a field, and mutual induction.</dd>
         <dt>Lenz&#8217;s law</dt><dd>The direction of an induced emf (and any resulting current) always opposes the change that produced it. This is a direct consequence of the conservation of energy &#8212; if the induced effect instead reinforced the change, energy could be created from nothing.</dd>
         <dt>Eddy currents</dt><dd>Induced currents that circulate within the bulk of a solid conductor (rather than around a single defined loop), always in a direction that opposes the change causing them (Lenz&#8217;s law). They dissipate energy as heat, which is useful in induction cookers but wasteful in transformer cores, where lamination is used to suppress them.</dd>
         <dt>Mutual induction</dt><dd>The induction of an emf in one circuit as a result of a changing current (and hence changing flux) in a separate, nearby circuit.</dd>
